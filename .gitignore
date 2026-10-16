@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# uv
+.uv/
+
+# OMC / tooling state (not project source)
+.omc/
+graft/
+
+# make-meme runtime data (models, downloaded videos, job state, outputs)
+.make-meme/
+
+# Media artifacts, except fixtures explicitly checked into tests/
+*.mp4
+*.mov
+*.mkv
+*.webm
+!tests/**/*.mp4
+
+# OS / editor cruft
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Local tool config
+.claude/settings.local.json
+.ignore
