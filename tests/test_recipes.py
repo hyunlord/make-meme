@@ -8,9 +8,28 @@ from make_meme.recipes.loader import RecipeError, all_recipes, get_recipe
 
 def test_builtin_recipes_load():
     recipes = all_recipes()
-    assert {"mocha_swap", "sam3_detect"} <= set(recipes)
+    assert {"mocha_swap", "sam3_detect", "wan_text_cache"} <= set(recipes)
     assert recipes["mocha_swap"].kind == "swap"
     assert recipes["sam3_detect"].kind == "detect"
+    assert recipes["wan_text_cache"].kind == "cache"
+
+
+def test_wan_text_cache_builds_prompt_and_profile_override():
+    r = get_recipe("wan_text_cache")
+    wf = r.build({"prompt": "a shiba inu dancing", "negative_prompt": "blurry"}, profile="mps")
+    assert wf["1"]["inputs"]["positive_prompt"] == "a shiba inu dancing"
+    assert wf["1"]["inputs"]["negative_prompt"] == "blurry"
+    assert wf["1"]["inputs"]["model_name"] == "umt5-xxl-enc-bf16.safetensors"
+    assert wf["1"]["inputs"]["device"] == "gpu"
+    assert wf["2"]["class_type"] == "MakeMemeSink"
+
+    wf_lowvram = r.build({"prompt": "x"}, profile="cuda_lowvram")
+    assert wf_lowvram["1"]["inputs"]["device"] == "cpu"
+
+
+def test_wan_text_cache_negative_prompt_defaults_to_empty():
+    wf = get_recipe("wan_text_cache").build({"prompt": "a dog"}, profile="mps")
+    assert wf["1"]["inputs"]["negative_prompt"] == ""
 
 
 def test_build_applies_inputs_preset_and_profile():
@@ -63,6 +82,21 @@ def test_missing_required_and_unknown_inputs():
         r.build({"video": "v", "mask": "m", "ref1": "a"}, profile="mps", preset="ultra")
 
 
+def test_magcache_unlinked_and_pruned_when_omitted():
+    wf = get_recipe("mocha_swap").build({"video": "v", "mask": "m", "ref1": "a"}, profile="mps")
+    assert "cache_args" not in wf["15"]["inputs"]
+    assert "18" not in wf  # orphaned WanVideoMagCache node pruned
+
+
+def test_magcache_links_sampler_when_given():
+    wf = get_recipe("mocha_swap").build(
+        {"video": "v", "mask": "m", "ref1": "a", "magcache_thresh": 0.12}, profile="mps"
+    )
+    assert wf["15"]["inputs"]["cache_args"] == ["18", 0]
+    assert wf["18"]["inputs"]["magcache_thresh"] == 0.12
+    assert wf["18"]["class_type"] == "WanVideoMagCache"
+
+
 def _object_info(models: list[str], with_wrapper: bool = True) -> dict:
     info = {
         "LoadVideo": {}, "GetVideoComponents": {}, "LoadImageMask": {}, "LoadImage": {},
@@ -74,7 +108,7 @@ def _object_info(models: list[str], with_wrapper: bool = True) -> dict:
             "WanVideoModelLoader": {"input": {"required": {"model": [models]}}},
             "WanVideoVAELoader": {"input": {"required": {"model_name": [models]}}},
             "WanVideoTextEncodeCached": {"input": {"required": {"model_name": [models]}}},
-            "MochaEmbeds": {}, "WanVideoSampler": {}, "WanVideoDecode": {},
+            "MochaEmbeds": {}, "WanVideoSampler": {}, "WanVideoDecode": {}, "WanVideoMagCache": {},
         })
     return info
 

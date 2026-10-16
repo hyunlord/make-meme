@@ -1,0 +1,45 @@
+name: wan_text_cache
+kind: cache
+title: Wan text-encoder cache warmup
+description: >
+  Runs the Wan/MoCha text encoder (T5) once for a prompt + negative-prompt pair and
+  writes its on-disk cache, so a later mocha_swap run with the same prompt skips
+  loading/running the 11 GB T5 model entirely. Produces nothing to download -- call
+  ComfyClient.free() afterward to release the encoder from memory before sampling.
+workflow: workflow.json
+
+constraints:
+  front: false
+  timeout_sec: 900
+
+custom_nodes:
+  - name: ComfyUI-WanVideoWrapper
+    repo: https://github.com/kijai/ComfyUI-WanVideoWrapper
+    ref: 088128b224242e110d3906c6750e9a3a348a659b
+    provides: [WanVideoTextEncodeCached]
+  - name: make_meme_nodes
+    repo: builtin:make_meme_nodes   # shipped inside this package (cheap OUTPUT_NODE terminal)
+    provides: [MakeMemeInfo, MakeMemeSink]
+
+inputs:
+  prompt:          {type: string, targets: [["1", "positive_prompt"]]}
+  negative_prompt: {type: string, default: "", targets: [["1", "negative_prompt"]]}
+
+models:
+  t5:
+    targets: [["1", "model_name"]]
+    profiles:
+      default:
+        file: umt5-xxl-enc-bf16.safetensors
+        dir: text_encoders
+        repo: Kijai/WanVideo_comfy
+        path: umt5-xxl-enc-bf16.safetensors
+        size_gb: 11.36
+        license: Apache-2.0
+
+profile_overrides:
+  cuda_lowvram:
+    "1": {device: cpu}   # same reasoning as mocha_swap: keep the 11 GB encoder off a 16 GB GPU
+
+outputs:
+  sink: "2"

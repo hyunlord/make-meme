@@ -96,6 +96,32 @@ class ComfyClient:
         r = await self._request("GET", "/queue", timeout=10.0)
         return r.json() if r.status_code == 200 else {}
 
+    # ---- make-meme companion pack extras -----------------------------------
+    async def stats(self) -> dict[str, Any] | None:
+        """GET /make_meme/stats (the companion node pack's route). None if the pack isn't
+        installed/loaded (404) or the request fails for any reason -- this is used for
+        best-effort memory polling during a generation and must never raise."""
+        try:
+            r = await self._request("GET", "/make_meme/stats", timeout=5.0)
+        except ComfyError:
+            return None
+        if r.status_code != 200:
+            return None
+        try:
+            return r.json()
+        except ValueError:
+            return None
+
+    async def free(self, unload_models: bool = True, free_memory: bool = True) -> None:
+        """POST /free to release VRAM (e.g. after precaching the text encoder, before
+        sampling). Errors are swallowed (logged as a warning) -- freeing is best-effort."""
+        try:
+            await self._request(
+                "POST", "/free", json={"unload_models": unload_models, "free_memory": free_memory}, timeout=30.0
+            )
+        except ComfyError:
+            logger.warning("ComfyUI /free request failed", exc_info=True)
+
     # ---- files ------------------------------------------------------------
     async def upload(self, path: Path) -> str:
         """Upload any file (image, video, mask) into ComfyUI's input dir; returns the name

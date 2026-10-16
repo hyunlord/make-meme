@@ -20,7 +20,7 @@ custom_nodes:
   - name: ComfyUI-WanVideoWrapper
     repo: https://github.com/kijai/ComfyUI-WanVideoWrapper
     ref: 088128b224242e110d3906c6750e9a3a348a659b
-    provides: [WanVideoModelLoader, WanVideoSampler, MochaEmbeds, WanVideoDecode]
+    provides: [WanVideoModelLoader, WanVideoSampler, MochaEmbeds, WanVideoDecode, WanVideoMagCache]
   - name: make_meme_nodes
     repo: builtin:make_meme_nodes   # shipped inside this package (MPS compatibility patches)
     provides: [MakeMemeInfo]
@@ -48,6 +48,12 @@ inputs:
   steps:  {type: int, default: 6, targets: [["15", "steps"]]}
   seed:   {type: int, default: 42, targets: [["15", "seed"]]}
   shift:  {type: float, default: 5.0, targets: [["15", "shift"]]}
+  magcache_thresh:
+    type: float
+    required: false
+    targets: [["18", "magcache_thresh"]]
+    unlink_if_missing: [["15", "cache_args"]]
+    description: "optional: skip similar sampler steps above this threshold (e.g. 0.1) for a faster but less exact run; off unless given"
 
 presets:
   draft: {width: 832, height: 480, steps: 4}

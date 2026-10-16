@@ -1,12 +1,15 @@
 """make-meme companion ComfyUI node pack.
 
-Installed into ComfyUI/custom_nodes by `make-meme install`. It currently carries
-compatibility patches that let make-meme recipes run on Apple Silicon (MPS):
+Installed into ComfyUI/custom_nodes by `make-meme install`. It carries:
 
 * MoCha RoPE (ComfyUI-WanVideoWrapper `mocha/nodes.py`) builds complex128 rotary
   frequencies; MPS has no float64/complex128 support. We swap in an equivalent
   real-valued (cos/sin, float32) implementation. Numerically it matches the original
   up to float32 precision and is used on every device for consistency.
+* GET /make_meme/stats -- a device/process/system memory snapshot that
+  make_meme.perf polls while a generation runs (see stats.py).
+* MakeMemeSink -- a cheap OUTPUT_NODE terminal for workflows that run purely for a
+  side effect, e.g. warming the text-encoder disk cache (see sink.py).
 
 Patches are applied whether WanVideoWrapper is imported before or after this pack
 (ComfyUI's custom node load order is filesystem-dependent).
@@ -20,6 +23,8 @@ import logging
 import sys
 
 from .mocha_rope import rope_apply_mocha_real, rope_params_mocha_real
+from .sink import MakeMemeSink
+from .stats import register_route
 
 log = logging.getLogger("make_meme_nodes")
 
@@ -73,7 +78,9 @@ _patch_loaded()
 if not any(isinstance(f, _MochaFinder) for f in sys.meta_path):
     sys.meta_path.insert(0, _MochaFinder())
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
+
+register_route()  # GET /make_meme/stats; no-op outside an actual ComfyUI process
 
 
 class MakeMemeInfo:
@@ -92,5 +99,5 @@ class MakeMemeInfo:
         return (f"make_meme_nodes {__version__}; patched: {sorted(_patched) or 'none'}",)
 
 
-NODE_CLASS_MAPPINGS = {"MakeMemeInfo": MakeMemeInfo}
-NODE_DISPLAY_NAME_MAPPINGS = {"MakeMemeInfo": "make-meme info"}
+NODE_CLASS_MAPPINGS = {"MakeMemeInfo": MakeMemeInfo, "MakeMemeSink": MakeMemeSink}
+NODE_DISPLAY_NAME_MAPPINGS = {"MakeMemeInfo": "make-meme info", "MakeMemeSink": "make-meme sink"}
