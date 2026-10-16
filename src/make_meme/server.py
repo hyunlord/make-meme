@@ -431,7 +431,9 @@ def swap_meme_from_text(idea: str) -> str:
         "the chosen image candidate(s).\n"
         "3. inspect_media(asset_id) on the video to see a storyboard and suggested segments; pick "
         "one and re-run load_media with start_sec/end_sec to trim it.\n"
-        "4. detect_subjects(video) to find the numbered subject(s) to replace.\n"
+        "4. detect_subjects(video) to find the numbered subject(s) to replace. If there are several "
+        "photos, call suggest_mappings(video, images) to decide whether they are angles of one "
+        "replacement or one per subject (the result is always ONE video).\n"
         "5. swap_subjects(video, mappings=[{subject: <id>, images: [<image asset ids>]}], "
         "prompt=<a short description of the desired result>) to start generation.\n"
         "6. get_job(job_id) repeatedly until it succeeds, then show the result to the user."
@@ -451,7 +453,8 @@ def swap_meme_from_link(url: str, who: str) -> str:
         f'3. search_media(query={who!r}, kind="image") to find reference photos, or ask the user '
         "to attach their own.\n"
         "4. load_media(...) each chosen image candidate.\n"
-        "5. detect_subjects(video) to find the numbered subject(s) to replace.\n"
+        "5. detect_subjects(video) to find the numbered subject(s) to replace; with several photos, "
+        "suggest_mappings(video, images) proposes who gets which (one video with all of them).\n"
         "6. swap_subjects(video, mappings=[{subject: <id>, images: [...]}]) to start generation.\n"
         "7. get_job(job_id) repeatedly until it succeeds, then show the result to the user."
     )

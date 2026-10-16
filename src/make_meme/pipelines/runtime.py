@@ -78,10 +78,13 @@ async def run_recipe(
     uploaded = {name: await client.upload(path) for name, path in media.items()}
     workflow = recipe.build({**values, **uploaded}, profile=profile, preset=preset)
     timeout = recipe.constraints.get("timeout_sec")
+    node = recipe.constraints.get("progress_node")
+    steps = workflow.get(node, {}).get("inputs", {}).get("steps") if node else None
     return await client.run(
         workflow, on_progress=on_progress, cancelled=cancelled, stage=stage,
-        progress_node=recipe.constraints.get("progress_node"),
+        progress_node=node,
         front=bool(recipe.constraints.get("front", False)),
+        progress_steps=int(steps) if isinstance(steps, int) else None,
         timeout=float(timeout) if timeout else None,
     )
 

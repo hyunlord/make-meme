@@ -175,19 +175,21 @@ class ComfyClient:
         progress_node: str | None = None,
         front: bool = False,
         timeout: float | None = None,
+        progress_steps: int | None = None,
     ) -> ExecutionResult:
         """Submit a workflow and wait for completion, streaming progress when the
         WebSocket is available and falling back to polling /history otherwise.
 
         - `progress_node`: only report that node's step progress (other nodes, e.g. VAE
           encoding, report their own unrelated step counts).
+        - `progress_steps`: only report progress whose total equals this (sampling steps).
         - `front`: jump the queue (quick jobs like detection shouldn't wait behind a
           long generation).
         - Raises ComfyError if the prompt disappears (ComfyUI restarted) or `timeout`
           seconds pass; asyncio.CancelledError if cancelled or interrupted."""
         prompt_id = await self.submit(workflow, front=front)
         logger.info("submitted prompt %s", prompt_id)
-        ws_task = asyncio.create_task(self._watch_ws(prompt_id, on_progress, stage, progress_node))
+        ws_task = asyncio.create_task(self._watch_ws(prompt_id, on_progress, stage, progress_node, progress_steps))
         loop = asyncio.get_running_loop()
         deadline = None if timeout is None else loop.time() + timeout
         missing = 0
@@ -216,7 +218,8 @@ class ComfyClient:
             ws_task.cancel()
 
     async def _watch_ws(
-        self, prompt_id: str, on_progress: ProgressCallback | None, stage: str, progress_node: str | None
+        self, prompt_id: str, on_progress: ProgressCallback | None, stage: str, progress_node: str | None,
+        progress_steps: int | None = None,
     ) -> None:
         if on_progress is None:
             return
@@ -234,6 +237,8 @@ class ComfyClient:
                     if msg.get("type") == "progress" and data.get("max"):
                         if progress_node is not None and str(data.get("node")) != progress_node:
                             continue
+                        if progress_steps is not None and data["max"] != progress_steps:
+                            continue  # e.g. weight-loading progress reported by the sampler node
                         frac = data["value"] / data["max"]
                         await on_progress(stage, frac, f"step {data['value']}/{data['max']}")
                     elif msg.get("type") == "executing" and data.get("node"):

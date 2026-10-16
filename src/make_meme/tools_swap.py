@@ -255,7 +255,9 @@ async def swap_subjects(
     """Replace subjects in a video with the people/animals in reference photos. Starts a
     background job (minutes to tens of minutes) and returns job ids; poll get_job.
 
-    - mappings: one entry per subject to replace, e.g.
+    - mappings: one entry per subject to replace — all of them are applied to the SAME
+      output video (e.g. two dogs for the two dancers = one video with both dogs).
+      Unsure which photo goes where? Call suggest_mappings first. Example:
       [{"subject": 1, "images": ["img_ab12", "img_cd34"]}, {"subject": "the dog", "images": ["img_ef56"]}]
     - prompt: optional direction for the result ("wearing sunglasses, energetic dance").
     - engine: "mocha" (keeps the original performance; works for animals).
@@ -287,9 +289,62 @@ async def swap_subjects(
         "jobs": jobs,
         "subjects": [{"subject": m.subject.id, "label": m.subject.label, "bbox": list(m.subject.bbox),
                       "reference_images": [str(p) for p in m.images[:2]]} for m in resolved],
+        "output": (f"each job renders ONE video with all {len(resolved)} replacement(s) applied in sequence"
+                   + (f"; {variations} jobs = {variations} alternative versions" if variations > 1 else "")),
         "estimate": _estimate(asset, len(resolved), ENGINES[engine]),
         "next": "Call get_job(job_id) every minute or so until status is 'succeeded'.",
     }, indent=2)
+
+
+async def _plan_assignment(asset: Asset, image_paths: list[Path], images_are: str, query: str = DEFAULT_QUERY):
+    """Shared by suggest_mappings and make_swap_meme: which subject gets which photos."""
+    from make_meme.pipelines.assign import assign
+
+    subjects, frame_path = await _detect(asset, 0.0, query)
+    _pin_detection(asset, 0.0, query)
+    try:
+        async with comfy_session() as client:
+            profile = await hardware_profile(client)
+            with Image.open(frame_path) as frame:
+                plan = await assign(client, image_paths, subjects, frame.copy(), profile=profile,
+                                    images_are=images_are)
+    except ValueError as e:
+        raise ToolError(str(e)) from e
+    except (ComfyError, RecipeError) as e:
+        raise ToolError(str(e)) from e
+    return plan, subjects, frame_path
+
+
+ImagesAre = Literal["auto", "same_subject", "different_subjects"]
+
+
+@mcp.tool(structured_output=False)
+async def suggest_mappings(video: str, images: list[str], images_are: ImagesAre = "auto") -> list[Any]:
+    """Propose which on-screen subject each reference photo should replace, before a long
+    swap. Several photos may be angles of ONE replacement (full body + face of my dog) or
+    one photo per DIFFERENT replacement (dog A for the left dancer, dog B for the right);
+    'auto' decides from what the photos show (person/animal + colours) and pairs different
+    replacements with the subjects that look most alike (hair vs fur colour). The swap
+    always produces ONE video containing every replacement. Returns the proposed
+    `mappings` (pass them to swap_subjects, adjusted if the user wants), the reasoning,
+    and an annotated frame. Use images_are to override the guess."""
+    asset = _video_asset(video)
+    paths = [_image_path(r) for r in images]
+    plan, subjects, frame_path = await _plan_assignment(asset, paths, images_are)
+    by_id = {s.id: s for s in subjects}
+    mappings = [{"subject": sid, "images": [images[i] for i in idx]} for sid, idx in plan.mappings]
+    annotated = frame_path.with_name("annotated_plan.jpg")
+    with Image.open(frame_path) as frame:
+        chosen = [by_id[sid] for sid, _ in plan.mappings]
+        await asyncio.to_thread(lambda: annotate(frame, chosen).save(annotated, quality=90))
+    payload = {
+        "video": asset.id,
+        "mappings": mappings,
+        "explanation": plan.reasons,
+        "subjects_on_screen": [{"subject": s.id, "label": s.label, "bbox": list(s.bbox)} for s in subjects],
+        "output": "one video with all replacements applied",
+    }
+    return [json.dumps(payload, indent=2, ensure_ascii=False), MCPImage(path=str(annotated))]
 
 
 @mcp.tool()
@@ -304,11 +359,16 @@ async def make_swap_meme(
     target: str | None = None,
     engine: Literal["mocha"] = "mocha",
     quality: Literal["draft", "high"] = "draft",
+    images_are: ImagesAre = "auto",
 ) -> str:
-    """One-shot meme: works from links/files OR from text alone.
+    """One-shot meme: works from links/files OR from text alone. Produces ONE video.
     - video: asset id, path or link (YouTube/TikTok/Instagram/Threads/...); or video_query to search.
-    - images: asset ids/paths/links of the replacement; or image_query to search photos.
-    - target: which subject to replace (phrase like "the singer"); default = the largest subject.
+    - images: asset ids/paths/links of the replacement(s); or image_query to search photos.
+      Several images are either angles of one replacement or one photo per different
+      replacement (e.g. two dogs for two dancers); images_are='auto' decides from the
+      photos and maps each different replacement to its own on-screen subject.
+    - target: which subject to replace when there is one replacement (phrase like "the singer");
+      default = the largest subject.
     - If no start/end is given, the top suggested ~5 s segment is used.
     Returns a job id plus what was chosen; poll get_job. For more control use
     search_media → load_media → inspect_media → detect_subjects → swap_subjects."""
@@ -350,11 +410,20 @@ async def make_swap_meme(
             raise ToolError(f"Couldn't download any image for {image_query!r}; pass images explicitly.")
         chosen["image_search"] = {"query": image_query, "picked": image_ids}
 
-    subject: int | str = target if target else 1
-    result = json.loads(await swap_subjects(
-        src["id"], [Mapping(subject=subject, images=image_ids)], prompt=prompt, engine=engine, quality=quality,
-    ))
-    result["chosen"] = {"video_asset": src["id"], "images": image_ids, **chosen}
+    clip = get_assets().get(src["id"])
+    if target and len(image_ids) > 1 and images_are != "different_subjects":
+        maps = [Mapping(subject=target, images=image_ids)]
+        chosen["assignment"] = [f"all photos -> {target!r} (target given)"]
+    elif target or len(image_ids) == 1:
+        maps = [Mapping(subject=target or 1, images=image_ids)]
+        chosen["assignment"] = ["one replacement -> " + (repr(target) if target else "the largest subject")]
+    else:
+        plan, _, _ = await _plan_assignment(clip, [_image_path(i) for i in image_ids], images_are)
+        maps = [Mapping(subject=sid, images=[image_ids[i] for i in idx]) for sid, idx in plan.mappings]
+        chosen["assignment"] = plan.reasons
+    result = json.loads(await swap_subjects(src["id"], maps, prompt=prompt, engine=engine, quality=quality))
+    result["chosen"] = {"video_asset": src["id"], "images": image_ids,
+                        "mappings": [m.model_dump() for m in maps], **chosen}
     return json.dumps(result, indent=2, default=str)
 
 
