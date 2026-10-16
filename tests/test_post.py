@@ -41,6 +41,39 @@ async def test_concat_videos_drops_overlap_frames(video_no_audio, tmp_path):
     assert meta_out["frame_count"] == pytest.approx(expected_frames, abs=3)
 
 
+async def test_concat_videos_accepts_mixed_sample_aspect_ratios(tmp_path):
+    # A passthrough shot scaled by ffmpeg (SAR 1216:1215) next to a model output (no SAR)
+    # made the concat filter fail on the first real multi-shot render.
+    def make(name: str, sar: str):
+        path = tmp_path / name
+        subprocess.run(
+            ["ffmpeg", "-y", "-f", "lavfi", "-i", "color=c=gray:size=64x48:rate=8:duration=0.5",
+             "-vf", f"setsar={sar}", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(path)],
+            check=True, capture_output=True,
+        )
+        return path
+
+    out = tmp_path / "mixed.mp4"
+    await post.concat_videos([make("a.mp4", "4/3"), make("b.mp4", "0")], out, overlap=0)
+    assert ingest.probe(out)["duration"] == pytest.approx(1.0, rel=0.2)
+
+
+def test_normalize_outputs_square_pixels(tmp_path):
+    src = tmp_path / "src.mp4"
+    subprocess.run(
+        ["ffmpeg", "-y", "-f", "lavfi", "-i", "color=c=gray:size=608x1080:rate=8:duration=0.5",
+         "-c:v", "libx264", "-pix_fmt", "yuv420p", str(src)],
+        check=True, capture_output=True,
+    )
+    out = ingest.normalize(src, 288, 512, 16)
+    sar = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=sample_aspect_ratio",
+         "-of", "csv=p=0", str(out)],
+        check=True, capture_output=True, text=True,
+    ).stdout.strip()
+    assert sar in ("1:1", "N/A")
+
+
 async def test_concat_single_video_preserves_duration(video_no_audio, tmp_path):
     out = tmp_path / "concat_single.mp4"
     await post.concat_videos([video_no_audio], out, overlap=1)

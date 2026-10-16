@@ -39,7 +39,10 @@ async def _run(cmd: list[str]) -> None:
 
 
 async def concat_videos(paths: list[Path], out: Path, overlap: int = 1) -> Path:
-    """Concatenate chunk videos, dropping ``overlap`` leading frames off every chunk after the first."""
+    """Concatenate chunk videos, dropping ``overlap`` leading frames off every chunk after the first.
+
+    Inputs are forced to square pixels: the concat filter refuses mixed sample aspect
+    ratios (e.g. a passthrough shot scaled by ffmpeg next to a model-generated one)."""
 
     if not paths:
         raise ValueError("concat_videos requires at least one input path")
@@ -52,9 +55,9 @@ async def concat_videos(paths: list[Path], out: Path, overlap: int = 1) -> Path:
     labels = []
     for i in range(len(paths)):
         if i == 0 or overlap <= 0:
-            filter_parts.append(f"[{i}:v]setpts=PTS-STARTPTS[v{i}]")
+            filter_parts.append(f"[{i}:v]setsar=1,setpts=PTS-STARTPTS[v{i}]")
         else:
-            filter_parts.append(f"[{i}:v]trim=start_frame={overlap},setpts=PTS-STARTPTS[v{i}]")
+            filter_parts.append(f"[{i}:v]trim=start_frame={overlap},setsar=1,setpts=PTS-STARTPTS[v{i}]")
         labels.append(f"[v{i}]")
     filter_parts.append(f"{''.join(labels)}concat=n={len(paths)}:v=1:a=0[outv]")
     filter_complex = ";".join(filter_parts)

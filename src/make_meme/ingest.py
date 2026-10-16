@@ -206,7 +206,7 @@ def normalize(video_id_or_path: Path, width: int, height: int, fps: int = 16) ->
 
     scale_filter = (
         f"scale={width}:{height}:force_original_aspect_ratio=increase,"
-        f"crop={width}:{height},fps={fps}"
+        f"crop={width}:{height},setsar=1,fps={fps}"  # square pixels: models output SAR 1:1
     )
     # Encode to a temp file first and atomically rename into place, so a crash/interrupt
     # mid-encode can never leave a truncated file behind that the exists()-check above
