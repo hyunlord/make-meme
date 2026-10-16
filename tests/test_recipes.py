@@ -140,3 +140,13 @@ def test_validate_ready_with_windows_style_paths():
         "umt5-xxl-enc-bf16.safetensors",
     ]
     assert check_recipe(r, _object_info(files), profile="mps").ready
+
+
+def test_mocha_uses_shorter_chunks_on_macs():
+    from make_meme.pipelines.swap import chunk_len_for
+
+    recipe = get_recipe("mocha_swap")
+    assert chunk_len_for(recipe, "mps") == 49  # 81-frame chunks swap memory on a 36 GB Mac
+    assert chunk_len_for(recipe, "cuda") == 81
+    assert chunk_len_for(recipe) == 81
+    assert (chunk_len_for(recipe, "mps") - 1) % 4 == 0

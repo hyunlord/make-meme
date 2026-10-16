@@ -77,8 +77,8 @@ def preset_size(recipe: Recipe, quality: str, source_size: tuple[int, int], prof
     return w, h
 
 
-def chunk_len_for(recipe: Recipe) -> int:
-    return int(recipe.constraints.get("max_frames", 81))
+def chunk_len_for(recipe: Recipe, profile: str | None = None) -> int:
+    return int(recipe.constraint("max_frames", profile, 81))
 
 
 async def _emit(report: Report | None, stage: str, progress: float, message: str) -> None:
@@ -106,7 +106,7 @@ async def run_swap(
 
     base = await asyncio.to_thread(_normalize, plan.video_path, work / "pass0.mp4", width, height, fps)
     total_frames = int((await asyncio.to_thread(ingest.probe, base))["frame_count"])
-    chunks = plan_chunks(total_frames, chunk_len=chunk_len_for(recipe), overlap=1)
+    chunks = plan_chunks(total_frames, chunk_len=chunk_len_for(recipe, plan.profile), overlap=1)
     steps_total = max(1, len(plan.mappings) * len(chunks))
     done = 0
 

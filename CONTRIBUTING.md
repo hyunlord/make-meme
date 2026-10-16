@@ -55,6 +55,8 @@ models:                    # downloaded by `make-meme install`, checked by check
                 path: path/in/repo.safetensors, size_gb: 9.7, license: Apache-2.0}
 custom_nodes:
   - {name: ComfyUI-Foo, repo: https://github.com/x/ComfyUI-Foo, ref: <commit sha>, provides: [FooNode]}
+profile_constraints:       # optional per-hardware constraint overrides
+  mps: {max_frames: 49}    # e.g. shorter chunks where long ones swap memory
 profile_overrides:         # widget values per hardware profile
   mps: {"11": {attention_mode: comfy}}
 outputs: {frames: "17"}    # output name -> node id

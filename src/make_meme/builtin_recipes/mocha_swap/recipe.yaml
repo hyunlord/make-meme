@@ -16,6 +16,12 @@ constraints:
   size_multiple: 16
   progress_node: "15"      # WanVideoSampler: the step count users care about
 
+# Measured on an M4 Max (36 GB) at 288x512: 81-frame chunks cost 4.3 s per frame-step and
+# peak at 30 GB (the system swaps); 49-frame chunks cost 2.8 s and peak at 24 GB.
+profile_constraints:
+  mps:
+    max_frames: 49
+
 custom_nodes:
   - name: ComfyUI-WanVideoWrapper
     repo: https://github.com/kijai/ComfyUI-WanVideoWrapper

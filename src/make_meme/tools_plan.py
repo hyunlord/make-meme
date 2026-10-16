@@ -142,6 +142,7 @@ def _preview(plan: MemePlan, shots: list[Shot], identities: list[IdentityRef]) -
 
 def _estimate(plan: MemePlan, shots: list[Shot], profile: str, width: int, height: int, steps: int) -> dict:
     from make_meme.chunking import plan_chunks
+    from make_meme.pipelines.swap import chunk_len_for
 
     try:
         from make_meme.perf import estimate_seconds
@@ -153,13 +154,35 @@ def _estimate(plan: MemePlan, shots: list[Shot], profile: str, width: int, heigh
         if not n:
             continue
         frames = max(1, round(shot.duration * 16))
-        for ch in plan_chunks(frames, chunk_len=81, overlap=1):
+        for ch in plan_chunks(frames, chunk_len=chunk_len_for(get_recipe("mocha_swap"), profile), overlap=1):
             length = ch.end - ch.start + ch.pad
             if estimate_seconds is not None:
                 est = estimate_seconds(profile, "mocha_swap", width, height, length, steps)
                 total += n * float(est["seconds"])
                 basis = est.get("basis", basis)
     return {"seconds": round(total), "minutes": round(total / 60, 1), "basis": basis, "profile": profile}
+
+
+def _refresh_estimate(plan: MemePlan, style) -> None:
+    """Re-estimate at render time: perf.jsonl may have gained samples since planning, and
+    preview/quality/cast overrides change the work."""
+    est = plan.estimate or {}
+    profile, size = est.get("profile"), est.get("output_size")
+    if not profile or not size:
+        return
+    try:
+        recipe = get_recipe(style.recipe)
+    except RecipeError:
+        return
+    from make_meme.pipelines.swap import preset_size
+
+    if plan.quality != est.get("quality", plan.quality):
+        w, h = preset_size(recipe, plan.quality, (int(size[0]), int(size[1])), profile)
+    else:
+        w, h = int(size[0]), int(size[1])
+    steps = int(recipe.preset_values(plan.quality, profile).get("steps", 4))
+    plan.estimate = {**_estimate(plan, [Shot.from_json(s) for s in plan.shots], profile, w, h, steps),
+                     "output_size": [w, h], "quality": plan.quality}
 
 
 @mcp.tool(structured_output=False)
@@ -312,6 +335,7 @@ async def plan_meme(
     )
     plan.estimate = _estimate(plan, shots, profile, w, h, steps)
     plan.estimate["output_size"] = [w, h]
+    plan.estimate["quality"] = quality
     save_plan(plan)
     preview = await asyncio.to_thread(_preview, plan, shots, identities)
     payload = plan.to_json()
@@ -371,6 +395,7 @@ async def render_meme(
     if clip_asset is None:
         raise ToolError("The plan's clip is gone; re-run plan_meme.")
     settings = get_settings()
+    _refresh_estimate(plan, st)
 
     async def job(ctx: JobContext) -> dict[str, Any]:
         # Keyed by plan + style (not job) so a re-run after a failure reuses finished chunks.

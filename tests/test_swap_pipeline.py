@@ -69,7 +69,7 @@ async def _noop_ready(*a, **k):
     return None
 
 
-@pytest.mark.parametrize("seconds,expected_chunks", [(2.0, 1), (7.0, 2)])
+@pytest.mark.parametrize("seconds,expected_chunks", [(2.0, 1), (7.0, 3)])  # mps: 49-frame chunks
 async def test_run_swap_with_fake_comfy(tmp_path, monkeypatch, seconds, expected_chunks):
     monkeypatch.setattr(swap_mod, "ensure_ready", _noop_ready)
 

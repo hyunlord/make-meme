@@ -81,6 +81,13 @@ class Recipe:
     outputs: dict[str, str]  # output name -> node id
     constraints: dict[str, Any] = field(default_factory=dict)
     profile_presets: dict[str, dict[str, dict[str, Any]]] = field(default_factory=dict)
+    profile_constraints: dict[str, dict[str, Any]] = field(default_factory=dict)
+
+    def constraint(self, name: str, profile: str | None = None, default: Any = None) -> Any:
+        """A constraint (e.g. max_frames), with a hardware-specific override when one exists."""
+        if profile is not None and name in self.profile_constraints.get(profile, {}):
+            return self.profile_constraints[profile][name]
+        return self.constraints.get(name, default)
 
     def required_class_types(self) -> set[str]:
         return {node["class_type"] for node in self.workflow.values()}
@@ -221,6 +228,7 @@ def load_recipe(root: Path) -> Recipe:
         outputs={k: str(v) for k, v in (m.get("outputs") or {}).items()},
         constraints=m.get("constraints") or {},
         profile_presets=m.get("profile_presets") or {},
+        profile_constraints=m.get("profile_constraints") or {},
     )
 
 

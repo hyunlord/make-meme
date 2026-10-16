@@ -144,3 +144,24 @@ async def test_render_plan_multi_shot(tmp_path, monkeypatch):
     assert calls[1][2] == ["prompt P2"]
     assert progress and max(progress) == pytest.approx(1.0)
     assert np.isfinite(info["fps"])
+
+
+def test_render_time_estimate_uses_current_measurements(monkeypatch):
+    # The plan's estimate was made before any perf samples existed; render_meme must refresh it.
+    from make_meme import perf
+    from make_meme.tools_plan import _refresh_estimate
+
+    calls = []
+
+    def fake_estimate(profile, recipe, w, h, frames, steps):
+        calls.append(frames)
+        return {"seconds": 100.0, "basis": "measured", "samples": 26}
+
+    monkeypatch.setattr(perf, "estimate_seconds", fake_estimate)
+    plan = _plan(Path("/tmp"), [Shot(0, 0.0, 6.0, performers={"P1": 1})], {"P1": "A"}, {"A": "/x.png"})
+    plan.estimate = {"seconds": 1, "minutes": 0.0, "basis": "default", "profile": "mps", "output_size": [288, 512],
+                     "quality": "draft"}
+    _refresh_estimate(plan, get_style("pet_full_body"))
+    assert plan.estimate["basis"] == "measured" and plan.estimate["output_size"] == [288, 512]
+    assert calls and max(calls) <= 49  # 96 frames split into Mac-sized chunks
+    assert plan.estimate["seconds"] == 100 * len(calls)
