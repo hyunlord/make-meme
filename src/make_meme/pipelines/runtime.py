@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
@@ -76,9 +77,12 @@ async def run_recipe(
     """Upload media inputs, build the workflow, run it and return the result."""
     uploaded = {name: await client.upload(path) for name, path in media.items()}
     workflow = recipe.build({**values, **uploaded}, profile=profile, preset=preset)
+    timeout = recipe.constraints.get("timeout_sec")
     return await client.run(
         workflow, on_progress=on_progress, cancelled=cancelled, stage=stage,
         progress_node=recipe.constraints.get("progress_node"),
+        front=bool(recipe.constraints.get("front", False)),
+        timeout=float(timeout) if timeout else None,
     )
 
 
@@ -88,5 +92,13 @@ def node_text_outputs(result: ExecutionResult, node_id: str) -> list[str]:
     return [t for t in text if isinstance(t, str)]
 
 
+def _file_order(name: str) -> tuple:
+    """SaveImage names files prefix_00001_.png; sort by that counter numerically so order
+    survives counters wider than 5 digits."""
+    nums = re.findall(r"\d+", name)
+    return (int(nums[-1]) if nums else -1, name)
+
+
 def node_files(result: ExecutionResult, node_id: str) -> list:
-    return sorted((o for o in result.outputs if o.node_id == node_id), key=lambda o: o.filename)
+    """Files a node wrote, in batch order (SaveImage's counter increases per image)."""
+    return sorted((o for o in result.outputs if o.node_id == node_id), key=lambda o: _file_order(o.filename))

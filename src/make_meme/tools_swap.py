@@ -9,7 +9,7 @@ import json
 import logging
 import random
 from pathlib import Path
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 from mcp.server.fastmcp import Image as MCPImage
 from mcp.server.fastmcp.exceptions import ToolError
@@ -18,14 +18,16 @@ from pydantic import BaseModel, Field
 
 from make_meme import ingest, post
 from make_meme.assets import Asset
+from make_meme.chunking import plan_chunks
 from make_meme.comfy.client import ComfyError
 from make_meme.comfy.validate import check_recipe
 from make_meme.config import get_settings
 from make_meme.jobs import JobContext
-from make_meme.pipelines.detect import DEFAULT_QUERY, Subject, annotate, detect_in_image
+from make_meme.pipelines.detect import DEFAULT_QUERY, Subject, annotate, detect_in_image, iou
 from make_meme.pipelines.runtime import comfy_session, hardware_profile, object_info
 from make_meme.pipelines.swap import SwapMapping, SwapPlan, chunk_len_for, run_swap
 from make_meme.recipes.loader import RecipeError, all_recipes, get_recipe, recipes_of_kind
+from make_meme.safety import UnsafePathError, check_local_media_path
 from make_meme.server import extra_checks, get_assets, get_jobs, load_media, mcp
 
 logger = logging.getLogger(__name__)
@@ -65,8 +67,20 @@ def _image_path(ref: str) -> Path:
         return asset.path
     p = Path(ref).expanduser()
     if p.is_file() and p.suffix.lower() in IMAGE_SUFFIXES:
-        # register it so phone formats (HEIC) are converted and EXIF rotation is applied
-        return get_assets().add(p, "image", origin={"source": str(p)}).path
+        try:
+            p = check_local_media_path(p)
+        except UnsafePathError as e:
+            raise ToolError(str(e)) from e
+        # register it so phone formats (HEIC) are converted and EXIF rotation is applied;
+        # reuse the earlier registration of the same unchanged file instead of duplicating it
+        st = p.stat()
+        stamp = f"{st.st_size}:{st.st_mtime_ns}"
+        store = get_assets()
+        for existing in store.list("image", limit=None):
+            same = existing.origin.get("source") == str(p) and existing.origin.get("stamp") == stamp
+            if same and existing.path.is_file():
+                return existing.path
+        return store.add(p, "image", origin={"source": str(p), "stamp": stamp}).path
     raise ToolError(f"Reference image {ref!r} not found (use an image asset id from load_media or a file path).")
 
 
@@ -76,6 +90,9 @@ def _subjects_file(asset: Asset, at_sec: float, query: str) -> Path:
 
 
 async def _detect(asset: Asset, at_sec: float, query: str) -> tuple[list[Subject], Path]:
+    duration = float(asset.meta.get("duration") or 0)
+    if at_sec < 0 or (duration and at_sec >= duration):
+        raise ToolError(f"at_sec must be between 0 and {duration:.2f} (the clip length).")
     cache = _subjects_file(asset, at_sec, query)
     frame_path = cache.parent / "frame.png"
     if cache.is_file():
@@ -90,31 +107,40 @@ async def _detect(asset: Asset, at_sec: float, query: str) -> tuple[list[Subject
     except (ComfyError, RecipeError) as e:
         raise ToolError(str(e)) from e
     cache.write_text(json.dumps([s.to_json() for s in subjects], indent=2))
-    # remember the default detection for swap_subjects
-    if at_sec == 0.0:
-        asset.meta.setdefault("subjects_files", {})[query] = str(cache)
-        asset.save(asset.path.parent)
     return subjects, frame_path
 
 
-@mcp.tool()
+def _pin_detection(asset: Asset, at_sec: float, query: str) -> None:
+    """Remember which detection the caller last *saw*, so subject numbers passed to
+    swap_subjects mean exactly what was shown."""
+    asset.meta["last_detection"] = {"file": str(_subjects_file(asset, at_sec, query)), "at_sec": at_sec,
+                                    "query": query}
+    asset.save(asset.path.parent)
+
+
+@mcp.tool(structured_output=False)
 async def detect_subjects(video: str, query: str = DEFAULT_QUERY, at_sec: float = 0.0) -> list[Any]:
     """Find people/animals in a video's frame (default: first frame, which is what swapping
     uses) and return them numbered 1..n (largest first) with boxes, plus an annotated image.
     `query` is comma-separated short phrases, e.g. "person", "dog, cat", "man in red jacket".
-    Pass the numbers to swap_subjects. Requires ComfyUI (see check_setup)."""
+    Pass the numbers to swap_subjects (numbers always refer to your latest detect_subjects
+    call with at_sec=0). Requires ComfyUI (see check_setup)."""
     asset = _video_asset(video)
     subjects, frame_path = await _detect(asset, at_sec, query)
+    _pin_detection(asset, at_sec, query)
     annotated_path = frame_path.with_name("annotated.jpg")
     with Image.open(frame_path) as frame:
         await asyncio.to_thread(lambda: annotate(frame, subjects).save(annotated_path, quality=90))
-    payload = {
+    payload: dict[str, Any] = {
         "video": asset.id,
         "at_sec": at_sec,
         "subjects": [{"subject": s.id, "label": s.label, "score": s.score, "bbox": list(s.bbox)} for s in subjects],
     }
     if not subjects:
         payload["hint"] = "Nothing found; try another query (e.g. 'singer', 'dancer') or a different at_sec."
+    if at_sec != 0.0:
+        payload["note"] = ("Swapping locates subjects on the first frame; to use these numbers in "
+                           "swap_subjects run detect_subjects again with at_sec=0 (or trim the clip to start here).")
     return [json.dumps(payload, indent=2), MCPImage(path=str(annotated_path))]
 
 
@@ -122,20 +148,22 @@ async def _resolve_mapping(asset: Asset, m: Mapping) -> SwapMapping:
     images = [_image_path(r) for r in m.images]
     if isinstance(m.subject, int) or (isinstance(m.subject, str) and m.subject.strip().isdigit()):
         sid = int(m.subject)
-        match = None
-        # prefer the detection the user actually looked at (most recent query first)
-        for path in reversed(list((asset.meta.get("subjects_files") or {}).values())):
-            if Path(path).is_file():
-                seen = [Subject.from_json(d) for d in json.loads(Path(path).read_text())]
-                match = next((s for s in seen if s.id == sid), None)
-                if match is not None:
-                    break
-        if match is None:
+        pinned = asset.meta.get("last_detection") or {}
+        if pinned and float(pinned.get("at_sec", 0.0)) != 0.0:
+            raise ToolError(
+                f"Your last detect_subjects was at at_sec={pinned['at_sec']}, but swapping uses the first frame. "
+                "Run detect_subjects(at_sec=0) and use those numbers."
+            )
+        if pinned and Path(pinned["file"]).is_file():
+            subjects = [Subject.from_json(d) for d in json.loads(Path(pinned["file"]).read_text())]
+        else:
             subjects, _ = await _detect(asset, 0.0, DEFAULT_QUERY)
-            match = next((s for s in subjects if s.id == sid), None)
+            _pin_detection(asset, 0.0, DEFAULT_QUERY)
+        match = next((s for s in subjects if s.id == sid), None)
         if match is None:
             raise ToolError(f"Subject {sid} not found on the first frame; run detect_subjects to see the numbers.")
     else:
+        # phrase lookups don't change the pinned numbering
         subjects, _ = await _detect(asset, 0.0, f"{m.subject}:3")
         if not subjects:
             raise ToolError(f"Couldn't find {m.subject!r} on the first frame; try detect_subjects with another query.")
@@ -181,6 +209,8 @@ def _submit_swap(
         if interpolate:
             final = await post.retime(final, 30, work / "interp.mp4")
         audio = asset.meta.get("audio_path")
+        if not audio and asset.meta.get("has_audio"):
+            audio = str(asset.path)  # untrimmed asset: take the soundtrack straight from the source
         out = settings.outputs_dir / f"{ctx.job_id}.mp4"
         if keep_audio and audio and Path(audio).is_file():
             await post.mux_audio(final, Path(audio), out)
@@ -205,14 +235,14 @@ def _submit_swap(
 def _estimate(asset: Asset, n_mappings: int, recipe_name: str) -> dict[str, Any]:
     recipe = get_recipe(recipe_name)
     frames = round(float(asset.meta.get("duration", 0)) * int(recipe.constraints.get("fps", 16)))
-    chunks = max(1, -(-frames // (chunk_len_for(recipe) - 1)))
+    chunks = max(1, len(plan_chunks(max(1, frames), chunk_len=chunk_len_for(recipe), overlap=1)))
     return {"frames": frames, "chunks": chunks, "passes": n_mappings * chunks}
 
 
 @mcp.tool()
 async def swap_subjects(
     video: str,
-    mappings: list[Mapping],
+    mappings: Annotated[list[Mapping], Field(min_length=1)],
     prompt: str | None = None,
     engine: Literal["mocha"] = "mocha",
     quality: Literal["draft", "high"] = "draft",
@@ -239,6 +269,13 @@ async def swap_subjects(
         raise ToolError("variations must be between 1 and 4.")
     asset = _video_asset(video)
     resolved = [await _resolve_mapping(asset, m) for m in mappings]
+    for i, a in enumerate(resolved):
+        for b in resolved[i + 1:]:
+            if iou(a.subject.bbox, b.subject.bbox) > 0.7:
+                raise ToolError(
+                    f"Two mappings point at the same subject ({a.subject.label} at {list(a.subject.bbox)}); "
+                    "use distinct subject numbers from detect_subjects."
+                )
     base_seed = seed if seed is not None else random.randint(0, 2**31 - 1)
     jobs = [
         _submit_swap(asset, resolved, engine=engine, quality=quality, prompt=prompt,

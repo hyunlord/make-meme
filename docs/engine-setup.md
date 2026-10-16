@@ -41,11 +41,13 @@ Open [`notebooks/remote_comfyui.ipynb`](../notebooks/remote_comfyui.ipynb) on Ka
 or Colab (T4), run all cells, and copy the printed `COMFY_URL`:
 
 ```bash
-claude mcp add make-meme -e COMFY_URL=https://<random>.trycloudflare.com -- uvx make-meme-mcp
+claude mcp add make-meme -e COMFY_URL=https://<random>.trycloudflare.com -e COMFY_TOKEN=<token> -- uvx make-meme-mcp
 ```
 
-The first run downloads ~23 GB inside the notebook (10–20 min). The tunnel URL is public while the
-notebook runs — don't share it.
+The first run downloads ~23 GB inside the notebook (10–20 min). ComfyUI has no login, so the
+notebook only exposes it through `make-meme comfy proxy`, which requires the printed
+`COMFY_TOKEN` (sent as a bearer token by make-meme). Keep the token secret and stop the notebook
+when you're done.
 
 ## Model licenses
 

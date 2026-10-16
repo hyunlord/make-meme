@@ -18,7 +18,14 @@ from pathlib import Path
 from make_meme import ingest
 from make_meme.chunking import plan_chunks
 from make_meme.comfy.client import ComfyClient
-from make_meme.pipelines.detect import Subject, binary_mask, clean_reference, detect_in_image, iou
+from make_meme.pipelines.detect import (
+    Subject,
+    binary_mask,
+    clean_reference,
+    detect_in_image,
+    head_reference,
+    iou,
+)
 from make_meme.pipelines.runtime import ensure_ready, node_files, run_recipe
 from make_meme.post import concat_videos
 from make_meme.recipes.loader import Recipe
@@ -46,7 +53,8 @@ class SwapPlan:
     prompt: str | None = None
     negative_prompt: str | None = None
     seed: int = 42
-    clean_refs: bool = True
+    clean_refs: bool = True  # put the main reference's subject on white
+    auto_head_ref: bool = True  # crop a head close-up as ref2 when only one photo is given
     work_dir: Path = field(default_factory=lambda: Path("."))
 
 
@@ -96,8 +104,13 @@ async def run_swap(
 
     for m_index, mapping in enumerate(plan.mappings, start=1):
         refs = mapping.images[:2]
-        if plan.clean_refs:
-            refs = [await clean_reference(client, p, work / f"refs{m_index}", profile=plan.profile) for p in refs]
+        if len(refs) == 1 and plan.auto_head_ref:
+            head = await head_reference(client, refs[0], work / f"refs{m_index}", profile=plan.profile)
+            if head is not None:
+                refs = [refs[0], head]
+        if plan.clean_refs:  # only the main (full-body) reference; a close-up keeps its context
+            main = await clean_reference(client, refs[0], work / f"refs{m_index}", profile=plan.profile)
+            refs = [main, *refs[1:]]
         prompt = " ".join(p for p in (plan.prompt, mapping.prompt) if p) or None
         prev_bbox = _scale_bbox(mapping.subject.bbox, plan.source_size, (width, height))
         first_mask = binary_mask(Path(mapping.subject.mask_path), width, height)

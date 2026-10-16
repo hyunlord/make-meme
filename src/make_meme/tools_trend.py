@@ -113,7 +113,7 @@ def _timeline(duration: float, rows: list[dict], hook: A.Hook | None, hot: list[
     return path
 
 
-@mcp.tool()
+@mcp.tool(structured_output=False)
 async def analyze_meme_usage(song: str, reference: str | None = None, n: int = 10) -> list[Any]:
     """Learn how a song is used in shorts/memes before making one: which part of the song
     people reuse and for how long. Finds the official MV (or uses `reference`: link or video

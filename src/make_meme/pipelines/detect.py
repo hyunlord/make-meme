@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import tempfile
@@ -89,9 +90,12 @@ async def detect_in_image(
         img_w, img_h = ImageOps.exif_transpose(im).size
     found: list[Subject] = []
     for term in parse_query(query):
-        label = term.rsplit(":", 1)[0].strip()
+        label, _, count = term.rpartition(":")
+        label = label.strip()
+        # ComfyUI's SAM 3 tokenizer only strips ":N" for N > 1; send a bare label for one match
+        sam_query = label if count.strip() == "1" else term
         result = await run_recipe(
-            client, recipe, media={"image": image_path}, values={"query": term, "threshold": threshold},
+            client, recipe, media={"image": image_path}, values={"query": sam_query, "threshold": threshold},
             profile=profile, stage="detecting",
         )
         boxes = _parse_boxes(node_text_outputs(result, recipe.outputs["boxes"]))
@@ -198,6 +202,30 @@ async def clean_reference(client: ComfyClient, image_path: Path, out_dir: Path, 
         pad_x, pad_y = (x2 - x1) // 10, (y2 - y1) // 10
         crop = white.crop((max(0, x1 - pad_x), max(0, y1 - pad_y), min(img.width, x2 + pad_x), min(img.height, y2 + pad_y)))
         out_dir.mkdir(parents=True, exist_ok=True)
-        dest = out_dir / f"ref_clean_{image_path.stem}.png"
+        digest = hashlib.sha1(str(image_path.resolve()).encode()).hexdigest()[:8]
+        dest = out_dir / f"ref_clean_{image_path.stem}_{digest}.png"
         crop.save(dest)
         return dest
+
+
+async def head_reference(client: ComfyClient, image_path: Path, out_dir: Path, *, profile: str) -> Path | None:
+    """Crop the head of the main subject as a close-up second reference (MoCha's ref2
+    improves identity; its authors suggest zooming into the first reference when no
+    separate face photo exists). 'head' works for people and animals alike."""
+    with tempfile.TemporaryDirectory(prefix="mm-head-") as tmp:
+        found = await detect_in_image(client, image_path, "head:1", Path(tmp), profile=profile, min_area_frac=0.003)
+    if not found:
+        return None
+    img = ImageOps.exif_transpose(Image.open(image_path)).convert("RGB")
+    x1, y1, x2, y2 = found[0].bbox
+    side = int(max(x2 - x1, y2 - y1) * 1.3)
+    cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+    box = (max(0, cx - side // 2), max(0, cy - side // 2), min(img.width, cx + side // 2), min(img.height, cy + side // 2))
+    crop = img.crop(box)
+    if min(crop.size) < 64:
+        return None
+    out_dir.mkdir(parents=True, exist_ok=True)
+    digest = hashlib.sha1(str(image_path.resolve()).encode()).hexdigest()[:8]
+    dest = out_dir / f"ref_head_{image_path.stem}_{digest}.png"
+    crop.save(dest)
+    return dest

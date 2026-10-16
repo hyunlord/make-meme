@@ -7,6 +7,10 @@ description: >
   match. Uses SAM 3.1 from ComfyUI core (no custom nodes needed).
 workflow: workflow.json
 
+constraints:
+  front: true        # jump ahead of long generations in ComfyUI's queue
+  timeout_sec: 300
+
 inputs:
   image:     {type: image, targets: [["1", "image"]]}
   query:     {type: string, default: "person", targets: [["3", "text"]], description: "one category; append :N for up to N matches, e.g. 'dog:3'"}

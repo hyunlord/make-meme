@@ -45,7 +45,7 @@ class FakeComfy:
         self.uploads[name] = path
         return name
 
-    async def run(self, workflow, *, on_progress=None, cancelled=None, stage="generating", progress_node=None):
+    async def run(self, workflow, *, on_progress=None, cancelled=None, stage="generating", **_kw):
         self.workflows.append(workflow)
         video = self.uploads[workflow["1"]["inputs"]["file"]]
         out_dir = self.tmp / f"gen{len(self.workflows)}"
@@ -86,7 +86,7 @@ async def test_run_swap_with_fake_comfy(tmp_path, monkeypatch, seconds, expected
         video_path=src, source_size=(640, 360),
         mappings=[SwapMapping(Subject(1, "person", 0.9, (100, 50, 300, 350), str(mask)), [ref], "dancing")],
         recipe=get_recipe("mocha_swap"), profile="mps", quality="draft", prompt="a shiba inu",
-        seed=3, clean_refs=False, work_dir=tmp_path / "work",
+        seed=3, clean_refs=False, auto_head_ref=False, work_dir=tmp_path / "work",
     )
     fake = FakeComfy(tmp_path)
     progress: list[float] = []

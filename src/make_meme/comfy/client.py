@@ -6,6 +6,7 @@ import asyncio
 import hashlib
 import json
 import logging
+import os
 import uuid
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
@@ -42,10 +43,20 @@ class ExecutionResult:
 
 
 class ComfyClient:
-    def __init__(self, base_url: str, timeout: float = 30.0) -> None:
+    """HTTP/WebSocket client. All network failures surface as ComfyError.
+
+    If COMFY_TOKEN is set (remote ComfyUI behind `make-meme comfy proxy`), it is sent as
+    a bearer token on every request and on the progress WebSocket."""
+
+    def __init__(
+        self, base_url: str, timeout: float = 30.0, token: str | None = None,
+        transport: httpx.AsyncBaseTransport | None = None,
+    ) -> None:
         self.base_url = base_url.rstrip("/")
         self.client_id = uuid.uuid4().hex
-        self._http = httpx.AsyncClient(base_url=self.base_url, timeout=timeout)
+        self.token = token if token is not None else os.environ.get("COMFY_TOKEN") or None
+        headers = {"Authorization": f"Bearer {self.token}"} if self.token else {}
+        self._http = httpx.AsyncClient(base_url=self.base_url, timeout=timeout, headers=headers, transport=transport)
 
     async def aclose(self) -> None:
         await self._http.aclose()
@@ -56,22 +67,34 @@ class ComfyClient:
     async def __aexit__(self, *exc: object) -> None:
         await self.aclose()
 
-    # ---- info -------------------------------------------------------------
-    async def system_stats(self) -> dict[str, Any]:
+    async def _request(self, method: str, url: str, **kw: Any) -> httpx.Response:
         try:
-            r = await self._http.get("/system_stats", timeout=5.0)
-            r.raise_for_status()
+            r = await self._http.request(method, url, **kw)
         except httpx.HTTPError as e:
             raise ComfyError(
-                f"ComfyUI is not reachable at {self.base_url} ({e.__class__.__name__}). "
-                "Start it (`make-meme comfy start`) or set COMFY_URL to a running instance."
+                f"ComfyUI request {method} {url} failed ({type(e).__name__}: {e}). Is ComfyUI running at "
+                f"{self.base_url}? Start it with `make-meme comfy start` or set COMFY_URL."
             ) from e
+        if r.status_code in (401, 403):
+            raise ComfyError(f"ComfyUI at {self.base_url} rejected the request (HTTP {r.status_code}); check COMFY_TOKEN.")
+        return r
+
+    # ---- info -------------------------------------------------------------
+    async def system_stats(self) -> dict[str, Any]:
+        r = await self._request("GET", "/system_stats", timeout=5.0)
+        if r.status_code != 200:
+            raise ComfyError(f"ComfyUI at {self.base_url} answered HTTP {r.status_code} to /system_stats.")
         return r.json()
 
     async def object_info(self) -> dict[str, Any]:
-        r = await self._http.get("/object_info", timeout=60.0)
-        r.raise_for_status()
+        r = await self._request("GET", "/object_info", timeout=60.0)
+        if r.status_code != 200:
+            raise ComfyError(f"ComfyUI /object_info failed: HTTP {r.status_code}")
         return r.json()
+
+    async def queue(self) -> dict[str, Any]:
+        r = await self._request("GET", "/queue", timeout=10.0)
+        return r.json() if r.status_code == 200 else {}
 
     # ---- files ------------------------------------------------------------
     async def upload(self, path: Path) -> str:
@@ -83,8 +106,8 @@ class ComfyClient:
         digest = hashlib.sha1(path.read_bytes()).hexdigest()[:12]
         remote_name = f"mm_{digest}{path.suffix.lower()}"
         with path.open("rb") as fh:
-            r = await self._http.post(
-                "/upload/image",
+            r = await self._request(
+                "POST", "/upload/image",
                 files={"image": (remote_name, fh, "application/octet-stream")},
                 data={"overwrite": "true", "type": "input"},
                 timeout=300.0,
@@ -97,30 +120,49 @@ class ComfyClient:
     async def download(self, out: OutputFile, dest: Path) -> Path:
         params = {"filename": out.filename, "subfolder": out.subfolder, "type": out.type}
         dest.parent.mkdir(parents=True, exist_ok=True)
-        async with self._http.stream("GET", "/view", params=params, timeout=600.0) as r:
-            r.raise_for_status()
-            with dest.open("wb") as fh:
-                async for chunk in r.aiter_bytes():
-                    fh.write(chunk)
+        tmp = dest.with_name(dest.name + ".part")
+        try:
+            async with self._http.stream("GET", "/view", params=params, timeout=600.0) as r:
+                if r.status_code != 200:
+                    raise ComfyError(f"Downloading {out.filename} from ComfyUI failed: HTTP {r.status_code}")
+                with tmp.open("wb") as fh:
+                    async for chunk in r.aiter_bytes():
+                        fh.write(chunk)
+        except httpx.HTTPError as e:
+            tmp.unlink(missing_ok=True)
+            raise ComfyError(f"Downloading {out.filename} from ComfyUI failed ({type(e).__name__}: {e})") from e
+        tmp.replace(dest)
         return dest
 
     # ---- execution --------------------------------------------------------
-    async def submit(self, workflow: dict[str, Any]) -> str:
-        r = await self._http.post("/prompt", json={"prompt": workflow, "client_id": self.client_id})
+    async def submit(self, workflow: dict[str, Any], *, front: bool = False) -> str:
+        body: dict[str, Any] = {"prompt": workflow, "client_id": self.client_id}
+        if front:
+            body["front"] = True
+        r = await self._request("POST", "/prompt", json=body)
         if r.status_code != 200:
             raise ComfyError(_format_validation_error(r))
         return r.json()["prompt_id"]
 
-    async def interrupt(self) -> None:
-        try:
-            await self._http.post("/interrupt", timeout=5.0)
-        except httpx.HTTPError:
-            logger.warning("interrupt request failed", exc_info=True)
+    async def cancel(self, prompt_id: str) -> None:
+        """Stop *our* prompt only: drop it from the queue if pending, interrupt it if running."""
+        for method, url, body in (("POST", "/queue", {"delete": [prompt_id]}),
+                                  ("POST", "/interrupt", {"prompt_id": prompt_id})):
+            try:
+                await self._request(method, url, json=body, timeout=5.0)
+            except ComfyError:
+                logger.warning("cancel request %s failed", url, exc_info=True)
 
     async def history(self, prompt_id: str) -> dict[str, Any] | None:
-        r = await self._http.get(f"/history/{prompt_id}")
-        r.raise_for_status()
+        r = await self._request("GET", f"/history/{prompt_id}")
+        if r.status_code != 200:
+            return None
         return r.json().get(prompt_id)
+
+    async def _is_queued(self, prompt_id: str) -> bool:
+        q = await self.queue()
+        items = (q.get("queue_running") or []) + (q.get("queue_pending") or [])
+        return any(len(item) > 1 and item[1] == prompt_id for item in items)
 
     async def run(
         self,
@@ -131,24 +173,45 @@ class ComfyClient:
         stage: str = "generating",
         poll_interval: float = 2.0,
         progress_node: str | None = None,
+        front: bool = False,
+        timeout: float | None = None,
     ) -> ExecutionResult:
         """Submit a workflow and wait for completion, streaming progress when the
         WebSocket is available and falling back to polling /history otherwise.
 
-        If `progress_node` is given, only that node's step progress is reported (other
-        nodes, e.g. VAE encoding, report their own unrelated step counts)."""
-        prompt_id = await self.submit(workflow)
+        - `progress_node`: only report that node's step progress (other nodes, e.g. VAE
+          encoding, report their own unrelated step counts).
+        - `front`: jump the queue (quick jobs like detection shouldn't wait behind a
+          long generation).
+        - Raises ComfyError if the prompt disappears (ComfyUI restarted) or `timeout`
+          seconds pass; asyncio.CancelledError if cancelled or interrupted."""
+        prompt_id = await self.submit(workflow, front=front)
         logger.info("submitted prompt %s", prompt_id)
         ws_task = asyncio.create_task(self._watch_ws(prompt_id, on_progress, stage, progress_node))
+        loop = asyncio.get_running_loop()
+        deadline = None if timeout is None else loop.time() + timeout
+        missing = 0
         try:
             while True:
                 if cancelled is not None and cancelled.is_set():
-                    await self.interrupt()
+                    await self.cancel(prompt_id)
                     raise asyncio.CancelledError
                 entry = await self.history(prompt_id)
                 if entry is not None and entry.get("status", {}).get("completed") is not None:
                     return _parse_history(prompt_id, entry)
+                if entry is None and not await self._is_queued(prompt_id):
+                    missing += 1  # tolerate the gap between finishing and appearing in history
+                    if missing >= 3:
+                        raise ComfyError("ComfyUI lost the job (was it restarted?). Please try again.")
+                else:
+                    missing = 0
+                if deadline is not None and loop.time() > deadline:
+                    await self.cancel(prompt_id)
+                    raise ComfyError(f"ComfyUI did not finish within {timeout:.0f}s; the job was cancelled.")
                 await asyncio.sleep(poll_interval)
+        except asyncio.CancelledError:
+            await asyncio.shield(self.cancel(prompt_id))
+            raise
         finally:
             ws_task.cancel()
 
@@ -158,8 +221,9 @@ class ComfyClient:
         if on_progress is None:
             return
         url = self.base_url.replace("http", "ws", 1) + f"/ws?clientId={self.client_id}"
+        headers = {"Authorization": f"Bearer {self.token}"} if self.token else None
         try:
-            async with websockets.connect(url, max_size=None, open_timeout=10) as ws:
+            async with websockets.connect(url, max_size=None, open_timeout=10, additional_headers=headers) as ws:
                 async for raw in ws:
                     if not isinstance(raw, str):
                         continue  # binary preview frames
@@ -182,6 +246,8 @@ class ComfyClient:
 
 def _parse_history(prompt_id: str, entry: dict[str, Any]) -> ExecutionResult:
     status = entry.get("status", {})
+    if any(kind == "execution_interrupted" for kind, _ in status.get("messages", [])):
+        raise asyncio.CancelledError
     if status.get("status_str") == "error":
         detail = "unknown error"
         for kind, payload in status.get("messages", []):
@@ -191,10 +257,6 @@ def _parse_history(prompt_id: str, entry: dict[str, Any]) -> ExecutionResult:
                     f"{payload.get('exception_message', '').strip()[:500]}"
                 )
         raise ComfyError(f"ComfyUI execution failed in {detail}")
-    if status.get("status_str") == "interrupted" or any(
-        kind == "execution_interrupted" for kind, _ in status.get("messages", [])
-    ):
-        raise asyncio.CancelledError
     outputs: list[OutputFile] = []
     for node_id, node_out in entry.get("outputs", {}).items():
         for kind, items in node_out.items():

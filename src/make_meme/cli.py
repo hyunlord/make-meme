@@ -3,6 +3,7 @@
   make-meme doctor                 same checks as the check_setup() MCP tool
   make-meme install [recipe ...]   set up ComfyUI + custom nodes + models (default: all recipes)
   make-meme comfy start            run the managed ComfyUI in the foreground
+  make-meme comfy proxy            token-protected proxy for exposing ComfyUI remotely
 """
 
 from __future__ import annotations
@@ -96,6 +97,11 @@ def main(argv: list[str] | None = None) -> None:
     p_start.add_argument("--profile", choices=["mps", "cuda", "cuda_lowvram", "cpu"])
     p_start.add_argument("--port", type=int, default=8188)
     p_start.add_argument("--listen", default="127.0.0.1")
+    p_proxy = comfy_sub.add_parser("proxy", help="Token-protected reverse proxy in front of ComfyUI (remote GPUs).")
+    p_proxy.add_argument("--upstream", default="http://127.0.0.1:8188")
+    p_proxy.add_argument("--port", type=int, default=8189)
+    p_proxy.add_argument("--listen", default="127.0.0.1")
+    p_proxy.add_argument("--token", help="shared secret (default: random, printed); clients set COMFY_TOKEN")
 
     args = parser.parse_args(argv)
     if args.command == "doctor":
@@ -104,6 +110,14 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(_install(args))
     if args.command == "comfy" and args.comfy_command == "start":
         sys.exit(_comfy_start(args))
+    if args.command == "comfy" and args.comfy_command == "proxy":
+        from .comfy import proxy
+
+        token = args.token or proxy.new_token()
+        if not args.token:
+            print(f"COMFY_TOKEN={token}", file=sys.stderr)
+        print(f"proxying http://{args.listen}:{args.port} -> {args.upstream}", file=sys.stderr)
+        proxy.serve(args.upstream, args.port, token, host=args.listen)
 
 
 if __name__ == "__main__":

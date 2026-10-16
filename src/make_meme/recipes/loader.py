@@ -246,7 +246,7 @@ def all_recipes() -> dict[str, Recipe]:
             if (child / "recipe.yaml").is_file():
                 try:
                     recipe = load_recipe(child)
-                except (RecipeError, KeyError, TypeError) as e:
+                except (RecipeError, KeyError, TypeError, AttributeError, ValueError) as e:
                     logger.error("skipping invalid recipe %s: %s", child, e)
                     continue
                 found[recipe.name] = recipe  # later dirs override built-ins
