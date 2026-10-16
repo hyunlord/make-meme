@@ -30,6 +30,8 @@ from make_meme.server import extra_checks, get_assets, get_jobs, load_media, mcp
 
 logger = logging.getLogger(__name__)
 
+IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".heic", ".heif", ".avif", ".tif", ".tiff"}
+
 # engine name exposed to the LLM -> recipe. Add entries as swap recipes land.
 ENGINES = {"mocha": "mocha_swap"}
 
@@ -62,8 +64,9 @@ def _image_path(ref: str) -> Path:
             raise ToolError(f"{ref} is a video; reference images must be photos.")
         return asset.path
     p = Path(ref).expanduser()
-    if p.is_file() and p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".bmp"}:
-        return p
+    if p.is_file() and p.suffix.lower() in IMAGE_SUFFIXES:
+        # register it so phone formats (HEIC) are converted and EXIF rotation is applied
+        return get_assets().add(p, "image", origin={"source": str(p)}).path
     raise ToolError(f"Reference image {ref!r} not found (use an image asset id from load_media or a file path).")
 
 

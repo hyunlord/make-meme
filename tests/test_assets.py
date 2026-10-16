@@ -87,3 +87,30 @@ def test_parent_ids_and_meta_round_trip_through_persistence(video_no_audio):
     reloaded = AssetStore().get(child.id)
     assert reloaded.parent_ids == [parent.id]
     assert reloaded.meta["note"] == "trimmed"
+
+
+def test_heic_and_rotated_images_are_normalized(tmp_path, monkeypatch):
+    """Phone photos (HEIC, EXIF-rotated JPEG) become upright PNGs ComfyUI can read."""
+    import pillow_heif
+    from PIL import Image
+
+    from make_meme.assets import AssetStore
+
+    pillow_heif.register_heif_opener()
+    heic = tmp_path / "dog.heic"
+    Image.new("RGB", (40, 30), (200, 120, 40)).save(heic, format="HEIF")
+    rotated = tmp_path / "phone.jpg"
+    exif = Image.Exif()
+    exif[0x0112] = 6  # rotate 90° CW on display
+    Image.new("RGB", (40, 30), (10, 20, 30)).save(rotated, exif=exif)
+
+    store = AssetStore(root=tmp_path / "assets")
+    a = store.add(heic, "image")
+    assert a.path.suffix == ".png" and a.path.is_file()
+    assert (a.meta["width"], a.meta["height"]) == (40, 30)
+    b = store.add(rotated, "image")
+    assert b.path.suffix == ".png"
+    assert (b.meta["width"], b.meta["height"]) == (30, 40)
+    plain = tmp_path / "plain.png"
+    Image.new("RGB", (8, 8)).save(plain)
+    assert store.add(plain, "image").path.name == "plain.png"

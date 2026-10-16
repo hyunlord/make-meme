@@ -59,6 +59,37 @@ class Asset:
         (directory / "asset.json").write_text(json.dumps(self.to_json(), indent=2, default=str))
 
 
+# Formats ComfyUI's LoadImage (and many models' preprocessing) can't read directly.
+_CONVERT_SUFFIXES = {".heic", ".heif", ".avif", ".gif", ".tif", ".tiff"}
+
+
+def _normalize_image(path: Path) -> Path:
+    """Make an image safe for every downstream consumer: phone formats (HEIC/HEIF/AVIF)
+    become PNG, and EXIF orientation is baked in so ComfyUI, SAM 3 and our own geometry
+    all see the same upright pixels. Returns the (possibly new) path."""
+    from PIL import Image, ImageOps
+
+    try:
+        import pillow_heif
+
+        pillow_heif.register_heif_opener()
+    except ImportError:  # optional at runtime; HEIC then fails with a clear OSError below
+        pass
+
+    with Image.open(path) as im:
+        rotated = im.getexif().get(0x0112, 1) not in (1, None)
+        if path.suffix.lower() not in _CONVERT_SUFFIXES and not rotated:
+            return path
+        upright = ImageOps.exif_transpose(im)
+        if upright.mode not in ("RGB", "RGBA", "L"):
+            upright = upright.convert("RGBA" if "A" in upright.getbands() else "RGB")
+        out = path.with_suffix(".png")
+        upright.save(out)
+    if out != path:
+        path.unlink(missing_ok=True)
+    return out
+
+
 def _new_id(kind: str) -> str:
     prefix = _ID_PREFIXES.get(kind, "ast")
     return f"{prefix}_{secrets.token_hex(4)}"
@@ -125,6 +156,7 @@ class AssetStore:
                     logger.warning("could not extract a preview frame for %s", dest)
         elif kind == "image":
             try:
+                dest = _normalize_image(dest)
                 from PIL import Image
 
                 with Image.open(dest) as im:
