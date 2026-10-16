@@ -331,9 +331,12 @@ async def render_meme(
     seed: int | None = None,
     preview_seconds: float | None = None,
     keep_audio: bool = True,
+    descriptions: dict[str, str] | None = None,
 ) -> str:
     """Render a plan from plan_meme into ONE video (background job; poll get_job).
     Override style / quality / cast / seed if the user changed their mind.
+    descriptions={"A": "an Italian greyhound with a blue-grey coat"} rewrites the prompts
+    (describe what you see in the reference photos: species, breed, coat).
     preview_seconds=5 renders only the first seconds for a quick check."""
     plan = load_plan(plan_id)
     if plan is None:
@@ -342,7 +345,12 @@ async def render_meme(
         st = get_style(style or plan.style or (plan.style_candidates[0] if plan.style_candidates else ""))
     except StyleError as e:
         raise ToolError(str(e)) from e
-    if style and style != plan.style or not plan.prompts:
+    for ident_id, text in (descriptions or {}).items():
+        ident = plan.identity(ident_id)
+        if ident is None:
+            raise ToolError(f"Plan {plan_id} has no identity {ident_id!r}; identities: {[i.id for i in plan.identities]}")
+        ident.description = text
+    if (style and style != plan.style) or descriptions or not plan.prompts:
         plan.prompts = {pid: st.render_prompt(subject_desc=i.description, coat=i.coat, scene=plan.scene)
                         for pid, iid in plan.cast.items() if (i := plan.identity(iid))}
         plan.negative_prompt = st.negative
