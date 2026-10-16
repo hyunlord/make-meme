@@ -1,15 +1,19 @@
 """Subject-swap pipeline: normalize → per-mapping, per-chunk recipe runs → stitch.
 
-Several mappings (e.g. member A → my photo, member B → my dog) run one after another:
-the output of one pass is the input video of the next. Long clips are split into
-4n+1-frame chunks; each chunk re-locates the subject on its first frame (SAM 3 +
-IoU tracking against the previous chunk) so the mask follows the performer.
+Several mappings (e.g. member A → my photo, member B → my dog) are each swapped from the
+original clip and then merged by where each output changed the frame (composite.py):
+a swap model regenerates the whole frame, so chaining passes would let the second one
+repaint the first. Long clips are split into 4n+1-frame chunks; each chunk re-locates the
+subject on its first frame (SAM 3 + IoU tracking against the previous chunk) so the mask
+follows the performer. Finished chunks are cached by content, so a re-run resumes.
 """
 
 from __future__ import annotations
 
 import asyncio
 import contextlib
+import hashlib
+import json
 import logging
 import shutil
 from collections.abc import Awaitable, Callable
@@ -19,6 +23,7 @@ from pathlib import Path
 from make_meme import ingest
 from make_meme.chunking import plan_chunks
 from make_meme.comfy.client import ComfyClient
+from make_meme.pipelines.composite import composite_swaps
 from make_meme.pipelines.detect import (
     Subject,
     binary_mask,
@@ -56,7 +61,7 @@ class SwapPlan:
     prompt: str | None = None
     negative_prompt: str | None = None
     seed: int = 42
-    clean_refs: bool = True  # put the main reference's subject on white
+    clean_refs: bool = True  # put each reference's subject on white (photo backgrounds leak into the video)
     auto_head_ref: bool = True  # crop a head close-up as ref2 when only one photo is given
     work_dir: Path = field(default_factory=lambda: Path("."))
 
@@ -99,21 +104,21 @@ async def run_swap(
     work = plan.work_dir
     work.mkdir(parents=True, exist_ok=True)
 
-    current = await asyncio.to_thread(_normalize, plan.video_path, work / "pass0.mp4", width, height, fps)
-    total_frames = int((await asyncio.to_thread(ingest.probe, current))["frame_count"])
+    base = await asyncio.to_thread(_normalize, plan.video_path, work / "pass0.mp4", width, height, fps)
+    total_frames = int((await asyncio.to_thread(ingest.probe, base))["frame_count"])
     chunks = plan_chunks(total_frames, chunk_len=chunk_len_for(recipe), overlap=1)
     steps_total = max(1, len(plan.mappings) * len(chunks))
     done = 0
 
+    layers: list[Path] = []
     for m_index, mapping in enumerate(plan.mappings, start=1):
         refs = mapping.images[:2]
         if len(refs) == 1 and plan.auto_head_ref:
             head = await head_reference(client, refs[0], work / f"refs{m_index}", profile=plan.profile)
             if head is not None:
                 refs = [refs[0], head]
-        if plan.clean_refs:  # only the main (full-body) reference; a close-up keeps its context
-            main = await clean_reference(client, refs[0], work / f"refs{m_index}", profile=plan.profile)
-            refs = [main, *refs[1:]]
+        if plan.clean_refs:
+            refs = [await clean_reference(client, r, work / f"refs{m_index}", profile=plan.profile) for r in refs]
         prompt = " ".join(p for p in (plan.prompt, mapping.prompt) if p) or None
         prev_bbox = _scale_bbox(mapping.subject.bbox, plan.source_size, (width, height))
         first_mask_src = Path(mapping.subject.mask_path)
@@ -136,7 +141,7 @@ async def run_swap(
             chunk_dir = work / f"m{m_index}_c{c_index}"
             chunk_dir.mkdir(exist_ok=True)
             chunk_video = await asyncio.to_thread(
-                _cut_chunk, current, chunk_dir / "input.mp4", chunk.start, chunk.end, chunk.pad, fps
+                _cut_chunk, base, chunk_dir / "input.mp4", chunk.start, chunk.end, chunk.pad, fps
             )
             if c_index == 0:
                 mask = first_mask
@@ -160,6 +165,13 @@ async def run_swap(
                 values["prompt"] = prompt
             if plan.negative_prompt:
                 values["negative_prompt"] = plan.negative_prompt
+            out_path = chunk_dir / "out.mp4"
+            key = _chunk_key(recipe.name, plan.quality, plan.profile, values, media)
+            if _cached(chunk_dir, out_path, key):
+                outputs.append(out_path)
+                done += 1
+                await _emit(report, "generating", done / steps_total, f"{label}: reused from a previous run")
+                continue
             await _emit(report, "generating", done / steps_total, f"{label}: submitting")
             meta = {"profile": plan.profile, "recipe": recipe.name, "width": width, "height": height,
                     "frames": chunk.end - chunk.start + chunk.pad, "refs": len(refs), "mask_mode": mapping.mask_mode,
@@ -177,7 +189,8 @@ async def run_swap(
             for i, f in enumerate(files):
                 await client.download(f, frames_dir / f"{i:05d}.png")
             keep = (chunk.end - chunk.start)  # drop padding frames
-            outputs.append(await asyncio.to_thread(_encode_frames, frames_dir, chunk_dir / "out.mp4", fps, keep))
+            outputs.append(await asyncio.to_thread(_encode_frames, frames_dir, out_path, fps, keep))
+            (chunk_dir / "key.json").write_text(json.dumps({"key": key}))
             done += 1
             await _emit(report, "generating", done / steps_total, f"{label}: done")
 
@@ -186,9 +199,29 @@ async def run_swap(
             shutil.copyfile(outputs[0], stitched)
         else:
             await concat_videos(outputs, stitched, overlap=1)
-        current = stitched
+        layers.append(stitched)
 
-    return current
+    if len(layers) == 1:
+        return layers[0]
+    merged = work / "swapped.mp4"
+    await _emit(report, "compositing", 1.0, f"merging {len(layers)} subjects")
+    return await asyncio.to_thread(composite_swaps, base, layers, merged, fps=fps)
+
+
+def _chunk_key(recipe: str, quality: str, profile: str, values: dict, media: dict[str, Path]) -> str:
+    """Content hash of everything that decides a chunk's output."""
+    h = hashlib.sha1(json.dumps([recipe, quality, profile, values], sort_keys=True, default=str).encode())
+    for name in sorted(media):
+        h.update(name.encode())
+        h.update(Path(media[name]).read_bytes())
+    return h.hexdigest()
+
+
+def _cached(chunk_dir: Path, out_path: Path, key: str) -> bool:
+    try:
+        return out_path.is_file() and json.loads((chunk_dir / "key.json").read_text()).get("key") == key
+    except (OSError, ValueError):
+        return False
 
 
 def _perf(client, label: str, meta: dict):

@@ -8,6 +8,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
+import numpy as np
 import pytest
 from PIL import Image
 
@@ -162,3 +163,51 @@ async def test_detect_treats_empty_sam3_failure_as_no_subjects(tmp_path, monkeyp
     monkeypatch.setattr(detect_mod, "run_recipe", other_error)
     with pytest.raises(ComfyError, match="OOM"):
         await detect_mod.detect_in_image(None, img, "person", tmp_path / "d2", profile="mps")
+
+
+def _two_subject_plan(tmp_path: Path, src: Path) -> SwapPlan:
+    mask = tmp_path / "mask.png"
+    Image.new("L", (640, 360), 0).save(mask)
+    ref = tmp_path / "dog.png"
+    Image.new("RGB", (300, 400), (200, 150, 90)).save(ref)
+    return SwapPlan(
+        video_path=src, source_size=(640, 360),
+        mappings=[SwapMapping(Subject(1, "person", 0.9, (40, 50, 200, 350), str(mask)), [ref], "left"),
+                  SwapMapping(Subject(2, "person", 0.9, (420, 50, 600, 350), str(mask)), [ref], "right")],
+        recipe=get_recipe("mocha_swap"), profile="mps", quality="draft", prompt=None,
+        seed=3, clean_refs=False, auto_head_ref=False, work_dir=tmp_path / "work",
+    )
+
+
+async def test_every_subject_is_swapped_from_the_original_then_composited(tmp_path, monkeypatch):
+    # Chaining passes let the second swap repaint the first (seen in the NEON test).
+    monkeypatch.setattr(swap_mod, "ensure_ready", _noop_ready)
+    src = _make_video(tmp_path / "src.mp4", 1.0)
+    plan = _two_subject_plan(tmp_path, src)
+    fake = FakeComfy(tmp_path)
+    out = await run_swap(fake, plan)
+
+    assert out.name == "swapped.mp4"
+    assert len(fake.workflows) == 2
+    base = np.asarray(ingest.extract_frame(plan.work_dir / "pass0.mp4", 0.0).convert("L"), np.float32)
+    for wf in fake.workflows:
+        sent = np.asarray(ingest.extract_frame(fake.uploads[wf["1"]["inputs"]["file"]], 0.0).convert("L"), np.float32)
+        assert np.abs(sent - base).mean() < 8  # the original, not the (inverted) first pass
+    assert ingest.probe(out)["frame_count"] == ingest.probe(plan.work_dir / "pass0.mp4")["frame_count"]
+
+
+async def test_rerun_reuses_finished_chunks(tmp_path, monkeypatch):
+    monkeypatch.setattr(swap_mod, "ensure_ready", _noop_ready)
+    src = _make_video(tmp_path / "src.mp4", 1.0)
+    fake = FakeComfy(tmp_path)
+    await run_swap(fake, _two_subject_plan(tmp_path, src))
+    assert len(fake.workflows) == 2
+    messages: list[str] = []
+    await run_swap(fake, _two_subject_plan(tmp_path, src), report=lambda s, p, m: messages.append(m))
+    assert len(fake.workflows) == 2  # nothing regenerated
+    assert any("reused" in m for m in messages)
+
+    changed = _two_subject_plan(tmp_path, src)
+    changed.mappings[1].prompt = "a different prompt"
+    await run_swap(fake, changed)
+    assert len(fake.workflows) == 3  # only the changed subject re-ran

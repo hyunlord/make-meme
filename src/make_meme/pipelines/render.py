@@ -151,7 +151,7 @@ async def render_plan(
         swap_plan = SwapPlan(
             video_path=piece, source_size=src_size, mappings=mappings, recipe=recipe, profile=profile,
             quality=plan.quality, prompt=None, negative_prompt=plan.negative_prompt or None, seed=plan.seed,
-            clean_refs=style.refs.get("ref1", "full").startswith("full"), auto_head_ref=False, work_dir=sdir / "swap",
+            clean_refs=True, auto_head_ref=False, work_dir=sdir / "swap",
         )
         outputs.append(await run_swap(client, swap_plan, report=shot_report, cancelled=cancelled))
         done += n_here

@@ -373,7 +373,8 @@ async def render_meme(
     settings = get_settings()
 
     async def job(ctx: JobContext) -> dict[str, Any]:
-        work = settings.outputs_dir / ctx.job_id
+        # Keyed by plan + style (not job) so a re-run after a failure reuses finished chunks.
+        work = settings.outputs_dir / "renders" / f"{plan.id}_{st.name}{'_preview' if preview_seconds else ''}"
         work.mkdir(parents=True, exist_ok=True)
 
         async def report(stage: str, progress: float, message: str) -> None:
