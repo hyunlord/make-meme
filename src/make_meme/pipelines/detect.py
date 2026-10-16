@@ -109,10 +109,15 @@ async def detect_in_image(
         label = label.strip()
         # ComfyUI's SAM 3 tokenizer only strips ":N" for N > 1; send a bare label for one match
         sam_query = label if count.strip() == "1" else term
-        result = await run_recipe(
-            client, recipe, media={"image": image_path}, values={"query": sam_query, "threshold": threshold},
-            profile=profile, stage="detecting",
-        )
+        try:
+            result = await run_recipe(
+                client, recipe, media={"image": image_path}, values={"query": sam_query, "threshold": threshold},
+                profile=profile, stage="detecting",
+            )
+        except ComfyError as e:
+            if _is_empty_detection_error(e):
+                continue  # SAM 3 found nothing: SaveImage can't save an empty mask batch
+            raise
         boxes = _parse_boxes(node_text_outputs(result, recipe.outputs["boxes"]))
         masks = node_files(result, recipe.outputs["masks"])
         if len(masks) != len(boxes):
@@ -128,6 +133,12 @@ async def detect_in_image(
     for i, s in enumerate(subjects, start=1):
         s.id = i
     return subjects
+
+
+def _is_empty_detection_error(e: ComfyError) -> bool:
+    """ComfyUI fails the sam3_detect workflow with this when there are zero matches."""
+    msg = str(e)
+    return "SaveImage" in msg and "out of bounds for dimension 0 with size 0" in msg
 
 
 def _parse_boxes(texts: list[str]) -> list[dict]:

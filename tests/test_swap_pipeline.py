@@ -137,3 +137,28 @@ def test_dedupe_drops_cross_label_parts_but_keeps_overlapping_people():
     labels = [(s.label, s.bbox) for s in dedupe([hair, p1, torso, p2, front])]
     assert ("animal", hair.bbox) not in labels and ("animal", torso.bbox) not in labels
     assert ("person", front.bbox) in labels and len(labels) == 3
+
+
+async def test_detect_treats_empty_sam3_failure_as_no_subjects(tmp_path, monkeypatch):
+    from make_meme.comfy.client import ComfyError
+    from make_meme.pipelines import detect as detect_mod
+
+    async def noop(*a, **k):
+        return None
+
+    async def failing_run_recipe(*a, **k):
+        raise ComfyError("ComfyUI execution failed in SaveImage (node 6): index 0 is out of bounds for dimension 0 "
+                         "with size 0")
+
+    monkeypatch.setattr(detect_mod, "ensure_ready", noop)
+    monkeypatch.setattr(detect_mod, "run_recipe", failing_run_recipe)
+    img = tmp_path / "x.png"
+    Image.new("RGB", (64, 64)).save(img)
+    assert await detect_mod.detect_in_image(None, img, "person, animal", tmp_path / "d", profile="mps") == []
+
+    async def other_error(*a, **k):
+        raise ComfyError("ComfyUI execution failed in WanVideoSampler (node 15): OOM")
+
+    monkeypatch.setattr(detect_mod, "run_recipe", other_error)
+    with pytest.raises(ComfyError, match="OOM"):
+        await detect_mod.detect_in_image(None, img, "person", tmp_path / "d2", profile="mps")
