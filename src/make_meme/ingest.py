@@ -12,6 +12,7 @@ from __future__ import annotations
 import io
 import json
 import logging
+import os
 import re
 import subprocess
 import tempfile
@@ -29,11 +30,15 @@ FFMPEG = "ffmpeg"
 FFPROBE = "ffprobe"
 
 
+_STDERR_TAIL_LINES = 8
+
+
 def _run(cmd: list[str]) -> subprocess.CompletedProcess:
     logger.debug("running: %s", " ".join(cmd))
     proc = subprocess.run(cmd, check=False, capture_output=True, text=True)
     if proc.returncode != 0:
-        raise RuntimeError(f"command failed ({proc.returncode}): {' '.join(cmd)}\nstderr:\n{proc.stderr}")
+        tail = "\n".join(proc.stderr.strip().splitlines()[-_STDERR_TAIL_LINES:])
+        raise RuntimeError(f"command failed ({proc.returncode}): {' '.join(cmd)}\nstderr (tail):\n{tail}")
     return proc
 
 
@@ -51,8 +56,40 @@ def _parse_rate(rate: str) -> float:
         return 0.0
 
 
+def _display_rotation_degrees(stream: dict[str, Any]) -> int:
+    """Return the net display rotation (one of 0, 90, 180, 270) from ffprobe stream metadata.
+
+    Checks the classic ``tags.rotate`` tag first, then a "Display Matrix" entry
+    in ``side_data_list`` (the form modern ffmpeg/ffprobe uses). Either can
+    report a rotation that doesn't match the stream's *coded* width/height --
+    e.g. a phone video shot with the sensor landscape but a rotate=90 tag
+    telling players (and ffmpeg's own auto-rotate on decode) to display it
+    portrait.
+    """
+
+    rotate_tag = (stream.get("tags") or {}).get("rotate")
+    if rotate_tag is not None:
+        try:
+            return int(rotate_tag) % 360
+        except (TypeError, ValueError):
+            pass
+    for side_data in stream.get("side_data_list") or []:
+        if side_data.get("side_data_type") == "Display Matrix" and "rotation" in side_data:
+            try:
+                return round(float(side_data["rotation"])) % 360
+            except (TypeError, ValueError):
+                continue
+    return 0
+
+
 def probe(path: Path) -> dict[str, Any]:
-    """Probe a media file with ffprobe: duration, fps, width, height, has_audio, frame_count."""
+    """Probe a media file with ffprobe: duration, fps, width, height, has_audio, frame_count.
+
+    ``width``/``height`` are *display* dimensions: swapped from the coded
+    dimensions when the stream carries a +-90 degree rotation (see
+    :func:`_display_rotation_degrees`), matching what ffmpeg will actually
+    output when it decodes/re-encodes the file (auto-rotate is on by default).
+    """
 
     proc = _run(
         [
@@ -75,6 +112,8 @@ def probe(path: Path) -> dict[str, Any]:
     duration = float(data.get("format", {}).get("duration") or video_stream.get("duration") or 0.0)
     width = int(video_stream.get("width", 0))
     height = int(video_stream.get("height", 0))
+    if _display_rotation_degrees(video_stream) in (90, 270):
+        width, height = height, width
     nb_frames = video_stream.get("nb_frames")
     frame_count = int(nb_frames) if nb_frames and str(nb_frames).isdigit() else round(duration * fps)
 
@@ -169,15 +208,25 @@ def normalize(video_id_or_path: Path, width: int, height: int, fps: int = 16) ->
         f"scale={width}:{height}:force_original_aspect_ratio=increase,"
         f"crop={width}:{height},fps={fps}"
     )
-    _run(
-        [
-            FFMPEG, "-y", "-i", str(source_path),
-            "-vf", scale_filter,
-            "-an",
-            "-c:v", "libx264", "-pix_fmt", "yuv420p",
-            str(out_path),
-        ]
-    )
+    # Encode to a temp file first and atomically rename into place, so a crash/interrupt
+    # mid-encode can never leave a truncated file behind that the exists()-check above
+    # would mistake for a valid, complete cache entry. Keep the .mp4 suffix last -- ffmpeg
+    # infers the output container from the file extension.
+    tmp_path = out_path.with_name(f"{out_path.stem}.tmp{out_path.suffix}")
+    try:
+        _run(
+            [
+                FFMPEG, "-y", "-i", str(source_path),
+                "-vf", scale_filter,
+                "-an",
+                "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                str(tmp_path),
+            ]
+        )
+    except Exception:
+        tmp_path.unlink(missing_ok=True)
+        raise
+    os.replace(tmp_path, out_path)
     return out_path
 
 

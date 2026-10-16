@@ -48,15 +48,22 @@ def plan_chunks(total_frames: int, chunk_len: int = 81, overlap: int = 1) -> lis
     step = chunk_len - overlap
     chunks: list[Chunk] = []
     start = 0
-    while start < total_frames:
+    while True:
         remaining = total_frames - start
+        if remaining <= 0:
+            break
+        # Once only the overlap tail is left, every one of those frames was already
+        # covered by the previous chunk -- stop instead of emitting a useless chunk
+        # that reprocesses already-covered frames and contributes nothing new.
+        if remaining <= overlap and chunks:
+            break
         if remaining >= chunk_len:
             chunks.append(Chunk(start=start, end=start + chunk_len, pad=0))
-        else:
-            needed_len = _round_up_to_4n_plus_1(remaining)
-            chunks.append(Chunk(start=start, end=total_frames, pad=needed_len - remaining))
-            break
-        start += step
+            start += step
+            continue
+        needed_len = _round_up_to_4n_plus_1(remaining)
+        chunks.append(Chunk(start=start, end=total_frames, pad=needed_len - remaining))
+        break
     return chunks
 
 

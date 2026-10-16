@@ -79,6 +79,30 @@ def test_list_respects_limit(video_no_audio):
     assert len(store.list(limit=2)) == 2
 
 
+def test_list_unlimited_returns_more_than_default_limit(video_no_audio):
+    store = AssetStore()
+    for _ in range(3):
+        store.add(video_no_audio, "video")
+    assert len(store.list(limit=None)) == 3
+
+
+def test_find_by_url_returns_matching_asset(video_no_audio, sample_image):
+    store = AssetStore()
+    store.add(video_no_audio, "video", origin={"url": "https://example.com/other"})
+    target = store.add(video_no_audio, "video", origin={"url": "https://example.com/target"})
+
+    found = store.find_by_url("https://example.com/target")
+    assert found is not None
+    assert found.id == target.id
+
+
+def test_find_by_url_returns_none_when_no_match(video_no_audio):
+    store = AssetStore()
+    store.add(video_no_audio, "video", origin={"url": "https://example.com/other"})
+    assert store.find_by_url("https://example.com/nope") is None
+    assert store.find_by_url("") is None
+
+
 def test_parent_ids_and_meta_round_trip_through_persistence(video_no_audio):
     store = AssetStore()
     parent = store.add(video_no_audio, "video")

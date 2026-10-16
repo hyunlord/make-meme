@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import json
+import subprocess
 from pathlib import Path
 
 import pytest
 
 from make_meme import ingest
+from make_meme.ingest import _display_rotation_degrees
 
 
 def test_probe_reports_duration_fps_size_and_audio(video_with_audio):
@@ -89,6 +92,28 @@ def test_normalize_is_idempotent_by_filename(video_with_audio):
     assert out2.stat().st_mtime == mtime1
 
 
+def test_normalize_does_not_poison_cache_on_failure(video_with_audio, monkeypatch):
+    asset = ingest.prepare_clip(video_with_audio, 0.0, 1.0)
+    original_run = ingest._run
+
+    def failing_run(cmd):
+        raise RuntimeError("simulated ffmpeg crash")
+
+    monkeypatch.setattr(ingest, "_run", failing_run)
+    with pytest.raises(RuntimeError):
+        ingest.normalize(asset.path, 64, 48, fps=8)
+
+    out_path = asset.path.parent / "normalized_64x48_8fps.mp4"
+    tmp_path = asset.path.parent / "normalized_64x48_8fps.tmp.mp4"
+    assert not out_path.exists(), "a failed encode must not leave a truncated 'cached' output"
+    assert not tmp_path.exists(), "the temp file must be cleaned up on failure"
+
+    # and a subsequent real call must still work (no corrupted state left behind)
+    monkeypatch.setattr(ingest, "_run", original_run)
+    out = ingest.normalize(asset.path, 64, 48, fps=8)
+    assert out.is_file()
+
+
 def test_extract_frame_returns_image_with_source_dimensions(video_with_audio):
     frame = ingest.extract_frame(video_with_audio, 1.0)
     assert frame.size == (320, 240)
@@ -120,3 +145,132 @@ def test_suggest_segments_scores_sorted_descending(video_with_hard_cuts):
 def test_suggest_segments_empty_for_zero_duration(tmp_path, monkeypatch):
     monkeypatch.setattr(ingest, "probe", lambda path: {"duration": 0.0})
     assert ingest.suggest_segments(tmp_path / "doesnt-matter.mp4") == []
+
+
+# --------------------------------------------------------------------------
+# Rotated phone video handling (probe() must report *display* dims, not coded
+# ones, since ffmpeg auto-rotates on decode by default).
+# --------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("stream", "expected"),
+    [
+        ({}, 0),
+        ({"tags": {"rotate": "90"}}, 90),
+        ({"tags": {"rotate": "-90"}}, 270),
+        ({"tags": {"rotate": "180"}}, 180),
+        ({"tags": {"rotate": "270"}}, 270),
+        ({"tags": {"rotate": "0"}}, 0),
+        ({"tags": {"rotate": "not-a-number"}}, 0),
+        ({"side_data_list": [{"side_data_type": "Display Matrix", "rotation": -90}]}, 270),
+        ({"side_data_list": [{"side_data_type": "Display Matrix", "rotation": 90.0}]}, 90),
+        ({"side_data_list": [{"side_data_type": "Display Matrix", "rotation": 180}]}, 180),
+        ({"side_data_list": [{"side_data_type": "Other"}]}, 0),
+        (
+            # tags.rotate takes priority over side_data when both are present
+            {
+                "tags": {"rotate": "90"},
+                "side_data_list": [{"side_data_type": "Display Matrix", "rotation": 180}],
+            },
+            90,
+        ),
+    ],
+)
+def test_display_rotation_degrees(stream, expected):
+    assert _display_rotation_degrees(stream) == expected
+
+
+def _fake_ffprobe_run(fake_json: dict):
+    def fake_run(cmd, **kwargs):
+        return subprocess.CompletedProcess(cmd, 0, stdout=json.dumps(fake_json), stderr="")
+
+    return fake_run
+
+
+def test_probe_swaps_width_height_for_90_degree_rotation(tmp_path, monkeypatch):
+    """A phone video shot landscape (coded 1920x1080) with a rotate=90 tag should report
+    *display* dims (1080x1920) -- what ffmpeg will actually output when it auto-rotates on
+    decode -- not the raw coded dims. My own ffmpeg build won't actually write a rotate tag
+    into an mp4 via any CLI incantation I could find, so this exercises probe()'s JSON
+    parsing directly against a hand-built (but schema-accurate) ffprobe payload."""
+
+    fake_json = {
+        "format": {"duration": "5.0"},
+        "streams": [
+            {
+                "codec_type": "video",
+                "width": 1920,
+                "height": 1080,
+                "r_frame_rate": "30/1",
+                "duration": "5.0",
+                "tags": {"rotate": "90"},
+            }
+        ],
+    }
+    monkeypatch.setattr(ingest.subprocess, "run", _fake_ffprobe_run(fake_json))
+    meta = ingest.probe(tmp_path / "phone.mp4")
+    assert meta["width"] == 1080
+    assert meta["height"] == 1920
+
+
+def test_probe_swaps_width_height_for_side_data_rotation(tmp_path, monkeypatch):
+    fake_json = {
+        "format": {"duration": "5.0"},
+        "streams": [
+            {
+                "codec_type": "video",
+                "width": 1920,
+                "height": 1080,
+                "r_frame_rate": "30/1",
+                "duration": "5.0",
+                "side_data_list": [{"side_data_type": "Display Matrix", "rotation": -90}],
+            }
+        ],
+    }
+    monkeypatch.setattr(ingest.subprocess, "run", _fake_ffprobe_run(fake_json))
+    meta = ingest.probe(tmp_path / "phone.mp4")
+    assert meta["width"] == 1080
+    assert meta["height"] == 1920
+
+
+def test_probe_does_not_swap_dims_for_180_degree_rotation(tmp_path, monkeypatch):
+    fake_json = {
+        "format": {"duration": "5.0"},
+        "streams": [
+            {
+                "codec_type": "video",
+                "width": 1920,
+                "height": 1080,
+                "r_frame_rate": "30/1",
+                "duration": "5.0",
+                "tags": {"rotate": "180"},
+            }
+        ],
+    }
+    monkeypatch.setattr(ingest.subprocess, "run", _fake_ffprobe_run(fake_json))
+    meta = ingest.probe(tmp_path / "phone.mp4")
+    assert meta["width"] == 1920
+    assert meta["height"] == 1080
+
+
+# --------------------------------------------------------------------------
+# ffmpeg failure messages: tail-only stderr (full logs can be enormous and
+# aren't useful to an LLM reading a job's error field).
+# --------------------------------------------------------------------------
+
+
+def test_run_truncates_stderr_to_last_lines(monkeypatch):
+    many_lines = "\n".join(f"line {i}" for i in range(50))
+
+    def fake_run(cmd, **kwargs):
+        return subprocess.CompletedProcess(cmd, 1, stdout="", stderr=many_lines)
+
+    monkeypatch.setattr(ingest.subprocess, "run", fake_run)
+    with pytest.raises(RuntimeError) as exc_info:
+        ingest._run(["ffmpeg", "-fake"])
+
+    message = str(exc_info.value)
+    assert "line 49" in message
+    assert "line 0" not in message
+    assert message.count("line ") == ingest._STDERR_TAIL_LINES

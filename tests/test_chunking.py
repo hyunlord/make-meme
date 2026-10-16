@@ -6,7 +6,7 @@ import itertools
 
 import pytest
 
-from make_meme.chunking import estimate_seconds, plan_chunks
+from make_meme.chunking import Chunk, estimate_seconds, plan_chunks
 
 
 def _length(chunk):
@@ -49,6 +49,37 @@ def test_single_chunk_when_shorter_than_chunk_len():
     assert len(chunks) == 1
     assert chunks[0].start == 0
     assert chunks[0].end == 10
+
+
+def test_exact_chunk_len_does_not_emit_a_useless_trailing_chunk():
+    # Regression: total_frames == chunk_len used to produce a spurious second chunk
+    # [80, 81) that only re-covers the 1-frame overlap tail of the first chunk,
+    # contributing nothing new.
+    chunks = plan_chunks(81, chunk_len=81, overlap=1)
+    assert chunks == [Chunk(start=0, end=81, pad=0)]
+
+
+def test_two_full_chunks_does_not_emit_a_useless_trailing_chunk():
+    # 161 = 81 + 80 (step) -> second chunk covers [80, 161); nothing is left over
+    # beyond the 1-frame overlap, so there should be exactly 2 chunks, not 3.
+    chunks = plan_chunks(161, chunk_len=81, overlap=1)
+    assert chunks == [Chunk(start=0, end=81, pad=0), Chunk(start=80, end=161, pad=0)]
+
+
+def test_one_genuinely_new_frame_still_gets_its_own_chunk():
+    # 82 has exactly 1 real frame beyond the first chunk's overlap tail (index 81);
+    # that's new content, not just re-covering the overlap, so it must still get a
+    # (padded) chunk of its own -- this must not be swept up by the "stop once only
+    # the overlap is left" fix for the 81/161 cases above.
+    chunks = plan_chunks(82, chunk_len=81, overlap=1)
+    assert len(chunks) == 2
+    assert chunks[0] == Chunk(start=0, end=81, pad=0)
+    assert chunks[1].start == 80
+    assert chunks[1].end == 82
+    covered = set()
+    for chunk in chunks:
+        covered.update(range(chunk.start, chunk.end))
+    assert covered == set(range(82))
 
 
 def test_empty_input_yields_no_chunks():

@@ -89,3 +89,66 @@ async def test_make_preview_extracts_a_frame(video_no_audio, tmp_path):
     assert out.is_file()
     with Image.open(out) as im:
         assert im.size == (320, 240)
+
+
+# --------------------------------------------------------------------------
+# _run internals: tail-only stderr on failure, and killing the ffmpeg
+# subprocess if the awaiting task itself gets cancelled.
+# --------------------------------------------------------------------------
+
+
+class _FakeProcess:
+    def __init__(self, returncode: int, stderr: bytes = b"", stdout: bytes = b""):
+        self.returncode = returncode
+        self._stdout = stdout
+        self._stderr = stderr
+        self.killed = False
+
+    async def communicate(self):
+        return self._stdout, self._stderr
+
+    def kill(self):
+        self.killed = True
+
+    async def wait(self):
+        return self.returncode
+
+
+async def test_run_truncates_stderr_to_last_lines(monkeypatch):
+    many_lines = "\n".join(f"line {i}" for i in range(50)).encode()
+    fake = _FakeProcess(1, stderr=many_lines)
+
+    async def fake_create_subprocess_exec(*cmd, **kwargs):
+        return fake
+
+    monkeypatch.setattr(post.asyncio, "create_subprocess_exec", fake_create_subprocess_exec)
+    with pytest.raises(RuntimeError) as exc_info:
+        await post._run(["ffmpeg", "-fake"])
+
+    message = str(exc_info.value)
+    assert "line 49" in message
+    assert "line 0" not in message
+    assert message.count("line ") == post._STDERR_TAIL_LINES
+
+
+async def test_run_kills_subprocess_when_cancelled(monkeypatch):
+    fake = _FakeProcess(0)
+
+    async def hanging_communicate():
+        await asyncio.sleep(10)
+        return b"", b""
+
+    fake.communicate = hanging_communicate
+
+    async def fake_create_subprocess_exec(*cmd, **kwargs):
+        return fake
+
+    monkeypatch.setattr(post.asyncio, "create_subprocess_exec", fake_create_subprocess_exec)
+
+    task = asyncio.ensure_future(post._run(["ffmpeg", "-fake"]))
+    await asyncio.sleep(0.05)  # let it reach the communicate() await point
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await task
+
+    assert fake.killed is True

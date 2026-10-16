@@ -19,17 +19,23 @@ FFMPEG = "ffmpeg"
 AI_GENERATED_COMMENT = "AI-generated with make-meme"
 
 
+_STDERR_TAIL_LINES = 8
+
+
 async def _run(cmd: list[str]) -> None:
     logger.debug("running: %s", " ".join(cmd))
     proc = await asyncio.create_subprocess_exec(
         *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
-    _, stderr = await proc.communicate()
+    try:
+        _, stderr = await proc.communicate()
+    except asyncio.CancelledError:
+        proc.kill()
+        await proc.wait()
+        raise
     if proc.returncode != 0:
-        raise RuntimeError(
-            f"command failed ({proc.returncode}): {' '.join(cmd)}\nstderr:\n"
-            f"{stderr.decode(errors='replace')}"
-        )
+        tail = "\n".join(stderr.decode(errors="replace").strip().splitlines()[-_STDERR_TAIL_LINES:])
+        raise RuntimeError(f"command failed ({proc.returncode}): {' '.join(cmd)}\nstderr (tail):\n{tail}")
 
 
 async def concat_videos(paths: list[Path], out: Path, overlap: int = 1) -> Path:

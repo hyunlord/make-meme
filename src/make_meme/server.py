@@ -4,10 +4,10 @@ Logging goes to stderr only -- stdout is the MCP stdio channel and must never
 receive anything else.
 
 This module owns the shared ``mcp`` FastMCP instance plus the ``get_assets()``
-/``get_jobs()`` singletons, so other modules (e.g. a future ``tools_swap.py``
-with detect/swap tools backed by ComfyUI recipes) can register more
-``@mcp.tool()``/``@mcp.prompt()`` functions against the same server. See the
-bottom of this file.
+/``get_jobs()`` singletons, so other modules (``tools_swap.py`` with
+detect/swap tools backed by ComfyUI recipes, ``tools_trend.py`` with
+analyze_meme_usage) can register more ``@mcp.tool()``/``@mcp.prompt()``
+functions against the same server. See the bottom of this file.
 """
 
 from __future__ import annotations
@@ -23,7 +23,6 @@ from collections.abc import Awaitable, Callable
 from pathlib import Path
 from typing import Any, Literal
 
-import httpx
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp import Image as MCPImage
 from mcp.server.fastmcp.exceptions import ToolError
@@ -32,6 +31,7 @@ from . import ingest
 from .assets import AssetStore
 from .config import get_settings
 from .jobs import JobManager
+from .safety import UnsafePathError, check_local_media_path
 
 logging.basicConfig(
     level=logging.INFO,
@@ -113,10 +113,10 @@ async def _check_setup_impl() -> dict[str, Any]:
 
     settings = get_settings()
     try:
-        async with httpx.AsyncClient(timeout=3.0) as client:
-            resp = await client.get(f"{settings.comfy_url}/system_stats")
-            resp.raise_for_status()
-            stats = resp.json()
+        from .comfy.client import ComfyClient  # sends COMFY_TOKEN when set (remote proxy)
+
+        async with ComfyClient(settings.comfy_url) as client:
+            stats = await client.system_stats()
             devices = stats.get("devices") or [{}]
             device = devices[0]
             report["comfyui"] = {
@@ -197,7 +197,7 @@ async def _resolve_search_ref(source: str) -> tuple[str, dict[str, Any]]:
     return url, {"candidate": candidate}
 
 
-@mcp.tool()
+@mcp.tool(structured_output=False)
 async def search_media(
     query: str,
     kind: Literal["video", "image"] = "video",
@@ -245,7 +245,7 @@ async def search_media(
     ]
 
 
-@mcp.tool()
+@mcp.tool(structured_output=False)
 async def load_media(
     source: str,
     start_sec: float | None = None,
@@ -268,6 +268,10 @@ async def load_media(
         resolved_source, candidate_meta = await _resolve_search_ref(source)
         local_path = Path(resolved_source).expanduser()
         if not _is_url(resolved_source) and local_path.is_file():
+            try:
+                local_path = check_local_media_path(local_path)
+            except UnsafePathError as exc:
+                raise ToolError(str(exc)) from exc
             kind: Literal["video", "image"] = "video" if _looks_like_video_path(local_path) else "image"
             asset = await asyncio.to_thread(
                 assets.add,
@@ -276,26 +280,32 @@ async def load_media(
                 origin={"source": str(local_path), **candidate_meta},
             )
         else:
-            sources = _load_sources_backend()
-            dest_dir = get_settings().videos_dir / "_fetched"
-            try:
-                fetched = await sources.fetch(resolved_source, dest_dir)
-            except sources.SourceError as exc:
-                raise ToolError(str(exc)) from exc
-            origin = {
-                "source": source,
-                "url": fetched.source_url,
-                "provider": fetched.provider,
-                "title": fetched.title,
-                "uploader": fetched.uploader,
-                "license": fetched.license,
-                "description": fetched.description,
-                "subtitles_excerpt": fetched.subtitles_excerpt,
-                **candidate_meta,
-            }
-            asset = await asyncio.to_thread(
-                assets.add, fetched.path, fetched.kind, origin=origin, move=True
-            )
+            existing = assets.find_by_url(resolved_source) if _is_url(resolved_source) else None
+            if existing is not None:
+                asset = existing
+            else:
+                sources = _load_sources_backend()
+                dest_dir = get_settings().videos_dir / "_fetched"
+                try:
+                    fetched = await sources.fetch(resolved_source, dest_dir)
+                except sources.SourceError as exc:
+                    raise ToolError(str(exc)) from exc
+                origin = {
+                    "source": source,
+                    "url": fetched.source_url,
+                    "provider": fetched.provider,
+                    "title": fetched.title,
+                    "uploader": fetched.uploader,
+                    "license": fetched.license,
+                    "description": fetched.description,
+                    "subtitles_excerpt": fetched.subtitles_excerpt,
+                    **candidate_meta,
+                }
+                # copy (not move): sources.fetch()'s own on-disk cache for this URL is keyed
+                # to fetched.path, so moving it away would force a re-download next time.
+                asset = await asyncio.to_thread(
+                    assets.add, fetched.path, fetched.kind, origin=origin, move=False
+                )
 
     warnings: list[str] = list(asset.meta.get("warnings", []))
 
@@ -320,7 +330,7 @@ async def load_media(
     return content
 
 
-@mcp.tool()
+@mcp.tool(structured_output=False)
 async def inspect_media(asset_id: str, frames: int = 12) -> list[Any]:
     """Inspect a loaded asset without needing to attach the file again: returns metadata (duration,
     resolution, origin/title/uploader if fetched from a link), and for video a storyboard image
@@ -360,7 +370,7 @@ async def inspect_media(asset_id: str, frames: int = 12) -> list[Any]:
 # --------------------------------------------------------------------------
 
 
-@mcp.tool()
+@mcp.tool(structured_output=False)
 async def get_job(job_id: str) -> list[Any]:
     """Get a job's status: stage, progress (0-1), message, and on success its result (e.g. an
     output asset id) plus a preview image if one is available."""
@@ -451,16 +461,24 @@ def swap_meme_from_link(url: str, who: str) -> str:
 # Entry point
 # --------------------------------------------------------------------------
 
-# Registers detect_subjects/swap_subjects/make_swap_meme (backed by ComfyUI
-# recipes) once that module exists; it doesn't yet, so this is a no-op today.
-try:
-    import make_meme.tools_trend
-except ImportError:
-    logger.debug("make_meme.tools_trend not available; analyze_meme_usage is not registered")
-try:
-    import make_meme.tools_swap  # noqa: F401
-except ImportError:
-    logger.debug("make_meme.tools_swap not available yet; swap tools are not registered")
+def _import_optional_tool_module(module_name: str) -> None:
+    """Import an optional tool module for its @mcp.tool()/@mcp.prompt() side effects.
+
+    A missing/broken optional module must not crash the server, but it must not
+    fail silently either -- log the real exception at ERROR level so a typo or
+    bad import doesn't quietly remove a whole tool.
+    """
+
+    try:
+        __import__(module_name)
+    except ImportError:
+        logger.exception("could not import %s; its tools will not be registered", module_name)
+
+
+# tools_swap.py adds detect_subjects/swap_subjects/make_swap_meme (ComfyUI
+# recipes); tools_trend.py adds analyze_meme_usage.
+for _optional_module in ("make_meme.tools_trend", "make_meme.tools_swap"):
+    _import_optional_tool_module(_optional_module)
 
 
 def main() -> None:

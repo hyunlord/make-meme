@@ -182,8 +182,8 @@ class AssetStore:
             return None
         return Asset.from_json(json.loads(info_path.read_text()))
 
-    def list(self, kind: AssetKind | None = None, limit: int = 50) -> list[Asset]:
-        """List known assets, newest first."""
+    def list(self, kind: AssetKind | None = None, limit: int | None = 50) -> list[Asset]:
+        """List known assets, newest first. ``limit=None`` returns all of them."""
 
         assets: list[Asset] = []
         if not self.root.is_dir():
@@ -202,7 +202,7 @@ class AssetStore:
                 continue
             assets.append(asset)
         assets.sort(key=lambda a: a.created_at, reverse=True)
-        return assets[:limit]
+        return assets if limit is None else assets[:limit]
 
     def resolve(self, ref: str) -> Asset:
         """Resolve an asset id to its :class:`Asset`, raising ``KeyError`` if not found."""
@@ -211,3 +211,13 @@ class AssetStore:
         if asset is None:
             raise KeyError(f"no asset with id {ref!r}")
         return asset
+
+    def find_by_url(self, url: str) -> Asset | None:
+        """Return the most recent existing asset whose ``origin["url"]`` matches, if any.
+
+        Used to dedupe re-fetching the same source URL (e.g. via load_media).
+        """
+
+        if not url:
+            return None
+        return next((a for a in self.list(limit=None) if a.origin.get("url") == url), None)

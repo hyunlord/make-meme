@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import pytest
+from mcp.types import ImageContent, TextContent
 
 from make_meme import server
 
@@ -141,6 +142,79 @@ async def test_cancel_job_unknown_id_returns_false_not_an_error():
     assert result == {"cancelled": False}
 
 
+def test_import_optional_tool_module_logs_error_not_silent(caplog):
+    import logging
+
+    with caplog.at_level(logging.ERROR, logger="make_meme.server"):
+        server._import_optional_tool_module("make_meme._does_not_exist_xyz")
+    assert any(
+        r.levelno == logging.ERROR and "make_meme._does_not_exist_xyz" in r.message
+        for r in caplog.records
+    )
+    assert caplog.records[-1].exc_info is not None
+
+
+# --------------------------------------------------------------------------
+# Real MCP call_tool() round trips: these go through FastMCP's own result
+# conversion, which is what actually broke in production ("Unable to
+# serialize unknown type: ...Image") when a tool returning list[Any] didn't
+# disable structured_output -- direct function calls above don't exercise
+# that path at all.
+# --------------------------------------------------------------------------
+
+
+async def test_load_media_via_call_tool_returns_image_for_video(video_with_audio):
+    result = await server.mcp.call_tool("load_media", {"source": str(video_with_audio)})
+    assert isinstance(result, list)
+    assert isinstance(result[0], TextContent)
+    assert json.loads(result[0].text)["kind"] == "video"
+    assert any(isinstance(block, ImageContent) for block in result)
+
+
+async def test_load_media_via_call_tool_returns_image_for_image(sample_image):
+    result = await server.mcp.call_tool("load_media", {"source": str(sample_image)})
+    assert isinstance(result, list)
+    assert isinstance(result[0], TextContent)
+    assert json.loads(result[0].text)["kind"] == "image"
+    assert any(isinstance(block, ImageContent) for block in result)
+
+
+async def test_inspect_media_via_call_tool_returns_image(video_with_hard_cuts):
+    loaded = await server.mcp.call_tool("load_media", {"source": str(video_with_hard_cuts)})
+    asset_id = json.loads(loaded[0].text)["id"]
+
+    result = await server.mcp.call_tool("inspect_media", {"asset_id": asset_id})
+    assert isinstance(result, list)
+    assert isinstance(result[0], TextContent)
+    assert any(isinstance(block, ImageContent) for block in result)
+
+
+async def test_search_media_via_call_tool_returns_image(monkeypatch, video_with_audio):
+    _install_fake_sources_module(monkeypatch, video_with_audio)
+    result = await server.mcp.call_tool("search_media", {"query": "a shiba inu"})
+    assert isinstance(result, list)
+    assert isinstance(result[0], TextContent)
+    assert any(isinstance(block, ImageContent) for block in result)
+
+
+async def test_get_job_via_call_tool_returns_image_on_success(video_with_audio):
+    loaded = await server.load_media(str(video_with_audio))
+    preview_path = json.loads(loaded[0])["meta"]["preview_path"]
+
+    jobs = server.get_jobs()
+
+    async def work(ctx):
+        return {"preview_path": preview_path}
+
+    job = jobs.submit("demo", work)
+    await jobs.wait(job.id)
+
+    result = await server.mcp.call_tool("get_job", {"job_id": job.id})
+    assert isinstance(result, list)
+    assert isinstance(result[0], TextContent)
+    assert any(isinstance(block, ImageContent) for block in result)
+
+
 # --------------------------------------------------------------------------
 # Fakes for the make_meme.sources contract (built separately; see module docstring)
 # --------------------------------------------------------------------------
@@ -232,6 +306,47 @@ async def test_load_media_unknown_search_session_raises_tool_error():
         await server.load_media("deadbeefcafe:1")
 
 
+async def test_load_media_dedupes_by_url(monkeypatch, video_with_audio):
+    fake = _install_fake_sources_module(monkeypatch, video_with_audio)
+    fetch_calls: list[str] = []
+    original_fetch = fake.fetch
+
+    async def counting_fetch(source, dest_dir):
+        fetch_calls.append(source)
+        return await original_fetch(source, dest_dir)
+
+    fake.fetch = counting_fetch
+
+    url = "https://example.com/dedupe-me.mp4"
+    first = await server.load_media(url)
+    first_id = _json_payload(first)["id"]
+    assert len(fetch_calls) == 1
+
+    second = await server.load_media(url)
+    second_id = _json_payload(second)["id"]
+    assert len(fetch_calls) == 1, "a second load_media for the same URL must not re-fetch"
+    assert second_id == first_id
+
+
+async def test_load_media_copies_fetched_file_instead_of_moving_it(monkeypatch, video_with_audio):
+    fake = _install_fake_sources_module(monkeypatch, video_with_audio)
+    captured_paths: list[Path] = []
+    original_fetch = fake.fetch
+
+    async def capturing_fetch(source, dest_dir):
+        media = await original_fetch(source, dest_dir)
+        captured_paths.append(media.path)
+        return media
+
+    fake.fetch = capturing_fetch
+
+    await server.load_media("https://example.com/copy-me.mp4")
+    assert len(captured_paths) == 1
+    # move=False: sources.fetch()'s own on-disk cache for this URL must survive so it can
+    # still hit on a later call, even though we also now dedupe at the asset-store level.
+    assert captured_paths[0].is_file()
+
+
 async def test_search_media_propagates_source_error_as_tool_error(monkeypatch):
     fake = types.ModuleType("make_meme.sources")
 
@@ -270,3 +385,19 @@ async def test_search_media_with_incomplete_sources_backend_raises_tool_error(mo
 
     with pytest.raises(server.ToolError):
         await server.search_media("anything")
+
+
+async def test_load_media_refuses_hidden_dirs(tmp_path):
+    from mcp.server.fastmcp.exceptions import ToolError
+    from PIL import Image
+
+    from make_meme import server
+
+    secret = tmp_path / ".secret"
+    secret.mkdir()
+    Image.new("RGB", (8, 8)).save(secret / "x.png")
+    with pytest.raises(ToolError, match="hidden directory"):
+        await server.load_media(str(secret / "x.png"))
+    Image.new("RGB", (8, 8)).save(tmp_path / "ok.png")
+    out = await server.load_media(str(tmp_path / "ok.png"))
+    assert "img_" in out[0]

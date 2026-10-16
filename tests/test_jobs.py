@@ -116,3 +116,69 @@ async def test_unreadable_job_file_is_skipped_not_fatal(tmp_path):
     (tmp_path / "corrupt.json").write_text("{not valid json")
     manager = JobManager(jobs_dir=tmp_path, max_concurrent=1)
     assert manager.list() == []
+
+
+async def test_real_asyncio_cancellation_resolves_job_not_stuck_running(tmp_path):
+    """A genuine asyncio.CancelledError (BaseException) from the pipeline -- not just our
+    own cooperative ctx.check_cancelled()/JobCancelled -- must still resolve the job,
+    instead of leaving it "running" forever (CancelledError isn't caught by `except
+    Exception`, so it used to escape _run entirely before the status/persist code ran)."""
+
+    manager = JobManager(jobs_dir=tmp_path, max_concurrent=1)
+    started = asyncio.Event()
+
+    async def work(ctx):
+        started.set()
+        await asyncio.sleep(10)  # would hang the test if cancellation weren't handled
+        return {}
+
+    job = manager.submit("demo", work)
+    await started.wait()
+
+    task = manager._tasks[job.id]
+    task.cancel()  # genuine asyncio cancellation, not ctx.cancelled.set()
+
+    finished = await manager.wait(job.id)
+    assert finished.status == "cancelled"
+
+
+async def test_restart_marks_queued_jobs_as_failed_too(tmp_path):
+    manager = JobManager(jobs_dir=tmp_path, max_concurrent=1)
+    gate = asyncio.Event()
+
+    async def blocking_first(ctx):
+        await gate.wait()
+        return {}
+
+    async def noop(ctx):
+        return {}
+
+    first = manager.submit("demo", blocking_first)
+    second = manager.submit("demo", noop)  # queues behind `first` (max_concurrent=1)
+
+    for _ in range(200):
+        if manager.get(second.id).status == "queued":
+            break
+        await asyncio.sleep(0.01)
+    assert manager.get(second.id).status == "queued"
+
+    restarted = JobManager(jobs_dir=tmp_path, max_concurrent=1)
+    assert restarted.get(second.id).status == "failed"
+    assert restarted.get(second.id).error == "server restarted"
+
+    gate.set()
+    await manager.wait(first.id)
+    await manager.wait(second.id)
+
+
+async def test_job_error_is_type_and_message_truncated(tmp_path):
+    manager = JobManager(jobs_dir=tmp_path, max_concurrent=1)
+
+    async def work(ctx):
+        raise ValueError("x" * 1000)
+
+    job = manager.submit("demo", work)
+    finished = await manager.wait(job.id)
+    assert finished.status == "failed"
+    assert finished.error.startswith("ValueError: ")
+    assert len(finished.error) <= 600

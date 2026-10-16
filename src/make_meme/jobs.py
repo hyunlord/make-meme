@@ -33,6 +33,16 @@ class JobCancelled(Exception):
     """Raised inside a job coroutine (via JobContext.check_cancelled) when cancelled."""
 
 
+_MAX_ERROR_LEN = 600
+
+
+def _format_job_error(exc: BaseException) -> str:
+    """A concise, LLM-readable error: "TypeName: message", truncated to ~600 chars."""
+
+    message = f"{type(exc).__name__}: {exc}"
+    return message if len(message) <= _MAX_ERROR_LEN else message[: _MAX_ERROR_LEN - 1] + "…"
+
+
 @dataclass
 class Job:
     id: str
@@ -107,7 +117,7 @@ class JobManager:
             except (json.JSONDecodeError, TypeError, ValueError) as exc:
                 logger.warning("skipping unreadable job file %s: %s", path, exc)
                 continue
-            if job.status == "running":
+            if job.status in ("running", "queued"):
                 job.status = "failed"
                 job.error = "server restarted"
                 job.updated_at = _now_iso()
@@ -153,12 +163,17 @@ class JobManager:
                 job.result = result
                 job.progress = 1.0
                 job.status = "succeeded"
-            except JobCancelled:
+            except (JobCancelled, asyncio.CancelledError):
+                # asyncio.CancelledError is a BaseException, not Exception -- it can reach
+                # here from genuine task cancellation (not just our own cooperative
+                # check_cancelled()), and must still resolve the job rather than leave it
+                # "running" forever. Swallowed deliberately (not re-raised): this task is a
+                # supervisor that always wants to finish and record an outcome.
                 job.status = "cancelled"
-            except Exception as exc:  # any failure becomes a job failure, not a server crash
+            except Exception as exc:  # any other failure becomes a job failure, not a server crash
                 logger.exception("job %s (%s) failed", job.id, job.kind)
                 job.status = "failed"
-                job.error = str(exc)
+                job.error = _format_job_error(exc)
             job.updated_at = _now_iso()
             self._write(job)
 
