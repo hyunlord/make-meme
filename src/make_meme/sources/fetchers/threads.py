@@ -21,6 +21,7 @@ import httpx
 
 from ..htmlmeta import iter_json_blobs, parse_meta_tags, walk
 from ..models import FetchedMedia, SourceError
+from ..netsafe import safe_client, safe_get
 from ..utils import (
     USER_AGENT_DESKTOP,
     USER_AGENT_MOBILE,
@@ -110,9 +111,7 @@ class ThreadsFetcher:
         dest_dir.mkdir(parents=True, exist_ok=True)
         cookies = _load_cookies()
 
-        async with httpx.AsyncClient(
-            cookies=cookies, follow_redirects=True, timeout=20.0
-        ) as client:
+        async with safe_client(cookies=cookies, timeout=20.0) as client:
             html = await self._fetch_html(client, source)
             meta = parse_meta_tags(html)
             blobs = list(iter_json_blobs(html))
@@ -168,7 +167,7 @@ class ThreadsFetcher:
         errors: list[str] = []
         for ua in (USER_AGENT_DESKTOP, USER_AGENT_MOBILE):
             try:
-                resp = await client.get(source, headers={"User-Agent": ua})
+                resp = await safe_get(client, source, headers={"User-Agent": ua})
             except httpx.HTTPError as e:
                 errors.append(describe_exception(e))
                 continue

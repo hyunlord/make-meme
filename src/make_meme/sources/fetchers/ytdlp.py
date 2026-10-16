@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from ..models import FetchedMedia, SourceError
+from ..netsafe import validate_url
 from ..utils import cache_key, describe_exception, is_url, strip_vtt
 
 logger = logging.getLogger(__name__)
@@ -95,6 +96,11 @@ class YtDlpFetcher:
         return _suitable_extractor(source) is not None
 
     async def fetch(self, source: str, dest_dir: Path) -> FetchedMedia:
+        # yt-dlp does its own HTTP (including following any redirects the target site
+        # sends) once handed this URL, so only the initial URL is validated here --
+        # a malicious redirect target reached via yt-dlp's own extractor/downloader
+        # code is not re-checked. See the module-level note in netsafe.py.
+        validate_url(source)
         return await asyncio.to_thread(self._fetch_sync, source, dest_dir)
 
     def _fetch_sync(self, source: str, dest_dir: Path) -> FetchedMedia:

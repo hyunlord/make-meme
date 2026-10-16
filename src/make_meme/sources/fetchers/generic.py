@@ -17,6 +17,7 @@ import httpx
 
 from ..htmlmeta import find_video_tag_src, parse_meta_tags
 from ..models import FetchedMedia, SourceError
+from ..netsafe import safe_client, safe_get
 from ..utils import (
     USER_AGENT_DESKTOP,
     cache_key,
@@ -41,11 +42,9 @@ class GenericFetcher:
     async def fetch(self, source: str, dest_dir: Path) -> FetchedMedia:
         dest_dir.mkdir(parents=True, exist_ok=True)
 
-        async with httpx.AsyncClient(
-            follow_redirects=True, timeout=20.0, headers={"User-Agent": USER_AGENT_DESKTOP}
-        ) as client:
+        async with safe_client(timeout=20.0, headers={"User-Agent": USER_AGENT_DESKTOP}) as client:
             try:
-                resp = await client.get(source)
+                resp = await safe_get(client, source)
             except httpx.HTTPError as e:
                 raise SourceError(f"Could not fetch {source}: {describe_exception(e)}") from e
             if resp.status_code >= 400:

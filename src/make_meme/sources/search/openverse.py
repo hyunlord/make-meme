@@ -8,6 +8,7 @@ from typing import ClassVar
 import httpx
 
 from ..models import Candidate, SourceError
+from ..netsafe import safe_client, safe_get
 from ..utils import describe_exception
 
 logger = logging.getLogger(__name__)
@@ -69,8 +70,8 @@ class OpenverseSearchProvider:
             return []
         params = {"q": query, "page_size": min(max(n, 1), 20)}
         try:
-            async with httpx.AsyncClient(timeout=REQUEST_TIMEOUT) as client:
-                resp = await client.get(OPENVERSE_API_URL, params=params)
+            async with safe_client(timeout=REQUEST_TIMEOUT) as client:
+                resp = await safe_get(client, OPENVERSE_API_URL, params=params)
                 resp.raise_for_status()
                 data = resp.json()
         except httpx.HTTPError as e:

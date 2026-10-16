@@ -10,6 +10,7 @@ import httpx
 from PIL import Image, ImageDraw, ImageFont
 
 from .models import Candidate
+from .netsafe import safe_client, safe_get
 from .utils import format_duration
 
 logger = logging.getLogger(__name__)
@@ -52,7 +53,7 @@ async def _fetch_thumbnail(client: httpx.AsyncClient, url: str | None) -> Image.
     if not url:
         return None
     try:
-        resp = await client.get(url, timeout=THUMBNAIL_TIMEOUT)
+        resp = await safe_get(client, url, timeout=THUMBNAIL_TIMEOUT)
         resp.raise_for_status()
         return Image.open(BytesIO(resp.content)).convert("RGB")
     except Exception as e:  # noqa: BLE001 - any failure here degrades to a placeholder, never aborts the grid
@@ -106,7 +107,7 @@ async def build_candidate_grid(candidates: list[Candidate]) -> Image.Image:
     sem = asyncio.Semaphore(MAX_CONCURRENT_DOWNLOADS)
 
     async def _get(c: Candidate) -> Image.Image:
-        async with sem, httpx.AsyncClient() as client:
+        async with sem, safe_client() as client:
             img = await _fetch_thumbnail(client, c.thumbnail_url)
         size = VIDEO_CELL if c.kind == "video" else IMAGE_CELL
         return _letterbox(img, size) if img is not None else _placeholder(size)

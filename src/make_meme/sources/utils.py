@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 import httpx
 
 from .models import SourceError
+from .netsafe import safe_stream
 
 logger = logging.getLogger(__name__)
 
@@ -128,9 +129,7 @@ async def download_to_file(
     limit = max_download_bytes()
     dest.parent.mkdir(parents=True, exist_ok=True)
     try:
-        async with client.stream(
-            "GET", url, headers=headers, follow_redirects=True, timeout=60.0
-        ) as resp:
+        async with safe_stream(client, "GET", url, headers=headers, timeout=60.0) as resp:
             if resp.status_code >= 400:
                 raise SourceError(f"Download failed (HTTP {resp.status_code}) for {url}")
             content_type = resp.headers.get("content-type")

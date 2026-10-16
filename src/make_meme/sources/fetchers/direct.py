@@ -6,9 +6,8 @@ import logging
 from pathlib import Path
 from urllib.parse import urlparse
 
-import httpx
-
 from ..models import FetchedMedia, SourceError
+from ..netsafe import safe_client
 from ..utils import USER_AGENT_DESKTOP, cache_key, download_to_file, is_url, kind_from_content_type
 
 logger = logging.getLogger(__name__)
@@ -65,7 +64,7 @@ class DirectFetcher:
 
         dest = dest_dir / f"{cache_key(source)}{ext}"
         if not dest.exists():
-            async with httpx.AsyncClient(headers={"User-Agent": USER_AGENT_DESKTOP}) as client:
+            async with safe_client(headers={"User-Agent": USER_AGENT_DESKTOP}) as client:
                 content_type = await download_to_file(client, source, dest)
             resolved_kind = kind_from_content_type(content_type)
             if resolved_kind is not None and resolved_kind != kind:
