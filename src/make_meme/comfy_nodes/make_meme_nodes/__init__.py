@@ -10,6 +10,9 @@ Installed into ComfyUI/custom_nodes by `make-meme install`. It carries:
   make_meme.perf polls while a generation runs (see stats.py).
 * MakeMemeSink -- a cheap OUTPUT_NODE terminal for workflows that run purely for a
   side effect, e.g. warming the text-encoder disk cache (see sink.py).
+* MakeMemeImageEmbed -- DINOv2-small image embeddings, used by
+  make_meme.pipelines.photos for appearance-similarity identity clustering
+  (see embed.py).
 
 Patches are applied whether WanVideoWrapper is imported before or after this pack
 (ComfyUI's custom node load order is filesystem-dependent).
@@ -22,6 +25,7 @@ import importlib.machinery
 import logging
 import sys
 
+from .embed import MakeMemeImageEmbed
 from .mocha_rope import rope_apply_mocha_real, rope_params_mocha_real
 from .sink import MakeMemeSink
 from .stats import register_route
@@ -99,5 +103,13 @@ class MakeMemeInfo:
         return (f"make_meme_nodes {__version__}; patched: {sorted(_patched) or 'none'}",)
 
 
-NODE_CLASS_MAPPINGS = {"MakeMemeInfo": MakeMemeInfo, "MakeMemeSink": MakeMemeSink}
-NODE_DISPLAY_NAME_MAPPINGS = {"MakeMemeInfo": "make-meme info", "MakeMemeSink": "make-meme sink"}
+NODE_CLASS_MAPPINGS = {
+    "MakeMemeInfo": MakeMemeInfo,
+    "MakeMemeSink": MakeMemeSink,
+    "MakeMemeImageEmbed": MakeMemeImageEmbed,
+}
+NODE_DISPLAY_NAME_MAPPINGS = {
+    "MakeMemeInfo": "make-meme info",
+    "MakeMemeSink": "make-meme sink",
+    "MakeMemeImageEmbed": "make-meme image embed",
+}

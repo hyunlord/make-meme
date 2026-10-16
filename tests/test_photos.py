@@ -34,7 +34,11 @@ from make_meme.pipelines.photos import (
 # Fake SAM 3: finds solid-colour blobs on a white background by nearest colour
 # ---------------------------------------------------------------------------
 
-_PALETTE = {"black": np.array([20, 20, 20]), "grey": np.array([130, 130, 130])}
+_PALETTE = {
+    "black": np.array([20, 20, 20]),
+    "grey": np.array([130, 130, 130]),
+    "blue": np.array([30, 30, 200]),  # used only by the subject_kind tests' fake "person" blobs
+}
 
 
 def _classify_pixels(colors: np.ndarray) -> np.ndarray:
@@ -90,9 +94,31 @@ async def fake_detect_in_image(
     return subjects
 
 
+async def fake_embed_crop(client, image_path, mask_path, *, profile):
+    """Deterministic fake DINOv2 embedding: the (masked) mean RGB, broadcast into a
+    384-d vector and L2-normalized. Keeps the pre-embedding tests' colour-based
+    separation working (same signal the histogram already carried) while exercising
+    the real embedding code path end to end.
+    """
+
+    img = Image.open(image_path).convert("RGB")
+    arr = np.asarray(img, dtype=np.float64)
+    if mask_path is not None:
+        mask = np.asarray(Image.open(mask_path).convert("L").resize(img.size))
+        sel = mask > 127
+        mean_rgb = arr[sel].mean(axis=0) if sel.sum() > 0 else arr.reshape(-1, 3).mean(axis=0)
+    else:
+        mean_rgb = arr.reshape(-1, 3).mean(axis=0)
+    vec = np.zeros(384, dtype=np.float64)
+    vec[:3] = mean_rgb / 255.0
+    norm = np.linalg.norm(vec)
+    return vec / norm if norm > 0 else vec
+
+
 @pytest.fixture(autouse=True)
 def _patch_detector(monkeypatch):
     monkeypatch.setattr(photos, "detect_in_image", fake_detect_in_image)
+    monkeypatch.setattr(photos, "_embed_crop", fake_embed_crop)
 
 
 def _make_photo(
@@ -106,7 +132,11 @@ def _make_photo(
     if blur:
         img = img.filter(ImageFilter.GaussianBlur(radius=6))
     path.parent.mkdir(parents=True, exist_ok=True)
-    img.save(path)
+    # Always lossless, regardless of the given filename's extension (PIL detects actual
+    # format from content when reopening, not the extension): JPEG's ringing artifacts at
+    # a hard colour edge can otherwise fool the fake detector's nearest-colour classifier
+    # into seeing a third, spurious blob at the boundary.
+    img.save(path, format="PNG")
     return path
 
 
@@ -162,7 +192,9 @@ def test_describe_coat_empty_histogram_is_unknown():
 # ---------------------------------------------------------------------------
 
 
-def _fake_instance(photo: Path, label: str, hist, head_hist=None, pose="upright") -> Instance:
+def _fake_instance(
+    photo: Path, label: str, hist, head_hist=None, pose="upright", embedding=None, head_path=None
+) -> Instance:
     return Instance(
         photo=photo,
         index=1,
@@ -171,7 +203,7 @@ def _fake_instance(photo: Path, label: str, hist, head_hist=None, pose="upright"
         bbox=(0, 0, 100, 100),
         mask_path=Path("/dummy/mask.png"),
         crop_path=Path("/dummy/crop.png"),
-        head_path=None,
+        head_path=head_path,
         quality={
             "pose": pose,
             "area_frac": 0.1,
@@ -182,6 +214,7 @@ def _fake_instance(photo: Path, label: str, hist, head_hist=None, pose="upright"
         },
         hist=np.asarray(hist, dtype=np.float64),
         head_hist=None if head_hist is None else np.asarray(head_hist, dtype=np.float64),
+        embedding=None if embedding is None else np.asarray(embedding, dtype=np.float64),
     )
 
 
@@ -246,6 +279,60 @@ def test_group_instances_respects_threshold():
 
 def test_group_instances_empty():
     assert group_instances([]) == []
+
+
+# ---------------------------------------------------------------------------
+# _pairwise_distance: DINOv2 embedding (primary) + histogram (tie-breaker)
+# ---------------------------------------------------------------------------
+
+
+def test_pairwise_distance_embedding_dominates_conflicting_histogram():
+    """With embeddings present, the 0.8-weighted embedding distance should dominate a
+    conflicting histogram signal -- exactly the real-world failure mode that motivated
+    switching from histogram-only distance (same dog, different lighting -> histograms
+    disagree; DINOv2 embeddings of the same real subject stay close)."""
+
+    from make_meme.pipelines.photos import _pairwise_distance
+
+    black_hist, grey_hist = _hist_for((20, 20, 20)), _hist_for((160, 160, 160))
+    same_embedding = [1.0, 0.0, 0.0] + [0.0] * 381
+    a = _fake_instance(Path("p1.jpg"), "animal", black_hist, embedding=same_embedding)
+    b = _fake_instance(Path("p2.jpg"), "animal", grey_hist, embedding=same_embedding)
+    # Histograms are maximally disjoint (distance 1.0) but embeddings are identical
+    # (distance 0.0); the blend (0.8*0 + 0.2*1.0 = 0.2) should land well under 0.5.
+    assert _pairwise_distance(a, b) == pytest.approx(0.2)
+
+
+def test_pairwise_distance_falls_back_to_histogram_without_embeddings():
+    from make_meme.pipelines.photos import _hist_distance, _pairwise_distance
+
+    black_hist, grey_hist = _hist_for((20, 20, 20)), _hist_for((160, 160, 160))
+    a = _fake_instance(Path("p1.jpg"), "animal", black_hist, embedding=None)
+    b = _fake_instance(Path("p2.jpg"), "animal", grey_hist, embedding=None)
+    assert _pairwise_distance(a, b) == pytest.approx(_hist_distance(a, b))
+
+
+def test_pairwise_distance_falls_back_when_only_one_side_has_an_embedding():
+    from make_meme.pipelines.photos import _hist_distance, _pairwise_distance
+
+    black_hist, grey_hist = _hist_for((20, 20, 20)), _hist_for((160, 160, 160))
+    a = _fake_instance(Path("p1.jpg"), "animal", black_hist, embedding=[1.0] + [0.0] * 383)
+    b = _fake_instance(Path("p2.jpg"), "animal", grey_hist, embedding=None)
+    assert _pairwise_distance(a, b) == pytest.approx(_hist_distance(a, b))
+
+
+def test_cosine_distance_identical_and_orthogonal_and_opposite():
+    from make_meme.pipelines.photos import _cosine_distance
+
+    assert _cosine_distance(np.array([1.0, 0.0]), np.array([1.0, 0.0])) == pytest.approx(0.0)
+    assert _cosine_distance(np.array([1.0, 0.0]), np.array([0.0, 1.0])) == pytest.approx(0.5)
+    assert _cosine_distance(np.array([1.0, 0.0]), np.array([-1.0, 0.0])) == pytest.approx(1.0)
+
+
+def test_cosine_distance_zero_vector_is_max_distance():
+    from make_meme.pipelines.photos import _cosine_distance
+
+    assert _cosine_distance(np.zeros(4), np.array([1.0, 0.0, 0.0, 0.0])) == 1.0
 
 
 # ---------------------------------------------------------------------------
@@ -580,6 +667,242 @@ async def test_organize_photos_survives_head_detection_crash(tmp_path, monkeypat
     assert identities[0].ref_head is None
     assert all(inst.head_path is None for inst in identities[0].instances)
     assert any("ref2" in a for a in identities[0].advice)
+
+
+@pytest.mark.asyncio
+async def test_organize_photos_advice_notes_embedding_fallback(tmp_path, monkeypatch):
+    """When the DINOv2 embedding recipe/node is unavailable, organize_photos must still
+    complete (histogram-only) and say so in the identity's advice."""
+
+    async def no_embeddings(client, image_path, mask_path, *, profile):
+        return None
+
+    monkeypatch.setattr(photos, "_embed_crop", no_embeddings)
+
+    photos_dir = tmp_path / "photos"
+    out_dir = tmp_path / "out"
+    paths = [_make_photo(photos_dir / f"black_{i}.jpg", [("black", UPRIGHT_BOX)]) for i in range(2)]
+
+    identities = await organize_photos(client=None, photos=paths, out_dir=out_dir, profile="cpu")
+    assert len(identities) == 1
+    assert all(inst.embedding is None for inst in identities[0].instances)
+    assert any("DINOv2 embedding unavailable" in a for a in identities[0].advice)
+
+
+# ---------------------------------------------------------------------------
+# subject_kind: pet-set detection / filtering stray "person" detections
+# ---------------------------------------------------------------------------
+
+_KIND_LABELS = {"black": "animal", "grey": "animal", "blue": "person"}
+
+
+def _classify_pixels_kind(colors: np.ndarray) -> np.ndarray:
+    names = list(_PALETTE.keys())
+    refs = list(_PALETTE.values())
+    dists = np.stack([np.abs(colors.astype(int) - ref).sum(axis=1) for ref in refs], axis=1)
+    idx = dists.argmin(axis=1)
+    return np.array([names[i] for i in idx])
+
+
+async def fake_detect_with_person(
+    client, image_path, query, out_dir, *, profile, threshold=0.5, min_area_frac=0.02, no_head=False
+):
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    img = Image.open(image_path).convert("RGB")
+    w, h = img.size
+
+    if "head" in query:
+        if no_head:
+            return []
+        bbox = (int(w * 0.1), 0, int(w * 0.9), int(h * 0.45))
+        mask = Image.new("L", (w, h), 0)
+        ImageDraw.Draw(mask).rectangle(bbox, fill=255)
+        mask_path = out_dir / "mask_head.png"
+        mask.save(mask_path)
+        return [Subject(1, "head", 0.9, bbox, str(mask_path))]
+
+    arr = np.asarray(img)
+    non_white = np.any(arr < 240, axis=-1)
+    if not non_white.any():
+        return []
+    ys, xs = np.where(non_white)
+    names = _classify_pixels_kind(arr[ys, xs])
+
+    found = []
+    for name in sorted(set(names)):
+        sel = names == name
+        cys, cxs = ys[sel], xs[sel]
+        bbox = (int(cxs.min()), int(cys.min()), int(cxs.max()) + 1, int(cys.max()) + 1)
+        area = (bbox[2] - bbox[0]) * (bbox[3] - bbox[1])
+        if area < min_area_frac * w * h:
+            continue
+        mask_arr = np.zeros((h, w), dtype=np.uint8)
+        mask_arr[cys, cxs] = 255
+        mask_path = out_dir / f"mask_{name}.png"
+        Image.fromarray(mask_arr).save(mask_path)
+        label = _KIND_LABELS[name]
+        found.append((area, Subject(0, label, 0.95, bbox, str(mask_path))))
+
+    found.sort(key=lambda t: t[0], reverse=True)
+    subjects = [s for _, s in found]
+    for i, s in enumerate(subjects, start=1):
+        s.id = i
+    return subjects
+
+
+def test_should_drop_persons_animal_mode_always_true():
+    from make_meme.pipelines.photos import _should_drop_persons
+
+    assert _should_drop_persons("animal", []) is True
+    assert _should_drop_persons("animal", [[]]) is True
+
+
+def test_should_drop_persons_person_mode_always_false():
+    from make_meme.pipelines.photos import _should_drop_persons
+
+    assert _should_drop_persons("person", []) is False
+
+
+def test_should_drop_persons_auto_majority_animal(tmp_path):
+    from make_meme.pipelines.photos import _should_drop_persons
+
+    animal = Subject(1, "animal", 0.9, (0, 0, 10, 10), "/dummy.png")
+    person = Subject(1, "person", 0.9, (0, 0, 10, 10), "/dummy.png")
+    # 2 of 3 photos have an animal -> pet set -> drop persons.
+    per_photo = [[animal], [animal, person], [person]]
+    assert _should_drop_persons("auto", per_photo) is True
+
+
+def test_should_drop_persons_auto_minority_animal():
+    from make_meme.pipelines.photos import _should_drop_persons
+
+    animal = Subject(1, "animal", 0.9, (0, 0, 10, 10), "/dummy.png")
+    person = Subject(1, "person", 0.9, (0, 0, 10, 10), "/dummy.png")
+    # 1 of 3 photos has an animal -> not a pet set -> keep (filtered) persons.
+    per_photo = [[person], [person], [animal]]
+    assert _should_drop_persons("auto", per_photo) is False
+
+
+def test_should_drop_persons_auto_empty_is_false():
+    from make_meme.pipelines.photos import _should_drop_persons
+
+    assert _should_drop_persons("auto", []) is False
+
+
+def test_passes_geometric_person_filter():
+    from make_meme.pipelines.photos import _passes_geometric_person_filter
+
+    big_centered = (100, 100, 300, 300)  # 200x200 of 400x400 = 0.25 area_frac, not cut off
+    assert _passes_geometric_person_filter(big_centered, 400, 400) is True
+
+    too_small = (190, 190, 210, 210)  # 20x20 of 400x400 = 0.0025 area_frac
+    assert _passes_geometric_person_filter(too_small, 400, 400) is False
+
+    cut_off_two_sides = (0, 0, 200, 200)  # touches left and top
+    assert _passes_geometric_person_filter(cut_off_two_sides, 400, 400) is False
+
+
+@pytest.mark.asyncio
+async def test_organize_photos_subject_kind_animal_drops_persons(tmp_path, monkeypatch):
+    monkeypatch.setattr(photos, "detect_in_image", fake_detect_with_person)
+
+    photos_dir = tmp_path / "photos"
+    out_dir = tmp_path / "out"
+    # A big, otherwise-qualifying person next to (not overlapping) the dog -- still
+    # dropped outright in "animal" mode.
+    person_box = (20, 20, 130, 280)
+    paths = [_make_photo(photos_dir / "both.jpg", [("black", UPRIGHT_BOX), ("blue", person_box)])]
+
+    identities = await organize_photos(
+        client=None, photos=paths, out_dir=out_dir, profile="cpu", subject_kind="animal"
+    )
+    assert len(identities) == 1
+    assert identities[0].label == "animal"
+
+
+@pytest.mark.asyncio
+async def test_organize_photos_auto_drops_persons_when_pet_set(tmp_path, monkeypatch):
+    monkeypatch.setattr(photos, "detect_in_image", fake_detect_with_person)
+
+    photos_dir = tmp_path / "photos"
+    out_dir = tmp_path / "out"
+    person_box = (20, 20, 130, 280)
+    paths = [
+        _make_photo(photos_dir / "dog_only_1.jpg", [("black", UPRIGHT_BOX)]),
+        _make_photo(photos_dir / "dog_only_2.jpg", [("black", UPRIGHT_BOX)]),
+        # minority of photos also show a (otherwise-qualifying) person
+        _make_photo(
+            photos_dir / "dog_and_owner.jpg", [("black", UPRIGHT_BOX), ("blue", person_box)]
+        ),
+    ]
+
+    identities = await organize_photos(client=None, photos=paths, out_dir=out_dir, profile="cpu")
+    assert all(ident.label != "person" for ident in identities)
+
+
+@pytest.mark.asyncio
+async def test_organize_photos_person_mode_filters_weak_persons(tmp_path, monkeypatch):
+    """subject_kind='person' keeps persons but still screens out ones too small/cut off
+    to be a real subject (owners' stray limbs/sleeves), per the geometric pre-filter."""
+
+    monkeypatch.setattr(photos, "detect_in_image", fake_detect_with_person)
+
+    photos_dir = tmp_path / "photos"
+    out_dir = tmp_path / "out"
+    tiny_person_box = (190, 190, 210, 210)  # well under MIN_PERSON_AREA_FRAC
+    real_person_box = (20, 20, 380, 280)
+    paths = [
+        _make_photo(photos_dir / "tiny.jpg", [("blue", tiny_person_box)]),
+        _make_photo(photos_dir / "real.jpg", [("blue", real_person_box)]),
+    ]
+
+    identities = await organize_photos(
+        client=None, photos=paths, out_dir=out_dir, profile="cpu", subject_kind="person"
+    )
+    assert len(identities) == 1
+    assert len(identities[0].instances) == 1
+    assert identities[0].instances[0].photo.name == "real.jpg"
+
+
+@pytest.mark.asyncio
+async def test_organize_photos_person_without_head_is_filtered(tmp_path, monkeypatch):
+    """A person detection that's big enough and not cut off still needs a detected head
+    to count as a "real subject" outside drop-persons mode."""
+
+    async def detect_no_head(
+        client, image_path, query, out_dir, *, profile, threshold=0.5, min_area_frac=0.02
+    ):
+        return await fake_detect_with_person(
+            client,
+            image_path,
+            query,
+            out_dir,
+            profile=profile,
+            threshold=threshold,
+            min_area_frac=min_area_frac,
+            no_head=True,
+        )
+
+    monkeypatch.setattr(photos, "detect_in_image", detect_no_head)
+
+    photos_dir = tmp_path / "photos"
+    out_dir = tmp_path / "out"
+    real_person_box = (20, 20, 380, 280)
+    paths = [_make_photo(photos_dir / "headless.jpg", [("blue", real_person_box)])]
+
+    identities = await organize_photos(
+        client=None, photos=paths, out_dir=out_dir, profile="cpu", subject_kind="person"
+    )
+    assert identities == []
+
+
+@pytest.mark.asyncio
+async def test_organize_photos_invalid_subject_kind_raises():
+    with pytest.raises(ValueError, match="subject_kind"):
+        await organize_photos(
+            client=None, photos=[], out_dir=Path("/tmp/x"), profile="cpu", subject_kind="dog"
+        )
 
 
 # ---------------------------------------------------------------------------

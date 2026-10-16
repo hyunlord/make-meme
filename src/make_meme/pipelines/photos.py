@@ -28,14 +28,25 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 from make_meme.comfy.client import ComfyClient, ComfyError
 from make_meme.pipelines.assign import color_hist, hist_dist
 from make_meme.pipelines.detect import Subject, detect_in_image
+from make_meme.pipelines.runtime import ensure_ready, run_recipe
+from make_meme.recipes.loader import RecipeError, get_recipe
 
 logger = logging.getLogger(__name__)
 
 DEFAULT_QUERY = "person:5, animal:5"
-IDENTITY_MAX_DIST = 0.45  # stop merging identities above this combined histogram distance
+# Combined (embedding, histogram)-distance threshold above which identities stop merging.
+# Tuned against a real 11-photo set (2 dogs, one shared "both" photo) after switching to
+# DINOv2 embeddings: the resulting clustering is identical for every threshold in
+# [0.32, 0.4] (stable plateau -- see the live-tuning report for the full pairwise
+# matrix), so 0.35 sits in the middle of that stable range rather than at an edge.
+IDENTITY_MAX_DIST = 0.35
+EMBED_WEIGHT = 0.8  # weight of the DINOv2 cosine distance in the combined distance
+HIST_WEIGHT = 0.2  # weight of the colour-histogram distance (weak tie-breaker)
 HEAD_MIN_AREA_FRAC = 0.003  # SAM 3 "head" search is relative to the (small) subject crop
 WORKING_MAX_LONG_SIDE = 1600  # downscale before sending to SAM 3 (upload size + speed)
 LOW_RES_PX = 512
+MIN_PERSON_AREA_FRAC = 0.08  # below this, a "person" detection is probably a stray limb/sleeve
+EMBED_RECIPE_NAME = "image_embed"
 
 
 # ---------------------------------------------------------------------------
@@ -58,6 +69,7 @@ class Instance:
     quality: dict[str, Any]
     hist: np.ndarray = field(repr=False)
     head_hist: np.ndarray | None = field(default=None, repr=False)
+    embedding: np.ndarray | None = field(default=None, repr=False)
 
     def to_json(self) -> dict[str, Any]:
         return {
@@ -207,6 +219,47 @@ def _compute_quality(
 
 
 # ---------------------------------------------------------------------------
+# Appearance embedding (DINOv2, run inside ComfyUI via the image_embed recipe)
+# ---------------------------------------------------------------------------
+
+
+def _node_embeddings(result, node_id: str) -> list[list[float]]:
+    out = result.raw.get("outputs", {}).get(node_id, {})
+    embeddings = out.get("embeddings", [])
+    return [list(e) for e in embeddings if isinstance(e, list)]
+
+
+async def _embed_crop(
+    client: ComfyClient, image_path: Path, mask_path: Path | None, *, profile: str
+) -> np.ndarray | None:
+    """DINOv2 embedding of ``image_path`` (composited onto grey via ``mask_path`` if
+    given), or None if the image_embed recipe/node isn't available right now.
+
+    Appearance clustering falls back to colour-histogram-only for any instance this
+    returns None for (see :func:`_pairwise_distance`); it never raises.
+    """
+
+    try:
+        recipe = get_recipe(EMBED_RECIPE_NAME)
+        await ensure_ready(client, recipe, profile)
+        media: dict[str, Path] = {"image": image_path}
+        if mask_path is not None:
+            media["mask"] = mask_path
+        result = await run_recipe(
+            client, recipe, media=media, values={}, profile=profile, stage="embedding"
+        )
+    except (ComfyError, RecipeError) as e:
+        logger.warning(
+            "DINOv2 embedding unavailable (%s); falling back to colour histogram only", e
+        )
+        return None
+    embeddings = _node_embeddings(result, recipe.outputs["embeddings"])
+    if not embeddings:
+        return None
+    return np.asarray(embeddings[0], dtype=np.float64)
+
+
+# ---------------------------------------------------------------------------
 # Building instances
 # ---------------------------------------------------------------------------
 
@@ -242,13 +295,18 @@ async def _build_instance(
     crop_path = photo_out / f"crop_{subj.id:02d}.png"
     crop.save(crop_path)
 
-    # Unmasked crop (still has background) -- input to head detection and to the
-    # colour histogram (which does its own mask+box selection).
+    # Unmasked crop (still has background) -- input to head detection, to the embedding
+    # (which composites it onto grey using mask_crop_path itself), and to the colour
+    # histogram (which does its own mask+box selection).
     raw_crop = working_img.crop(crop_box)
     raw_crop_path = photo_out / f"raw_{subj.id:02d}.png"
     raw_crop.save(raw_crop_path)
 
+    mask_crop_path = photo_out / f"maskcrop_{subj.id:02d}.png"
+    mask_img.crop(crop_box).save(mask_crop_path)
+
     hist = color_hist(working_img, mask_img, subj.bbox)
+    embedding = await _embed_crop(client, raw_crop_path, mask_crop_path, profile=profile)
 
     head_path: Path | None = None
     head_hist: np.ndarray | None = None
@@ -315,6 +373,7 @@ async def _build_instance(
         quality=quality,
         hist=hist,
         head_hist=head_hist,
+        embedding=embedding,
     )
 
 
@@ -323,16 +382,42 @@ async def _build_instance(
 # ---------------------------------------------------------------------------
 
 
-def _pairwise_distance(a: Instance, b: Instance) -> float:
-    """Combined body+head colour distance; different labels are never comparable."""
+def _cosine_distance(a: np.ndarray, b: np.ndarray) -> float:
+    """0 = identical direction, 1 = orthogonal, 2 = opposite -- clamped to [0, 1] in
+    practice since DINOv2 CLS tokens for any two real photos are never anti-correlated."""
 
-    if a.label != b.label:
+    a, b = np.asarray(a, dtype=np.float64), np.asarray(b, dtype=np.float64)
+    na, nb = float(np.linalg.norm(a)), float(np.linalg.norm(b))
+    if na == 0.0 or nb == 0.0:
         return 1.0
+    cos_sim = float(np.dot(a, b) / (na * nb))
+    return max(0.0, min(1.0, (1.0 - cos_sim) / 2.0))
+
+
+def _hist_distance(a: Instance, b: Instance) -> float:
+    """Combined body+head colour-histogram distance."""
+
     body_d = hist_dist(a.hist, b.hist)
     if a.head_hist is not None and b.head_hist is not None:
         head_d = hist_dist(a.head_hist, b.head_hist)
         return body_d * 0.6 + head_d * 0.4
     return body_d
+
+
+def _pairwise_distance(a: Instance, b: Instance) -> float:
+    """Appearance distance: DINOv2 embedding cosine distance (primary) blended with a
+    colour-histogram distance (weak tie-breaker), falling back to histogram-only when
+    either instance has no embedding (e.g. the image_embed recipe/node wasn't available).
+    Different labels (person vs animal) are never comparable.
+    """
+
+    if a.label != b.label:
+        return 1.0
+    hist_d = _hist_distance(a, b)
+    if a.embedding is not None and b.embedding is not None:
+        emb_d = _cosine_distance(a.embedding, b.embedding)
+        return EMBED_WEIGHT * emb_d + HIST_WEIGHT * hist_d
+    return hist_d
 
 
 def group_instances(
@@ -598,6 +683,43 @@ def _identity_id(index: int) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Pet-set detection: drop/filter spurious "person" detections (owners' limbs, sleeves)
+# ---------------------------------------------------------------------------
+
+SUBJECT_KINDS = ("auto", "animal", "person")
+
+
+def _passes_geometric_person_filter(
+    bbox: tuple[int, int, int, int], img_w: int, img_h: int
+) -> bool:
+    """Cheap, pre-instance-building screen for a "person" detection that's probably a
+    real subject: big enough, and not cut off on 2+ frame edges. (The other half of the
+    "looks like a real subject" rule -- a detected head -- needs the built Instance, so
+    it's checked by the caller after :func:`_build_instance` runs.)
+    """
+
+    x1, y1, x2, y2 = bbox
+    area_frac = max(0, x2 - x1) * max(0, y2 - y1) / max(1, img_w * img_h)
+    if area_frac < MIN_PERSON_AREA_FRAC:
+        return False
+    touches = sum((x1 <= 1, y1 <= 1, x2 >= img_w - 1, y2 >= img_h - 1))
+    return touches < 2
+
+
+def _should_drop_persons(subject_kind: str, per_photo_subjects: list[list[Subject]]) -> bool:
+    if subject_kind == "animal":
+        return True
+    if subject_kind == "person":
+        return False
+    # auto: a "pet set" (animals in at least half the photos) means stray person
+    # detections (owners' arms, legs, sleeves) are noise, not a second set of identities.
+    if not per_photo_subjects:
+        return False
+    with_animal = sum(1 for subs in per_photo_subjects if any(s.label == "animal" for s in subs))
+    return with_animal >= len(per_photo_subjects) / 2
+
+
+# ---------------------------------------------------------------------------
 # Main entry point
 # ---------------------------------------------------------------------------
 
@@ -610,13 +732,28 @@ async def organize_photos(
     profile: str,
     query: str = DEFAULT_QUERY,
     min_area_frac: float = 0.02,
+    subject_kind: str = "auto",
 ) -> list[Identity]:
-    """Detect every person/animal across ``photos`` and group them into identities."""
+    """Detect every person/animal across ``photos`` and group them into identities.
+
+    ``subject_kind``: ``"auto"`` (default) treats the whole set as a pet set -- and
+    drops all "person" detections -- when animals were found in at least half the
+    photos (SAM 3's "person" query also catches owners' arms/legs/sleeves, which are
+    noise once we know this is really about the pets); otherwise persons are kept, but
+    only ones that look like a real subject (big enough, not cut off, a head found in
+    them). ``"animal"``/``"person"`` force dropping the other label outright (e.g.
+    plan_meme passes ``"animal"`` for pet_* styles, which already know the answer).
+    """
+
+    if subject_kind not in SUBJECT_KINDS:
+        raise ValueError(f"subject_kind must be one of {SUBJECT_KINDS}, got {subject_kind!r}")
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    instances: list[Instance] = []
+    # Pass 1: detect raw subjects per photo. Collected up front because the "auto"
+    # pet-set decision needs to see every photo's subjects before any instance is built.
+    detected: list[tuple[Path, Path, Path, int, int, float, list[Subject]]] = []
     for p_index, photo in enumerate(photos):
         photo_out = out_dir / f"photo_{p_index:03d}"
         working_path, w, h, scale_to_original = _prepare_working_copy(photo, photo_out / "work")
@@ -628,27 +765,53 @@ async def organize_photos(
             profile=profile,
             min_area_frac=min_area_frac,
         )
+        detected.append((photo, photo_out, working_path, w, h, scale_to_original, subjects))
+
+    drop_persons = _should_drop_persons(subject_kind, [subs for *_, subs in detected])
+
+    # Pass 2: build instances, applying the person filter (cheap geometric screen
+    # before building, "has a head" after -- that needs the built Instance).
+    instances: list[Instance] = []
+    embed_total = 0
+    embed_missing = 0
+    for photo, photo_out, working_path, w, h, scale_to_original, subjects in detected:
         if not subjects:
             continue
         with Image.open(working_path) as wim:
             working_img = wim.convert("RGB").copy()
         for subj in subjects:
-            instances.append(
-                await _build_instance(
-                    client,
-                    photo,
-                    working_img,
-                    w,
-                    h,
-                    scale_to_original,
-                    subj,
-                    photo_out,
-                    profile=profile,
-                )
+            if subj.label == "person":
+                if drop_persons:
+                    continue
+                if not _passes_geometric_person_filter(subj.bbox, w, h):
+                    continue
+            inst = await _build_instance(
+                client,
+                photo,
+                working_img,
+                w,
+                h,
+                scale_to_original,
+                subj,
+                photo_out,
+                profile=profile,
             )
+            if subj.label == "person" and not drop_persons and inst.head_path is None:
+                continue  # "looks like a real subject" requires a detected head
+            embed_total += 1
+            if inst.embedding is None:
+                embed_missing += 1
+            instances.append(inst)
 
     groups = group_instances(instances)
     groups.sort(key=len, reverse=True)
+
+    embed_fallback_note = (
+        f"Appearance clustering used colour only (DINOv2 embedding unavailable) for "
+        f"{embed_missing}/{embed_total} detected subjects."
+        if embed_missing
+        else None
+    )
 
     identities: list[Identity] = []
     for g_index, members in enumerate(groups):
@@ -657,6 +820,9 @@ async def organize_photos(
         ref_full, ref_head = choose_refs(members)
         mean_hist = np.mean([m.hist for m in members], axis=0)
         coat = describe_coat(mean_hist)
+        advice = _advice_for(ident_id, members, ref_full, ref_head)
+        if embed_fallback_note and any(m.embedding is None for m in members):
+            advice.append(embed_fallback_note)
         identities.append(
             Identity(
                 id=ident_id,
@@ -667,7 +833,7 @@ async def organize_photos(
                 description=_describe(label, coat),
                 coat=coat,
                 confidence=_confidence_for(members, groups),
-                advice=_advice_for(ident_id, members, ref_full, ref_head),
+                advice=advice,
             )
         )
     return identities

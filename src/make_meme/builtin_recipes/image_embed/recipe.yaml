@@ -1,0 +1,31 @@
+name: image_embed
+kind: embed
+title: DINOv2 appearance embedding
+description: >
+  Embeds an image (optionally masked to just its subject, composited onto neutral
+  grey) into a 384-dim appearance vector using facebook/dinov2-small (Apache-2.0,
+  ~86M params, auto-downloaded from Hugging Face on first use -- no models: entry
+  needed). Used to tell subjects apart by appearance (make_meme.pipelines.photos),
+  which a raw colour histogram alone is too weak for on real photos.
+workflow: workflow.json
+
+custom_nodes:
+  - name: make_meme_nodes
+    repo: builtin:make_meme_nodes   # shipped inside this package
+    provides: [MakeMemeImageEmbed]
+
+constraints:
+  front: true        # a tiny, quick job; don't wait behind a long generation
+  timeout_sec: 300
+
+inputs:
+  image: {type: image, targets: [["1", "image"]]}
+  mask:
+    type: mask
+    required: false
+    targets: [["2", "image"]]
+    unlink_if_missing: [["4", "mask"]]
+    description: "optional subject mask; when given, the subject is composited onto neutral grey before embedding"
+
+outputs:
+  embeddings: "4"

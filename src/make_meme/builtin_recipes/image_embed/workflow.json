@@ -1,0 +1,6 @@
+{
+  "1": {"class_type": "LoadImage", "inputs": {"image": "__image__"}},
+  "2": {"class_type": "LoadImage", "inputs": {"image": "__mask__"}},
+  "3": {"class_type": "ImageToMask", "inputs": {"image": ["2", 0], "channel": "red"}},
+  "4": {"class_type": "MakeMemeImageEmbed", "inputs": {"image": ["1", 0], "mask": ["3", 0]}}
+}
