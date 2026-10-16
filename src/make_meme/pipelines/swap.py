@@ -9,6 +9,7 @@ IoU tracking against the previous chunk) so the mask follows the performer.
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import logging
 import shutil
 from collections.abc import Awaitable, Callable
@@ -23,6 +24,7 @@ from make_meme.pipelines.detect import (
     binary_mask,
     clean_reference,
     detect_in_image,
+    head_mask_within,
     head_reference,
     iou,
 )
@@ -40,6 +42,7 @@ class SwapMapping:
     subject: Subject  # where the subject is on the first frame (source pixel coords)
     images: list[Path]  # reference photos of the replacement (1st = full body, 2nd = face close-up)
     prompt: str | None = None
+    mask_mode: str = "full_body"  # "head": replace only the head (+ a bit of neck)
 
 
 @dataclass
@@ -113,7 +116,17 @@ async def run_swap(
             refs = [main, *refs[1:]]
         prompt = " ".join(p for p in (plan.prompt, mapping.prompt) if p) or None
         prev_bbox = _scale_bbox(mapping.subject.bbox, plan.source_size, (width, height))
-        first_mask = binary_mask(Path(mapping.subject.mask_path), width, height)
+        first_mask_src = Path(mapping.subject.mask_path)
+        if mapping.mask_mode == "head":
+            frame0 = work / f"m{m_index}_frame0.png"
+            (await asyncio.to_thread(ingest.extract_frame, plan.video_path, 0.0)).save(frame0)
+            head = await head_mask_within(client, frame0, mapping.subject, work / f"m{m_index}_head",
+                                          profile=plan.profile)
+            if head is not None:
+                first_mask_src = head
+            else:
+                logger.warning("no head found for subject %s; using its full mask", mapping.subject.id)
+        first_mask = binary_mask(first_mask_src, width, height)
 
         outputs: list[Path] = []
         for c_index, chunk in enumerate(chunks):
@@ -129,7 +142,8 @@ async def run_swap(
                 mask = first_mask
             else:
                 mask, prev_bbox = await _relocate(
-                    client, chunk_video, mapping.subject.label, prev_bbox, chunk_dir, plan.profile, width, height
+                    client, chunk_video, mapping.subject.label, prev_bbox, chunk_dir, plan.profile, width, height,
+                    mask_mode=mapping.mask_mode,
                 )
             mask_path = chunk_dir / "mask.png"
             mask.convert("RGB").save(mask_path)
@@ -147,10 +161,14 @@ async def run_swap(
             if plan.negative_prompt:
                 values["negative_prompt"] = plan.negative_prompt
             await _emit(report, "generating", done / steps_total, f"{label}: submitting")
-            result = await run_recipe(
-                client, recipe, media=media, values=values, profile=plan.profile, preset=plan.quality,
-                on_progress=on_progress, cancelled=cancelled,
-            )
+            meta = {"profile": plan.profile, "recipe": recipe.name, "width": width, "height": height,
+                    "frames": chunk.end - chunk.start + chunk.pad, "refs": len(refs), "mask_mode": mapping.mask_mode,
+                    "steps": int(recipe.preset_values(plan.quality, plan.profile).get("steps", 0))}
+            async with _perf(client, label, meta):
+                result = await run_recipe(
+                    client, recipe, media=media, values=values, profile=plan.profile, preset=plan.quality,
+                    on_progress=on_progress, cancelled=cancelled,
+                )
             frames_dir = chunk_dir / "frames"
             frames_dir.mkdir(exist_ok=True)
             files = node_files(result, recipe.outputs["frames"])
@@ -171,6 +189,17 @@ async def run_swap(
         current = stitched
 
     return current
+
+
+def _perf(client, label: str, meta: dict):
+    """Record time + peak memory of one generation into perf.jsonl (feeds estimates)."""
+    try:
+        from make_meme.perf import PerfRecorder
+    except ImportError:  # optional
+        return contextlib.nullcontext()
+    if not hasattr(client, "stats"):
+        return contextlib.nullcontext()
+    return PerfRecorder(client, label, meta)
 
 
 def _normalize(src: Path, dest: Path, width: int, height: int, fps: int) -> Path:
@@ -206,7 +235,7 @@ def _scale_bbox(bbox, src: tuple[int, int], dst: tuple[int, int]) -> tuple[int, 
     return (round(x1 * scale - ox), round(y1 * scale - oy), round(x2 * scale - ox), round(y2 * scale - oy))
 
 
-async def _relocate(client, chunk_video, label, prev_bbox, chunk_dir, profile, width, height):
+async def _relocate(client, chunk_video, label, prev_bbox, chunk_dir, profile, width, height, mask_mode="full_body"):
     """Find the same subject on the chunk's first frame: best IoU with its last known box."""
     frame = await asyncio.to_thread(ingest.extract_frame, chunk_video, 0.0)
     frame_path = chunk_dir / "first.png"
@@ -219,7 +248,11 @@ async def _relocate(client, chunk_video, label, prev_bbox, chunk_dir, profile, w
     best = max(found, key=lambda s: iou(s.bbox, prev_bbox))
     if iou(best.bbox, prev_bbox) < 0.05:
         best = min(found, key=lambda s: _center_dist(s.bbox, prev_bbox))
-    return binary_mask(Path(best.mask_path), width, height), best.bbox
+    mask_src = Path(best.mask_path)
+    if mask_mode == "head":
+        head = await head_mask_within(client, frame_path, best, chunk_dir / "head", profile=profile)
+        mask_src = head or mask_src
+    return binary_mask(mask_src, width, height), best.bbox
 
 
 def _center_dist(a, b) -> float:

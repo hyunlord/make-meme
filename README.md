@@ -43,7 +43,16 @@ claude mcp add make-meme -- uv run --directory /path/to/make-meme make-meme-mcp
 
 ## How it works
 
-Tools are designed to be chained together in conversation:
+**Recommended:** `plan_meme` → (show the plan to the user) → `render_meme`.
+`plan_meme` takes the request in plain words plus a video/link/song name and a folder of
+photos (unsorted is fine) and decides everything in one inspectable plan: the segment memes
+actually reuse (`analyze_meme_usage`), camera cuts, a 9:16 reframe that follows the
+performers, which photo shows which individual (group photos are split), the best two
+references per individual, who becomes whom, the style (`list_styles`: e.g. `pet_head_swap`,
+`pet_full_body`, `person_swap`), prompts and a time estimate. `render_meme` turns it into ONE
+video.
+
+Lower-level tools can also be chained directly:
 
 1. `search_media` / `load_media` — find or load a source video and reference photos (local files,
    direct URLs, or links like YouTube/TikTok/Instagram).

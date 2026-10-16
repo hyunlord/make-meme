@@ -418,25 +418,33 @@ async def list_assets(kind: Literal["video", "image"] | None = None) -> str:
 # --------------------------------------------------------------------------
 
 
+_PLAN_FLOW = (
+    "Recommended flow (it keeps every decision in one plan the user can check):\n"
+    "1. plan_meme(intent=<the user's words>, video=<link/path/asset> or query=<song or idea>, "
+    "photos=[...] or folder=<dir>, style=<optional, see list_styles>, length_sec=<optional>).\n"
+    "   It picks the segment memes actually reuse, splits camera cuts, reframes to 9:16, sorts the "
+    "photos into individuals (group photos are split), picks the best references, decides who "
+    "becomes whom and writes the prompts.\n"
+    "2. Show the user the plan: segment and why, performers -> identities (preview image), style, "
+    "warnings (e.g. missing standing photo), and the time estimate. Look at the reference photos "
+    "yourself and, if you can tell, re-run plan_meme with descriptions={'A': 'an Italian greyhound "
+    "with a blue-grey coat'} for better prompts. If style_candidates has several entries, ask which "
+    "look the user wants (e.g. pet_head_swap = only the head, pet_full_body = whole body).\n"
+    "3. render_meme(plan_id, style=...) — optionally first with preview_seconds=5 to check quickly.\n"
+    "4. get_job(job_id) until it succeeds; show the result. Every render is ONE video.\n"
+    "Lower-level tools (search_media, inspect_media, detect_subjects, swap_subjects, ...) remain "
+    "for fine control."
+)
+
+
 @mcp.prompt()
 def swap_meme_from_text(idea: str) -> str:
     """Make a subject-swap meme video starting from just a text idea (no video/image attached)."""
 
     return (
-        f"The user wants to make a meme video from this idea: {idea!r}\n\n"
-        "Follow this flow:\n"
-        '1. search_media(query=..., kind="video") to find a source video matching the idea, and '
-        'search_media(query=..., kind="image") for reference photos of the replacement subject.\n'
-        '2. load_media(source="<search_id>:<n>") for your chosen video candidate, and again for '
-        "the chosen image candidate(s).\n"
-        "3. inspect_media(asset_id) on the video to see a storyboard and suggested segments; pick "
-        "one and re-run load_media with start_sec/end_sec to trim it.\n"
-        "4. detect_subjects(video) to find the numbered subject(s) to replace. If there are several "
-        "photos, call suggest_mappings(video, images) to decide whether they are angles of one "
-        "replacement or one per subject (the result is always ONE video).\n"
-        "5. swap_subjects(video, mappings=[{subject: <id>, images: [<image asset ids>]}], "
-        "prompt=<a short description of the desired result>) to start generation.\n"
-        "6. get_job(job_id) repeatedly until it succeeds, then show the result to the user."
+        f"The user wants to make a meme video from this idea: {idea!r}\n"
+        "If they haven't given photos of the replacement, ask for them, or use "
+        "search_media(kind='image') and load_media to get some.\n\n" + _PLAN_FLOW
     )
 
 
@@ -445,18 +453,19 @@ def swap_meme_from_link(url: str, who: str) -> str:
     """Make a subject-swap meme video from a video link, replacing a subject described by `who`."""
 
     return (
-        f"The user gave this video link: {url!r} and wants to replace a subject with: {who!r}\n\n"
-        "Follow this flow:\n"
-        f"1. load_media(source={url!r}) to fetch the video.\n"
-        "2. inspect_media(asset_id) to see a storyboard and suggested segments; pick a good one and "
-        "re-run load_media with start_sec/end_sec to trim it.\n"
-        f'3. search_media(query={who!r}, kind="image") to find reference photos, or ask the user '
-        "to attach their own.\n"
-        "4. load_media(...) each chosen image candidate.\n"
-        "5. detect_subjects(video) to find the numbered subject(s) to replace; with several photos, "
-        "suggest_mappings(video, images) proposes who gets which (one video with all of them).\n"
-        "6. swap_subjects(video, mappings=[{subject: <id>, images: [...]}]) to start generation.\n"
-        "7. get_job(job_id) repeatedly until it succeeds, then show the result to the user."
+        f"The user gave this video link: {url!r} and wants to replace someone with: {who!r}.\n"
+        f"Use video={url!r} in plan_meme.\n\n" + _PLAN_FLOW
+    )
+
+
+@mcp.prompt()
+def pet_dance_meme(song: str, photos_folder: str) -> str:
+    """Turn the performers of a song's MV into your pets (head-only or full-body)."""
+
+    return (
+        f"The user wants the performers of {song!r} replaced by their pets; photos are in "
+        f"{photos_folder!r} (unsorted, may include group photos).\n"
+        f"Call plan_meme(intent=..., query={song!r}, folder={photos_folder!r}) and continue:\n\n" + _PLAN_FLOW
     )
 
 
@@ -479,8 +488,9 @@ def _import_optional_tool_module(module_name: str) -> None:
 
 
 # tools_swap.py adds detect_subjects/swap_subjects/make_swap_meme (ComfyUI
-# recipes); tools_trend.py adds analyze_meme_usage.
-for _optional_module in ("make_meme.tools_trend", "make_meme.tools_swap"):
+# recipes); tools_trend.py adds analyze_meme_usage; tools_plan.py adds the
+# recommended plan_meme -> render_meme flow plus organize_photos/list_styles.
+for _optional_module in ("make_meme.tools_trend", "make_meme.tools_swap", "make_meme.tools_plan"):
     _import_optional_tool_module(_optional_module)
 
 

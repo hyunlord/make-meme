@@ -72,7 +72,7 @@ async def _noop_ready(*a, **k):
 async def test_run_swap_with_fake_comfy(tmp_path, monkeypatch, seconds, expected_chunks):
     monkeypatch.setattr(swap_mod, "ensure_ready", _noop_ready)
 
-    async def fake_relocate(client, chunk_video, label, prev_bbox, chunk_dir, profile, w, h):
+    async def fake_relocate(client, chunk_video, label, prev_bbox, chunk_dir, profile, w, h, **_kw):
         return Image.new("L", (w, h), 255), prev_bbox
 
     monkeypatch.setattr(swap_mod, "_relocate", fake_relocate)

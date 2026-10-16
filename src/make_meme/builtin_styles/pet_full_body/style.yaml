@@ -1,0 +1,16 @@
+name: pet_full_body
+title: Full-body pets
+description: >
+  The whole performer becomes the pet: real fur body, paws and tail, dancing on its hind
+  legs. Most convincing with an upright (standing/sitting) full-body photo of the pet.
+recipe: mocha_swap
+mask: full_body
+refs:
+  ref1: full               # best upright full-body photo, background removed
+  ref2: head               # head close-up for identity
+prompt: "{scene} {subject_desc_cap} dancing on its hind legs, a real animal body covered in {coat} fur, paws and a tail, no clothing."
+negative: "clothes, shirt, pants, hoodie, outfit, costume, human skin, human hands, human body, mannequin, blurry"
+keywords: [body, 온몸, 전신, 몸, whole, full]
+defaults:
+  length_sec: 15
+  aspect: "9:16"

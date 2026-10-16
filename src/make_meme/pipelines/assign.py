@@ -53,7 +53,9 @@ def color_hist(img: Image.Image, mask: Image.Image | None = None, box: tuple[int
     if mask is not None:
         m = np.asarray(mask.convert("L").resize(img.size)) > 127
         sel = m if m.sum() > 50 else sel
-    px = hsv[sel]
+    px = hsv[sel].copy()
+    # hue is meaningless for near-grey/near-black pixels (black fur, dark hair): pool them
+    px[(px[:, 1] < 48) | (px[:, 2] < 40), 0] = 0
     h = np.zeros((8, 4, 4), dtype=np.float64)
     np.add.at(h, (px[:, 0] * 8 // 256, px[:, 1] * 4 // 256, px[:, 2] * 4 // 256), 1)
     return (h / max(1.0, h.sum())).ravel()

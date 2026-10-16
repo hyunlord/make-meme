@@ -9,6 +9,7 @@ import tempfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from make_meme.comfy.client import ComfyClient, ComfyError
@@ -242,4 +243,38 @@ async def head_reference(client: ComfyClient, image_path: Path, out_dir: Path, *
     digest = hashlib.sha1(str(image_path.resolve()).encode()).hexdigest()[:8]
     dest = out_dir / f"ref_head_{image_path.stem}_{digest}.png"
     crop.save(dest)
+    return dest
+
+
+async def head_mask_within(client: ComfyClient, frame_path: Path, subject: Subject, out_dir: Path, *,
+                           profile: str, neck: float = 0.15) -> Path | None:
+    """Mask of just the head of `subject` (SAM 3 'head' inside its box), in full-frame
+    coordinates, extended a little downward so the replacement blends into the neck.
+    Returns None if no head is found (caller falls back to the full-body mask)."""
+    frame = Image.open(frame_path).convert("RGB")
+    x1, y1, x2, y2 = subject.bbox
+    pad = int(0.1 * max(x2 - x1, y2 - y1))
+    box = (max(0, x1 - pad), max(0, y1 - pad), min(frame.width, x2 + pad), min(frame.height, y2 + pad))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    crop_path = out_dir / f"subject{subject.id}_crop.png"
+    frame.crop(box).save(crop_path)
+    with tempfile.TemporaryDirectory(prefix="mm-headmask-") as tmp:
+        found = await detect_in_image(client, crop_path, "head:1", Path(tmp), profile=profile, min_area_frac=0.002)
+        if not found:
+            return None
+        head = Image.open(found[0].mask_path).convert("L").resize((box[2] - box[0], box[3] - box[1]))
+        hx1, hy1, hx2, hy2 = found[0].bbox
+    full = Image.new("L", frame.size, 0)
+    full.paste(head, box[:2])
+    # extend into the neck: a rectangle under the head, narrower than the head
+    hw, hh = hx2 - hx1, hy2 - hy1
+    nx1, nx2 = box[0] + hx1 + int(hw * 0.2), box[0] + hx2 - int(hw * 0.2)
+    ny1, ny2 = box[1] + hy2 - int(hh * 0.1), box[1] + hy2 + int(hh * neck * 2)
+    ImageDraw.Draw(full).rectangle([nx1, ny1, nx2, ny2], fill=255)
+    if subject.mask_path and Path(subject.mask_path).is_file():  # stay inside the person
+        body = Image.open(subject.mask_path).convert("L").resize(frame.size)
+        full = Image.fromarray(np.minimum(np.asarray(full), np.asarray(body.point(lambda v: 255 if v > 127 else 0))))
+        full.paste(head, box[:2], mask=head)  # but keep the whole head (hair may exceed the body mask)
+    dest = out_dir / f"subject{subject.id}_head_mask.png"
+    full.save(dest)
     return dest

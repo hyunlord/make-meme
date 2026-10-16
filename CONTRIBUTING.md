@@ -8,6 +8,7 @@ Thanks for helping! make-meme is built so most contributions don't touch the MCP
 | fix or add a site for link fetching (Threads changed its HTML again…) | a **fetcher** | [Sources](#adding-a-fetcher-or-search-provider) |
 | add a search backend (Pexels, Pixabay, …) | a **search provider** | [Sources](#adding-a-fetcher-or-search-provider) |
 | make a recipe run on new hardware | a **profile variant** in `recipe.yaml` | [Profiles](#hardware-profiles) |
+| add a new meme *look* on top of existing recipes (what gets replaced, prompts) | a **style pack** | [Styles](#adding-a-style-pack) |
 
 ## Dev setup
 
@@ -64,6 +65,29 @@ outputs: {frames: "17"}    # output name -> node id
 
 Rules: pin custom nodes to a commit; record model licenses accurately; models are downloaded by
 the user from their original hosts — never commit weights.
+
+## Adding a style pack
+
+A style says *how* a meme is made with a recipe: which region of each performer is replaced,
+which reference crops are used, and the prompt templates. Drop a `style.yaml` into
+`src/make_meme/builtin_styles/<name>/` (or a directory in `MAKE_MEME_STYLES`):
+
+```yaml
+name: pet_head_swap
+title: Pet-head dancers
+description: >            # shown to the LLM and the user
+  Only the head becomes the pet; outfit and choreography stay.
+recipe: mocha_swap
+mask: head                # head | full_body
+refs: {ref1: head, ref2: head_alt}   # full | head | head_alt | full_alt (from organize_photos)
+prompt: "{scene} The performer has the head of {subject_desc}, dancing energetically."
+negative: "human face, human ears, mask, helmet"
+keywords: [head, 머리]    # words in the user's request that select this style
+defaults: {length_sec: 15, aspect: "9:16"}
+```
+
+Template fields: `{subject_desc}` (identity description, e.g. "a dog with a short black coat"),
+`{subject_desc_cap}`, `{coat}`, `{scene}`. Add a test like `tests/test_plan_render.py::test_builtin_styles_and_prompts`.
 
 ## Adding a fetcher or search provider
 

@@ -1,0 +1,17 @@
+name: pet_head_swap
+title: Pet-head dancers
+description: >
+  Only the head of each performer becomes the pet; outfit, body and choreography stay.
+  The classic "dog-head dancer" meme look. Works with any pet photos where the face is
+  clearly visible.
+recipe: mocha_swap
+mask: head                 # replace only the head region of the on-screen subject
+refs:
+  ref1: head               # pet head close-up (cleaned background not needed)
+  ref2: head_alt           # a second head close-up if available
+prompt: "{scene} The performer has the head of {subject_desc}, with a natural fur-to-neck blend, dancing energetically."
+negative: "human face, human ears, human hair, mask, helmet, costume head, deformed snout, extra eyes, blurry"
+keywords: [head, face, 머리, 얼굴, 대가리]
+defaults:
+  length_sec: 15
+  aspect: "9:16"

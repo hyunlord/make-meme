@@ -1,0 +1,16 @@
+name: person_swap
+title: Person swap
+description: >
+  Replace a performer with another person (identity, hair, outfit from the photos) while
+  keeping the performance. Use photos of people who agreed to it.
+recipe: mocha_swap
+mask: full_body
+refs:
+  ref1: full
+  ref2: head
+prompt: "{scene} {subject_desc_cap} performs the same choreography naturally."
+negative: "distorted face, extra limbs, blurry, watermark, text"
+keywords: [person, 사람, 친구, 나로, me]
+defaults:
+  length_sec: 10
+  aspect: source
