@@ -454,6 +454,10 @@ def swap_meme_from_link(url: str, who: str) -> str:
 # Registers detect_subjects/swap_subjects/make_swap_meme (backed by ComfyUI
 # recipes) once that module exists; it doesn't yet, so this is a no-op today.
 try:
+    import make_meme.tools_trend
+except ImportError:
+    logger.debug("make_meme.tools_trend not available; analyze_meme_usage is not registered")
+try:
     import make_meme.tools_swap  # noqa: F401
 except ImportError:
     logger.debug("make_meme.tools_swap not available yet; swap tools are not registered")
