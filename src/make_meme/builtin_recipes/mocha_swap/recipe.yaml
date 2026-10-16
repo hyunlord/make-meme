@@ -1,0 +1,132 @@
+name: mocha_swap
+kind: swap
+title: MoCha subject replacement
+description: >
+  Replaces one subject in a video with the subject of reference photos (people or
+  animals) while keeping the original motion, camera and lighting. No pose skeleton
+  is used, so animals and unusual bodies work well. Needs a first-frame mask of the
+  subject to replace. ref2 (optional) should be a clean face close-up of the new
+  subject for better identity.
+workflow: workflow.json
+
+constraints:
+  fps: 16
+  frames_rule: 4n+1        # Wan latent constraint
+  max_frames: 81           # per chunk
+  size_multiple: 16
+  progress_node: "15"      # WanVideoSampler: the step count users care about
+
+custom_nodes:
+  - name: ComfyUI-WanVideoWrapper
+    repo: https://github.com/kijai/ComfyUI-WanVideoWrapper
+    ref: 088128b224242e110d3906c6750e9a3a348a659b
+    provides: [WanVideoModelLoader, WanVideoSampler, MochaEmbeds, WanVideoDecode]
+  - name: make_meme_nodes
+    repo: builtin:make_meme_nodes   # shipped inside this package (MPS compatibility patches)
+    provides: [MakeMemeInfo]
+
+inputs:
+  video:     {type: video,  targets: [["1", "file"]], description: "16 fps clip, size a multiple of 16"}
+  mask:      {type: mask,   targets: [["3", "image"]], description: "first-frame mask, white = subject to replace"}
+  ref1:      {type: image,  targets: [["4", "image"]], description: "reference photo of the new subject (clean background preferred)"}
+  ref2:
+    type: image
+    required: false
+    targets: [["6", "image"]]
+    unlink_if_missing: [["14", "ref2"]]
+    description: "optional face close-up of the new subject"
+  prompt:
+    type: string
+    default: "The character moves naturally, matching the original performance."
+    targets: [["13", "positive_prompt"]]
+  negative_prompt:
+    type: string
+    default: "blurry, distorted face, extra limbs, watermark, text"
+    targets: [["13", "negative_prompt"]]
+  width:  {type: int, default: 832, targets: [["5", "target_width"], ["7", "target_width"]]}
+  height: {type: int, default: 480, targets: [["5", "target_height"], ["7", "target_height"]]}
+  steps:  {type: int, default: 6, targets: [["15", "steps"]]}
+  seed:   {type: int, default: 42, targets: [["15", "seed"]]}
+  shift:  {type: float, default: 5.0, targets: [["15", "shift"]]}
+
+presets:
+  draft: {width: 832, height: 480, steps: 4}
+  high:  {width: 1280, height: 720, steps: 8}
+
+# Measured on an M4 Max (36 GB): 512x288 ≈ 50 s/step for a 1 s clip; 480p+ thrashes memory.
+profile_presets:
+  mps:
+    draft: {width: 512, height: 288, steps: 4}
+    high:  {width: 832, height: 480, steps: 6}
+  cuda_lowvram:
+    high:  {width: 832, height: 480, steps: 8}
+
+models:
+  mocha:
+    targets: [["11", "model"]]
+    profiles:
+      mps:
+        file: WanVideo/mocha-Q4_K_M.gguf
+        dir: diffusion_models
+        repo: vantagewithai/MoCha-GGUF
+        path: mocha-Q4_K_M.gguf
+        size_gb: 9.66
+        license: AGPL-3.0 (weights)
+      cuda_lowvram:   # <20 GB VRAM, e.g. free Kaggle/Colab T4
+        file: WanVideo/mocha-Q4_K_M.gguf
+        dir: diffusion_models
+        repo: vantagewithai/MoCha-GGUF
+        path: mocha-Q4_K_M.gguf
+        size_gb: 9.66
+        license: AGPL-3.0 (weights)
+      cuda:
+        file: WanVideo/Wan2_1_mocha-14B-preview_fp8_e4m3fn_scaled_KJ.safetensors
+        dir: diffusion_models
+        repo: Kijai/WanVideo_comfy_fp8_scaled
+        path: MoCha/Wan2_1_mocha-14B-preview_fp8_e4m3fn_scaled_KJ.safetensors
+        size_gb: 14.34
+        license: AGPL-3.0 (weights)
+  lightx2v:
+    targets: [["10", "lora_0"]]
+    profiles:
+      default:
+        file: WanVideo/Lightx2v/lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors
+        dir: loras
+        repo: Kijai/WanVideo_comfy
+        path: Lightx2v/lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors
+        size_gb: 0.63
+        license: Apache-2.0
+  vae:
+    targets: [["12", "model_name"]]
+    profiles:
+      default:
+        file: Wan2_1_VAE_bf16.safetensors
+        dir: vae
+        repo: Kijai/WanVideo_comfy
+        path: Wan2_1_VAE_bf16.safetensors
+        size_gb: 0.25
+        license: Apache-2.0
+  t5:
+    targets: [["13", "model_name"]]
+    profiles:
+      default:
+        file: umt5-xxl-enc-bf16.safetensors
+        dir: text_encoders
+        repo: Kijai/WanVideo_comfy
+        path: umt5-xxl-enc-bf16.safetensors
+        size_gb: 11.36
+        license: Apache-2.0
+
+profile_overrides:
+  mps:
+    "11": {base_precision: fp16, quantization: disabled, attention_mode: comfy, load_device: main_device}
+  cuda_lowvram:
+    "11": {base_precision: fp16, quantization: disabled, attention_mode: sdpa, load_device: main_device}
+    "13": {device: cpu}   # keep the 11 GB text encoder off a 16 GB GPU (encoded once, then cached)
+  cuda:
+    "11": {base_precision: fp16, quantization: fp8_e4m3fn_scaled, attention_mode: sdpa, load_device: main_device}
+  cpu:
+    "11": {base_precision: fp32, quantization: disabled, attention_mode: sdpa, load_device: main_device}
+
+outputs:
+  frames: "17"

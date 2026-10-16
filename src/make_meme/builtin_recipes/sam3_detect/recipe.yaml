@@ -1,0 +1,29 @@
+name: sam3_detect
+kind: detect
+title: SAM 3 open-vocabulary detection + masks
+description: >
+  Finds subjects in an image from a short text phrase ("person", "dog",
+  "man in red jacket") and returns one bounding box + one segmentation mask per
+  match. Uses SAM 3.1 from ComfyUI core (no custom nodes needed).
+workflow: workflow.json
+
+inputs:
+  image:     {type: image, targets: [["1", "image"]]}
+  query:     {type: string, default: "person", targets: [["3", "text"]], description: "one category; append :N for up to N matches, e.g. 'dog:3'"}
+  threshold: {type: float, default: 0.5, targets: [["4", "threshold"]]}
+
+models:
+  sam3:
+    targets: [["2", "ckpt_name"]]
+    profiles:
+      default:
+        file: sam3.1_multiplex_fp16.safetensors
+        dir: checkpoints
+        repo: Comfy-Org/sam3.1
+        path: checkpoints/sam3.1_multiplex_fp16.safetensors
+        size_gb: 1.75
+        license: SAM License (Meta)
+
+outputs:
+  masks: "6"
+  boxes: "7"
