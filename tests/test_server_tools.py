@@ -75,6 +75,28 @@ async def test_load_media_unknown_asset_id_raises_tool_error():
         await server.load_media("vid_deadbeef")
 
 
+async def test_load_media_refuses_path_in_hidden_directory(tmp_path):
+    """Tool arguments can be steered by untrusted web content; a local path reaching into
+    a hidden/config directory (~/.ssh-style) must be refused, not silently loaded."""
+
+    from PIL import Image
+
+    hidden_dir = tmp_path / ".secret"
+    hidden_dir.mkdir()
+    secret_file = hidden_dir / "x.png"
+    Image.new("RGB", (10, 10)).save(secret_file)
+
+    with pytest.raises(server.ToolError):
+        await server.load_media(str(secret_file))
+
+
+async def test_load_media_allows_a_normal_local_path(sample_image):
+    # sample_image lives directly under pytest's tmp_path (not hidden, not a system
+    # location) -- the safety check must not get in the way of ordinary use.
+    content = await server.load_media(str(sample_image))
+    assert _json_payload(content)["kind"] == "image"
+
+
 async def test_inspect_media_on_video_returns_storyboard_and_segments(video_with_hard_cuts):
     content = await server.load_media(str(video_with_hard_cuts))
     asset_id = _json_payload(content)["id"]
