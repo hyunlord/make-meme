@@ -10,6 +10,8 @@
 - **링크만 줘도 됨**: YouTube, Shorts, TikTok, Instagram 릴스, Threads, X 등 링크에서 영상과 이미지를 가져옵니다.
 - **텍스트만 줘도 됨**: 영상이나 사진 없이 텍스트로 검색해서 고를 수 있습니다(`search_media`). 결과는 번호가 붙은 썸네일로 보여 줍니다.
 - **영상을 보고 고르기**: `inspect_media`가 스토리보드와 장면 기준 추천 구간을 보여 줍니다.
+- **밈 트렌드 분석**: `analyze_meme_usage`가 숏폼·챌린지 영상의 오디오를 원곡과 대조해서, 사람들이 노래의 어느 구간을 몇 초로 쓰는지 알려 줍니다.
+- **세로 자동 리프레이밍**: `reframe_video`가 인물을 따라가는 9:16 크롭을 만들어서, 작게 나온 인물도 크게 교체할 수 있게 합니다.
 - **여러 명 동시 교체**: 1번 인물은 내 사진으로, 2번 인물은 강아지로 바꾸는 식입니다. 한 대상에 여러 각도의 사진을 줄 수 있습니다(전신 + 얼굴 클로즈업).
 - **프롬프트로 연출**: "선글라스 끼고 신나게"처럼 지시할 수 있고, 시드를 바꾼 여러 버전(`variations`)을 만들어 고를 수 있습니다.
 - **원본 음악 유지**: 결과 영상에 원본 오디오를 다시 입힙니다.
@@ -36,7 +38,7 @@ GPU가 부족하면 [`notebooks/remote_comfyui.ipynb`](notebooks/remote_comfyui.
 
 ## 도구 흐름
 
-`search_media` / `load_media` → `inspect_media` → `detect_subjects` → `swap_subjects` → `get_job`
+`search_media` / `load_media` → `analyze_meme_usage` / `inspect_media` → (`reframe_video`) → `detect_subjects` → `swap_subjects` → `get_job`
 
 원샷 도구: `make_swap_meme(video_query="...", image_query="...", prompt="...")`
 

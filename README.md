@@ -47,7 +47,9 @@ Tools are designed to be chained together in conversation:
 
 1. `search_media` / `load_media` — find or load a source video and reference photos (local files,
    direct URLs, or links like YouTube/TikTok/Instagram).
-2. `inspect_media` — see a storyboard and suggested trim points for a loaded video.
+2. `inspect_media` — see a storyboard and suggested trim points for a loaded video;
+   `analyze_meme_usage` — learn which part of a song shorts/memes actually reuse;
+   `reframe_video` — auto-pan crop to 9:16 so small dancers fill the frame.
 3. `detect_subjects` — find the numbered people/animals in the video to replace.
 4. `swap_subjects` (or the one-shot `make_swap_meme`) — kick off generation; returns a `job_id`.
 5. `get_job` — poll progress until the result is ready.

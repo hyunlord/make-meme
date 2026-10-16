@@ -387,3 +387,39 @@ async def _recipes_check() -> dict[str, Any]:
 
 
 extra_checks.append(_recipes_check)
+
+
+@mcp.tool(structured_output=False)
+async def reframe_video(video: str, aspect: str = "9:16", query: str = "person, animal") -> list[Any]:
+    """Re-crop a clip to another aspect ratio (default vertical 9:16 for Shorts/Reels/TikTok)
+    with a camera pan that follows the subjects (found with SAM 3 about once per second).
+    Use it before swap_subjects when the people are small in a wide shot: they fill more
+    of the frame, which gives the swap far more detail. Returns a new video asset (audio
+    kept) plus a preview; `all_subjects_fit` is false if they spread wider than the crop."""
+    from make_meme.pipelines.reframe import parse_aspect, reframe
+
+    asset = _video_asset(video)
+    try:
+        parse_aspect(aspect)
+    except ValueError as e:
+        raise ToolError(str(e)) from e
+    out = asset.path.parent / f"reframed_{aspect.replace(':', 'x')}.mp4"
+    try:
+        async with comfy_session() as client:
+            profile = await hardware_profile(client)
+            path, plan, fits = await reframe(client, asset.path, out, aspect=aspect, query=query, profile=profile)
+    except (ComfyError, RecipeError) as e:
+        raise ToolError(str(e)) from e
+    meta = {}
+    if asset.meta.get("audio_path"):
+        meta["audio_path"] = asset.meta["audio_path"]
+    new = await asyncio.to_thread(
+        get_assets().add, path, "video", origin={"reframed_from": asset.id, "aspect": aspect, "crop_path": plan},
+        meta=meta, parent_ids=[asset.id],
+    )
+    payload = {"asset_id": new.id, "width": new.meta.get("width"), "height": new.meta.get("height"),
+               "duration": new.meta.get("duration"), "all_subjects_fit": fits, "pan_keyframes": len(plan)}
+    content: list[Any] = [json.dumps(payload, indent=2)]
+    if new.meta.get("preview_path"):
+        content.append(MCPImage(path=new.meta["preview_path"]))
+    return content
