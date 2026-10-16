@@ -1,0 +1,73 @@
+{
+  "result_count": 240,
+  "page_count": 80,
+  "page_size": 3,
+  "page": 1,
+  "results": [
+    {
+      "id": "93d59f37-9cf4-462f-a683-e5f330429df6",
+      "title": "Shiba inu",
+      "indexed_on": "2018-12-21T12:34:40.573425Z",
+      "foreign_landing_url": "https://www.flickr.com/photos/76758469@N00/6556553517",
+      "url": "https://live.staticflickr.com/7165/6556553517_a6cf8d416c_b.jpg",
+      "creator": "Yuya Tamai",
+      "creator_url": "https://www.flickr.com/photos/76758469@N00",
+      "license": "by",
+      "license_version": "2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "provider": "flickr",
+      "source": "flickr",
+      "category": null,
+      "filesize": null,
+      "filetype": null,
+      "tags": [
+        {"name": "inu", "accuracy": null},
+        {"name": "shiba", "accuracy": null}
+      ],
+      "attribution": "\"Shiba inu\" by Yuya Tamai is licensed under CC BY 2.0.",
+      "mature": false,
+      "height": 768,
+      "width": 1024,
+      "thumbnail": "https://api.openverse.org/v1/images/93d59f37-9cf4-462f-a683-e5f330429df6/thumb/",
+      "detail_url": "https://api.openverse.org/v1/images/93d59f37-9cf4-462f-a683-e5f330429df6/"
+    },
+    {
+      "id": "1c9f1f8b-3eb0-48f3-878b-d8cdad02d9f3",
+      "title": "Shiba inu",
+      "indexed_on": "2020-04-17T08:55:22.497086Z",
+      "foreign_landing_url": "https://www.flickr.com/photos/76758469@N00/6073283080",
+      "url": "https://live.staticflickr.com/6087/6073283080_ed5e81efa5_b.jpg",
+      "creator": "Yuya Tamai",
+      "creator_url": "https://www.flickr.com/photos/76758469@N00",
+      "license": "by",
+      "license_version": "2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "provider": "flickr",
+      "source": "flickr",
+      "mature": false,
+      "height": 768,
+      "width": 1024,
+      "thumbnail": "https://api.openverse.org/v1/images/1c9f1f8b-3eb0-48f3-878b-d8cdad02d9f3/thumb/",
+      "detail_url": "https://api.openverse.org/v1/images/1c9f1f8b-3eb0-48f3-878b-d8cdad02d9f3/"
+    },
+    {
+      "id": "761459a6-3bad-450b-bafb-9d13a6674c9b",
+      "title": "Sleepy Shiba Inu",
+      "indexed_on": "2018-11-08T17:31:32.467511Z",
+      "foreign_landing_url": "https://www.flickr.com/photos/76758469@N00/6556394577",
+      "url": "https://live.staticflickr.com/7007/6556394577_a2439a1c25_b.jpg",
+      "creator": "Yuya Tamai",
+      "creator_url": "https://www.flickr.com/photos/76758469@N00",
+      "license": "by",
+      "license_version": "2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "provider": "flickr",
+      "source": "flickr",
+      "mature": false,
+      "height": 768,
+      "width": 1024,
+      "thumbnail": "https://api.openverse.org/v1/images/761459a6-3bad-450b-bafb-9d13a6674c9b/thumb/",
+      "detail_url": "https://api.openverse.org/v1/images/761459a6-3bad-450b-bafb-9d13a6674c9b/"
+    }
+  ]
+}
