@@ -61,12 +61,26 @@ def iou(a: tuple[int, int, int, int], b: tuple[int, int, int, int]) -> float:
     return inter / union if union > 0 else 0.0
 
 
-def dedupe(subjects: list[Subject], threshold: float = 0.7) -> list[Subject]:
-    """Drop lower-scored boxes that overlap a kept box (e.g. 'animal' and 'dog' hitting the same dog)."""
+def _inside(inner: tuple[int, int, int, int], outer: tuple[int, int, int, int]) -> float:
+    """Fraction of `inner`'s area that lies within `outer`."""
+    ix1, iy1 = max(inner[0], outer[0]), max(inner[1], outer[1])
+    ix2, iy2 = min(inner[2], outer[2]), min(inner[3], outer[3])
+    area = max(1, (inner[2] - inner[0]) * (inner[3] - inner[1]))
+    return max(0, ix2 - ix1) * max(0, iy2 - iy1) / area
+
+
+def dedupe(subjects: list[Subject], threshold: float = 0.7, contained: float = 0.8) -> list[Subject]:
+    """Drop lower-scored boxes that overlap a kept box (e.g. 'animal' and 'dog' hitting the
+    same dog), and boxes of a *different* label lying mostly inside a kept one (e.g. a
+    person's hair or torso picked up by the 'animal' query). Same-label containment is
+    kept: one dancer standing in front of another is two real subjects."""
     kept: list[Subject] = []
     for s in sorted(subjects, key=lambda s: s.score, reverse=True):
-        if all(iou(s.bbox, k.bbox) < threshold for k in kept):
-            kept.append(s)
+        if any(iou(s.bbox, k.bbox) >= threshold for k in kept):
+            continue
+        if any(k.label != s.label and _inside(s.bbox, k.bbox) >= contained for k in kept):
+            continue
+        kept.append(s)
     return kept
 
 

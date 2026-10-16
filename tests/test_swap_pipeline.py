@@ -126,3 +126,14 @@ def test_detect_helpers():
     c = Subject(0, "person", 0.8, (200, 0, 300, 100), "")
     assert iou(a.bbox, b.bbox) > 0.8
     assert [s.label for s in dedupe([b, a, c])] == ["dog", "person"]
+
+
+def test_dedupe_drops_cross_label_parts_but_keeps_overlapping_people():
+    p1 = Subject(0, "person", 0.97, (233, 422, 466, 831), "")
+    p2 = Subject(0, "person", 0.94, (106, 428, 307, 830), "")
+    hair = Subject(0, "animal", 0.6, (116, 428, 251, 604), "")  # inside p2
+    torso = Subject(0, "animal", 0.55, (265, 495, 407, 650), "")  # inside p1
+    front = Subject(0, "person", 0.9, (300, 500, 420, 800), "")  # a person in front of p1
+    labels = [(s.label, s.bbox) for s in dedupe([hair, p1, torso, p2, front])]
+    assert ("animal", hair.bbox) not in labels and ("animal", torso.bbox) not in labels
+    assert ("person", front.bbox) in labels and len(labels) == 3
