@@ -1,0 +1,173 @@
+"""`make-meme install`: set up a ComfyUI that can run make-meme recipes.
+
+Installs (idempotently) ComfyUI itself, each recipe's custom node packs at pinned
+commits, the bundled make_meme_nodes companion pack, and the recipe's model files for
+the chosen hardware profile. Works for a local Mac/Linux/Windows box or inside a free
+cloud notebook (Kaggle/Colab) — see notebooks/.
+"""
+
+from __future__ import annotations
+
+import logging
+import os
+import platform
+import shutil
+import subprocess
+import sys
+from importlib import resources
+from pathlib import Path
+
+import httpx
+
+from make_meme.recipes.loader import ModelVariant, Recipe
+
+log = logging.getLogger("make_meme.install")
+
+COMFY_REPO = "https://github.com/comfyanonymous/ComfyUI.git"
+EXTRA_COMFY_PACKAGES = ["torchaudio", "gguf"]  # WanVideoWrapper imports torchaudio; GGUF loader
+
+
+def detect_profile() -> str:
+    if sys.platform == "darwin" and platform.machine() == "arm64":
+        return "mps"
+    if shutil.which("nvidia-smi"):
+        try:
+            out = subprocess.run(
+                ["nvidia-smi", "--query-gpu=memory.total", "--format=csv,noheader,nounits"],
+                capture_output=True, text=True, check=True,
+            ).stdout.split()
+            vram_mib = int(out[0]) if out else 0
+        except (subprocess.CalledProcessError, ValueError):
+            vram_mib = 0
+        return "cuda" if vram_mib >= 20 * 1024 else "cuda_lowvram"
+    return "cpu"
+
+
+def _run(cmd: list[str], cwd: Path | None = None) -> None:
+    log.info("$ %s", " ".join(cmd))
+    subprocess.run(cmd, cwd=cwd, check=True)
+
+
+def comfy_python(comfy_dir: Path) -> Path:
+    win = comfy_dir / ".venv" / "Scripts" / "python.exe"
+    return win if win.exists() else comfy_dir / ".venv" / "bin" / "python"
+
+
+def _pip_install(comfy_dir: Path, *args: str) -> None:
+    py = str(comfy_python(comfy_dir))
+    if shutil.which("uv"):
+        _run(["uv", "pip", "install", "--python", py, *args])
+    else:
+        _run([py, "-m", "pip", "install", *args])
+
+
+def ensure_comfyui(comfy_dir: Path, *, use_system_python: bool = False) -> None:
+    if not (comfy_dir / "main.py").exists():
+        comfy_dir.parent.mkdir(parents=True, exist_ok=True)
+        _run(["git", "clone", "--depth", "1", COMFY_REPO, str(comfy_dir)])
+    if use_system_python:
+        venv = comfy_dir / ".venv"
+        if not venv.exists():
+            _run([sys.executable, "-m", "venv", "--system-site-packages", str(venv)])
+    elif not comfy_python(comfy_dir).exists():
+        if shutil.which("uv"):
+            _run(["uv", "venv", "--python", "3.12", str(comfy_dir / ".venv")])
+        else:
+            _run([sys.executable, "-m", "venv", str(comfy_dir / ".venv")])
+    _pip_install(comfy_dir, "-r", str(comfy_dir / "requirements.txt"))
+    _pip_install(comfy_dir, *EXTRA_COMFY_PACKAGES)
+
+
+def install_companion_nodes(comfy_dir: Path) -> Path:
+    src = Path(str(resources.files("make_meme") / "comfy_nodes" / "make_meme_nodes"))
+    dest = comfy_dir / "custom_nodes" / "make_meme_nodes"
+    if dest.is_symlink() or dest.is_file():
+        dest.unlink()
+    elif dest.is_dir():
+        shutil.rmtree(dest)
+    shutil.copytree(src, dest, ignore=shutil.ignore_patterns("__pycache__"))
+    return dest
+
+
+def install_node_pack(comfy_dir: Path, repo: str, ref: str | None) -> None:
+    if repo.startswith("builtin:"):
+        install_companion_nodes(comfy_dir)
+        return
+    name = repo.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
+    dest = comfy_dir / "custom_nodes" / name
+    if not dest.exists():
+        _run(["git", "clone", repo, str(dest)])
+    if ref:
+        current = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=dest, capture_output=True, text=True, check=False
+        ).stdout.strip()
+        if current != ref:
+            _run(["git", "fetch", "--depth", "1", "origin", ref], cwd=dest)
+            _run(["git", "checkout", ref], cwd=dest)
+    req = dest / "requirements.txt"
+    if req.exists():
+        _pip_install(comfy_dir, "-r", str(req))
+
+
+def download_model(comfy_dir: Path, variant: ModelVariant) -> Path:
+    dest = comfy_dir / "models" / variant.dir / variant.file
+    if dest.exists() and dest.stat().st_size > 0:
+        return dest
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    url = f"https://huggingface.co/{variant.repo}/resolve/main/{variant.path}"
+    part = dest.with_name(dest.name + ".part")
+    headers = {}
+    token = os.environ.get("HF_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    offset = part.stat().st_size if part.exists() else 0
+    if offset:
+        headers["Range"] = f"bytes={offset}-"
+    log.info("downloading %s (%.1f GB) -> %s", url, variant.size_gb, dest)
+    with httpx.stream("GET", url, headers=headers, follow_redirects=True, timeout=60.0) as r:
+        if r.status_code == 416:  # already complete
+            part.rename(dest)
+            return dest
+        r.raise_for_status()
+        mode = "ab" if r.status_code == 206 else "wb"
+        total = int(r.headers.get("content-length", 0)) + (offset if mode == "ab" else 0)
+        done = offset if mode == "ab" else 0
+        last_pct = -1
+        with part.open(mode) as fh:
+            for chunk in r.iter_bytes(chunk_size=8 << 20):
+                fh.write(chunk)
+                done += len(chunk)
+                pct = int(done * 100 / total) if total else -1
+                if pct != last_pct and pct % 5 == 0:
+                    print(f"  {variant.file}: {pct}%", file=sys.stderr, flush=True)
+                    last_pct = pct
+    part.rename(dest)
+    return dest
+
+
+def install_recipe(comfy_dir: Path, recipe: Recipe, profile: str, *, skip_models: bool = False) -> list[str]:
+    notes: list[str] = []
+    for pack in recipe.custom_nodes:
+        install_node_pack(comfy_dir, pack.repo, pack.ref)
+    if skip_models:
+        return notes
+    for model in recipe.models:
+        variant = model.profiles.get(profile) or model.profiles.get("default")
+        if variant is None:
+            notes.append(f"{recipe.name}: no '{profile}' variant for model {model.id}; skipped")
+            continue
+        download_model(comfy_dir, variant)
+        if "AGPL" in variant.license or "SAM" in variant.license:
+            notes.append(f"{variant.file}: license {variant.license} — see README 'Model licenses'")
+    return notes
+
+
+def comfy_launch_command(comfy_dir: Path, port: int = 8188, listen: str = "127.0.0.1") -> list[str]:
+    return [str(comfy_python(comfy_dir)), "main.py", "--listen", listen, "--port", str(port), "--disable-auto-launch"]
+
+
+def comfy_env(profile: str) -> dict[str, str]:
+    env = dict(os.environ)
+    if profile == "mps":
+        env.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
+    return env
