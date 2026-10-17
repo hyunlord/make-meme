@@ -22,7 +22,7 @@ import yaml
 
 logger = logging.getLogger(__name__)
 
-ENGINES = ("swap", "paste")
+ENGINES = ("swap", "paste", "animate")
 MASK_MODES = ("head", "full_body")
 REF_KINDS = ("full", "head", "head_alt", "full_alt")
 
@@ -45,6 +45,14 @@ class Style:
     defaults: dict[str, Any] = field(default_factory=dict)
     engine: str = "swap"
     params: dict[str, Any] = field(default_factory=dict)  # engine-specific knobs (e.g. paste scale)
+    # animate styles: how the character reference is designed from the pet photo first
+    design_prompt: str = ""
+    design_outfit: bool = False  # give the designer a crop of the performer to copy the outfit from
+    design_size: tuple[int, int] = (768, 1344)
+
+    def render_design_prompt(self, *, subject_desc: str, coat: str = "") -> str:
+        values = _Defaults(subject_desc=subject_desc, subject_desc_cap=_cap(subject_desc), coat=coat or "its")
+        return re.sub(r"\s+", " ", self.design_prompt.format_map(values)).strip()
 
     def render_prompt(self, *, subject_desc: str, coat: str = "", scene: str = "") -> str:
         values = _Defaults(subject_desc=subject_desc, subject_desc_cap=_cap(subject_desc), coat=coat or "its",
@@ -73,16 +81,20 @@ def load_style(path: Path) -> Style:
     try:
         style = Style(
             name=m["name"], title=m.get("title", m["name"]), description=str(m.get("description", "")).strip(),
-            recipe=m["recipe"] if m.get("engine", "swap") == "swap" else str(m.get("recipe") or ""),
+            recipe=m["recipe"] if m.get("engine", "swap") in ("swap", "animate") else str(m.get("recipe") or ""),
             mask=m.get("mask", "full_body"), refs=dict(m.get("refs") or {"ref1": "full"}),
             prompt=m.get("prompt", "{subject_desc}"), negative=m.get("negative", ""),
             keywords=[str(k).lower() for k in m.get("keywords") or []], defaults=dict(m.get("defaults") or {}),
             engine=str(m.get("engine", "swap")), params=dict(m.get("params") or {}),
+            design_prompt=str(m.get("design_prompt", "")).strip(), design_outfit=bool(m.get("design_outfit", False)),
+            design_size=tuple(m.get("design_size") or (768, 1344)),
         )
     except KeyError as e:
         raise StyleError(f"Style {path} is missing {e}") from e
     if style.engine not in ENGINES:
         raise StyleError(f"Style {style.name}: engine must be one of {ENGINES}")
+    if style.engine == "animate" and not style.design_prompt:
+        raise StyleError(f"Style {style.name}: animate styles need a design_prompt for the character reference")
     if style.mask not in MASK_MODES:
         raise StyleError(f"Style {style.name}: mask must be one of {MASK_MODES}")
     bad = [k for k in style.refs.values() if k not in REF_KINDS]

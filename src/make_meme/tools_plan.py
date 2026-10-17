@@ -194,7 +194,30 @@ def _refresh_estimate(plan: MemePlan, style) -> None:
 
     w, h = preset_size(recipe, plan.quality, clip_size, profile)
     steps = int(recipe.preset_values(plan.quality, profile).get("steps", 4))
+    if style.engine == "animate":
+        plan.estimate = {**base, **_animate_estimate(plan, shots, recipe.name, profile, w, h, steps),
+                         "generation_size": [w, h], "output_size": list(clip_size)}
+        return
     plan.estimate = {**base, **_estimate(plan, shots, profile, w, h, steps), "output_size": [w, h]}
+
+
+def _animate_estimate(plan: MemePlan, shots: list[Shot], recipe: str, profile: str, w: int, h: int,
+                      steps: int) -> dict:
+    """One generation per cast performer per shot, at the clip's frame rate, in windows of
+    at most 77 frames (plus a character design per identity, ~1 min)."""
+    from make_meme.perf import estimate_seconds
+
+    total, basis = 60.0 * len(set(plan.cast.values())), "default-guess"
+    for shot in shots:
+        n = sum(1 for pid in plan.cast if pid in shot.performers)
+        frames = max(1, round(shot.duration * 24))
+        while n and frames > 0:
+            window = min(frames, 77)
+            est = estimate_seconds(profile, recipe, w, h, window, steps)
+            total += n * float(est["seconds"])
+            basis = est.get("basis", basis)
+            frames -= window
+    return {"seconds": round(total), "minutes": round(total / 60, 1), "basis": basis}
 
 
 @mcp.tool(structured_output=False)
@@ -352,6 +375,69 @@ async def plan_meme(
     return [json.dumps(payload, indent=2, ensure_ascii=False, default=str), MCPImage(path=str(preview))]
 
 
+def _save_characters(plan: MemePlan) -> None:
+    """Persist designed character references into the saved plan (even after a preview
+    render, which works on a trimmed copy)."""
+    saved = load_plan(plan.id)
+    if saved is None:
+        return
+    for ident in plan.identities:
+        if (target := saved.identity(ident.id)) is not None:
+            target.characters.update(ident.characters)
+    save_plan(saved)
+
+
+@mcp.tool(structured_output=False)
+async def design_characters(plan_id: str, style: str, identity: str | None = None, extra: str = "",
+                            seed: int | None = None) -> list[Any]:
+    """Design (or redesign) the character reference each cast identity will become in an
+    `animate` style, e.g. the dog standing upright in the performer's outfit. Show the
+    images to the user before render_meme: the video copies this look. Pass `identity` to
+    redo just one, `extra` to steer it ("bigger ears", "smiling"), `seed` for a new variation.
+    render_meme designs missing ones automatically."""
+    from make_meme.pipelines.render import ensure_characters
+
+    plan = load_plan(plan_id)
+    if plan is None:
+        raise ToolError(f"No plan {plan_id!r}; call plan_meme first.")
+    try:
+        st = get_style(style)
+    except StyleError as e:
+        raise ToolError(str(e)) from e
+    if st.engine != "animate":
+        raise ToolError(f"Style {style!r} doesn't use a designed character (engine: {st.engine}).")
+    targets = [identity] if identity else sorted(set(plan.cast.values()))
+    for ident_id in targets:
+        ident = plan.identity(ident_id)
+        if ident is None:
+            raise ToolError(f"Plan {plan_id} has no identity {ident_id!r}")
+        ident.characters.pop(st.name, None)  # redo
+    if seed is not None:
+        plan.seed = seed
+    work = get_settings().home / "plans" / f"{plan.id}_design"
+    try:
+        async with comfy_session() as client:
+            profile = await hardware_profile(client)
+            if extra:
+                from make_meme.pipelines.design import design_character
+
+                for ident_id in targets:
+                    ident = plan.identity(ident_id)
+                    ident.characters[st.name] = str(await design_character(
+                        client, st, ident, work / "characters", profile=profile, seed=plan.seed, extra=extra))
+            refs = await ensure_characters(client, plan, st, work, profile=profile)
+    except (ComfyError, RecipeError, ValueError) as e:
+        raise ToolError(str(e)) from e
+    _save_characters(plan)
+    images: list[Any] = [json.dumps({"plan_id": plan.id, "style": st.name,
+                                     "characters": {pid: str(p) for pid, p in refs.items()},
+                                     "next": "Show these to the user; redesign with extra/seed if needed, then "
+                                             f"render_meme(plan_id={plan.id!r}, style={st.name!r})."},
+                                    ensure_ascii=False)]
+    images += [MCPImage(path=str(p)) for p in refs.values()]
+    return images
+
+
 @mcp.tool()
 async def render_meme(
     plan_id: str,
@@ -413,7 +499,7 @@ async def render_meme(
 
         async with comfy_session() as client:
             profile = await hardware_profile(client)
-            if st.engine == "swap":  # paste styles have no prompts to encode
+            if st.engine in ("swap", "animate"):  # paste styles have no prompts to encode
                 try:
                     from make_meme.perf import precache_prompts
 
@@ -424,6 +510,7 @@ async def render_meme(
                     pass
             silent = await render_plan(client, plan, st, clip_asset.path, work / "work", profile=profile,
                                        report=report, cancelled=ctx.cancelled)
+        _save_characters(plan)
         out = settings.outputs_dir / f"{ctx.job_id}.mp4"
         audio = clip_asset.meta.get("audio_path") or (str(clip_asset.path) if clip_asset.meta.get("has_audio") else None)
         if keep_audio and audio and Path(audio).is_file():

@@ -1,12 +1,14 @@
 """Pose-guided replacement with Wan2.2-Animate (wan_animate_replace recipe).
 
 Per shot: every person is tracked (SAM 3, re-detecting), each cast performer's per-frame
-body mask is found, and for each performer the recipe gets
+body mask is found (and, for head styles, their head + neck), and for each performer the
+recipe gets
   * a pose video showing only that performer (ViTPose picks one person per frame),
-  * the background frames with that performer blanked out, and the mask itself,
-  * the reference photo padded to the generation size.
-Each performer is generated from the original shot, then pasted back inside their own
-(grown) mask, so the background and everyone else stay untouched.
+  * the background frames with the region to replace blanked out, and that mask,
+  * the character reference padded to the generation size.
+Generation runs at the shot's own frame rate (the model doesn't care, and it keeps the
+audio in sync); each result is scaled back and pasted inside its feathered mask onto the
+original-resolution frames, so everything outside the region is the original pixels.
 """
 
 from __future__ import annotations
@@ -21,9 +23,8 @@ from PIL import Image, ImageFilter, ImageOps
 
 from make_meme import ingest
 from make_meme.comfy.client import ComfyClient
-from make_meme.pipelines.detect import Subject, clean_reference
+from make_meme.pipelines.detect import Subject
 from make_meme.pipelines.runtime import ensure_ready, node_files, run_recipe
-from make_meme.pipelines.swap import _scale_bbox
 from make_meme.pipelines.track import track_labels
 from make_meme.recipes.loader import Recipe
 
@@ -114,7 +115,7 @@ def padded_length(n: int) -> int:
     return n if (n - 1) % 4 == 0 else n + (4 - (n - 1) % 4)
 
 
-def _write_video(frames: list[np.ndarray], dest: Path, fps: int, *, lossless: bool = False) -> Path:
+def _write_video(frames: list[np.ndarray], dest: Path, fps: int | str, *, lossless: bool = False) -> Path:
     h, w = frames[0].shape[:2]
     cmd = [ingest.FFMPEG, "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}",
            "-r", str(fps), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p",
@@ -139,15 +140,19 @@ def read_frames(video: Path) -> list[np.ndarray]:
     return [f for f in np.frombuffer(raw, np.uint8).reshape(-1, h, w, 3)]
 
 
-def build_inputs(frames: list[np.ndarray], masks: list[np.ndarray], out_dir: Path, fps: int) -> dict[str, Path]:
-    """pose / bg / mask videos for one performer, padded to 4k+1 frames."""
+def build_inputs(frames: list[np.ndarray], masks: list[np.ndarray], out_dir: Path, fps: int | str,
+                 pose_masks: list[np.ndarray] | None = None) -> dict[str, Path]:
+    """pose / bg / mask videos for one performer, padded to 4k+1 frames. `masks` is the
+    region to regenerate; `pose_masks` (default: the same) is what the pose video keeps."""
     out_dir.mkdir(parents=True, exist_ok=True)
+    pose_masks = pose_masks or masks
     n = padded_length(len(frames))
     frames = frames + [frames[-1]] * (n - len(frames))
     masks = masks + [masks[-1]] * (n - len(masks))
+    pose_masks = pose_masks + [pose_masks[-1]] * (n - len(pose_masks))
     pose, bg, mk = [], [], []
-    for fr, m in zip(frames, masks, strict=True):
-        keep = grow(m, POSE_GROW_PX)[..., None]
+    for fr, m, pm in zip(frames, masks, pose_masks, strict=True):
+        keep = grow(pm, POSE_GROW_PX)[..., None]
         pose.append(np.where(keep, fr, 127))
         gm = grow(m, GROW_PX)
         bg.append(np.where(gm[..., None], 0, fr))
@@ -169,64 +174,134 @@ def padded_ref(photo: Path, width: int, height: int, dest: Path) -> Path:
     return dest
 
 
-async def animate_shot(client: ComfyClient, recipe: Recipe, video: Path, source_size: tuple[int, int],
-                       performers: dict[str, Subject], refs: dict[str, Path], prompts: dict[str, str], work: Path, *,
-                       profile: str, quality: str, seed: int, negative: str = "", report=None,
-                       cancelled=None) -> tuple[Path, list[str]]:
-    """`video` is the shot normalized (cover-scaled + centre-cropped) to the generation size
-    and fps from a clip of `source_size`; performer boxes are in clip pixels. Returns the
-    shot with each performer replaced (same size, fps and frame count) and warnings."""
+def head_and_neck(head: np.ndarray, body: np.ndarray, neck: float = 0.45) -> np.ndarray:
+    """The head mask plus a neck strip below it (clipped to the body), so a generated head
+    joins the original shoulders instead of floating."""
+    ys, xs = np.nonzero(head)
+    if len(xs) == 0:
+        return head
+    x1, x2, y1, y2 = xs.min(), xs.max(), ys.min(), ys.max()
+    w, h = x2 - x1 + 1, y2 - y1 + 1
+    strip = np.zeros_like(head)
+    strip[y2 - int(0.1 * h):min(head.shape[0], y2 + int(neck * h)), x1 + int(0.2 * w):x2 - int(0.2 * w) + 1] = True
+    return head | (strip & grow(body, 4))
+
+
+def resize_mask(mask: np.ndarray, width: int, height: int) -> np.ndarray:
+    return np.asarray(Image.fromarray((mask * 255).astype(np.uint8)).resize((width, height),
+                                                                             Image.Resampling.BILINEAR)) > 127
+
+
+def frame_rate(video: Path) -> str:
+    out = subprocess.run([ingest.FFPROBE, "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=r_frame_rate",
+                          "-of", "default=nw=1:nk=1", str(video)], capture_output=True, text=True, check=True)
+    return out.stdout.strip() or "24"
+
+
+async def looks_replaced(client: ComfyClient, frames: list[Path], masks: list[np.ndarray], work: Path, *,
+                         profile: str, query: str = "animal") -> bool:
+    """QC: does the regenerated region show the pet (not the original person)? Checks a
+    few frames, cropped to the region, with SAM 3."""
+    from make_meme.pipelines.detect import detect_in_image
+
+    picks = sorted({0, len(frames) // 2, len(frames) - 1})
+    hits = 0
+    for i in picks:
+        ys, xs = np.nonzero(masks[i])
+        if len(xs) == 0:
+            continue
+        with Image.open(frames[i]) as im:
+            sx, sy = im.width / masks[i].shape[1], im.height / masks[i].shape[0]
+            crop = im.convert("RGB").crop((int(xs.min() * sx), int(ys.min() * sy), int(xs.max() * sx) + 1,
+                                           int(ys.max() * sy) + 1))
+        path = work / f"qc_{i:05d}.png"
+        crop.save(path)
+        if await detect_in_image(client, path, f"{query}:1", work / f"qc_{i:05d}", profile=profile, min_area_frac=0.05):
+            hits += 1
+    return hits * 2 >= len(picks)
+
+
+async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, performers: dict[str, Subject],
+                       refs: dict[str, Path], prompts: dict[str, str], work: Path, *, profile: str, quality: str,
+                       gen_size: tuple[int, int], seed: int, negative: str = "", mask_mode: str = "full_body",
+                       qc: bool = True, report=None, cancelled=None) -> tuple[Path, list[str]]:
+    """Replace each performer in `piece` (one shot, at the clip's resolution and frame rate;
+    performer boxes in its pixels) with their reference. Returns (video with the same size,
+    frame rate and frame count, warnings)."""
+    from make_meme.pipelines.paste import assign_heads
+    from make_meme.pipelines.track import downscale
+
     await ensure_ready(client, recipe, profile)
     work.mkdir(parents=True, exist_ok=True)
-    info = await asyncio.to_thread(ingest.probe, video)
-    w, h, fps = int(info["width"]), int(info["height"]), round(float(info["fps"]) or 16)
-    frames = await asyncio.to_thread(read_frames, video)
-    labels = await track_labels(client, video, work / "people", profile=profile, query="person",
+    info = await asyncio.to_thread(ingest.probe, piece)
+    width, height = int(info["width"]), int(info["height"])
+    rate = await asyncio.to_thread(frame_rate, piece)
+    gw, gh = gen_size
+    frames = await asyncio.to_thread(read_frames, piece)
+    small, factor = await asyncio.to_thread(downscale, piece, work / "track_in.mp4")
+    labels = await track_labels(client, small, work / "people", profile=profile, query="person",
                                 detect_interval=4, max_objects=8, cancelled=cancelled)
-    bodies = {pid: _scale_bbox(s.bbox, source_size, (w, h)) for pid, s in performers.items()}
-    tracks = assign_bodies(labels, bodies)
+    bodies = {pid: tuple(int(v / factor) for v in s.bbox) for pid, s in performers.items() if pid in refs}
+    body_tracks = assign_bodies(labels, bodies)
+    head_tracks = {}
+    if mask_mode == "head":
+        head_labels = await track_labels(client, small, work / "heads", profile=profile, cancelled=cancelled)
+        head_tracks = assign_heads(head_labels, bodies)
     warnings: list[str] = []
+    gen_frames = [np.asarray(Image.fromarray(f).resize((gw, gh), Image.Resampling.LANCZOS)) for f in frames]
     out = [f.astype(np.float32) for f in frames]
-    n_perf = len(tracks)
-    for idx, (pid, masks) in enumerate(tracks.items(), start=1):
-        if pid not in refs:
-            continue
+    todo = list(bodies)
+    n_todo = len(todo)
+    for idx, pid in enumerate(todo, start=1):
         try:
-            filled = fill_masks(masks)
+            body = fill_masks(body_tracks[pid])
         except ValueError:
             warnings.append(f"{pid}: not found in this shot; left as is")
             continue
-        missing = sum(m is None for m in masks)
-        if missing > len(masks) // 3:
-            warnings.append(f"{pid}: tracked in {len(masks) - missing}/{len(masks)} frames")
+        region = body
+        if mask_mode == "head":
+            try:
+                heads = fill_masks(head_tracks.get(pid, []))
+            except ValueError:
+                warnings.append(f"{pid}: no head found in this shot; left as is")
+                continue
+            region = [head_and_neck(h, b) for h, b in zip(heads, body, strict=True)]
+        missing = sum(m is None for m in body_tracks[pid])
+        if missing > len(body) // 3:
+            warnings.append(f"{pid}: tracked in {len(body) - missing}/{len(body)} frames")
+        region_gen = [resize_mask(m, gw, gh) for m in region]
+        body_gen = [resize_mask(m, gw, gh) for m in body]
         pdir = work / pid
-        media = await asyncio.to_thread(build_inputs, frames, filled, pdir, fps)
-        clean = await clean_reference(client, refs[pid], pdir, profile=profile)
-        media["ref"] = await asyncio.to_thread(padded_ref, clean, w, h, pdir / "ref.png")
+        media = await asyncio.to_thread(build_inputs, gen_frames, region_gen, pdir, rate, body_gen)
+        media["ref"] = await asyncio.to_thread(padded_ref, refs[pid], gw, gh, pdir / "ref.png")
         n = padded_length(len(frames))
-        values = {"width": w, "height": h, "num_frames": n, "seed": seed, "prompt": prompts.get(pid, ""),
-                  "negative_prompt": negative}
 
-        async def progress(stage, frac, msg, _i=idx, _n=n_perf):
+        async def progress(stage, frac, msg, _i=idx, _n=n_todo):
             if report is not None and frac >= 0:
                 await report("generating", ((_i - 1) + frac) / _n, f"performer {_i}/{_n}: {msg}")
 
-        result = await run_recipe(client, recipe, media=media, values=values, profile=profile, preset=quality,
-                                  on_progress=progress, cancelled=cancelled)
-        gen_dir = pdir / "frames"
-        gen_dir.mkdir(exist_ok=True)
-        files = node_files(result, recipe.outputs["frames"])
-        gen = []
-        for i, f in enumerate(files[: len(frames)]):
-            dest = await client.download(f, gen_dir / f"{i:05d}.png")
-            with Image.open(dest) as im:
-                gen.append(np.asarray(im.convert("RGB").resize((w, h))).astype(np.float32))
-        if len(gen) < len(frames):
-            warnings.append(f"{pid}: model returned {len(gen)}/{len(frames)} frames")
-        for i, g in enumerate(gen):
-            a = np.asarray(Image.fromarray((grow(filled[i], GROW_PX) * 255).astype(np.uint8))
-                           .filter(ImageFilter.GaussianBlur(2)), np.float32)[..., None] / 255.0
+        files: list[Path] = []
+        for attempt in range(2 if qc else 1):
+            values = {"width": gw, "height": gh, "num_frames": n, "seed": seed + attempt,
+                      "prompt": prompts.get(pid, ""), "negative_prompt": negative}
+            result = await run_recipe(client, recipe, media=media, values=values, profile=profile, preset=quality,
+                                      on_progress=progress, cancelled=cancelled)
+            gen_dir = pdir / f"frames{attempt}"
+            gen_dir.mkdir(exist_ok=True)
+            files = [await client.download(f, gen_dir / f"{i:05d}.png")
+                     for i, f in enumerate(node_files(result, recipe.outputs["frames"])[: len(frames)])]
+            if not qc or mask_mode == "head" or await looks_replaced(client, files, region_gen, pdir, profile=profile):
+                break
+            warnings.append(f"{pid}: the original person still showed; retried with another seed")
+        if len(files) < len(frames):
+            warnings.append(f"{pid}: model returned {len(files)}/{len(frames)} frames")
+        for i, f in enumerate(files):
+            with Image.open(f) as im:
+                g = np.asarray(im.convert("RGB").resize((width, height), Image.Resampling.LANCZOS), np.float32)
+            m = resize_mask(grow(region[i], 2), width, height)
+            a = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(3)),
+                           np.float32)[..., None] / 255.0
             out[i] = out[i] * (1 - a) + g * a
     dest = work / "out.mp4"
-    await asyncio.to_thread(_write_video, [np.clip(f + 0.5, 0, 255).astype(np.uint8) for f in out], dest, fps)
+    await asyncio.to_thread(_write_video, [np.clip(f + 0.5, 0, 255).astype(np.uint8) for f in out], dest, rate)
     return dest, warnings

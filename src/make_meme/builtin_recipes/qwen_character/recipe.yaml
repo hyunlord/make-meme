@@ -1,0 +1,76 @@
+name: qwen_character
+kind: design
+title: Character design from a pet photo (Qwen-Image-Edit-2511)
+description: >
+  Turns a photo of a pet into a full-body character reference: e.g. the pet as a cute
+  anthropomorphic character standing upright, optionally wearing the outfit shown in a
+  second image (a crop of the performer). Pose-driven video models need a reference that
+  already stands like the performer; a photo of a dog lying down makes them invent a body.
+  Four steps with the Lightning LoRA.
+workflow: workflow.json
+
+constraints:
+  timeout_sec: 1800
+
+inputs:
+  photo:  {type: image, targets: [["1", "image"]], description: "the pet (one photo, ideally the clearest full view)"}
+  outfit:
+    type: image
+    required: false
+    targets: [["2", "image"]]
+    unlink_if_missing: [["9", "image2"], ["10", "image2"]]
+    description: "optional: a crop of the performer whose outfit the character should wear"
+  prompt: {type: string, default: "", targets: [["9", "prompt"]]}
+  width:  {type: int, default: 768, targets: [["11", "width"]]}
+  height: {type: int, default: 1344, targets: [["11", "height"]]}
+  seed:   {type: int, default: 42, targets: [["12", "seed"]]}
+  steps:  {type: int, default: 4, targets: [["12", "steps"]]}
+
+presets:
+  draft: {steps: 4}
+  high:  {steps: 4}
+
+models:
+  edit:
+    targets: [["4", "unet_name"]]
+    profiles:
+      default:
+        file: qwen_image_edit_2511_fp8mixed.safetensors
+        dir: diffusion_models
+        repo: Comfy-Org/Qwen-Image-Edit_ComfyUI
+        path: split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors
+        size_gb: 20.53
+        license: Apache-2.0
+  lightning:
+    targets: [["7", "lora_name"]]
+    profiles:
+      default:
+        file: Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors
+        dir: loras
+        repo: lightx2v/Qwen-Image-Edit-2511-Lightning
+        path: Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors
+        size_gb: 0.85
+        license: Apache-2.0
+  text_encoder:
+    targets: [["5", "clip_name"]]
+    profiles:
+      default:
+        file: qwen_2.5_vl_7b_fp8_scaled.safetensors
+        dir: text_encoders
+        repo: Comfy-Org/Qwen-Image_ComfyUI
+        path: split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors
+        size_gb: 9.38
+        license: Apache-2.0
+  vae:
+    targets: [["6", "vae_name"]]
+    profiles:
+      default:
+        file: qwen_image_vae.safetensors
+        dir: vae
+        repo: Comfy-Org/Qwen-Image_ComfyUI
+        path: split_files/vae/qwen_image_vae.safetensors
+        size_gb: 0.25
+        license: Apache-2.0
+
+outputs:
+  image: "14"

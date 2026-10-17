@@ -1,0 +1,20 @@
+name: pet_head_animate
+title: Pet head that moves with the performer (generated)
+description: >
+  Only each performer's head and neck are regenerated as the pet's head, driven by the
+  performer's pose and face, so it turns, tilts and reacts with them; body, outfit and
+  background stay the original pixels. Needs a GPU engine (e.g. a DGX Spark or any CUDA
+  box with ~40 GB); on a Mac it renders a low-resolution draft.
+engine: animate
+recipe: wan_animate_replace
+mask: head
+refs: {ref1: head, ref2: full}
+design_prompt: >
+  Turn the pet in image 1 ({subject_desc}) into a front-facing portrait of its head and neck only,
+  looking straight at the camera, same fur colours and markings, natural ears, sharp studio
+  photo on a plain white background.
+design_size: [1024, 1024]
+prompt: "{scene}A dancer with the head of {subject_desc}, natural fur blending into the neck, the dog head turning and reacting with every move."
+negative: "human face, human skin on the head, mask, helmet, costume head, deformed snout, extra eyes, blurry, low quality"
+keywords: [얼굴 따라, 표정, 고개, head animate, moving head]
+defaults: {length_sec: 15, aspect: "9:16"}

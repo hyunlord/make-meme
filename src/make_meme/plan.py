@@ -32,6 +32,8 @@ class IdentityRef:
     ref_head_alt: str | None = None
     ref_full_alt: str | None = None
     advice: list[str] = field(default_factory=list)
+    # style name -> designed character reference (qwen_character), e.g. the pet standing upright
+    characters: dict[str, str] = field(default_factory=dict)
 
     def ref_for(self, kind: str) -> str | None:
         return {"full": self.ref_full, "head": self.ref_head, "head_alt": self.ref_head_alt,

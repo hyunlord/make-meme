@@ -1,0 +1,20 @@
+name: pet_idol_fur
+title: Furry pet dancer (generated)
+description: >
+  Each performer becomes the pet standing on two legs with a fur-covered body, no
+  clothing, dancing the exact choreography (pose-driven). A character reference is
+  designed first from the pet photo; check it before rendering. Needs a GPU engine
+  (~40 GB); a Mac renders a low-resolution draft.
+engine: animate
+recipe: wan_animate_replace
+mask: full_body
+refs: {ref1: full, ref2: head}
+design_prompt: >
+  Make the pet in image 1 ({subject_desc}) into a cute anthropomorphic character standing upright
+  on two legs like a dancer, the whole body covered in its real {coat} fur, no clothing,
+  paws instead of hands, a tail, full body from head to feet, keeping the dog's real face
+  and markings, plain white background.
+prompt: "{scene}{subject_desc_cap} standing on two legs and dancing, fur-covered body, no clothing, paws and a tail."
+negative: "clothes, shirt, pants, hoodie, costume, human skin, human hands, human face, extra limbs, deformed limbs, blurry"
+keywords: [털, 옷 없이, 털옷, fur, furry]
+defaults: {length_sec: 15, aspect: "9:16"}

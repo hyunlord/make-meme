@@ -118,6 +118,9 @@ async def render_plan(
     """Returns a silent mp4 (audio is muxed by the caller) covering the whole clip."""
     if style.engine == "paste":
         return await render_paste(client, plan, style, clip, work, profile=profile, report=report, cancelled=cancelled)
+    if style.engine == "animate":
+        return await render_animate(client, plan, style, clip, work, profile=profile, report=report,
+                                    cancelled=cancelled)
     recipe = get_recipe(style.recipe)
     work.mkdir(parents=True, exist_ok=True)
     info = await asyncio.to_thread(ingest.probe, clip)
@@ -234,6 +237,100 @@ async def render_paste(
         plan.warnings.extend(f"shot {shot.index + 1}: {w}" for w in warns)
         outputs.append(out)
         done += 1
+    final = work / "render_silent.mp4"
+    if len(outputs) == 1:
+        shutil.copyfile(outputs[0], final)
+    else:
+        await concat_videos(outputs, final, overlap=0)
+    return final
+
+
+async def ensure_characters(client: ComfyClient, plan: MemePlan, style: Style, work: Path, *, profile: str,
+                            report: Report | None = None) -> dict[str, Path]:
+    """performer id -> designed character reference for `style` (designing missing ones)."""
+    from make_meme.pipelines.design import design_character, performer_crop
+    from make_meme.pipelines.shots import main_shot
+
+    shots = [Shot.from_json(s) for s in plan.shots]
+    main = main_shot(shots) if shots else None
+    refs: dict[str, Path] = {}
+    for pid, ident_id in plan.cast.items():
+        ident = plan.identity(ident_id)
+        if ident is None:
+            continue
+        existing = ident.characters.get(style.name)
+        if existing and Path(existing).is_file():
+            refs[pid] = Path(existing)
+            continue
+        outfit = None
+        if style.design_outfit and main is not None and pid in main.performers and main.frame_path:
+            outfit = await asyncio.to_thread(performer_crop, Path(main.frame_path), _subject(main, main.performers[pid]),
+                                             work / f"outfit_{pid}.png")
+        if report is not None:
+            await report("designing", 0.0, f"designing {ident_id} as {style.title}")
+        path = await design_character(client, style, ident, work / "characters", profile=profile, seed=plan.seed,
+                                      outfit=outfit)
+        ident.characters[style.name] = str(path)
+        refs[pid] = path
+    return refs
+
+
+async def render_animate(
+    client: ComfyClient,
+    plan: MemePlan,
+    style: Style,
+    clip: Path,
+    work: Path,
+    *,
+    profile: str,
+    report: Report | None = None,
+    cancelled: asyncio.Event | None = None,
+) -> Path:
+    """The `animate` engine (pose-driven replacement) at the clip's resolution and frame rate."""
+    import hashlib
+    import json
+
+    from make_meme.pipelines.animate import animate_shot
+
+    work.mkdir(parents=True, exist_ok=True)
+    recipe = get_recipe(style.recipe)
+    info = await asyncio.to_thread(ingest.probe, clip)
+    gen_size = preset_size(recipe, plan.quality, (int(info["width"]), int(info["height"])), profile)
+    refs = await ensure_characters(client, plan, style, work, profile=profile, report=report)
+    shots = [Shot.from_json(s) for s in plan.shots]
+    busy = [s for s in shots if any(p in refs for p in s.performers)]
+    outputs: list[Path] = []
+    for shot in shots:
+        if cancelled is not None and cancelled.is_set():
+            raise asyncio.CancelledError
+        sdir = work / f"shot{shot.index:02d}"
+        sdir.mkdir(exist_ok=True)
+        piece = await asyncio.to_thread(cut_segment, clip, shot.start, shot.end, sdir / "input.mp4")
+        performers = {pid: _subject(shot, sid) for pid, sid in shot.performers.items() if pid in refs}
+        if not performers:
+            outputs.append(piece)
+            continue
+        # Reuse a finished shot when nothing that decides it has changed (resume after a failure).
+        key = hashlib.sha1(json.dumps([style.name, plan.quality, profile, plan.seed, gen_size, shot.start, shot.end,
+                                       sorted((p, str(refs[p]), plan.prompts.get(p, "")) for p in performers)],
+                                      default=str).encode()).hexdigest()
+        done_out, key_file = sdir / "out.mp4", sdir / "key.json"
+        if done_out.is_file() and key_file.is_file() and json.loads(key_file.read_text()).get("key") == key:
+            outputs.append(done_out)
+            continue
+        i = busy.index(shot)
+
+        async def shot_report(stage: str, frac: float, msg: str, _i=i, _idx=shot.index) -> None:
+            if report is not None:
+                await report(stage, (_i + frac) / len(busy), f"shot {_idx + 1}/{len(shots)} · {msg}")
+
+        out, warns = await animate_shot(client, recipe, piece, performers, refs, plan.prompts, sdir, profile=profile,
+                                        quality=plan.quality, gen_size=gen_size, seed=plan.seed,
+                                        negative=plan.negative_prompt, mask_mode=style.mask, report=shot_report,
+                                        cancelled=cancelled)
+        plan.warnings.extend(f"shot {shot.index + 1}: {w}" for w in warns)
+        key_file.write_text(json.dumps({"key": key}))
+        outputs.append(out)
     final = work / "render_silent.mp4"
     if len(outputs) == 1:
         shutil.copyfile(outputs[0], final)

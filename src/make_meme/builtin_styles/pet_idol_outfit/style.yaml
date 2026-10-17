@@ -1,0 +1,21 @@
+name: pet_idol_outfit
+title: Pet idol in the performer's outfit (generated)
+description: >
+  Each performer becomes the pet as a cute anthropomorphic character wearing the
+  performer's outfit, dancing the exact choreography (pose-driven). A character
+  reference is designed first from the pet photo and a crop of the performer; check it
+  before rendering. Needs a GPU engine (~40 GB); a Mac renders a low-resolution draft.
+engine: animate
+recipe: wan_animate_replace
+mask: full_body
+refs: {ref1: full, ref2: head}
+design_outfit: true
+design_prompt: >
+  Make the pet in image 1 ({subject_desc}) into a cute anthropomorphic character standing upright
+  on two legs like a K-pop dancer, wearing exactly the outfit worn by the person in image 2,
+  full body from head to feet, keeping the dog's real face, fur colours and markings, plain
+  white background.
+prompt: "{scene}{subject_desc_cap} as a cute anthropomorphic character in the outfit, dancing the choreography with an expressive dog face."
+negative: "human face, human skin, extra limbs, deformed limbs, mask, costume head, blurry, low quality"
+keywords: [옷 입은, 의상, 아이돌, outfit, idol, wearing]
+defaults: {length_sec: 15, aspect: "9:16"}
