@@ -276,6 +276,11 @@ async def ensure_characters(client: ComfyClient, plan: MemePlan, style: Style, w
     return refs
 
 
+# Bump when animate_shot's output changes for the same inputs (e.g. how masks are built), so
+# cached shots from an older pipeline aren't reused.
+ANIMATE_PIPELINE_VERSION = 2
+
+
 async def render_animate(
     client: ComfyClient,
     plan: MemePlan,
@@ -312,7 +317,8 @@ async def render_animate(
             outputs.append(piece)
             continue
         # Reuse a finished shot when nothing that decides it has changed (resume after a failure).
-        key = hashlib.sha1(json.dumps([style.name, plan.quality, profile, plan.seed, gen_size, shot.start, shot.end,
+        key = hashlib.sha1(json.dumps([ANIMATE_PIPELINE_VERSION, style.name, plan.quality, profile, plan.seed,
+                                       gen_size, shot.start, shot.end,
                                        sorted((p, str(refs[p]), plan.prompts.get(p, "")) for p in performers)],
                                       default=str).encode()).hexdigest()
         done_out, key_file = sdir / "out.mp4", sdir / "key.json"
