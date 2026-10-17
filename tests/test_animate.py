@@ -144,3 +144,14 @@ def test_performer_crop_whites_out_other_people(tmp_path):
         px = im.convert("RGB")
         assert px.getpixel((2, 2)) == (255, 255, 255)  # outside the performer: white
         assert px.getpixel((im.width // 2, im.height // 2)) == (200, 30, 30)
+
+
+def test_blockify_covers_whole_cells():
+    from make_meme.pipelines.animate import blockify
+
+    m = np.zeros((70, 70), bool)
+    m[33, 5] = True
+    b = blockify(m, 32)
+    assert b[32:64, 0:32].all() and b.sum() == 32 * 32
+    assert blockify(np.zeros((10, 10), bool)).sum() == 0
+    assert blockify(np.ones((70, 70), bool)).all()

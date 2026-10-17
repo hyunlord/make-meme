@@ -29,7 +29,8 @@ from make_meme.pipelines.swap import _perf
 from make_meme.pipelines.track import track_labels
 from make_meme.recipes.loader import Recipe
 
-GROW_PX = 6  # generation mask margin around the performer (at generation size)
+GROW_PX = 10  # generation mask margin around the performer (at generation size), as in Wan's preprocessing
+BLOCK_PX = 32  # the region handed to the model is blockified, like Wan-Animate's official preprocessing
 POSE_GROW_PX = 10  # how much of the performer's surroundings the pose video keeps
 
 
@@ -101,6 +102,18 @@ def grow(mask: np.ndarray, px: int) -> np.ndarray:
     return np.asarray(im) > 127
 
 
+def blockify(mask: np.ndarray, block: int = BLOCK_PX) -> np.ndarray:
+    """Every block x block cell touched by the mask becomes fully masked. With an exact
+    silhouette the model just fills the person-shaped hole (we got black human silhouettes
+    instead of dogs); a coarse region leaves it room to draw the character's own shape."""
+    h, w = mask.shape
+    gh, gw = -(-h // block), -(-w // block)
+    padded = np.zeros((gh * block, gw * block), bool)
+    padded[:h, :w] = mask
+    cells = padded.reshape(gh, block, gw, block).any(axis=(1, 3))
+    return np.repeat(np.repeat(cells, block, axis=0), block, axis=1)[:h, :w]
+
+
 def fill_masks(masks: list[np.ndarray | None]) -> list[np.ndarray]:
     """Frames where the performer wasn't found reuse the nearest found mask (short gaps:
     a missing mask would make the model leave the original person in that frame)."""
@@ -155,7 +168,7 @@ def build_inputs(frames: list[np.ndarray], masks: list[np.ndarray], out_dir: Pat
     for fr, m, pm in zip(frames, masks, pose_masks, strict=True):
         keep = grow(pm, POSE_GROW_PX)[..., None]
         pose.append(np.where(keep, fr, 127))
-        gm = grow(m, GROW_PX)
+        gm = blockify(grow(m, GROW_PX))
         bg.append(np.where(gm[..., None], 0, fr))
         mk.append(np.repeat((gm * 255).astype(np.uint8)[..., None], 3, axis=-1))
     return {
@@ -302,7 +315,8 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
         for i, f in enumerate(files):
             with Image.open(f) as im:
                 g = np.asarray(im.convert("RGB").resize((width, height), Image.Resampling.LANCZOS), np.float32)
-            m = resize_mask(grow(region[i], 2), width, height)
+            # paste back the whole region the model regenerated (blocks), feathered
+            m = resize_mask(blockify(grow(region_gen[i], GROW_PX)), width, height)
             a = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(3)),
                            np.float32)[..., None] / 255.0
             out[i] = out[i] * (1 - a) + g * a

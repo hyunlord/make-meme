@@ -205,4 +205,4 @@ def test_assign_bodies_and_inputs(tmp_path):
     media = build_inputs(frames, filled, tmp_path, 16)
     assert ingest.probe(media["bg_video"])["frame_count"] == 9
     bg = np.asarray(ingest.extract_frame(media["bg_video"], 0.0))
-    assert bg[50, 85].max() < 30 and bg[50, 55].min() > 170  # performer blanked, rest kept
+    assert bg[50, 85].max() < 30 and bg[50, 10].min() > 170  # performer (blockified) blanked, rest kept
