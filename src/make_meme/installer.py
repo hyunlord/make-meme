@@ -36,6 +36,22 @@ def _system_memory_mib() -> int:
         return 0
 
 
+def unified_memory_gpu() -> bool:
+    """An NVIDIA GPU that shares system RAM (DGX Spark / GB10, Jetson): nvidia-smi can't
+    report its memory."""
+    if sys.platform == "darwin" or not shutil.which("nvidia-smi"):
+        return False
+    try:
+        out = subprocess.run(["nvidia-smi", "--query-gpu=memory.total", "--format=csv,noheader,nounits"],
+                             capture_output=True, text=True, check=True).stdout.split()
+        int(out[0]) if out else 0
+    except subprocess.CalledProcessError:
+        return False
+    except ValueError:
+        return True
+    return False
+
+
 def detect_profile() -> str:
     if sys.platform == "darwin" and platform.machine() == "arm64":
         return "mps"
@@ -205,8 +221,18 @@ def install_recipe(comfy_dir: Path, recipe: Recipe, profile: str, *, skip_models
     return notes
 
 
-def comfy_launch_command(comfy_dir: Path, port: int = 8188, listen: str = "127.0.0.1") -> list[str]:
-    return [str(comfy_python(comfy_dir)), "main.py", "--listen", listen, "--port", str(port), "--disable-auto-launch"]
+# On unified memory every copy counts twice: mmap'd model files sit in the page cache next to
+# their GPU copy, and ComfyUI's RAM cache keeps CPU copies of models. With the defaults a
+# 720p Wan2.2-Animate run took a 128 GB DGX Spark down (unreachable until rebooted).
+UNIFIED_MEMORY_COMFY_ARGS = ["--disable-mmap", "--cache-none", "--reserve-vram", "20"]
+
+
+def comfy_launch_command(comfy_dir: Path, port: int = 8188, listen: str = "127.0.0.1",
+                         unified_memory: bool | None = None) -> list[str]:
+    cmd = [str(comfy_python(comfy_dir)), "main.py", "--listen", listen, "--port", str(port), "--disable-auto-launch"]
+    if unified_memory if unified_memory is not None else unified_memory_gpu():
+        cmd += UNIFIED_MEMORY_COMFY_ARGS
+    return cmd
 
 
 def comfy_env(profile: str) -> dict[str, str]:

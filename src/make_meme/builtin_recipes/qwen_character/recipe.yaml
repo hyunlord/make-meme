@@ -11,6 +11,7 @@ workflow: workflow.json
 
 constraints:
   timeout_sec: 1800
+  min_free_gb: 36       # checked before runs on unified-memory GPUs (DGX Spark)
 
 inputs:
   photo:  {type: image, targets: [["1", "image"]], description: "the pet (one photo, ideally the clearest full view)"}

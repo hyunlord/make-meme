@@ -139,3 +139,42 @@ async def test_run_recipe_drops_page_cache_only_on_unified_memory(monkeypatch, t
     for client in (spark, desktop):
         await runtime.run_recipe(client, recipe, media={"image": tmp_path / "x.png"}, values={}, profile="cuda")
     assert spark.dropped == 1 and desktop.dropped == 0
+
+
+async def test_heavy_runs_refuse_when_a_unified_memory_box_is_short_of_memory(tmp_path):
+    from make_meme.comfy.client import ComfyError
+    from make_meme.pipelines import runtime
+    from make_meme.recipes.loader import get_recipe
+
+    class Spark:
+        base_url = "fake://spark-low"
+
+        def __init__(self, avail_gb):
+            self.avail = avail_gb * 2**30
+            self.ran = False
+
+        async def system_stats(self):
+            return {"system": {"ram_total": 122 << 30}, "devices": [{"type": "cuda", "vram_total": 122 << 30}]}
+
+        async def drop_cache(self):
+            pass
+
+        async def stats(self):
+            return {"system_available_bytes": self.avail, "allocated_bytes": 0}
+
+        async def upload(self, path):
+            return path.name
+
+        async def run(self, workflow, **kw):
+            self.ran = True
+            return "ok"
+
+    recipe = get_recipe("qwen_character")  # min_free_gb: 36
+    low = Spark(20)
+    with pytest.raises(ComfyError, match="needs about 36 GB"):
+        await runtime.run_recipe(low, recipe, media={"photo": tmp_path / "p.png"}, values={}, profile="cuda")
+    assert not low.ran
+    ok = Spark(90)
+    ok.base_url = "fake://spark-ok"
+    await runtime.run_recipe(ok, recipe, media={"photo": tmp_path / "p.png"}, values={}, profile="cuda")
+    assert ok.ran

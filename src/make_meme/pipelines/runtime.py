@@ -59,6 +59,26 @@ async def unified_memory(client: ComfyClient) -> bool:
     return _unified_cache[client.base_url]
 
 
+async def _check_free_memory(client: ComfyClient, recipe: Recipe) -> None:
+    """Refuse a heavy run on a unified-memory GPU when the machine doesn't have the memory:
+    there, GPU memory can't be swapped, and running out froze a shared DGX Spark."""
+    need = float(recipe.constraints.get("min_free_gb", 0) or 0)
+    if not need or not hasattr(client, "stats"):
+        return
+    stats = await client.stats() or {}
+    avail = stats.get("system_available_bytes")
+    if avail is None:
+        return
+    # ComfyUI may already hold some of this recipe's models; count them as available.
+    held = float(stats.get("allocated_bytes") or 0)
+    if (avail + held) / 2**30 < need:
+        raise ComfyError(
+            f"{recipe.name} needs about {need:.0f} GB free on the GPU server, which has {avail / 2**30:.0f} GB "
+            f"available right now (other programs are using the rest). Free memory there and retry; on a "
+            f"unified-memory machine running out freezes the whole system."
+        )
+
+
 async def object_info(client: ComfyClient, refresh: bool = False) -> dict[str, Any]:
     if refresh or client.base_url not in _object_info_cache:
         _object_info_cache[client.base_url] = await client.object_info()
@@ -97,6 +117,7 @@ async def run_recipe(
         # Page-cached model files and GPU allocations share RAM there, and the driver doesn't
         # reclaim the cache: without this a 40 GB model failed to load with 110 GB "available".
         await client.drop_cache()
+        await _check_free_memory(client, recipe)
     workflow = recipe.build({**values, **uploaded}, profile=profile, preset=preset)
     timeout = recipe.constraints.get("timeout_sec")
     node = recipe.constraints.get("progress_node")

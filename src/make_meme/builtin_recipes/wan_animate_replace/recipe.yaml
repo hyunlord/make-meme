@@ -17,6 +17,7 @@ constraints:
   size_multiple: 16
   progress_node: "19"
   timeout_sec: 21600
+  min_free_gb: 50       # checked before runs on unified-memory GPUs (DGX Spark)
 
 custom_nodes:
   - name: ComfyUI-WanVideoWrapper

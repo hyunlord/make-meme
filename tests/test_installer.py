@@ -79,3 +79,22 @@ def test_companion_drop_cache_walks_model_files(tmp_path):
     result = drop_file_cache([tmp_path])
     if result["supported"]:
         assert result["files"] == 1 and result["bytes"] == 2 << 20
+
+
+def test_unified_memory_launch_flags(tmp_path):
+    cmd = installer.comfy_launch_command(tmp_path, port=8190, unified_memory=True)
+    assert "--disable-mmap" in cmd and "--cache-none" in cmd and cmd[cmd.index("--reserve-vram") + 1] == "20"
+    assert "--disable-mmap" not in installer.comfy_launch_command(tmp_path, unified_memory=False)
+
+
+def test_watchdog_reads_meminfo():
+    import importlib.util
+    from pathlib import Path
+
+    path = Path(__file__).resolve().parents[1] / "src/make_meme/comfy_nodes/make_meme_nodes/unified.py"
+    spec = importlib.util.spec_from_file_location("mm_unified", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    avail = mod.mem_available_bytes()
+    assert avail is None or avail > 0  # None off Linux
+    assert mod.start_memory_watchdog() is False  # no unified-memory CUDA GPU here
