@@ -136,6 +136,21 @@ def install_node_pack(comfy_dir: Path, repo: str, ref: str | None, pip: list[str
         _pip_install(comfy_dir, "-r", str(req))
 
 
+def drop_file_cache(path: Path) -> None:
+    """Evict a just-downloaded file from the page cache (Linux). On unified-memory GPUs the
+    cache competes with GPU allocations and isn't reclaimed by the CUDA driver."""
+    if not hasattr(os, "posix_fadvise"):
+        return
+    try:
+        fd = os.open(path, os.O_RDONLY)
+        try:
+            os.posix_fadvise(fd, 0, 0, os.POSIX_FADV_DONTNEED)
+        finally:
+            os.close(fd)
+    except OSError:
+        log.debug("could not drop page cache for %s", path, exc_info=True)
+
+
 def download_model(comfy_dir: Path, variant: ModelVariant) -> Path:
     dest = comfy_dir / "models" / variant.dir / variant.file
     if dest.exists() and dest.stat().st_size > 0:
@@ -169,6 +184,7 @@ def download_model(comfy_dir: Path, variant: ModelVariant) -> Path:
                     print(f"  {variant.file}: {pct}%", file=sys.stderr, flush=True)
                     last_pct = pct
     part.rename(dest)
+    drop_file_cache(dest)
     return dest
 
 

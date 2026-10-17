@@ -109,3 +109,33 @@ async def test_token_header_sent():
 
     await ComfyClient("http://x", token="s3cret", transport=httpx.MockTransport(handler)).system_stats()
     assert seen["auth"] == "Bearer s3cret"
+
+
+async def test_run_recipe_drops_page_cache_only_on_unified_memory(monkeypatch, tmp_path):
+    from make_meme.pipelines import runtime
+
+    class Fake:
+        def __init__(self, vram, ram):
+            self.base_url = f"fake://{vram}-{ram}"
+            self.dropped = 0
+            self._stats = {"system": {"ram_total": ram}, "devices": [{"type": "cuda", "vram_total": vram}]}
+
+        async def system_stats(self):
+            return self._stats
+
+        async def drop_cache(self):
+            self.dropped += 1
+
+        async def upload(self, path):
+            return path.name
+
+        async def run(self, workflow, **kw):
+            return "ok"
+
+    from make_meme.recipes.loader import get_recipe
+
+    recipe = get_recipe("sam3_detect")
+    spark, desktop = Fake(122 << 30, 122 << 30), Fake(24 << 30, 64 << 30)
+    for client in (spark, desktop):
+        await runtime.run_recipe(client, recipe, media={"image": tmp_path / "x.png"}, values={}, profile="cuda")
+    assert spark.dropped == 1 and desktop.dropped == 0

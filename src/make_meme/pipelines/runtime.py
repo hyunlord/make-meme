@@ -42,6 +42,23 @@ async def hardware_profile(client: ComfyClient) -> str:
     return kind if kind == "mps" else "cpu"
 
 
+_unified_cache: dict[str, bool] = {}
+
+
+async def unified_memory(client: ComfyClient) -> bool:
+    """True for GPUs that share system RAM (DGX Spark / GB10: ComfyUI reports VRAM == RAM)."""
+    if client.base_url not in _unified_cache:
+        try:
+            stats = await client.system_stats()
+            device = (stats.get("devices") or [{}])[0]
+            ram = float((stats.get("system") or {}).get("ram_total") or 0)
+            vram = float(device.get("vram_total") or 0)
+            _unified_cache[client.base_url] = device.get("type") == "cuda" and ram > 0 and abs(vram - ram) / ram < 0.05
+        except (ComfyError, AttributeError, TypeError, ValueError):
+            _unified_cache[client.base_url] = False
+    return _unified_cache[client.base_url]
+
+
 async def object_info(client: ComfyClient, refresh: bool = False) -> dict[str, Any]:
     if refresh or client.base_url not in _object_info_cache:
         _object_info_cache[client.base_url] = await client.object_info()
@@ -76,6 +93,10 @@ async def run_recipe(
 ) -> ExecutionResult:
     """Upload media inputs, build the workflow, run it and return the result."""
     uploaded = {name: await client.upload(path) for name, path in media.items()}
+    if hasattr(client, "drop_cache") and await unified_memory(client):
+        # Page-cached model files and GPU allocations share RAM there, and the driver doesn't
+        # reclaim the cache: without this a 40 GB model failed to load with 110 GB "available".
+        await client.drop_cache()
     workflow = recipe.build({**values, **uploaded}, profile=profile, preset=preset)
     timeout = recipe.constraints.get("timeout_sec")
     node = recipe.constraints.get("progress_node")

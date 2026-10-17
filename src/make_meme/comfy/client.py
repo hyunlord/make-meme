@@ -97,6 +97,20 @@ class ComfyClient:
         return r.json() if r.status_code == 200 else {}
 
     # ---- make-meme companion pack extras -----------------------------------
+    async def drop_cache(self) -> dict[str, Any] | None:
+        """POST /make_meme/drop_cache (companion pack): evict model files from the page cache
+        before a large load on unified-memory GPUs. Best-effort; None if unavailable."""
+        try:
+            r = await self._request("POST", "/make_meme/drop_cache", timeout=120.0)
+        except ComfyError:
+            return None
+        if r.status_code != 200:
+            return None
+        try:
+            return r.json()
+        except ValueError:
+            return None
+
     async def stats(self) -> dict[str, Any] | None:
         """GET /make_meme/stats (the companion node pack's route). None if the pack isn't
         installed/loaded (404) or the request fails for any reason -- this is used for

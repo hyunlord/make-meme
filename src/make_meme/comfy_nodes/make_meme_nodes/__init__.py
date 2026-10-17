@@ -15,6 +15,8 @@ Installed into ComfyUI/custom_nodes by `make-meme install`. It carries:
   (see embed.py).
 * MakeMemeTrackLabels -- SAM 3 video tracks as per-frame label images that keep
   object identities (see track_labels.py).
+* POST /make_meme/drop_cache -- evicts model files from the page cache, which
+  unified-memory GPUs (DGX Spark) need before large loads (see cache.py).
 
 Patches are applied whether WanVideoWrapper is imported before or after this pack
 (ComfyUI's custom node load order is filesystem-dependent).
@@ -27,6 +29,7 @@ import importlib.machinery
 import logging
 import sys
 
+from .cache import register_route as register_cache_route
 from .embed import MakeMemeImageEmbed
 from .mocha_rope import rope_apply_mocha_real, rope_params_mocha_real
 from .sink import MakeMemeSink
@@ -85,9 +88,10 @@ _patch_loaded()
 if not any(isinstance(f, _MochaFinder) for f in sys.meta_path):
     sys.meta_path.insert(0, _MochaFinder())
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 register_route()  # GET /make_meme/stats; no-op outside an actual ComfyUI process
+register_cache_route()  # POST /make_meme/drop_cache
 
 
 class MakeMemeInfo:
