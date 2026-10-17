@@ -29,7 +29,7 @@
     "positive_prompt": "", "negative_prompt": "", "quantization": "disabled", "use_disk_cache": true, "device": "gpu"}},
   "19": {"class_type": "WanVideoSampler", "inputs": {"model": ["17", 0], "image_embeds": ["15", 0], "steps": 6, "cfg": 1.0,
     "shift": 5.0, "seed": 42, "force_offload": true, "scheduler": "dpm++_sde", "riflex_freq_index": 0,
-    "text_embeds": ["18", 0]}},
+    "rope_function": "comfy", "text_embeds": ["18", 0]}},
   "20": {"class_type": "WanVideoDecode", "inputs": {"vae": ["14", 0], "samples": ["19", 0], "enable_vae_tiling": true,
     "tile_x": 272, "tile_y": 272, "tile_stride_x": 144, "tile_stride_y": 128}},
   "21": {"class_type": "SaveImage", "inputs": {"images": ["20", 0], "filename_prefix": "make_meme/animate"}}
