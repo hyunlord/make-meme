@@ -188,6 +188,56 @@ def padded_ref(photo: Path, width: int, height: int, dest: Path) -> Path:
     return dest
 
 
+WINDOW = 77  # frames per generation: longer clips switch Wan2.2-Animate to its looping mode, where
+#              the background/mask conditioning didn't hold (dogs came back as black silhouettes)
+OVERLAP = 5  # frames shared by consecutive windows, crossfaded
+
+
+def window_ranges(n: int, window: int = WINDOW, overlap: int = OVERLAP) -> list[tuple[int, int]]:
+    """[a, b) frame ranges covering n frames, each at most `window` long, consecutive ones
+    sharing `overlap` frames."""
+    if n <= window:
+        return [(0, n)]
+    out, a = [], 0
+    while True:
+        b = min(n, a + window)
+        out.append((a, b))
+        if b == n:
+            return out
+        a = b - overlap
+
+
+async def _generate_window(client, recipe, frames, region, body, ref, wdir, rate, *, profile, quality, seed, prompt,
+                           negative, qc, label, warnings, progress, cancelled) -> list[np.ndarray]:
+    """One model run over <= WINDOW frames; returns generated frames (generation size, float)."""
+    media = await asyncio.to_thread(build_inputs, frames, region, wdir, rate, body)
+    media["ref"] = ref
+    n = padded_length(len(frames))
+    files: list[Path] = []
+    for attempt in range(2 if qc else 1):
+        values = {"width": frames[0].shape[1], "height": frames[0].shape[0], "num_frames": n, "seed": seed + attempt,
+                  "prompt": prompt, "negative_prompt": negative}
+        meta = {"profile": profile, "recipe": recipe.name, "width": values["width"], "height": values["height"],
+                "frames": n, "steps": int(recipe.preset_values(quality, profile).get("steps", 0))}
+        async with _perf(client, f"{label} attempt {attempt + 1}", meta):  # feeds render estimates
+            result = await run_recipe(client, recipe, media=media, values=values, profile=profile, preset=quality,
+                                      on_progress=progress, cancelled=cancelled)
+        gen_dir = wdir / f"frames{attempt}"
+        gen_dir.mkdir(parents=True, exist_ok=True)
+        files = [await client.download(f, gen_dir / f"{i:05d}.png")
+                 for i, f in enumerate(node_files(result, recipe.outputs["frames"])[: len(frames)])]
+        if not qc or await looks_replaced(client, files, region, wdir, profile=profile):
+            break
+        warnings.append(f"{label}: the original person still showed; retried with another seed")
+    if len(files) < len(frames):
+        warnings.append(f"{label}: model returned {len(files)}/{len(frames)} frames")
+    out = []
+    for f in files:
+        with Image.open(f) as im:
+            out.append(np.asarray(im.convert("RGB"), np.float32))
+    return out
+
+
 def head_and_neck(head: np.ndarray, body: np.ndarray, neck: float = 0.45) -> np.ndarray:
     """The head mask plus a neck strip below it (clipped to the body), so a generated head
     joins the original shoulders instead of floating."""
@@ -286,40 +336,39 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
         region_gen = [resize_mask(m, gw, gh) for m in region]
         body_gen = [resize_mask(m, gw, gh) for m in body]
         pdir = work / pid
-        media = await asyncio.to_thread(build_inputs, gen_frames, region_gen, pdir, rate, body_gen)
-        media["ref"] = await asyncio.to_thread(padded_ref, refs[pid], gw, gh, pdir / "ref.png")
-        n = padded_length(len(frames))
+        pdir.mkdir(parents=True, exist_ok=True)
+        ref = await asyncio.to_thread(padded_ref, refs[pid], gw, gh, pdir / "ref.png")
+        gen: list[np.ndarray | None] = [None] * len(frames)
+        windows = window_ranges(len(frames))
+        n_windows = len(windows)
+        for w_i, (a, b) in enumerate(windows):
 
-        async def progress(stage, frac, msg, _i=idx, _n=n_todo):
-            if report is not None and frac >= 0:
-                await report("generating", ((_i - 1) + frac) / _n, f"performer {_i}/{_n}: {msg}")
+            async def progress(stage, frac, msg, _i=idx, _n=n_todo, _w=w_i, _nw=n_windows):
+                if report is not None and frac >= 0:
+                    await report("generating", ((_i - 1) + (_w + frac) / _nw) / _n,
+                                 f"performer {_i}/{_n}, part {_w + 1}/{_nw}: {msg}")
 
-        files: list[Path] = []
-        for attempt in range(2 if qc else 1):
-            values = {"width": gw, "height": gh, "num_frames": n, "seed": seed + attempt,
-                      "prompt": prompts.get(pid, ""), "negative_prompt": negative}
-            meta = {"profile": profile, "recipe": recipe.name, "width": gw, "height": gh, "frames": n,
-                    "mask_mode": mask_mode, "steps": int(recipe.preset_values(quality, profile).get("steps", 0))}
-            async with _perf(client, f"{pid} attempt {attempt + 1}", meta):  # feeds render estimates
-                result = await run_recipe(client, recipe, media=media, values=values, profile=profile,
-                                          preset=quality, on_progress=progress, cancelled=cancelled)
-            gen_dir = pdir / f"frames{attempt}"
-            gen_dir.mkdir(exist_ok=True)
-            files = [await client.download(f, gen_dir / f"{i:05d}.png")
-                     for i, f in enumerate(node_files(result, recipe.outputs["frames"])[: len(frames)])]
-            if not qc or mask_mode == "head" or await looks_replaced(client, files, region_gen, pdir, profile=profile):
-                break
-            warnings.append(f"{pid}: the original person still showed; retried with another seed")
-        if len(files) < len(frames):
-            warnings.append(f"{pid}: model returned {len(files)}/{len(frames)} frames")
-        for i, f in enumerate(files):
-            with Image.open(f) as im:
-                g = np.asarray(im.convert("RGB").resize((width, height), Image.Resampling.LANCZOS), np.float32)
+            part = await _generate_window(
+                client, recipe, gen_frames[a:b], region_gen[a:b], body_gen[a:b], ref, pdir / f"w{w_i}", rate,
+                profile=profile, quality=quality, seed=seed, prompt=prompts.get(pid, ""), negative=negative,
+                qc=qc and mask_mode != "head", label=pid, warnings=warnings, progress=progress, cancelled=cancelled)
+            for j, g in enumerate(part):
+                i = a + j
+                if gen[i] is None:
+                    gen[i] = g
+                else:  # overlap with the previous window: crossfade so the seam doesn't jump
+                    t = (j + 1) / (OVERLAP + 1)
+                    gen[i] = gen[i] * (1 - t) + g * t
+        for i, g in enumerate(gen):
+            if g is None:
+                continue
+            g_full = np.asarray(Image.fromarray(np.clip(g + 0.5, 0, 255).astype(np.uint8)).resize(
+                (width, height), Image.Resampling.LANCZOS), np.float32)
             # paste back the whole region the model regenerated (blocks), feathered
             m = resize_mask(blockify(grow(region_gen[i], GROW_PX)), width, height)
-            a = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(3)),
-                           np.float32)[..., None] / 255.0
-            out[i] = out[i] * (1 - a) + g * a
+            alpha = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(3)),
+                               np.float32)[..., None] / 255.0
+            out[i] = out[i] * (1 - alpha) + g_full * alpha
     dest = work / "out.mp4"
     await asyncio.to_thread(_write_video, [np.clip(f + 0.5, 0, 255).astype(np.uint8) for f in out], dest, rate)
     return dest, warnings

@@ -278,7 +278,7 @@ async def ensure_characters(client: ComfyClient, plan: MemePlan, style: Style, w
 
 # Bump when animate_shot's output changes for the same inputs (e.g. how masks are built), so
 # cached shots from an older pipeline aren't reused.
-ANIMATE_PIPELINE_VERSION = 2
+ANIMATE_PIPELINE_VERSION = 3
 
 
 async def render_animate(

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import itertools
 import shutil
 import subprocess
 
@@ -155,3 +156,13 @@ def test_blockify_covers_whole_cells():
     assert b[32:64, 0:32].all() and b.sum() == 32 * 32
     assert blockify(np.zeros((10, 10), bool)).sum() == 0
     assert blockify(np.ones((70, 70), bool)).all()
+
+
+def test_window_ranges_stay_out_of_the_looping_mode():
+    from make_meme.pipelines.animate import OVERLAP, WINDOW, window_ranges
+
+    assert window_ranges(73) == [(0, 73)]
+    wins = window_ranges(199)
+    assert all(b - a <= WINDOW for a, b in wins)
+    assert wins[0][0] == 0 and wins[-1][1] == 199
+    assert all(prev[1] - nxt[0] == OVERLAP for prev, nxt in itertools.pairwise(wins))
