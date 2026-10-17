@@ -163,12 +163,25 @@ def _estimate(plan: MemePlan, shots: list[Shot], profile: str, width: int, heigh
     return {"seconds": round(total), "minutes": round(total / 60, 1), "basis": basis, "profile": profile}
 
 
+PASTE_SEC_PER_FRAME = 0.3  # SAM 3 video tracking per tracked frame (rough; Mac M4 Max)
+
+
 def _refresh_estimate(plan: MemePlan, style) -> None:
-    """Re-estimate at render time: perf.jsonl may have gained samples since planning, and
-    preview/quality/cast overrides change the work."""
+    """(Re-)estimate for `style`: at plan time, and again at render time since perf.jsonl
+    may have gained samples and preview/quality/cast overrides change the work."""
     est = plan.estimate or {}
-    profile, size = est.get("profile"), est.get("output_size")
-    if not profile or not size:
+    profile = est.get("profile")
+    clip_size = est.get("clip_size") or est.get("output_size")
+    if not profile or not clip_size:
+        return
+    clip_size = (int(clip_size[0]), int(clip_size[1]))
+    shots = [Shot.from_json(s) for s in plan.shots]
+    base = {"profile": profile, "clip_size": list(clip_size), "quality": plan.quality, "engine": style.engine}
+    if style.engine == "paste":
+        frames = sum(round(s.duration * 24) * sum(1 for p in plan.cast if p in s.performers) for s in shots)
+        seconds = 15 + frames * PASTE_SEC_PER_FRAME
+        plan.estimate = {**base, "seconds": round(seconds), "minutes": round(seconds / 60, 1),
+                         "basis": "default-guess", "output_size": list(clip_size)}
         return
     try:
         recipe = get_recipe(style.recipe)
@@ -176,13 +189,9 @@ def _refresh_estimate(plan: MemePlan, style) -> None:
         return
     from make_meme.pipelines.swap import preset_size
 
-    if plan.quality != est.get("quality", plan.quality):
-        w, h = preset_size(recipe, plan.quality, (int(size[0]), int(size[1])), profile)
-    else:
-        w, h = int(size[0]), int(size[1])
+    w, h = preset_size(recipe, plan.quality, clip_size, profile)
     steps = int(recipe.preset_values(plan.quality, profile).get("steps", 4))
-    plan.estimate = {**_estimate(plan, [Shot.from_json(s) for s in plan.shots], profile, w, h, steps),
-                     "output_size": [w, h], "quality": plan.quality}
+    plan.estimate = {**base, **_estimate(plan, shots, profile, w, h, steps), "output_size": [w, h]}
 
 
 @mcp.tool(structured_output=False)
@@ -318,12 +327,6 @@ async def plan_meme(
     prompts = {pid: st.render_prompt(subject_desc=plan_ident.description, coat=plan_ident.coat, scene=scene or "")
                for pid, iid in final_cast.items() if (plan_ident := next((i for i in identities if i.id == iid), None))}
 
-    recipe = get_recipe(st.recipe)
-    from make_meme.pipelines.swap import preset_size
-
-    w, h = preset_size(recipe, quality, (int(clip_asset.meta.get("width", 1)), int(clip_asset.meta.get("height", 1))),
-                       profile)
-    steps = int(recipe.preset_values(quality, profile).get("steps", 4))
     plan = MemePlan(
         id=new_plan_id(), intent=intent, source_asset=src_asset.id, source_title=src_asset.origin.get("title"),
         segment=segment, clip_asset=clip_asset.id, aspect=aspect, style=style_name, style_candidates=candidates,
@@ -333,9 +336,9 @@ async def plan_meme(
         identities=identities, cast=final_cast, prompts=prompts, negative_prompt=st.negative, scene=scene or "",
         warnings=warnings,
     )
-    plan.estimate = _estimate(plan, shots, profile, w, h, steps)
-    plan.estimate["output_size"] = [w, h]
-    plan.estimate["quality"] = quality
+    clip_size = (int(clip_asset.meta.get("width", 1)), int(clip_asset.meta.get("height", 1)))
+    plan.estimate = {"profile": profile, "clip_size": list(clip_size)}
+    _refresh_estimate(plan, st)
     save_plan(plan)
     preview = await asyncio.to_thread(_preview, plan, shots, identities)
     payload = plan.to_json()
@@ -407,14 +410,15 @@ async def render_meme(
 
         async with comfy_session() as client:
             profile = await hardware_profile(client)
-            try:
-                from make_meme.perf import precache_prompts
+            if st.engine == "swap":  # paste styles have no prompts to encode
+                try:
+                    from make_meme.perf import precache_prompts
 
-                ctx.update(stage="preparing", message="encoding prompts once (saves memory during sampling)")
-                await precache_prompts(client, [(p, plan.negative_prompt) for p in plan.prompts.values()],
-                                       profile=profile)
-            except ImportError:
-                pass
+                    ctx.update(stage="preparing", message="encoding prompts once (saves memory during sampling)")
+                    await precache_prompts(client, [(p, plan.negative_prompt) for p in plan.prompts.values()],
+                                           profile=profile)
+                except ImportError:
+                    pass
             silent = await render_plan(client, plan, st, clip_asset.path, work / "work", profile=profile,
                                        report=report, cancelled=ctx.cancelled)
         out = settings.outputs_dir / f"{ctx.job_id}.mp4"

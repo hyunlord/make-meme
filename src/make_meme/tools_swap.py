@@ -450,7 +450,7 @@ async def _recipes_check() -> dict[str, Any]:
             profile = await hardware_profile(client)
             info = await object_info(client, refresh=True)
             return {"recipes": [check_recipe(r, info, profile).summary() for r in recipes_of_kind("swap")
-                                + recipes_of_kind("detect")], "profile": profile}
+                                + recipes_of_kind("detect") + recipes_of_kind("track")], "profile": profile}
     except ComfyError as e:
         return {"recipes": "skipped", "reason": str(e)}
 

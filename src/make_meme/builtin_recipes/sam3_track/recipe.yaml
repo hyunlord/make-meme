@@ -1,0 +1,31 @@
+name: sam3_track
+kind: track
+title: SAM 3 video object tracking
+description: >
+  Follows one object through a video from a first-frame mask and returns one mask per
+  frame (white = the object). Used to keep a pasted head or a replacement locked onto a
+  performer as they move. Uses SAM 3.1 from ComfyUI core (no custom nodes needed).
+workflow: workflow.json
+
+constraints:
+  front: true
+  timeout_sec: 900
+
+inputs:
+  video: {type: video, targets: [["1", "file"]], description: "short shot, ideally downscaled (e.g. 540 px wide)"}
+  mask:  {type: mask, targets: [["4", "image"]], description: "first-frame mask of the object, same size as the video"}
+
+models:
+  sam3:
+    targets: [["3", "ckpt_name"]]
+    profiles:
+      default:
+        file: sam3.1_multiplex_fp16.safetensors
+        dir: checkpoints
+        repo: Comfy-Org/sam3.1
+        path: checkpoints/sam3.1_multiplex_fp16.safetensors
+        size_gb: 1.75
+        license: SAM License (Meta)
+
+outputs:
+  masks: "8"

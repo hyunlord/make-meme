@@ -1,8 +1,9 @@
 """Style packs: how a kind of meme is made, as data.
 
-A style picks the generation recipe, which region of each on-screen subject is replaced
-(`mask`: head | full_body), which kind of reference crops feed the model, and prompt
-templates. New meme looks are added by dropping a `style.yaml` into builtin_styles/ or a
+A style picks the engine (`swap`: a generation recipe replaces the subject; `paste`: a
+tracked cut-out of the pet's head is pasted on, no generation), which region of each
+on-screen subject is replaced (`mask`: head | full_body), which kind of reference crops
+are used, and prompt templates. New meme looks are added by dropping a `style.yaml` into builtin_styles/ or a
 directory listed in $MAKE_MEME_STYLES — no code changes.
 """
 
@@ -21,6 +22,7 @@ import yaml
 
 logger = logging.getLogger(__name__)
 
+ENGINES = ("swap", "paste")
 MASK_MODES = ("head", "full_body")
 REF_KINDS = ("full", "head", "head_alt", "full_alt")
 
@@ -41,6 +43,8 @@ class Style:
     negative: str
     keywords: list[str] = field(default_factory=list)
     defaults: dict[str, Any] = field(default_factory=dict)
+    engine: str = "swap"
+    params: dict[str, Any] = field(default_factory=dict)  # engine-specific knobs (e.g. paste scale)
 
     def render_prompt(self, *, subject_desc: str, coat: str = "", scene: str = "") -> str:
         values = _Defaults(subject_desc=subject_desc, subject_desc_cap=_cap(subject_desc), coat=coat or "its",
@@ -48,8 +52,8 @@ class Style:
         return re.sub(r"\s+", " ", self.prompt.format_map(values)).strip()
 
     def summary(self) -> dict[str, Any]:
-        return {"name": self.name, "title": self.title, "description": self.description, "mask": self.mask,
-                "defaults": self.defaults}
+        return {"name": self.name, "title": self.title, "description": self.description, "engine": self.engine,
+                "mask": self.mask, "defaults": self.defaults}
 
 
 class _Defaults(dict):
@@ -69,12 +73,16 @@ def load_style(path: Path) -> Style:
     try:
         style = Style(
             name=m["name"], title=m.get("title", m["name"]), description=str(m.get("description", "")).strip(),
-            recipe=m["recipe"], mask=m.get("mask", "full_body"), refs=dict(m.get("refs") or {"ref1": "full"}),
+            recipe=m["recipe"] if m.get("engine", "swap") == "swap" else str(m.get("recipe") or ""),
+            mask=m.get("mask", "full_body"), refs=dict(m.get("refs") or {"ref1": "full"}),
             prompt=m.get("prompt", "{subject_desc}"), negative=m.get("negative", ""),
             keywords=[str(k).lower() for k in m.get("keywords") or []], defaults=dict(m.get("defaults") or {}),
+            engine=str(m.get("engine", "swap")), params=dict(m.get("params") or {}),
         )
     except KeyError as e:
         raise StyleError(f"Style {path} is missing {e}") from e
+    if style.engine not in ENGINES:
+        raise StyleError(f"Style {style.name}: engine must be one of {ENGINES}")
     if style.mask not in MASK_MODES:
         raise StyleError(f"Style {style.name}: mask must be one of {MASK_MODES}")
     bad = [k for k in style.refs.values() if k not in REF_KINDS]

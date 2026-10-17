@@ -1,9 +1,10 @@
 """Execute a MemePlan: shot by shot, performer by performer, into ONE video.
 
-Each shot is cut from the plan's clip, the performers cast in that shot are swapped one
-after another (pipelines.swap.run_swap, chunked for long shots), shots without cast
-performers are passed through at the same size/fps, and everything is concatenated with
-the clip's original audio.
+Each shot is cut from the plan's clip and handled by the style's engine: `swap` styles
+replace the performers cast in that shot with a generation recipe (pipelines.swap.run_swap,
+chunked for long shots); `paste` styles paste each cast performer's tracked pet-head
+cut-out (pipelines.paste). Shots without cast performers are passed through, and the
+shots are concatenated into one silent video (the caller adds the clip's audio).
 """
 
 from __future__ import annotations
@@ -16,11 +17,13 @@ from collections.abc import Awaitable, Callable
 from pathlib import Path
 
 import numpy as np
+from PIL import Image
 
 from make_meme import ingest
 from make_meme.comfy.client import ComfyClient
 from make_meme.pipelines.assign import hist_dist
 from make_meme.pipelines.detect import Subject
+from make_meme.pipelines.paste import head_cutout, paste_shot
 from make_meme.pipelines.reframe import reframe
 from make_meme.pipelines.shots import Shot
 from make_meme.pipelines.swap import SwapMapping, SwapPlan, preset_size, run_swap
@@ -107,6 +110,8 @@ async def render_plan(
     cancelled: asyncio.Event | None = None,
 ) -> Path:
     """Returns a silent mp4 (audio is muxed by the caller) covering the whole clip."""
+    if style.engine == "paste":
+        return await render_paste(client, plan, style, clip, work, profile=profile, report=report, cancelled=cancelled)
     recipe = get_recipe(style.recipe)
     work.mkdir(parents=True, exist_ok=True)
     info = await asyncio.to_thread(ingest.probe, clip)
@@ -155,6 +160,70 @@ async def render_plan(
         )
         outputs.append(await run_swap(client, swap_plan, report=shot_report, cancelled=cancelled))
         done += n_here
+    final = work / "render_silent.mp4"
+    if len(outputs) == 1:
+        shutil.copyfile(outputs[0], final)
+    else:
+        await concat_videos(outputs, final, overlap=0)
+    return final
+
+
+async def render_paste(
+    client: ComfyClient,
+    plan: MemePlan,
+    style: Style,
+    clip: Path,
+    work: Path,
+    *,
+    profile: str,
+    report: Report | None = None,
+    cancelled: asyncio.Event | None = None,
+) -> Path:
+    """The `paste` engine: original resolution and frame rate, no generation."""
+    work.mkdir(parents=True, exist_ok=True)
+    shots = [Shot.from_json(s) for s in plan.shots]
+    scale = float(style.params.get("scale", 1.6))
+    lift = float(style.params.get("lift", 0.12))
+    hold = float(style.params.get("hold_sec", 0.25))
+
+    cutouts = {}
+    for pid, ident_id in plan.cast.items():
+        ident = plan.identity(ident_id)
+        if ident is None:
+            continue
+        cached = work / f"cutout_{ident_id}.png"
+        if cached.is_file():
+            cutouts[pid] = Image.open(cached).convert("RGBA")
+            continue
+        for kind in (style.refs.get("ref1", "head"), style.refs.get("ref2", "full")):
+            ref = ident.ref_for(kind)
+            if ref and (cut := await head_cutout(client, Path(ref), profile=profile)) is not None:
+                cut.save(cached)
+                cutouts[pid] = cut
+                break
+        else:
+            plan.warnings.append(f"identity {ident_id}: could not cut a head out of its photos; skipped")
+
+    total = max(1, sum(1 for s in shots if any(p in cutouts for p in s.performers)))
+    done = 0
+    outputs: list[Path] = []
+    for shot in shots:
+        if cancelled is not None and cancelled.is_set():
+            raise asyncio.CancelledError
+        sdir = work / f"shot{shot.index:02d}"
+        sdir.mkdir(exist_ok=True)
+        piece = await asyncio.to_thread(cut_segment, clip, shot.start, shot.end, sdir / "input.mp4")
+        performers = {pid: _subject(shot, sid) for pid, sid in shot.performers.items() if pid in cutouts}
+        if not performers:
+            outputs.append(piece)
+            continue
+        if report is not None:
+            await report("tracking", done / total, f"shot {shot.index + 1}/{len(shots)} · tracking heads")
+        out, warns = await paste_shot(client, piece, performers, cutouts, sdir, profile=profile, scale=scale,
+                                      lift=lift, hold_sec=hold, cancelled=cancelled)
+        plan.warnings.extend(f"shot {shot.index + 1}: {w}" for w in warns)
+        outputs.append(out)
+        done += 1
     final = work / "render_silent.mp4"
     if len(outputs) == 1:
         shutil.copyfile(outputs[0], final)

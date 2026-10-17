@@ -1,0 +1,20 @@
+name: pet_head_paste
+title: Pasted pet heads (classic edit)
+description: >
+  The pet's head, cut out from its photo, is pasted onto each performer's head and
+  follows it frame by frame (position, size, tilt). No generation: the original video,
+  outfits and choreography stay untouched at full resolution, and it takes minutes even
+  on a laptop. The deliberately cheap "photoshopped" look of classic meme edits.
+engine: paste
+mask: head
+refs:
+  ref1: head               # head close-up to cut the pet's head from
+  ref2: full               # fallback if no head close-up exists
+params:
+  scale: 1.6               # pasted head height / performer head height
+  lift: 0.12               # move the pasted head up by this fraction of its height
+  hold_sec: 0.25           # keep the last position this long when the head is briefly lost
+keywords: [paste, pasted, cutout, edit, 붙이기, 붙여, 오려, 합성짤, 얼굴만, 짤]
+defaults:
+  length_sec: 15
+  aspect: "9:16"
