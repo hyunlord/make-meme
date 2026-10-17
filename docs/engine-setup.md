@@ -35,6 +35,30 @@ which Metal doesn't support, and recipes use ComfyUI's split attention on MPS. I
 extremely slow, check memory pressure (Activity Monitor): heavy swapping means the model doesn't
 fit next to your other apps.
 
+## Option C — your own GPU server (DGX Spark, any Linux + NVIDIA box)
+
+The generated styles (`pet_head_animate`, `pet_idol_outfit`, `pet_idol_fur`) need about 40 GB at
+720p (Wan2.2-Animate 14B fp8 + text encoder + activations); character design (Qwen-Image-Edit)
+peaks around 35 GB, loaded one after the other. A laptop can drive a GPU server over your LAN or
+Tailscale:
+
+```bash
+# on the GPU server
+git clone https://github.com/<you>/make-meme && cd make-meme && uv sync
+COMFY_DIR=~/make-meme/ComfyUI uv run make-meme install            # nodes + models for every recipe
+COMFY_DIR=~/make-meme/ComfyUI uv run make-meme comfy start --listen 127.0.0.1 --port 8190 &
+uv run make-meme comfy proxy --upstream http://127.0.0.1:8190 --listen <server LAN/Tailscale IP> --port 8191
+#   prints a COMFY_TOKEN (or pass --token)
+
+# on your laptop
+claude mcp add make-meme -e COMFY_URL=http://<server IP>:8191 -e COMFY_TOKEN=<token> -- uvx make-meme-mcp
+```
+
+Unified-memory boards (DGX Spark / GB10) report no VRAM through `nvidia-smi`; the installer uses
+system RAM instead and picks the `cuda` profile. On Linux aarch64 it installs CUDA torch from
+PyTorch's index (`MAKE_MEME_TORCH_INDEX` overrides it). Bind the proxy to a private address only;
+ComfyUI itself has no login.
+
 ## Option B — free cloud GPU (Kaggle / Colab)
 
 Open [`notebooks/remote_comfyui.ipynb`](../notebooks/remote_comfyui.ipynb) on Kaggle (GPU T4, Internet on)
@@ -57,7 +81,12 @@ Models are downloaded by you from their original hosts; make-meme does not redis
 |---|---|---|
 | MoCha (Orange-3DV-Team; GGUF by vantagewithai, fp8 by Kijai) | `mocha_swap` | AGPL-3.0 (weights) |
 | Wan 2.1 VAE, umt5-xxl text encoder, lightx2v distill LoRA | `mocha_swap` | Apache-2.0 |
-| SAM 3.1 (Meta, via Comfy-Org) | `sam3_detect` | SAM License |
+| SAM 3.1 (Meta, via Comfy-Org) | `sam3_detect`, `sam3_track` | SAM License |
+| Wan2.2-Animate 14B (Wan-AI; fp8/GGUF by Kijai), relight LoRA, lightx2v I2V LoRA | `wan_animate_replace` | Apache-2.0 |
+| CLIP ViT-H (OpenCLIP, via Comfy-Org) | `wan_animate_replace` | MIT |
+| ViTPose-L wholebody ONNX (easy_ViTPose) | `wan_animate_replace` | Apache-2.0 |
+| YOLOv10m ONNX (person boxes for ViTPose; shipped in the Wan2.2-Animate repo) | `wan_animate_replace` | AGPL-3.0 |
+| Qwen-Image-Edit-2511 (fp8 by Comfy-Org), Qwen2.5-VL text encoder, Lightning LoRA (lightx2v) | `qwen_character` | Apache-2.0 |
 
 Custom node packs: ComfyUI-WanVideoWrapper (Apache-2.0). ComfyUI itself is GPL-3.0; make-meme
 only talks to it over HTTP.
