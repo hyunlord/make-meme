@@ -27,7 +27,7 @@ custom_nodes:
     repo: https://github.com/kijai/ComfyUI-WanAnimatePreprocess
     ref: 0e0b6a2a555625acf4d4aefb780e27d06937132f
     provides: [OnnxDetectionModelLoader, PoseAndFaceDetection, DrawViTPose]
-    pip: [onnxruntime, onnx]
+    pip: [onnxruntime, onnx, matplotlib, opencv-python]
 
 inputs:
   pose_video: {type: video, targets: [["1", "file"]], description: "the shot with only the target performer visible"}
