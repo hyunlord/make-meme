@@ -25,6 +25,7 @@ from make_meme import ingest
 from make_meme.comfy.client import ComfyClient
 from make_meme.pipelines.detect import Subject
 from make_meme.pipelines.runtime import ensure_ready, node_files, run_recipe
+from make_meme.pipelines.swap import _perf
 from make_meme.pipelines.track import track_labels
 from make_meme.recipes.loader import Recipe
 
@@ -284,8 +285,11 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
         for attempt in range(2 if qc else 1):
             values = {"width": gw, "height": gh, "num_frames": n, "seed": seed + attempt,
                       "prompt": prompts.get(pid, ""), "negative_prompt": negative}
-            result = await run_recipe(client, recipe, media=media, values=values, profile=profile, preset=quality,
-                                      on_progress=progress, cancelled=cancelled)
+            meta = {"profile": profile, "recipe": recipe.name, "width": gw, "height": gh, "frames": n,
+                    "mask_mode": mask_mode, "steps": int(recipe.preset_values(quality, profile).get("steps", 0))}
+            async with _perf(client, f"{pid} attempt {attempt + 1}", meta):  # feeds render estimates
+                result = await run_recipe(client, recipe, media=media, values=values, profile=profile,
+                                          preset=quality, on_progress=progress, cancelled=cancelled)
             gen_dir = pdir / f"frames{attempt}"
             gen_dir.mkdir(exist_ok=True)
             files = [await client.download(f, gen_dir / f"{i:05d}.png")

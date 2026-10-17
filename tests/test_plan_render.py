@@ -39,11 +39,10 @@ def test_guess_style_from_intent():
     assert guess_style("머리만 강아지로 바꿔줘", "animal")[0] == "pet_head_swap"
     assert guess_style("온몸을 강아지로", "animal")[0] == "pet_full_body"
     name, candidates = guess_style("두 멤버를 우리 강아지로", "animal")
-    assert name is None and set(candidates) == {"pet_head_swap", "pet_full_body", "pet_head_paste", "pet_head_animate",
+    assert name is None and set(candidates) == {"pet_head_swap", "pet_full_body", "pet_head_paste",
                                                 "pet_idol_outfit", "pet_idol_fur"}
     assert guess_style("멤버 옷 입은 강아지로", "animal")[0] == "pet_idol_outfit"
     assert guess_style("옷 없이 털로 덮인 강아지", "animal")[0] == "pet_idol_fur"
-    assert guess_style("고개랑 표정까지 따라가게", "animal")[0] == "pet_head_animate"
     assert guess_style("우리 강아지 얼굴 오려서 붙여줘", "animal")[0] is None  # 얼굴 (head swap) + 붙여 (paste)
     assert guess_style("강아지 사진 붙여서 짤 만들어줘", "animal")[0] == "pet_head_paste"
     assert guess_style("replace the singer with my friend", "person")[0] == "person_swap"

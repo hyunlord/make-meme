@@ -50,9 +50,8 @@ def _ident(tmp_path, with_head=True):
 
 def test_design_starts_from_the_photo_the_style_needs(tmp_path):
     ident = _ident(tmp_path)
-    assert design_photo(get_style("pet_head_animate"), ident).endswith("head.png")
     assert design_photo(get_style("pet_idol_outfit"), ident).endswith("full.png")
-    assert design_photo(get_style("pet_head_animate"), _ident(tmp_path, with_head=False)).endswith("full.png")
+    assert design_photo(get_style("pet_idol_fur"), _ident(tmp_path)).endswith("full.png")
     prompt = get_style("pet_idol_outfit").render_design_prompt(subject_desc="an Italian greyhound")
     assert "(an Italian greyhound)" in prompt and "image 2" in prompt
 

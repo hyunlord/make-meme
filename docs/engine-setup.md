@@ -37,7 +37,7 @@ fit next to your other apps.
 
 ## Option C — your own GPU server (DGX Spark, any Linux + NVIDIA box)
 
-The generated styles (`pet_head_animate`, `pet_idol_outfit`, `pet_idol_fur`) need about 40 GB at
+The generated styles (`pet_idol_outfit`, `pet_idol_fur`) need about 40 GB at
 720p (Wan2.2-Animate 14B fp8 + text encoder + activations); character design (Qwen-Image-Edit)
 peaks around 35 GB, loaded one after the other. A laptop can drive a GPU server over your LAN or
 Tailscale:
