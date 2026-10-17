@@ -25,6 +25,15 @@ log = logging.getLogger("make_meme.install")
 
 COMFY_REPO = "https://github.com/comfyanonymous/ComfyUI.git"
 EXTRA_COMFY_PACKAGES = ["torchaudio", "gguf"]  # WanVideoWrapper imports torchaudio; GGUF loader
+# PyPI's Linux aarch64 torch wheels are CPU-only; CUDA builds come from PyTorch's index.
+DEFAULT_CUDA_TORCH_INDEX = "https://download.pytorch.org/whl/cu128"
+
+
+def _system_memory_mib() -> int:
+    try:
+        return int(os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / 2**20)
+    except (ValueError, OSError, AttributeError):
+        return 0
 
 
 def detect_profile() -> str:
@@ -37,10 +46,22 @@ def detect_profile() -> str:
                 capture_output=True, text=True, check=True,
             ).stdout.split()
             vram_mib = int(out[0]) if out else 0
-        except (subprocess.CalledProcessError, ValueError):
+        except subprocess.CalledProcessError:
             vram_mib = 0
+        except ValueError:
+            # "[N/A]": a unified-memory GPU (DGX Spark / GB10, Jetson) shares system RAM.
+            vram_mib = _system_memory_mib()
         return "cuda" if vram_mib >= 20 * 1024 else "cuda_lowvram"
     return "cpu"
+
+
+def torch_index_url() -> str | None:
+    """Where to get CUDA torch for this machine (None: requirements.txt's default is fine)."""
+    if override := os.environ.get("MAKE_MEME_TORCH_INDEX"):
+        return override
+    if sys.platform.startswith("linux") and platform.machine() in ("aarch64", "arm64") and shutil.which("nvidia-smi"):
+        return DEFAULT_CUDA_TORCH_INDEX
+    return None
 
 
 def _run(cmd: list[str], cwd: Path | None = None) -> None:
@@ -74,6 +95,8 @@ def ensure_comfyui(comfy_dir: Path, *, use_system_python: bool = False) -> None:
             _run(["uv", "venv", "--python", "3.12", str(comfy_dir / ".venv")])
         else:
             _run([sys.executable, "-m", "venv", str(comfy_dir / ".venv")])
+    if index := torch_index_url():
+        _pip_install(comfy_dir, "torch", "torchvision", "torchaudio", "--index-url", index)
     _pip_install(comfy_dir, "-r", str(comfy_dir / "requirements.txt"))
     _pip_install(comfy_dir, *EXTRA_COMFY_PACKAGES)
 
