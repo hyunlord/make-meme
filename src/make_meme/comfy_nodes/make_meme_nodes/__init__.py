@@ -17,6 +17,9 @@ Installed into ComfyUI/custom_nodes by `make-meme install`. It carries:
   object identities (see track_labels.py).
 * POST /make_meme/drop_cache -- evicts model files from the page cache, which
   unified-memory GPUs (DGX Spark) need before large loads (see cache.py).
+* On sm_121 GPUs (DGX Spark / GB10) PyTorch's cuDNN attention backend fails to build
+  execution plans for some shapes (SAM 3 tracking: "No valid execution plans built");
+  that one backend is switched off, the other SDPA backends still run.
 
 Patches are applied whether WanVideoWrapper is imported before or after this pack
 (ComfyUI's custom node load order is filesystem-dependent).
@@ -88,7 +91,21 @@ _patch_loaded()
 if not any(isinstance(f, _MochaFinder) for f in sys.meta_path):
     sys.meta_path.insert(0, _MochaFinder())
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
+
+
+def _disable_cudnn_sdpa_on_gb10() -> None:
+    try:
+        import torch
+
+        if torch.cuda.is_available() and torch.cuda.get_device_capability(0) == (12, 1):
+            torch.backends.cuda.enable_cudnn_sdp(False)
+            log.info("make-meme: disabled cuDNN SDPA on sm_121 (GB10)")
+    except Exception:  # never break ComfyUI startup over an optimisation switch
+        log.debug("could not check/disable cuDNN SDPA", exc_info=True)
+
+
+_disable_cudnn_sdpa_on_gb10()
 
 register_route()  # GET /make_meme/stats; no-op outside an actual ComfyUI process
 register_cache_route()  # POST /make_meme/drop_cache
