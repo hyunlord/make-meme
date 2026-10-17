@@ -33,14 +33,16 @@ def test_head_pose_position_size_and_tilt():
     upright = head_pose(_ellipse_mask(200, 200, 100, 80, 20, 30, 0))
     assert upright is not None
     assert upright.cx == pytest.approx(100, abs=1.5) and upright.cy == pytest.approx(80, abs=1.5)
-    assert upright.size == pytest.approx(60, rel=0.1)  # full height of the ellipse
+    assert upright.size == pytest.approx(40, rel=0.1)  # full width of the ellipse (hair doesn't widen a head)
     assert abs(upright.angle) < 3
     tilted = head_pose(_ellipse_mask(200, 200, 100, 80, 20, 30, 25))
     assert tilted.angle == pytest.approx(25, abs=4)  # top leaning right = positive
     assert head_pose(_ellipse_mask(200, 200, 100, 80, 20, 30, -25)).angle == pytest.approx(-25, abs=4)
     assert head_pose(np.zeros((50, 50), bool)) is None
     scaled = head_pose(_ellipse_mask(200, 200, 100, 80, 20, 30, 0), scale=2.0)
-    assert scaled.cx == pytest.approx(200, abs=3) and scaled.size == pytest.approx(120, rel=0.1)
+    assert scaled.cx == pytest.approx(200, abs=3) and scaled.size == pytest.approx(80, rel=0.1)
+    long_hair = head_pose(_ellipse_mask(200, 300, 100, 120, 20, 70, 0))
+    assert long_hair.size == pytest.approx(upright.size, rel=0.1)
 
 
 def test_smoothing_holds_briefly_then_hides():
@@ -65,7 +67,7 @@ def test_paste_head_follows_pose_and_tilt():
     blue = (a[..., 2] > 200) & (a[..., 0] < 60)
     ys, xs = np.nonzero(blue)
     assert abs(xs.mean() - 150) < 6 and abs(ys.mean() - 150) < 6  # centred on the head
-    assert ys.max() - ys.min() > 80  # scaled up (60 * 1.5 = 90 tall before rotation)
+    assert xs.max() - xs.min() > 85  # scaled to 1.5x the head width (90 px before rotation)
     red = (a[..., 0] > 200) & (a[..., 1] < 60) & (a[..., 2] < 60)
     ry, rx = np.nonzero(red)
     assert rx.mean() > 155 and ry.mean() < 130  # tilted clockwise: the top moved right

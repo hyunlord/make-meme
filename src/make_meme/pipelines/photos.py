@@ -504,14 +504,30 @@ def _ref_head_score(inst: Instance) -> float:
     return res_norm * 0.4 + sharp_norm * 0.3 + head_frac_norm * 0.3
 
 
+ATYPICAL_COLOUR_PENALTY = 0.35  # max score lost by a photo whose colours are far from the subject's usual look
+
+
+def _colour_penalties(instances: list[Instance]) -> dict[int, float]:
+    """Penalty per instance for colours far from the subject's average (warm indoor light can
+    turn a blue-grey dog tan in one photo; that photo shouldn't define the dog). Needs >= 3 photos."""
+    if len(instances) < 3:
+        return {id(i): 0.0 for i in instances}
+    # Median distance to the subject's other photos: one odd photo can't drag the reference.
+    dists = {id(i): float(np.median([hist_dist(i.hist, o.hist) for o in instances if o is not i]))
+             for i in instances}
+    typical = float(np.median(list(dists.values())))
+    return {k: ATYPICAL_COLOUR_PENALTY * min(1.0, max(0.0, d - typical) / max(typical, 1e-6)) for k, d in dists.items()}
+
+
 def choose_refs(instances: list[Instance]) -> tuple[Instance, Instance | None]:
     """Pick the best full-body reference (ref1) and head close-up (ref2, if any)."""
 
     if not instances:
         raise ValueError("choose_refs requires at least one instance")
-    ref_full = max(instances, key=_ref_full_score)
+    penalty = _colour_penalties(instances)
+    ref_full = max(instances, key=lambda i: _ref_full_score(i) - penalty[id(i)])
     head_candidates = [i for i in instances if i.head_path is not None]
-    ref_head = max(head_candidates, key=_ref_head_score) if head_candidates else None
+    ref_head = max(head_candidates, key=lambda i: _ref_head_score(i) - penalty[id(i)]) if head_candidates else None
     return ref_full, ref_head
 
 

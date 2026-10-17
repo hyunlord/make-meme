@@ -30,7 +30,7 @@ MAX_TILT = 45.0
 class HeadPose:
     cx: float
     cy: float
-    size: float  # head length along its main axis, in pixels
+    size: float  # head width across its main axis, in pixels (long hair stretches the length, not the width)
     angle: float  # degrees; positive = top of the head leans to the right (clockwise)
 
 
@@ -51,7 +51,7 @@ def head_pose(mask: np.ndarray, scale: float = 1.0) -> HeadPose | None:
     if abs(angle) > 90:  # a head lying sideways reads as a wide blob; keep tilt sane
         angle = 0.0
     angle = max(-MAX_TILT, min(MAX_TILT, angle))
-    size = 4.0 * math.sqrt(max(vals[1], 1.0))  # full length of the fitted ellipse's major axis
+    size = 4.0 * math.sqrt(max(vals[0], 1.0))  # full width of the fitted ellipse (minor axis)
     return HeadPose(cx * scale, cy * scale, size * scale, angle)
 
 
@@ -128,9 +128,10 @@ async def head_cutout(client: ComfyClient, photo_path: Path, *, profile: str) ->
 
 def paste_head(frame: Image.Image, cutout: Image.Image, pose: HeadPose, opacity: float, *,
                scale: float, lift: float) -> None:
-    """Paste `cutout` onto `frame` (RGB, in place) centred on the head pose."""
-    target_h = max(4, int(pose.size * scale))
-    target_w = max(4, int(cutout.width * target_h / cutout.height))
+    """Paste `cutout` onto `frame` (RGB, in place) centred on the head pose, `scale` times as
+    wide as the performer's head."""
+    target_w = max(4, int(pose.size * scale))
+    target_h = max(4, int(cutout.height * target_w / cutout.width))
     head = cutout.resize((target_w, target_h), Image.Resampling.LANCZOS)
     if abs(pose.angle) > 0.5:
         head = head.rotate(-pose.angle, resample=Image.Resampling.BICUBIC, expand=True)  # PIL rotates CCW
@@ -149,13 +150,14 @@ def composite_heads(video: Path, dest: Path, layers: list[tuple[Image.Image, lis
                     *, scale: float, lift: float) -> Path:
     """Stream `video` frame by frame, pasting each layer's cut-out at its per-frame pose."""
     info = ingest.probe(video)
-    w, h, fps = int(info["width"]), int(info["height"]), float(info["fps"])
+    w, h = int(info["width"]), int(info["height"])
+    rate = _frame_rate(video)
     frame_bytes = w * h * 3
     reader = subprocess.Popen([ingest.FFMPEG, "-v", "error", "-i", str(video), "-f", "rawvideo",
                                "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
     tmp = dest.with_name(f"{dest.stem}.tmp{dest.suffix}")
     writer = subprocess.Popen([ingest.FFMPEG, "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
-                               "-s", f"{w}x{h}", "-r", f"{fps:.6f}", "-i", "-", "-c:v", "libx264", "-crf", "16",
+                               "-s", f"{w}x{h}", "-r", rate, "-i", "-", "-c:v", "libx264", "-crf", "16",
                                "-pix_fmt", "yuv420p", str(tmp)], stdin=subprocess.PIPE)
     n = 0
     try:
@@ -178,6 +180,14 @@ def composite_heads(video: Path, dest: Path, layers: list[tuple[Image.Image, lis
         raise RuntimeError(f"pasting heads onto {video.name} failed (ffmpeg exit {code}, {n} frames)")
     tmp.replace(dest)
     return dest
+
+
+def _frame_rate(video: Path) -> str:
+    """Exact frame rate as ffprobe reports it (e.g. 24000/1001), so the output keeps the input's timing."""
+    out = subprocess.run([ingest.FFPROBE, "-v", "error", "-select_streams", "v:0", "-show_entries",
+                          "stream=r_frame_rate", "-of", "default=nw=1:nk=1", str(video)],
+                         capture_output=True, text=True, check=True).stdout.strip()
+    return out or "24"
 
 
 async def paste_shot(client: ComfyClient, piece: Path, performers: dict[str, Subject],

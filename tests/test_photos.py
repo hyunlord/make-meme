@@ -951,3 +951,26 @@ def test_contact_sheet_single_identity(tmp_path):
     )
     sheet = contact_sheet([ident])
     assert isinstance(sheet, Image.Image)
+
+
+def test_choose_refs_avoids_a_colour_cast_photo():
+    # Warm indoor light turned the blue-grey greyhound tan in its sharpest photo (NEON test).
+    from make_meme.pipelines.assign import color_hist
+
+    rng = np.random.default_rng(0)
+
+    def inst(name, rgb, sharp):
+        noise = rng.normal(0, 18, (64, 64, 3))
+        img = Image.fromarray(np.clip(np.array(rgb) + noise, 0, 255).astype(np.uint8))
+        q = {"pose": "upright", "area_frac": 0.3, "sharpness": sharp, "cut_off": False, "resolution": 512,
+             "head_frac": 0.3}
+        i = _instance_with_quality(Path(name), q, head_path=Path(f"/dummy/{name}_head.png"))
+        i.hist = color_hist(img)
+        return i
+
+    greys = [inst(f"g{k}.jpg", (105 + 4 * k, 112 + 4 * k, 125 + 4 * k), 150.0) for k in range(3)]
+    warm = inst("warm.jpg", (190, 150, 105), 900.0)  # much sharper, wrong colour
+    ref_full, ref_head = choose_refs([*greys, warm])
+    assert ref_full is not warm and ref_head is not warm
+    # with fewer than 3 photos there is no "usual look" to compare against
+    assert choose_refs([greys[0], warm])[0] is warm

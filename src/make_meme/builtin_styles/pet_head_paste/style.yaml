@@ -11,7 +11,7 @@ refs:
   ref1: head               # head close-up to cut the pet's head from
   ref2: full               # fallback if no head close-up exists
 params:
-  scale: 1.6               # pasted head height / performer head height
+  scale: 1.5               # pasted head width / performer head width
   lift: 0.12               # move the pasted head up by this fraction of its height
   hold_sec: 0.25           # keep the last position this long when the head is briefly lost
 keywords: [paste, pasted, cutout, edit, 붙이기, 붙여, 오려, 합성짤, 얼굴만, 짤]

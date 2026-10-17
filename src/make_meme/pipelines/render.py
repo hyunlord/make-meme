@@ -182,7 +182,7 @@ async def render_paste(
     """The `paste` engine: original resolution and frame rate, no generation."""
     work.mkdir(parents=True, exist_ok=True)
     shots = [Shot.from_json(s) for s in plan.shots]
-    scale = float(style.params.get("scale", 1.6))
+    scale = float(style.params.get("scale", 1.5))
     lift = float(style.params.get("lift", 0.12))
     hold = float(style.params.get("hold_sec", 0.25))
 
