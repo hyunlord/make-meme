@@ -222,9 +222,12 @@ def install_recipe(comfy_dir: Path, recipe: Recipe, profile: str, *, skip_models
 
 
 # On unified memory every copy counts twice: mmap'd model files sit in the page cache next to
-# their GPU copy, and ComfyUI's RAM cache keeps CPU copies of models. With the defaults a
-# 720p Wan2.2-Animate run took a 128 GB DGX Spark down (unreachable until rebooted).
-UNIFIED_MEMORY_COMFY_ARGS = ["--disable-mmap", "--cache-none", "--reserve-vram", "20"]
+# their GPU copy, ComfyUI's RAM cache keeps CPU copies of models, and its pinned-memory quota
+# (~90 % of RAM) plus cudaMallocAsync can fill all 128 GB in seconds on GB10
+# (Comfy-Org/ComfyUI#11106). See docs/engine-setup.md for the host tuning a DGX Spark also
+# needs (swap off, GPU clock cap against overcurrent power-offs).
+UNIFIED_MEMORY_COMFY_ARGS = ["--disable-mmap", "--cache-none", "--reserve-vram", "20",
+                             "--disable-pinned-memory", "--disable-cuda-malloc"]
 
 
 def comfy_launch_command(comfy_dir: Path, port: int = 8188, listen: str = "127.0.0.1",

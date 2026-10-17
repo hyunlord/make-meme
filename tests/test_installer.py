@@ -84,6 +84,7 @@ def test_companion_drop_cache_walks_model_files(tmp_path):
 def test_unified_memory_launch_flags(tmp_path):
     cmd = installer.comfy_launch_command(tmp_path, port=8190, unified_memory=True)
     assert "--disable-mmap" in cmd and "--cache-none" in cmd and cmd[cmd.index("--reserve-vram") + 1] == "20"
+    assert "--disable-pinned-memory" in cmd and "--disable-cuda-malloc" in cmd
     assert "--disable-mmap" not in installer.comfy_launch_command(tmp_path, unified_memory=False)
 
 

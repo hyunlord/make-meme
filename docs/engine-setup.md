@@ -54,6 +54,26 @@ uv run make-meme comfy proxy --upstream http://127.0.0.1:8190 --listen <server L
 claude mcp add make-meme -e COMFY_URL=http://<server IP>:8191 -e COMFY_TOKEN=<token> -- uvx make-meme-mcp
 ```
 
+### DGX Spark / GB10: host tuning (needs sudo, once per boot)
+
+Video models push GB10 from ~14 W to ~85 W the instant denoising starts; on some units that trips
+overcurrent protection and the box powers off or hard-reboots **with no logs**. Approaching the
+memory limit with swap on freezes it instead of failing cleanly. Before rendering:
+
+```bash
+sudo swapoff -a                    # unified memory: thrashing swap freezes the whole machine
+sudo sysctl -w vm.swappiness=10
+sudo nvidia-smi -pm 1              # persistence mode
+sudo nvidia-smi -lgc 300,2100      # cap GPU clocks (~50 W); -pl is N/A on GB10
+# undo: sudo nvidia-smi -rgc; sudo swapon -a
+```
+
+(Community findings: NVIDIA forum "Unlocking the Power of the Spark in ComfyUI", the
+`bjarkebolding/spark-comfyui` project; `tune --persist` there makes this survive reboots.)
+make-meme then starts ComfyUI with `--disable-mmap --cache-none --reserve-vram 20
+--disable-pinned-memory --disable-cuda-malloc`, refuses heavy recipes when free memory is short,
+and its companion nodes interrupt a prompt below 6 GB available.
+
 Unified-memory boards (DGX Spark / GB10) report no VRAM through `nvidia-smi`; the installer uses
 system RAM instead and picks the `cuda` profile. On Linux aarch64 it installs CUDA torch from
 PyTorch's index (`MAKE_MEME_TORCH_INDEX` overrides it). Bind the proxy to a private address only;
