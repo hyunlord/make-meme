@@ -187,6 +187,10 @@ async def render_paste(
 ) -> Path:
     """The `paste` engine: original resolution and frame rate, no generation."""
     work.mkdir(parents=True, exist_ok=True)
+    if hasattr(client, "free"):
+        # A generation model left loaded by an earlier render (14B + text encoder) pushed a
+        # 36 GB Mac into swap and made tracking 6x slower; SAM 3 reloads in seconds.
+        await client.free()
     shots = [Shot.from_json(s) for s in plan.shots]
     scale = float(style.params.get("scale", 1.5))
     lift = float(style.params.get("lift", 0.12))
