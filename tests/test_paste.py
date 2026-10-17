@@ -13,7 +13,7 @@ from make_meme import ingest
 from make_meme.pipelines import paste as paste_mod
 from make_meme.pipelines import render as render_mod
 from make_meme.pipelines.detect import Subject
-from make_meme.pipelines.paste import HeadPose, head_pose, paste_head, smooth_poses
+from make_meme.pipelines.paste import HeadPose, assign_heads, head_pose, paste_head, smooth_poses
 from make_meme.pipelines.render import render_plan
 from make_meme.pipelines.shots import Shot
 from make_meme.plan import IdentityRef, MemePlan, new_plan_id
@@ -73,6 +73,35 @@ def test_paste_head_follows_pose_and_tilt():
     assert rx.mean() > 155 and ry.mean() < 130  # tilted clockwise: the top moved right
 
 
+def _labels(n, heads):
+    """n frames of 200x300 label maps; heads: {label: [(frame, cx, cy)]}."""
+    frames = [np.zeros((300, 200), np.uint8) for _ in range(n)]
+    for k, spots in heads.items():
+        for f, cx, cy in spots:
+            frames[f][cy - 8:cy + 8, cx - 7:cx + 7] = k
+    return frames
+
+
+def test_assign_heads_claims_relinks_and_ignores_strangers():
+    bodies = {"P1": (20, 40, 80, 290), "P2": (120, 40, 180, 290)}
+    heads = {
+        1: [(f, 50, 60) for f in range(5)],             # P1's head, then lost
+        2: [(f, 150 - f, 60) for f in range(10)],       # P2's head, drifting left
+        3: [(f, 100, 200) for f in range(10)],          # someone else's head, mid-frame low
+        4: [(f, 53, 62) for f in range(7, 10)],         # P1's head re-detected as a new object
+    }
+    out = assign_heads(_labels(10, heads), bodies)
+    p1 = [m is not None for m in out["P1"]]
+    assert p1 == [True] * 5 + [False, False] + [True] * 3
+    assert all(m is not None for m in out["P2"])
+    assert not out["P2"][9][200, 100] and not out["P1"][9][200, 100]  # the stranger is never pasted over
+
+
+def test_assign_heads_needs_a_head_inside_the_body_at_first():
+    out = assign_heads(_labels(3, {1: [(f, 190, 20) for f in range(3)]}), {"P1": (20, 40, 80, 290)})
+    assert all(m is None for m in out["P1"])
+
+
 def _plan(shots, cast, refs):
     idents = [IdentityRef(id=i, label="animal", description=f"dog {i}", coat="black", photos=1, confidence=0.9,
                           ref_full=path, ref_head=path) for i, path in refs.items()]
@@ -105,25 +134,16 @@ async def test_render_paste_full_resolution_with_fakes(tmp_path, monkeypatch):
     async def fake_cutout(client, photo, *, profile):
         return Image.open(photo).convert("RGBA")
 
-    async def fake_head_mask(client, frame_path, subject, out_dir, *, profile, neck=0.15):
-        out_dir.mkdir(parents=True, exist_ok=True)
-        with Image.open(frame_path) as f:
-            m = Image.new("L", f.size, 0)
-        ImageDraw.Draw(m).ellipse([120, 60, 180, 140], fill=255)
-        dest = out_dir / "head.png"
-        m.save(dest)
-        return dest
-
-    async def fake_track(client, video, first_mask, out_dir, *, profile, cancelled=None):
+    async def fake_track(client, video, out_dir, *, profile, cancelled=None, **_kw):
         calls["track"] += 1
-        n = ingest.probe(video)["frame_count"]
-        with Image.open(first_mask) as m:
-            base = np.asarray(m.convert("L")) > 127
-        return [np.roll(base, i, axis=1) for i in range(n)]  # head drifts right
+        info = ingest.probe(video)
+        m = Image.new("L", (int(info["width"]), int(info["height"])), 0)
+        ImageDraw.Draw(m).ellipse([120, 60, 180, 140], fill=1)  # label 1 = a head on top of the body
+        base = np.asarray(m)
+        return [np.roll(base, i, axis=1) for i in range(info["frame_count"])]  # head drifts right
 
     monkeypatch.setattr(render_mod, "head_cutout", fake_cutout)
-    monkeypatch.setattr(paste_mod, "head_mask_within", fake_head_mask)
-    monkeypatch.setattr(paste_mod, "track_masks", fake_track)
+    monkeypatch.setattr(paste_mod, "track_labels", fake_track)
 
     out = await render_plan(object(), plan, get_style("pet_head_paste"), clip, tmp_path / "work", profile="mps")
     info = ingest.probe(out)
@@ -137,3 +157,25 @@ async def test_render_paste_full_resolution_with_fakes(tmp_path, monkeypatch):
     assert len(xs) > 500 and ys.mean() < 200  # pasted where the head is (top of the frame)
     last = np.asarray(ingest.extract_frame(out, 1.6)).astype(int)
     assert ((abs(last[..., 0] - 139) < 30) & (abs(last[..., 1] - 69) < 30)).sum() < 50  # untouched shot
+
+
+def test_expand_poses_interpolates_skipped_frames():
+    from make_meme.pipelines.paste import expand_poses
+
+    a, b = HeadPose(0, 0, 10, 0), HeadPose(10, 20, 30, 10)
+    out = expand_poses([a, b, None], 6, 2)
+    assert out[0] == a and out[2] == b
+    assert out[1] == HeadPose(5, 10, 20, 5)  # halfway
+    assert out[3] == b  # next tracked frame is missing: hold the nearer known pose
+    assert out[4] is None and out[5] is None
+
+
+@needs_ffmpeg
+def test_downscale_with_stride_keeps_every_other_frame(tmp_path):
+    from make_meme.pipelines.track import downscale
+
+    clip = _white_clip(tmp_path / "c.mp4")  # 360x640, 48 frames
+    small, factor = downscale(clip, tmp_path / "s.mp4", width=180, stride=2)
+    info = ingest.probe(small)
+    assert (info["width"], info["height"]) == (180, 320) and factor == 2.0
+    assert info["frame_count"] == 24

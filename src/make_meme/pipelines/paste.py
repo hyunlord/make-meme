@@ -1,8 +1,11 @@
 """The "pasted pet head" edit: no generation, just a tracked cut-out.
 
-For each cast performer in a shot, SAM 3 tracks their head through the shot; each
-frame's head mask gives a position, size and tilt, smoothed with a One-Euro filter, and
-the pet's head cut-out is pasted there at the video's own resolution and frame rate.
+SAM 3 tracks every head in a shot (re-detecting every few frames, so heads lost to fast
+motion or turns are picked up again); each tracked head is tied to a cast performer by
+where it first appears (inside the performer's body box at the start, or next to where
+that performer's head was last seen). Each frame's head mask gives a position, width and
+tilt, smoothed with a One-Euro filter, and the pet's head cut-out is pasted there at the
+video's own resolution and frame rate.
 """
 
 from __future__ import annotations
@@ -11,7 +14,7 @@ import asyncio
 import math
 import subprocess
 import tempfile
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
@@ -19,11 +22,12 @@ from PIL import Image, ImageFilter, ImageOps
 
 from make_meme import ingest
 from make_meme.comfy.client import ComfyClient
-from make_meme.pipelines.detect import Subject, detect_in_image, head_mask_within
-from make_meme.pipelines.track import downscale, track_masks
+from make_meme.pipelines.detect import Subject, detect_in_image
+from make_meme.pipelines.track import downscale, track_labels
 
 MIN_HEAD_PX = 30  # head masks smaller than this (in tracking pixels) count as "lost"
 MAX_TILT = 45.0
+TRACK_STRIDE = 2
 
 
 @dataclass
@@ -53,6 +57,89 @@ def head_pose(mask: np.ndarray, scale: float = 1.0) -> HeadPose | None:
     angle = max(-MAX_TILT, min(MAX_TILT, angle))
     size = 4.0 * math.sqrt(max(vals[0], 1.0))  # full width of the fitted ellipse (minor axis)
     return HeadPose(cx * scale, cy * scale, size * scale, angle)
+
+
+def _centre_and_width(mask: np.ndarray) -> tuple[float, float, float] | None:
+    ys, xs = np.nonzero(mask)
+    if len(xs) < MIN_HEAD_PX:
+        return None
+    return float(xs.mean()), float(ys.mean()), float(xs.max() - xs.min() + 1)
+
+
+def assign_heads(labels: list[np.ndarray], bodies: dict[str, tuple[int, int, int, int]],
+                 max_gap: int = 12) -> dict[str, list[np.ndarray | None]]:
+    """Tie tracked heads (label maps from track_labels) to performers.
+
+    `bodies` are the performers' body boxes on the first frame (label-map pixels). A tracked
+    object belongs to a performer for good once claimed: at the start, the head nearest the
+    top-centre of a performer's body box (and inside it); later, an unclaimed head that
+    appears near where a performer's head was last seen, within `max_gap` frames.
+    Heads of other people are never claimed."""
+    owner: dict[int, str] = {}
+    last: dict[str, tuple[float, float, float, int]] = {}  # performer -> (cx, cy, width, frame)
+    out: dict[str, list[np.ndarray | None]] = {pid: [] for pid in bodies}
+    for f, lab in enumerate(labels):
+        objs = {}
+        for k in np.unique(lab):
+            if k == 0:
+                continue
+            m = lab == k
+            if (cw := _centre_and_width(m)) is not None:
+                objs[int(k)] = (m, cw)
+        live = {owner[k] for k in objs if k in owner}
+        for k, (_m, (cx, cy, w)) in sorted(objs.items()):
+            if k in owner:
+                continue
+            best, best_d = None, float("inf")
+            for pid, (x1, y1, x2, y2) in bodies.items():
+                if pid in live:
+                    continue
+                if pid in last:
+                    lx, ly, lw, lf = last[pid]
+                    if f - lf > max_gap:
+                        continue
+                    d = math.hypot(cx - lx, cy - ly)
+                    if d > 1.5 * max(lw, w) + 0.15 * (f - lf) * lw:
+                        continue
+                else:
+                    pad = 0.1 * (x2 - x1)
+                    if not (x1 - pad <= cx <= x2 + pad and y1 - pad <= cy <= y1 + 0.6 * (y2 - y1)):
+                        continue
+                    d = math.hypot(cx - (x1 + x2) / 2, cy - (y1 + 0.1 * (y2 - y1)))
+                if d < best_d:
+                    best, best_d = pid, d
+            if best is not None:
+                owner[k] = best
+                live.add(best)
+        for pid in bodies:
+            mine = [m for k, (m, _) in objs.items() if owner.get(k) == pid]
+            if mine:
+                mask = np.logical_or.reduce(mine)
+                cw = _centre_and_width(mask)
+                if cw is not None:
+                    last[pid] = (*cw, f)
+                out[pid].append(mask)
+            else:
+                out[pid].append(None)
+    return out
+
+
+def expand_poses(poses: list[HeadPose | None], n: int, stride: int) -> list[HeadPose | None]:
+    """Poses tracked on every `stride`-th frame -> all `n` frames (linear in between)."""
+    if stride == 1:
+        return (poses + [None] * n)[:n]
+    out: list[HeadPose | None] = []
+    for i in range(n):
+        j, r = divmod(i, stride)
+        a = poses[j] if j < len(poses) else None
+        b = poses[j + 1] if j + 1 < len(poses) else None
+        if r == 0 or a is None or b is None:
+            out.append(a if a is not None else (b if r * 2 >= stride else None))
+            continue
+        t = r / stride
+        out.append(HeadPose(*(x + (y - x) * t for x, y in zip((a.cx, a.cy, a.size, a.angle),
+                                                               (b.cx, b.cy, b.size, b.angle), strict=True))))
+    return out
 
 
 class OneEuro:
@@ -200,23 +287,24 @@ async def paste_shot(client: ComfyClient, piece: Path, performers: dict[str, Sub
     warnings: list[str] = []
     info = await asyncio.to_thread(ingest.probe, piece)
     fps = float(info["fps"]) or 24.0
-    small, factor = await asyncio.to_thread(downscale, piece, work / "track_in.mp4")
-    frame0 = work / "frame0.png"
-    (await asyncio.to_thread(ingest.extract_frame, small, 0.0)).save(frame0)
+    stride = TRACK_STRIDE if fps > 20 else 1  # track every other frame of 24-60 fps video
+    small, factor = await asyncio.to_thread(downscale, piece, work / "track_in.mp4", stride=stride)
+    wanted = {pid: s for pid, s in performers.items() if pid in cutouts}
+    if not wanted:
+        return piece, warnings
+    labels = await track_labels(client, small, work / "track", profile=profile, cancelled=cancelled)
+    bodies = {pid: tuple(int(v / factor) for v in s.bbox) for pid, s in wanted.items()}
+    heads = assign_heads(labels, bodies, max_gap=max(2, 12 // stride))
     layers = []
-    for pid, subject in performers.items():
-        if pid not in cutouts:
+    for pid, masks in heads.items():
+        tracked = [head_pose(m, scale=factor) if m is not None else None for m in masks]
+        poses = expand_poses(tracked, int(info["frame_count"]), stride)
+        seen = sum(p is not None for p in poses)
+        if seen == 0:
+            warnings.append(f"{pid}: no head found in this shot; left as is")
             continue
-        sx1, sy1, sx2, sy2 = subject.bbox
-        scaled = replace(subject, bbox=(int(sx1 / factor), int(sy1 / factor), int(sx2 / factor), int(sy2 / factor)))
-        head = await head_mask_within(client, frame0, scaled, work / f"{pid}_head", profile=profile, neck=0.0)
-        if head is None:
-            warnings.append(f"{pid}: no head visible at the start of the shot; left as is")
-            continue
-        masks = await track_masks(client, small, head, work / f"{pid}_track", profile=profile, cancelled=cancelled)
-        poses = [head_pose(m, scale=factor) for m in masks]
-        if sum(p is not None for p in poses) < max(1, len(poses) // 5):
-            warnings.append(f"{pid}: head tracked in only {sum(p is not None for p in poses)}/{len(poses)} frames")
+        if seen < len(poses) // 2:
+            warnings.append(f"{pid}: head found in {seen}/{len(poses)} frames")
         layers.append((cutouts[pid], smooth_poses(poses, fps, hold_frames=round(hold_sec * fps))))
     if not layers:
         return piece, warnings

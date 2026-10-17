@@ -13,6 +13,8 @@ Installed into ComfyUI/custom_nodes by `make-meme install`. It carries:
 * MakeMemeImageEmbed -- DINOv2-small image embeddings, used by
   make_meme.pipelines.photos for appearance-similarity identity clustering
   (see embed.py).
+* MakeMemeTrackLabels -- SAM 3 video tracks as per-frame label images that keep
+  object identities (see track_labels.py).
 
 Patches are applied whether WanVideoWrapper is imported before or after this pack
 (ComfyUI's custom node load order is filesystem-dependent).
@@ -29,6 +31,7 @@ from .embed import MakeMemeImageEmbed
 from .mocha_rope import rope_apply_mocha_real, rope_params_mocha_real
 from .sink import MakeMemeSink
 from .stats import register_route
+from .track_labels import MakeMemeTrackLabels
 
 log = logging.getLogger("make_meme_nodes")
 
@@ -82,7 +85,7 @@ _patch_loaded()
 if not any(isinstance(f, _MochaFinder) for f in sys.meta_path):
     sys.meta_path.insert(0, _MochaFinder())
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 register_route()  # GET /make_meme/stats; no-op outside an actual ComfyUI process
 
@@ -107,9 +110,11 @@ NODE_CLASS_MAPPINGS = {
     "MakeMemeInfo": MakeMemeInfo,
     "MakeMemeSink": MakeMemeSink,
     "MakeMemeImageEmbed": MakeMemeImageEmbed,
+    "MakeMemeTrackLabels": MakeMemeTrackLabels,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "MakeMemeInfo": "make-meme info",
     "MakeMemeSink": "make-meme sink",
     "MakeMemeImageEmbed": "make-meme image embed",
+    "MakeMemeTrackLabels": "make-meme track labels",
 }

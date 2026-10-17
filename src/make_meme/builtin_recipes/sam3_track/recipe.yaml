@@ -1,19 +1,28 @@
 name: sam3_track
 kind: track
-title: SAM 3 video object tracking
+title: SAM 3 video tracking by text
 description: >
-  Follows one object through a video from a first-frame mask and returns one mask per
-  frame (white = the object). Used to keep a pasted head or a replacement locked onto a
-  performer as they move. Uses SAM 3.1 from ComfyUI core (no custom nodes needed).
+  Finds every object matching a short phrase ("head") through a video, re-detecting
+  every few frames so fast motion, turns and small far-away subjects are picked up again,
+  and returns one label image per frame that keeps each object's identity (pixel k/255 =
+  object k-1). Uses SAM 3.1 from ComfyUI core plus the make-meme companion node.
 workflow: workflow.json
 
 constraints:
   front: true
-  timeout_sec: 900
+  timeout_sec: 1800
+
+custom_nodes:
+  - name: make_meme_nodes
+    repo: builtin:make_meme_nodes
+    provides: [MakeMemeTrackLabels]
 
 inputs:
-  video: {type: video, targets: [["1", "file"]], description: "short shot, ideally downscaled (e.g. 540 px wide)"}
-  mask:  {type: mask, targets: [["4", "image"]], description: "first-frame mask of the object, same size as the video"}
+  video:          {type: video, targets: [["1", "file"]], description: "one shot, ideally downscaled (e.g. 540 px wide)"}
+  query:          {type: string, default: "head", targets: [["4", "text"]]}
+  threshold:      {type: float, default: 0.4, targets: [["5", "detection_threshold"]]}
+  max_objects:    {type: int, default: 6, targets: [["5", "max_objects"]]}
+  detect_interval: {type: int, default: 2, targets: [["5", "detect_interval"]], description: "re-detect every N frames"}
 
 models:
   sam3:
@@ -28,4 +37,4 @@ models:
         license: SAM License (Meta)
 
 outputs:
-  masks: "8"
+  labels: "8"

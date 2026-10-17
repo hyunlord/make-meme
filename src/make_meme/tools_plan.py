@@ -163,7 +163,10 @@ def _estimate(plan: MemePlan, shots: list[Shot], profile: str, width: int, heigh
     return {"seconds": round(total), "minutes": round(total / 60, 1), "basis": basis, "profile": profile}
 
 
-PASTE_SEC_PER_FRAME = 0.3  # SAM 3 video tracking per tracked frame (rough; Mac M4 Max)
+# Measured on an M4 Max: SAM 3 text tracking at 540 px wide ~1.9 s per tracked frame; every
+# other frame is tracked, one run per shot for all performers, plus ~10 s per shot overhead.
+PASTE_SEC_PER_FRAME = 0.95
+PASTE_SEC_PER_SHOT = 10.0
 
 
 def _refresh_estimate(plan: MemePlan, style) -> None:
@@ -178,8 +181,8 @@ def _refresh_estimate(plan: MemePlan, style) -> None:
     shots = [Shot.from_json(s) for s in plan.shots]
     base = {"profile": profile, "clip_size": list(clip_size), "quality": plan.quality, "engine": style.engine}
     if style.engine == "paste":
-        frames = sum(round(s.duration * 24) * sum(1 for p in plan.cast if p in s.performers) for s in shots)
-        seconds = 15 + frames * PASTE_SEC_PER_FRAME
+        busy = [s for s in shots if any(p in s.performers for p in plan.cast)]
+        seconds = 15 + sum(PASTE_SEC_PER_SHOT + round(s.duration * 24) * PASTE_SEC_PER_FRAME for s in busy)
         plan.estimate = {**base, "seconds": round(seconds), "minutes": round(seconds / 60, 1),
                          "basis": "default-guess", "output_size": list(clip_size)}
         return
