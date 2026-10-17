@@ -37,12 +37,18 @@ logger = logging.getLogger(__name__)
 Report = Callable[[str, float, str], Awaitable[None]]
 
 
-def cut_segment(video: Path, start: float, end: float, dest: Path, *, keep_audio: bool = False) -> Path:
-    """Re-encoded, frame-accurate cut of [start, end)."""
-    cmd = [ingest.FFMPEG, "-y", "-i", str(video), "-ss", f"{start:.3f}", "-to", f"{end:.3f}",
-           "-c:v", "libx264", "-crf", "14", "-pix_fmt", "yuv420p"]
-    cmd += ["-c:a", "aac"] if keep_audio else ["-an"]
-    ingest._run([*cmd, str(dest)])
+def cut_segment(video: Path, start: float, end: float, dest: Path) -> Path:
+    """Frame-exact, silent cut of frames [round(start*fps), round(end*fps)).
+
+    Consecutive shots must tile the clip exactly: second-based seeking (-ss/-to) gains or
+    loses a frame per cut, and over several shots the video drifts against the clip's
+    audio (seen as a 0.1 s lag in the NEON test)."""
+    fps = float(ingest.probe(video)["fps"]) or 24.0
+    first, stop = round(start * fps), round(end * fps)
+    stop = max(stop, first + 1)
+    vf = f"select='between(n\\,{first}\\,{stop - 1})',setpts=N/FRAME_RATE/TB"
+    ingest._run([ingest.FFMPEG, "-y", "-i", str(video), "-vf", vf, "-an", "-c:v", "libx264", "-crf", "14",
+                 "-pix_fmt", "yuv420p", str(dest)])
     return dest
 
 

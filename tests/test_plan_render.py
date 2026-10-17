@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import itertools
 import shutil
 import subprocess
 from pathlib import Path
@@ -167,3 +168,18 @@ def test_render_time_estimate_uses_current_measurements(monkeypatch):
     assert plan.estimate["basis"] == "measured" and plan.estimate["output_size"] == [288, 512]
     assert calls and max(calls) <= 49  # 96 frames split into Mac-sized chunks
     assert plan.estimate["seconds"] == 100 * len(calls)
+
+
+@pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg required")
+def test_cut_segment_shots_tile_the_clip_exactly(tmp_path):
+    clip = tmp_path / "clip.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "testsrc=size=160x90:rate=24000/1001",
+                    "-frames:v", "120", "-pix_fmt", "yuv420p", str(clip)], check=True)
+    fps = 24000 / 1001
+    bounds = [0.0, 0.834, 3.17, 3.837, 4.421, 5.005]  # NEON shot boundaries (frame times, rounded to ms)
+    pieces = [render_mod.cut_segment(clip, a, b, tmp_path / f"s{i}.mp4")
+              for i, (a, b) in enumerate(itertools.pairwise(bounds))]
+    counts = [ingest.probe(p)["frame_count"] for p in pieces]
+    assert counts == [round(b * fps) - round(a * fps) for a, b in itertools.pairwise(bounds)]
+    assert sum(counts) == round(bounds[-1] * fps)
+    assert ingest.probe(pieces[0])["fps"] == pytest.approx(fps, abs=0.01)
