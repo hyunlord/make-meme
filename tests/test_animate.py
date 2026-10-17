@@ -130,3 +130,17 @@ async def test_render_animate_designs_once_caches_shots_and_keeps_timing(tmp_pat
     _save_characters(plan)
     assert load_plan(plan.id).identity("A").characters["pet_idol_fur"].endswith("char.png")
     reset_settings_cache()
+
+
+def test_performer_crop_whites_out_other_people(tmp_path):
+    frame = tmp_path / "f.png"
+    Image.new("RGB", (200, 300), (200, 30, 30)).save(frame)  # everything "red outfit"
+    mask = tmp_path / "m.png"
+    m = Image.new("L", (200, 300), 0)
+    m.paste(255, (60, 50, 140, 270))
+    m.save(mask)
+    out = performer_crop(frame, Subject(1, "person", 0.9, (50, 40, 150, 280), str(mask)), tmp_path / "c.png")
+    with Image.open(out) as im:
+        px = im.convert("RGB")
+        assert px.getpixel((2, 2)) == (255, 255, 255)  # outside the performer: white
+        assert px.getpixel((im.width // 2, im.height // 2)) == (200, 30, 30)

@@ -23,9 +23,17 @@ from make_meme.styles import Style
 
 
 def performer_crop(frame_path: Path, subject: Subject, dest: Path, pad: float = 0.08) -> Path:
-    """The performer cut out of a shot frame (for the designer to copy the outfit from)."""
+    """The performer cut out of a shot frame (for the designer to copy the outfit from).
+    With a mask, everyone else is whited out: dancers overlap, and a crop showing two
+    outfits made the designer pick the wrong one."""
     with Image.open(frame_path) as f:
         img = f.convert("RGB")
+        if subject.mask_path and Path(subject.mask_path).is_file():
+            with Image.open(subject.mask_path) as m:
+                mask = m.convert("L").resize(img.size).point(lambda v: 255 if v > 127 else 0)
+            white = Image.new("RGB", img.size, (255, 255, 255))
+            white.paste(img, mask=mask)
+            img = white
         x1, y1, x2, y2 = subject.bbox
         px, py = int((x2 - x1) * pad), int((y2 - y1) * pad)
         img.crop((max(0, x1 - px), max(0, y1 - py), min(img.width, x2 + px), min(img.height, y2 + py))).save(dest)
