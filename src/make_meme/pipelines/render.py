@@ -251,6 +251,7 @@ async def ensure_characters(client: ComfyClient, plan: MemePlan, style: Style, w
     from make_meme.pipelines.design import design_character, performer_crop
     from make_meme.pipelines.shots import main_shot
 
+    work.mkdir(parents=True, exist_ok=True)
     shots = [Shot.from_json(s) for s in plan.shots]
     main = main_shot(shots) if shots else None
     refs: dict[str, Path] = {}
