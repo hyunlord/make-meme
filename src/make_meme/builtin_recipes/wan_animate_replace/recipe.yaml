@@ -40,7 +40,9 @@ inputs:
   width:      {type: int, default: 832, targets: [["10", "width"], ["11", "width"], ["15", "width"]]}
   height:     {type: int, default: 480, targets: [["10", "height"], ["11", "height"], ["15", "height"]]}
   num_frames: {type: int, default: 81, targets: [["15", "num_frames"]]}
-  face_strength: {type: float, default: 1.0, targets: [["15", "face_strength"]]}
+  face_strength: {type: float, default: 1.0, targets: [["15", "face_strength"]], description: "how much the performer's facial motion drives the character (0 for animal heads that shouldn't look human)"}
+  pose_strength: {type: float, default: 1.0, targets: [["15", "pose_strength"]]}
+  draw_head:  {type: bool, default: true, targets: [["11", "draw_head"]], description: "draw face keypoints into the pose video"}
   steps:      {type: int, default: 6, targets: [["19", "steps"]]}
   seed:       {type: int, default: 42, targets: [["19", "seed"]]}
 
