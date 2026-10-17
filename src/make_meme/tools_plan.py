@@ -487,6 +487,11 @@ async def render_meme(
     if clip_asset is None:
         raise ToolError("The plan's clip is gone; re-run plan_meme.")
     settings = get_settings()
+    try:  # estimate for the machine that will render (the plan may have been made elsewhere)
+        async with comfy_session() as client:
+            plan.estimate["profile"] = await hardware_profile(client)
+    except ComfyError:
+        pass
     _refresh_estimate(plan, st)
 
     async def job(ctx: JobContext) -> dict[str, Any]:
