@@ -72,6 +72,12 @@ def test_animate_styles_need_a_design_prompt(tmp_path):
         load_style(bad)
 
 
+def _clip(path):
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "color=c=white:size=144x256:rate=24",
+                    "-t", "2", "-pix_fmt", "yuv420p", str(path)], check=True)
+    return path
+
+
 def _plan(shots, cast, ident):
     return MemePlan(
         id=new_plan_id(), intent="t", source_asset="vid_x", source_title=None, segment={"start": 0, "end": 2},
@@ -87,9 +93,7 @@ async def test_render_animate_designs_once_caches_shots_and_keeps_timing(tmp_pat
     from make_meme.config import reset_settings_cache
 
     reset_settings_cache()
-    clip = tmp_path / "clip.mp4"
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "color=c=white:size=144x256:rate=24",
-                    "-t", "2", "-pix_fmt", "yuv420p", str(clip)], check=True)
+    clip = _clip(tmp_path / "clip.mp4")
     subj = Subject(1, "person", 0.9, (20, 20, 120, 240), None)
     shots = [Shot(0, 0.0, 1.0, [subj], None, {"P1": 1}), Shot(1, 1.0, 2.0, [], None, {})]
     plan = _plan(shots, {"P1": "A"}, _ident(tmp_path))
