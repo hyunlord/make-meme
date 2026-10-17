@@ -70,7 +70,7 @@ sudo nvidia-smi -lgc 300,2100      # cap GPU clocks (~50 W); -pl is N/A on GB10
 
 (Community findings: NVIDIA forum "Unlocking the Power of the Spark in ComfyUI", the
 `bjarkebolding/spark-comfyui` project; `tune --persist` there makes this survive reboots.)
-make-meme then starts ComfyUI with `--disable-mmap --cache-none --reserve-vram 20
+make-meme then starts ComfyUI with `--disable-mmap --reserve-vram 20
 --disable-pinned-memory --disable-cuda-malloc`, refuses heavy recipes when free memory is short,
 and its companion nodes interrupt a prompt below 6 GB available.
 

@@ -226,8 +226,10 @@ def install_recipe(comfy_dir: Path, recipe: Recipe, profile: str, *, skip_models
 # (~90 % of RAM) plus cudaMallocAsync can fill all 128 GB in seconds on GB10
 # (Comfy-Org/ComfyUI#11106). See docs/engine-setup.md for the host tuning a DGX Spark also
 # needs (swap off, GPU clock cap against overcurrent power-offs).
-UNIFIED_MEMORY_COMFY_ARGS = ["--disable-mmap", "--cache-none", "--reserve-vram", "20",
+UNIFIED_MEMORY_COMFY_ARGS = ["--disable-mmap", "--reserve-vram", "20",
                              "--disable-pinned-memory", "--disable-cuda-malloc"]
+# (--cache-none was dropped again: it re-ran every loader node, reloading the 14B video model
+# for every shot -- 1-2 min each -- while measured peaks left 57 GB free.)
 
 
 def comfy_launch_command(comfy_dir: Path, port: int = 8188, listen: str = "127.0.0.1",
