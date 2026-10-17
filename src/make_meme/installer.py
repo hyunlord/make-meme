@@ -89,7 +89,7 @@ def install_companion_nodes(comfy_dir: Path) -> Path:
     return dest
 
 
-def install_node_pack(comfy_dir: Path, repo: str, ref: str | None) -> None:
+def install_node_pack(comfy_dir: Path, repo: str, ref: str | None, pip: list[str] | None = None) -> None:
     if repo.startswith("builtin:"):
         install_companion_nodes(comfy_dir)
         return
@@ -104,6 +104,10 @@ def install_node_pack(comfy_dir: Path, repo: str, ref: str | None) -> None:
         if current != ref:
             _run(["git", "fetch", "--depth", "1", "origin", ref], cwd=dest)
             _run(["git", "checkout", ref], cwd=dest)
+    if pip is not None:
+        if pip:
+            _pip_install(comfy_dir, *pip)
+        return
     req = dest / "requirements.txt"
     if req.exists():
         _pip_install(comfy_dir, "-r", str(req))
@@ -148,7 +152,7 @@ def download_model(comfy_dir: Path, variant: ModelVariant) -> Path:
 def install_recipe(comfy_dir: Path, recipe: Recipe, profile: str, *, skip_models: bool = False) -> list[str]:
     notes: list[str] = []
     for pack in recipe.custom_nodes:
-        install_node_pack(comfy_dir, pack.repo, pack.ref)
+        install_node_pack(comfy_dir, pack.repo, pack.ref, pack.pip)
     if skip_models:
         return notes
     for model in recipe.models:

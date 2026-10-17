@@ -67,7 +67,8 @@ def test_paste_head_follows_pose_and_tilt():
     blue = (a[..., 2] > 200) & (a[..., 0] < 60)
     ys, xs = np.nonzero(blue)
     assert abs(xs.mean() - 150) < 6 and abs(ys.mean() - 150) < 6  # centred on the head
-    assert xs.max() - xs.min() > 85  # scaled to 1.5x the head width (90 px before rotation)
+    # sqrt(w*h) of the 40x60 cut-out becomes 1.5 x 60 = 90 px: 73 x 110 before rotation
+    assert 70 < xs.max() - xs.min() < 125
     red = (a[..., 0] > 200) & (a[..., 1] < 60) & (a[..., 2] < 60)
     ry, rx = np.nonzero(red)
     assert rx.mean() > 155 and ry.mean() < 130  # tilted clockwise: the top moved right
@@ -179,3 +180,29 @@ def test_downscale_with_stride_keeps_every_other_frame(tmp_path):
     info = ingest.probe(small)
     assert (info["width"], info["height"]) == (180, 320) and factor == 2.0
     assert info["frame_count"] == 24
+
+
+def test_assign_bodies_and_inputs(tmp_path):
+    from make_meme.pipelines.animate import assign_bodies, build_inputs, fill_masks, padded_length
+
+    labels = []
+    for f in range(6):
+        lab = np.zeros((100, 120), np.uint8)
+        lab[20:90, 10:40] = 1  # P1
+        if f < 3:
+            lab[20:90, 70:100] = 2  # P2 ...
+        elif f > 3:
+            lab[22:92, 72:102] = 5  # ... re-detected under a new number after a gap
+        lab[5:15, 50:60] = 3 if f == 0 else 0  # tiny: ignored
+        labels.append(lab)
+    out = assign_bodies(labels, {"P1": (10, 20, 40, 90), "P2": (70, 20, 100, 90)})
+    assert all(m is not None for m in out["P1"])
+    assert [m is not None for m in out["P2"]] == [True, True, True, False, True, True]
+    filled = fill_masks(out["P2"])
+    assert filled[3] is not None
+    assert padded_length(6) == 9 and padded_length(9) == 9 and padded_length(1) == 1
+    frames = [np.full((100, 120, 3), 200, np.uint8) for _ in range(6)]
+    media = build_inputs(frames, filled, tmp_path, 16)
+    assert ingest.probe(media["bg_video"])["frame_count"] == 9
+    bg = np.asarray(ingest.extract_frame(media["bg_video"], 0.0))
+    assert bg[50, 85].max() < 30 and bg[50, 55].min() > 170  # performer blanked, rest kept

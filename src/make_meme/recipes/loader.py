@@ -63,6 +63,9 @@ class CustomNodeSpec:
     repo: str
     ref: str | None = None
     provides: list[str] = field(default_factory=list)  # node class_types used to detect it
+    # Packages to install instead of the pack's requirements.txt (e.g. when it pins a
+    # CUDA-only wheel such as onnxruntime-gpu that doesn't exist on every platform).
+    pip: list[str] | None = None
 
 
 @dataclass

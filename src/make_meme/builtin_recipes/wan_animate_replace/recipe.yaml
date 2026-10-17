@@ -1,0 +1,164 @@
+name: wan_animate_replace
+kind: animate
+title: Wan2.2-Animate character replacement (pose-guided)
+description: >
+  Replaces one performer with the subject of a reference photo, driven by the performer's
+  body pose (ViTPose) and facial motion, so the choreography is followed closely. Only the
+  masked region is regenerated; everything else comes from the background frames, with a
+  relighting LoRA to match the scene. Long shots are generated in overlapping windows with
+  colour matching. An animal reference becomes an anthropomorphic animal that dances on
+  two legs. Inputs are prepared by make_meme.pipelines.animate (pose-isolated video,
+  background with the performer blanked, per-frame mask, padded reference).
+workflow: workflow.json
+
+constraints:
+  fps: 16
+  frames_rule: 4n+1
+  size_multiple: 16
+  progress_node: "19"
+  timeout_sec: 21600
+
+custom_nodes:
+  - name: ComfyUI-WanVideoWrapper
+    repo: https://github.com/kijai/ComfyUI-WanVideoWrapper
+    ref: 088128b224242e110d3906c6750e9a3a348a659b
+    provides: [WanVideoAnimateEmbeds, WanVideoModelLoader, WanVideoSampler, WanVideoDecode, WanVideoClipVisionEncode]
+  - name: ComfyUI-WanAnimatePreprocess
+    repo: https://github.com/kijai/ComfyUI-WanAnimatePreprocess
+    ref: 0e0b6a2a555625acf4d4aefb780e27d06937132f
+    provides: [OnnxDetectionModelLoader, PoseAndFaceDetection, DrawViTPose]
+    pip: [onnxruntime, onnx]
+
+inputs:
+  pose_video: {type: video, targets: [["1", "file"]], description: "the shot with only the target performer visible"}
+  bg_video:   {type: video, targets: [["3", "file"]], description: "the shot with the performer's region blanked"}
+  mask_video: {type: video, targets: [["5", "file"]], description: "per-frame mask of the performer (white)"}
+  ref:        {type: image, targets: [["8", "image"]], description: "reference photo padded to the generation size"}
+  prompt:     {type: string, default: "", targets: [["18", "positive_prompt"]]}
+  negative_prompt: {type: string, default: "", targets: [["18", "negative_prompt"]]}
+  width:      {type: int, default: 832, targets: [["10", "width"], ["11", "width"], ["15", "width"]]}
+  height:     {type: int, default: 480, targets: [["10", "height"], ["11", "height"], ["15", "height"]]}
+  num_frames: {type: int, default: 81, targets: [["15", "num_frames"]]}
+  face_strength: {type: float, default: 1.0, targets: [["15", "face_strength"]]}
+  steps:      {type: int, default: 6, targets: [["19", "steps"]]}
+  seed:       {type: int, default: 42, targets: [["19", "seed"]]}
+
+presets:
+  draft: {width: 832, height: 480, steps: 4}
+  high:  {width: 1280, height: 720, steps: 6}
+
+profile_presets:
+  mps:
+    draft: {width: 512, height: 288, steps: 4}
+    high:  {width: 832, height: 480, steps: 6}
+
+models:
+  animate:
+    targets: [["17", "model"]]
+    profiles:
+      mps:
+        file: WanVideo/Wan2_2_Animate_14B_Q4_K_M.gguf
+        dir: diffusion_models
+        repo: Kijai/WanVideo_comfy_GGUF
+        path: Wan22Animate/Wan2_2_Animate_14B_Q4_K_M.gguf
+        size_gb: 12.62
+        license: Apache-2.0
+      cuda_lowvram:
+        file: WanVideo/Wan2_2_Animate_14B_Q4_K_M.gguf
+        dir: diffusion_models
+        repo: Kijai/WanVideo_comfy_GGUF
+        path: Wan22Animate/Wan2_2_Animate_14B_Q4_K_M.gguf
+        size_gb: 12.62
+        license: Apache-2.0
+      cuda:
+        file: WanVideo/Wan2_2-Animate-14B_fp8_e4m3fn_scaled_KJ.safetensors
+        dir: diffusion_models
+        repo: Kijai/WanVideo_comfy_fp8_scaled
+        path: Wan22Animate/Wan2_2-Animate-14B_fp8_e4m3fn_scaled_KJ.safetensors
+        size_gb: 18.4
+        license: Apache-2.0
+  lightx2v:
+    targets: [["16", "lora_0"]]
+    profiles:
+      default:
+        file: WanVideo/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors
+        dir: loras
+        repo: Kijai/WanVideo_comfy
+        path: Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors
+        size_gb: 0.74
+        license: Apache-2.0
+  relight:
+    targets: [["16", "lora_1"]]
+    profiles:
+      default:
+        file: WanVideo/WanAnimate_relight_lora_fp16_resized_from_128_to_dynamic_22.safetensors
+        dir: loras
+        repo: Kijai/WanVideo_comfy
+        path: LoRAs/Wan22_relight/WanAnimate_relight_lora_fp16_resized_from_128_to_dynamic_22.safetensors
+        size_gb: 0.27
+        license: Apache-2.0
+  clip_vision:
+    targets: [["12", "clip_name"]]
+    profiles:
+      default:
+        file: clip_vision_h.safetensors
+        dir: clip_vision
+        repo: Comfy-Org/Wan_2.1_ComfyUI_repackaged
+        path: split_files/clip_vision/clip_vision_h.safetensors
+        size_gb: 1.26
+        license: MIT (OpenCLIP)
+  vitpose:
+    targets: [["9", "vitpose_model"]]
+    profiles:
+      default:
+        file: vitpose-l-wholebody.onnx
+        dir: detection
+        repo: JunkyByte/easy_ViTPose
+        path: onnx/wholebody/vitpose-l-wholebody.onnx
+        size_gb: 1.23
+        license: Apache-2.0
+  yolo:
+    targets: [["9", "yolo_model"]]
+    profiles:
+      default:
+        file: yolov10m.onnx
+        dir: detection
+        repo: Wan-AI/Wan2.2-Animate-14B
+        path: process_checkpoint/det/yolov10m.onnx
+        size_gb: 0.06
+        license: AGPL-3.0 (YOLOv10 weights, shipped in the Apache-2.0 Wan2.2-Animate repo)
+  vae:
+    targets: [["14", "model_name"]]
+    profiles:
+      default:
+        file: Wan2_1_VAE_bf16.safetensors
+        dir: vae
+        repo: Kijai/WanVideo_comfy
+        path: Wan2_1_VAE_bf16.safetensors
+        size_gb: 0.25
+        license: Apache-2.0
+  t5:
+    targets: [["18", "model_name"]]
+    profiles:
+      default:
+        file: umt5-xxl-enc-bf16.safetensors
+        dir: text_encoders
+        repo: Kijai/WanVideo_comfy
+        path: umt5-xxl-enc-bf16.safetensors
+        size_gb: 11.36
+        license: Apache-2.0
+
+profile_overrides:
+  mps:
+    "9": {onnx_device: CPUExecutionProvider}
+    "17": {base_precision: fp16, quantization: disabled, attention_mode: comfy, load_device: main_device}
+  cpu:
+    "9": {onnx_device: CPUExecutionProvider}
+  cuda_lowvram:
+    "17": {base_precision: fp16, quantization: disabled, attention_mode: sdpa, load_device: main_device}
+    "18": {device: cpu}
+  cuda:
+    "17": {base_precision: fp16, quantization: fp8_e4m3fn_scaled, attention_mode: sdpa, load_device: main_device}
+
+outputs:
+  frames: "21"
