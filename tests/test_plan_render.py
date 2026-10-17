@@ -183,3 +183,11 @@ def test_cut_segment_shots_tile_the_clip_exactly(tmp_path):
     assert counts == [round(b * fps) - round(a * fps) for a, b in itertools.pairwise(bounds)]
     assert sum(counts) == round(bounds[-1] * fps)
     assert ingest.probe(pieces[0])["fps"] == pytest.approx(fps, abs=0.01)
+
+
+def test_split_shots_keeps_a_montage_of_short_cuts_as_its_own_shot():
+    # NEON: a graphic flashing by as three short cuts was folded into the long dance shot.
+    cuts = [0.834, 2.794, 2.836, 2.878, 3.17, 4.963, 13.263, 13.347, 13.597, 13.889, 15.057]
+    shots = split_shots(cuts, 18.018)
+    assert (4.963, 13.263) in shots and (13.263, 13.889) in shots
+    assert (0.834, 3.17) in shots  # a run that is still too short joins the previous shot

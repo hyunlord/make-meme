@@ -215,10 +215,11 @@ async def head_cutout(client: ComfyClient, photo_path: Path, *, profile: str) ->
 
 def paste_head(frame: Image.Image, cutout: Image.Image, pose: HeadPose, opacity: float, *,
                scale: float, lift: float) -> None:
-    """Paste `cutout` onto `frame` (RGB, in place) centred on the head pose, `scale` times as
-    wide as the performer's head."""
-    target_w = max(4, int(pose.size * scale))
-    target_h = max(4, int(cutout.height * target_w / cutout.width))
+    """Paste `cutout` onto `frame` (RGB, in place) centred on the head pose. Its geometric
+    mean side (sqrt(w*h)) becomes `scale` times the performer's head width, so a cut-out made
+    wide by floppy ears or tall by a hanging tongue isn't blown up."""
+    k = pose.size * scale / math.sqrt(cutout.width * cutout.height)
+    target_w, target_h = max(4, int(cutout.width * k)), max(4, int(cutout.height * k))
     head = cutout.resize((target_w, target_h), Image.Resampling.LANCZOS)
     if abs(pose.angle) > 0.5:
         head = head.rotate(-pose.angle, resample=Image.Resampling.BICUBIC, expand=True)  # PIL rotates CCW

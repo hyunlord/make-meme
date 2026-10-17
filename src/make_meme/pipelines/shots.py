@@ -52,19 +52,35 @@ class Shot:
 
 
 def split_shots(cuts: list[float], duration: float, min_len: float = MIN_SHOT_SEC) -> list[tuple[float, float]]:
-    """Cut times -> [(start, end)], merging shots shorter than min_len into a neighbour."""
+    """Cut times -> [(start, end)]. Runs of consecutive short shots (a quick montage, a
+    graphic flashing by) become one shot when together they're long enough; only a short
+    run that is still too short joins its previous neighbour. Folding each short shot into
+    the previous one instead let a montage get absorbed by a long dance shot."""
     bounds = [0.0] + sorted(c for c in cuts if 0.0 < c < duration) + [duration]
-    spans = [(a, b) for a, b in itertools.pairwise(bounds) if b > a]
-    merged: list[list[float]] = []
+    spans = [[a, b] for a, b in itertools.pairwise(bounds) if b > a]
+    groups: list[list[float]] = []
+    run: list[float] | None = None  # current run of short spans
     for a, b in spans:
-        if merged and (b - a < min_len or merged[-1][1] - merged[-1][0] < min_len):
-            merged[-1][1] = b
-        else:
-            merged.append([a, b])
-    if len(merged) > 1 and merged[-1][1] - merged[-1][0] < min_len:
-        last = merged.pop()
-        merged[-1][1] = last[1]
-    return [(round(a, 3), round(b, 3)) for a, b in merged]
+        if b - a < min_len:
+            run = [run[0], b] if run else [a, b]
+            continue
+        if run:
+            _close_run(groups, run, min_len)
+            run = None
+        groups.append([a, b])
+    if run:
+        _close_run(groups, run, min_len)
+    if len(groups) > 1 and groups[0][1] - groups[0][0] < min_len:  # a too-short opening joins the next shot
+        first = groups.pop(0)
+        groups[0][0] = first[0]
+    return [(round(a, 3), round(b, 3)) for a, b in groups]
+
+
+def _close_run(groups: list[list[float]], run: list[float], min_len: float) -> None:
+    if run[1] - run[0] >= min_len or not groups:
+        groups.append(run)
+    else:
+        groups[-1][1] = run[1]
 
 
 def main_shot(shots: list[Shot]) -> Shot:
