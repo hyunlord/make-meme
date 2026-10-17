@@ -18,8 +18,8 @@ Installed into ComfyUI/custom_nodes by `make-meme install`. It carries:
 * POST /make_meme/drop_cache -- evicts model files from the page cache, which
   unified-memory GPUs (DGX Spark) need before large loads (see cache.py).
 * Unified-memory GPUs (DGX Spark / GB10): a memory watchdog that interrupts a prompt
-  before the machine runs out, and SAM 3 nodes that skip cuDNN attention on sm_121
-  (see unified.py).
+  before the machine runs out, and attention that falls back from cuDNN when it can't
+  plan a shape on sm_121 (see unified.py).
 
 Patches are applied whether WanVideoWrapper is imported before or after this pack
 (ComfyUI's custom node load order is filesystem-dependent).
@@ -91,15 +91,15 @@ _patch_loaded()
 if not any(isinstance(f, _MochaFinder) for f in sys.meta_path):
     sys.meta_path.insert(0, _MochaFinder())
 
-__version__ = "0.6.0"
+__version__ = "0.6.1"
 
 
 def _unified_memory_setup() -> None:
     try:
-        from .unified import sam3_without_cudnn, start_memory_watchdog
+        from .unified import sdpa_cudnn_fallback, start_memory_watchdog
 
         start_memory_watchdog()
-        sam3_without_cudnn()
+        sdpa_cudnn_fallback()
     except Exception:  # never break ComfyUI startup over a safety net
         log.debug("unified-memory setup skipped", exc_info=True)
 

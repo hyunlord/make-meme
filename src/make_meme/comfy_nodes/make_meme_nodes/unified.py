@@ -4,9 +4,9 @@
   out froze a shared DGX Spark until it was rebooted. A thread checks MemAvailable every
   second and interrupts the running prompt (like the UI's Cancel) when it drops below
   MAKE_MEME_MIN_AVAILABLE_GB (default 6), so the job fails instead of the machine.
-* SAM 3 on sm_121: cuDNN 9.19 can't build attention plans for SAM 3's shapes ("No valid
-  execution plans built"). Only while a SAM 3 node runs, cuDNN is dropped from ComfyUI's
-  SDPA backend priority; other models keep their fastest backend.
+* sm_121: cuDNN 9.19 can't build attention plans for some shapes (SAM 3 tracking: "No
+  valid execution plans built"). Such calls are retried without cuDNN (and that shape
+  skips it from then on); everything else keeps ComfyUI's backend priority.
 """
 
 from __future__ import annotations
@@ -69,44 +69,47 @@ def start_memory_watchdog() -> bool:
     return True
 
 
-def sam3_without_cudnn() -> bool:
-    """Wrap SAM 3 nodes so cuDNN attention is skipped only while they run (sm_121)."""
+def sdpa_cudnn_fallback() -> bool:
+    """On sm_121, retry an attention call without cuDNN when cuDNN can't build a plan for it
+    (SAM 3's shapes), remembering the shape so later calls skip cuDNN directly. Other calls
+    keep ComfyUI's backend priority, cuDNN first."""
     try:
         import torch
 
         if not (torch.cuda.is_available() and torch.cuda.get_device_capability(0) == (12, 1)):
             return False
         import comfy.ops  # type: ignore[import-not-found]
-        from comfy_extras import nodes_sam3  # type: ignore[import-not-found]
         from torch.nn.attention import SDPBackend
     except Exception:
-        log.debug("SAM 3 cuDNN workaround not applicable", exc_info=True)
+        log.debug("cuDNN attention fallback not applicable", exc_info=True)
         return False
+    original = getattr(comfy.ops, "scaled_dot_product_attention", None)
+    if original is None or getattr(original, "_make_meme_wrapped", False):
+        return False
+    bad_shapes: set = set()
 
-    def wrap(cls) -> None:
-        original = cls.__dict__.get("execute")
-        if original is None or getattr(original, "_make_meme_wrapped", False):
-            return
-        func = original.__func__ if isinstance(original, classmethod) else original
+    def without_cudnn(q, k, v, *args, **kwargs):
+        saved = comfy.ops.SDPA_BACKEND_PRIORITY
+        comfy.ops.SDPA_BACKEND_PRIORITY = [b for b in saved if b != SDPBackend.CUDNN_ATTENTION]
+        try:
+            return original(q, k, v, *args, **kwargs)
+        finally:
+            comfy.ops.SDPA_BACKEND_PRIORITY = saved
 
-        def execute(klass, *args, **kwargs):
-            saved = getattr(comfy.ops, "SDPA_BACKEND_PRIORITY", None)
-            if saved:
-                comfy.ops.SDPA_BACKEND_PRIORITY = [b for b in saved if b != SDPBackend.CUDNN_ATTENTION]
-            try:
-                return func(klass, *args, **kwargs)
-            finally:
-                if saved:
-                    comfy.ops.SDPA_BACKEND_PRIORITY = saved
+    def sdpa(q, k, v, *args, **kwargs):
+        key = (tuple(q.shape), tuple(k.shape), q.dtype)
+        if key in bad_shapes:
+            return without_cudnn(q, k, v, *args, **kwargs)
+        try:
+            return original(q, k, v, *args, **kwargs)
+        except RuntimeError as e:
+            if "cuDNN" not in str(e):
+                raise
+            bad_shapes.add(key)
+            log.info("make-meme: cuDNN attention failed for %s; using another backend", key[0])
+            return without_cudnn(q, k, v, *args, **kwargs)
 
-        execute._make_meme_wrapped = True
-        cls.execute = classmethod(execute)
-
-    wrapped = 0
-    for name in dir(nodes_sam3):
-        obj = getattr(nodes_sam3, name)
-        if isinstance(obj, type) and name.startswith("SAM3_") and "execute" in obj.__dict__:
-            wrap(obj)
-            wrapped += 1
-    log.info("make-meme: SAM 3 nodes skip cuDNN attention on sm_121 (%d wrapped)", wrapped)
-    return wrapped > 0
+    sdpa._make_meme_wrapped = True
+    comfy.ops.scaled_dot_product_attention = sdpa
+    log.info("make-meme: attention falls back from cuDNN when it can't plan a shape (sm_121)")
+    return True
