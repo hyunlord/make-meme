@@ -291,9 +291,11 @@ def read_frames(video: Path) -> list[np.ndarray]:
 
 
 def build_inputs(frames: list[np.ndarray], masks: list[np.ndarray], out_dir: Path, fps: int | str,
-                 pose_masks: list[np.ndarray] | None = None) -> dict[str, Path]:
+                 pose_masks: list[np.ndarray] | None = None, plate: np.ndarray | None = None) -> dict[str, Path]:
     """pose / bg / mask videos for one performer, padded to 4k+1 frames. `masks` is the
-    region to regenerate; `pose_masks` (default: the same) is what the pose video keeps."""
+    region to regenerate; `pose_masks` (default: the same) is what the pose video keeps.
+    The region is blanked with `plate` (the shot's clean background) when given, else black:
+    whatever part of it the model leaves unpainted then shows background, not black blocks."""
     out_dir.mkdir(parents=True, exist_ok=True)
     pose_masks = pose_masks or masks
     n = padded_length(len(frames))
@@ -305,7 +307,7 @@ def build_inputs(frames: list[np.ndarray], masks: list[np.ndarray], out_dir: Pat
         keep = grow(pm, POSE_GROW_PX)[..., None]
         pose.append(np.where(keep, fr, 127))
         gm = blockify(grow(m, GROW_PX))
-        bg.append(np.where(gm[..., None], 0, fr))
+        bg.append(np.where(gm[..., None], plate.astype(np.uint8) if plate is not None else 0, fr))
         mk.append(np.repeat((gm * 255).astype(np.uint8)[..., None], 3, axis=-1))
     return {
         "pose_video": _write_video(pose, out_dir / "pose.mp4", fps),
@@ -345,9 +347,9 @@ def window_ranges(n: int, window: int = WINDOW, overlap: int = OVERLAP) -> list[
 
 async def _generate_window(client, recipe, frames, region, body, ref, wdir, rate, *, profile, quality, seed, prompt,
                            negative, qc, label, warnings, progress, cancelled, retarget=None,
-                           extra=None) -> list[np.ndarray]:
+                           extra=None, plate=None) -> list[np.ndarray]:
     """One model run over <= WINDOW frames; returns generated frames (generation size, float)."""
-    media = await asyncio.to_thread(build_inputs, frames, region, wdir, rate, body)
+    media = await asyncio.to_thread(build_inputs, frames, region, wdir, rate, body, plate)
     media["ref"] = ref
     if retarget is not None:  # rescale the pose skeleton to the character's proportions
         media["retarget"] = retarget
@@ -465,6 +467,10 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
     gen_frames = [np.asarray(Image.fromarray(f).resize((gw, gh), Image.Resampling.LANCZOS)) for f in frames]
     out = [f.astype(np.float32) for f in frames]
     todo = [p for p in body_tracks if any(m is not None for m in body_tracks[p])]
+    # the shot's background without people, at generation size, for blanking regions
+    gen_plate = await asyncio.to_thread(
+        clean_plate, gen_frames, [resize_mask(u, gw, gh) if (u := _union_at(body_tracks, i, None)) is not None else None
+                                  for i in range(len(gen_frames))])
     n_todo = len(todo)
     for idx, pid in enumerate(todo, start=1):
         try:
@@ -501,6 +507,7 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
             part = await _generate_window(
                 client, recipe, gen_frames[a:b], region_gen[a:b], body_gen[a:b], ref, pdir / f"w{w_i}", rate,
                 profile=profile, quality=quality, seed=seed, prompt=prompts.get(pid, ""), negative=negative,
+                plate=gen_plate,
                 qc=qc and mask_mode != "head" and w_i == 0, label=pid, warnings=warnings, progress=progress,
                 cancelled=cancelled, retarget=ref if retarget else None, extra=recipe_values)
             for j, g in enumerate(part):
