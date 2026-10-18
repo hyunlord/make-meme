@@ -44,7 +44,10 @@ inputs:
     unlink_if_missing: [["10", "retarget_image"]]
     description: "optional: rescale the performer's pose skeleton to this character's proportions"
   prompt:     {type: string, default: "", targets: [["18", "positive_prompt"]]}
-  negative_prompt: {type: string, default: "", targets: [["18", "negative_prompt"]]}
+  # cfg is 1 with the step-distill LoRA, which ignores a plain negative prompt (we got bare
+  # skin despite "naked skin, genitals" in it); NAG applies it inside attention instead
+  negative_prompt: {type: string, default: "", targets: [["18", "negative_prompt"], ["23", "positive_prompt"]]}
+  nag_scale:  {type: float, default: 11.0, targets: [["24", "nag_scale"]], description: "how hard NAG pushes away from the negative prompt"}
   width:      {type: int, default: 832, targets: [["10", "width"], ["11", "width"], ["15", "width"]]}
   height:     {type: int, default: 480, targets: [["10", "height"], ["11", "height"], ["15", "height"]]}
   num_frames: {type: int, default: 81, targets: [["15", "num_frames"]]}
@@ -151,7 +154,7 @@ models:
         size_gb: 0.25
         license: Apache-2.0
   t5:
-    targets: [["18", "model_name"]]
+    targets: [["18", "model_name"], ["23", "model_name"]]
     profiles:
       default:
         file: umt5-xxl-enc-bf16.safetensors

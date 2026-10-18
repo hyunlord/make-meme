@@ -10,13 +10,13 @@ recipe: wan_animate_replace
 mask: full_body
 refs: {ref1: full, ref2: head}
 design_prompt: >
-  Make the pet in image 1 ({subject_desc}) into a cute anthropomorphic character standing upright
-  on two legs like a dancer, the whole body covered in its real {coat} fur, no clothing,
-  paws instead of hands, a tail, full body from head to feet, keeping the dog's real face
-  and markings, plain white background.
-  Keep the breed's real build: a slender breed stays slender, with a thin waist and long thin legs; animal eyes and a real dog face, no human chest or muscles.
-prompt: "{scene}{subject_desc_cap} standing on two legs and dancing, fur-covered body, no clothing, paws and a tail."
-negative: "clothes, shirt, pants, hoodie, costume, human skin, human hands, human face, extra limbs, deformed limbs, blurry, human chest, pectoral muscles, abs, human eyes, bulky body, thick torso"
+  Photograph of the dog in image 1 ({subject_desc}) standing upright on its hind legs like a
+  dancer: the same real dog, photorealistic fur and lighting, not a cartoon, illustration or 3D
+  character. The whole body covered in its real {coat} fur, no clothing, paws instead of hands,
+  a tail, the chest, belly and groin covered in fur like a dog's, full body from head to feet, plain white background.
+  Keep the breed's real build: a slender breed stays slender, with a thin waist and long thin legs; real dog eyes and face, no human chest or muscles.
+prompt: "{scene}{subject_desc_cap} standing on two legs and dancing, a real dog with photorealistic fur and a natural dog face, the whole body and belly covered in short fur, no clothing, paws and a tail."
+negative: "clothes, shirt, pants, hoodie, costume, human skin, human hands, human face, extra limbs, deformed limbs, blurry, human chest, pectoral muscles, abs, human eyes, bulky body, thick torso, bare skin, naked skin, nipples, genitals, groin, human belly button, cartoon, illustration, anime, 3d render, cgi, plush toy"
 params:
   replace_all: true        # everyone on screen becomes a cast character
   retarget: false          # pose retarget to the character's proportions: off (it moved/dropped performers in tests)
