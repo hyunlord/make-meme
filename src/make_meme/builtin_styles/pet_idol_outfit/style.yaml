@@ -21,6 +21,6 @@ negative: "human face, human skin, extra limbs, deformed limbs, mask, costume he
 params:
   recipe_values:
     hand_stick_width: 0
-    face_strength: 0.0
+    face_strength: 0.3
 keywords: [옷 입은, 의상, 아이돌, outfit, idol, wearing]
 defaults: {length_sec: 15, aspect: "9:16"}
