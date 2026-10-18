@@ -60,6 +60,12 @@ async def design_character(client: ComfyClient, style: Style, ident: IdentityRef
     media = {"photo": Path(photo)}
     if style.design_outfit and outfit is not None:
         media["outfit"] = outfit
+    face = ident.ref_for("head")
+    if face and face != photo:  # a full-body photo shows the face small: designs drifted to a generic dog
+        media["face"] = Path(face)
+        prompt += (" Image 3 is a close-up of the same dog: copy only its face from it (eye shape and colour,"
+                   " ears, muzzle, markings and fur colour) so it is recognisably this dog; ignore everything else"
+                   " in image 3 (harnesses, clothes, seats, background).")
     width, height = style.design_size
     result = await run_recipe(client, recipe, media=media,
                               values={"prompt": prompt, "width": int(width), "height": int(height), "seed": seed},

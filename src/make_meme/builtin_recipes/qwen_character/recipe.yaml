@@ -21,6 +21,12 @@ inputs:
     targets: [["2", "image"]]
     unlink_if_missing: [["9", "image2"], ["10", "image2"]]
     description: "optional: a crop of the performer whose outfit the character should wear"
+  face:
+    type: image
+    required: false
+    targets: [["16", "image"]]
+    unlink_if_missing: [["9", "image3"], ["10", "image3"]]
+    description: "optional: a close-up of the pet's face (image 3), so the character keeps its real face"
   prompt: {type: string, default: "", targets: [["9", "prompt"]]}
   width:  {type: int, default: 768, targets: [["11", "width"]]}
   height: {type: int, default: 1344, targets: [["11", "height"]]}
