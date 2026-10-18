@@ -209,11 +209,11 @@ def test_generation_never_exceeds_the_clip_resolution():
 def test_composite_alpha_follows_the_silhouette_and_new_parts():
     from make_meme.pipelines.animate import composite_alpha
 
-    h, w = 120, 100
+    h, w = 140, 100
     region = np.zeros((h, w), bool)
     region[40:100, 40:60] = True  # the performer
     blocks = np.zeros((h, w), bool)
-    blocks[32:112, 32:72] = True  # the coarse region the model regenerated
+    blocks[32:136, 32:72] = True  # the coarse region the model regenerated
     original = np.full((h, w, 3), 200, np.float32)
     generated = original.copy()
     generated[40:100, 40:60] = 30  # the dog's body
@@ -221,7 +221,7 @@ def test_composite_alpha_follows_the_silhouette_and_new_parts():
     a = composite_alpha(region, original, generated, blocks)[..., 0]
     assert a[70, 50] > 0.95  # body
     assert a[35, 53] > 0.5  # changed pixels inside the blocks are kept (the ear)
-    assert a[111, 33] < 0.05  # unchanged block corner, beyond the grown silhouette: original kept
+    assert a[130, 33] < 0.05  # unchanged block corner, beyond the grown silhouette: original kept
     assert a[10, 53] == 0  # never outside the blocks
 
 
