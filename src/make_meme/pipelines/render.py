@@ -281,8 +281,7 @@ def cap_to_source(size: tuple[int, int], source: tuple[int, int], multiple: int 
     frames, so a 720x1280 generation for a 608x1080 clip only costs time."""
     w, h = size
     sw, sh = source
-    k = min(1.0, sw / w, sh / h)
-    return max(multiple, int(w * k) // multiple * multiple), max(multiple, int(h * k) // multiple * multiple)
+    return max(multiple, min(w, sw // multiple * multiple)), max(multiple, min(h, sh // multiple * multiple))
 
 
 # Bump when animate_shot's output changes for the same inputs (e.g. how masks are built), so
