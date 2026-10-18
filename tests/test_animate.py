@@ -251,6 +251,35 @@ def test_far_changes_are_not_pasted():
     assert a[25, 25] == 0
 
 
+def test_unpainted_black_next_to_the_performer_is_not_pasted():
+    from make_meme.pipelines.animate import composite_alpha
+
+    region = np.zeros((200, 200), bool)
+    region[60:140, 90:110] = True
+    blocks = np.ones((200, 200), bool)
+    original = np.full((200, 200, 3), 220, np.float32)
+    generated = original.copy()
+    generated[60:140, 90:110] = 5  # a black dog's body over the silhouette
+    generated[64:96, 120:152] = 0  # the blanked block beside it, left unpainted (no pose there)
+    generated[50:60, 95:100] = 40  # a dark ear above the head
+    a = composite_alpha(region, original, generated, blocks)[..., 0]
+    assert a[100, 100] > 0.95  # the black body is kept
+    assert a[80, 140] == 0  # the unpainted block is not
+    generated[64:96, 110:116] = 0  # unpainted, inside the margin around the silhouette
+    a = composite_alpha(region, original, generated, blocks, feather=0)[..., 0]
+    assert a[80, 114] == 0 and a[80, 108] == 1  # the margin drops it; the silhouette itself stays
+    assert a[52, 97] > 0.5  # dark but painted: kept
+
+
+def test_fill_masks_only_bridges_short_gaps():
+    from make_meme.pipelines.animate import fill_masks
+
+    m = np.ones((4, 4), bool)
+    out = fill_masks([None] * 10 + [m, None, None], max_gap=3)
+    assert out[11].all() and out[12].all() and out[7].all()  # short gaps reuse the mask
+    assert not out[0].any() and not out[6].any()  # long before the performer appears: empty
+
+
 def test_clean_plate_recovers_the_background_behind_moving_people():
     from make_meme.pipelines.animate import clean_plate
 

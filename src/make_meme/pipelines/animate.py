@@ -32,6 +32,8 @@ from make_meme.recipes.loader import Recipe
 GROW_PX = 6  # generation mask margin around the performer (at generation size); baggy clothes already add volume
 BLOCK_PX = 32  # the region handed to the model is blockified, like Wan-Animate's official preprocessing
 POSE_GROW_PX = 10  # how much of the performer's surroundings the pose video keeps
+LIMB_QUERIES = ("sleeve", "arm")  # tracked besides "person" (foreground arms escape its masks)
+MAX_FILL_GAP = 6  # frames a lost performer keeps their last mask
 
 
 def assign_bodies(labels: list[np.ndarray], bodies: dict[str, tuple[int, int, int, int]],
@@ -160,15 +162,18 @@ def clean_plate(frames: list[np.ndarray], masks: list[np.ndarray | None], sample
 
 def composite_alpha(region: np.ndarray, original: np.ndarray, generated: np.ndarray, blocks: np.ndarray,
                     grow_px: int = 10, feather: float = 4.0, diff_threshold: float = 28.0,
-                    reach_px: int = 48) -> np.ndarray:
+                    reach_px: int = 48, unpainted_level: float = 20.0) -> np.ndarray:
     """Soft paste mask for one frame (all at output resolution): the performer's silhouette
     (grown) plus whatever the model visibly changed (ears, a tail beyond the silhouette),
     limited to the blocks it was allowed to regenerate. Pasting the whole blocks left
     staircase edges where the original background or sleeves met them."""
     # new parts (ears, a tail) only near the performer: far-off changes are leftovers of the
-    # blanked background the model didn't paint
-    diff = (np.abs(generated - original).mean(axis=-1) > diff_threshold) & grow(region, reach_px)
-    hard = (grow(region, grow_px) | diff) & blocks
+    # blanked background the model didn't paint. Near-black beyond the silhouette is that
+    # blank too: with no pose to follow (motion blur, a body cut by the frame edge) the model
+    # leaves it, and pasting it showed black squares.
+    unpainted = grow(generated.max(axis=-1) < unpainted_level, 2)  # with the blank's blurred rim
+    diff = (np.abs(generated - original).mean(axis=-1) > diff_threshold) & grow(region, reach_px) & ~unpainted
+    hard = (region | (grow(region, grow_px) & ~unpainted) | diff) & blocks
     soft = Image.fromarray((hard * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3)).filter(
         ImageFilter.GaussianBlur(feather))
     return np.asarray(soft, np.float32)[..., None] / 255.0
@@ -250,14 +255,21 @@ def blockify(mask: np.ndarray, block: int = BLOCK_PX) -> np.ndarray:
     return np.repeat(np.repeat(cells, block, axis=0), block, axis=1)[:h, :w]
 
 
-def fill_masks(masks: list[np.ndarray | None]) -> list[np.ndarray]:
+def fill_masks(masks: list[np.ndarray | None], max_gap: int = MAX_FILL_GAP) -> list[np.ndarray]:
     """Frames where the performer wasn't found reuse the nearest found mask (short gaps:
-    a missing mask would make the model leave the original person in that frame)."""
+    a missing mask would make the model leave the original person in that frame). Farther
+    than `max_gap` frames the mask is empty: a performer seen only in the last frames got
+    their mask copied over a whole close-up, and the model drew a body nobody was in."""
     found = [i for i, m in enumerate(masks) if m is not None]
     if not found:
         raise ValueError("performer never found in the shot")
-    return [masks[i] if masks[i] is not None else masks[min(found, key=lambda j: abs(j - i))]
-            for i in range(len(masks))]
+    out = []
+    for i, m in enumerate(masks):
+        if m is None:
+            j = min(found, key=lambda k: abs(k - i))
+            m = masks[j] if abs(j - i) <= max_gap else np.zeros_like(masks[j])
+        out.append(m)
+    return out
 
 
 def padded_length(n: int) -> int:
@@ -453,6 +465,13 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
         body_tracks = assign_everyone(labels, bodies, [p for p in refs if p not in bodies])
     else:
         body_tracks = assign_bodies(labels, bodies)
+    # Arms thrust at the camera are big and blurred, and SAM 3's "person" masks miss them:
+    # the dancers' sleeves stayed human next to the dogs' heads. Limbs tracked on their own
+    # join the performer they touch.
+    for query in LIMB_QUERIES:
+        limbs = await track_labels(client, small, work / query, profile=profile, query=query,
+                                   detect_interval=4, max_objects=8, cancelled=cancelled)
+        body_tracks = merge_fragments(body_tracks, limbs)
     # Long hair swinging away from the body isn't part of SAM 3's "person" masks, and the
     # performer's hair then flew around the dog. It is NOT added to the generation mask (the
     # model left such blanked areas black); instead, hair touching a performer is painted
