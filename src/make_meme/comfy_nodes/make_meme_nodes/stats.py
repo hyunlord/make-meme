@@ -25,7 +25,14 @@ def collect_stats() -> dict:
         "process_rss_bytes": None,
         "system_total_bytes": None,
         "system_available_bytes": None,
+        "sageattention": False,
     }
+    try:
+        import importlib.util
+
+        stats["sageattention"] = importlib.util.find_spec("sageattention") is not None
+    except Exception:
+        log.debug("could not check for sageattention", exc_info=True)
 
     try:
         import torch

@@ -59,6 +59,16 @@ async def unified_memory(client: ComfyClient) -> bool:
     return _unified_cache[client.base_url]
 
 
+_sage_cache: dict[str, bool] = {}
+
+
+async def _has_sage(client: ComfyClient) -> bool:
+    if client.base_url not in _sage_cache:
+        stats = await client.stats() if hasattr(client, "stats") else None
+        _sage_cache[client.base_url] = bool((stats or {}).get("sageattention"))
+    return _sage_cache[client.base_url]
+
+
 async def _check_free_memory(client: ComfyClient, recipe: Recipe) -> None:
     """Refuse a heavy run on a unified-memory GPU when the machine doesn't have the memory:
     there, GPU memory can't be swapped, and running out froze a shared DGX Spark."""
@@ -119,6 +129,10 @@ async def run_recipe(
         await client.drop_cache()
         await _check_free_memory(client, recipe)
     workflow = recipe.build({**values, **uploaded}, profile=profile, preset=preset)
+    if recipe.constraints.get("sage_targets") and profile.startswith("cuda") and await _has_sage(client):
+        for node, field in recipe.constraints["sage_targets"]:  # SageAttention: ~2x faster attention
+            if str(node) in workflow:
+                workflow[str(node)]["inputs"][field] = "sageattn"
     timeout = recipe.constraints.get("timeout_sec")
     node = recipe.constraints.get("progress_node")
     steps = workflow.get(node, {}).get("inputs", {}).get("steps") if node else None

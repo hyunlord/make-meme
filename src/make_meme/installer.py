@@ -237,7 +237,18 @@ def comfy_launch_command(comfy_dir: Path, port: int = 8188, listen: str = "127.0
     cmd = [str(comfy_python(comfy_dir)), "main.py", "--listen", listen, "--port", str(port), "--disable-auto-launch"]
     if unified_memory if unified_memory is not None else unified_memory_gpu():
         cmd += UNIFIED_MEMORY_COMFY_ARGS
+    if _has_module(comfy_dir, "sageattention"):
+        cmd.append("--use-sage-attention")
     return cmd
+
+
+def _has_module(comfy_dir: Path, name: str) -> bool:
+    py = comfy_python(comfy_dir)
+    if not py.exists():
+        return False
+    probe = subprocess.run([str(py), "-c", f"import importlib.util,sys; sys.exit(importlib.util.find_spec({name!r}) is None)"],
+                           capture_output=True, check=False)
+    return probe.returncode == 0
 
 
 def comfy_env(profile: str) -> dict[str, str]:

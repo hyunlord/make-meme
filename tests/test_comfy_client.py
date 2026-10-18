@@ -178,3 +178,33 @@ async def test_heavy_runs_refuse_when_a_unified_memory_box_is_short_of_memory(tm
     ok.base_url = "fake://spark-ok"
     await runtime.run_recipe(ok, recipe, media={"photo": tmp_path / "p.png"}, values={}, profile="cuda")
     assert ok.ran
+
+
+async def test_sageattention_is_used_only_when_the_server_has_it(tmp_path):
+    from make_meme.pipelines import runtime
+    from make_meme.recipes.loader import get_recipe
+
+    class Server:
+        def __init__(self, name, sage):
+            self.base_url, self.sage, self.workflow = f"fake://{name}", sage, None
+
+        async def system_stats(self):
+            return {"system": {"ram_total": 64 << 30}, "devices": [{"type": "cuda", "vram_total": 24 << 30}]}
+
+        async def stats(self):
+            return {"sageattention": self.sage}
+
+        async def upload(self, path):
+            return path.name
+
+        async def run(self, workflow, **kw):
+            self.workflow = workflow
+            return "ok"
+
+    recipe = get_recipe("wan_animate_replace")
+    media = {k: tmp_path / f"{k}.mp4" for k in ("pose_video", "bg_video", "mask_video")} | {"ref": tmp_path / "r.png"}
+    with_sage, without = Server("sage", True), Server("plain", False)
+    for srv in (with_sage, without):
+        await runtime.run_recipe(srv, recipe, media=media, values={}, profile="cuda")
+    assert with_sage.workflow["17"]["inputs"]["attention_mode"] == "sageattn"
+    assert without.workflow["17"]["inputs"]["attention_mode"] == "sdpa"
