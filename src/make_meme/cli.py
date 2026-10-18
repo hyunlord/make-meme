@@ -48,6 +48,8 @@ def _install(args: argparse.Namespace) -> int:
     if not args.skip_comfy:
         installer.ensure_comfyui(comfy_dir, use_system_python=args.system_python)
     installer.install_companion_nodes(comfy_dir)
+    if args.sage:
+        installer.install_sageattention(comfy_dir)
     notes: list[str] = []
     for name in names:
         notes += installer.install_recipe(comfy_dir, recipes[name], profile, skip_models=args.skip_models)
@@ -87,6 +89,8 @@ def main(argv: list[str] | None = None) -> None:
                            help="hardware profile (auto-detected)")
     p_install.add_argument("--skip-comfy", action="store_true", help="use an existing ComfyUI as-is")
     p_install.add_argument("--skip-models", action="store_true", help="only install nodes")
+    p_install.add_argument("--sage", action="store_true",
+                           help="build SageAttention (CUDA; ~2x faster video generation, needs nvcc)")
     p_install.add_argument("--system-python", action="store_true",
                            help="reuse the current Python's packages (e.g. preinstalled torch in Colab/Kaggle)")
 

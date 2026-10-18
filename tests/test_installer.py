@@ -100,3 +100,32 @@ def test_watchdog_reads_meminfo():
     avail = mod.mem_available_bytes()
     assert avail is None or avail > 0  # None off Linux
     assert mod.start_memory_watchdog() is False  # no unified-memory CUDA GPU here
+
+
+def test_gb10_torch_is_pinned_cu130(monkeypatch, tmp_path):
+    monkeypatch.delenv("MAKE_MEME_TORCH_INDEX", raising=False)
+    _fake_smi(monkeypatch, "[N/A]")
+    calls = []
+    monkeypatch.setattr(installer, "_pip_install", lambda comfy_dir, *args: calls.append(args))
+    monkeypatch.setattr(installer, "_run", lambda *a, **k: None)
+    (tmp_path / "main.py").write_text("")
+    (tmp_path / ".venv" / "bin").mkdir(parents=True)
+    (tmp_path / ".venv" / "bin" / "python").write_text("")
+    installer.ensure_comfyui(tmp_path)
+    torch_call = calls[0]
+    assert "torch==2.14.0" in torch_call and torch_call[-1].endswith("/cu130")
+
+
+def test_cuda_profiles_install_gpu_onnxruntime(monkeypatch, tmp_path):
+    from make_meme.recipes.loader import get_recipe
+
+    seen = {}
+    monkeypatch.setattr(installer, "install_node_pack", lambda d, repo, ref, pip=None: seen.__setitem__(repo, pip))
+    monkeypatch.setattr(installer, "install_companion_nodes", lambda d: None)
+    recipe = get_recipe("wan_animate_replace")
+    installer.install_recipe(tmp_path, recipe, "cuda", skip_models=True)
+    pre = next(v for k, v in seen.items() if "WanAnimatePreprocess" in k)
+    assert "onnxruntime-gpu" in pre
+    installer.install_recipe(tmp_path, recipe, "mps", skip_models=True)
+    pre = next(v for k, v in seen.items() if "WanAnimatePreprocess" in k)
+    assert "onnxruntime" in pre and "onnxruntime-gpu" not in pre

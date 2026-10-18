@@ -45,7 +45,7 @@ Tailscale:
 ```bash
 # on the GPU server
 git clone https://github.com/<you>/make-meme && cd make-meme && uv sync
-COMFY_DIR=~/make-meme/ComfyUI uv run make-meme install            # nodes + models for every recipe
+COMFY_DIR=~/make-meme/ComfyUI uv run make-meme install --sage     # nodes + models; --sage builds SageAttention (needs nvcc)
 COMFY_DIR=~/make-meme/ComfyUI uv run make-meme comfy start --listen 127.0.0.1 --port 8190 &
 uv run make-meme comfy proxy --upstream http://127.0.0.1:8190 --listen <server LAN/Tailscale IP> --port 8191
 #   prints a COMFY_TOKEN (or pass --token)
@@ -75,8 +75,9 @@ make-meme then starts ComfyUI with `--disable-mmap --reserve-vram 20
 and its companion nodes interrupt a prompt below 6 GB available.
 
 Unified-memory boards (DGX Spark / GB10) report no VRAM through `nvidia-smi`; the installer uses
-system RAM instead and picks the `cuda` profile. On Linux aarch64 it installs CUDA torch from
-PyTorch's index (`MAKE_MEME_TORCH_INDEX` overrides it). Bind the proxy to a private address only;
+system RAM instead and picks the `cuda` profile. On Linux aarch64 it installs torch 2.14 cu130 from
+PyTorch's index (`MAKE_MEME_TORCH_INDEX` overrides it) and GPU onnxruntime for pose detection.
+With SageAttention installed, recipes switch to it automatically (measured on a DGX Spark below). Bind the proxy to a private address only;
 ComfyUI itself has no login.
 
 ## Option B — free cloud GPU (Kaggle / Colab)

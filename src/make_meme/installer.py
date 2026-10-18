@@ -26,7 +26,12 @@ log = logging.getLogger("make_meme.install")
 COMFY_REPO = "https://github.com/comfyanonymous/ComfyUI.git"
 EXTRA_COMFY_PACKAGES = ["torchaudio", "gguf"]  # WanVideoWrapper imports torchaudio; GGUF loader
 # PyPI's Linux aarch64 torch wheels are CPU-only; CUDA builds come from PyTorch's index.
-DEFAULT_CUDA_TORCH_INDEX = "https://download.pytorch.org/whl/cu128"
+# cu130 + these pins are the combination field-tested on GB10 (sm_121, DGX Spark), together
+# with SageAttention at SAGE_REF and onnxruntime-gpu (PyPI's GPU wheels are CUDA 13 builds).
+DEFAULT_CUDA_TORCH_INDEX = "https://download.pytorch.org/whl/cu130"
+CUDA_TORCH_PINS = ["torch==2.14.0", "torchvision==0.29.0", "torchaudio==2.11.0"]
+SAGE_REPO = "https://github.com/thu-ml/SageAttention.git"
+SAGE_REF = "d1a57a546c3d395b1ffcbeecc66d81db76f3b4b5"  # pre-3.0; 3.x showed mosaic artifacts on GB10
 
 
 def _system_memory_mib() -> int:
@@ -112,7 +117,8 @@ def ensure_comfyui(comfy_dir: Path, *, use_system_python: bool = False) -> None:
         else:
             _run([sys.executable, "-m", "venv", str(comfy_dir / ".venv")])
     if index := torch_index_url():
-        _pip_install(comfy_dir, "torch", "torchvision", "torchaudio", "--index-url", index)
+        pins = CUDA_TORCH_PINS if index == DEFAULT_CUDA_TORCH_INDEX else ["torch", "torchvision", "torchaudio"]
+        _pip_install(comfy_dir, *pins, "--index-url", index)
     _pip_install(comfy_dir, "-r", str(comfy_dir / "requirements.txt"))
     _pip_install(comfy_dir, *EXTRA_COMFY_PACKAGES)
 
@@ -204,10 +210,29 @@ def download_model(comfy_dir: Path, variant: ModelVariant) -> Path:
     return dest
 
 
+def install_sageattention(comfy_dir: Path, arch: str = "12.1+PTX") -> None:
+    """Build SageAttention for this GPU into ComfyUI's venv (needs nvcc / CUDA_HOME). Recipes
+    and comfy start pick it up automatically when it's importable."""
+    if _has_module(comfy_dir, "sageattention"):
+        return
+    src = comfy_dir.parent / "SageAttention"
+    if not src.exists():
+        _run(["git", "clone", SAGE_REPO, str(src)])
+    _run(["git", "checkout", SAGE_REF], cwd=src)
+    _pip_install(comfy_dir, "ninja", "packaging", "setuptools", "wheel")
+    env = {**os.environ, "CXX_APPEND_FLAGS": "-std=c++20", "NVCC_APPEND_FLAGS": "-std=c++20",
+           "TORCH_CUDA_ARCH_LIST": arch, "MAX_JOBS": str(min(8, os.cpu_count() or 4))}
+    py = str(comfy_python(comfy_dir))
+    cmd = (["uv", "pip", "install", "--python", py] if shutil.which("uv") else [py, "-m", "pip", "install"])
+    log.info("$ building SageAttention (several minutes)")
+    subprocess.run([*cmd, "--no-build-isolation", "--no-deps", "."], cwd=src, env=env, check=True)
+
+
 def install_recipe(comfy_dir: Path, recipe: Recipe, profile: str, *, skip_models: bool = False) -> list[str]:
     notes: list[str] = []
     for pack in recipe.custom_nodes:
-        install_node_pack(comfy_dir, pack.repo, pack.ref, pack.pip)
+        pip = pack.pip_cuda if (pack.pip_cuda is not None and profile.startswith("cuda")) else pack.pip
+        install_node_pack(comfy_dir, pack.repo, pack.ref, pip)
     if skip_models:
         return notes
     for model in recipe.models:

@@ -66,6 +66,7 @@ class CustomNodeSpec:
     # Packages to install instead of the pack's requirements.txt (e.g. when it pins a
     # CUDA-only wheel such as onnxruntime-gpu that doesn't exist on every platform).
     pip: list[str] | None = None
+    pip_cuda: list[str] | None = None  # replaces `pip` on CUDA profiles (e.g. onnxruntime-gpu)
 
 
 @dataclass
