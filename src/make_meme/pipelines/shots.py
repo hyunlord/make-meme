@@ -95,7 +95,9 @@ def _close_run(groups: list[list[float]], run: list[float], min_len: float) -> N
 
 
 def main_shot(shots: list[Shot]) -> Shot:
-    return max(shots, key=lambda s: (len(s.subjects), s.duration))
+    """The shot that defines the performers: many people, on screen long enough. Counting
+    people first picked a 0.5 s close-up where arm fragments were detected as a third person."""
+    return max(shots, key=lambda s: (len(s.subjects) * min(s.duration, 2.0), s.duration))
 
 
 def match_performers(ref: list[tuple[str, np.ndarray]], cand: list[tuple[int, np.ndarray]],

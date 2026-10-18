@@ -215,3 +215,13 @@ def test_detect_hard_cuts_finds_a_cut_between_similar_scenes(tmp_path):
     from make_meme.pipelines.shots import merge_cuts
 
     assert merge_cuts([1.0, 1.01, 2.0, 0.5]) == [0.5, 1.0, 2.0]
+
+
+def test_main_shot_prefers_a_long_group_shot_over_a_crowded_flash():
+    from make_meme.pipelines.shots import main_shot
+
+    subj = [Subject(i, "person", 0.9, (0, 0, 10, 10), None) for i in range(3)]
+    flash = Shot(0, 4.42, 4.96, subj, None)  # arm fragments detected as a third person
+    group = Shot(1, 4.96, 11.47, subj[:2], None)
+    solo = Shot(2, 11.47, 20.0, subj[:1], None)
+    assert main_shot([flash, group, solo]) is group
