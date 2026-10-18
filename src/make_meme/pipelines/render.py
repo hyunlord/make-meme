@@ -329,7 +329,8 @@ async def render_animate(
         info_piece = await asyncio.to_thread(ingest.probe, piece)
         windows = window_ranges(int(info_piece["frame_count"]))
         version = [ANIMATE_PIPELINE_VERSION] + ([windows] if len(windows) > 1 else [])  # windowed shots: v3
-        version += [{"replace_all": replace_all, "retarget": retarget, "grow": 6}]
+        version += [{"replace_all": replace_all, "retarget": retarget, "grow": 6,
+                     "values": style.params.get("recipe_values") or {}}]
         key = hashlib.sha1(json.dumps([version, style.name, plan.quality, profile, plan.seed,
                                        gen_size, shot.start, shot.end,
                                        sorted((p, str(refs[p]), plan.prompts.get(p, "")) for p in performers)],
@@ -347,7 +348,9 @@ async def render_animate(
         out, warns = await animate_shot(client, recipe, piece, performers, refs, plan.prompts, sdir, profile=profile,
                                         quality=plan.quality, gen_size=gen_size, seed=plan.seed,
                                         negative=plan.negative_prompt, mask_mode=style.mask,
-                                        replace_all=replace_all, retarget=retarget, report=shot_report,
+                                        replace_all=replace_all, retarget=retarget,
+                                        recipe_values=dict(style.params.get("recipe_values") or {}),
+                                        report=shot_report,
                                         cancelled=cancelled)
         plan.warnings.extend(f"shot {shot.index + 1}: {w}" for w in warns)
         key_file.write_text(json.dumps({"key": key}))

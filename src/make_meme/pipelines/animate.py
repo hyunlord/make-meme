@@ -256,7 +256,8 @@ def window_ranges(n: int, window: int = WINDOW, overlap: int = OVERLAP) -> list[
 
 
 async def _generate_window(client, recipe, frames, region, body, ref, wdir, rate, *, profile, quality, seed, prompt,
-                           negative, qc, label, warnings, progress, cancelled, retarget=None) -> list[np.ndarray]:
+                           negative, qc, label, warnings, progress, cancelled, retarget=None,
+                           extra=None) -> list[np.ndarray]:
     """One model run over <= WINDOW frames; returns generated frames (generation size, float)."""
     media = await asyncio.to_thread(build_inputs, frames, region, wdir, rate, body)
     media["ref"] = ref
@@ -266,7 +267,7 @@ async def _generate_window(client, recipe, frames, region, body, ref, wdir, rate
     files: list[Path] = []
     for attempt in range(2 if qc else 1):
         values = {"width": frames[0].shape[1], "height": frames[0].shape[0], "num_frames": n, "seed": seed + attempt,
-                  "prompt": prompt, "negative_prompt": negative}
+                  "prompt": prompt, "negative_prompt": negative, **(extra or {})}
         meta = {"profile": profile, "recipe": recipe.name, "width": values["width"], "height": values["height"],
                 "frames": n, "steps": int(recipe.preset_values(quality, profile).get("steps", 0))}
         async with _perf(client, f"{label} attempt {attempt + 1}", meta):  # feeds render estimates
@@ -338,8 +339,8 @@ async def looks_replaced(client: ComfyClient, frames: list[Path], masks: list[np
 async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, performers: dict[str, Subject],
                        refs: dict[str, Path], prompts: dict[str, str], work: Path, *, profile: str, quality: str,
                        gen_size: tuple[int, int], seed: int, negative: str = "", mask_mode: str = "full_body",
-                       qc: bool = True, replace_all: bool = True, retarget: bool = False, report=None,
-                       cancelled=None) -> tuple[Path, list[str]]:
+                       qc: bool = True, replace_all: bool = True, retarget: bool = False,
+                       recipe_values: dict | None = None, report=None, cancelled=None) -> tuple[Path, list[str]]:
     """Replace each performer in `piece` (one shot, at the clip's resolution and frame rate;
     performer boxes in its pixels) with their reference. Returns (video with the same size,
     frame rate and frame count, warnings)."""
@@ -406,7 +407,7 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
                 client, recipe, gen_frames[a:b], region_gen[a:b], body_gen[a:b], ref, pdir / f"w{w_i}", rate,
                 profile=profile, quality=quality, seed=seed, prompt=prompts.get(pid, ""), negative=negative,
                 qc=qc and mask_mode != "head" and w_i == 0, label=pid, warnings=warnings, progress=progress,
-                cancelled=cancelled, retarget=ref if retarget else None)
+                cancelled=cancelled, retarget=ref if retarget else None, extra=recipe_values)
             for j, g in enumerate(part):
                 i = a + j
                 if gen[i] is None:

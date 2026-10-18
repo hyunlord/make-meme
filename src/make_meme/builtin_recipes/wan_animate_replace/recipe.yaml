@@ -51,6 +51,7 @@ inputs:
   face_strength: {type: float, default: 1.0, targets: [["15", "face_strength"]], description: "how much the performer's facial motion drives the character (0 for animal heads that shouldn't look human)"}
   pose_strength: {type: float, default: 1.0, targets: [["15", "pose_strength"]]}
   draw_head:  {type: bool, default: true, targets: [["11", "draw_head"]], description: "draw face keypoints into the pose video"}
+  hand_stick_width: {type: int, default: -1, targets: [["11", "hand_stick_width"]], description: "0: no finger keypoints (paws instead of human hands)"}
   steps:      {type: int, default: 6, targets: [["19", "steps"]]}
   seed:       {type: int, default: 42, targets: [["19", "seed"]]}
 
