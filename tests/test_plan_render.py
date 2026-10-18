@@ -50,8 +50,9 @@ def test_guess_style_from_intent():
 
 def test_split_shots_merges_tiny_shots():
     spans = split_shots([4.88, 5.17, 5.84, 6.38, 6.42, 6.97, 13.47], 18.0)
-    assert spans[0] == (0.0, 5.17)  # the 0.29 s shot after the first cut is merged into it
-    assert all(b - a >= 0.4 for a, b in spans)
+    assert (4.88, 5.17) in spans  # 0.29 s (7 frames) is a shot of its own
+    assert (5.84, 6.42) in spans  # the 0.04 s flash joins the shot before it
+    assert all(b - a >= 0.25 for a, b in spans)
     assert spans[-1][1] == 18.0
     assert (6.97, 13.47) in spans
 
@@ -193,4 +194,24 @@ def test_split_shots_keeps_a_montage_of_short_cuts_as_its_own_shot():
     cuts = [0.834, 2.794, 2.836, 2.878, 3.17, 4.963, 13.263, 13.347, 13.597, 13.889, 15.057]
     shots = split_shots(cuts, 18.018)
     assert (4.963, 13.263) in shots and (13.263, 13.889) in shots
-    assert (0.834, 3.17) in shots  # a run that is still too short joins the previous shot
+    assert (0.834, 2.794) in shots and (2.794, 3.17) in shots  # a whip pan into a 7-frame shot stays apart
+    assert split_shots([1.0, 1.05, 1.1, 3.0], 4.0)[0] == (0.0, 1.1)  # a run still too short joins the previous shot
+
+
+@pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg required")
+def test_detect_hard_cuts_finds_a_cut_between_similar_scenes(tmp_path):
+    # white room -> a slightly different white room with a figure: too similar for ffmpeg's scene score
+    a, b = tmp_path / "a.mp4", tmp_path / "b.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "color=c=0xEEEEEE:size=96x160:rate=24",
+                    "-t", "1", "-pix_fmt", "yuv420p", str(a)], check=True)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "color=c=0xE4E4E4:size=96x160:rate=24",
+                    "-vf", "drawbox=x=30:y=20:w=40:h=120:color=0x303030:t=fill", "-t", "1", "-pix_fmt", "yuv420p",
+                    str(b)], check=True)
+    clip = tmp_path / "clip.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(a), "-i", str(b), "-filter_complex",
+                    "[0:v][1:v]concat=n=2:v=1[v]", "-map", "[v]", str(clip)], check=True)
+    cuts = ingest.detect_hard_cuts(clip)
+    assert cuts == [pytest.approx(1.0, abs=0.05)]
+    from make_meme.pipelines.shots import merge_cuts
+
+    assert merge_cuts([1.0, 1.01, 2.0, 0.5]) == [0.5, 1.0, 2.0]

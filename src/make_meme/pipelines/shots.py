@@ -23,6 +23,8 @@ from make_meme.pipelines.assign import hist_dist, subject_head_hist
 from make_meme.pipelines.detect import Subject, detect_in_image
 
 MIN_SHOT_SEC = 0.4
+MIN_KEEP_SEC = 0.25  # a run of short shots at least this long stays a shot: NEON's whip pan into a 7-frame
+# wide shot (2.79-3.17 s), folded into the close-up before it, was generated as one motion
 MATCH_MAX_DIST = 0.55
 
 
@@ -51,6 +53,15 @@ class Shot:
                    d.get("frame_path"), dict(d.get("performers") or {}))
 
 
+def merge_cuts(cuts: list[float], min_gap: float = 0.03) -> list[float]:
+    """Sorted cut times with near-duplicates (the same cut found by two detectors) dropped."""
+    out: list[float] = []
+    for c in sorted(cuts):
+        if not out or c - out[-1] > min_gap:
+            out.append(c)
+    return out
+
+
 def split_shots(cuts: list[float], duration: float, min_len: float = MIN_SHOT_SEC) -> list[tuple[float, float]]:
     """Cut times -> [(start, end)]. Runs of consecutive short shots (a quick montage, a
     graphic flashing by) become one shot when together they're long enough; only a short
@@ -77,7 +88,7 @@ def split_shots(cuts: list[float], duration: float, min_len: float = MIN_SHOT_SE
 
 
 def _close_run(groups: list[list[float]], run: list[float], min_len: float) -> None:
-    if run[1] - run[0] >= min_len or not groups:
+    if run[1] - run[0] >= min(min_len, MIN_KEEP_SEC) or not groups:
         groups.append(run)
     else:
         groups[-1][1] = run[1]
@@ -111,6 +122,7 @@ async def analyze_shots(
     info = await asyncio.to_thread(ingest.probe, clip)
     duration = float(info["frame_count"]) / float(info["fps"]) if info.get("fps") else float(info["duration"])
     cuts = await asyncio.to_thread(ingest._detect_scene_cuts, clip)
+    cuts = merge_cuts(cuts + await asyncio.to_thread(ingest.detect_hard_cuts, clip))
     spans = split_shots(cuts, duration)
     shots: list[Shot] = []
     work.mkdir(parents=True, exist_ok=True)

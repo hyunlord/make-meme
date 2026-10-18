@@ -318,6 +318,27 @@ def _detect_scene_cuts(video_path: Path, threshold: float = 0.3) -> list[float]:
     return cuts
 
 
+def detect_hard_cuts(video_path: Path, *, min_diff: float = 20.0, spike: float = 3.0) -> list[float]:
+    """Cuts between similar-looking scenes, which ffmpeg's scene score misses (NEON: white
+    room to white room, 1.67 s and 11.46 s): a frame whose mean change jumps well above its
+    neighbours' (camera motion changes every frame a little; a cut changes one a lot)."""
+    import numpy as np
+
+    info = probe(video_path)
+    fps = float(info.get("fps") or 0) or 24.0
+    raw = subprocess.run([FFMPEG, "-v", "error", "-i", str(video_path), "-vf", "scale=96:96", "-f", "rawvideo",
+                          "-pix_fmt", "gray", "-"], capture_output=True, check=True).stdout
+    frames = np.frombuffer(raw, np.uint8).reshape(-1, 96, 96).astype(np.float32)
+    diff = np.abs(np.diff(frames, axis=0)).mean(axis=(1, 2))
+    cuts = []
+    for i, d in enumerate(diff):
+        around = np.r_[diff[max(0, i - 3):i], diff[i + 1:i + 4]]
+        base = float(np.median(around)) if len(around) else 0.0
+        if d > min_diff and d > spike * base + 5.0:
+            cuts.append(round((i + 1) / fps, 3))
+    return cuts
+
+
 def suggest_segments(
     video_path: Path,
     target_len: float = 8.0,
