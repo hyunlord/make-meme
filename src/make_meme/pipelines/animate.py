@@ -87,9 +87,12 @@ def assign_everyone(labels: list[np.ndarray], bodies: dict[str, tuple[int, int, 
 
 
 def merge_fragments(tracks: dict[str, list[np.ndarray | None]], labels: list[np.ndarray],
-                    max_dist_frac: float = 0.35) -> dict[str, list[np.ndarray | None]]:
+                    max_dist_frac: float = 0.04) -> dict[str, list[np.ndarray | None]]:
     """Union every object in `labels` (e.g. tracked hair) into the nearest performer's mask
-    in that frame, if it's within `max_dist_frac` of the frame height."""
+    in that frame, if it touches it (within `max_dist_frac` of the frame height). Anything
+    farther off is left alone: a stray detection merged in became a black block the model
+    never filled."""
+    reach = max(1, int(max_dist_frac * (labels[0].shape[0] if labels else 1)))
     for f, lab in enumerate(labels):
         if f >= max((len(v) for v in tracks.values()), default=0):
             break
@@ -97,32 +100,31 @@ def merge_fragments(tracks: dict[str, list[np.ndarray | None]], labels: list[np.
             if k == 0:
                 continue
             m = lab == k
-            ys, xs = np.nonzero(m)
-            if len(xs) < 20:
+            if m.sum() < 20:
                 continue
-            cx, cy = xs.mean(), ys.mean()
-            best, best_d = None, max_dist_frac * lab.shape[0]
+            near = grow(m, reach)
+            best, best_overlap = None, 0
             for pid, masks in tracks.items():
                 if f >= len(masks) or masks[f] is None:
                     continue
-                py, px = np.nonzero(masks[f])
-                # distance to the performer's nearest pixel (sampled) rather than their centre
-                step = max(1, len(px) // 400)
-                d = float(np.min(np.hypot(px[::step] - cx, py[::step] - cy)))
-                if d < best_d:
-                    best, best_d = pid, d
+                overlap = int((near & masks[f]).sum())
+                if overlap > best_overlap:
+                    best, best_overlap = pid, overlap
             if best is not None:
                 tracks[best][f] = tracks[best][f] | m
     return tracks
 
 
 def composite_alpha(region: np.ndarray, original: np.ndarray, generated: np.ndarray, blocks: np.ndarray,
-                    grow_px: int = 10, feather: float = 4.0, diff_threshold: float = 28.0) -> np.ndarray:
+                    grow_px: int = 10, feather: float = 4.0, diff_threshold: float = 28.0,
+                    reach_px: int = 48) -> np.ndarray:
     """Soft paste mask for one frame (all at output resolution): the performer's silhouette
     (grown) plus whatever the model visibly changed (ears, a tail beyond the silhouette),
     limited to the blocks it was allowed to regenerate. Pasting the whole blocks left
     staircase edges where the original background or sleeves met them."""
-    diff = np.abs(generated - original).mean(axis=-1) > diff_threshold
+    # new parts (ears, a tail) only near the performer: far-off changes are leftovers of the
+    # blanked background the model didn't paint
+    diff = (np.abs(generated - original).mean(axis=-1) > diff_threshold) & grow(region, reach_px)
     hard = (grow(region, grow_px) | diff) & blocks
     soft = Image.fromarray((hard * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3)).filter(
         ImageFilter.GaussianBlur(feather))

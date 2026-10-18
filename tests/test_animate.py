@@ -236,3 +236,16 @@ def test_merge_fragments_gives_hair_to_the_nearest_performer():
     hair[30:45, 30:40] = 1  # swinging off P1's head
     out = merge_fragments({"P1": [body.copy()], "P2": [other.copy()]}, [hair])
     assert out["P1"][0][35, 35] and not out["P2"][0][35, 35]
+
+
+def test_far_changes_are_not_pasted():
+    from make_meme.pipelines.animate import composite_alpha
+
+    region = np.zeros((200, 200), bool)
+    region[60:140, 90:110] = True
+    blocks = np.ones((200, 200), bool)
+    original = np.full((200, 200, 3), 220, np.float32)
+    generated = original.copy()
+    generated[10:40, 10:40] = 0  # a black block the model left unpainted, far from the performer
+    a = composite_alpha(region, original, generated, blocks)[..., 0]
+    assert a[25, 25] == 0

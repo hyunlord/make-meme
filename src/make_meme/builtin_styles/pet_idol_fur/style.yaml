@@ -22,5 +22,6 @@ params:
   retarget: false          # pose retarget to the character's proportions: off (it moved/dropped performers in tests)
   recipe_values:
     hand_stick_width: 0    # no finger keypoints: paws instead of human hands
+    face_strength: 0.0     # the performer's face crops pulled the dogs' faces human
 keywords: [털, 옷 없이, 털옷, fur, furry]
 defaults: {length_sec: 15, aspect: "9:16"}
