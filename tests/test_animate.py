@@ -196,3 +196,11 @@ def test_recipe_retarget_input_is_optional():
     assert "retarget_image" not in wf["10"]["inputs"] and "22" not in wf
     wf = r.build({**base, "retarget": "c.png"}, profile="cuda", preset="max")
     assert wf["10"]["inputs"]["retarget_image"] == ["22", 0] and wf["19"]["inputs"]["steps"] == 8
+
+
+def test_generation_never_exceeds_the_clip_resolution():
+    from make_meme.pipelines.render import cap_to_source
+
+    assert cap_to_source((720, 1280), (608, 1080)) == (608, 1072)
+    assert cap_to_source((480, 832), (608, 1080)) == (480, 832)
+    assert cap_to_source((1280, 720), (1920, 1080)) == (1280, 720)

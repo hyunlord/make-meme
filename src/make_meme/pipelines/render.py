@@ -276,6 +276,15 @@ async def ensure_characters(client: ComfyClient, plan: MemePlan, style: Style, w
     return refs
 
 
+def cap_to_source(size: tuple[int, int], source: tuple[int, int], multiple: int = 16) -> tuple[int, int]:
+    """Never generate more pixels than the clip has: results are pasted onto the clip's own
+    frames, so a 720x1280 generation for a 608x1080 clip only costs time."""
+    w, h = size
+    sw, sh = source
+    k = min(1.0, sw / w, sh / h)
+    return max(multiple, int(w * k) // multiple * multiple), max(multiple, int(h * k) // multiple * multiple)
+
+
 # Bump when animate_shot's output changes for the same inputs (e.g. how masks are built), so
 # cached shots from an older pipeline aren't reused.
 ANIMATE_PIPELINE_VERSION = 2
@@ -301,7 +310,8 @@ async def render_animate(
     work.mkdir(parents=True, exist_ok=True)
     recipe = get_recipe(style.recipe)
     info = await asyncio.to_thread(ingest.probe, clip)
-    gen_size = preset_size(recipe, plan.quality, (int(info["width"]), int(info["height"])), profile)
+    gen_size = cap_to_source(preset_size(recipe, plan.quality, (int(info["width"]), int(info["height"])), profile),
+                             (int(info["width"]), int(info["height"])))
     refs = await ensure_characters(client, plan, style, work, profile=profile, report=report)
     shots = [Shot.from_json(s) for s in plan.shots]
     replace_all = bool(style.params.get("replace_all", True))
