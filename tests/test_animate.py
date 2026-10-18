@@ -204,3 +204,35 @@ def test_generation_never_exceeds_the_clip_resolution():
     assert cap_to_source((720, 1280), (608, 1080)) == (608, 1072)
     assert cap_to_source((480, 832), (608, 1080)) == (480, 832)
     assert cap_to_source((1280, 720), (1920, 1080)) == (1280, 720)
+
+
+def test_composite_alpha_follows_the_silhouette_and_new_parts():
+    from make_meme.pipelines.animate import composite_alpha
+
+    h, w = 120, 100
+    region = np.zeros((h, w), bool)
+    region[40:100, 40:60] = True  # the performer
+    blocks = np.zeros((h, w), bool)
+    blocks[32:112, 32:72] = True  # the coarse region the model regenerated
+    original = np.full((h, w, 3), 200, np.float32)
+    generated = original.copy()
+    generated[40:100, 40:60] = 30  # the dog's body
+    generated[20:40, 50:56] = 30  # an ear above the silhouette, inside the blocks? (rows 32-40 only)
+    a = composite_alpha(region, original, generated, blocks)[..., 0]
+    assert a[70, 50] > 0.95  # body
+    assert a[35, 53] > 0.5  # changed pixels inside the blocks are kept (the ear)
+    assert a[111, 33] < 0.05  # unchanged block corner, beyond the grown silhouette: original kept
+    assert a[10, 53] == 0  # never outside the blocks
+
+
+def test_merge_fragments_gives_hair_to_the_nearest_performer():
+    from make_meme.pipelines.animate import merge_fragments
+
+    body = np.zeros((100, 100), bool)
+    body[40:90, 10:30] = True
+    other = np.zeros((100, 100), bool)
+    other[40:90, 70:90] = True
+    hair = np.zeros((100, 100), np.uint8)
+    hair[30:45, 30:40] = 1  # swinging off P1's head
+    out = merge_fragments({"P1": [body.copy()], "P2": [other.copy()]}, [hair])
+    assert out["P1"][0][35, 35] and not out["P2"][0][35, 35]

@@ -86,6 +86,49 @@ def assign_everyone(labels: list[np.ndarray], bodies: dict[str, tuple[int, int, 
     return out
 
 
+def merge_fragments(tracks: dict[str, list[np.ndarray | None]], labels: list[np.ndarray],
+                    max_dist_frac: float = 0.35) -> dict[str, list[np.ndarray | None]]:
+    """Union every object in `labels` (e.g. tracked hair) into the nearest performer's mask
+    in that frame, if it's within `max_dist_frac` of the frame height."""
+    for f, lab in enumerate(labels):
+        if f >= max((len(v) for v in tracks.values()), default=0):
+            break
+        for k in np.unique(lab):
+            if k == 0:
+                continue
+            m = lab == k
+            ys, xs = np.nonzero(m)
+            if len(xs) < 20:
+                continue
+            cx, cy = xs.mean(), ys.mean()
+            best, best_d = None, max_dist_frac * lab.shape[0]
+            for pid, masks in tracks.items():
+                if f >= len(masks) or masks[f] is None:
+                    continue
+                py, px = np.nonzero(masks[f])
+                # distance to the performer's nearest pixel (sampled) rather than their centre
+                step = max(1, len(px) // 400)
+                d = float(np.min(np.hypot(px[::step] - cx, py[::step] - cy)))
+                if d < best_d:
+                    best, best_d = pid, d
+            if best is not None:
+                tracks[best][f] = tracks[best][f] | m
+    return tracks
+
+
+def composite_alpha(region: np.ndarray, original: np.ndarray, generated: np.ndarray, blocks: np.ndarray,
+                    grow_px: int = 10, feather: float = 4.0, diff_threshold: float = 28.0) -> np.ndarray:
+    """Soft paste mask for one frame (all at output resolution): the performer's silhouette
+    (grown) plus whatever the model visibly changed (ears, a tail beyond the silhouette),
+    limited to the blocks it was allowed to regenerate. Pasting the whole blocks left
+    staircase edges where the original background or sleeves met them."""
+    diff = np.abs(generated - original).mean(axis=-1) > diff_threshold
+    hard = (grow(region, grow_px) | diff) & blocks
+    soft = Image.fromarray((hard * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3)).filter(
+        ImageFilter.GaussianBlur(feather))
+    return np.asarray(soft, np.float32)[..., None] / 255.0
+
+
 def _assign(labels, bodies, min_iou: float = 0.3, max_gap: int = 16):
     owner: dict[int, str] = {}
     last: dict[str, tuple[float, float, float, int]] = {}
@@ -362,6 +405,12 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
         body_tracks = assign_everyone(labels, bodies, [p for p in refs if p not in bodies])
     else:
         body_tracks = assign_bodies(labels, bodies)
+    # Long hair swinging away from the body isn't part of SAM 3's "person" masks, and the
+    # performer's hair then flew around the dog. Track hair on its own and give each strand
+    # to the nearest performer.
+    hair = await track_labels(client, small, work / "hair", profile=profile, query="hair",
+                              detect_interval=4, max_objects=8, cancelled=cancelled)
+    body_tracks = merge_fragments(body_tracks, hair)
     head_tracks = {}
     if mask_mode == "head":
         head_labels = await track_labels(client, small, work / "heads", profile=profile, cancelled=cancelled)
@@ -420,10 +469,10 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
                 continue
             g_full = np.asarray(Image.fromarray(np.clip(g + 0.5, 0, 255).astype(np.uint8)).resize(
                 (width, height), Image.Resampling.LANCZOS), np.float32)
-            # paste back the whole region the model regenerated (blocks), feathered
-            m = resize_mask(blockify(grow(region_gen[i], GROW_PX)), width, height)
-            alpha = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(3)),
-                               np.float32)[..., None] / 255.0
+            blocks = resize_mask(blockify(grow(region_gen[i], GROW_PX)), width, height)
+            # compare with the untouched frame: out[i] may already hold another performer's dog
+            alpha = composite_alpha(resize_mask(region_gen[i], width, height), frames[i].astype(np.float32), g_full,
+                                    blocks)
             out[i] = out[i] * (1 - alpha) + g_full * alpha
     dest = work / "out.mp4"
     await asyncio.to_thread(_write_video, [np.clip(f + 0.5, 0, 255).astype(np.uint8) for f in out], dest, rate)
