@@ -3,6 +3,7 @@ recipe execution with readiness checks."""
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import os
 import re
@@ -75,12 +76,18 @@ async def _check_free_memory(client: ComfyClient, recipe: Recipe) -> None:
     need = float(recipe.constraints.get("min_free_gb", 0) or 0)
     if not need or not hasattr(client, "stats"):
         return
-    stats = await client.stats() or {}
-    avail = stats.get("system_available_bytes")
-    if avail is None:
-        return
-    # ComfyUI may already hold some of this recipe's models; count them as available.
-    held = float(stats.get("allocated_bytes") or 0)
+    for attempt in range(2):
+        stats = await client.stats() or {}
+        avail = stats.get("system_available_bytes")
+        if avail is None:
+            return
+        # ComfyUI may already hold some of this recipe's models; count them as available.
+        held = float(stats.get("allocated_bytes") or 0)
+        if (avail + held) / 2**30 >= need:
+            return
+        if attempt == 0:  # models it offloaded after the last run aren't "allocated" but still take memory
+            await client.free()
+            await asyncio.sleep(3)
     if (avail + held) / 2**30 < need:
         raise ComfyError(
             f"{recipe.name} needs about {need:.0f} GB free on the GPU server, which has {avail / 2**30:.0f} GB "

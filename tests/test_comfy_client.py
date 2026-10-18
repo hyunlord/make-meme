@@ -149,9 +149,14 @@ async def test_heavy_runs_refuse_when_a_unified_memory_box_is_short_of_memory(tm
     class Spark:
         base_url = "fake://spark-low"
 
-        def __init__(self, avail_gb):
+        def __init__(self, avail_gb, offloaded_gb=0):
             self.avail = avail_gb * 2**30
+            self.offloaded = offloaded_gb * 2**30  # models ComfyUI moved off the GPU but still holds
             self.ran = False
+
+        async def free(self, *a, **k):
+            self.avail += self.offloaded
+            self.offloaded = 0
 
         async def system_stats(self):
             return {"system": {"ram_total": 122 << 30}, "devices": [{"type": "cuda", "vram_total": 122 << 30}]}
@@ -178,6 +183,10 @@ async def test_heavy_runs_refuse_when_a_unified_memory_box_is_short_of_memory(tm
     ok.base_url = "fake://spark-ok"
     await runtime.run_recipe(ok, recipe, media={"photo": tmp_path / "p.png"}, values={}, profile="cuda")
     assert ok.ran
+    held = Spark(20, offloaded_gb=30)  # NEON render: refused right after a run, with the model still loaded
+    held.base_url = "fake://spark-held"
+    await runtime.run_recipe(held, recipe, media={"photo": tmp_path / "p.png"}, values={}, profile="cuda")
+    assert held.ran
 
 
 async def test_sageattention_is_used_only_when_the_server_has_it(tmp_path):
