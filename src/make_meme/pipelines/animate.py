@@ -294,8 +294,9 @@ def build_inputs(frames: list[np.ndarray], masks: list[np.ndarray], out_dir: Pat
                  pose_masks: list[np.ndarray] | None = None, plate: np.ndarray | None = None) -> dict[str, Path]:
     """pose / bg / mask videos for one performer, padded to 4k+1 frames. `masks` is the
     region to regenerate; `pose_masks` (default: the same) is what the pose video keeps.
-    The region is blanked with `plate` (the shot's clean background) when given, else black:
-    whatever part of it the model leaves unpainted then shows background, not black blocks."""
+    The region is blanked black (as Wan's preprocessing does). Blanking it with a clean
+    background plate instead made the model treat it as background and draw no character.
+    `plate` is kept for experiments."""
     out_dir.mkdir(parents=True, exist_ok=True)
     pose_masks = pose_masks or masks
     n = padded_length(len(frames))
@@ -467,10 +468,6 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
     gen_frames = [np.asarray(Image.fromarray(f).resize((gw, gh), Image.Resampling.LANCZOS)) for f in frames]
     out = [f.astype(np.float32) for f in frames]
     todo = [p for p in body_tracks if any(m is not None for m in body_tracks[p])]
-    # the shot's background without people, at generation size, for blanking regions
-    gen_plate = await asyncio.to_thread(
-        clean_plate, gen_frames, [resize_mask(u, gw, gh) if (u := _union_at(body_tracks, i, None)) is not None else None
-                                  for i in range(len(gen_frames))])
     n_todo = len(todo)
     for idx, pid in enumerate(todo, start=1):
         try:
@@ -507,7 +504,6 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
             part = await _generate_window(
                 client, recipe, gen_frames[a:b], region_gen[a:b], body_gen[a:b], ref, pdir / f"w{w_i}", rate,
                 profile=profile, quality=quality, seed=seed, prompt=prompts.get(pid, ""), negative=negative,
-                plate=gen_plate,
                 qc=qc and mask_mode != "head" and w_i == 0, label=pid, warnings=warnings, progress=progress,
                 cancelled=cancelled, retarget=ref if retarget else None, extra=recipe_values)
             for j, g in enumerate(part):
