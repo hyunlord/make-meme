@@ -249,3 +249,18 @@ def test_far_changes_are_not_pasted():
     generated[10:40, 10:40] = 0  # a black block the model left unpainted, far from the performer
     a = composite_alpha(region, original, generated, blocks)[..., 0]
     assert a[25, 25] == 0
+
+
+def test_clean_plate_recovers_the_background_behind_moving_people():
+    from make_meme.pipelines.animate import clean_plate
+
+    frames, masks = [], []
+    for x in range(0, 60, 6):
+        f = np.full((40, 80, 3), 200, np.uint8)
+        f[10:30, x:x + 10] = 20  # a dancer crossing
+        m = np.zeros((40, 80), bool)
+        m[10:30, x:x + 10] = True
+        frames.append(f)
+        masks.append(m)
+    plate = clean_plate(frames, masks)
+    assert np.abs(plate - 200).max() < 1  # the dancer is gone from the plate

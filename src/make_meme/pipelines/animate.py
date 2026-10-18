@@ -115,6 +115,49 @@ def merge_fragments(tracks: dict[str, list[np.ndarray | None]], labels: list[np.
     return tracks
 
 
+def _hair_only(hair_tracks: dict, body_tracks: dict, n: int) -> list[np.ndarray | None]:
+    """Hair pixels merge_fragments attached to performers (they're the difference between the
+    performers' masks with and without the hair labels)."""
+    out: list[np.ndarray | None] = []
+    for i in range(n):
+        acc = None
+        for pid, masks in body_tracks.items():
+            with_hair = hair_tracks.get(pid, [None] * n)[i] if pid in hair_tracks else None
+            base = masks[i] if i < len(masks) else None
+            if with_hair is None or base is None:
+                continue
+            extra = with_hair & ~base
+            acc = extra if acc is None else acc | extra
+        out.append(acc)
+    return out
+
+
+def _union_at(tracks: dict, i: int, extra: np.ndarray | None) -> np.ndarray | None:
+    acc = extra.copy() if extra is not None else None
+    for masks in tracks.values():
+        m = masks[i] if i < len(masks) else None
+        if m is not None:
+            acc = m.copy() if acc is None else acc | m
+    return acc
+
+
+def clean_plate(frames: list[np.ndarray], masks: list[np.ndarray | None], samples: int = 40) -> np.ndarray:
+    """Background estimate for a shot: per-pixel temporal median of the frames with people
+    and hair masked out (static cameras; where a pixel is always covered, the median of all
+    frames is used)."""
+    h, w = frames[0].shape[:2]
+    idx = np.linspace(0, len(frames) - 1, min(samples, len(frames))).astype(int)
+    stack = np.stack([frames[i].astype(np.float32) for i in idx])
+    for j, i in enumerate(idx):
+        m = masks[i]
+        if m is not None:
+            mm = resize_mask(m, w, h) if m.shape != (h, w) else m
+            stack[j][grow(mm, 6)] = np.nan
+    plate = np.nanmedian(stack, axis=0)
+    fallback = np.median(np.stack([frames[i].astype(np.float32) for i in idx]), axis=0)
+    return np.where(np.isnan(plate), fallback, plate)
+
+
 def composite_alpha(region: np.ndarray, original: np.ndarray, generated: np.ndarray, blocks: np.ndarray,
                     grow_px: int = 10, feather: float = 4.0, diff_threshold: float = 28.0,
                     reach_px: int = 48) -> np.ndarray:
@@ -408,11 +451,12 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
     else:
         body_tracks = assign_bodies(labels, bodies)
     # Long hair swinging away from the body isn't part of SAM 3's "person" masks, and the
-    # performer's hair then flew around the dog. Track hair on its own and give each strand
-    # to the nearest performer.
-    hair = await track_labels(client, small, work / "hair", profile=profile, query="hair",
-                              detect_interval=4, max_objects=8, cancelled=cancelled)
-    body_tracks = merge_fragments(body_tracks, hair)
+    # performer's hair then flew around the dog. It is NOT added to the generation mask (the
+    # model left such blanked areas black); instead, hair touching a performer is painted
+    # over with a clean background plate after compositing.
+    hair_labels = await track_labels(client, small, work / "hair", profile=profile, query="hair",
+                                     detect_interval=4, max_objects=8, cancelled=cancelled)
+    hair = merge_fragments({p: list(v) for p, v in body_tracks.items()}, hair_labels)  # copies
     head_tracks = {}
     if mask_mode == "head":
         head_labels = await track_labels(client, small, work / "heads", profile=profile, cancelled=cancelled)
@@ -476,6 +520,17 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
             alpha = composite_alpha(resize_mask(region_gen[i], width, height), frames[i].astype(np.float32), g_full,
                                     blocks)
             out[i] = out[i] * (1 - alpha) + g_full * alpha
+    hair_masks = _hair_only(hair, body_tracks, len(frames))
+    if any(m is not None and m.any() for m in hair_masks):
+        plate = clean_plate(frames, [_union_at(body_tracks, i, hair_masks[i]) for i in range(len(frames))])
+        for i, hm in enumerate(hair_masks):
+            if hm is None or not hm.any():
+                continue
+            people = resize_mask(_union_at(body_tracks, i, None), width, height)
+            m = resize_mask(hm, width, height) & ~grow(people, 3)
+            a = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(2)),
+                           np.float32)[..., None] / 255.0
+            out[i] = out[i] * (1 - a) + plate * a
     dest = work / "out.mp4"
     await asyncio.to_thread(_write_video, [np.clip(f + 0.5, 0, 255).astype(np.uint8) for f in out], dest, rate)
     return dest, warnings
