@@ -389,12 +389,15 @@ def _save_characters(plan: MemePlan) -> None:
 
 @mcp.tool(structured_output=False)
 async def design_characters(plan_id: str, style: str, identity: str | None = None, extra: str = "",
-                            seed: int | None = None) -> list[Any]:
+                            seed: int | None = None, descriptions: dict[str, str] | None = None) -> list[Any]:
     """Design (or redesign) the character reference each cast identity will become in an
     `animate` style, e.g. the dog standing upright in the performer's outfit. Show the
     images to the user before render_meme: the video copies this look. Pass `identity` to
     redo just one, `extra` to steer it ("bigger ears", "smiling"), `seed` for a new variation.
-    render_meme designs missing ones automatically."""
+    Pass `descriptions` ({"A": "a slender Italian greyhound with a short blue-grey coat"}) when
+    you can see the photos: the breed and build drive the character's body shape (without it
+    a greyhound came out with a heavy, human-like body). render_meme designs missing ones
+    automatically."""
     from make_meme.pipelines.render import ensure_characters
 
     plan = load_plan(plan_id)
@@ -406,6 +409,15 @@ async def design_characters(plan_id: str, style: str, identity: str | None = Non
         raise ToolError(str(e)) from e
     if st.engine != "animate":
         raise ToolError(f"Style {style!r} doesn't use a designed character (engine: {st.engine}).")
+    for ident_id, text in (descriptions or {}).items():
+        ident = plan.identity(ident_id)
+        if ident is None:
+            raise ToolError(f"Plan {plan_id} has no identity {ident_id!r}")
+        ident.description = text
+    if descriptions:
+        plan.prompts = {pid: st.render_prompt(subject_desc=i.description, coat=i.coat, scene=plan.scene)
+                        for pid, iid in plan.cast.items() if (i := plan.identity(iid))}
+        save_plan(plan)
     targets = [identity] if identity else sorted(set(plan.cast.values()))
     for ident_id in targets:
         ident = plan.identity(ident_id)

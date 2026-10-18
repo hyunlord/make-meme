@@ -304,7 +304,16 @@ async def render_animate(
     gen_size = preset_size(recipe, plan.quality, (int(info["width"]), int(info["height"])), profile)
     refs = await ensure_characters(client, plan, style, work, profile=profile, report=report)
     shots = [Shot.from_json(s) for s in plan.shots]
-    busy = [s for s in shots if any(p in refs for p in s.performers)]
+    replace_all = bool(style.params.get("replace_all", True))
+    retarget = bool(style.params.get("retarget", False))
+
+    def has_work(shot: Shot) -> bool:
+        if any(p in refs for p in shot.performers):
+            return True  # a matched cast performer
+        # unmatched people still get replaced (everyone on screen becomes a cast character)
+        return replace_all and any(s.label == "person" for s in shot.subjects)
+
+    busy = [s for s in shots if has_work(s)]
     outputs: list[Path] = []
     for shot in shots:
         if cancelled is not None and cancelled.is_set():
@@ -313,13 +322,14 @@ async def render_animate(
         sdir.mkdir(exist_ok=True)
         piece = await asyncio.to_thread(cut_segment, clip, shot.start, shot.end, sdir / "input.mp4")
         performers = {pid: _subject(shot, sid) for pid, sid in shot.performers.items() if pid in refs}
-        if not performers:
+        if not has_work(shot):
             outputs.append(piece)
             continue
         # Reuse a finished shot when nothing that decides it has changed (resume after a failure).
         info_piece = await asyncio.to_thread(ingest.probe, piece)
         windows = window_ranges(int(info_piece["frame_count"]))
         version = [ANIMATE_PIPELINE_VERSION] + ([windows] if len(windows) > 1 else [])  # windowed shots: v3
+        version += [{"replace_all": replace_all, "retarget": retarget, "grow": 6}]
         key = hashlib.sha1(json.dumps([version, style.name, plan.quality, profile, plan.seed,
                                        gen_size, shot.start, shot.end,
                                        sorted((p, str(refs[p]), plan.prompts.get(p, "")) for p in performers)],
@@ -336,7 +346,8 @@ async def render_animate(
 
         out, warns = await animate_shot(client, recipe, piece, performers, refs, plan.prompts, sdir, profile=profile,
                                         quality=plan.quality, gen_size=gen_size, seed=plan.seed,
-                                        negative=plan.negative_prompt, mask_mode=style.mask, report=shot_report,
+                                        negative=plan.negative_prompt, mask_mode=style.mask,
+                                        replace_all=replace_all, retarget=retarget, report=shot_report,
                                         cancelled=cancelled)
         plan.warnings.extend(f"shot {shot.index + 1}: {w}" for w in warns)
         key_file.write_text(json.dumps({"key": key}))

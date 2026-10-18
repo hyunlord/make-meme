@@ -35,6 +35,12 @@ inputs:
   bg_video:   {type: video, targets: [["3", "file"]], description: "the shot with the performer's region blanked"}
   mask_video: {type: video, targets: [["5", "file"]], description: "per-frame mask of the performer (white)"}
   ref:        {type: image, targets: [["8", "image"]], description: "reference photo padded to the generation size"}
+  retarget:
+    type: image
+    required: false
+    targets: [["22", "image"]]
+    unlink_if_missing: [["10", "retarget_image"]]
+    description: "optional: rescale the performer's pose skeleton to this character's proportions"
   prompt:     {type: string, default: "", targets: [["18", "positive_prompt"]]}
   negative_prompt: {type: string, default: "", targets: [["18", "negative_prompt"]]}
   width:      {type: int, default: 832, targets: [["10", "width"], ["11", "width"], ["15", "width"]]}
@@ -49,6 +55,7 @@ inputs:
 presets:
   draft: {width: 832, height: 480, steps: 4}
   high:  {width: 1280, height: 720, steps: 6}
+  max:   {width: 1280, height: 720, steps: 8}
 
 profile_presets:
   mps:

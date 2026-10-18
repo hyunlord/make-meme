@@ -15,7 +15,8 @@ design_prompt: >
   on two legs like a K-pop dancer, wearing exactly the outfit worn by the person in image 2,
   full body from head to feet, keeping the dog's real face, fur colours and markings, plain
   white background.
+  Keep the breed's real build and proportions under the outfit; animal eyes and a real dog face, no human face.
 prompt: "{scene}{subject_desc_cap} as a cute anthropomorphic character in the outfit, dancing the choreography with an expressive dog face."
-negative: "human face, human skin, extra limbs, deformed limbs, mask, costume head, blurry, low quality"
+negative: "human face, human skin, extra limbs, deformed limbs, mask, costume head, blurry, low quality, human eyes, bulky body"
 keywords: [옷 입은, 의상, 아이돌, outfit, idol, wearing]
 defaults: {length_sec: 15, aspect: "9:16"}

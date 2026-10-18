@@ -166,3 +166,33 @@ def test_window_ranges_stay_out_of_the_looping_mode():
     assert all(b - a <= WINDOW for a, b in wins)
     assert wins[0][0] == 0 and wins[-1][1] == 199
     assert all(prev[1] - nxt[0] == OVERLAP for prev, nxt in itertools.pairwise(wins))
+
+
+def test_assign_everyone_leaves_nobody_original():
+    from make_meme.pipelines.animate import assign_everyone
+
+    labels = []
+    for _ in range(4):
+        lab = np.zeros((100, 100), np.uint8)
+        lab[20:90, 5:30] = 1  # P2, matched by its box
+        lab[20:90, 60:90] = 2  # a second dancer nobody matched (NEON shot 9)
+        lab[40:46, 32:38] = 3  # a stray fragment (an arm) next to P2
+        labels.append(lab)
+    out = assign_everyone(labels, {"P2": (5, 20, 30, 90)}, spare=["P1"])
+    assert set(out) == {"P1", "P2"}
+    assert all(m is not None and m[50, 75] for m in out["P1"])  # the unmatched dancer -> the spare cast member
+    assert all(m[43, 35] for m in out["P2"])  # the fragment joined the nearest performer
+    only = assign_everyone(labels, {"P2": (5, 20, 30, 90)}, spare=[])
+    assert set(only) == {"P2"}  # no spare cast member: nothing to give the extra dancer
+    assert not any(m[50, 75] for m in only["P2"])  # ...and they aren't merged into P2 as a "fragment"
+
+
+def test_recipe_retarget_input_is_optional():
+    from make_meme.recipes.loader import get_recipe
+
+    r = get_recipe("wan_animate_replace")
+    base = {"pose_video": "p.mp4", "bg_video": "b.mp4", "mask_video": "m.mp4", "ref": "r.png"}
+    wf = r.build(base, profile="cuda", preset="high")
+    assert "retarget_image" not in wf["10"]["inputs"] and "22" not in wf
+    wf = r.build({**base, "retarget": "c.png"}, profile="cuda", preset="max")
+    assert wf["10"]["inputs"]["retarget_image"] == ["22", 0] and wf["19"]["inputs"]["steps"] == 8

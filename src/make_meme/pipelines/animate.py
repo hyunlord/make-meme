@@ -29,7 +29,7 @@ from make_meme.pipelines.swap import _perf
 from make_meme.pipelines.track import track_labels
 from make_meme.recipes.loader import Recipe
 
-GROW_PX = 10  # generation mask margin around the performer (at generation size), as in Wan's preprocessing
+GROW_PX = 6  # generation mask margin around the performer (at generation size); baggy clothes already add volume
 BLOCK_PX = 32  # the region handed to the model is blockified, like Wan-Animate's official preprocessing
 POSE_GROW_PX = 10  # how much of the performer's surroundings the pose video keeps
 
@@ -39,6 +39,54 @@ def assign_bodies(labels: list[np.ndarray], bodies: dict[str, tuple[int, int, in
     """Tie tracked people (label maps) to performers: at first by overlap with the performer's
     body box on the shot's first frame, later (when a person is re-detected under a new
     number) by closeness to where that performer was last seen."""
+    return _assign(labels, bodies, min_iou, max_gap)[0]
+
+
+def assign_everyone(labels: list[np.ndarray], bodies: dict[str, tuple[int, int, int, int]], spare: list[str],
+                    min_person_frac: float = 0.02) -> dict[str, list[np.ndarray | None]]:
+    """Like assign_bodies, but nobody stays original: a person-sized tracked object no
+    performer claimed goes to a cast member absent from the shot's matching (`spare`, in
+    order; the NEON clip had a shot where only one of two dancers was matched), and leftover
+    fragments (an arm, flying hair tracked on its own) join the nearest performer in each
+    frame."""
+    out, owner = _assign(labels, bodies)
+    if not labels:
+        return out
+    h, w = labels[0].shape
+    stats: dict[int, list[tuple[int, np.ndarray]]] = {}
+    for f, lab in enumerate(labels):
+        for k in np.unique(lab):
+            if k and int(k) not in owner:
+                stats.setdefault(int(k), []).append((f, lab == k))
+    people = sorted((k for k, fr in stats.items() if max(m.sum() for _, m in fr) >= min_person_frac * h * w),
+                    key=lambda k: -sum(m.sum() for _, m in stats[k]))
+    for k, pid in zip(people, spare, strict=False):
+        masks: list[np.ndarray | None] = [None] * len(labels)
+        for f, m in stats.pop(k):
+            masks[f] = m
+        out[pid] = masks
+    for k in people:  # more unmatched people than spare cast members: not someone else's fragment
+        stats.pop(k, None)
+    for frames in stats.values():  # fragments
+        for f, m in frames:
+            ys, xs = np.nonzero(m)
+            if len(xs) < 20:
+                continue
+            cx, cy = xs.mean(), ys.mean()
+            best, best_d = None, float("inf")
+            for pid, masks in out.items():
+                if masks[f] is None:
+                    continue
+                py, px = np.nonzero(masks[f])
+                d = math.hypot(px.mean() - cx, py.mean() - cy)
+                if d < best_d:
+                    best, best_d = pid, d
+            if best is not None:
+                out[best][f] = out[best][f] | m
+    return out
+
+
+def _assign(labels, bodies, min_iou: float = 0.3, max_gap: int = 16):
     owner: dict[int, str] = {}
     last: dict[str, tuple[float, float, float, int]] = {}
     out: dict[str, list[np.ndarray | None]] = {pid: [] for pid in bodies}
@@ -84,7 +132,7 @@ def assign_bodies(labels: list[np.ndarray], bodies: dict[str, tuple[int, int, in
                 out[pid].append(mask)
             else:
                 out[pid].append(None)
-    return out
+    return out, owner
 
 
 def _iou(a, b) -> float:
@@ -208,10 +256,12 @@ def window_ranges(n: int, window: int = WINDOW, overlap: int = OVERLAP) -> list[
 
 
 async def _generate_window(client, recipe, frames, region, body, ref, wdir, rate, *, profile, quality, seed, prompt,
-                           negative, qc, label, warnings, progress, cancelled) -> list[np.ndarray]:
+                           negative, qc, label, warnings, progress, cancelled, retarget=None) -> list[np.ndarray]:
     """One model run over <= WINDOW frames; returns generated frames (generation size, float)."""
     media = await asyncio.to_thread(build_inputs, frames, region, wdir, rate, body)
     media["ref"] = ref
+    if retarget is not None:  # rescale the pose skeleton to the character's proportions
+        media["retarget"] = retarget
     n = padded_length(len(frames))
     files: list[Path] = []
     for attempt in range(2 if qc else 1):
@@ -288,7 +338,8 @@ async def looks_replaced(client: ComfyClient, frames: list[Path], masks: list[np
 async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, performers: dict[str, Subject],
                        refs: dict[str, Path], prompts: dict[str, str], work: Path, *, profile: str, quality: str,
                        gen_size: tuple[int, int], seed: int, negative: str = "", mask_mode: str = "full_body",
-                       qc: bool = True, report=None, cancelled=None) -> tuple[Path, list[str]]:
+                       qc: bool = True, replace_all: bool = True, retarget: bool = False, report=None,
+                       cancelled=None) -> tuple[Path, list[str]]:
     """Replace each performer in `piece` (one shot, at the clip's resolution and frame rate;
     performer boxes in its pixels) with their reference. Returns (video with the same size,
     frame rate and frame count, warnings)."""
@@ -306,7 +357,10 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
     labels = await track_labels(client, small, work / "people", profile=profile, query="person",
                                 detect_interval=4, max_objects=8, cancelled=cancelled)
     bodies = {pid: tuple(int(v / factor) for v in s.bbox) for pid, s in performers.items() if pid in refs}
-    body_tracks = assign_bodies(labels, bodies)
+    if replace_all:  # everyone on screen becomes a cast character, matched or not
+        body_tracks = assign_everyone(labels, bodies, [p for p in refs if p not in bodies])
+    else:
+        body_tracks = assign_bodies(labels, bodies)
     head_tracks = {}
     if mask_mode == "head":
         head_labels = await track_labels(client, small, work / "heads", profile=profile, cancelled=cancelled)
@@ -314,7 +368,7 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
     warnings: list[str] = []
     gen_frames = [np.asarray(Image.fromarray(f).resize((gw, gh), Image.Resampling.LANCZOS)) for f in frames]
     out = [f.astype(np.float32) for f in frames]
-    todo = list(bodies)
+    todo = [p for p in body_tracks if any(m is not None for m in body_tracks[p])]
     n_todo = len(todo)
     for idx, pid in enumerate(todo, start=1):
         try:
@@ -351,7 +405,8 @@ async def animate_shot(client: ComfyClient, recipe: Recipe, piece: Path, perform
             part = await _generate_window(
                 client, recipe, gen_frames[a:b], region_gen[a:b], body_gen[a:b], ref, pdir / f"w{w_i}", rate,
                 profile=profile, quality=quality, seed=seed, prompt=prompts.get(pid, ""), negative=negative,
-                qc=qc and mask_mode != "head", label=pid, warnings=warnings, progress=progress, cancelled=cancelled)
+                qc=qc and mask_mode != "head" and w_i == 0, label=pid, warnings=warnings, progress=progress,
+                cancelled=cancelled, retarget=ref if retarget else None)
             for j, g in enumerate(part):
                 i = a + j
                 if gen[i] is None:

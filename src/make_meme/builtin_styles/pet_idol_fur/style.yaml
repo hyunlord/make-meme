@@ -14,7 +14,8 @@ design_prompt: >
   on two legs like a dancer, the whole body covered in its real {coat} fur, no clothing,
   paws instead of hands, a tail, full body from head to feet, keeping the dog's real face
   and markings, plain white background.
+  Keep the breed's real build: a slender breed stays slender, with a thin waist and long thin legs; animal eyes and a real dog face, no human chest or muscles.
 prompt: "{scene}{subject_desc_cap} standing on two legs and dancing, fur-covered body, no clothing, paws and a tail."
-negative: "clothes, shirt, pants, hoodie, costume, human skin, human hands, human face, extra limbs, deformed limbs, blurry"
+negative: "clothes, shirt, pants, hoodie, costume, human skin, human hands, human face, extra limbs, deformed limbs, blurry, human chest, pectoral muscles, abs, human eyes, bulky body, thick torso"
 keywords: [털, 옷 없이, 털옷, fur, furry]
 defaults: {length_sec: 15, aspect: "9:16"}
