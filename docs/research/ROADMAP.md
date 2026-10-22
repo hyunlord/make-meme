@@ -87,3 +87,10 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 ## B-007A 실제 결론 (2026-10-22)
 
 **COMPLETED: 실제 작은 FlashAttention kernel PASS4.** CPU 색상 mask/geometry/timebase 검증 완료, 경계 PARTIAL. 전체 모델 변환/로딩/추론과14B peak는 아직 NOT_RUN/NOT_MEASURED다. [결과](experiments/B-007-scail-preflight/RESULTS.md). 다음 하나는 별도 승인된 B-007B SCAIL-2 Wan RGB driving baseline이며, 현재는80GB 다운로드·추론을 시작하지 않는다. 이전 PLANNED/RUNNING은 역사 기록으로 보존한다.
+
+## B-007B — 실제 모델 baseline (2026-10-22 사전 계획)
+
+- 상태 **PLANNED / NOT_RUN**. [B-007B PLAN](experiments/B-007B-scail-baseline/PLAN.md).
+- B-007A FA2 BF16 tiny QKV4/4 PASS는 전체14B 실행 증명이 아님. checkpoint 대용량 eager load·safetensors load의 peak 위험이 있음.
+- **게이트 순서:** fresh Spark 자원/색상 mask·24fps → 소형 fixture로 메모리 안전 SAT→Wan 변환 방식 검증 → 필요 파일 최대85GB selective download → 변환/로딩 자원 측정 → 공식 예제 1건 및 Lab 실제 단일17f 1건까지 조건부 추론.
+- 신규 전체 diffusion inference 최대2회·학습0·다른 작업 비간섭. memory safe path 증명 못 하면 대형 변환을 강행하지 않고 BLOCKED. 영상이 나오면 동작·개체·시간적 품질을 독립 평가하며 Kling 수용 주장을 피한다.
