@@ -50,3 +50,9 @@ B-002에서는 새 학습 update를 하지 않는다. B-001에서 학습한 도�
 ## B-004 실제 결론 (2026-10-22)
 
 COMPLETED: 신규2·재사용2·학습0. R-gray에서1/2seed직립형태,1/2착석. 참조내용민감도는관측됐으나실제Lab개체/안무전이미수용. Canny고정이므로직립의구조인과효과미식별. 시간UNVERIFIED. [결과](experiments/B-004-reference-neutral/RESULTS.md). 다음하나는R-gray고정C-real/C-null비교제안이며NOT_RUN/미승인. 기존PLANNED는사전기록이다.
+
+## B-005 계획 등록 (2026-10-22)
+
+- 상태 **PLANNED / NOT_RUN**. [B-005 PLAN](experiments/B-005-factorial/PLAN.md).
+- R-bg/R-gray × C-real/C-null의 2×2 요인 비교를 두 seed에서 완료하는 마지막 작은 frozen 조건 제거 실험. 기존 B-003의 4개 및 B-004의 2개를 엄격 검증 후 재사용하여 **R-gray+C-null 두 회만 신규 실행**, 학습0.
+- 결과가 네 조합 모두 원본 춤+실제 Lab identity를 충족하지 못하면 같은 입력 제거 실험의 반복을 중단하고, 실제 동작 조건을 더 직접적으로 쓰는 로컬 동작 전이 baseline/표현 연구를 선택한다. 서비스·논문 가치를 앞서 선언하지 않는다.
