@@ -62,3 +62,11 @@ COMPLETED: 신규2·재사용2·학습0. R-gray에서1/2seed직립형태,1/2착�
 COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증통과,모든조합에서실제Labidentity+원본춤동시수용실패. 입력민감도와seed에따른반응차이는있지만유용한동작전이미입증. 시간UNVERIFIED. [결과](experiments/B-005-factorial/RESULTS.md).
 
 동일Canny/reference제거실험은여기서종료한다. 다음하나는명시적동물관절궤적·가시성·발접촉표현의원본동작보존및모델연결적합성검증이다. 아직NOT_RUN/미승인이며자동설치·학습·추론하지않는다. 이전PLANNED기록은사전상태로보존한다.
+
+
+## B-006 연구 방향 전환 (2026-10-22)
+
+- **PLANNED / NOT_RUN**: [B-006 PLAN](experiments/B-006-motion-representation/PLAN.md).
+- B-002~005의 input sensitivity 진단은 완료. 조건 형태를 바꿔도 8셀 모두 실제 Lab 정체성과 원본 안무를 동시 수용하지 못했으므로 **동작 표현/모델 조건 인터페이스 적합성**을 다음 연구 대상으로 정한다.
+- 다음은 17프레임에서 Canny/관절·가시성·접촉/RGB driving의 동작 정보 보존 능력, 공식 SCAIL-2 및 현 VACE의 실제 입력 경로, DGX Spark 환경의 실용성을 비교한다.
+- **B-006의 GPU 생성/학습 모델 실행 0회**; 새로운 pretrained 14B 체크포인트 다운로드·설치도 없음. 예산·구현 가능성 검사 후 B-007의 제한된 공식 baseline 한 건을 별도로 결정. 단순 keypoint 시각화만으로 생성 모델이 그 조건을 지원한다고 주장하지 않는다.
