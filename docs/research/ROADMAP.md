@@ -126,3 +126,10 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 **CONVERSION_PASS, 모델 실행·영상 baseline NOT_RUN.** OS 격리·정확한 scoped globals·실제 metadata 통과 후 두 번째이자 마지막 CPU mmap load로 SAT→Wan tensor-only 변환을 완료했다. 원본987개에서 mapped1,307개를 만들고 모든 값 hash·dtype·shape·QKV 순서와 원본 SHA를 검증했다. 전체 변환 guard456.759초, cgroup cap32GiB, 표본 RSS 약53GiB(서로 다른 회계), OOM0. 실제 load2회·재시도0. [결과](experiments/B-007D-safe-conversion/RESULTS.md), [이론](lessons/B-007D-real-checkpoint-loading.md).
 
 다음 하나는 별도 승인된 SCAIL 모델 적재·공식/Lab17프레임 제한 baseline이다. CPU 변환 성공은 GPU 모델 fit·영상 동작·개체 품질 성공이 아니다. 이번에는 모델·추론·학습을 시작하지 않았다.
+
+## B-007E — 실제 모델 적재와 RGB driving 최초 baseline (2026-10-22)
+
+- 상태 **PLANNED / NOT_RUN**. [B-007E PLAN](experiments/B-007E-scail-forward/PLAN.md).
+- B-007D SAT→Wan F32 65.58GB safetensors 변환/전체 tensor parity PASS는 실제 모델·GPU forward 통과를 보장하지 않는다. loader의 FP32 weight 일시적 중복·T5/CLIP/VAE/activation과 128GB 통합메모리 중복 계산 위험을 선행 점검.
+- 최대 두 가지 bounded 로딩 방법만 검증. 적재 가능할 때 공식17프레임 기준선 1회와 Lab17프레임 RGB-driving 1회(max diffusion sampler 2회), 학습0·대형 재다운로드0. 실패한 gate에서는 안전하게 BLOCKED·메모리 실측 제출.
+- 이번 목표는 실제 모델의 최초 영상 결과와 자원·개체·동작·시간평가 기준선을 확보하는 것. 자동으로 15초/두 동물/LoRA/후속 모델로 확대하지 않는다.
