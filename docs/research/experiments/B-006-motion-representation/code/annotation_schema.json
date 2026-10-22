@@ -1,0 +1,41 @@
+{
+  "schema_version": "B006-manual-v1",
+  "coordinate_system": "decoded RGB512x288, top-left origin, x right, y down; animal anatomical left/right (front-facing means image-right is animal-left)",
+  "landmark_ids": [
+    "nose",
+    "left_eye",
+    "right_eye",
+    "neck",
+    "tail_base",
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_front_paw",
+    "right_front_paw",
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_hind_paw",
+    "right_hind_paw"
+  ],
+  "mapping_note": "APT-36K inspired semantic names only, not an official annotation import; tail_base is our explicit definition of the paper's tail keypoint. No pose model used.",
+  "frame_status": [
+    "ANNOTATED",
+    "NOT_ANNOTATED"
+  ],
+  "visibility": [
+    "visible",
+    "occluded",
+    "unobservable"
+  ],
+  "point_contract": "visible -> xy:[x,y], uncertainty_px>0, note; occluded/unobservable -> xy:null, uncertainty_px:null, note. NOT_ANNOTATED -> no invented coordinates.",
+  "contact_contract": "Each paw has evidence visible_evidence/possible/unknown; touching true/false/null; note. 2D image evidence is not weight-bearing or 3D proof.",
+  "frame_contract": "frame0..16, time_seconds=frame/24, instance_id=source-dog-1, viewed_individually boolean, annotation_status, bbox_xyxy or null, camera_note, landmarks keyed by all17 IDs, contacts for4paws, note",
+  "normalization": "xy/[512,288] only. Anatomical root-relative coordinates NOT_COMPUTED if pelvis/body scale unresolved. Visible proxies are not joint centers.",
+  "uncertainty": "Manual low-resolution image observations. No interpolation as truth. Finite differences only adjacent manually annotated visible points; report px/s with independent worst-case uncertainty 24*(radius_t+radius_t1), never treat subuncertainty motion as measured truth.",
+  "torso_and_heading": "3D heading and joint angles are not inferred. Torso angle is unavailable when anatomical shoulder/hip centers are unresolved.",
+  "visibility_colors": "visible yellow dots; null joints not drawn; contact not rendered as a support assertion",
+  "private_data": "Actual coordinates, source images, overlays and paths stay private. Only this schema and generic code may be public."
+}

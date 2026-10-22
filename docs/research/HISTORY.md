@@ -132,3 +132,9 @@
 - 이 문서 검토에서는 Spark에서 모델을 직접 재실행하지 않았다. 제출 ZIP `make-meme-B-005-20261022.zip`은 이번 리뷰 시점에 Python/container 파일 열기 요청이 실패하여 CRC/실제 영상 재생을 독립 검증하지 못했다. SHA256 `dd1500c9aa328c297637c71936a694b073ec59383ab07836bddb2a03dbd88ca9`와 파일 822개 검증은 실행 담당자가 보고한 값이다. 시간 품질 UNVERIFIED 유지.
 - 판단: 조건 입력의 영향은 확인됐으나 유용한 동작 전달은 실패. 동일 회색/검정 콘텐츠 대체 실험을 반복하지 않고 동작 표현과 공식 조건 인터페이스 검토로 상위 연구 질문을 변경.
 - [B-006 사전 PLAN](experiments/B-006-motion-representation/PLAN.md): 비학습식 원본 동작 주석·비교 시각화, 2D landmark의 가림/접촉 표시, 기존 VACE와 공식 SCAIL-2 RGB driving 경로·Spark 적합성 문서/코드 비교. 새 대형 모델 설치/영상 추론/학습은 NOT_RUN, 승인 범위 아님.
+
+## 2026-10-22 — B-006 실행 전 고정
+
+- 시작 원격 HEAD `f6819d2a5e487516896e1169237d910bd98354fd`와 사전 PLAN을 확인했다. 기존 실행 환경과 공개 문서 worktree를 분리하고 A 및 이전 결과를 보존한다.
+- 수동 가시성 schema와 CPU 가시화 코드를 결과 전에 고정한다. 관측 불가능한 관절은 null; 3D 접촉/체중 분배를 2D 점으로 확정하지 않는다.
+- 신규 모델 다운로드·영상 diffusion 추론·학습은 0회. 공식 SCAIL-2/VACE 코드 조사와 원본 17프레임의 동작 표현 감사만 진행한다. [RUNNING](experiments/B-006-motion-representation/RUNNING.md).
