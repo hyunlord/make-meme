@@ -249,3 +249,9 @@
 - 실행 사전 고정 `97189c029ac298b0aded73990d1858d5df9b93bf`. 새 공식 시도1/2에서 전체 적재331.44초는 통과했으나 초기 noise 저장 이후 첫 DiT forward 이전에 MemAvailable23.912720GiB가 기존24GiB 하한을 밑돌아 종료했다. swap/OOM0, exact allocating subphase UNOBSERVED.
 - post-sampler 정책은 NOT_REACHED이며 final latent/raw/MP4 없음. initial noise는 E와 동일하지만 final latent가 아니다. Lab NOT_RUN·자동 재시도0·다운로드/학습0. [RESULTS](experiments/B-007F-post-sampler-memory/RESULTS.md).
 - 다음 하나는 저장된 E/F trace와 코드의 pre-forward 메모리 수명 CPU-only 감사다. 새 모델 로딩·sampler·decode를 자동 실행하지 않는다. 기존 E 실패와 F 시도 장부를 보존한다.
+
+## 2026-10-23 — B-007G 착수: 순차 프로세스로 메모리 수명 분리
+
+- 시작 원격 `62c9ef583f109080e640184cecd58a7ad90a853d`와 [PLAN](experiments/B-007G-phase-separated-baseline/PLAN.md)을 확인했다. F post-sampler 정책은 NOT_REACHED이므로 실패 원인으로 단정하지 않는다.
+- E/F CPU-only 비교 최대45분 후, 기존 수학·noise·dtype·입력 계약을 유지한 P(조건 인코딩)/S(DiT)/D(VAE) 별도 프로세스를 검증한다. 기존 pipeline 전체를 반복 적재하는 경로는 사용하지 않는다.
+- 전체4시간, 공식17f16fps 한정 P1/S최대1/D1, 선행 실패 시 후속 중지. 24GiB 가드·기존 서비스·A와 E/F 기록 보존. 코드/fixture/검토/사전 push 이전 실제 실행 NOT_RUN. [진행](experiments/B-007G-phase-separated-baseline/RUNNING.md).

@@ -149,3 +149,7 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 **BLOCKED / MP4·final latent 미확보.** 전체 적재331.44초 후 첫 DiT forward 이전의 headroom guard로 공식1/2 시도가 종료됐다. 초기 noise만 보존됐고 변경한 post-sampler 정책은 NOT_REACHED다. Lab NOT_RUN, 추가 sampler·학습0. [RESULTS](experiments/B-007F-post-sampler-memory/RESULTS.md).
 
 다음 한 작업은 기존 E/F trace·코드에 대한 첫 forward 이전 메모리 수명 CPU-only 감사다. 실제 final latent가 없으므로 decode-only 재개는 아직 불가능하다. 새 모델 로딩·추론은 별도 결정 전 자동 실행하지 않는다.
+
+## B-007G 착수 (2026-10-23)
+
+**RUNNING / P·S·D NOT_RUN.** [PLAN](experiments/B-007G-phase-separated-baseline/PLAN.md). F는 post-sampler 변경에 도달하지 않았으므로 그 정책을 반증하지 않는다. 제한된 E/F CPU 비교와 함께 조건·DiT·decode의 불필요한 동시 상주를 줄이는 순차 프로세스 구조를 시험한다. 같은 공식17f16fps·noise·scheduler·dtype·24GiB 하한을 유지하며 새 sampler 최대1회다. 실패 시 재시도하지 않고 저장된 조건/최종 latent와 정확한 경계를 남긴다.
