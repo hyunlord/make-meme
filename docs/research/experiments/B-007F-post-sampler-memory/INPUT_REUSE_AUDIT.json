@@ -4,7 +4,7 @@
   "finished_utc": "2026-10-22T15:54:14.575376+00:00",
   "baseline": "B-007E preservation_after.json",
   "baseline_sha256": "054153afce82608ce99065a0097a81000faa7ffab5a4c1ad17d24ab1afb1053c",
-  "private_evidence_sha256": "b1c15b1f028da523b3bd5dfcd2e27322f1e39deea63469b17eb3e15a710ddba0",
+  "private_evidence_sha256": "42147a8b83817b97de2ae1dc5241834acb12d95361307dec9fcef6878c48d6cb",
   "groups": {
     "weights": {
       "count": 8,
@@ -69,5 +69,54 @@
       "match": true,
       "sha256": "26b96ca0dac0d3742f571ba160217b6f935bd3c0a83a67d1902cc948b43928e4"
     }
-  ]
+  ],
+  "post_run_preservation": {
+    "started_utc": "2026-10-22T16:09:29.100440+00:00",
+    "finished_utc": "2026-10-22T16:11:20.305093+00:00",
+    "all_match": true,
+    "groups": {
+      "weights": {
+        "count": 8,
+        "matching": 8
+      },
+      "dependencies": {
+        "count": 168,
+        "matching": 168
+      },
+      "source_original": {
+        "count": 8,
+        "matching": 8
+      },
+      "fixed_inputs_config": {
+        "count": 10,
+        "matching": 10
+      }
+    },
+    "e_ledger_comparison": [
+      {
+        "alias": "reports/pipeline-process.json",
+        "mac_retained_sha256": "e805874b11d2abef4321491b0441c3ac91fc4746a1c264885117d8df2d65e692",
+        "spark_current_sha256": "e805874b11d2abef4321491b0441c3ac91fc4746a1c264885117d8df2d65e692",
+        "match": true
+      },
+      {
+        "alias": "reports/model-load-attempt.json",
+        "mac_retained_sha256": "d43d8d5b632b5d0e58b546ed44a7bde8675fd203086e2e99d2102a66361c5662",
+        "spark_current_sha256": "d43d8d5b632b5d0e58b546ed44a7bde8675fd203086e2e99d2102a66361c5662",
+        "match": true
+      },
+      {
+        "alias": "reports/official-sampler-attempt.json",
+        "mac_retained_sha256": "02c2d2484ec184b7eb0ff7356d57d793e7cbc7cd9f4abace64ba161b28a15ab1",
+        "spark_current_sha256": "02c2d2484ec184b7eb0ff7356d57d793e7cbc7cd9f4abace64ba161b28a15ab1",
+        "match": true
+      },
+      {
+        "alias": "outputs/official/run.json",
+        "mac_retained_sha256": "9e32cfe588615b137f3ce6ceceba7ccb973f2cb8ee209c864aebfdacd6cb6089",
+        "spark_current_sha256": "9e32cfe588615b137f3ce6ceceba7ccb973f2cb8ee209c864aebfdacd6cb6089",
+        "match": true
+      }
+    ]
+  }
 }

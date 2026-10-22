@@ -1,6 +1,6 @@
 # B-007F — 통합 메모리에서 tensor의 수명 관리
 
-현재 B-007F 실측은 **NOT_RUN**이다. [계획](../experiments/B-007F-post-sampler-memory/PLAN.md)에 따라 실행 증거가 도착하면 갱신한다. B-007E의 성공·실패는 선행 관측이며 이번 결과를 대신하지 않는다.
+현재 B-007F는 **첫 DiT forward 이전 시스템 headroom guard 종료**다. [계획](../experiments/B-007F-post-sampler-memory/PLAN.md)에 따라 실제 결과와 도달하지 못한 정책 변경을 아래에 구분한다. B-007E의 성공·실패는 선행 관측이며 이번 결과를 대신하지 않는다.
 
 ## 1. 직관: 이동·해제·캐시 반환은 다르다
 
@@ -49,7 +49,7 @@ B-007E는 로그40/40 뒤 guard로 종료됐고 정확한 offload/decode 위치�
 - raw finite/17f 및 실제 MP4 decode·fps·guard 정상 종료: VIDEO_OUTPUT_PASS.
 - 개체·안무·시간 품질: 별도의 시각 검토. 연속 재생을 보지 못하면 UNVERIFIED.
 
-이번 새 phase·메모리·latent·영상 결과는 아직 NOT_RUN/NOT_MEASURED다. 원본 및 B-007E 실패를 덮어쓰지 않는다.
+이번 phase·메모리 관측과 미실행 항목은 아래 실제 결과에 기록했다. 원본 및 B-007E 실패를 덮어쓰지 않는다.
 
 ## 이해 질문
 
@@ -62,3 +62,17 @@ B-007E는 로그40/40 뒤 guard로 종료됐고 정확한 offload/decode 위치�
 1. CPU 이동은 값과 모델 소유를 유지한다. 마지막 참조 제거는 storage 해제를 가능하게 하지만 allocator cache가 남을 수 있다. empty_cache는 사용하지 않는 cache를 반환하며 살아 있는 parameter를 삭제하지 않는다. 통합 메모리에서는 device 이동이 물리 용량 해방을 보장하지 않는다.
 2. 아니다. initial noise는 sampler 시작 상태이고 generated latent는 scheduler/history 처리가 끝난 decode 입력이다. VAE code/weights·scale 규약, 실제 shape/dtype·finite/hash·완료 step, input/config/noise hash와 segment/reference 포함 여부가 필요하다. 파일의 atomic 완료도 확인해야 한다.
 3. 가능하다. 회계 범위가 다르고 cgroup 밖의 작업 및 GPU allocation·공유 page가 있다. 시스템 가용 메모리도 직접 감시해야 한다. synchronize와 hook은 timing을 바꾸므로 완료 경계를 더 정확히 관측한 사실과 성능 개선 주장을 구분한다.
+
+## 사전 고정 구현 연결
+
+commit `97189c029ac298b0aded73990d1858d5df9b93bf`의 [runtime_patch.py](../experiments/B-007F-post-sampler-memory/code/runtime_patch.py)는 기존 post-loop 블록 하나와 step 완료 지점 하나가 정확히 일치해야 패치한다. [runtime_transition.py](../experiments/B-007F-post-sampler-memory/code/runtime_transition.py)는 최종 latent 보존과 선택한 이동 생략·decode 경계를 담당하며, [runtime_observe.py](../experiments/B-007F-post-sampler-memory/code/runtime_observe.py)는 phase 관측을 기록한다. 실제 시작·완료 판정은 [runtime_infer.py](../experiments/B-007F-post-sampler-memory/code/runtime_infer.py)의 durable 기록과 guard 결과를 함께 읽는다. 코드 고정과 작은 mock 검증은 이번 실제 메모리·영상 결과가 아니다.
+
+## 실제 결과: post-loop 변경에 도달하지 못함
+
+전체 pipeline 적재는331.4초, preprocess 완료까지340.9초였다. initial noise hash는 B-007E와 일치했고 저장된 forward counter는0이었다. 첫 forward 진입·완료 관측은 없으며, 이 값은 최종 counter 실측이 아닌 저장 스냅샷이다. sampler 예약은 새 상한2회 중1회 사용으로 보존한다. 마지막 durable phase는 `pipeline_loaded`이며 첫 forward 이전의 정확한 종료 subphase는 **UNOBSERVED**다.
+
+MemAvailable=25,676,087,296 bytes가24GiB(25,769,803,776 bytes) 아래로 내려가 guard가 중단했다. swap0·OOM0이다. 이전 B-007E와 달리 sampler40step이나 post-loop 경계에 도달하지 않았다. 그러므로 post-loop CPU 이동 생략은 **NOT_REACHED**이며 성공도 반증도 아니다. 동일 initial noise는 동일 완료 결과의 증거가 아니다.
+
+최종 latent·decoded raw·MP4는 없다. Lab는 NOT_RUN이고 자동 재시도는 없다. final-save 구현의 순서·실패 보존은 작은 mock으로만 검증됐으며 실제 최종 latent 보존 성공이라고 보고하지 않는다. initial noise를 final latent처럼 decode하는 것도 금지한다.
+
+다음 한 제안은 **CPU-only 사전 forward 메모리 수명·guard trace 감사**다. 기존 로그와 고정 코드에서 pre-forward model.to(device)의 parameter 소유·이동 순서, 시스템 메모리 표본과 phase 간격을 대조한다. 이 조사에서는 GPU 적재·sampler·decode를 실행하지 않는다. 정확한 subphase를 입증할 증거가 부족하면 UNKNOWN을 유지하며, 새 sampler 예산이나 guard 완화로 자동 확대하지 않는다. final latent가 없으므로 decode-only 실험을 현재 재개 경로로 제안하지 않는다.

@@ -243,3 +243,9 @@
 - 시작 원격 HEAD `fcd1fda723b3828d416fa4de7b14fa292f9e02a6`와 [사전 계획](experiments/B-007F-post-sampler-memory/PLAN.md)을 확인했다. B-007E의 1/2 시도·실패 기록은 보존한다.
 - 기존 mixed-BF16 loader·가중치·입력·sampler·72/24GiB 가드를 유지하고 post-loop `self.model.cpu()` 한 곳만 생략한다. final decode latent의 원자적 저장·정확한 counter·단계별 메모리 관측을 선행 구현한다.
 - 신규 sampler 최대2회: 공식1회, raw/MP4 검증과 종료 후 자원 회복이 모두 통과한 경우에만 별도 프로세스의 Lab1회. 자동 재시도·다운로드·학습0. 실행 코드를 공개 고정한 뒤 시작하며 현재 sampler NOT_RUN이다.
+
+## 2026-10-23 — B-007F 공식 예제 첫 forward 전 중단
+
+- 실행 사전 고정 `97189c029ac298b0aded73990d1858d5df9b93bf`. 새 공식 시도1/2에서 전체 적재331.44초는 통과했으나 초기 noise 저장 이후 첫 DiT forward 이전에 MemAvailable23.912720GiB가 기존24GiB 하한을 밑돌아 종료했다. swap/OOM0, exact allocating subphase UNOBSERVED.
+- post-sampler 정책은 NOT_REACHED이며 final latent/raw/MP4 없음. initial noise는 E와 동일하지만 final latent가 아니다. Lab NOT_RUN·자동 재시도0·다운로드/학습0. [RESULTS](experiments/B-007F-post-sampler-memory/RESULTS.md).
+- 다음 하나는 저장된 E/F trace와 코드의 pre-forward 메모리 수명 CPU-only 감사다. 새 모델 로딩·sampler·decode를 자동 실행하지 않는다. 기존 E 실패와 F 시도 장부를 보존한다.

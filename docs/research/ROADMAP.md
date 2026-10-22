@@ -143,3 +143,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 ## B-007F 착수 (2026-10-23)
 
 **RUNNING / sampler NOT_RUN.** [PLAN](experiments/B-007F-post-sampler-memory/PLAN.md). B-007E의 메모리 전이 가설을 검증하기 위해 post-loop DiT CPU 이동 한 곳만 생략하고, decode 전 final latent·실제 완료 counter를 보존한다. 공식 예제 실패 시 Lab는 실행하지 않는다. 같은24GiB headroom 유지, 신규 sampler 최대2회·3시간·학습0. 실패 시 저장 latent의 decode만 다음 후보로 남기며 자동 실행하지 않는다.
+
+## B-007F 실제 결론 (2026-10-23)
+
+**BLOCKED / MP4·final latent 미확보.** 전체 적재331.44초 후 첫 DiT forward 이전의 headroom guard로 공식1/2 시도가 종료됐다. 초기 noise만 보존됐고 변경한 post-sampler 정책은 NOT_REACHED다. Lab NOT_RUN, 추가 sampler·학습0. [RESULTS](experiments/B-007F-post-sampler-memory/RESULTS.md).
+
+다음 한 작업은 기존 E/F trace·코드에 대한 첫 forward 이전 메모리 수명 CPU-only 감사다. 실제 final latent가 없으므로 decode-only 재개는 아직 불가능하다. 새 모델 로딩·추론은 별도 결정 전 자동 실행하지 않는다.

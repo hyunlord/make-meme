@@ -1,0 +1,84 @@
+{
+  "supervisor": {
+    "reason": "system_headroom_or_swap",
+    "returncode": 0,
+    "started": 1792684851.867233,
+    "finished": 1792685261.880142
+  },
+  "last_durable_phase": "pipeline_loaded",
+  "last_phase_epoch": 1792685197.644302,
+  "phase_durations": [
+    {
+      "phase": "t5_constructor",
+      "seconds": 66.58649014099501
+    },
+    {
+      "phase": "t5_checkpoint_load",
+      "seconds": 1.0650437090080231
+    },
+    {
+      "phase": "t5",
+      "seconds": 76.44010845199227
+    },
+    {
+      "phase": "clip_constructor",
+      "seconds": 0.15034202201059088
+    },
+    {
+      "phase": "clip_checkpoint_load",
+      "seconds": 2.305811919970438
+    },
+    {
+      "phase": "dit_meta_init",
+      "seconds": 0.05891512898961082
+    },
+    {
+      "phase": "full_pipeline_load",
+      "seconds": 331.44035469996743
+    }
+  ],
+  "unpaired_phase_starts": [
+    "vae",
+    "vae_complete_clip"
+  ],
+  "resource_sample_count": 404,
+  "min_available_gib": 23.9127197265625,
+  "max_swap_bytes": 0,
+  "max_observed_cgroup_current_bytes": 66079387648,
+  "cases": [
+    {
+      "case": "official",
+      "run_status": "NOT_RECORDED",
+      "error": null,
+      "completed_steps": null,
+      "actual_model_calls": null,
+      "persisted_forward_calls": 0,
+      "latent_status": "NOT_SAVED",
+      "latent_shape": null,
+      "latent_dtype": null,
+      "latent_readback_exact_runtime": null,
+      "output_finite": null,
+      "mp4_exists": false
+    }
+  ],
+  "limits": [
+    "No completion inferred from tqdm or exit code alone.",
+    "Open phase is an observed boundary, not proof of the internal failure cause.",
+    "OS, cgroup, process and CUDA accounting must not be added together.",
+    "Artifact existence/hash does not establish image or temporal quality."
+  ],
+  "status": "LOAD_PASS_FIRST_FORWARD_NOT_REACHED_GUARD_STOP",
+  "last_mem_available_gib": 23.9127197265625,
+  "last_memory_events": "low 0\nhigh 9396\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "observed_cgroup_peak_bytes": 66118230016,
+  "actual_cap_bytes": 68140400640,
+  "initial_available_bytes": 93910204416,
+  "cap_formula_matches": true,
+  "load_seconds": 331.4405360959936,
+  "supervisor_seconds": 410.0129089355469,
+  "initial_noise_hash_match_E": true,
+  "initial_noise_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+  "lab": "NOT_RUN",
+  "causal_limit": "Post-sampler policy was not reached; this run cannot establish its memory benefit or cause of E failure.",
+  "metrics_sha256": "a88b3612127df55667cb6e059687d5485d3f37660004be1c5bc72c1a7cc491ab"
+}
