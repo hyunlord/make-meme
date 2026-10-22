@@ -133,3 +133,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 - B-007D SAT→Wan F32 65.58GB safetensors 변환/전체 tensor parity PASS는 실제 모델·GPU forward 통과를 보장하지 않는다. loader의 FP32 weight 일시적 중복·T5/CLIP/VAE/activation과 128GB 통합메모리 중복 계산 위험을 선행 점검.
 - 최대 두 가지 bounded 로딩 방법만 검증. 적재 가능할 때 공식17프레임 기준선 1회와 Lab17프레임 RGB-driving 1회(max diffusion sampler 2회), 학습0·대형 재다운로드0. 실패한 gate에서는 안전하게 BLOCKED·메모리 실측 제출.
 - 이번 목표는 실제 모델의 최초 영상 결과와 자원·개체·동작·시간평가 기준선을 확보하는 것. 자동으로 15초/두 동물/LoRA/후속 모델로 확대하지 않는다.
+
+## 2026-10-22 — B-007E 실제 적재·첫 forward 통과, 영상 출력 차단
+
+**LOAD_PASS / FIRST_FORWARD_PASS / VIDEO_OUTPUT_BLOCKED.** 실제 SCAIL pipeline은268.587초에 적재,1,307tensor strict검사와12,992-token 첫 finite forward를 통과했다. 공식 sampler1회에서40/40 progress 뒤 post-sampler offload/decode 경계의 MemAvailable23.899GiB가24GiB 하한을 밑돌아 자기 프로세스만 종료했다. 정확한 종료 subphase는UNOBSERVED이며 OOM/FlashAttention 실패로 단정하지 않는다. 최종 raw/MP4/denoisedlatent 없음, Lab NOT_RUN, 추론1/2·학습0·다운로드0. [결과](experiments/B-007E-scail-forward/RESULTS.md).
+
+다음 하나는 final latent 저장·phase hook과 post-loop DiT GPU 유지 경로의 제한된 메모리 전이 검증이다. 별도 승인 전 새 sampler·모델·학습을 자동 시작하지 않는다. 기존 계획·과거 NOT_RUN은 해당 시점 기록으로 보존한다.

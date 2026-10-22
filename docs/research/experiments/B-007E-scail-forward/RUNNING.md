@@ -19,3 +19,7 @@
 14:06:15UTC 실제 full pipeline 로딩 시작. T5/VAE/CLIP 이후 DiT mixed loader를 거쳐14:10:44UTC 전체 적재 완료(268.587초). 1,307개 tensor의 strict assign missing/unexpected는 모두 빈목록. DiT 실제16,395,544,384 parameter,33,166,820,096 bytes; BF16 tensor974개와 FP32 tensor333개.
 
 공식 sampler1회 예약 후14:12:05UTC 첫 DiT 진입,14:12:28UTC finite 출력 완료. 첫 forward22.856초와 첫40-step sampler 단계40.30초는 서로 다른 단위다. 실제 token12,992, 첫 forward CUDA allocator peak36.798GB. 이 시점 영상 출력·Lab 시도는 아직 미완료다. Cgroup에 모든 GPU allocation이 반영되지 않아 MemAvailable 감시를 함께 유지한다.
+
+## 종료
+
+14:30:22UTC resource guard 종료. 마지막가용23.898979GiB<24GiB,swap0/OOM0. sampling40/40뒤offload/decode경계이며세부위치UNOBSERVED. 공식1회실패,Lab0회,영상없음. 종료코드0은서비스SIGTERM의정상처리이며실험성공이아니다. 추가실행없이원본보존검사·문서·비공개ZIP을마무리한다.

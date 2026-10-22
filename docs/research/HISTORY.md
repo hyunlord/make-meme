@@ -231,3 +231,9 @@
 - 사용자 제출 ZIP `make-meme-B-007D-20261022-1308.zip` 369,538 bytes를 현 세션 컨테이너로 직접 열어 SHA256 `ef6d94c37a1720223b52a1e61d0776e93bc2e11f299e73003801a271a954e96c` 확인, ZIP CRC 정상, manifest 59개 파일의 크기·해시 독립 PASS. Spark 저장 65.58GB 실물과 Mac 원본은 이 검토에서 직접 읽지 않았으므로 host 간 일치·실제 모델 forward를 검증했다고 주장하지 않는다.
 - GitHub B-007D 결과 commit `5e396f0cee097423e7c2ecdc3e7c4d80cc78ed64` RESULTS와 ZIP conversion ledger/code/checks를 대조. 실제 CPU mmap 제한 load 2회, SAT 987개→Wan 1,307개 tensor value/dtype/shape/hash 대응 PASS, converted output 65,582,313,560 bytes/SHA `8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118`. 변환 guard 456.759초, cgroup peak32GiB/RSS HWM약53GiB라는 별도 회계, OOM0. 변환 코드의 lint/type 지적은 잔존.
 - 다음 [B-007E PLAN](experiments/B-007E-scail-forward/PLAN.md): 변환본 재사용, SCAIL2 official full-model RAM/디바이스 적재 계측과 메모리-안전한 로딩만 통과 시 공식17f·Lab17f 각 최대1회 생성(새 전체 diffusion 최대2회), 학습/재다운로드0. **SCAIL 모델 load/forward/영상 출력은 아직 NOT_RUN.**
+
+## 2026-10-22 — B-007E 실제 적재·첫 forward 통과, 영상 출력 차단
+
+**LOAD_PASS / FIRST_FORWARD_PASS / VIDEO_OUTPUT_BLOCKED.** 실제 SCAIL pipeline은268.587초에 적재,1,307tensor strict검사와12,992-token 첫 finite forward를 통과했다. 공식 sampler1회에서40/40 progress 뒤 post-sampler offload/decode 경계의 MemAvailable23.899GiB가24GiB 하한을 밑돌아 자기 프로세스만 종료했다. 정확한 종료 subphase는UNOBSERVED이며 OOM/FlashAttention 실패로 단정하지 않는다. 최종 raw/MP4/denoisedlatent 없음, Lab NOT_RUN, 추론1/2·학습0·다운로드0. [결과](experiments/B-007E-scail-forward/RESULTS.md).
+
+다음 하나는 final latent 저장·phase hook과 post-loop DiT GPU 유지 경로의 제한된 메모리 전이 검증이다. 별도 승인 전 새 sampler·모델·학습을 자동 시작하지 않는다. 기존 계획·과거 NOT_RUN은 해당 시점 기록으로 보존한다.
