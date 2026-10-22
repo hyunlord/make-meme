@@ -13,7 +13,6 @@ from collections import Counter
 from pathlib import Path
 
 import torch
-
 from converter_mapping import OFFICIAL_SHA, MappingSource, checkpoint_tensors, mapped_tensors
 from converter_stream import tensor_header
 
