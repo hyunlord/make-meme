@@ -1,0 +1,166 @@
+{
+  "experiment": "B-007G",
+  "preregistered_commit": "648bbe4a1cf9cb13ddf25a6c9b5ca111282b0d6b",
+  "status": "CONDITION_CACHE_PASS / S_BLOCKED",
+  "parent_sampler_attempts": {
+    "E": 1,
+    "F": 1
+  },
+  "G_reserved_sampler_slots": 1,
+  "G_sampler_cap": 1,
+  "G_sampler_loop_entered": false,
+  "forward_count": "NOT_RECORDED; first_forward phase absent",
+  "completed_steps": "NOT_RECORDED; progress file absent",
+  "D": "NOT_RUN",
+  "retry": false,
+  "final_latent": "NOT_CREATED",
+  "raw_video": "NOT_CREATED",
+  "MP4": "NOT_CREATED",
+  "stages": {
+    "P": {
+      "whole_guard_seconds": 143.3308310508728,
+      "reason": "service_exit",
+      "returncode": 0,
+      "last_phase": "stage_P_complete",
+      "last_phase_elapsed": 140.53064977005124,
+      "memory_cap_bytes": 68719476736,
+      "minimum_available_bytes": 70981316608,
+      "maximum_swap_bytes": 0,
+      "maximum_observed_cuda_allocated_peak_bytes": 4320272384,
+      "last_cgroup_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "phases": [
+        {
+          "phase": "stage_P_start",
+          "elapsed_seconds": 0.00016057799803093076
+        },
+        {
+          "phase": "encoders_load_start",
+          "elapsed_seconds": 3.5652510140207596
+        },
+        {
+          "phase": "t5_constructor_start",
+          "elapsed_seconds": 3.5737857230124064
+        },
+        {
+          "phase": "t5_constructor_complete",
+          "elapsed_seconds": 74.44674873101758
+        },
+        {
+          "phase": "t5_dtype_device_cast_complete",
+          "elapsed_seconds": 83.17141454503872
+        },
+        {
+          "phase": "t5_checkpoint_load_start",
+          "elapsed_seconds": 83.19079917302588
+        },
+        {
+          "phase": "t5_checkpoint_load_complete",
+          "elapsed_seconds": 86.18793425901094
+        },
+        {
+          "phase": "clip_constructor_start",
+          "elapsed_seconds": 88.18137475504773
+        },
+        {
+          "phase": "clip_constructor_complete",
+          "elapsed_seconds": 88.3244427840109
+        },
+        {
+          "phase": "clip_dtype_device_cast_complete",
+          "elapsed_seconds": 88.35765780002112
+        },
+        {
+          "phase": "clip_checkpoint_load_start",
+          "elapsed_seconds": 88.36853820999386
+        },
+        {
+          "phase": "clip_checkpoint_load_complete",
+          "elapsed_seconds": 91.552045902994
+        },
+        {
+          "phase": "encoders_load_end",
+          "elapsed_seconds": 91.55677928205114
+        },
+        {
+          "phase": "conditions_save_start",
+          "elapsed_seconds": 140.31148942303844
+        },
+        {
+          "phase": "CONDITION_CACHE_PASS",
+          "elapsed_seconds": 140.52391553501366
+        },
+        {
+          "phase": "stage_P_complete",
+          "elapsed_seconds": 140.53064977005124
+        }
+      ]
+    },
+    "S": {
+      "whole_guard_seconds": 121.0544764995575,
+      "reason": "service_exit",
+      "returncode": 1,
+      "last_phase": "dit_load_end",
+      "last_phase_elapsed": 115.7415377870202,
+      "memory_cap_bytes": 68719476736,
+      "minimum_available_bytes": 62726045696,
+      "maximum_swap_bytes": 0,
+      "maximum_observed_cuda_allocated_peak_bytes": 0,
+      "last_cgroup_events": "low 0\nhigh 2660\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+      "final_service": "MainPID=0\nResult=exit-code\nActiveState=failed\n",
+      "phases": [
+        {
+          "phase": "stage_S_start",
+          "elapsed_seconds": 0.00021494698012247682
+        },
+        {
+          "phase": "dit_load_start",
+          "elapsed_seconds": 3.872168280009646
+        },
+        {
+          "phase": "dit_meta_init_start",
+          "elapsed_seconds": 3.8762656609760597
+        },
+        {
+          "phase": "dit_meta_init_done",
+          "elapsed_seconds": 3.9319015279761516
+        },
+        {
+          "phase": "dit_staged_weights_done",
+          "elapsed_seconds": 115.64132378296927
+        },
+        {
+          "phase": "dit_loader_complete_cpu",
+          "elapsed_seconds": 115.73263073898852
+        },
+        {
+          "phase": "dit_load_end",
+          "elapsed_seconds": 115.7415377870202
+        }
+      ]
+    }
+  },
+  "condition_cache": {
+    "bytes": 17365660,
+    "sha256": "1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308",
+    "readback_exact": true,
+    "tensor_count": 16,
+    "initial_noise_equals_E": true,
+    "aliases": "Shared argument values serialized as separate identical tensors; no storage-alias parity claim"
+  },
+  "failure": {
+    "type": "torch.AcceleratorError",
+    "message": "CUDA error: out of memory; cuDevicePrimaryCtxRetain returned CUDA_ERROR_OUT_OF_MEMORY",
+    "operation": "artifacts.load_tree restoring cached tensor to recorded cuda:0 device, after CPU staged DiT load",
+    "not_reached": [
+      "dit_to_device_start",
+      "sampler_start",
+      "first_forward_start",
+      "final_latent_save_start"
+    ],
+    "global_memory_guard_triggered": false,
+    "cgroup_oom_events": 0,
+    "cause_limit": "Underlying driver allocation/cgroup/unified-memory interaction UNKNOWN. No new mechanism inferred from driver error alone."
+  },
+  "owned_processes": "Both G units terminal failed with MainPID0; original Comfy idle, no owned GPU worker remains"
+}

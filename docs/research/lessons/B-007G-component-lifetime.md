@@ -1,6 +1,6 @@
 # B-007G — 같은 조건부 벡터장, 다른 구성 요소 수명
 
-현재 상태: **실물 P/S/D 결과 대기**. 아래 실행 계획과 코드 검토는 새 sampler 성공이나 메모리 절감의 실측이 아니다. [계획](../experiments/B-007G-phase-separated-baseline/PLAN.md), [재현 범위](../experiments/B-007G-phase-separated-baseline/REPRODUCE.md)를 함께 읽는다.
+최종 상태: **CONDITION_CACHE_PASS / S_BLOCKED / D NOT_RUN**. P의 조건 캐시는 보존됐다. S는 CPU DiT 적재 후 조건 tensor를 CUDA로 복원하는 단계에서 실패했으며 sampler loop·첫 forward·최종 latent·영상에는 도달하지 않았다. 재시도하지 않았다. [계획](../experiments/B-007G-phase-separated-baseline/PLAN.md), [재현 범위](../experiments/B-007G-phase-separated-baseline/REPRODUCE.md)를 함께 읽는다.
 
 ## 1. 조건을 먼저 계산해도 되는 이유
 
@@ -16,7 +16,7 @@ SCAIL의 한 sampling step은 noisy video latent `z_sigma`, noise time `sigma`, 
 
 교육용 linear path를 `z_sigma=(1-sigma)x+sigma*epsilon`으로 쓰면 velocity target은 `epsilon-x`이고, sampling은 높은 sigma에서 낮은 sigma로 간다. 이는 시간 방향을 반대로 정의한 `x-epsilon` 예제와 부호가 다르다. 실제 구현은 [flow prediction을 clean sample로 변환](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/utils/fm_solvers_unipc.py#L300-L327)하고 UniPC predictor/corrector와 이전 step 기록을 사용한다. 단순 Euler로 교체하지 않는다.
 
-CFG는 `v_cfg=v_null+5*(v_cond-v_null)`이다. 여기의 null은 무조건 모든 조건을 제거한다는 뜻이 아니다. 실제 `arg_null`에서 유지되는 시각 조건과 negative text를 그대로 보존해야 한다. [공식 loop](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)의 40 step과 두 branch는 완료 시 80 DiT 호출을 요구한다. 이 수는 계획이며 실제 G 완료 여부는 durable counter로 확인한다.
+CFG는 `v_cfg=v_null+5*(v_cond-v_null)`이다. 여기의 null은 무조건 모든 조건을 제거한다는 뜻이 아니다. 실제 `arg_null`에서 유지되는 시각 조건과 negative text를 그대로 보존해야 한다. [공식 loop](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)의 40 step과 두 branch는 완료 시 80 DiT 호출을 요구한다. 이는 완료 시 요구되는 수다. 실제 G는 counter 초기화와 loop 이전에 실패하여 forward/step counter가 기록되지 않았다. 실행 경로상 미도달이라는 증거를 완료된 counter 측정으로 바꾸지 않는다.
 
 seed만 같아도 generator의 소비 순서가 다르면 noise가 달라진다. P는 E의 저장된 initial noise와 값 및 SHA를 대조하고, noise 생성 이후 generator state도 저장하도록 구현되어 있다. S는 그 state를 복원하고 resolved timesteps/sigmas의 동등성을 검사한다. pinned [UniPC step](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/utils/fm_solvers_unipc.py#L657-L750)은 `generator`를 인자로 받지만 이 함수 본문에서 사용하지 않으며 해당 파일에는 random sampling 호출이 없다. 이 사실은 다른 scheduler도 deterministic하다는 일반 명제가 아니다.
 
@@ -56,7 +56,28 @@ D는 [공식 VAE decode](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be
 
 ## 6. 관측과 한계
 
-E는 첫 forward finite PASS와 sampler 40/40 로그를 남겼지만 offload/decode 경계에서 guard가 종료했다. F는 첫 forward 이전에 guard가 종료하여 post-loop 개입이 실행되지 않았다. 둘 다 final latent와 MP4가 없으며 정확한 중간 allocating operation은 UNOBSERVED다. G의 P/S/D 실물 결과, 단계별 peak와 시간은 아직 이 문서에 등록되지 않았다. 학습·LoRA·Lab·identity/motion 품질 수용은 이 구조 검증으로 통과하지 않는다.
+E는 첫 forward finite PASS와 sampler 40/40 로그를 남겼지만 offload/decode 경계에서 guard가 종료했다. F는 첫 forward 이전에 guard가 종료하여 post-loop 개입이 실행되지 않았다. 둘 다 final latent와 MP4가 없으며 정확한 중간 allocating operation은 UNOBSERVED다. G의 P는 정상 종료와 PID 0/inactive를 확인했다. guard 기준 143.331초, phase 완료 기준 140.53초다. 조건 파일은 17,365,660 bytes이며 SHA256은 `1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308`이다. initial noise는 E의 실제 저장 tensor와 값 및 hash가 같았다. P 중 최소 MemAvailable은 70,981,316,608 bytes, CUDA peak allocated는 4,320,272,384 bytes였다. 종료 후 MemAvailable은 93,767,056 KiB였다. 측정 단위와 시점이 다르므로 이 값들을 합산하지 않는다. S의 마지막 durable phase는 `dit_load_end`, stage 시작 후 115.742초다. `dit_load_start`와의 차이는 111.869초이며 전체 guard 시간은 121.054초다. 이후 `artifacts.load_tree`가 캐시 tensor를 기록된 `cuda:0`로 복원할 때 `cuDevicePrimaryCtxRetain`의 `CUDA_ERROR_OUT_OF_MEMORY`로 실패했다. `dit_to_device_start`, `sampler_start`, `first_forward_start`에는 도달하지 않았다. D는 NOT_RUN이며 final latent/raw/MP4는 생성되지 않았다.
+
+S의 마지막 phase에는 `cuda_initialized=true`와 allocator allocated/reserved/peak 0이 함께 기록됐다. 이는 PyTorch allocator 관측이며 CUDA driver가 쓸 메모리가 충분하거나 primary context가 모든 관점에서 준비됐다는 증거가 아니다. S 최소 MemAvailable은 62,726,045,696 bytes로 이번 global headroom guard가 발동한 것이 아니다. cgroup `high=2660`, `oom=0`, `oom_kill=0`, swap 0이다. `high`는 pressure/throttling 회계이며 kernel OOM 발생 횟수가 아니다. driver 오류와 cgroup/통합 메모리 사이의 정확한 인과관계는 **UNKNOWN**으로 남긴다. 마지막 snapshot의 allocator peak 0을 오류 순간의 모든 메모리 peak라고 부르지 않는다.
+
+[MEASUREMENTS](../experiments/B-007G-phase-separated-baseline/MEASUREMENTS.json)와 [RUN_LEDGER](../experiments/B-007G-phase-separated-baseline/RUN_LEDGER.json)가 실제 근거다. 조건 cache의 공유 argument 값은 별도 동일 tensor로 직렬화됐으므로 storage alias 보존까지 검증됐다고 주장하지 않는다. 수학 인자 값 보존과 물리 storage 관계는 별도 계약이다.
+
+다음 제안은 한 가지다. 기존 P cache와 기록을 사용하여 CPU 적재·CUDA context 준비·조건 복원의 메모리 순서를 조사하는 한정 작업이다. 새로운 sampling을 자동 실행하거나 이번 실패만으로 다른 loader/allocator가 해결책이라고 단정하지 않는다. 학습·LoRA·Lab·identity/motion 품질 수용은 이 구조 검증으로 통과하지 않는다.
+
+### P에서 실제 저장한 조건
+
+| 항목 | 실제 shape | dtype |
+|---|---|---|
+| positive / negative text | `[5,4096]` / `[1,4096]` | BF16 |
+| CLIP | `[1,257,1280]` | FP16 |
+| reference latent | `[16,1,64,112]` | FP32 |
+| reference mask | `[28,6,64,112]` | FP32 |
+| driving latent | `[16,5,32,56]` | FP32 |
+| driving mask | `[28,5,32,56]` | FP32 |
+| post-noise generator state | `[16]` | uint8 |
+| timesteps / sigmas | `[40]` / `[41]` | int64 / FP32 |
+
+별도 CPU 40-step fixture에서는 UniPC 호출 전후 RNG state가 같았다. 이는 pinned solver의 generator 미사용 소스와 일치하며, 실물 S의 완료를 뜻하지 않는다. 공유 artifact는 파일 전달이고 GPU tensor IPC가 아니다.
 
 ## 이해 확인 질문
 

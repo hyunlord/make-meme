@@ -153,3 +153,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 ## B-007G 착수 (2026-10-23)
 
 **RUNNING / P·S·D NOT_RUN.** [PLAN](experiments/B-007G-phase-separated-baseline/PLAN.md). F는 post-sampler 변경에 도달하지 않았으므로 그 정책을 반증하지 않는다. 제한된 E/F CPU 비교와 함께 조건·DiT·decode의 불필요한 동시 상주를 줄이는 순차 프로세스 구조를 시험한다. 같은 공식17f16fps·noise·scheduler·dtype·24GiB 하한을 유지하며 새 sampler 최대1회다. 실패 시 재시도하지 않고 저장된 조건/최종 latent와 정확한 경계를 남긴다.
+
+## B-007G 종료 (2026-10-23)
+
+**CONDITION_CACHE_PASS / S_FAILED / D_NOT_RUN.** P143.331초에 실제 조건과 동일 initial noise를 저장했다. S121.054초 시도는 CPU DiT 적재 후 첫 조건의 CUDA 복원에서 `cuDevicePrimaryCtxRetain` OOM으로 종료됐고 sampler loop·첫 forward에 도달하지 않았다. 24GiB 가드 종료가 아니며 정확한 드라이버/메모리 원인은 UNKNOWN이다. 신규 슬롯1/1 사용, 재시도0, final latent/MP4 없음. [결과](experiments/B-007G-phase-separated-baseline/RESULTS.md).
+
+다음 하나는 기존 P 캐시를 활용하는 S의 CUDA context/CPU weight 수명 사전 진단이다. decode-only용 final latent는 없으며 새 sampler는 자동 실행하지 않는다.

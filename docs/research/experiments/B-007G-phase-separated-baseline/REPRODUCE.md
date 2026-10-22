@@ -1,6 +1,6 @@
 # B-007G 재현 범위와 순차 실행
 
-현재: **실물 실행 결과 대기**. 이 문서는 [PLAN](PLAN.md)의 한정된 공식 예제 P/S/D 실행을 설명한다. 명령이 있다는 사실은 실행 완료를 뜻하지 않는다. deadline이 지났거나 stage reservation이 이미 존재하면 실행을 반복하지 않는다. 이후 재실행에는 별도의 승인된 예산과 새 기록이 필요하다.
+최종: **P CONDITION_CACHE_PASS / S_BLOCKED / D NOT_RUN**. 이번 실행은 종료됐으며 아래 명령은 당시 재현 계약이다. 남은 단계나 sampler를 자동 실행하지 않는다. 이 문서는 [PLAN](PLAN.md)의 한정된 공식 예제 P/S/D 실행을 설명한다. 명령이 있다는 사실은 실행 완료를 뜻하지 않는다. deadline이 지났거나 stage reservation이 이미 존재하면 실행을 반복하지 않는다. 이후 재실행에는 별도의 승인된 예산과 새 기록이 필요하다.
 
 ## 고정 계약
 
@@ -12,12 +12,14 @@
 
 ## 실행 전 확인
 
-각 stage root에는 `code/`, `environment/`, `upstream/`, `models/`, `configs/`, `reports/`, `artifacts/`와 해당 입력 계약이 필요하다. 실제 stage root 구성과 공유 artifact 연결은 실행 담당자의 고정 layout을 따른다. 경로를 추측해 새 모델을 설치하거나 기존 디렉터리를 덮어쓰지 않는다.
+각 stage root에는 `code/`, `environment/`, `upstream/`, `models/`, `configs/`, `reports/`, `artifacts/`와 해당 입력 계약이 필요하다. 실제 stage root는 `${RUN_ROOT}/stages/P`, `${RUN_ROOT}/stages/S`, `${RUN_ROOT}/stages/D`이며 공유 artifact는 `${RUN_ROOT}/artifacts`다. 각 worker는 독립 프로세스이며 tensor IPC는 없다. 경로를 추측해 새 모델을 설치하거나 기존 디렉터리를 덮어쓰지 않는다.
 
 [run_phase.py](code/run_phase.py)는 `ROOT P|S|D`를 받는다. stage별 `reports/attempt.json`은 exclusive 생성이므로 기존 기록을 삭제하거나 같은 stage를 재실행하지 않는다. [runtime_launch.py](code/runtime_launch.py)는 `ROOT SECONDS COMMAND...`를 받아 남은 절대 deadline보다 짧게 실행 시간을 제한한다. 다음은 경로를 외부에서 지정하는 명령 형식이며 실제 사용한 root/시간은 launch receipt가 기준이다.
 
 ```sh
-# PHASE_ROOT와 STAGE는 승인된 stage layout에서 설정한다.
+# RUN_ROOT는 승인된 G 실행 root다. 각 단계 직전에 설정한다.
+STAGE=P
+PHASE_ROOT="${RUN_ROOT}/stages/${STAGE}"
 # STAGE=P, 그다음 성공/종료 확인 후 S, 마지막 성공/종료 확인 후 D.
 "${PHASE_ROOT}/environment/bin/python" \
   "${PHASE_ROOT}/code/runtime_launch.py" "${PHASE_ROOT}" 7200 \
@@ -44,4 +46,8 @@ P/S/D tensor와 원본 영상은 private 산출물이다. 공개 GitHub에는 �
 
 ## 현재 결과
 
-실제 stage launch와 완료 receipt는 아직 이 문서에 반영되지 않았다. CPU fixture 통과는 full-model 수치 동등성이나 영상 성공이 아니다. [이론 문서](../../lessons/B-007G-component-lifetime.md)의 E 관측값과 G 예상값을 구분한다. 연속 재생을 직접 확인하지 못하면 시간 품질은 UNVERIFIED다.
+P는 guard 정상 종료, PID 0/inactive, 조건 readback을 확인했다. 전체 guard 시간 143.331초, phase 완료 140.53초다. 조건 파일은 17,365,660 bytes, SHA256 `1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308`이며 initial noise는 E raw tensor와 값·hash가 같다. S는 stage 시작 후 115.742초에 CPU DiT 적재 완료를 기록했다. 적재 start/end 간격은 111.869초, 전체 guard 시간은 121.054초다. 조건 cache의 첫 CUDA 복원 경로 `artifacts.load_tree`에서 `cuDevicePrimaryCtxRetain`이 `CUDA_ERROR_OUT_OF_MEMORY`를 반환했다. DiT device 이동 hook, sampler loop, 첫 forward, final latent 저장 모두 미도달이다. D는 실행하지 않았고 final latent/raw/MP4가 없다.
+
+S 슬롯은 1/1 예약됐으며 실패로 보존한다. forward/step counter는 초기화 전 실패로 NOT_RECORDED이며, 재시도는 없다. 마지막 관측은 `cuda_initialized=true`, allocator 0이지만 driver 가용 메모리나 실패 순간 peak를 증명하지 않는다. global headroom guard는 발동하지 않았고 cgroup high2660/oom0, swap0이었다. 정확한 driver/context/통합 메모리 원인은 UNKNOWN이다. [RUN_LEDGER](RUN_LEDGER.json)와 [MEASUREMENTS](MEASUREMENTS.json)를 확인한다.
+
+새 sampling 없이 기존 P cache를 활용한 CPU 적재·context 준비·조건 복원 순서의 한정 조사가 다음 제안이다. 해당 제안은 이 문서의 명령을 다시 실행하라는 승인이 아니다. CPU fixture 통과는 full-model 수치 동등성이나 영상 성공이 아니다. [이론 문서](../../lessons/B-007G-component-lifetime.md)의 E 관측값과 G 예상값을 구분한다. 연속 재생을 직접 확인하지 못하면 시간 품질은 UNVERIFIED다.

@@ -260,3 +260,9 @@
 
 - 사전 실행 고정 `648bbe4`와 신선한 가중치·환경·입력 해시를 확인한 뒤 P1을 실행했다. DiT 없이 공식 조건과 E와 같은 실제 initial noise를 저장하고 정상 종료했다.
 - 조건17,365,660bytes readback/hash PASS, 전체 guarded P143.331초. 메모리 회복과 PID0 확인 후 S1에 진입하며 T5/CLIP/VAE는 인스턴스화하지 않는다. S/D 결과와 영상 품질은 아직 미확인이다. [진행](experiments/B-007G-phase-separated-baseline/RUNNING.md).
+
+## B-007G 종료 (2026-10-23)
+
+**CONDITION_CACHE_PASS / S_FAILED / D_NOT_RUN.** P143.331초에 실제 조건과 동일 initial noise를 저장했다. S121.054초 시도는 CPU DiT 적재 후 첫 조건의 CUDA 복원에서 `cuDevicePrimaryCtxRetain` OOM으로 종료됐고 sampler loop·첫 forward에 도달하지 않았다. 24GiB 가드 종료가 아니며 정확한 드라이버/메모리 원인은 UNKNOWN이다. 신규 슬롯1/1 사용, 재시도0, final latent/MP4 없음. [결과](experiments/B-007G-phase-separated-baseline/RESULTS.md).
+
+다음 하나는 기존 P 캐시를 활용하는 S의 CUDA context/CPU weight 수명 사전 진단이다. decode-only용 final latent는 없으며 새 sampler는 자동 실행하지 않는다.
