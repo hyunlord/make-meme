@@ -43,6 +43,7 @@ def main() -> None:
     from wan.utils.scail_utils import load_image_to_tensor_chw_normalized, resize_for_rectangle_crop
     from wan.utils.utils import cache_video
     import wan.modules.model_scail2 as model_module
+    import wan.scail as pipeline_module
     def image(name: str) -> torch.Tensor:
         path = root / cfg[name]
         value = load_image_to_tensor_chw_normalized(Image.open(path).convert("RGB"))
@@ -87,6 +88,14 @@ def main() -> None:
                     record["observations"].setdefault(label, describe(result))
                 module.register_forward_hook(hook)
         record["resolved_sampling"] = {"negative_prompt": "", "scheduler": "FlowUniPCMultistepScheduler", "constructor_shift": 1, "use_dynamic_shifting": False, "num_train_timesteps": pipeline.num_train_timesteps, "set_timesteps_shift": 3.0, "param_dtype": str(pipeline.param_dtype), "t5_cpu": True, "offload_model": True}
+        scheduler_class = pipeline_module.FlowUniPCMultistepScheduler
+        original_set_timesteps = scheduler_class.set_timesteps
+        def observed_timesteps(scheduler: object, *args: object, **kwargs: object) -> object:
+            result = original_set_timesteps(scheduler, *args, **kwargs)
+            record["observations"]["scheduler"] = {"config": dict(scheduler.config), "timesteps": scheduler.timesteps.detach().cpu().tolist(), "sigmas": scheduler.sigmas.detach().cpu().tolist()}
+            save()
+            return result
+        scheduler_class.set_timesteps = observed_timesteps
         original_randn = torch.randn
         def observed_randn(*args: object, **kwargs: object) -> torch.Tensor:
             value = original_randn(*args, **kwargs)
@@ -100,6 +109,7 @@ def main() -> None:
         started = time.monotonic()
         result = pipeline.generate(input_prompt=cfg["prompt"], **inputs, replace_flag=False, segment_len=17, segment_overlap=5, shift=3.0, sample_solver="unipc", sampling_steps=40, guide_scale=5.0, seed=cfg["seed"], offload_model=True)
         torch.randn = original_randn
+        scheduler_class.set_timesteps = original_set_timesteps
         record["sampling_seconds"] = time.monotonic() - started
         record["output"] = describe(result)
         record["output_finite"] = bool(torch.isfinite(result).all())
@@ -110,6 +120,8 @@ def main() -> None:
         record["status"] = "COMPLETED"
         phase("encoded")
     except BaseException as error:
+        if "original_set_timesteps" in locals():
+            scheduler_class.set_timesteps = original_set_timesteps
         if "original_randn" in locals():
             torch.randn = original_randn
         record["status"] = "FAILED"
