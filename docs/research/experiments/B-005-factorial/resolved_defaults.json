@@ -1,0 +1,40 @@
+{
+  "provenance": "Pinned function signature AST, not new runtime instrumentation",
+  "upstream_commit": "f39d731a3e318d25b725eb3389cfddb184619842",
+  "file": "diffsynth/pipelines/wan_video.py",
+  "file_sha256": "e3ab58df6db88987661813f92bca601de1397aa6a2986f2a9dda6e2771183bcc",
+  "fixed_defaults": {
+    "denoising_strength": 1.0,
+    "vace_scale": 1.0,
+    "rand_device": "cpu",
+    "cfg_merge": false,
+    "sigma_shift": 5.0,
+    "tiled": true,
+    "tile_size": [
+      30,
+      52
+    ],
+    "tile_stride": [
+      15,
+      26
+    ],
+    "sliding_window_size": null,
+    "sliding_window_stride": null,
+    "tea_cache_l1_thresh": null,
+    "tea_cache_model_id": "",
+    "framewise_decoding": false,
+    "output_type": "quantized"
+  },
+  "explicit_sampling": {
+    "num_inference_steps": 20,
+    "cfg_scale": 5,
+    "height": 288,
+    "width": 512,
+    "num_frames": 17,
+    "fps": 24,
+    "tiled": true,
+    "rand_device": "cpu"
+  },
+  "adapter": null,
+  "training_updates": 0
+}

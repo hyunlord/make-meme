@@ -108,3 +108,8 @@
 - R-bg의 C-real은 양 seed 착석. R-gray는 seed22 착석/seed23 직립 실루엣만 생성. 실제 Lab identity·안무는 두 seed 모두 미수용, 시간 품질 UNVERIFIED. 회색은 정상적인 identity 참조가 아닌 OOD일 수 있음.
 - 다음 B-005는 2×2 factorial의 빠진 R-gray+C-null 두 seed만 신규 실행하도록 사전 계획했음. B-003(R-bg+C-real/null) 4개 및 B-004(R-gray+C-real) 2개를 설정·noise 검증 후 재사용. 최대 신규2회·학습0. 원본 동작·Lab identity를 모두 수용하기 전에는 조건 차이를 성공으로 부르지 않음.
 - [B-004 결과](experiments/B-004-reference-neutral/RESULTS.md) · [B-005 계획](experiments/B-005-factorial/PLAN.md). 이 기록은 문서 작업으로, B-005 GPU 실험은 NOT_RUN.
+
+## 2026-10-22 — B-005 실행 전 고정
+
+- 시작HEAD `582e67ca0b153b5d602b04587b9f57cd36ad3426`, 기존PLAN유지. 기존6결과재사용검증통과,모델/입력/noise/코드해시고정.
+- 신규gray+null두seed만실행예정,학습0,상한2회·2시간. [RUNNING](experiments/B-005-factorial/RUNNING.md).

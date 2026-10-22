@@ -1,0 +1,471 @@
+{
+  "experiment": "B-005",
+  "provenance": "B003 fixed input SHA manifest; current decoded pixels independently rechecked for all six reused outputs in B005 reuse_audit.",
+  "source": [
+    {
+      "file": "000.png",
+      "sha256": "28dd41bad21486e6d15093b3563f59962b691d6c486e4fb0e918fa3a56cc2b9e",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "001.png",
+      "sha256": "12b94fca9cd64957e76a98144aaec8a6c043c92984da189139577eae9cd25352",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "002.png",
+      "sha256": "32c3553d90f865b88fbe980b172daf183e263990e659420d272185568bd4b857",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "003.png",
+      "sha256": "515e884deddd4baf84980b49a48e6e09ad2d8c17a2674dbaf88363d9e34c2cf8",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "004.png",
+      "sha256": "9b873e458bf94cf10647f7379bce95f750e17bc52fbcfa01d0fadecf52381729",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "005.png",
+      "sha256": "1ea326446ffa6ddcff7b3712ecf42b20536f1d7e34c67e7d41a441a50d08bd13",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "006.png",
+      "sha256": "abc4ba73e428c0fcb2102ccc92050aa1217a194e3fa83d3488f77ee92385914d",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "007.png",
+      "sha256": "4d5e7b73fa5e8d7d5045174ca8667e47a3184ee2ced0d5a9ac90743ece04c3d8",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "008.png",
+      "sha256": "22c2199866236990e457dcadfac9300c80d2df021fa61ce1417719b7b0647b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "009.png",
+      "sha256": "400add1714fe8e32598f613ab88f753e15039b4c84c1c1a34cc6ae05706b6cac",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "010.png",
+      "sha256": "5f3871e4f334729cebfac56f15ee1c3396b60b1bd1b751cd1f5775dcf42d9ce1",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "011.png",
+      "sha256": "2faabf55723b08d1802e673001df0369fb801646186e64c09fdfc35e4e8ecf1e",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "012.png",
+      "sha256": "515bf8763d8f00f0b8a72a387ce20556397f919fe6c6dcb99fdf0e849e86750a",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "013.png",
+      "sha256": "0c879870f1480d6179fa9f0f2aae38912f14c657b2fab50f3cf5e1abdd76128a",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "014.png",
+      "sha256": "1fcf71d1a1f3c20aca80264cc3a40b45383691307eb218b25639a9219105d3ca",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "015.png",
+      "sha256": "a84078f498c61a0230375be36a03fbb0c25ebaa10d815098ae69349cabbe781f",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "016.png",
+      "sha256": "c8ed34203615832ffef4191f52afc5d41bb2bbb5c4e46cba6526050582745ee6",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    }
+  ],
+  "C-real": [
+    {
+      "file": "000.png",
+      "sha256": "84c1a96f56706b1d3669942dc25b4e0df185e6e7ce351f2e625ffc361ff0f67b",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "001.png",
+      "sha256": "43f9f58402e80bba61788acab69042f7bcdeb6e3d0660f3b59f4f4eb4c19a281",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "002.png",
+      "sha256": "e75748ce55e10af3f5a9d230500995187ca013ae0d6cfd3b523e5bbef3146b09",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "003.png",
+      "sha256": "d978f61bdbc5abe561f240c34697182406a4b7a72d5d95d73dfd7d8da8b7b28b",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "004.png",
+      "sha256": "cef1bb0f01b64863976ed6617d6d391cda13a96404b0b2ef3e5b099acf2e60f8",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "005.png",
+      "sha256": "cae854f4e2b7851b9d7f772938b9a6ec422328e03ea6de5f64428044763015eb",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "006.png",
+      "sha256": "844e292198ab877e35a2ba0cae3e083e5e50243bf394d01c1ad12771499d7bfe",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "007.png",
+      "sha256": "da565a75908b36ef111cc08d0d62006b71714abcd3b341c536f7d03b9a2f33cb",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "008.png",
+      "sha256": "e5b121c562254fad8082ad3a4efc302328a97eb9f7be524e0db1a9c32a2a86a6",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "009.png",
+      "sha256": "88279a94c0a6b8e12d159c0b8cde737bdee4c69ef1403776a133534e596dd76b",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "010.png",
+      "sha256": "338edd6ce64a1728c88a75e18cc4d1e99fe11afda528d84401e38f62147b2ce4",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "011.png",
+      "sha256": "48e0b099fdf96cd75ff39115a3c988745423abc84c537381a1e620caf972a5f2",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "012.png",
+      "sha256": "020e042e0db6c9aec7328322debf24153aaf052561a418086a5365388f8df711",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "013.png",
+      "sha256": "e3d0831bcae36a25ac97b78c192de401048af8b9323c6286689da2d83ff9160e",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "014.png",
+      "sha256": "229cadd07ff01e0213371da03e0a1c6d1b50fd48dcb5ae799951d6a2b1375721",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "015.png",
+      "sha256": "32ce1feffa81d5404c73b9c30fb28b8a39f460a68ef2f7dd171cb70a2bc21b49",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "016.png",
+      "sha256": "35db8ef979c740ff2cc2e8ce5a0dcd02400d68f71c5ae828a5e0fddf177de7e6",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "L"
+    }
+  ],
+  "C-null": [
+    {
+      "file": "000.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "001.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "002.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "003.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "004.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "005.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "006.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "007.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "008.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "009.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "010.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "011.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "012.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "013.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "014.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "015.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "016.png",
+      "sha256": "ecfe02e207e4af6b599603a88438ecf38e3d43f220f87b5af17e5a41a6a38b00",
+      "size": [
+        512,
+        288
+      ],
+      "mode": "RGB"
+    }
+  ],
+  "R-bg_sha256": "d4d5ff988fa13f6b3c18165f1043c49e510baa12bffabb8a66c8a26865b8f2b2",
+  "R-gray_sha256": "74fad0f371d7a3705a8653af44f6a0e6ef0bac4e4248353eb0f45f91a323119a"
+}
