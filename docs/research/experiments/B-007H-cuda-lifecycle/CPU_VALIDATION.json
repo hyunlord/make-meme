@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "test_file": "code/test_h_contract.py",
+  "tests": 3,
+  "actual_cuda_calls": 0,
+  "scope": [
+    "CPU mocked tiny64-byte operation and CPU RNG preservation",
+    "Exact G source reuse for loader/sampler extraction/cache/VAE/media",
+    "Actual cached device contract: generator_state and sigmas CPU; timesteps CUDA"
+  ],
+  "not_proven": "Actual CUDA allocation/context/cache restoration or model behavior; requires separately bounded probe"
+}

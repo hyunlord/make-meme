@@ -1,0 +1,272 @@
+--- G/code/cuda_probe.py
++++ H/code/cuda_probe.py
+@@ -0,0 +1,92 @@
++"""One bounded non-RNG CUDA operation plus exact original-device cache restore."""
++import hashlib
++import json
++from pathlib import Path
++import torch
++from safetensors.torch import load_file
++from artifacts import load_tree,atomic_json
++from runtime_observe import phase
++
++
++def ancestors() -> dict:
++    relative=next(line.split(':',2)[2] for line in Path('/proc/self/cgroup').read_text().splitlines() if line.startswith('0::'))
++    current=Path('/sys/fs/cgroup')/relative.lstrip('/');records={}
++    while current.is_relative_to('/sys/fs/cgroup'):
++        records[str(current.relative_to('/sys/fs/cgroup'))]={name:(current/name).read_text() for name in ('memory.current','memory.high','memory.max','memory.events','memory.pressure') if (current/name).exists()}
++        if current==Path('/sys/fs/cgroup'):break
++        current=current.parent
++    return records
++
++
++def diagnostic(root:Path,label:str,*,cuda_success:bool=False) -> None:
++    phase(label)
++    record={'label':label,'is_initialized':torch.cuda.is_initialized(),'ancestors':ancestors(),'primary_context_get_state':'NOT_CALLED: no new driver binding introduced','diagnostic_side_effects':'is_initialized does not establish device allocation; mem_get_info only after tiny copy/kernel success'}
++    if cuda_success:
++        free,total=torch.cuda.mem_get_info();record['cuda_mem_get_info']={'free':free,'total':total}
++    atomic_json(root/'reports'/f'{label}.json',record)
++
++
++def tiny(root:Path) -> torch.Tensor:
++    """64-byte retained anchor, no RNG operations; test allocation/copy/kernel/readback."""
++    before=torch.get_rng_state().clone()
++    diagnostic(root,'tiny_copy_start')
++    cpu=torch.full((16,),3.0,dtype=torch.float32)
++    anchor=cpu.to('cuda:0')
++    phase('tiny_copy_end');phase('tiny_kernel_start')
++    anchor.add_(2.0);torch.cuda.synchronize()
++    assert torch.equal(anchor.cpu(),torch.full((16,),5.0))
++    assert torch.equal(before,torch.get_rng_state())
++    diagnostic(root,'tiny_kernel_complete',cuda_success=True)
++    atomic_json(root/'reports/tiny.json',{'status':'PASS','retained_payload_bytes':anchor.numel()*anchor.element_size(),'cpu_rng_unchanged':True,'operations':['constant CPU fill','H2D copy','add_ constant','synchronize','D2H exact equality'],'CUDA_RNG':'No RNG operation invoked; initial CUDA state baseline captured only after successful real work'})
++    return anchor
++
++
++def recheck(root:Path,anchor:torch.Tensor,label:str) -> None:
++    assert torch.equal(anchor.cpu(),torch.full((16,),5.0))
++    anchor.add_(0.0);torch.cuda.synchronize()
++    diagnostic(root,label,cuda_success=True)
++
++
++def restore(root:Path):
++    path=root/'artifacts/conditions.safetensors'
++    cpu_tree,meta=load_tree(path,device='cpu');del cpu_tree
++    assert meta['file_sha256']=='1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308'
++    values=load_file(str(path));rows=[]
++    def inflate(node,location):
++        if 'tensor' in node:
++            key=node['tensor'];value=values[key];target=node['device']
++            phase('cache_'+key+'_restore_start')
++            row={'key':key,'location':location,'target_device':target,'bytes':value.numel()*value.element_size(),'shape':list(value.shape),'dtype':str(value.dtype),'status':'STARTED'}
++            rows.append(row);atomic_json(root/'reports/cache_leaves.json',{'leaves':rows})
++            restored=value.to(target)
++            if restored.is_cuda:torch.cuda.synchronize()
++            roundtrip=restored.detach().cpu().contiguous()
++            if roundtrip.is_floating_point() or roundtrip.is_complex():assert bool(torch.isfinite(roundtrip).all())
++            assert list(restored.shape)==meta['tensors'][key]['shape'] and restored.device==torch.device(target)
++            digest=hashlib.sha256(roundtrip.view(torch.uint8).numpy().tobytes()).hexdigest()
++            assert digest==meta['tensors'][key]['sha256'] and restored.dtype==value.dtype
++            row.update(status='PASS',sha256=digest,actual_device=str(restored.device))
++            atomic_json(root/'reports/cache_leaves.json',{'leaves':rows});phase('cache_'+key+'_restore_end')
++            return restored
++        if 'list' in node:return [inflate(item,location+f'[{i}]') for i,item in enumerate(node['list'])]
++        if 'dict' in node:return {key:inflate(item,location+'.'+key) for key,item in node['dict'].items()}
++        return node['scalar']
++    tree=inflate(meta['structure'],'root')
++    assert len(rows)==16
++    return tree,meta
++
++
++def run(root:Path,cfg:dict) -> None:
++    # Same imports as S before its first large model construction.
++    diagnostic(root,'before_official_import')
++    from wan.utils.fm_solvers_unipc import FlowUniPCMultistepScheduler
++    from wan.configs import SCAIL_CONFIGS
++    assert callable(FlowUniPCMultistepScheduler) and SCAIL_CONFIGS['SCAIL-14B'].num_train_timesteps==1000
++    diagnostic(root,'after_official_import')
++    anchor=tiny(root)
++    cuda_rng=torch.cuda.get_rng_state().clone()
++    tree,meta=restore(root)
++    assert tree['history'] is None
++    assert torch.equal(cuda_rng,torch.cuda.get_rng_state())
++    recheck(root,anchor,'probe_cache_restore_complete')
++    atomic_json(root/'reports/probe.json',{'status':'PASS','cache_sha256':meta['file_sha256'],'cuda_rng_unchanged_after_tiny':True,'leaf_count':16})
+--- G/code/phase_sample.py
++++ H/code/phase_sample.py
+@@ -8 +8 @@
+-from artifacts import load_tree,save_tree,atomic_json
++from artifacts import save_tree,atomic_json
+@@ -11,0 +12 @@
++from cuda_probe import diagnostic,tiny,restore,recheck
+@@ -14,0 +16 @@
++    diagnostic(root,'before_official_import')
+@@ -17,0 +20,3 @@
++    diagnostic(root,'after_official_import')
++    anchor=tiny(root)
++    atomic_json(root/'reports/model-load-attempt.json',{'attempt':1,'max':1,'parent':'B-007G','intervention':'tiny real CUDA before unchanged staged loader'})
+@@ -22 +27,3 @@
+-    tree,meta=load_tree(root/'artifacts/conditions.safetensors')
++    recheck(root,anchor,'after_cpu_load_tiny_recheck')
++    tree,meta=restore(root)
++    recheck(root,anchor,'after_cache_restore_tiny_recheck')
+@@ -46 +53 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-007H','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-007G','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
+@@ -52 +59,4 @@
+-    namespace={'torch':torch,'tqdm':tqdm,'self':SimpleNamespace(model=model,device=device,rank=0),'offload_model':True,'apply_clean_history':apply_clean_history,'timesteps':scheduler.timesteps,'sample_scheduler':scheduler,'guide_scale':5.0,'seed_g':generator,'completed':completed,'complete':complete,'phase':phase}
++    def measured_phase(label):
++        phase(label)
++        if label=='dit_to_device_end':recheck(root,anchor,'after_dit_move_tiny_recheck')
++    namespace={'torch':torch,'tqdm':tqdm,'self':SimpleNamespace(model=model,device=device,rank=0),'offload_model':True,'apply_clean_history':apply_clean_history,'timesteps':scheduler.timesteps,'sample_scheduler':scheduler,'guide_scale':5.0,'seed_g':generator,'completed':completed,'complete':complete,'phase':measured_phase}
+@@ -53,0 +64 @@
++    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':'official17f','parent_history':{'E':1,'F':1,'G_reserved':1}})
+--- G/code/prepare_layout.py
++++ H/code/prepare_layout.py
+@@ -1 +1 @@
+-"""Build three sequential private worker directories without modifying parent E/F."""
++"""Isolated H roots, read-only references to verified G cache and E environment."""
+@@ -5,2 +5 @@
+-
+-root,previous=map(Path,sys.argv[1:])
++root,previous,parent=map(Path,sys.argv[1:])
+@@ -8 +7,2 @@
+-for stage in ('P','S','D'):
++for name in ('conditions.safetensors','conditions.json'):(root/'artifacts'/name).symlink_to(parent/'artifacts'/name)
++for stage in ('PROBE','S','D'):
+@@ -14 +13,0 @@
+-    (target/'parent_official').symlink_to(previous/'outputs/official',target_is_directory=True)
+--- G/code/run_phase.py
++++ H/code/run_phase.py
+@@ -1 +1,2 @@
+-"""Fresh exec worker; exclusive stage reservation and immutable handoff contracts."""
++"""Fresh bounded H worker; parent G cache is immutable, P is never rerun."""
++import hashlib
+@@ -3 +3,0 @@
+-import hashlib
+@@ -13,11 +13,4 @@
+-    assert stage in ('P','S','D')
+-    manifest=json.loads((root/'PREREGISTERED_CODE.json').read_text())
+-    for name,digest in manifest['files'].items():
+-        assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
+-    for name,digest in manifest['upstream'].items():
+-        assert hashlib.sha256((root/'upstream'/name).read_bytes()).hexdigest()==digest,name
+-    if stage!='P':
+-        previous=root.parent/('P' if stage=='S' else 'S')
+-        receipt=json.loads((previous/'reports/pipeline-process.json').read_text())
+-        assert receipt['reason']=='service_exit' and receipt['returncode']==0 and 'MainPID=0' in receipt['final_service']
+-        assert json.loads((previous/'reports/result.json').read_text())['status']=='COMPLETED'
++    assert stage in ('PROBE','S','D')
++    # Record even setup/validation failures; never silently reset a reserved stage.
++    with (root/'reports/attempt.json').open('x') as file:
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1},'max_stage_attempts':1},file)
+@@ -25,0 +19,2 @@
++    (root/'reports/before_torch_import.json').write_text(json.dumps({'torch_already_imported':'torch' in sys.modules,'time':time.time(),'CUDA_VISIBLE_DEVICES':os.environ.get('CUDA_VISIBLE_DEVICES','UNSET'),'note':'No CUDA API called at this observation'}))
++    from artifacts import atomic_json,load_tree
+@@ -28,8 +23,20 @@
+-    from artifacts import atomic_json,load_tree
+-    cfg=verify_inputs(root)
+-    if stage!='P':
+-        cached,metadata=load_tree(root/'artifacts'/('conditions.safetensors' if stage=='S' else 'final_latent.safetensors'),device='cpu')
+-        if stage=='S':
+-            assert list(cached['noise'].shape)==[16,5,64,112] and str(cached['noise'].dtype)=='torch.float32'
+-            assert cached['history'] is None and metadata['provenance']['config']==cfg
+-            assert metadata['provenance']['initial_noise_sha256']=='9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950'
++    initialize(root/'reports/phases.jsonl')
++    try:
++        manifest=json.loads((root/'PREREGISTERED_CODE.json').read_text())
++        for name,digest in manifest['files'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
++        for name,digest in manifest['upstream'].items():assert hashlib.sha256((root/'upstream'/name).read_bytes()).hexdigest()==digest,name
++        if stage!='PROBE':
++            previous=root.parent/('PROBE' if stage=='S' else 'S')
++            receipt=json.loads((previous/'reports/pipeline-process.json').read_text())
++            assert receipt['reason']=='service_exit' and receipt['returncode']==0 and 'MainPID=0' in receipt['final_service']
++            assert json.loads((previous/'reports/result.json').read_text())['status']=='COMPLETED'
++        cfg=verify_inputs(root)
++        parent_contract=json.loads((root/'PREREGISTERED_INPUTS.json').read_text())['parent_cache']
++        assert hashlib.sha256((root/'artifacts/conditions.json').read_bytes()).hexdigest()==parent_contract['metadata_sha256']
++        path=root/'artifacts'/('final_latent.safetensors' if stage=='D' else 'conditions.safetensors')
++        cached,meta=load_tree(path,device='cpu')
++        if stage!='D':
++            assert meta['file_sha256']=='1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308'
++            assert len(meta['tensors'])==16 and meta['provenance']['config']==cfg
++            assert list(cached['noise'].shape)==[16,5,64,112] and cached['history'] is None
++            assert meta['provenance']['initial_noise_sha256']=='9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950'
+@@ -37,11 +44,9 @@
+-            assert len(cached['x0'])==1 and list(cached['x0'][0].shape)==[16,5,64,112]
+-            assert metadata['provenance']['counters']=={'model_calls':80,'completed_steps':40}
+-            assert metadata['provenance']['config']==cfg
+-        del cached,metadata
+-    initialize(root/'reports/phases.jsonl')
+-    with (root/'reports/attempt.json').open('x') as file:
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1},'G_sampler_cap':1,'stage_cap':1},file)
+-    phase('stage_'+stage+'_start')
+-    try:
+-        if stage=='P':from phase_prepare import run
+-        elif stage=='S':from phase_sample import run
++            assert meta['provenance']['counters']=={'model_calls':80,'completed_steps':40}
++            assert meta['provenance']['config']==cfg
++            assert list(cached['x0'][0].shape)==[16,5,64,112]
++        del cached,meta
++        phase('stage_'+stage+'_start')
++        if stage in ('PROBE','S'):
++            import phase_sample  # Same pre-official import set in probe and S.
++            if stage=='PROBE':from cuda_probe import run
++            else:run=phase_sample.run
+--- G/code/runtime_guard.py
++++ H/code/runtime_guard.py
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-22T21:56:43+00:00').timestamp()
+-UNIT: Final = 'make-meme-b007g-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T02:35:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b007h-pipeline'
+--- G/code/runtime_launch.py
++++ H/code/runtime_launch.py
+@@ -18 +18 @@
+-    '--unit=make-meme-b007g-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b007h-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
+--- G/code/test_h_contract.py
++++ H/code/test_h_contract.py
+@@ -0,0 +1,41 @@
++"""CPU mocks only: diagnostic sequencing/value checks and exact frozen policies."""
++from pathlib import Path
++from unittest.mock import patch
++import torch
++from cuda_probe import tiny,recheck
++
++
++def test_tiny_mock_is_non_rng_and_keeps_64_bytes(tmp_path:Path) -> None:
++    (tmp_path/'reports').mkdir()
++    original=torch.Tensor.to;targets=[]
++    def redirected(value,*args,**kwargs):
++        if args and args[0]=='cuda:0':targets.append(args[0]);args=('cpu',)+args[1:]
++        return original(value,*args,**kwargs)
++    before=torch.get_rng_state().clone()
++    with patch.object(torch.Tensor,'to',redirected),patch('cuda_probe.diagnostic'),patch('cuda_probe.phase'),patch.object(torch.cuda,'synchronize'):
++        value=tiny(tmp_path);recheck(tmp_path,value,'fixture')
++    assert targets==['cuda:0'] and value.numel()*value.element_size()==64
++    assert torch.equal(before,torch.get_rng_state()) and torch.equal(value,torch.full((16,),5.0))
++
++
++def test_frozen_math_and_loader_reuse() -> None:
++    import os
++    previous=Path(os.environ['G_CODE']);current=Path(__file__).parent
++    for name in ('staged_loader.py','extract.py','artifacts.py','phase_decode.py','media.py'):
++        assert (current/name).read_bytes()==(previous/name).read_bytes(),name
++    source=(current/'phase_sample.py').read_text()
++    assert source.index('anchor=tiny(root)')<source.index('model=load_model(')<source.index('tree,meta=restore(root)')
++    assert "'offload_model':True" in source and "'guide_scale':5.0" in source
++
++
++def test_probe_budget_and_cpu_leaves_contract() -> None:
++    import os,json
++    meta=json.loads(Path(os.environ['G_CACHE_METADATA']).read_text())
++    leaves=[]
++    def visit(node):
++        if 'tensor' in node:leaves.append((node['tensor'],node['device']))
++        for item in node.get('list',[]):visit(item)
++        for item in node.get('dict',{}).values():visit(item)
++    visit(meta['structure'])
++    assert len(leaves)==16 and dict(leaves)['t13']=='cpu' and dict(leaves)['t15']=='cpu'
++    assert dict(leaves)['t14']=='cuda:0'

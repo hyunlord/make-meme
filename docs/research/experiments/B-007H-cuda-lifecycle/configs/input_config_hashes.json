@@ -1,0 +1,7 @@
+{
+  "configs/official.json": "354676d6dda0c4ef6bce72daebadde6f2fa59eeb2a953e9d1dfd617a64162d6f",
+  "inputs/official-animation-001/ref.jpg": "3485a50ddf5cf73d81da87ff7a9da4a16e4ad3e51cb7c8e1f2393d2dea79f781",
+  "inputs/official-animation-001/ref_mask.jpg": "ba2c5f30c8204e0822d37d08ce00d0cbc84bfe12c9bd6d918762cf467c6740c4",
+  "inputs/official-animation-001/driver-17frames.mp4": "584d69294f59a8f3cd52207ed93e71d81eaf834bf2702cf451da096f555c63dc",
+  "inputs/official-animation-001/mask-17frames.mp4": "70138c35fa5686032062ff8d95d8ade87658625f8c84e1aa0b79f0c455b68532"
+}
