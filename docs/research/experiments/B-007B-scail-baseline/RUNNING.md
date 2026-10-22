@@ -22,3 +22,10 @@
 - 실제 upstream cache_video로 원본RGB17장을24fps512×896 MP4로 저장하고 ffprobe17f/0.708333초 확인. 최초 FFMPEG plugin 누락 실패는 기록에 보존했다. 신규환경에만 작은필수패키지26,031,848bytes를 설치했고 Torch는 교체하지 않았다.
 - 입력80파일 Mac/Spark 해시동일, 기존Lab148artifact검증. LabmaskPARTIAL과공식예제16fps 유지.
 - 공개 고정 downloader/manifest에 따라재사용파일해시를먼저검증하고 신규SAT+CLIP만최대85GB범위에서받는다. actualmetadata gate가실패하면 eager/unsafe로우회하지않는다.
+
+## 08:12 UTC 부근 — 실제 추론 전 코드·설정 고정
+
+- 공식 reference 실제1920×1080이므로 H512/W896, Lab는 H896/W512다. 공식17장16fps와 Lab17장24fps를 구분한다. 각1회, seed20261022,40steps,UniPC,shift3,CFG5,overlap5,adapter=null,추가reference없음으로 고정했다.
+- FFmpeg RGB24 reader를 사용하는 isolated runner이며 pipeline.generate와 upstream resize/normalization/cache_video를 유지한다. 전체 generate.py CLI 무변경 실행이라고 부르지 않는다. 독립 코드 검토에서 입력layout·정규화순서·API계약이 맞음을 확인했다.
+- 첫 명시적generator의 실제noise와 DiT/attention입력shape를 관측한다. hook은 RNG를 추가 호출하지 않는다. 각 infer-* 작업은 로딩 전에2회장부를 예약한다.
+- mixedBF16 CPU가중치와 GPU이동·activation의 실제peak는 미확인이다. 작은fixturePASS가 이를 보장하지 않는다. 추후guard는 다른서비스작업/가용메모리/swap/deadline의 정확한 종료이유를 기록한다. 이미 실행 중인 downloadguard는 변경하지 않았다.

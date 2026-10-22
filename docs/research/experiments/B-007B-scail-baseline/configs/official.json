@@ -1,0 +1,20 @@
+{
+  "name": "official",
+  "frames": 17,
+  "fps": 16,
+  "height": 512,
+  "width": 896,
+  "seed": 20261022,
+  "steps": 40,
+  "solver": "unipc",
+  "shift": 3.0,
+  "guide_scale": 5.0,
+  "segment_overlap": 5,
+  "adapter": null,
+  "prompt": "The girl is dancing",
+  "precision": "mixed BF16 with FP32 normalization/time/head islands",
+  "reference": "inputs/official-animation-001/ref.jpg",
+  "reference_mask": "inputs/official-animation-001/ref_mask.jpg",
+  "driver": "inputs/official-animation-001/driver-17frames.mp4",
+  "driver_mask": "inputs/official-animation-001/mask-17frames.mp4"
+}
