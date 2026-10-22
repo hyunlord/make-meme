@@ -5,7 +5,7 @@
 - upstream: `f39d731a3e318d25b725eb3389cfddb184619842`
 - weights: `Wan-AI/Wan2.1-VACE-1.3B` revision `574e6a744642ce3bee319afc31496b88bde8aac4`
 - 기존 B-001 격리 환경의 Python/PyTorch/BF16 CUDA/SDPA를 재사용한다. 신규 설치·학습·adapter 없음.
-- `resolved_design.json`과 실제 로컬 config를 대조한다. public `code/`는 실제 실행 스크립트의 복사이며 참조 준비 스크립트만 private 절대경로를 CLI 인수로 바꾼 배포본이다.
+- `resolved_design.json`과 실제 로컬 config를 대조한다. 실제 실행 스크립트는 commit `9d81447919469c2cdeda69a9d7da25515a5b55f0`의 `code/`에 고정되어 있다. 최종 public `code/`에는 import 정렬만 적용했으며 import집합/나머지AST 일치를 검사했다. 원격 실행 스크립트는 변경하지 않았다. 참조 준비 스크립트만 private 절대경로를 CLI 인수로 바꾼 배포본이다.
 
 ```sh
 # 권한 있는 로컬 입력/가중치/기존 baseline config를 준비한 뒤 실행한다.

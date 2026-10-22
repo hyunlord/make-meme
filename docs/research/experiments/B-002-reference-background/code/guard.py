@@ -2,7 +2,6 @@
 # requires-python = ">=3.12"
 # ///
 """Bounded own-process monitor; terminate ahead of global deadline, never others."""
-from pathlib import Path
 import datetime as dt
 import json
 import os
@@ -10,6 +9,8 @@ import signal
 import subprocess
 import sys
 import time
+from pathlib import Path
+
 root=Path(__file__).resolve().parents[1]
 policy=json.loads((root/'configs/policy.json').read_text())
 label,*command=sys.argv[1:]

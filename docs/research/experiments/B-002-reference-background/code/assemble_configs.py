@@ -2,9 +2,10 @@
 # requires-python = ">=3.12"
 # ///
 """Preserve baseline settings, change only reference/seed/output/deadline."""
-from pathlib import Path
 import json
 import sys
+from pathlib import Path
+
 base=json.loads(Path(sys.argv[1]).read_text())
 root=Path(sys.argv[2])
 deadline=sys.argv[3]

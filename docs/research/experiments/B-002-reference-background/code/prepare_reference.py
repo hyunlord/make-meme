@@ -3,12 +3,13 @@
 # ///
 # Run: python prepare_reference.py RUN_ROOT LAB_PHOTO SOURCE_F0 (CPU only; private assets)
 """Recorded manual silhouette seeds plus nonlearned GrabCut; no RGB synthesis."""
-from pathlib import Path
 import hashlib
 import json
 import shutil
-import time
 import sys
+import time
+from pathlib import Path
+
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps

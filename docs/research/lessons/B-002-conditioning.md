@@ -35,3 +35,9 @@ CFG의 negative branch에도 동일 S/R/M이 남는다. `v_cfg=v_neg+5*(v_pos-v_
 같은 seed의 paired 차이를 `Delta_s=q(Y_bg,s)-q(Y_R,s)`라 정의할 수 있다. q가 수동 순서척도이면 숫자 차이를 정확한 물리량처럼 읽지 않는다. 두 seed는 방향 반복성을 탐색하는 정도다. 배경 대체는 대비와 입력 분포까지 바꾸므로 모델 내부의 순수 '배경 뉴런' 효과를 분리했다고 할 수 없다.
 
 침대가 줄어도 직립 동작이 생기지 않으면 배경 개입의 부분 효과다. P는 source RGB를 참조하지만 text는 검은 Lab를 요구하므로 순수한 동일 개체 reconstruction positive control이 아니다. P 실패만으로 구조 경로가 죽었다고 결론내릴 수 없다. 정적 자세 붕괴와 실제 속도 시간 품질도 구별하며 재생을 직접 보지 않으면 시간 품질은 UNVERIFIED다.
+
+## 이번 관측으로 식을 읽기
+
+[실제 결과](../experiments/B-002-reference-background/RESULTS.md)에서 새 run의 text hash는 모두 같고 같은 seed의 noise hash도 같았다. R-bg의 VACE context hash는 R와 달라졌다. 따라서 고정 theta에서 c의 reference 성분을 바꾸어 생성 경로가 달라졌다는 실측 연결이 있다. 결과의 두 seed 모두 침대/커튼/창 배치 재현이 줄고 착석은 남았다. 이는 q를 '참조 침실 배치 재현 유무'와 '직립 여부'로 나누어 읽을 이유다. 임의의 숫자 점수를 더해 통계적 개선량을 만들지 않았다.
+
+reference가 바뀌는 P에서 직립했어도 그 참조 자체가 직립 자세를 갖는다. S(Canny)의 독립 효과와 R의 자세 영향은 아직 분리되지 않았다. P의 text도 참조 개체와 충돌한다. 따라서 다음에는 R-bg를 유지하고 S만 실제/무정보로 바꾸는 한 비교를 제안한다. 질문의 답은 추가 학습 성공이 아니라 조건이 forward와 출력에 어떻게 연결되는지에 관한 것이다. 시간 품질은 실제 연속 재생을 관찰하지 못해 UNVERIFIED다.

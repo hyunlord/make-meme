@@ -5,19 +5,20 @@
 # Run in the isolated pinned DiffSynth environment: python scripts/vace_experiment.py config.json
 """One bounded local VACE inference or LoRA experiment; never downloads models."""
 from __future__ import annotations
+
 import json
 import os
 import shutil
 import subprocess
-from pathlib import Path
 import sys
 import time
 from datetime import datetime
+from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
 import torch
 from PIL import Image, ImageDraw, ImageOps
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class RunConfig(BaseModel):
@@ -69,10 +70,10 @@ def main() -> None:
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     sys.path.insert(0, str(config.upstream))
-    from diffsynth.pipelines.wan_video import WanVideoPipeline, ModelConfig
-    from diffsynth.utils.data import VideoData
-    from vace_observe import install_observers, save_initial_noise, install_input_observer
     from diffsynth.models import wan_video_dit
+    from diffsynth.pipelines.wan_video import ModelConfig, WanVideoPipeline
+    from diffsynth.utils.data import VideoData
+    from vace_observe import install_input_observer, install_observers, save_initial_noise
     wan_video_dit.FLASH_ATTN_3_AVAILABLE = False
     wan_video_dit.FLASH_ATTN_2_AVAILABLE = False
     wan_video_dit.SAGE_ATTN_AVAILABLE = False

@@ -1,0 +1,481 @@
+{
+  "experiment": "B-002",
+  "prereg_commit": "9d81447919469c2cdeda69a9d7da25515a5b55f0",
+  "new_attempts": 5,
+  "attempt_cap_5": true,
+  "new_completed": 5,
+  "new_failed": 0,
+  "reused": [
+    {
+      "label": "R-20261022",
+      "status": "REUSED",
+      "noise_hash_source": "B001 seeded upstream initializer record, not old live tensor hook",
+      "old_text_tensor_hash": "NOT_RECORDED"
+    }
+  ],
+  "code_hash_matches_prereg": {
+    "assemble_configs.py": true,
+    "guard.py": true,
+    "launch_video.py": true,
+    "vace_experiment.py": true,
+    "vace_observe.py": true
+  },
+  "paired_controls": {
+    "20261022": {
+      "new_completed": 2,
+      "same_noise": true,
+      "same_positive_text": true,
+      "same_negative_text": true,
+      "different_vace_context_count": 2
+    },
+    "20261023": {
+      "new_completed": 3,
+      "same_noise": true,
+      "same_positive_text": true,
+      "same_negative_text": true,
+      "different_vace_context_count": 3
+    }
+  },
+  "runs": [
+    {
+      "label": "R-bg-20261022",
+      "attempt": 1,
+      "seed": 20261022,
+      "status": "COMPLETED",
+      "checks": {
+        "config_ledger_hash": true,
+        "same_fixed_settings": true,
+        "prereg_commit": true,
+        "saved_config_semantics": true,
+        "source_condition_mask_unchanged": true,
+        "reference_preprocess_matches": true,
+        "actual_noise_vace_shapes": true,
+        "actual_noise_matches_saved_noise": true,
+        "preprocess_cpu_rng_unchanged": true,
+        "adapter_off_no_offload_bf16": true,
+        "parameter_counts_unchanged": true,
+        "17_frames_24fps_512x288": true,
+        "40_model_calls": true
+      },
+      "hashes": {
+        "shared.noise": "2e9cb4e5dea03c81bc772a0a7dc960fe659480fd85826b616bf8df49507e1e78",
+        "shared.vace_context": "48724efe2aee2ee9d0615cf8de0b83809e884b9b9895b0cbc1e2233c1f7bb735",
+        "positive.context": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a",
+        "negative.context": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+      },
+      "returncode": 0,
+      "tensor_shapes": {
+        "shared.noise": [
+          1,
+          16,
+          6,
+          36,
+          64
+        ],
+        "shared.vace_context": [
+          1,
+          96,
+          6,
+          36,
+          64
+        ],
+        "positive.context": [
+          1,
+          512,
+          4096
+        ],
+        "negative.context": [
+          1,
+          512,
+          4096
+        ]
+      },
+      "runtime": {
+        "vram_management_enabled": false,
+        "torch_dtype": "torch.bfloat16",
+        "device": "cuda",
+        "attention": "upstream SDPA fallback",
+        "adapter": null
+      },
+      "parameter_counts": {
+        "text_encoder": 5680910336,
+        "dit": 1418996800,
+        "vae": 126892531,
+        "vace": 734975232
+      },
+      "video": {
+        "width": 512,
+        "height": 288,
+        "r_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_frames": "17"
+      },
+      "output_sha256": "7927e74e5d932a0edd94828a73fe4a7bbe785c9fa2b8e5fc7873058a9bc8f7fa",
+      "resources": {
+        "label": "R-bg-20261022",
+        "process_seconds": 120.07607769966125,
+        "runner_seconds": 109.75813864998054,
+        "pipeline_seconds": 44.10612246399978,
+        "model_seconds": 37.10722921480192,
+        "cuda_peak_allocated_bytes": 17056366080,
+        "cuda_peak_reserved_bytes": 17687379968,
+        "os_mem_available_min_bytes": 64743706624,
+        "swap_peak_bytes": 0
+      },
+      "technical_checks_pass": true
+    },
+    {
+      "label": "P-20261022",
+      "attempt": 2,
+      "seed": 20261022,
+      "status": "COMPLETED",
+      "checks": {
+        "config_ledger_hash": true,
+        "same_fixed_settings": true,
+        "prereg_commit": true,
+        "saved_config_semantics": true,
+        "source_condition_mask_unchanged": true,
+        "reference_preprocess_matches": true,
+        "actual_noise_vace_shapes": true,
+        "actual_noise_matches_saved_noise": true,
+        "preprocess_cpu_rng_unchanged": true,
+        "adapter_off_no_offload_bf16": true,
+        "parameter_counts_unchanged": true,
+        "17_frames_24fps_512x288": true,
+        "40_model_calls": true
+      },
+      "hashes": {
+        "shared.noise": "2e9cb4e5dea03c81bc772a0a7dc960fe659480fd85826b616bf8df49507e1e78",
+        "shared.vace_context": "1c63d043749853b5773d6dfd74ba1a3a60450ca51a3fd2f9381e85284a564dc1",
+        "positive.context": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a",
+        "negative.context": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+      },
+      "returncode": 0,
+      "tensor_shapes": {
+        "shared.noise": [
+          1,
+          16,
+          6,
+          36,
+          64
+        ],
+        "shared.vace_context": [
+          1,
+          96,
+          6,
+          36,
+          64
+        ],
+        "positive.context": [
+          1,
+          512,
+          4096
+        ],
+        "negative.context": [
+          1,
+          512,
+          4096
+        ]
+      },
+      "runtime": {
+        "vram_management_enabled": false,
+        "torch_dtype": "torch.bfloat16",
+        "device": "cuda",
+        "attention": "upstream SDPA fallback",
+        "adapter": null
+      },
+      "parameter_counts": {
+        "text_encoder": 5680910336,
+        "dit": 1418996800,
+        "vae": 126892531,
+        "vace": 734975232
+      },
+      "video": {
+        "width": 512,
+        "height": 288,
+        "r_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_frames": "17"
+      },
+      "output_sha256": "a3320c269b413b1ae56f83fafbcc5a22c5a6ff032fa47ccc3b667f16b12fa197",
+      "resources": {
+        "label": "P-20261022",
+        "process_seconds": 100.07095456123352,
+        "runner_seconds": 92.26404961198568,
+        "pipeline_seconds": 40.85857326397672,
+        "model_seconds": 34.311516754038166,
+        "cuda_peak_allocated_bytes": 17056366080,
+        "cuda_peak_reserved_bytes": 17687379968,
+        "os_mem_available_min_bytes": 75294609408,
+        "swap_peak_bytes": 0
+      },
+      "technical_checks_pass": true
+    },
+    {
+      "label": "R-20261023",
+      "attempt": 3,
+      "seed": 20261023,
+      "status": "COMPLETED",
+      "checks": {
+        "config_ledger_hash": true,
+        "same_fixed_settings": true,
+        "prereg_commit": true,
+        "saved_config_semantics": true,
+        "source_condition_mask_unchanged": true,
+        "reference_preprocess_matches": true,
+        "actual_noise_vace_shapes": true,
+        "actual_noise_matches_saved_noise": true,
+        "preprocess_cpu_rng_unchanged": true,
+        "adapter_off_no_offload_bf16": true,
+        "parameter_counts_unchanged": true,
+        "17_frames_24fps_512x288": true,
+        "40_model_calls": true
+      },
+      "hashes": {
+        "shared.noise": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3",
+        "shared.vace_context": "2639336102f64bababa137d62e61843259a3405c00cced5817c62f1017926132",
+        "positive.context": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a",
+        "negative.context": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+      },
+      "returncode": 0,
+      "tensor_shapes": {
+        "shared.noise": [
+          1,
+          16,
+          6,
+          36,
+          64
+        ],
+        "shared.vace_context": [
+          1,
+          96,
+          6,
+          36,
+          64
+        ],
+        "positive.context": [
+          1,
+          512,
+          4096
+        ],
+        "negative.context": [
+          1,
+          512,
+          4096
+        ]
+      },
+      "runtime": {
+        "vram_management_enabled": false,
+        "torch_dtype": "torch.bfloat16",
+        "device": "cuda",
+        "attention": "upstream SDPA fallback",
+        "adapter": null
+      },
+      "parameter_counts": {
+        "text_encoder": 5680910336,
+        "dit": 1418996800,
+        "vae": 126892531,
+        "vace": 734975232
+      },
+      "video": {
+        "width": 512,
+        "height": 288,
+        "r_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_frames": "17"
+      },
+      "output_sha256": "d381a2d084c1260db14309f6b52fbd93dd945933139d278f2b999e3138c8d894",
+      "resources": {
+        "label": "R-20261023",
+        "process_seconds": 82.06239938735962,
+        "runner_seconds": 72.8798206410138,
+        "pipeline_seconds": 38.878152277029585,
+        "model_seconds": 32.41342229314614,
+        "cuda_peak_allocated_bytes": 17056366080,
+        "cuda_peak_reserved_bytes": 17687379968,
+        "os_mem_available_min_bytes": 68772065280,
+        "swap_peak_bytes": 0
+      },
+      "technical_checks_pass": true
+    },
+    {
+      "label": "R-bg-20261023",
+      "attempt": 4,
+      "seed": 20261023,
+      "status": "COMPLETED",
+      "checks": {
+        "config_ledger_hash": true,
+        "same_fixed_settings": true,
+        "prereg_commit": true,
+        "saved_config_semantics": true,
+        "source_condition_mask_unchanged": true,
+        "reference_preprocess_matches": true,
+        "actual_noise_vace_shapes": true,
+        "actual_noise_matches_saved_noise": true,
+        "preprocess_cpu_rng_unchanged": true,
+        "adapter_off_no_offload_bf16": true,
+        "parameter_counts_unchanged": true,
+        "17_frames_24fps_512x288": true,
+        "40_model_calls": true
+      },
+      "hashes": {
+        "shared.noise": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3",
+        "shared.vace_context": "48724efe2aee2ee9d0615cf8de0b83809e884b9b9895b0cbc1e2233c1f7bb735",
+        "positive.context": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a",
+        "negative.context": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+      },
+      "returncode": 0,
+      "tensor_shapes": {
+        "shared.noise": [
+          1,
+          16,
+          6,
+          36,
+          64
+        ],
+        "shared.vace_context": [
+          1,
+          96,
+          6,
+          36,
+          64
+        ],
+        "positive.context": [
+          1,
+          512,
+          4096
+        ],
+        "negative.context": [
+          1,
+          512,
+          4096
+        ]
+      },
+      "runtime": {
+        "vram_management_enabled": false,
+        "torch_dtype": "torch.bfloat16",
+        "device": "cuda",
+        "attention": "upstream SDPA fallback",
+        "adapter": null
+      },
+      "parameter_counts": {
+        "text_encoder": 5680910336,
+        "dit": 1418996800,
+        "vae": 126892531,
+        "vace": 734975232
+      },
+      "video": {
+        "width": 512,
+        "height": 288,
+        "r_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_frames": "17"
+      },
+      "output_sha256": "bfd11a840156fb62cb780625522850726e2fc485225d94b6f49503b9e7841969",
+      "resources": {
+        "label": "R-bg-20261023",
+        "process_seconds": 86.06656265258789,
+        "runner_seconds": 78.97211638395675,
+        "pipeline_seconds": 39.4963008419727,
+        "model_seconds": 32.96105766115943,
+        "cuda_peak_allocated_bytes": 17056366080,
+        "cuda_peak_reserved_bytes": 17687379968,
+        "os_mem_available_min_bytes": 69355593728,
+        "swap_peak_bytes": 0
+      },
+      "technical_checks_pass": true
+    },
+    {
+      "label": "P-20261023",
+      "attempt": 5,
+      "seed": 20261023,
+      "status": "COMPLETED",
+      "checks": {
+        "config_ledger_hash": true,
+        "same_fixed_settings": true,
+        "prereg_commit": true,
+        "saved_config_semantics": true,
+        "source_condition_mask_unchanged": true,
+        "reference_preprocess_matches": true,
+        "actual_noise_vace_shapes": true,
+        "actual_noise_matches_saved_noise": true,
+        "preprocess_cpu_rng_unchanged": true,
+        "adapter_off_no_offload_bf16": true,
+        "parameter_counts_unchanged": true,
+        "17_frames_24fps_512x288": true,
+        "40_model_calls": true
+      },
+      "hashes": {
+        "shared.noise": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3",
+        "shared.vace_context": "1c63d043749853b5773d6dfd74ba1a3a60450ca51a3fd2f9381e85284a564dc1",
+        "positive.context": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a",
+        "negative.context": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+      },
+      "returncode": 0,
+      "tensor_shapes": {
+        "shared.noise": [
+          1,
+          16,
+          6,
+          36,
+          64
+        ],
+        "shared.vace_context": [
+          1,
+          96,
+          6,
+          36,
+          64
+        ],
+        "positive.context": [
+          1,
+          512,
+          4096
+        ],
+        "negative.context": [
+          1,
+          512,
+          4096
+        ]
+      },
+      "runtime": {
+        "vram_management_enabled": false,
+        "torch_dtype": "torch.bfloat16",
+        "device": "cuda",
+        "attention": "upstream SDPA fallback",
+        "adapter": null
+      },
+      "parameter_counts": {
+        "text_encoder": 5680910336,
+        "dit": 1418996800,
+        "vae": 126892531,
+        "vace": 734975232
+      },
+      "video": {
+        "width": 512,
+        "height": 288,
+        "r_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_frames": "17"
+      },
+      "output_sha256": "c8c024b78c60bba86352ac7c37482650ac2f97746442f75666e625292057eead",
+      "resources": {
+        "label": "P-20261023",
+        "process_seconds": 88.05363416671753,
+        "runner_seconds": 81.78178874001605,
+        "pipeline_seconds": 38.77064547804184,
+        "model_seconds": 32.45448225195287,
+        "cuda_peak_allocated_bytes": 17056366080,
+        "cuda_peak_reserved_bytes": 17687379968,
+        "os_mem_available_min_bytes": 70461943808,
+        "swap_peak_bytes": 0
+      },
+      "technical_checks_pass": true
+    }
+  ],
+  "training_updates": 0,
+  "temporal_quality": "UNVERIFIED",
+  "quality_acceptance": "NOT_INFERRED_FROM_TECHNICAL_CHECKS",
+  "all_completed_technical_checks_pass": true,
+  "full_design_completed": true
+}

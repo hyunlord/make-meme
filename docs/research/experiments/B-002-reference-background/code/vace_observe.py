@@ -5,12 +5,15 @@
 # Imported by the bounded VACE runner, not a standalone model launcher.
 """Read-only runtime shape and noise observations."""
 from __future__ import annotations
+
 import hashlib
 import json
 import time
 from pathlib import Path
 from typing import TYPE_CHECKING
+
 import torch
+
 if TYPE_CHECKING:
     from diffsynth.pipelines.wan_video import WanVideoPipeline
     from vace_experiment import RunConfig

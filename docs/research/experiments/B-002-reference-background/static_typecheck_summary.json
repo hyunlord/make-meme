@@ -1,0 +1,31 @@
+{
+  "scope": "Mac static check of eight public research helpers; not Spark model execution",
+  "status": "NOT_PASS",
+  "summary": {
+    "filesAnalyzed": 8,
+    "errorCount": 326,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 1.036
+  },
+  "rules": {
+    "reportAny": 49,
+    "reportUnusedCallResult": 32,
+    "reportCallIssue": 1,
+    "reportArgumentType": 4,
+    "reportUnknownMemberType": 55,
+    "reportUnknownVariableType": 79,
+    "reportUnknownArgumentType": 53,
+    "reportAttributeAccessIssue": 4,
+    "reportUnannotatedClassAttribute": 1,
+    "reportMissingImports": 7,
+    "reportUnnecessaryComparison": 1,
+    "reportUnknownParameterType": 16,
+    "reportMissingParameterType": 8,
+    "reportUnusedParameter": 1,
+    "reportMissingTypeArgument": 1,
+    "reportIndexIssue": 13,
+    "reportOptionalSubscript": 1
+  },
+  "limitations": "Missing local torch/upstream imports plus genuinely incomplete annotations and heterogeneous JSON/dictionary inference. No diagnostic suppression or type-safety success claim. Inference code remains frozen at preregistration commit."
+}

@@ -19,3 +19,13 @@
 ## 2026-10-22 00:06 UTC — 재사용 확정 및 실행 순서 고정
 
 remote 모델/토크나이저9파일이 B-001 실제SHA와 일치하고 pinned upstream 핵심5파일도 일치했다. 동일prompt/tokenizer/textencoder경로이며 이전texttensor의 직접 해시는 없어 그 점은 미관측 한계로 남긴다. 기존R/20261022를 재사용한다. 신규순서: R-bg/20261022 → P/20261022 → R/20261023 → R-bg/20261023 → P/20261023. 실제NoiseInitializer와 text/VACE입력 해시는 새 read-only hook으로 기록한다. CPU dummy로 실제unit runner의 tuple반환·tensoridentity·RNG보존을 검증했다.
+
+## 첫 신규 추론 완료
+
+R-bg/20261022 정상종료: runner109.758초, pipeline44.106초, peakallocated17,056,366,080bytes/peakreserved17,687,379,968bytes. 실제NoiseInitializer 해시가 기존R의 저장noise와 일치한다. text조건은 positive `(1,512,4096)`, VACEcontext `(1,96,6,36,64)`이며 initializer/prompt/VACE단위 전후 CPU RNG상태가 유지됐다. 이 검사는 입력통제 증거이며 이미지품질 평가는 아직 하지 않았다. 계획대로 나머지4조건을 순차 실행한다.
+
+## 실행 종료
+
+신규5/5 완료, 실패0, 재사용1. 실제 해시/설정/프레임 검증 PASS. 조건명을 가린 시트 관측 후 대응표를 확인했으며 기존R 노출 때문에 완전블라인드가 아니라고 기록했다. 추가 생성 없이 RESULTS와 이론을 정리했다. 시간품질UNVERIFIED.
+
+검토 후 `parameters_unchanged`라는 모호한 검사명을 `parameter_counts_unchanged`로 정정했다. 비교한 것은 개수이며 실행 후 전체 가중치 값 검증을 뜻하지 않는다. 실행/모델은 변경하지 않았다. strict type 검사 미통과는 RESULTS에 따로 남겼다.

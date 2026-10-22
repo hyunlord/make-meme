@@ -2,7 +2,6 @@
 # requires-python = ">=3.12"
 # ///
 """One inference attempt, fail closed before preregistration; no automatic retry."""
-from pathlib import Path
 import datetime as dt
 import fcntl
 import hashlib
@@ -11,6 +10,7 @@ import re
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 config = Path(sys.argv[1]).resolve()
