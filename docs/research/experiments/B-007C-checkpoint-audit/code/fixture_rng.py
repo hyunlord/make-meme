@@ -51,7 +51,13 @@ def main(output: Path, prior_code: Path, official_source: Path) -> None:
     sys.path.insert(0, str(prior_code))
     from converter_mapping import ConversionError, MappingSource, checkpoint_tensors, mapped_tensors
 
-    before = list(torch.serialization.get_safe_globals())
+    import_baseline = set(torch.serialization.get_safe_globals())
+    # FakeTensor lazy imports add framework globals; record rather than clear them.
+    with FakeTensorMode():
+        pass
+    before = set(torch.serialization.get_safe_globals())
+    ambient_names = sorted(f"{entry.__module__}.{entry.__qualname__}" for entry in before)
+    lazy_added = sorted(f"{entry.__module__}.{entry.__qualname__}" for entry in before - import_baseline)
     base = torch.arange(36, dtype=torch.float32).reshape(6, 6)
     state = {"model.diffusion_model.transformer.layers.0.attention.query_key_value.weight": base,
              "model.diffusion_model.time_embed.0.weight": base[1:5, ::2],
@@ -103,13 +109,13 @@ def main(output: Path, prior_code: Path, official_source: Path) -> None:
             dynamic_dtype_error = str(error)
         else:
             raise FixtureError("Expected rejection without dynamic dtype entry")
-    require(torch.serialization.get_safe_globals() == before, "Dynamic failure scope leaked")
+    require(set(torch.serialization.get_safe_globals()) == before, "Dynamic failure scope leaked")
     tests = []
     for mmap in (False, True):
         require(sha(fixture) == expected_hash, "Synthetic fixture changed")
         with torch.serialization.safe_globals(entries):
             loaded = torch.load(fixture, map_location="cpu", weights_only=True, mmap=mmap)
-        require(torch.serialization.get_safe_globals() == before, "Scoped global state leaked")
+        require(set(torch.serialization.get_safe_globals()) == before, "Scoped global state leaked")
         actual = loaded["module"]
         require(actual.keys() == state.keys(), "Tensor key mismatch")
         for key in state:
@@ -121,7 +127,7 @@ def main(output: Path, prior_code: Path, official_source: Path) -> None:
         tests.append({"test": "restricted_full_fixture", "mmap": mmap, "status": "PASS"})
     with torch.serialization.safe_globals(entries), FakeTensorMode():
         fake = torch.load(fixture, map_location="cpu", weights_only=True, mmap=True)["module"]
-    require(torch.serialization.get_safe_globals() == before, "Fake scope leaked")
+    require(set(torch.serialization.get_safe_globals()) == before, "Fake scope leaked")
     for key in state:
         require(isinstance(fake[key], FakeTensor), "Metadata test returned real tensor")
         require(tensor_record(fake[key]) == tensor_record(state[key]), "Fake metadata mismatch")
@@ -137,7 +143,7 @@ def main(output: Path, prior_code: Path, official_source: Path) -> None:
             unexpected_error = str(error)
         else:
             raise FixtureError("Unexpected class accepted")
-    require(torch.serialization.get_safe_globals() == before, "Failure scope leaked")
+    require(set(torch.serialization.get_safe_globals()) == before, "Failure scope leaked")
     mapped = mapped_tensors(actual, MappingSource(official_source))
     packed = {key: value.contiguous().clone() for key, value in mapped.items()}
     tensor_file = output / "mapped-tensor-only.safetensors"
@@ -152,6 +158,8 @@ def main(output: Path, prior_code: Path, official_source: Path) -> None:
               "strict_gate": "REJECTED_AS_EXPECTED", "strict_error": strict_error, "static_globals": unsafe,
               "scoped_allowlist_exact": entry_names, "missing_dynamic_dtype_rejected": dynamic_dtype_error,
               "legacy_fixture_edit": "Exactly one protocol2 GLOBAL numpy._core to numpy.core; all other members byte-identical; original local fixture preserved", "dynamic_dtype_class": entry_names[-1], "safe_globals_restored": True,
+              "ambient_safe_globals_after_import_count": len(import_baseline), "ambient_safe_globals_after_fake_warmup": ambient_names,
+              "fake_lazy_import_added_globals": lazy_added, "scope_note": "Four scoped NumPy entries are additional to recorded framework ambient globals; dedicated subprocess only.",
               "rng_algorithm": rng[0], "rng_state_shape": list(rng[1].shape), "rng_state_dtype": str(rng[1].dtype),
               "tests": tests, "unexpected_global_rejected": True, "unexpected_error": unexpected_error,
               "tensors": {key: tensor_record(value) for key, value in state.items()},

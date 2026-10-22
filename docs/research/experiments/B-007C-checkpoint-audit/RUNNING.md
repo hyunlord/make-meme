@@ -17,3 +17,7 @@
 신규 대형 다운로드·diffusion·학습·전체 변환·full model loading: 모두 0. 작은 fixture 통과는 실제 변환 성공이 아니다. A/VACE/기존 checkpoint 및 B-007B gate는 변경하지 않는다.
 
 코드 SHA는 이 문서와 함께 등록되는 git commit의 blob으로 고정하고 실제 실행 manifest에 파일 SHA256을 보존한다. 공개 자료에는 개인 경로와 raw pickle을 포함하지 않는다.
+
+## 10:30 UTC fixture amendment
+
+최초 synthetic 실행은 full/mmap 검사를 지난 뒤 FakeTensor scope 복원 검사에서 실패했다. 별도 fresh process에서 빈 FakeTensorMode 초기화만으로 framework safe_globals 10개가 추가됨을 재현했다. 이를 NumPy context 누출로 혼동하지 않도록 FakeTensor 초기화를 먼저 실행하고 ambient 목록과 추가 목록을 기록한 뒤 각 context 전후 집합을 비교한다. 기존 실패 로그는 보존하고 허용 목록을 clear하거나 실제 checkpoint에 적용하지 않는다. 정확한 NumPy 네 항목은 전체 허용 집합이 아니라 기록된 framework ambient 집합에 대한 추가분이다.
