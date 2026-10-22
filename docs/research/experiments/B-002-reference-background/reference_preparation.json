@@ -1,0 +1,24 @@
+{
+  "method": "Manual fullresolution polygon seeds + OpenCV GrabCut5, RNG20261022; largest exterior contour fill removes internal alpha holes; recorded manual silhouette clips bedding/shadow spill. No learned model, no feathering or RGB change.",
+  "source_sha256": "54f8052c7264139a41d2818d5c881abd2442f462b5d02cc7908c1f360f00fadb",
+  "decoded_orientation": "Image.open.convert RGB, no exif_transpose",
+  "size": [
+    1536,
+    2048
+  ],
+  "background_rgb": [
+    255,
+    255,
+    255
+  ],
+  "foreground_pixels": 595340,
+  "all_retained_foreground_rgb_exact": true,
+  "foreground_source_bytes_sha256": "e2fa54a97326053c3e4bd57072d1a3c64f94f9af13bc57d32fc80bf277335fbf",
+  "foreground_output_bytes_sha256": "e2fa54a97326053c3e4bd57072d1a3c64f94f9af13bc57d32fc80bf277335fbf",
+  "alpha_sha256": "29ea5d20bf6ee1bf85e263ba14ab1cc3063f4dd6670064a6f63f3184cc725a3a",
+  "R_bg_sha256": "d4d5ff988fa13f6b3c18165f1043c49e510baa12bffabb8a66c8a26865b8f2b2",
+  "cpu_processing_seconds": 2.2511554579250515,
+  "manual_masking": "Human-directed polygon coordinates; not automatic segmentation performance",
+  "model_normalization": "Same B001 ImageOps.pad RGB512x288 gray128; wholecanvas preserved",
+  "visual_review": "Reviewed final original/white/model sheet and full-size preliminary mask; final ears/tongue/bothfrontpaws/chest retained, beddinggap excluded. Hard manual boundary has pixel-level contour uncertainty; not automatic segmentation performance."
+}
