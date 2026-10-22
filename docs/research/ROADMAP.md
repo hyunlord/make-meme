@@ -113,3 +113,10 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 **AUDIT_PASS: 고정 checkpoint 비실행 의존성 감사 + 소형 제한 loader 검증 + 후속 한 경로 선정.** NumPy globals의 RNG 전용 구문 의존성과 원본 SHA 보존을 확인했다. synthetic legacy alias/dynamic dtype/CPU storage parity는 검증됐지만 실제65GB 로딩·변환·모델 실행은 NOT_RUN이다. [결과](experiments/B-007C-checkpoint-audit/RESULTS.md).
 
 다음 후보 하나는 **원본 SHA·환경 고정, 실제 격리 검증, exact scoped safe_globals/weights_only CPU mmap의 metadata-only 확인을 선행하는 bounded tensor-only 변환**이다. 실제 제한 loader의 메모리·storage parity와 보안 격리는 후속 실행에서 검증해야 한다. B-007B 영상 baseline은 여전히 미확보이며 다음 단계 승인 전 대형 변환·모델·추론을 자동 시작하지 않는다.
+
+## B-007D — 실제 체크포인트 제한 로딩·조건부 변환 (2026-10-22)
+
+- **PLANNED / NOT_RUN.** [B-007D PLAN](experiments/B-007D-safe-conversion/PLAN.md).
+- B-007C의 pickle graph 감사와 작은 fixture는 필요한 선행근거이나 실제 65GB 로딩 무위험/메모리 fit을 증명하지 않는다. 다음 단계는 **OS 격리 검증 → 실제 65GB metadata-only FakeTensor / weights_only + 정확한 scoped NumPy4종 확인 → 제한적 실제 변환** 순서다.
+- 실패/새 global/격리 미구현/자원 부족 시 BLOCKED로 종료하고 모델 변환을 강행하지 않는다. full SCAIL 14B 모델 load·diffusion 영상 생성·학습은 B-007D에서 0회로 유지. checkpoint 재다운로드도 하지 않는다.
+- 실제 tensor mapping·dtype·shape·값 검증까지 완료하면 그 다음 단일 경로는 **별도 승인된 모델 로딩과 짧은 공식/Lab 영상 추론**이다.
