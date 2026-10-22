@@ -177,3 +177,11 @@
 - GB10 SM121 공식 FA2 BF164케이스가 FP32 SDPA 대비 사전 오차 기준을 통과했다. 릴리스 C++17 실패, Ninja PATH 수정, 내부 deadline 종료와 동일 source 한정 continuation을 보존했다.
 - 의존성 source56,998,912 bytes, 새 모델 가중치/전체 diffusion/학습0. 마스크 입력 계약과 실제 helper CPU 검증 완료, 얇은 경계는 PARTIAL. 모델 변환·load peak는 NOT_MEASURED.
 - [B-007A RESULTS](experiments/B-007-scail-preflight/RESULTS.md), [이론](lessons/B-007-attention-memory-feasibility.md). B-007B는 별도 승인 전 NOT_RUN이다.
+
+## 2026-10-22 — B-007A 업로드·원격 결과 독립 검토 및 B-007B 계획 등록
+
+- B-007A 원격 결과 commit `2f8d97bdbee699bdb168a0b00fa0b6db8f63bba8`에서 RESULTS/attention/resource/입력-masks 보고서를 읽었다. Mac/Spark 간 바이트 일치는 실행 담당자 보고이며 이 검토에서는 직접 접근한 **업로드 ZIP 한 벌**을 확인했다.
+- 업로드 `make-meme-B-007A-20261022-0705.zip`: 15,456,993bytes, SHA256 `ef66556e9af77caa5f9d3cafb3405cb151d03c6237b4268258dc77c0cf4a5d6b` 직접 일치. ZIP CRC pass, manifest 224개 모두 ZIP 안의 해당 파일 bytes·SHA256과 직접 대조해 일치(전체 entry225, 나머지는 manifest 자체). 모델 forward/커널 재실행은 하지 않았다.
+- 실행 기록에서 GB10 FA2 BF16 tiny attention4/4 PASS, max abs error0.00465846, 기준 atol0.01/rtol0.02, 본체 추론/peak UNKNOWN 확인. 공식 SAT checkpoint65.58GB, 필수 비선택 파일80.002GB, 변환 원본 torch.load→safetensors.save_file 및 로딩 시 peak 위험. 마스크 경계 PARTIAL, 기본 writer16fps vs source24fps mismatch.
+- 결정: 작은 kernel PASS는 실질적 진전이므로 다음은 **B-007B**로 전체 모델 baseline을 단계별 시도할 가치가 있다. 다만 대규모 변환이 RAM/다른 작업에 위험하므로 다운로드 전에 메모리 안전 변환 경로를 확인하고 실제 안전 조건을 통과할 때만 80GB 파일 확보·변환·공식 예제/실제 Lab 17f 최대2건 추론하도록 사전 계획한다.
+- [B-007B PLAN](experiments/B-007B-scail-baseline/PLAN.md) 등록은 계획 공개만으로, 대형 다운로드·변환·확산 영상·학습은 여전히 NOT_RUN. 사용자 또는 실행 agent의 다음 명시 지시 전 자동 실행하지 않는다.
