@@ -1,0 +1,22 @@
+{
+  "scope": "B-007D actual restricted loading only",
+  "checkpoint_sha256": "d6c73e94c57eb36e6351c800d1228e41ed7e45db1ccf410dd875bcfdd2945e7f",
+  "max_actual_loads": 2,
+  "deadline_utc": "2026-10-22T14:34:00Z",
+  "metadata_memory_gib": 8,
+  "conversion_memory_gib_max": 32,
+  "preserved_system_headroom_gib": 24,
+  "code": {
+    "code/ambient_contract.json": "1c9ea8eba2838b73c8f492aded7a3e5d4c7f4ae69bbd7fe0e31d57b7025c94b0",
+    "code/convert_stage.py": "bac60336f89d28ab07a1c2eb43f0ea3aec4f5d69268f14a2e1de67c4ff6a1ad7",
+    "code/same_state_verify.py": "1e15347baf77e680ad44b9b6c174773ae41b0528659970ee98a5d2fe96ace651",
+    "code/sandbox_command.py": "3a07804c5e9c99d13654a13b73beb53c2602c104e1abd90241cdc426c07b0cb5",
+    "code/sandbox_guard.py": "7caeeed375d5544ce2416d6898e75a696a8f8fe20ff3a00a401ee08338478897",
+    "code/sandbox_launch.py": "192adb2e9de084eda034955a3e5958665ace3d4ca5aefb99cc91c0cdfaea9078",
+    "code/sandbox_preflight.py": "e92ec32062eec0d23a159570a2f2a00cc6443307b90099e818e6ed0c516789fe",
+    "code/sandbox_probe.py": "4dbdf130344d4b0150276b4362aeba55314beeb460e55a205b2d1d018659f8da",
+    "code/scoped_loader.py": "f9c7527ac2c94a33f5b7471f1165fdab7eb5b1a2282e45433f9edb20d1d827d7",
+    "code/static_contract.py": "77749e79978b7397fc68e47de87bdce752fc3e6af10bcfb9ae120eeec5d4b257",
+    "code/test_conversion_contract.py": "e3167e55f9474af61e66ce8a637833e6aec2a2a6f510801ced2ebb6b969042cb"
+  }
+}
