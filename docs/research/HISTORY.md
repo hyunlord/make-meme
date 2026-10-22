@@ -124,3 +124,11 @@
 - 신규gray+null2/2완료·실패0·기존6재사용·학습0. 전체8셀noise/text/조건tensor와코드무결성대조통과.
 - 신규2개사족. 직립형태는gray+real의seed23한개뿐이며실제Lab+원본춤동시수용0/8. 시간UNVERIFIED.
 - 같은제거실험반복중단. 다음하나는동물관절궤적·가시성·발접촉표현적합성검증제안만(NOT_RUN). [RESULTS](experiments/B-005-factorial/RESULTS.md),[이론](lessons/B-005-conditioning-interaction.md).
+
+
+## 2026-10-22 — B-005 원격 기록 검토, 조건 제거 실험 종료 / B-006 사전 등록
+
+- 사용자 제출 B-005 결과와 원격 commit `1d7e97b63dcfb27a1d16c9f91fc5a99103149688`의 RESULTS/learning/run_summary를 대조했다. R-bg/R-gray × C-real/C-null × 2seed의 8개 조건을 완성(6개 재사용+2개 신규). 8개 모두 실제 Lab identity와 원본 춤의 동시 수용 실패. 1개 회색/real의 직립 실루엣을 안무 성공으로 재분류하지 않는다.
+- 이 문서 검토에서는 Spark에서 모델을 직접 재실행하지 않았다. 제출 ZIP `make-meme-B-005-20261022.zip`은 이번 리뷰 시점에 Python/container 파일 열기 요청이 실패하여 CRC/실제 영상 재생을 독립 검증하지 못했다. SHA256 `dd1500c9aa328c297637c71936a694b073ec59383ab07836bddb2a03dbd88ca9`와 파일 822개 검증은 실행 담당자가 보고한 값이다. 시간 품질 UNVERIFIED 유지.
+- 판단: 조건 입력의 영향은 확인됐으나 유용한 동작 전달은 실패. 동일 회색/검정 콘텐츠 대체 실험을 반복하지 않고 동작 표현과 공식 조건 인터페이스 검토로 상위 연구 질문을 변경.
+- [B-006 사전 PLAN](experiments/B-006-motion-representation/PLAN.md): 비학습식 원본 동작 주석·비교 시각화, 2D landmark의 가림/접촉 표시, 기존 VACE와 공식 SCAIL-2 RGB driving 경로·Spark 적합성 문서/코드 비교. 새 대형 모델 설치/영상 추론/학습은 NOT_RUN, 승인 범위 아님.
