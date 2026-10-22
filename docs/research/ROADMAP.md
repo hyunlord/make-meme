@@ -76,3 +76,10 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 **COMPLETED: 동작 표현 감사·공식 모델 인터페이스 검토.** 원본17프레임에서 보이는 표면점119개와 미관측170개를 구분하고, 실제 관절 중심/3D 접촉을 지어내지 않았다. CPU overlay·궤적·heatmap 완료는 생성 성공과 다르다. [결과](experiments/B-006-motion-representation/RESULTS.md).
 
 다음 한 경로는 **B-007 공식 SCAIL-2 Wan RGB driving의 제한된 baseline**이다. 현재 FlashAttention 의존성 부재, ARM64/GB10 kernel·변환/로딩 peak UNKNOWN,16fps 기본 출력과 원본24fps의 차이가 선행 조건이다. 모델 파일 약80GB 및 추가 변환 공간은 별도 예산을 필요로 한다. 설치·추론·학습은 이번에 실행하지 않았고 다음 승인 전 자동 시작하지 않는다. 임의 animal skeleton을 VACE에 대입하거나 Canny/reference 제거 실험을 반복하지 않는다.
+
+## B-007A 사전 실행 가능성 검증 (2026-10-22)
+
+- 상태 **PLANNED / NOT_RUN**. [B-007A PLAN](experiments/B-007-scail-preflight/PLAN.md).
+- 목표: SCAIL-2 Wan RGB driving baseline을 새 80GB 다운로드 전에 DGX Spark GB10에서 실행 가능한지 판단. 실제 flash-attn 호출 형태·SM121 kernel smoke, reference/driving 색상 mask 의미와 24fps 원본 시간축, crop, checkpoint 변환 중 메모리/디스크 위험 확인.
+- B-007A는 모델 전체 다운로드0/영상 diffusion 추론0/학습0; 격리 환경의 bounded dependency 설치/작은 attention 연산만 예정. 통과도 14B model load 및 Lab 춤 성공 증명이 아니다.
+- 다음 별도 결정 B-007B: 정식 체크포인트 확보·변환·공식 예제와 실제 단일 컷 추론. 이번 PLAN만으로 자동 승인하지 않는다.
