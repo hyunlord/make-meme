@@ -1,0 +1,5 @@
+{
+  "E_scail_sha256": "53079bd481178fccc87f0b2f6081938a7dfc086f1ce26d218a98b1db91babd9f",
+  "F_scail_sha256": "e0df335fd1951f8282ec1987796e209d3ea2dfdba393a50c5ee25526c9d02cae",
+  "policy_change": "Only post-loop model.cpu skipped; earlier offload and post-loop empty_cache unchanged"
+}

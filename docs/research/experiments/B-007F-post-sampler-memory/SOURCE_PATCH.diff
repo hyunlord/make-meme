@@ -1,0 +1,23 @@
+--- E/wan/scail.py
++++ F/wan/scail.py
+@@ -423,14 +423,12 @@
+ 
+                     x0 = [latent.to(self.device)]
+                     del latent_model_input, timestep
+-
+-                if offload_model:
+-                    self.model.cpu()
+-                    torch.cuda.empty_cache()
+-
+-                if self.rank == 0:
+-                    videos = self.vae.decode(x0)
+-                return videos
++                    from runtime_transition import step_completed
++                    step_completed(t, sample_scheduler)
++
++                from runtime_transition import preserve_final, post_sampler_decode
++                preserve_final(x0, history_latent, seg_idx, seg_start, seg_end, len(segments))
++                return post_sampler_decode(self.model, self.vae, x0, offload_model, self.rank)
+ 
+             for seg_idx, (seg_start, seg_end) in enumerate(segments):
+                 logging.info(

@@ -1,0 +1,73 @@
+{
+  "status": "REUSABLE_HASH_VERIFIED",
+  "started_utc": "2026-10-22T15:53:22.999774+00:00",
+  "finished_utc": "2026-10-22T15:54:14.575376+00:00",
+  "baseline": "B-007E preservation_after.json",
+  "baseline_sha256": "054153afce82608ce99065a0097a81000faa7ffab5a4c1ad17d24ab1afb1053c",
+  "private_evidence_sha256": "b1c15b1f028da523b3bd5dfcd2e27322f1e39deea63469b17eb3e15a710ddba0",
+  "groups": {
+    "weights": {
+      "count": 8,
+      "matching": 8
+    },
+    "dependencies": {
+      "count": 168,
+      "matching": 168
+    },
+    "source_original": {
+      "count": 8,
+      "matching": 8
+    },
+    "fixed_inputs_config": {
+      "count": 10,
+      "matching": 10
+    },
+    "preregistered_inputs": {
+      "count": 8,
+      "matching": 8
+    }
+  },
+  "weight_sha256": [
+    "8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118",
+    "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+    "020daacf4c0ce94284df584d243cefb6ddfadefff8772226a8e85431df5de2da",
+    "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+    "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d",
+    "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458",
+    "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b",
+    "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05"
+  ],
+  "resources": {
+    "mem_available_bytes": 90071883776,
+    "mem_available_gib": 83.88597869873047,
+    "swap_used_bytes": 0,
+    "disk_free_bytes": 1136047190016,
+    "gpu_process_count": 1,
+    "queue_running_count": 0,
+    "queue_pending_count": 0
+  },
+  "method": "Sequential 8 MiB SHA256 reads, file stat byte sizes, /proc/meminfo, disk_usage, read-only nvidia-smi process list and existing queue GET. No model imports/load/GPU operation or environment modification.",
+  "limitations": [
+    "Dependency coverage is the 168 baseline evidence files, not every byte of installed environments.",
+    "F official/lab/input_config_hashes copies are byte-identical to E. Runtime source changes are audited separately; this report does not certify sampler output equivalence.",
+    "Resource snapshot is not launch approval; live guard must recheck at launch.",
+    "Original source coverage is the 8 baseline files, not an entire repository hash."
+  ],
+  "f_config_copy_check": [
+    {
+      "file": "official.json",
+      "match": true,
+      "sha256": "354676d6dda0c4ef6bce72daebadde6f2fa59eeb2a953e9d1dfd617a64162d6f"
+    },
+    {
+      "file": "lab.json",
+      "match": true,
+      "sha256": "ce05010aee9349af5b4bfdc8b4f7d982c371d2d9883a680da4e076a03d6632b9"
+    },
+    {
+      "file": "input_config_hashes.json",
+      "match": true,
+      "sha256": "26b96ca0dac0d3742f571ba160217b6f935bd3c0a83a67d1902cc948b43928e4"
+    }
+  ]
+}

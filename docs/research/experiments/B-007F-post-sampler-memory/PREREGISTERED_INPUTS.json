@@ -1,0 +1,116 @@
+{
+  "experiment": "B-007F",
+  "source_commit": "78fe19576bb06be96c2375e088574a262a300edb",
+  "hf_revision": "150cc0ca4e98e50e60b9295dacde39442fdccab2",
+  "model_hash_checked_utc": "2026-10-22T13:53:40.895590+00:00",
+  "environment_checked_utc": "2026-10-22T13:57:47.598261+00:00",
+  "versions": {
+    "torch": "2.14.0+cu130",
+    "torch_git": "08187d9e0fba026dc8217405802ab5381dc88d90",
+    "cuda": "13.0",
+    "numpy": "2.5.2",
+    "flash_attention": "2.8.4"
+  },
+  "inputs": {
+    "lab": [
+      {
+        "alias": "lab/driver-24fps.mp4",
+        "sha256": "e08b0f08155ff9da9a0f9322a15fa5adf665b6857ba1c84cc8e5e65e6891fc27",
+        "bytes": 2487365
+      },
+      {
+        "alias": "lab/mask-24fps.mp4",
+        "sha256": "cd13899eecf7ca29e2063975dbae7fab733fe9667195bfc29c2dae1cade451c2",
+        "bytes": 40485
+      },
+      {
+        "alias": "lab/reference-mask.png",
+        "sha256": "281d5d7ebacfc510b2eba8cedc2b12cc9e5399c5024715e67a5006859cf8d6f3",
+        "bytes": 4349
+      },
+      {
+        "alias": "lab/reference.png",
+        "sha256": "703884c8e2a657d4294cf4e74efeb463c9cd6e05e1ad582f99d6546b954cfdce",
+        "bytes": 498994
+      }
+    ],
+    "official": [
+      {
+        "alias": "official-animation-001/driver-17frames.mp4",
+        "sha256": "584d69294f59a8f3cd52207ed93e71d81eaf834bf2702cf451da096f555c63dc",
+        "bytes": 8545375
+      },
+      {
+        "alias": "official-animation-001/mask-17frames.mp4",
+        "sha256": "70138c35fa5686032062ff8d95d8ade87658625f8c84e1aa0b79f0c455b68532",
+        "bytes": 712786
+      },
+      {
+        "alias": "official-animation-001/ref.jpg",
+        "sha256": "3485a50ddf5cf73d81da87ff7a9da4a16e4ad3e51cb7c8e1f2393d2dea79f781",
+        "bytes": 224421
+      },
+      {
+        "alias": "official-animation-001/ref_mask.jpg",
+        "sha256": "ba2c5f30c8204e0822d37d08ce00d0cbc84bfe12c9bd6d918762cf467c6740c4",
+        "bytes": 55525
+      }
+    ]
+  },
+  "weights": [
+    {
+      "filename": "wan-model.safetensors",
+      "bytes": 65582313560,
+      "sha256": "8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118",
+      "prior_match": true
+    },
+    {
+      "filename": "Wan2.1_VAE.pth",
+      "bytes": 507609880,
+      "sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+      "prior_match": true
+    },
+    {
+      "filename": "models_clip_open-clip-xlm-roberta-large-vit-huge-14-onlyvisual.pth",
+      "bytes": 2528485611,
+      "sha256": "020daacf4c0ce94284df584d243cefb6ddfadefff8772226a8e85431df5de2da",
+      "prior_match": true
+    },
+    {
+      "filename": "models_t5_umt5-xxl-enc-bf16.pth",
+      "bytes": 11361920418,
+      "sha256": "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+      "prior_match": true
+    },
+    {
+      "filename": "special_tokens_map.json",
+      "bytes": 6623,
+      "sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d",
+      "prior_match": "NO_LFS_SHA_USE_BASELINE"
+    },
+    {
+      "filename": "spiece.model",
+      "bytes": 4548313,
+      "sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458",
+      "prior_match": true
+    },
+    {
+      "filename": "tokenizer.json",
+      "bytes": 16837417,
+      "sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b",
+      "prior_match": true
+    },
+    {
+      "filename": "tokenizer_config.json",
+      "bytes": 61728,
+      "sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05",
+      "prior_match": "NO_LFS_SHA_USE_BASELINE"
+    }
+  ],
+  "flash_attention_extension": {
+    "filename": "flash_attn_2_cuda.cpython-312-aarch64-linux-gnu.so",
+    "sha256": "ca0ca462a673878b30797f9f83c1218985bac00e85ee7c4e96909bc12f4f3511"
+  },
+  "parent": "B-007E",
+  "reuse_status": "Fresh unchanged hashes confirmed in private reports/provenance-check.json"
+}

@@ -1,0 +1,22 @@
+{
+  "experiment": "B-007F",
+  "deadline_utc": "2026-10-22T18:50:53Z",
+  "files": {
+    "code/prepare_cases.py": "698044912c942c9470ac19270786dc4828bacd3b4defbc037a34ff32386a0d49",
+    "code/runtime_guard.py": "1678e814df5daf22129e88fa6a4955ef3b86293704751d2ba0ad2decca23f982",
+    "code/runtime_infer.py": "d99261be81818c44388a57ec57465b7c800f36ebf459ba0cade3178538c8b140",
+    "code/runtime_sentinel.py": "04ece251b4972f209d5c7ca5b301624d8f61c21b699776ea5ae7f2967a5631d6",
+    "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+    "code/test_guard_policy.py": "22455da56d8f2c9fe50f20a8361c5b661d9b951e7ffa425d64cc5a7f4d2be8e5",
+    "code/runtime_transition.py": "7c93b0da9cc2b2ebff11e3701e90f1b6a854d05e835491379b631136d8bb0756",
+    "code/runtime_patch.py": "50f37f3e18d4e3bb2e8c2c521037862d37292a871639b3de8299423d865728e0",
+    "code/test_transition.py": "15272629099a3e4b73ed5e0b7d3fad7ba3dd387b88d2a23c7b1d88206f7b56df",
+    "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+    "code/runtime_launch.py": "678fdda462281403d8a13c60b6cd24c343d4fbda21d8fc1fc05103a74647532e",
+    "code/test_staged_loader.py": "6f03ff37e17afd6d8cddf7108f51607b7180383f8edfd5f3979cf06b514204ef",
+    "code/check_case.py": "fa5155fd175262405afc2280b80ce560a5371c3ce8dfa354e7f032872fd621d3",
+    "configs/lab.json": "ce05010aee9349af5b4bfdc8b4f7d982c371d2d9883a680da4e076a03d6632b9",
+    "configs/official.json": "354676d6dda0c4ef6bce72daebadde6f2fa59eeb2a953e9d1dfd617a64162d6f",
+    "configs/input_config_hashes.json": "26b96ca0dac0d3742f571ba160217b6f935bd3c0a83a67d1902cc948b43928e4"
+  }
+}
