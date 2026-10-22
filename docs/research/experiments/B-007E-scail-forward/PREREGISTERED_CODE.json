@@ -1,0 +1,25 @@
+{
+  "experiment": "B-007E",
+  "loading_path": "meta+per-tensor mixed BF16/FP32+strict assign",
+  "full_loading_paths_max": 2,
+  "declared_loading_paths": 1,
+  "sampler_attempts_max": 2,
+  "new_checkpoint_downloads": 0,
+  "training_updates": 0,
+  "deadline_utc": "2026-10-22T18:49:00Z",
+  "files": {
+    "PREREGISTERED_INPUTS.json": "79e231dd4523ed7deb4bd075f373e651e440846e142a626f97b5347d1be966fb",
+    "code/runtime_guard.py": "95b7f9f2bbc2674da22536ba9ee766ba45a309bde0655b80c852f53db5fa5519",
+    "code/runtime_infer.py": "11b2c36f3153ef4076a552eac9c791ceaca679324efb0579b54b76000c28d1bf",
+    "code/runtime_launch.py": "4a102262f8509c07f266309e7414af96b7f107d6d0dfff0768cd479510decc83",
+    "code/runtime_observe.py": "dbfe9e503c1e87909bf21c7ec29fde0a7d362d4e3f651f2575e46792c4dd1c3f",
+    "code/runtime_prepare.py": "2398c84e1803b78b3875674a8865b0b43662fa5c0e43b46a077b2a4ac452caab",
+    "code/runtime_sentinel.py": "d58777e9fd5d08d7828457c99393bab0e32e4eb9974c44d0f3d38d2265fe8759",
+    "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+    "code/test_guard_policy.py": "22455da56d8f2c9fe50f20a8361c5b661d9b951e7ffa425d64cc5a7f4d2be8e5",
+    "code/test_staged_loader.py": "6f03ff37e17afd6d8cddf7108f51607b7180383f8edfd5f3979cf06b514204ef",
+    "configs/input_config_hashes.json": "26b96ca0dac0d3742f571ba160217b6f935bd3c0a83a67d1902cc948b43928e4",
+    "configs/lab.json": "ce05010aee9349af5b4bfdc8b4f7d982c371d2d9883a680da4e076a03d6632b9",
+    "configs/official.json": "354676d6dda0c4ef6bce72daebadde6f2fa59eeb2a953e9d1dfd617a64162d6f"
+  }
+}
