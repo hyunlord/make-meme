@@ -15,3 +15,7 @@ G cache read-only 재사용; P0·Lab0·다운로드0·학습0. Probe1 ≤300초,
 ## PROBE 실물 통과 / S 시작
 
 PROBE는6.062초에 정상 종료했다. 실제64-byte CUDA copy/add/synchronize/readback PASS, 캐시16leaf 원래 device 및 roundtrip 값 검증 PASS, tiny 이후 CUDA RNG 상태 불변. 두 unit MainPID0·inactive 확인 후 fresh S를 시작했다. S는 CPU 가중치를 읽기 전에 실제 tiny 연산을 완료했다. 모델 적재·sampler·D 성공을 아직 주장하지 않는다.
+
+## S가 기존 실패 지점을 통과
+
+이번 실행에서 CPU staged load 뒤 tiny 재검사와16leaf 복원이 통과했다. DiT device 이동·재검사 후 첫 forward는254.93초에 완료됐고 첫 scheduler step은266.80초에 완료됐다. 동일40step sampler 진행 중이며 final latent·D·MP4는 아직 미완료다. 이전 G 원인을 초기화 순서 하나로 확정하지 않는다.
