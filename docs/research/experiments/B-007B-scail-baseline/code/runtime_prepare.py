@@ -21,8 +21,14 @@ for relative in ('wan/modules/t5.py','wan/modules/clip.py'):
  p=target/relative;text=p.read_text();needle="torch.load(checkpoint_path, map_location='cpu')"
  assert text.count(needle)==1
  p.write_text(text.replace(needle,"torch.load(checkpoint_path, map_location='cpu', weights_only=True, mmap=True)"))
+p=target/'wan/utils/scail_utils.py';text=p.read_text()
+assert text.count('import decord\n')==1 and text.count('from decord import VideoReader\n')==1
+text=text.replace('import decord\n','').replace('from decord import VideoReader\n','')
+assert text.count('def load_video_for_pose_sample(video_data):\n')==1
+text=text.replace('def load_video_for_pose_sample(video_data):\n','def load_video_for_pose_sample(video_data):\n    import decord\n    from decord import VideoReader\n')
+p.write_text(text)
 venv.EnvBuilder(with_pip=False).create(root/'environment')
 site=next((root/'environment/lib').glob('python*/site-packages'))
 (site/'readonly-b007a.pth').write_text('import site; site.addsitedir('+repr(str(existing_site))+')\n')
 (root/'reports').mkdir(exist_ok=True)
-(root/'reports/runtime_prepare.json').write_text(json.dumps({'scope':'isolated tree, meta mixedBF16 DiT loader, mmap CPU T5/CLIP checkpoint loads','files':{str(p.relative_to(target)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (target/'wan/scail.py',target/'wan/modules/t5.py',target/'wan/modules/clip.py')}},indent=2))
+(root/'reports/runtime_prepare.json').write_text(json.dumps({'scope':'isolated tree, meta mixedBF16 DiT loader, mmap CPU T5/CLIP checkpoint loads','files':{str(p.relative_to(target)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (target/'wan/scail.py',target/'wan/modules/t5.py',target/'wan/modules/clip.py',target/'wan/utils/scail_utils.py')}},indent=2))

@@ -1,0 +1,64 @@
+{
+  "repo": "zai-org/SCAIL-2",
+  "revision": "150cc0ca4e98e50e60b9295dacde39442fdccab2",
+  "files": [
+    {
+      "path": "Wan2.1_VAE.pth",
+      "size": 507609880,
+      "sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+      "blob_id": "5897fba405232a6b07a947d6188d19a8e050ccfb",
+      "reuse": "Wan2.1_VAE.pth"
+    },
+    {
+      "path": "model/1/fsdp2_rank_0000_checkpoint.pt",
+      "size": 65582563395,
+      "sha256": "d6c73e94c57eb36e6351c800d1228e41ed7e45db1ccf410dd875bcfdd2945e7f",
+      "blob_id": "5b3cd39015514f001ff0c0389109bd4787259641",
+      "reuse": null
+    },
+    {
+      "path": "models_clip_open-clip-xlm-roberta-large-vit-huge-14-onlyvisual.pth",
+      "size": 2528485611,
+      "sha256": "020daacf4c0ce94284df584d243cefb6ddfadefff8772226a8e85431df5de2da",
+      "blob_id": "477d2ebd196255980710dc6262e498ac68caf79a",
+      "reuse": null
+    },
+    {
+      "path": "umt5-xxl/models_t5_umt5-xxl-enc-bf16.pth",
+      "size": 11361920418,
+      "sha256": "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+      "blob_id": "d5dad910304ab4b909a2c8a225a71840606e6de4",
+      "reuse": "models_t5_umt5-xxl-enc-bf16.pth"
+    },
+    {
+      "path": "umt5-xxl/special_tokens_map.json",
+      "size": 6623,
+      "sha256": null,
+      "blob_id": "14855e7052ffbb595057dfd791d293c1c940db2c",
+      "reuse": "google/umt5-xxl/special_tokens_map.json"
+    },
+    {
+      "path": "umt5-xxl/spiece.model",
+      "size": 4548313,
+      "sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458",
+      "blob_id": "2fe5f347e9f9367585589ae89e997dfbd5cf802c",
+      "reuse": "google/umt5-xxl/spiece.model"
+    },
+    {
+      "path": "umt5-xxl/tokenizer.json",
+      "size": 16837417,
+      "sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b",
+      "blob_id": "7bd4ee3cf5633e49c0e06a3aac2a621559e6222a",
+      "reuse": "google/umt5-xxl/tokenizer.json"
+    },
+    {
+      "path": "umt5-xxl/tokenizer_config.json",
+      "size": 61728,
+      "sha256": null,
+      "blob_id": "4e1cc1cd85599ce0b47fd0a746af188fe4043ff2",
+      "reuse": "google/umt5-xxl/tokenizer_config.json"
+    }
+  ],
+  "optional_lora": false,
+  "download_cap": 85000000000
+}
