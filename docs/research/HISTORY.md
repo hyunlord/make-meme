@@ -207,3 +207,9 @@
 - 소형 legacy-name fixture에서 exact scoped NumPy4항목 + weights_only CPU/mmap 값·형상·storage parity와 공식mapping/safetensors roundtrip 확인. 최초 FakeTensor framework globals 추가 및 두 번째 FakeTensor 객체 identity 실패를 보존했다. 실제 storage 검증과 FakeTensor ZIP offset 검증을 분리했다.
 - **AUDIT_PASS는 감사/후속 경로 선정에 한정**. 실제65GB allowlist load·변환·모델·diffusion·학습은 모두 NOT_RUN/0. 다음 한 경로는 SHA고정·검증된격리에서 exact scoped loader metadata-only부터 시작하는 조건부 변환이며, 이번에 실행하지 않는다.
 - [RESULTS](experiments/B-007C-checkpoint-audit/RESULTS.md), [코드 감사](experiments/B-007C-checkpoint-audit/CODE_AUDIT.md), [이론](lessons/B-007C-serialization-and-metadata.md). 기존 B-007B BLOCKED 기록과 strict gate는 보존한다.
+
+## 2026-10-22 — B-007C AUDIT_PASS 검토 / B-007D 사전 등록
+
+- B-007C 실행 담당 결과 커밋 `73c0a54f90726832c7932a64c7fd98b42832ff79`와 원격 RESULTS/CODE_AUDIT/REPRODUCE 조회. 실제 SAT checkpoint 크기65,582,563,395 bytes, SHA d6c73e94c57eb36e6351c800d1228e41ed7e45db1ccf410dd875bcfdd2945e7f. 비실행 pickle graph(7 root, 989 storage, 993 ZIP member)에서 NumPy globals는 np_rng_state root에 국한. 소형 fixture scoped 4종+weights_only/mmap/fake metadata 검사 PASS; 첫 두 실패 기록과 FakeTensor object identity 한계를 보존. **실제 65GB restricted load/변환/전체 모델 load/추론/학습은 NOT_RUN.**
+- 업로드 `/mnt/data/make-meme-B-007C-20261022.zip`은 이번 세션의 Python/CaaS 읽기 도구 장애로 직접 CRC/해시 재검증하지 못함. 크기 383,179bytes, SHA 37a3b451fa8f0f6faadefc31d2f9375081f72df38a4f68b17f391b6e16636836 및 69개 파일 검증은 실행 담당자의 보고값으로만 기록함. 정확한 파일 경로를 읽도록 시도했으나 성공하지 않았으므로 독립 검증 완료라고 말하지 않음.
+- 다음 [B-007D PLAN](experiments/B-007D-safe-conversion/PLAN.md)은 SHA·환경 고정 + 실제 OS 격리 아래 정확한 scoped safe_globals(4개), weights_only CPU mmap FakeTensor metadata-only 검증을 우선한다. 그 결과와 변환 memory safety가 모두 확인된 경우에만 실제 tensor-only SAT→Wan 변환을 최대 1회 시도. 신규 다운로드0, diffusion 추론0, 학습0. 여전히 SCAIL 영상 baseline은 NOT_RUN.
