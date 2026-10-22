@@ -17,3 +17,7 @@
 ## 동일 방법2 실행기 경로 수정 — 2026-10-22 06:14 UTC
 
 `ninja.BIN_DIR`가 빈 문자열이어서 기존 실제 Ninja 실행 파일을 PATH에 넣지 못하고 serial distutils로 내려갔다. 기존 실행 파일의 `--version`을 확인하고 owned build process group만 중단했다. 로그와 object를 보존하고, 같은 source/arch/compiler를 실제 Ninja 경로로 재개한다. 새로운 설치 방법이나 다운로드가 아니며 원래 방법2 deadline 06:45:33 UTC를 명시적으로 유지한다.
+
+## 실제 색상 압축 함수 CPU 검사 추가 고정
+
+생성 없이 pinned helper 자체를 실행해 실제 준비 mask의28채널/시간축/색상 슬롯을 확인한다. driver 실제 순서는 bilinear 절반 resize 뒤 helper(additional_spatial_downsample=1)이며, helper2와 같다고 가정하지 않는다. 함수 AST만 추출해 CPU 실행하고 전체 pipeline/model import는 하지 않는다. area 보간의 fractional occupancy도 기록한다. 이는 기존 mask/FPS 사전검증 범위의 세부 검증이며 새로운 모델 실험이 아니다.
