@@ -6,7 +6,7 @@
 |---|---|---|---|
 | B-001 학습 기반 | Spark에서 toy 생성 모델과 VACE LoRA를 실제로 학습·추론할 수 있는가? | 실행 완료 보고 / 제한적 학습 경로 확인 | 기존 코드·설정·출력 보존; 일반화와 구분 |
 | B-002 참조 배경 비교 | 같은 Lab 참조에서 배경만 바꾸면 결과 배경·자세에 어떤 영향이 있는가? | COMPLETED / 동작 전이 미수용 | 두 seed 배경 변화·착석 유지; [결과](experiments/B-002-reference-background/RESULTS.md) |
-| 조건 수용 검증 | 구조 조건이 실제로 사용되는지, 전처리·mask·scale·sampling의 영향은 무엇인가? | BACKLOG / 조건부 | B-002에서 남은 원인에 따라 한 요인만 선정 |
+| B-003 구조 조건 비교 | R-bg 고정에서 실제/무정보 Canny 영향은? | COMPLETED / 직립 춤 미수용 | 2/2쌍 자세 변화,0/4직립; [결과](experiments/B-003-structure-condition/RESULTS.md) |
 | 과제 적합 데이터 | 개체 외모와 동작을 분리해 학습할 수 있는 input/condition/target은 무엇인가? | BACKLOG | 허용된 데이터, scene/identity 단위 split, 정답과 누수 정의 |
 | 제한된 학습 개입 | LoRA/adapter/조건 주입 하나가 어떤 실패를 줄이는가? | BACKLOG | 학습 전후 동일 조건 비교와 미학습 샘플 검증 |
 | 확장 검증 | 더 긴 동작·큰 체형 차이·두 개체에서도 성립하는가? | BACKLOG | 실패율·자원·여러 seed, 외부 개체/동작 평가 |
@@ -36,3 +36,7 @@ B-002에서는 새 학습 update를 하지 않는다. B-001에서 학습한 도�
 ## B-003 착수 (2026-10-22)
 
 사용자가 위 조건부 비교를 승인했다. [B-003 PLAN](experiments/B-003-structure-condition/PLAN.md): R-bg 고정, 실제/무정보 Canny × 두 seed의 frozen baseline 비교. 상태 PLANNED, 학습0회, 전체제작 승인이 아니다. 이전 NOT_RUN 문구는 B-002 종료 당시의 상태다.
+
+## B-003 실제 결론 (2026-10-22)
+
+신규4/4완료·학습0·실패0. 실제 구조 latent 변화 및 두 seed의 real착석/null사족 차이는 구조 영향이 있음을 지지한다. 원하는 직립 춤 전달은0/4이며 reference 단독 지배도 확정할 수 없다. 다음 하나는 C-real 고정에서 R-bg 대 균일 회색 reference 한 장 비교다. 개체정보도 제거되므로 품질개선 아닌 조건기여 진단이며 아직 NOT_RUN/미승인이다. 기존 B-003 착수 PLANNED 항목은 시작 당시 기록이다.

@@ -8,7 +8,7 @@
 2. [로드맵](ROADMAP.md)
 3. [누적 히스토리](HISTORY.md)
 4. [모든 작업에 적용할 기록 규칙](RECORDING_PROTOCOL.md)
-5. [다음 실험 의뢰서: B-002 참조 배경 통제 비교](experiments/B-002-reference-background/PLAN.md)
+5. [최근 실험: B-003 구조 조건 비교](experiments/B-003-structure-condition/RESULTS.md)
 6. [새 실험 문서 양식](templates/EXPERIMENT.md)
 
 ## 현재 상태 — 2026-10-22 기준
@@ -33,3 +33,5 @@
 공개 저장소이므로 개인 사진·원본 동영상·토큰·개인 경로·대형 모델/캐시/로그를 자동으로 올리지 않는다. 실행 자료는 로컬에 보관하고 공개 문서에는 비민감 요약·재현 명령·자산 별칭·해시를 남긴다.
 
 B-002 실행 이후에는 선별한 비민감 실행 코드·설정·검증 요약을 추가했다. 여전히 실제 자산과 전체 실행 환경을 포함한 checkout은 아니다.
+
+B-003: **COMPLETED**,4/4추론·0학습. 두 seed 모두 real착석/null사족으로 구조 영향은 확인됐으나 원본 직립 춤은0/4. 시간UNVERIFIED. [결과](experiments/B-003-structure-condition/RESULTS.md) · [이론](lessons/B-003-structure-conditioning.md).

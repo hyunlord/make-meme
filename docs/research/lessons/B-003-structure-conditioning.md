@@ -72,6 +72,10 @@ Wan은 `z_sigma=(1-sigma)*z_clean+sigma*epsilon`을 사용하고 velocity target
 
 black은 유효한 고정 대조 입력이지만 학습 분포와의 거리가 달라질 수 있다. 이 실험은 모델 내부의 순수 motion channel을 분리하지 않는다. 두 seed의 paired 결과는 탐색적이며 서비스·논문·전체 반려동물 품질을 입증하지 않는다. 실제 연속 재생을 보지 못하면 시간 품질은 UNVERIFIED다.
 
-## B-003 실측 연결 자리
+## B-003 실제 관측과 식의 연결
 
-작성 시점에는 이 작성자가 B-003 추론을 실행하거나 결과를 관측하지 않았다. 실행 담당자가 실제 run ID, 재사용 여부, noise/text/reference/mask 일치, reactive/context 변화, 두 seed의 정적·시간 관측을 RESULTS와 연결한다. 이 문단의 상태는 실측 자료를 확인한 뒤 갱신하며 예상 shape만으로 성공을 채우지 않는다.
+[실행 결과](../experiments/B-003-structure-condition/RESULTS.md)에서4회 모두 완료했고 실제 noise/text/reference prefix/inactive/mask hash는 각 seed의 두 조건에서 같았다. reactive video와 전체 context hash는 달랐다. noise `(1,16,6,36,64)`,text `(1,512,4096)`,context `(1,96,6,36,64)`는 이번에도 관측했다. RGB BCTHW는 코드 유도이며 decoder RGB uint8 `(288,512,3)`는 별도 실측이다.
+
+같은 epsilon/R/T/M/lambda에서 S를 바꾸자 두 seed 모두 real의 착석이 null의 사족 자세로 바뀌었다. 따라서 이 설정의 `G_theta`는 구조 입력에 관측 가능한 반응을 보였다. 하지만0/4 run이 source의 뒷발 직립 춤을 성공적으로 재현했다. `Delta_s`가0이 아니라는 사실과 원하는 방향으로 움직였다는 사실은 다르다.
+
+reference가 고정된 null에서도 착석이 사라졌으므로 '참조의 착석이 무조건 고정한다'고 말할 수 없다. real 착석은 조건 상호작용 또는 baseline 표현의 한계일 수 있다. 이를 분해하려면 별도 한 요인 비교가 필요하다. 정적17프레임 시트와 대표 원본 프레임을 관찰했으나 연속 재생은 보지 못해 시간 품질은 UNVERIFIED다. 자세·개체·시간 품질을 하나의 성공 점수로 합치지 않는다.

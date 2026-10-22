@@ -58,3 +58,17 @@
 - R-bg 고정, 실제 Canny/검정 무정보 Canny × 두 seed, 신규 추론 최대4회·학습0회·2시간 상한. 기존 결과를 네 셀 대신 재사용하지 않는다.
 - 검정 RGB 입력은 VACE 제거가 아니며 reference/mask 경로를 유지한다. GPU 큐와 메모리를 확인했고 기존 환경은 수정하지 않는다.
 - [PLAN](experiments/B-003-structure-condition/PLAN.md). 결과는 아직 NOT_RUN.
+
+## 2026-10-22 — B-003 첫 seed 실행 완료
+
+- 계획7368c1f 및 실행코드49c41ec의 원격 SHA를 확인한 뒤 실행했다.
+- 첫 seed real/null 두 run 완료, 실제 noise/text/reference/inactive/mask 동일 및 reactive 차이를 확인했다. 대표 f8의 real 착석/null 네발 자세 차이를 정적으로 관측했다. 전체 결론은 두 번째 seed와 모든 프레임 검토 뒤 기록한다.
+- 모델9파일·핵심코드5파일을 새로 해시 검사했다. [진행 기록](experiments/B-003-structure-condition/RUNNING.md).
+
+## 2026-10-22 — B-003 통제 비교 완료
+
+- 4/4신규완료,실패0,재사용0,학습0,adapter=null. 실제 pairednoise/text/ref/inactive/mask동일,reactive/context상이 확인.
+- 두 seed 모두 real착석/null사족. 구조 경로 영향은 관측됐으나 원본 직립 춤 성공0/4. reference 단독 지배는 확정하지 않음.
+- 모든17프레임 시트와 대표 원본프레임을 정적 검토. 연속재생미관측으로 시간UNVERIFIED. 개인자료는GitHub비공개.
+- 다음 하나: C-real 고정 R-bg/균일회색 reference 비교 제안만. 자동실행없음.
+- [RESULTS](experiments/B-003-structure-condition/RESULTS.md),[이론](lessons/B-003-structure-conditioning.md),[실측](experiments/B-003-structure-condition/run_summary.json).

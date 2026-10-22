@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-22T01:37:44.395849+00:00",
+  "python_compile": "PASS",
+  "ast_parse": "PASS",
+  "files": [
+    "scripts/vace_observe.py",
+    "scripts/launch_video.py",
+    "scripts/check_inputs_cpu.py",
+    "scripts/guard.py",
+    "scripts/vace_experiment.py",
+    "scripts/check_observer_cpu.py",
+    "reports/validate_runs.py"
+  ],
+  "preregistered_code_unchanged": {
+    "vace_observe.py": true,
+    "launch_video.py": true,
+    "check_inputs_cpu.py": true,
+    "guard.py": true,
+    "vace_experiment.py": true,
+    "check_observer_cpu.py": true
+  },
+  "ruff": "NOT_RUN: not present on PATH or uv tool list; no installation",
+  "basedpyright": "NOT_RUN: not present on PATH or uv tool list; no installation",
+  "scope": "Bounded syntax and prereg integrity checks, not full lint/typecheck or model quality acceptance."
+}
