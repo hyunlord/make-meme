@@ -159,3 +159,9 @@
 - 시작 remote `6ca9271b8d565cf88db22bbfe61bbedecf7b915c`; 2시간/의존성2GB/최대두방법 경계를 유지한다. 격리된 실제 BF16 FlashAttention smoke와 CPU 입력 검사를 고정한다.
 - 세로 Lab reference가 공식 출력 H/W를 교환하는 조건을 발견했다. 같은 crop geometry로 RGB/mask와 머리·발 보존을 확인한다.
 - [실행 기록](experiments/B-007-scail-preflight/RUNNING.md). 모델 가중치·diffusion·학습은0이며 B-007B로 자동 확대하지 않는다.
+
+## 2026-10-22 — B-007A 첫 빌드 실패 보존
+
+- FlashAttention 릴리스의 C++17과 기존 Torch2.14의 C++20 요구가 충돌했다. 설치/연산 성공을 선언하지 않는다.
+- 고정 공식 main은 현재 Torch를 위한 C++20 및 SM121 분기를 제공하므로 두 번째이자 마지막 설치 방법으로 선택했다. [RUNNING](experiments/B-007-scail-preflight/RUNNING.md).
+- 원본 RGB와 mask의 동일 crop에서 머리/발은 보존되지만 초기 GrabCut에 바닥 반사가 포함됐다. 해당 v1을 보존하고 관측 가능한 바닥 경계의 수동 수정과 한계를 기록한다.
