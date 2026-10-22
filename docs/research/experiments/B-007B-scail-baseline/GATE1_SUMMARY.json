@@ -1,0 +1,36 @@
+{
+  "status": "PASS_SYNTHETIC_CONVERSION_ONLY",
+  "preregistered_commit": "f1cbdff",
+  "execution_host": "DGX Spark CPU; CUDA_VISIBLE_DEVICES empty",
+  "python": "3.12.3",
+  "torch": "2.14.0+cu130",
+  "safetensors": "0.8.0",
+  "pytest": "8.4.2",
+  "timeout_seconds": 120,
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "pytest_reported_seconds": 1.21,
+  "junit_seconds": 1.206,
+  "private_junit_sha256": "6263c72e08bd54855970e8a8bddcc991f8d443eeb455fc59d9da9820f18d0f5e",
+  "source_sha256": "0519f688643b0a2c3f13660f196e34280704ddb3e2575aa226e2d2f8f2b4397f",
+  "checks": [
+    "Official key mapping + save_file golden: key/dtype/shape/contiguous/value/per-tensor SHA equality",
+    "Explicit q/k/v order; KV image/text and biases; BF16/F32/F16",
+    "CPU mmap and FakeTensor metadata; scalar/empty/shared-storage views",
+    "Reject noncontiguous, overwritten output, changed official source, unsafe globals, legacy format",
+    "Independent safetensors parser + chunked source/output hash, payload corruption rejection"
+  ],
+  "large_checkpoint_compatibility": "NOT_RUN",
+  "conversion_peak": "NOT_MEASURED",
+  "model_forward": "NOT_RUN",
+  "optimizer_updates": 0,
+  "code_hashes": {
+    "converter.py": "00e27b90c836227247f5600071ff22ffbf47c1f179633046e52de1b36102bc2d",
+    "converter_mapping.py": "6e5036c8ea450e8aced25cdc73ee8da0a5570028c5d36147a48b4fe808c0db37",
+    "converter_stream.py": "1148c7c5efd0f1d1eec46b4d266248f1f3afeb7bb47ee4ffff9e973575c2a510",
+    "converter_verify.py": "8b14576d0185fa0debae424180bbdedfe75715f55d18e8d24d064413fc36749d",
+    "test_conversion.py": "579912c52c3ac4500f84e9a3f49f1846245b2096a49fc75847e0c2ee55705047"
+  }
+}

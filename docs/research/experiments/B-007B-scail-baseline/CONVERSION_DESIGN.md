@@ -1,6 +1,6 @@
 # Gate 1 — mmap CPU 변환 설계와 고정 비교
 
-상태: 코드·fixture 작성, 실행 전 고정 대기. 실제 대형 checkpoint 호환성·변환 peak는 UNKNOWN이다. 새 모델 다운로드·GPU·diffusion·학습 실행은 없다.
+상태: `f1cbdff` 고정 후 Spark CPU의 작은 fixture 8/8 PASS. [실행 요약](GATE1_SUMMARY.json). 실제 대형 checkpoint 호환성·변환 peak는 UNKNOWN이다. 새 모델 다운로드·GPU·diffusion·학습 실행은 없다.
 
 ## 유지하는 것과 바꾸는 것
 
@@ -27,3 +27,12 @@ runtime 담당자의 독립 cgroup/메모리·swap·deadline guard 아래에서�
 ## 재현
 
 기존 격리 Python에서 `SCAIL_CONVERT_SOURCE=<검증된 pinned convert.py> python -m pytest code/test_conversion.py -q`로 합성 검증한다. 변환은 외부 guard 아래 `python code/converter.py <checkpoint> <pinned convert.py> <output.safetensors>`다. 이 문서는 실제 다운로드/실행 승인이나 성공 기록을 대체하지 않는다.
+
+
+## 실제 실행과 재현 증거
+
+Spark CPU Python3.12.3, torch2.14.0+cu130, safetensors0.8.0, pytest8.4.2에서 8개 비교가1.21초에 통과했다. GPU를 숨기고120초 timeout을 적용했다. 앞선 pytest 미설치 시도는 fixture 실행 전 중단됐고, 독립 B007B 환경에 테스트 의존성을 설치한 뒤 실행했다. Mac CPU의 사전8개 비교도 통과했으나 Spark 결과를 대체하지 않는다.
+
+`converter_verify.py`는 Rust safetensors parser로 key/dtype/shape/format을 확인한 뒤, source CPU mmap과 출력 파일을 tensor별 최대8MiB로 읽어 SHA256을 비교한다. `safetensors.load_file`로 전체 출력 state를 materialize하지 않는다. 실제 source metadata mapping과 값을 다시 대조하므로 converter가 작성한 manifest만 믿는 검사가 아니다. synthetic 출력의 payload1byte를 바꾸자 검증이 거부됐다.
+
+대형 변환 뒤 별도 resource/deadline guard 아래 `python code/converter_verify.py <checkpoint> <pinned convert.py> <output.safetensors>`로 검증한다. 원본 mmap resident/file cache는 여전히 메모리에 포함되므로 검사 자체도 무제한 실행하지 않는다. 실제 checkpoint의 안전한 mmap 지원과 대형 변환·검증 peak는 아직 미측정이다.

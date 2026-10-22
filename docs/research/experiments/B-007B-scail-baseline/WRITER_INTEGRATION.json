@@ -1,0 +1,32 @@
+{
+  "status": "COMPLETED_CPU_REAL_ENCODING",
+  "torch": "2.14.0+cu130",
+  "torchvision": "0.29.0+cu130",
+  "imageio": "2.38.1",
+  "exact_upstream_writer_sha256": "8e2d85b1c7961233379b9ab38cee153ca8d95358f27cb8bb6dd154e809731c8c",
+  "pinned_generate_sha256": "c6382298335741379aa0c3ad330b318adb743166a048e70b927a647f0e7c9cbc",
+  "isolated_generate_sha256": "8412fa09a1ebb345934d529a887a8546c845a913c3afec0fefb219c5f2a172d7",
+  "explicit_output_fps": 24,
+  "cfg_default_fps": 16,
+  "zero_fps_rejected": true,
+  "test_tensor_shape": [
+    3,
+    17,
+    896,
+    512
+  ],
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "width": 512,
+        "height": 896,
+        "avg_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_read_frames": "17"
+      }
+    ]
+  },
+  "output_sha256": "840945d6b99801699da79c1a14f7e425936cdd9e390a7137b2e1a8968ff9a7eb",
+  "scope": "Actual pinned cache_video CPU encoding, exact patched call and parser. No fullmodel imports, no diffusion; prepared source RGB only. Sampling/training prior unchanged."
+}
