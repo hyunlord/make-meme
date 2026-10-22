@@ -270,3 +270,7 @@
 ## B-007H 착수 (2026-10-23)
 
 **RUNNING / probe·S·D NOT_RUN.** 원격 `51daacac291f161a21edeac3a551375fdd24f08c`와 [PLAN](experiments/B-007H-cuda-lifecycle/PLAN.md)을 확인했다. G의 조건 캐시를 재사용하며 P는 반복하지 않는다. 같은 서비스 환경의 작은 실제 CUDA 연산과 leaf별 복원 검증을 선행하고, 통과하면 별도 worker에서 CPU DiT 적재 전 CUDA 연산을 수행한다. initialized flag와 실제 연산 성공을 구분하며 원인을 사전 확정하지 않는다. probe1·CPU DiT load1·sampler1·decode1 상한, 선행 실패 시 후속 중지, 기존72/24GiB·swap0 가드 보존.
+
+## B-007H 모델 없는 실제 CUDA 검사 통과 (2026-10-23)
+
+사전 코드 `80f51ff`로 PROBE1을 실행해6.062초에 실제64-byte CUDA 연산·캐시16leaf 원래 device/값 복원을 통과했다. P 재실행0. 정상 종료·자원 가드를 확인한 뒤 별도 S1을 시작한다. 초기화 순서가 G 실패의 유일한 원인이었다는 결론은 아직 내리지 않는다.
