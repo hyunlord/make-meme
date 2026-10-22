@@ -21,3 +21,7 @@
 ## 10:30 UTC fixture amendment
 
 최초 synthetic 실행은 full/mmap 검사를 지난 뒤 FakeTensor scope 복원 검사에서 실패했다. 별도 fresh process에서 빈 FakeTensorMode 초기화만으로 framework safe_globals 10개가 추가됨을 재현했다. 이를 NumPy context 누출로 혼동하지 않도록 FakeTensor 초기화를 먼저 실행하고 ambient 목록과 추가 목록을 기록한 뒤 각 context 전후 집합을 비교한다. 기존 실패 로그는 보존하고 허용 목록을 clear하거나 실제 checkpoint에 적용하지 않는다. 정확한 NumPy 네 항목은 전체 허용 집합이 아니라 기록된 framework ambient 집합에 대한 추가분이다.
+
+## 10:34 UTC second and final fixture amendment
+
+두 번째 실행에서는 scope 복원이 통과했지만 FakeTensor storage 객체의 `is` 동일성 검사가 실패했다. 별도 관측에서 세 객체의 식별자는 다르지만 checkpoint offset 4806과 storage 144 bytes는 같았다. 실제 CPU/mmap 로드의 storage 공유 검사는 그대로 유지한다. FakeTensor 객체 공유는 NOT_PRESERVED로 기록하고, metadata와 `_checkpoint_offset`을 실제 ZIP storage payload 위치에 대조한다. 이전 실패를 PASS로 덮어쓰지 않는다. 이 시험은 FakeTensor 객체 identity가 물리 storage alias의 일반 대리 지표가 아님을 드러냈다. 수정은 두 번으로 제한하며 실제 대형 checkpoint에는 적용하지 않는다.

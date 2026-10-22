@@ -10,6 +10,7 @@ import hashlib
 import json
 import pickle
 import sys
+import struct
 import time
 import zipfile
 from pathlib import Path
@@ -132,8 +133,26 @@ def main(output: Path, prior_code: Path, official_source: Path) -> None:
         require(isinstance(fake[key], FakeTensor), "Metadata test returned real tensor")
         require(tensor_record(fake[key]) == tensor_record(state[key]), "Fake metadata mismatch")
     fake_storages = [value.untyped_storage() for value in fake.values()]
-    require(all(storage is fake_storages[0] for storage in fake_storages), "Fake storage alias mismatch")
-    tests.append({"test": "fake_tensor_mmap_metadata_and_alias", "status": "PASS", "value_check": "NOT_APPLICABLE"})
+    fake_object_alias = all(storage is fake_storages[0] for storage in fake_storages)
+    fake_checkpoint_offsets = [getattr(storage, "_checkpoint_offset", None) for storage in fake_storages]
+    with zipfile.ZipFile(fixture) as archive:
+        storage_members = [info for info in archive.infolist() if "/data/" in info.filename]
+        require(len(storage_members) == 1, "Synthetic fixture must have exactly one storage member")
+        info = storage_members[0]
+        with fixture.open("rb") as handle:
+            handle.seek(info.header_offset)
+            header = handle.read(30)
+        require(header[:4] == b"PK\x03\x04", "Invalid fixture local ZIP header")
+        filename_length, extra_length = struct.unpack_from("<HH", header, 26)
+        exact_storage_offset = info.header_offset + 30 + filename_length + extra_length
+        require(info.compress_type == zipfile.ZIP_STORED and info.file_size == 144, "Unexpected synthetic storage encoding")
+    require(all(offset == exact_storage_offset for offset in fake_checkpoint_offsets),
+            "Fake checkpoint offsets do not match actual ZIP storage payload offset")
+    tests.append({"test": "fake_tensor_mmap_metadata", "status": "PASS", "value_check": "NOT_APPLICABLE",
+                  "storage_object_identity_shared": fake_object_alias,
+                  "storage_object_identity_status": "PASS" if fake_object_alias else "NOT_PRESERVED",
+                  "checkpoint_storage_offsets": fake_checkpoint_offsets, "zip_payload_offset": exact_storage_offset,
+                  "scope": "Checkpoint-offset evidence only; not physical storage alias or real checkpoint validation"})
     unexpected = output / "locally-created-unexpected-global.pt"
     torch.save({"module": state, "unexpected": UnexpectedFixtureGlobal()}, unexpected)
     with torch.serialization.safe_globals(entries):
