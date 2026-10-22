@@ -32,3 +32,7 @@ B-002에서는 새 학습 update를 하지 않는다. B-001에서 학습한 도�
 ## B-002 실제 결론 (2026-10-22)
 
 두 seed에서 참조 배경의 구체적 복사가 줄었지만 착석 자세는 남았다. P 직립은 실제Lab 개체 일치나 Canny 효과의 독립 증거가 아니다. 다음 실험은 R-bg와 나머지 조건을 고정한 Canny/무정보 Canny 한 요인 비교만 제안한다. 아직 NOT_RUN이며 새 학습·모델·추가 생성 승인이 아니다.
+
+## B-003 착수 (2026-10-22)
+
+사용자가 위 조건부 비교를 승인했다. [B-003 PLAN](experiments/B-003-structure-condition/PLAN.md): R-bg 고정, 실제/무정보 Canny × 두 seed의 frozen baseline 비교. 상태 PLANNED, 학습0회, 전체제작 승인이 아니다. 이전 NOT_RUN 문구는 B-002 종료 당시의 상태다.
