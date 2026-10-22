@@ -14,7 +14,7 @@ from safetensors import safe_open
 
 def parameter_dtype(name: str) -> torch.dtype:
     """Keep explicit FP32 arithmetic islands and normalization/modulation parameters."""
-    fp32 = name.startswith(('time_embedding.', 'time_projection.', 'head.')) or 'norm' in name or 'modulation' in name
+    fp32 = name.startswith(('time_embedding.', 'time_projection.', 'head.')) or name.startswith(('img_emb.proj.0.', 'img_emb.proj.4.')) or 'norm' in name or 'modulation' in name
     return torch.float32 if fp32 else torch.bfloat16
 
 
