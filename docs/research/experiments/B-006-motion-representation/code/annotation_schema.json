@@ -36,6 +36,6 @@
   "normalization": "xy/[512,288] only. Anatomical root-relative coordinates NOT_COMPUTED if pelvis/body scale unresolved. Visible proxies are not joint centers.",
   "uncertainty": "Manual low-resolution image observations. No interpolation as truth. Finite differences only adjacent manually annotated visible points; report px/s with independent worst-case uncertainty 24*(radius_t+radius_t1), never treat subuncertainty motion as measured truth.",
   "torso_and_heading": "3D heading and joint angles are not inferred. Torso angle is unavailable when anatomical shoulder/hip centers are unresolved.",
-  "visibility_colors": "visible yellow dots; null joints not drawn; contact not rendered as a support assertion",
+  "visibility_colors": "Stable per-ID palette defined in renderer; representative 3x panels include text IDs. Null joints not drawn.",
   "private_data": "Actual coordinates, source images, overlays and paths stay private. Only this schema and generic code may be public."
 }

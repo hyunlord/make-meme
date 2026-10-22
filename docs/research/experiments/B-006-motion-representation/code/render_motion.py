@@ -11,10 +11,32 @@ import sys
 from collections import Counter
 from PIL import Image, ImageDraw
 
+def validate_point(point, annotated, viewed):
+    assert point['visibility'] in ('visible','occluded','unobservable')
+    if point['visibility']=='visible':
+        assert annotated and viewed and point['xy'] is not None
+        assert len(point['xy'])==2 and point['uncertainty_px']>0
+        assert 0<=point['xy'][0]<512 and 0<=point['xy'][1]<288
+    else:
+        assert point['xy'] is None and point['uncertainty_px'] is None
+    assert point['note']
+
+# Negative contract fixtures contain no source-derived observations.
+for invalid in [dict(visibility='visible',xy=None,uncertainty_px=2,note='fixture'),
+                dict(visibility='occluded',xy=[1,2],uncertainty_px=None,note='fixture')]:
+    try:
+        validate_point(invalid,True,True)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError('Invalid point contract fixture accepted')
+
 root=Path(sys.argv[1]);schema=json.loads((root/'tools/annotation_schema.json').read_text())
 data=json.loads((root/'annotations/annotated_landmarks.json').read_text())
 frames=data['frames'];assert [f['frame'] for f in frames]==list(range(17))
 output=root/'outputs';(output/'overlay').mkdir(parents=True,exist_ok=True)
+contact_summary=Counter();palette=['#ffcc00','#00ffff','#ff66ff','#ff6633','#66ff66','#99aaff','#ffffff']
+point_colors={name:palette[i%len(palette)] for i,name in enumerate(schema['landmark_ids'])}
 summary=Counter();per_landmark={name:Counter() for name in schema['landmark_ids']};records=[]
 comparison=Image.new('RGB',(5*512,4*3*312),(25,25,25))
 overview=Image.new('RGB',(5*512,4*312),(25,25,25))
@@ -24,7 +46,16 @@ for frame in frames:
         original=source.convert('RGB');overlay=original.copy()
     draw=ImageDraw.Draw(overlay)
     assert set(frame['landmarks'])==set(schema['landmark_ids'])
+    assert frame['annotation_status'] in schema['frame_status']
+    assert set(frame['contacts'])=={'left_front_paw','right_front_paw','left_hind_paw','right_hind_paw'}
+    for contact in frame['contacts'].values():
+        assert contact['evidence'] in ('visible_evidence','possible','unknown')
+        assert contact['touching'] is None or type(contact['touching']) is bool
+        if contact['evidence']!='visible_evidence': assert contact['touching'] is None
+        assert contact['note']
+        contact_summary[f"{contact['evidence']}:{contact['touching']}"]+=1
     for name,point in frame['landmarks'].items():
+        validate_point(point,frame['annotation_status']=='ANNOTATED',frame['viewed_individually'])
         assert point['visibility'] in schema['visibility']
         summary[point['visibility']]+=1;per_landmark[name][point['visibility']]+=1
         xy=point['xy']
@@ -32,13 +63,22 @@ for frame in frames:
             assert frame['annotation_status']=='ANNOTATED' and frame['viewed_individually']
             assert point['visibility']=='visible' and point['uncertainty_px']>0
             x,y=xy;assert 0<=x<512 and 0<=y<288
-            draw.ellipse((x-2,y-2,x+2,y+2),fill=(255,220,0))
+            draw.ellipse((x-2,y-2,x+2,y+2),fill=point_colors[name])
             records.append({'frame':index,'point':name,'xy':xy,'normalized_xy':[x/512,y/288],
                             'uncertainty_px':point['uncertainty_px']})
         else:
             assert point['visibility']!='visible'
     draw.text((5,5),f'f{index} manual visible points; hidden joints=null',fill=(255,255,0))
     overlay.save(output/'overlay'/f'{index:03d}.png')
+    if index in (0,4,8,12,16):
+        enlarged=original.resize((1536,864),Image.Resampling.NEAREST);ed=ImageDraw.Draw(enlarged)
+        for name,point in frame['landmarks'].items():
+            if point['xy'] is not None:
+                x,y=[v*3 for v in point['xy']];color=point_colors[name]
+                ed.ellipse((x-4,y-4,x+4,y+4),outline=color,width=2)
+                ed.line((x,y,x+75,y),fill=color,width=1)
+                ed.text((x+78,y-5),name,fill=color,stroke_width=1,stroke_fill='black')
+        enlarged.save(output/f'annotated-f{index:02d}-3x.png')
     col,row=index%5,index//5
     overview.paste(overlay,(col*512,row*312+24));ImageDraw.Draw(overview).text((col*512+5,row*312+5),f'f{index} @ {index/24:.4f}s',fill='white')
     with Image.open(root/'inputs/canny'/f'{index:03d}.png') as edge: canny=edge.convert('RGB')
@@ -90,6 +130,7 @@ for video in output.glob('*.mp4'):
     assert stream['avg_frame_rate']=='24/1' and int(stream['nb_read_frames'])==17
     probes.append({'file':video.name,'sha256':hashlib.sha256(video.read_bytes()).hexdigest(),'probe':info})
 report={'visibility':dict(summary),'per_landmark':{key:dict(value) for key,value in per_landmark.items()},
+    'contact_summary':dict(contact_summary),'contacts_by_frame':[{'frame':f['frame'],'contacts':f['contacts']} for f in frames],
     'annotated_frames':sum(f['annotation_status']=='ANNOTATED' for f in frames),'observations':records,'finite_differences':velocities,
     'root_relative':'NOT_COMPUTED: anatomical pelvis root and reliable body scale unresolved; pixel normalization is separate.',
     'temporal_quality':'UNVERIFIED','commands':commands,'videos':probes}
