@@ -120,3 +120,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 - B-007C의 pickle graph 감사와 작은 fixture는 필요한 선행근거이나 실제 65GB 로딩 무위험/메모리 fit을 증명하지 않는다. 다음 단계는 **OS 격리 검증 → 실제 65GB metadata-only FakeTensor / weights_only + 정확한 scoped NumPy4종 확인 → 제한적 실제 변환** 순서다.
 - 실패/새 global/격리 미구현/자원 부족 시 BLOCKED로 종료하고 모델 변환을 강행하지 않는다. full SCAIL 14B 모델 load·diffusion 영상 생성·학습은 B-007D에서 0회로 유지. checkpoint 재다운로드도 하지 않는다.
 - 실제 tensor mapping·dtype·shape·값 검증까지 완료하면 그 다음 단일 경로는 **별도 승인된 모델 로딩과 짧은 공식/Lab 영상 추론**이다.
+
+## 2026-10-22 — B-007D 실제 제한 변환 완료
+
+**CONVERSION_PASS, 모델 실행·영상 baseline NOT_RUN.** OS 격리·정확한 scoped globals·실제 metadata 통과 후 두 번째이자 마지막 CPU mmap load로 SAT→Wan tensor-only 변환을 완료했다. 원본987개에서 mapped1,307개를 만들고 모든 값 hash·dtype·shape·QKV 순서와 원본 SHA를 검증했다. 전체 변환 guard456.759초, cgroup cap32GiB, 표본 RSS 약53GiB(서로 다른 회계), OOM0. 실제 load2회·재시도0. [결과](experiments/B-007D-safe-conversion/RESULTS.md), [이론](lessons/B-007D-real-checkpoint-loading.md).
+
+다음 하나는 별도 승인된 SCAIL 모델 적재·공식/Lab17프레임 제한 baseline이다. CPU 변환 성공은 GPU 모델 fit·영상 동작·개체 품질 성공이 아니다. 이번에는 모델·추론·학습을 시작하지 않았다.

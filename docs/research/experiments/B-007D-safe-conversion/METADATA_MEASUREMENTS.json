@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "source_tensors": 987,
+  "mapped_tensors": 1307,
+  "tensor_bytes": 65582177536,
+  "elapsed_seconds": 45.208602644037455,
+  "scope_restored": true,
+  "cgroup_peak_bytes": 8589934592,
+  "system_available_min_bytes": 95089909760,
+  "phases": {
+    "hash_phase": {
+      "seconds": 44.370772662048694,
+      "io_delta": {
+        "rchar": 65582563506,
+        "wchar": 0,
+        "syscr": 250182,
+        "syscw": 0,
+        "read_bytes": 10668929024,
+        "write_bytes": 0,
+        "cancelled_write_bytes": 0
+      },
+      "rss_max_kib_at_end": 461776
+    },
+    "load_phase": {
+      "seconds": 0.1671833860455081,
+      "io_delta": {
+        "rchar": 4330136,
+        "wchar": 0,
+        "syscr": 1010,
+        "syscw": 0,
+        "read_bytes": 2928640,
+        "write_bytes": 0,
+        "cancelled_write_bytes": 0
+      },
+      "rss_max_kib_at_end": 573196
+    }
+  }
+}

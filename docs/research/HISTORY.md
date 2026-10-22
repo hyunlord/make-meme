@@ -213,3 +213,15 @@
 - B-007C 실행 담당 결과 커밋 `73c0a54f90726832c7932a64c7fd98b42832ff79`와 원격 RESULTS/CODE_AUDIT/REPRODUCE 조회. 실제 SAT checkpoint 크기65,582,563,395 bytes, SHA d6c73e94c57eb36e6351c800d1228e41ed7e45db1ccf410dd875bcfdd2945e7f. 비실행 pickle graph(7 root, 989 storage, 993 ZIP member)에서 NumPy globals는 np_rng_state root에 국한. 소형 fixture scoped 4종+weights_only/mmap/fake metadata 검사 PASS; 첫 두 실패 기록과 FakeTensor object identity 한계를 보존. **실제 65GB restricted load/변환/전체 모델 load/추론/학습은 NOT_RUN.**
 - 업로드 `/mnt/data/make-meme-B-007C-20261022.zip`은 이번 세션의 Python/CaaS 읽기 도구 장애로 직접 CRC/해시 재검증하지 못함. 크기 383,179bytes, SHA 37a3b451fa8f0f6faadefc31d2f9375081f72df38a4f68b17f391b6e16636836 및 69개 파일 검증은 실행 담당자의 보고값으로만 기록함. 정확한 파일 경로를 읽도록 시도했으나 성공하지 않았으므로 독립 검증 완료라고 말하지 않음.
 - 다음 [B-007D PLAN](experiments/B-007D-safe-conversion/PLAN.md)은 SHA·환경 고정 + 실제 OS 격리 아래 정확한 scoped safe_globals(4개), weights_only CPU mmap FakeTensor metadata-only 검증을 우선한다. 그 결과와 변환 memory safety가 모두 확인된 경우에만 실제 tensor-only SAT→Wan 변환을 최대 1회 시도. 신규 다운로드0, diffusion 추론0, 학습0. 여전히 SCAIL 영상 baseline은 NOT_RUN.
+
+## 2026-10-22 — B-007D 첫 실제 제한 metadata 로드 통과
+
+- 사전 실행 코드 `5e134fa3c8668bd9abe8b00067c01d84cd2580b3` 고정, OS 격리와 deadline cleanup 실증 후 실제 첫 CPU mmap/FakeTensor load를 수행했다.
+- module987개 metadata/ZIP 대응 및 공식1307개 mapping PASS. NumPy4종 scope 복원 확인. 전체 tensor 값·모델 forward는 이 단계에서 검증하지 않았다.
+- 독립 검토 및 신선한 자원 확인 후 기존 PLAN의 조건부 변환을 한 번 진행한다. [실행 기록](experiments/B-007D-safe-conversion/RUNNING.md).
+
+## 2026-10-22 — B-007D 실제 제한 변환 완료
+
+**CONVERSION_PASS, 모델 실행·영상 baseline NOT_RUN.** OS 격리·정확한 scoped globals·실제 metadata 통과 후 두 번째이자 마지막 CPU mmap load로 SAT→Wan tensor-only 변환을 완료했다. 원본987개에서 mapped1,307개를 만들고 모든 값 hash·dtype·shape·QKV 순서와 원본 SHA를 검증했다. 전체 변환 guard456.759초, cgroup cap32GiB, 표본 RSS 약53GiB(서로 다른 회계), OOM0. 실제 load2회·재시도0. [결과](experiments/B-007D-safe-conversion/RESULTS.md), [이론](lessons/B-007D-real-checkpoint-loading.md).
+
+다음 하나는 별도 승인된 SCAIL 모델 적재·공식/Lab17프레임 제한 baseline이다. CPU 변환 성공은 GPU 모델 fit·영상 동작·개체 품질 성공이 아니다. 이번에는 모델·추론·학습을 시작하지 않았다.

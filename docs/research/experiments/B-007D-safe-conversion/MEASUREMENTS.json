@@ -1,0 +1,177 @@
+{
+  "status": "CONVERSION_PASS_NOT_MODEL_FORWARD",
+  "actual_checkpoint_loads": 2,
+  "actual_load_cap": 2,
+  "metadata": {
+    "sample_count": 47,
+    "receipt_seconds": 45.208602644037455,
+    "hash_phase": {
+      "seconds": 44.370772662048694,
+      "start_utc": "2026-10-22T12:53:36.359326+00:00",
+      "end_utc": "2026-10-22T12:54:20.730098+00:00",
+      "io_delta": {
+        "rchar": 65582563506,
+        "wchar": 0,
+        "syscr": 250182,
+        "syscw": 0,
+        "read_bytes": 10668929024,
+        "write_bytes": 0,
+        "cancelled_write_bytes": 0
+      },
+      "ru_maxrss_end_kib": 461776
+    },
+    "restricted_load_phase": {
+      "seconds": 0.1671833860455081,
+      "start_utc": "2026-10-22T12:54:21.221739+00:00",
+      "end_utc": "2026-10-22T12:54:21.388924+00:00",
+      "io_delta": {
+        "rchar": 4330136,
+        "wchar": 0,
+        "syscr": 1010,
+        "syscw": 0,
+        "read_bytes": 2928640,
+        "write_bytes": 0,
+        "cancelled_write_bytes": 0
+      },
+      "ru_maxrss_end_kib": 573196
+    },
+    "scope_restored": true,
+    "cgroup_peak_bytes": 8589934592,
+    "sampled_anon_max_bytes": 379994112,
+    "sampled_file_max_bytes": 8281415680,
+    "sampled_rss_max_kib": 572044,
+    "sampled_rss_anon_max_kib": 371084,
+    "min_system_available_bytes": 95089909760,
+    "max_events": {
+      "max": 1092,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "last_observed_process_io": {
+      "rchar": 65640263843,
+      "wchar": 17096,
+      "syscr": 256181,
+      "syscw": 13,
+      "read_bytes": 10678726656,
+      "write_bytes": 8192,
+      "cancelled_write_bytes": 4096
+    },
+    "last_io_sample_epoch": 1792673661.267952,
+    "io_note": "Last observed whole-process counters, sampled before process exit; not exact terminal counters. mmap faults contribute physical IO but not syscall rchar. Repeated checksum/parity scans included.",
+    "container": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-22T12:53:35.501913071Z",
+      "FinishedAt": "2026-10-22T12:54:21.828918403Z"
+    },
+    "supervisor": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "guard_whole_seconds": 48.04157209396362,
+    "guard_reason": "process_exit",
+    "guard_returncode": 0
+  },
+  "conversion": {
+    "sample_count": 448,
+    "receipt_seconds_before_final_output_hash": 369.0682190289954,
+    "hash_phase": {
+      "seconds": 62.76318884099601,
+      "start_utc": "2026-10-22T12:55:51.636478+00:00",
+      "end_utc": "2026-10-22T12:56:54.399666+00:00",
+      "io_delta": {
+        "rchar": 65582563507,
+        "wchar": 0,
+        "syscr": 250182,
+        "syscw": 0,
+        "read_bytes": 32940421120,
+        "write_bytes": 0,
+        "cancelled_write_bytes": 0
+      },
+      "ru_maxrss_end_kib": 460764
+    },
+    "restricted_load_phase": {
+      "seconds": 0.09000234300037846,
+      "start_utc": "2026-10-22T12:56:54.963140+00:00",
+      "end_utc": "2026-10-22T12:56:55.053145+00:00",
+      "io_delta": {
+        "rchar": 4330136,
+        "wchar": 0,
+        "syscr": 1010,
+        "syscw": 0,
+        "read_bytes": 2453504,
+        "write_bytes": 0,
+        "cancelled_write_bytes": 0
+      },
+      "ru_maxrss_end_kib": 576432
+    },
+    "scope_restored": true,
+    "cgroup_peak_bytes": 34359738368,
+    "sampled_anon_max_bytes": 407834624,
+    "sampled_file_max_bytes": 33793638400,
+    "sampled_rss_max_kib": 55564172,
+    "sampled_rss_anon_max_kib": 398276,
+    "min_system_available_bytes": 89057169408,
+    "max_events": {
+      "max": 31772,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "last_observed_process_io": {
+      "rchar": 262392253567,
+      "wchar": 65583709827,
+      "syscr": 766155,
+      "syscw": 9041,
+      "read_bytes": 238545145856,
+      "write_bytes": 65583759360,
+      "cancelled_write_bytes": 4096
+    },
+    "last_io_sample_epoch": 1792674206.2779534,
+    "io_note": "Last observed whole-process counters, sampled before process exit; not exact terminal counters. mmap faults contribute physical IO but not syscall rchar. Repeated checksum/parity scans included.",
+    "container": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-22T12:55:50.61921544Z",
+      "FinishedAt": "2026-10-22T13:03:26.764220175Z"
+    },
+    "supervisor": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "guard_whole_seconds": 456.7588872909546,
+    "guard_reason": "process_exit",
+    "guard_returncode": 0
+  },
+  "source_tensor_count": 987,
+  "mapped_tensor_count": 1307,
+  "verified_tensor_hash_count": 1307,
+  "mapped_tensor_bytes": 65582177536,
+  "output_bytes": 65582313560,
+  "source_sha256": "d6c73e94c57eb36e6351c800d1228e41ed7e45db1ccf410dd875bcfdd2945e7f",
+  "output_sha256": "8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118",
+  "writer_seconds": "NOT_MEASURED",
+  "parity_verification_seconds": "NOT_MEASURED",
+  "model_forward": "NOT_RUN",
+  "video_inference": "NOT_RUN",
+  "training": "NOT_RUN",
+  "remaining_owned_running_containers": "",
+  "remaining_disk_free_bytes": 1118926725120,
+  "notes": [
+    "Cgroup peak includes reclaimable file cache; sampled process RSS is distinct.",
+    "The scope ru_maxrss snapshot ends just after load, not after complete conversion.",
+    "Final output hash completed before receipt and process exit. Internal conversion seconds was evaluated before final output hash.",
+    "No GPU model memory measurement. Existing unrelated GPU service remained running.",
+    "Process RSS exceeds this container cgroup charge. Shared mapped file pages charged elsewhere are a possible explanation; individual charge ownership was NOT_MEASURED. Do not sum these values or infer all RSS is private allocated memory."
+  ],
+  "page_charge_ownership_attribution": "NOT_MEASURED"
+}
