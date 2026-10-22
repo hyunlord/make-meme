@@ -192,3 +192,10 @@
 - 필수SAT/CLIP 신규68,111,049,006bytes를 받고공식SHA검증,나머지6파일은검증후재사용했다. 실제SATmetadata의NumPy globals3개가사전fail-closed정책에걸렸다. np_rng_state/MT19937 opcode문맥은확인했지만unsafe역직렬화나새parser로우회하지않았다.
 - **BLOCKED: 전체변환·모델load·forward·영상NOT_RUN,추론0/2,학습0.** B007A커널PASS를전체모델PASS로확대하지않는다. 실제메모리peak미측정,소유프로세스종료. 다음한경로는동일checkpoint의비텐서RNG메타데이터안전분리감사이며자동실행하지않는다.
 - [RESULTS](experiments/B-007B-scail-baseline/RESULTS.md), [재현](experiments/B-007B-scail-baseline/REPRODUCE.md), [수학·코드](lessons/B-007B-conversion-and-model-forward.md). 이전PLANNED와B007A기록은그당시상태로보존한다.
+
+## 2026-10-22 — B-007B checkpoint gate BLOCKED 확인 / B-007C 감사 사전 등록
+
+- 원격 B-007B result commit `083a1ffc78f35ee4b37ac15e6ee55db6626580fb`의 RESULTS, REPRODUCE 및 converter_mapping.py를 확인. 신규68,111,049,006 bytes 선택 다운로드와 SHA 검증 완료, 실제 checkpoint의 np_rng_state 근방 NumPy globals `_reconstruct`, ndarray, dtype가 보수적 safe gate에서 거부됨. 변환/모델 load/diffusion 추론/학습 NOT_RUN(추론0/2). 악성 판정이나 메모리 OOM 증거가 아님.
+- 사용자 제공 업로드 `make-meme-B-007B-20261022.zip` 직접 확인: 28,160,888bytes, SHA256 `1351e61ad9ff4ba1f9af39008424c0dafe13e8f647750803b5c8ff14b3450c84`, ZIP CRC PASS, manifest의 포함 171파일 길이/SHA 모두 PASS. Mac/Spark 간 바이트 동일성은 실행 담당자의 별도 확인 보고이며 이번 검토자가 해당 호스트에 직접 재연결한 것은 아님.
+- private 실패 로그에서 실제 `get_unsafe_globals_in_checkpoint()` 기반 검사 거부는 `torch.load`/FakeTensorMode 이전임을 확인. opcode의 인접성만으로 NumPy globals가 RNG metadata 외에는 안 쓰인다고 확증하지 않음.
+- [B-007C 안전 직렬화 감사 사전 PLAN](experiments/B-007C-checkpoint-audit/PLAN.md): 모델 재다운로드0·diffusion 추론0·optimizer0; static pickle/storage graph + synthetic fixture로 안전한 tensor-only extraction 경로 검토. `weights_only=False` 우회 금지. scoped safe_globals도 실제 65GB에 곧바로 적용하지 않음. 성공 후에도 대형 변환/모델 실행은 별도 PLAN 필요. 이 기록 시점 B-007C는 PLANNED/NOT_RUN.
