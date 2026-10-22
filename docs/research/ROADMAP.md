@@ -83,3 +83,7 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 - 목표: SCAIL-2 Wan RGB driving baseline을 새 80GB 다운로드 전에 DGX Spark GB10에서 실행 가능한지 판단. 실제 flash-attn 호출 형태·SM121 kernel smoke, reference/driving 색상 mask 의미와 24fps 원본 시간축, crop, checkpoint 변환 중 메모리/디스크 위험 확인.
 - B-007A는 모델 전체 다운로드0/영상 diffusion 추론0/학습0; 격리 환경의 bounded dependency 설치/작은 attention 연산만 예정. 통과도 14B model load 및 Lab 춤 성공 증명이 아니다.
 - 다음 별도 결정 B-007B: 정식 체크포인트 확보·변환·공식 예제와 실제 단일 컷 추론. 이번 PLAN만으로 자동 승인하지 않는다.
+
+## B-007A 실제 결론 (2026-10-22)
+
+**COMPLETED: 실제 작은 FlashAttention kernel PASS4.** CPU 색상 mask/geometry/timebase 검증 완료, 경계 PARTIAL. 전체 모델 변환/로딩/추론과14B peak는 아직 NOT_RUN/NOT_MEASURED다. [결과](experiments/B-007-scail-preflight/RESULTS.md). 다음 하나는 별도 승인된 B-007B SCAIL-2 Wan RGB driving baseline이며, 현재는80GB 다운로드·추론을 시작하지 않는다. 이전 PLANNED/RUNNING은 역사 기록으로 보존한다.

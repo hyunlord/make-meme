@@ -31,3 +31,11 @@
 앞선 live deadline 연장 거절은 그대로다. 사용자 상한은 총2시간/최대2가지 설치 방법이며35분은 실행자가 보수적으로 정한 한 프로세스의 내부 상한이다. 56/97 object까지 오류 없이 진행되는 증거를 근거로, 단순 내부 timeout 때문에 실제 연산 검증을 미리 포기하지 않도록 **원래 감시가 완전히 종료된 뒤 동일 방법2를 한 번만 이어가는 것**을 사전 등록한다.
 
 조건: 원래 guard 종료와 owned group 부재 확인, TIMEOUT 기록 보존, 동일 pinned source/compiler/arch/Ninja와 기존 object 사용, 추가 다운로드/설치방법/환경 수정 없음. `kernel_method2_resume.py`를 동일하게 사용하며 KERNEL_METHOD_DEADLINE=1792653333.3034995(07:15:33 UTC, 방법2 원래 시작+65분)로 제한한다. 새 guard도 자체35분/global reserve보다 늘어나지 않는다. continuation의 시작·종료·object 재사용 여부를 별도로 기록한다. 이것이 마지막 continuation이며 실패하거나 누적 상한에 도달하면 중단한다. 사용자 전체2시간 deadline08:01:33은 바뀌지 않는다.
+
+## 원래 감시 timeout 보존 후 continuation — 2026-10-22 06:46 UTC
+
+기존 guard는06:45:34.206 UTC에 return=-15, reason=deadline_or_memory_guard로 종료했다. 마지막 시스템 가용메모리와swap0 및 deadline 도달을 확인해 시간 제한으로 분류한다. 메모리 부족/SM121 비호환으로 바꾸어 해석하지 않는다. owned PGID 부재를 확인했고79/97 object가 보존됐다. 사전 amendment fca2203에 따라 같은 source/object를 마지막으로 이어간다. 최종deadline07:15:33.303UTC, 새로운 다운로드/소스/환경변경0이다.
+
+## 06:57 UTC — 실제 kernel 및 종료 검사
+
+공식 FA2 BF164케이스 PASS, 최대절대오차0.00465846. 모든 자체 process group 종료. 전체 모델 NOT_RUN. 최종 수치와 실패 이력은 RESULTS/KERNEL_SUMMARY에 기록했다.

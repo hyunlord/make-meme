@@ -66,3 +66,9 @@ Spark 실행 담당자의 2026-10-22 06:07:46 UTC 관측은 MemTotal128,524,300,
 [실제 helper 검사](MASK_TENSOR_CHECK.json)는 Mac CPU PyTorch2.14.1에서 실행했다. reference 입력 `(3,1,896,512)` → 출력 `(28,1,112,64)`, driver `(3,17,896,512)` → bilinear half `(3,17,448,256)` → helper 출력 `(28,5,56,32)`다. **driver를 먼저 bilinear half한 다음 helper의 additional_spatial_downsample=1**을 사용한다. helper에2를 넣는 방식과 같다고 가정하면 안 된다. resize 전/후 threshold 순서가 바뀌기 때문이다.
 
 두 출력은 float32이고 red slot `[1,8,15,22]`만 활성이다. reference fractional cells1,052개, driver2,380개이며 범위0~1이다. bright는 정규화된225보다 strict greater-than이다. area 평균의 분수 점유율을 binary로 다시 threshold하지 않았다. 이것은 색상 packing 실행 증거이며 full pipeline import·VAE·모델 실행·경계 정확도 수용은 아니다.
+
+## 빌드 시간이 부족할 때의 대안 경계
+
+같은 pinned FlashAttention setup의 NVIDIA CUDA 경로에는 forward-only 또는 head-dim128만 선택하는 공개 환경변수가 없다. `FLASHATTENTION_DISABLE_BACKWARD`는 주석 compiler define일 뿐이며, `OPT_DIM`은 ROCm CK 분기다. dropout 비활성화 옵션도 backward/다른 head dimension 소스 목록을 제거하지 않는다. 이번 실행에서 이 옵션들을 임의로 추가하거나 source를 고치지 않았다.
+
+만약 현재 빌드가 시간 상한에 도달한다면 다음 대안 하나는 **동일 source/compiler/arch의 빌드를 별도 승인된 더 긴 시간 상한으로 재개**하는 것이다. 기존 object는 보존하되 Ninja가 실제 재사용하는지 확인해야 한다. 이는 아직 실행하지 않은 대안이며 SM121 kernel 지원 성공/실패를 대신하지 않는다.

@@ -48,7 +48,7 @@ SAT→Wan 변환은 전체 checkpoint를 `torch.load`하고 mapping한 dictionar
 
 원본 sample time은 `t_i=i/24`, i=0…16이다. 첫 장에서 마지막 장까지 관측 간격은16/24=0.666667초이며, 각 frame을1/24초씩 표시하는 파일 길이는17/24=0.708333초다. 동일17장을 기본16fps로 저장하면 파일은17/16=1.0625초이고 동작 속도는 원본의2/3이 된다. 장수를 유지한 채 fps만 바꾸는 것은 속도 보존이 아니다.
 
-pinned SCAIL loader는 모든 frame을 읽고 writer는 기본16fps를 쓴다. 24fps를 보존할 후속 baseline에서는 최소 writer override와 동일 RGB/mask 공간 변환을 기록해야 한다. 이번에는 diffusion 영상을 생성하지 않았다. 중간 결과가 부족하다고 frame 복제·보간으로 품질 수용을 만들지 않는다.
+pinned SCAIL loader는 모든 frame을 읽고 writer는 기본16fps를 쓴다. 24fps를 보존할 후속 baseline에서는 최소 writer override와 동일 RGB/mask 공간 변환을 기록해야 한다. 이번에는 diffusion 영상을 생성하지 않았다. 24fps 저장은 파일의 재생 시간 계약을 보존할 뿐, 모델이 학습한 시간 prior나 실제 동작 전이 정확도를 검증하지 않는다. 후속에는 같은 원본 시각에서 출력 자세를 별도 비교해야 한다. 중간 결과가 부족하다고 frame 복제·보간으로 품질 수용을 만들지 않는다.
 
 ## 6. 실제 결과와 해석 경계
 
@@ -56,6 +56,10 @@ pinned SCAIL loader는 모든 frame을 읽고 writer는 기본16fps를 쓴다. 2
 
 Spark MemAvailable은06:07:46 UTC에95,932,358,656 bytes,06:10:56 UTC에94,136,250,368 bytes였다. 이는 컴파일 전후의 자원 기준선이며 모델 peak는 NOT_MEASURED다. 총 통합 메모리를 CPU/GPU 별도로 더하지 않는다.
 
-HF metadata는 이전 revision과 동일함을 이번 HTTP 조회로 확인했다. 공식 attention 및 변환 경로를 읽었지만 가중치는 받지 않았다. kernel 담당자의 실행 결과가 확정되기 전까지 이 강의는 커널 성공을 주장하지 않는다. 실제 모델 로딩·peak·영상 품질·Lab 개체/안무 수용은 NOT_RUN 또는 NOT_MEASURED다.
+HF metadata는 이전 revision과 동일함을 이번 HTTP 조회로 확인했다. 공식 attention 및 변환 경로를 읽었지만 가중치는 받지 않았다.
+
+실제 GB10 SM121에서 pinned SCAIL wrapper의 FA2 BF16 attention 네 경우가 모두 통과했다. self-full, 유효 key48/64인 self, image-cross(key32), text-cross(유효 key57/80)를 query `(1,64,40,128)`로 실행했다. FP32 SDPA 비교의 최대 절대 오차는 각각0.003648,0.004387,0.004658,0.004158이며 사전 기준 atol0.01/rtol0.02 안이었다. FA2는 사용 가능, FA3는 사용 불가였고, wrapper는 pinned source와 일치했다. [실제 커널 기록](../experiments/B-007-scail-preflight/KERNEL_SUMMARY.json).
+
+첫 방법은 C++17/현재 torch C++20 요구 충돌로 실패했고, 두 번째는 중단·시간 제한 기록을 보존한 동일 소스 continuation 후 빌드와 smoke가 완료됐다. 측정된 peak allocated46,262,784 bytes는 작은 FA 연산과 FP32 SDPA 비교를 포함하는 범위다. 이를 full SCAIL 메모리나 순수 FA 성능으로 읽으면 안 된다. 이 결과는 작은 실제 kernel 실행 증거이며, 전체12,992-token attention·모델 로딩·변환·영상 생성 준비 완료를 뜻하지 않는다. 실제 모델 peak는 NOT_MEASURED이고, 모델 forward·학습·Lab 개체/안무 수용은 NOT_RUN이다.
 
 [이해 질문](../experiments/B-007-scail-preflight/QUESTIONS_KO.md)을 먼저 풀고 [해설](../experiments/B-007-scail-preflight/ANSWERS_KO.md)을 확인한다.

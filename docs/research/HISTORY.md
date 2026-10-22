@@ -171,3 +171,9 @@
 - 동일 red ID/black 배경, RGB/mask 동일 crop와119개 가시점 보존,17장24fps encode/decode 일치를 확인했다. v1 반사 오염과 v2 수동 국소 제외를 모두 보존했으며 얇은 경계는 PARTIAL이다.
 - 실제 pinned mask 함수 CPU 실행에서 reference[28,1,112,64], driver[28,5,56,32], red4슬롯만 활성임을 확인했다. driver 실제 순서는 bilinear half resize 후 helper1이며 area 결과는 fractional occupancy다. [입력 검사](experiments/B-007-scail-preflight/INPUT_PREFLIGHT.md).
 - 격리 FlashAttention 방법2 컴파일은 진행 중이며 실제 kernel/SDPA 오차는 아직 NOT_RUN이다. 모델 다운로드·전체 추론·학습0을 유지한다.
+
+## 2026-10-22 — B-007A 실제 커널 사전검증 완료
+
+- GB10 SM121 공식 FA2 BF164케이스가 FP32 SDPA 대비 사전 오차 기준을 통과했다. 릴리스 C++17 실패, Ninja PATH 수정, 내부 deadline 종료와 동일 source 한정 continuation을 보존했다.
+- 의존성 source56,998,912 bytes, 새 모델 가중치/전체 diffusion/학습0. 마스크 입력 계약과 실제 helper CPU 검증 완료, 얇은 경계는 PARTIAL. 모델 변환·load peak는 NOT_MEASURED.
+- [B-007A RESULTS](experiments/B-007-scail-preflight/RESULTS.md), [이론](lessons/B-007-attention-memory-feasibility.md). B-007B는 별도 승인 전 NOT_RUN이다.

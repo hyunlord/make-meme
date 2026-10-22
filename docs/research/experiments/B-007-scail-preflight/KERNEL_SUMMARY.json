@@ -1,0 +1,238 @@
+{
+  "methods": [
+    {
+      "label": "build-method1",
+      "returncode": 1,
+      "seconds": 12.00322699546814,
+      "min_available_bytes": 94648008704,
+      "max_swap_bytes": 0,
+      "reason": "process_exit",
+      "pid": 2376182,
+      "process_still_exists": false
+    },
+    {
+      "label": "build-method2",
+      "returncode": -15,
+      "seconds": 156.05341053009033,
+      "min_available_bytes": 88759545856,
+      "max_swap_bytes": 0,
+      "reason": "process_exit",
+      "pid": 2382418,
+      "process_still_exists": false
+    },
+    {
+      "label": "build-method2-resume",
+      "returncode": -15,
+      "seconds": 1858.5788912773132,
+      "min_available_bytes": 68959162368,
+      "max_swap_bytes": 0,
+      "reason": "deadline_or_memory_guard",
+      "pid": 2393389,
+      "process_still_exists": false
+    },
+    {
+      "label": "build-method2-continuation",
+      "returncode": 0,
+      "seconds": 626.1607599258423,
+      "min_available_bytes": 74235174912,
+      "max_swap_bytes": 0,
+      "reason": "process_exit",
+      "pid": 2466512,
+      "process_still_exists": false
+    },
+    {
+      "label": "smoke-method2",
+      "returncode": 0,
+      "seconds": 4.001412630081177,
+      "min_available_bytes": 94651203584,
+      "max_swap_bytes": 0,
+      "reason": "process_exit",
+      "pid": 2494018,
+      "process_still_exists": false
+    }
+  ],
+  "base_environment_after_method1_vs_final": {
+    "count": 138,
+    "changed": [],
+    "limitation": "No pre-method1 byte snapshot; method1 attempted isolated prefix only"
+  },
+  "download_bytes": 56998912,
+  "binary_hashes": {
+    "flash_attn_2_cuda.cpython-312-aarch64-linux-gnu.so": "ca0ca462a673878b30797f9f83c1218985bac00e85ee7c4e96909bc12f4f3511"
+  },
+  "script_hashes": {
+    "kernel_smoke.py": "4a83474b91ae23b80da33f931038a23b902ab107592d45ae894d15997f2764cc",
+    "kernel_method2.py": "93928be70cdefb2d9598f537b3536f4d0b6bf5758463b29d3b3184c27f239a8e",
+    "kernel_guard.py": "055558981b40d7d057f418a5149a2c61b9bbd8660d117bdacb786d15efb6a274",
+    "scail_attention.py": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc",
+    "summarize_kernel.py": "062e30e460a7d39a9427edeebb8704086d3014f5815e4dc4b1208936d4cc5bc4",
+    "kernel_method2_resume.py": "d00017e65bf70b4dad6d6b712f057f3f8c0236910cf881cd7e5635ffd50cce46",
+    "kernel_download.py": "0c25efdf4217dd293d941ccf03e6d7736efb89e14819a2843efea7b3ab05bf42",
+    "kernel_build.py": "e56e775fc8c882cdc61338ef2e006da1beabc480bd6d5aa47c14708a7ce9bde8"
+  },
+  "metrics_scope": "Kernel seconds/peak include FA and FP32 SDPA comparator; model peak NOT_MEASURED",
+  "kernel_report_exists": true,
+  "model_forward": "NOT_RUN",
+  "training": "NOT_RUN",
+  "installed_flash_attn_version": "2.8.4",
+  "installed_extension": {
+    "name": "flash_attn_2_cuda.cpython-312-aarch64-linux-gnu.so",
+    "bytes": 523990344,
+    "sha256": "ca0ca462a673878b30797f9f83c1218985bac00e85ee7c4e96909bc12f4f3511"
+  },
+  "source_downloads": [
+    {
+      "filename": "flash_attn-2.8.3.post2.tar.gz",
+      "bytes": 8453127,
+      "prior_bytes": 0,
+      "cap": 2000000000,
+      "status": "VERIFIED",
+      "sha256": "d0f9f0b08a986cdeadbffcf5ec8b3a8f514366c68ad1853d3ab061bc83cc340b",
+      "url": "https://files.pythonhosted.org/packages/6c/b1/b77625e3d11260d2bd6a4fc249a4be9a3da97ff848e2222e810c4f0e0211/flash_attn-2.8.3.post2.tar.gz"
+    },
+    {
+      "url": "https://codeload.github.com/Dao-AILab/flash-attention/tar.gz/2bdeddd15af6f1c44cd41e6f5b08b9e544398397",
+      "revision": "2bdeddd15af6f1c44cd41e6f5b08b9e544398397",
+      "bytes": 14544826,
+      "sha256": "539dc4cbc6ba858190e34131ad03512aae1a1c18ec63adf558c060500776a19e",
+      "status": "COMPLETE"
+    },
+    {
+      "url": "https://codeload.github.com/NVIDIA/cutlass/tar.gz/7127592069c2fe01b041e174ba4345ef9b279671",
+      "revision": "7127592069c2fe01b041e174ba4345ef9b279671",
+      "bytes": 34000959,
+      "sha256": "12baa9c2bf22eaca065b5e55387c21bb4ac742992a6ecd2dd1d3b016dfd25a0a",
+      "status": "COMPLETE"
+    }
+  ],
+  "smoke": {
+    "wrapper_sha256": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "device": "NVIDIA GB10",
+    "cc": [
+      12,
+      1
+    ],
+    "fa2_available": true,
+    "fa3_available": false,
+    "scope": "Tiny random attention only; no SCAIL weights/model/video/training",
+    "cases": [
+      {
+        "case": "self-full",
+        "q_shape": [
+          1,
+          64,
+          40,
+          128
+        ],
+        "k_shape": [
+          1,
+          64,
+          40,
+          128
+        ],
+        "valid_k": 64,
+        "dtype": "torch.bfloat16",
+        "finite": true,
+        "max_abs_error": 0.0036476850509643555,
+        "mean_abs_error": 0.00031392675009556115,
+        "rmse": 0.0004174582427367568,
+        "atol": 0.01,
+        "rtol": 0.02,
+        "pass": true,
+        "seconds": 0.9480153699987568
+      },
+      {
+        "case": "self-key-padding",
+        "q_shape": [
+          1,
+          64,
+          40,
+          128
+        ],
+        "k_shape": [
+          1,
+          64,
+          40,
+          128
+        ],
+        "valid_k": 48,
+        "dtype": "torch.bfloat16",
+        "finite": true,
+        "max_abs_error": 0.004387021064758301,
+        "mean_abs_error": 0.0003513791598379612,
+        "rmse": 0.00046931640827097,
+        "atol": 0.01,
+        "rtol": 0.02,
+        "pass": true,
+        "seconds": 0.0013644210412167013
+      },
+      {
+        "case": "image-cross",
+        "q_shape": [
+          1,
+          64,
+          40,
+          128
+        ],
+        "k_shape": [
+          1,
+          32,
+          40,
+          128
+        ],
+        "valid_k": 32,
+        "dtype": "torch.bfloat16",
+        "finite": true,
+        "max_abs_error": 0.00465846061706543,
+        "mean_abs_error": 0.00041347401565872133,
+        "rmse": 0.0005553739028982818,
+        "atol": 0.01,
+        "rtol": 0.02,
+        "pass": true,
+        "seconds": 0.0005800660001114011
+      },
+      {
+        "case": "text-cross-padding",
+        "q_shape": [
+          1,
+          64,
+          40,
+          128
+        ],
+        "k_shape": [
+          1,
+          80,
+          40,
+          128
+        ],
+        "valid_k": 57,
+        "dtype": "torch.bfloat16",
+        "finite": true,
+        "max_abs_error": 0.0041582584381103516,
+        "mean_abs_error": 0.00032775718136690557,
+        "rmse": 0.00043620416545309126,
+        "atol": 0.01,
+        "rtol": 0.02,
+        "pass": true,
+        "seconds": 0.0005299540353007615
+      }
+    ],
+    "all_pass": true,
+    "peak_allocated": 46262784
+  },
+  "completed_utc": "2026-10-22T06:57:25.106120+00:00",
+  "owned_process_groups_remaining": [],
+  "method1_status": "FAILED_CXX17_VS_TORCH_CXX20",
+  "method2_status": "COMPLETED_AFTER_PRESERVED_TIMEOUT_AND_SAME_SOURCE_CONTINUATION",
+  "tiny_attention_kernel_status": "PASS",
+  "model_memory": "NOT_MEASURED",
+  "source_preservation": {
+    "checked": 121,
+    "changed": [],
+    "scope": "official FA setup and CUDA attention source files compared against pinned downloaded archive"
+  },
+  "wrapper_pinned_commit": "78fe19576bb06be96c2375e088574a262a300edb",
+  "wrapper_matches_pinned_commit": true
+}
