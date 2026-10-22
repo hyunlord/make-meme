@@ -146,3 +146,10 @@
 - 공식 SCAIL-2 두 branch와 기존 VACE의 조건·학습 코드를 고정 commit에서 비교했다. VACE 공식 pose 지원은 있지만 animal schema 직접 지원은 미확인. SCAIL RGB driving은 공식 경로가 있으나 현재 환경의 FlashAttention 부재로 실행 BLOCKED, 전체 peak 메모리는 UNKNOWN이다.
 - 다음 후보는 SCAIL-2 공식 Wan RGB driving baseline 하나. 색상 마스크·시간축16/24fps·추가 저장공간과 의존성 검증이 선행한다. 새 모델 다운로드·diffusion 추론·학습은0, B-007은 미실행이며 자동 확대하지 않는다.
 - [RESULTS](experiments/B-006-motion-representation/RESULTS.md), [모델 감사](experiments/B-006-motion-representation/MODEL_AUDIT.md), [이론](lessons/B-006-animal-motion-representation.md).
+
+## 2026-10-22 — B-006 완료 기록 검토 / B-007A 사전 등록
+
+- 기준 remote commit `6cdd53a053c37d9a41832a08bc53949afe5fe070`에서 B-006 RESULTS, MODEL_AUDIT, VACE_AUDIT, 수학·재현 문서를 읽었다. B-006 CPU 관측점119, 미관측/가림170, RGB/Canny/heatmap 비교 및 SCAIL-2 공식 입력 검토를 완료했다고 기록됨. 이번 문서 검토자가 Spark 학습·추론을 다시 수행하지는 않았다.
+- SCAIL-2 wan-scail2 공식 RGB driving+color masks 경로가 다음 후보. 현 Spark에는 필수 flash_attn module이 없으며 SM121 actual kernel/14B peak 및 입력 FPS 정합 미검증. 선택 LoRA 제외 약80GB checkpoint와 추가 변환 공간 필요. 다른 모델의 SM121 kernel 문제 사례만으로 SCAIL 직접 실패를 확정하지 않는다.
+- [B-007A PLAN](experiments/B-007-scail-preflight/PLAN.md) 등록: 최대 2시간, 격리 환경의 실제 FlashAttention kernel smoke, 색상마스크·24fps·crop 및 checkpoint 변환 메모리 위험 사전검증. 80GB 모델 다운로드/전체 영상 inference/학습은 NOT_RUN 및 이번 승인 범위 밖. 통과 이후에만 별도 B-007B 승인 계획.
+- 사용자 제공 ZIP `make-meme-B-006-20261022.zip`과 SHA `da563753334b2e94b5b95391cb1e0916d32f4b8121006b688e2329b1ea201f8c`의 실제 CRC/파일 해시 및 영상 재생은 이번 검토의 컨테이너 도구 오류로 독립 검증하지 못함. 개인 영상 공개하지 않음.
