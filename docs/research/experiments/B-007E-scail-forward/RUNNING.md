@@ -13,3 +13,9 @@
 13:53 UTC 변환본·T5·CLIP·VAE fresh SHA 확인. 입력8개와 FA binary/환경은 PREREGISTERED_INPUTS.json에 고정. meta/strict assign loader tiny 실제 architecture7검사 통과, 초기 CPU import 실패도 보존. 64GiB cgroup/swap0와 durable watchdog의 실제 종료 sentinel은3.26초 후 childPID0을 확인했다. 이것은 전체 모델 적재 성공 증거가 아니다.
 
 공식→Lab은 하나의 pipeline을 재사용하되 각 sampler는 별도 exclusive reservation을 남긴다. 공식 실행 실패 시 Lab를 자동 수행하지 않는다. 새/기존 미확인 GPU 작업 발견 시 자기 작업만 중단한다. declared mixed-BF16 경로1개만 실행하며 자동 fallback은 없다.
+
+## 실제 적재 및 첫 forward
+
+14:06:15UTC 실제 full pipeline 로딩 시작. T5/VAE/CLIP 이후 DiT mixed loader를 거쳐14:10:44UTC 전체 적재 완료(268.587초). 1,307개 tensor의 strict assign missing/unexpected는 모두 빈목록. DiT 실제16,395,544,384 parameter,33,166,820,096 bytes; BF16 tensor974개와 FP32 tensor333개.
+
+공식 sampler1회 예약 후14:12:05UTC 첫 DiT 진입,14:12:28UTC finite 출력 완료. 첫 forward22.856초와 첫40-step sampler 단계40.30초는 서로 다른 단위다. 실제 token12,992, 첫 forward CUDA allocator peak36.798GB. 이 시점 영상 출력·Lab 시도는 아직 미완료다. Cgroup에 모든 GPU allocation이 반영되지 않아 MemAvailable 감시를 함께 유지한다.

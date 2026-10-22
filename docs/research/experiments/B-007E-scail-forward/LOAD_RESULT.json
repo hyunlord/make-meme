@@ -1,0 +1,379 @@
+{
+  "scope": "LOAD_ONLY_NOT_FORWARD_OR_QUALITY",
+  "seconds": 170.59147251897957,
+  "policy": "mixed BF16, FP32 time/head/norm/modulation; lossy versus checkpoint FP32",
+  "parameter_count": 16395544384,
+  "parameter_bytes": 33166820096,
+  "freqs_shape": [
+    8192,
+    64
+  ],
+  "freqs_dtype": "torch.complex128",
+  "registered_buffers": 0,
+  "load_state_dict_result": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "strict": true,
+    "assign": true
+  },
+  "tensor_count": 1307,
+  "tensor_dtypes": {
+    "torch.bfloat16": 974,
+    "torch.float32": 333
+  },
+  "private_loader_report_sha256": "17a29f04994b559d5e8238364872858c367bc9ce1c890c5c53bed1e098d38023",
+  "phases": [
+    {
+      "phase": "full_pipeline_load_start",
+      "epoch": 1792677975.956546,
+      "elapsed_seconds": 0.00020555302035063505,
+      "process_memory": [
+        "VmHWM:\t  688100 kB",
+        "VmRSS:\t  688100 kB",
+        "RssAnon:\t  460020 kB",
+        "RssFile:\t  228080 kB"
+      ],
+      "mem_available": "MemAvailable:   92116272 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "pipeline_init",
+      "epoch": 1792677975.9568763,
+      "elapsed_seconds": 0.0005358430207706988,
+      "process_memory": [
+        "VmHWM:\t  688140 kB",
+        "VmRSS:\t  688140 kB",
+        "RssAnon:\t  460020 kB",
+        "RssFile:\t  228120 kB"
+      ],
+      "mem_available": "MemAvailable:   92116272 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "t5_start",
+      "epoch": 1792677975.9570956,
+      "elapsed_seconds": 0.0007552360184490681,
+      "process_memory": [
+        "VmHWM:\t  688140 kB",
+        "VmRSS:\t  688140 kB",
+        "RssAnon:\t  460020 kB",
+        "RssFile:\t  228120 kB"
+      ],
+      "mem_available": "MemAvailable:   92116272 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "t5_constructor_start",
+      "epoch": 1792677975.957278,
+      "elapsed_seconds": 0.0009374290239065886,
+      "process_memory": [
+        "VmHWM:\t  688140 kB",
+        "VmRSS:\t  688140 kB",
+        "RssAnon:\t  460020 kB",
+        "RssFile:\t  228120 kB"
+      ],
+      "mem_available": "MemAvailable:   92116272 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "t5_constructor_complete",
+      "epoch": 1792678058.3216796,
+      "elapsed_seconds": 82.36534009000752,
+      "process_memory": [
+        "VmHWM:\t22914804 kB",
+        "VmRSS:\t22914804 kB",
+        "RssAnon:\t22687572 kB",
+        "RssFile:\t  227232 kB"
+      ],
+      "mem_available": "MemAvailable:   69845088 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "t5_dtype_device_cast_complete",
+      "epoch": 1792678067.4265263,
+      "elapsed_seconds": 91.47018644399941,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t12495284 kB",
+        "RssAnon:\t12267816 kB",
+        "RssFile:\t  227468 kB"
+      ],
+      "mem_available": "MemAvailable:   80365072 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "t5_checkpoint_load_start",
+      "epoch": 1792678067.4280088,
+      "elapsed_seconds": 91.47166845103493,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t12495284 kB",
+        "RssAnon:\t12267816 kB",
+        "RssFile:\t  227468 kB"
+      ],
+      "mem_available": "MemAvailable:   80365072 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "t5_checkpoint_load_complete",
+      "epoch": 1792678068.883557,
+      "elapsed_seconds": 92.92721767700277,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t12496028 kB",
+        "RssAnon:\t12268296 kB",
+        "RssFile:\t  227732 kB"
+      ],
+      "mem_available": "MemAvailable:   80318336 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "t5_complete",
+      "epoch": 1792678069.9195433,
+      "elapsed_seconds": 93.96320319303777,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t12790912 kB",
+        "RssAnon:\t12561972 kB",
+        "RssFile:\t  228940 kB"
+      ],
+      "mem_available": "MemAvailable:   80008968 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "vae_start",
+      "epoch": 1792678069.9198701,
+      "elapsed_seconds": 93.96353004302364,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t12790912 kB",
+        "RssAnon:\t12561972 kB",
+        "RssFile:\t  228940 kB"
+      ],
+      "mem_available": "MemAvailable:   80008068 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 0,
+      "cuda_reserved": 0,
+      "cuda_peak_allocated": 0
+    },
+    {
+      "phase": "vae_complete_clip_start",
+      "epoch": 1792678070.8207557,
+      "elapsed_seconds": 94.86441584699787,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13224404 kB",
+        "RssAnon:\t12918592 kB",
+        "RssFile:\t  260564 kB"
+      ],
+      "mem_available": "MemAvailable:   78049236 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 530316288,
+      "cuda_reserved": 534773760,
+      "cuda_peak_allocated": 530316288
+    },
+    {
+      "phase": "clip_constructor_start",
+      "epoch": 1792678070.8211095,
+      "elapsed_seconds": 94.86476919200504,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13224404 kB",
+        "RssAnon:\t12918592 kB",
+        "RssFile:\t  260564 kB"
+      ],
+      "mem_available": "MemAvailable:   78049236 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 530316288,
+      "cuda_reserved": 534773760,
+      "cuda_peak_allocated": 530316288
+    },
+    {
+      "phase": "clip_constructor_complete",
+      "epoch": 1792678070.9721751,
+      "elapsed_seconds": 95.01583524403395,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13240772 kB",
+        "RssAnon:\t12933520 kB",
+        "RssFile:\t  262004 kB"
+      ],
+      "mem_available": "MemAvailable:   75374504 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 3125935616,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3131177984
+    },
+    {
+      "phase": "clip_dtype_device_cast_complete",
+      "epoch": 1792678070.9884617,
+      "elapsed_seconds": 95.03212223399896,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13262756 kB",
+        "RssAnon:\t12955308 kB",
+        "RssFile:\t  262200 kB"
+      ],
+      "mem_available": "MemAvailable:   75350528 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "clip_checkpoint_load_start",
+      "epoch": 1792678070.9909966,
+      "elapsed_seconds": 95.03465792600764,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13262840 kB",
+        "RssAnon:\t12955392 kB",
+        "RssFile:\t  262200 kB"
+      ],
+      "mem_available": "MemAvailable:   75350528 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "clip_checkpoint_load_complete",
+      "epoch": 1792678073.935458,
+      "elapsed_seconds": 97.97911836404819,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13278292 kB",
+        "RssAnon:\t12970624 kB",
+        "RssFile:\t  262420 kB"
+      ],
+      "mem_available": "MemAvailable:   75291816 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "clip_complete",
+      "epoch": 1792678073.9358056,
+      "elapsed_seconds": 97.97946507000597,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13278292 kB",
+        "RssAnon:\t12970624 kB",
+        "RssFile:\t  262420 kB"
+      ],
+      "mem_available": "MemAvailable:   75291816 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "dit_meta_init_start",
+      "epoch": 1792678073.9378476,
+      "elapsed_seconds": 97.9815072719939,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13278300 kB",
+        "RssAnon:\t12970632 kB",
+        "RssFile:\t  262420 kB"
+      ],
+      "mem_available": "MemAvailable:   75291816 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "dit_meta_init_done",
+      "epoch": 1792678073.9891152,
+      "elapsed_seconds": 98.03277522802819,
+      "process_memory": [
+        "VmHWM:\t24965812 kB",
+        "VmRSS:\t13281944 kB",
+        "RssAnon:\t12972800 kB",
+        "RssFile:\t  263896 kB"
+      ],
+      "mem_available": "MemAvailable:   75289152 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "dit_staged_weights_done",
+      "epoch": 1792678244.385806,
+      "elapsed_seconds": 268.4294662119937,
+      "process_memory": [
+        "VmHWM:\t64803116 kB",
+        "VmRSS:\t64712144 kB",
+        "RssAnon:\t44221092 kB",
+        "RssFile:\t20445804 kB"
+      ],
+      "mem_available": "MemAvailable:   44838056 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "dit_loader_complete_cpu",
+      "epoch": 1792678244.5378351,
+      "elapsed_seconds": 268.58149503701134,
+      "process_memory": [
+        "VmHWM:\t64803116 kB",
+        "VmRSS:\t64708860 kB",
+        "RssAnon:\t44240548 kB",
+        "RssFile:\t20423064 kB"
+      ],
+      "mem_available": "MemAvailable:   44820240 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    },
+    {
+      "phase": "full_pipeline_load_complete",
+      "epoch": 1792678244.543376,
+      "elapsed_seconds": 268.5870357929962,
+      "process_memory": [
+        "VmHWM:\t64803116 kB",
+        "VmRSS:\t64708920 kB",
+        "RssAnon:\t44240552 kB",
+        "RssFile:\t20423120 kB"
+      ],
+      "mem_available": "MemAvailable:   44820240 kB",
+      "cuda_initialized": true,
+      "cuda_allocated": 1817430528,
+      "cuda_reserved": 3204448256,
+      "cuda_peak_allocated": 3134905856
+    }
+  ]
+}
