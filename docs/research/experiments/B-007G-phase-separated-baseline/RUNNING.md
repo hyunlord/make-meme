@@ -14,3 +14,7 @@
 4. 실제 상태·관측·이론·재현 기록과 비공개 ZIP 검증, 원격 최종 SHA 확인.
 
 E/F의 사용량과 실패를 보존한다. F post-sampler 변경은 NOT_REACHED이며 정책 실패로 해석하지 않는다. 기존 24GiB headroom, swap0, 타 서비스 보호를 유지한다. 프로세스 분리는 동시 상주를 줄이는 구조 가설이지 E/F 원인의 확정이나 영상 품질 성공이 아니다.
+
+## 18:03 UTC — CPU 감사 종료, 실제 실행 준비
+
+E/F 동시각으로 볼 수 없는 표본을 구분한 [비교](E_F_COMPARISON.md)와 [객체 수명](OBJECT_LIFETIME.md)을 작성했다. 정확한 F allocating operation은 UNKNOWN이다. cast_state와 model의 assign alias를 두 payload로 계산하지 않았다. 공식 generate와 nested sampler를 좁게 추출해 P/S/D로 연결하는 코드와 CPU fixture 검증을 진행한다. 아직 P/S/D 모두 NOT_RUN이다.

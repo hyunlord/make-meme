@@ -1,0 +1,32 @@
+{
+  "stage": "pre-freeze",
+  "syntax_and_critical_ruff": "PASS",
+  "basedpyright": "NOT_CLEAN",
+  "summary": {
+    "filesAnalyzed": 13,
+    "errorCount": 151,
+    "warningCount": 531,
+    "informationCount": 0,
+    "timeInSec": 1.146
+  },
+  "error_rules": {
+    "reportMissingTypeArgument": 8,
+    "reportReturnType": 1,
+    "reportMissingImports": 13,
+    "reportImplicitRelativeImport": 19,
+    "reportArgumentType": 45,
+    "reportCallIssue": 43,
+    "reportGeneralTypeIssues": 3,
+    "reportAttributeAccessIssue": 8,
+    "reportOperatorIssue": 1,
+    "reportOptionalSubscript": 4,
+    "reportIndexIssue": 2,
+    "reportOptionalMemberAccess": 2,
+    "reportUninitializedInstanceVariable": 2
+  },
+  "limits": [
+    "Static typing is not claimed clean. Dynamic upstream extraction/tree parsing and missing upstream imports require separate typing work.",
+    "Runtime CPU contract tests and actual P/S/D outcomes are reported independently.",
+    "A wrong None return annotation is being corrected before execution; no model math changed for lint."
+  ]
+}

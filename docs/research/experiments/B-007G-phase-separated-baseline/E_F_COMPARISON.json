@@ -1,0 +1,450 @@
+{
+  "method": "Existing trace only; nearest OS/cgroup samples explicitly offset-tagged. No new model load. Missing operation boundaries UNOBSERVED.",
+  "experiments": {
+    "E": {
+      "evidence_sha256": {
+        "phases": "362d488024b2b028e6935a35fbe52b207beb2c23b2e2fc4aefddadf8c1d05b24",
+        "resources": "ec97ba6f6c24c9f36d5989df19ae18ea251b9d82a850c7102153925a327bcdec",
+        "run": "9e32cfe588615b137f3ce6ceceba7ccb973f2cb8ee209c864aebfdacd6cb6089"
+      },
+      "phase_snapshots": {
+        "full_pipeline_load_start": {
+          "epoch": 1792677975.956546,
+          "mem_available_bytes": 94327062528,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 471060480,
+          "rss_file_bytes": 233553920,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.30926990509033203,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 730210304,
+          "cgroup_file_bytes": 847872,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 0,
+          "cuda_reserved_bytes": 0,
+          "cuda_peak_bytes": 0
+        },
+        "t5_complete": {
+          "epoch": 1792678069.9195433,
+          "mem_available_bytes": 81929183232,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 12863459328,
+          "rss_file_bytes": 234434560,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.12633228302001953,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 12862926848,
+          "cgroup_file_bytes": 7811072,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 0,
+          "cuda_reserved_bytes": 0,
+          "cuda_peak_bytes": 0
+        },
+        "clip_complete": {
+          "epoch": 1792678073.9358056,
+          "mem_available_bytes": 77098819584,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 13281918976,
+          "rss_file_bytes": 268718080,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.13303804397583008,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 13286088704,
+          "cgroup_file_bytes": 2720673792,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "dit_meta_init_done": {
+          "epoch": 1792678073.9891152,
+          "mem_available_bytes": 77096091648,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 13284147200,
+          "rss_file_bytes": 270229504,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.07972836494445801,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 13286088704,
+          "cgroup_file_bytes": 2720673792,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "dit_loader_complete_cpu": {
+          "epoch": 1792678244.5378351,
+          "mem_available_bytes": 45895925760,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 45302321152,
+          "rss_file_bytes": 20913217536,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.09506702423095703,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 45342957568,
+          "cgroup_file_bytes": 20869980160,
+          "cgroup_events": {
+            "low": 0,
+            "high": 7053,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "full_pipeline_load_complete": {
+          "epoch": 1792678244.543376,
+          "mem_available_bytes": 45895925760,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 45302325248,
+          "rss_file_bytes": 20913274880,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.08952617645263672,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 45342957568,
+          "cgroup_file_bytes": 20869980160,
+          "cgroup_events": {
+            "low": 0,
+            "high": 7053,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "pipeline_loaded": {
+          "epoch": 1792678251.3222823,
+          "mem_available_bytes": 45447622656,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 45659070464,
+          "rss_file_bytes": 19589537792,
+          "rss_source": "nearest resource sample",
+          "resource_offset_seconds": 0.3807864189147949,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 45658902528,
+          "cgroup_file_bytes": 19713527808,
+          "cgroup_events": {
+            "low": 0,
+            "high": 7491,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "first_dit_forward": {
+          "epoch": 1792678325.853761,
+          "mem_available_bytes": 44378611712,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 16468303872,
+          "rss_file_bytes": 1727860736,
+          "rss_source": "nearest resource sample",
+          "resource_offset_seconds": -0.4086489677429199,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 16468303872,
+          "cgroup_file_bytes": 1780101120,
+          "cgroup_events": {
+            "low": 0,
+            "high": 8405,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 34076237312,
+          "cuda_reserved_bytes": 34133245952,
+          "cuda_peak_bytes": 34076237312
+        },
+        "first_dit_forward_complete": {
+          "epoch": 1792678348.7101843,
+          "mem_available_bytes": 40513523712,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 15623376896,
+          "rss_file_bytes": 77905920,
+          "rss_source": "nearest resource sample",
+          "resource_offset_seconds": 0.0667424201965332,
+          "cgroup_source": "nearest resource sample",
+          "cgroup_anon_bytes": 15623340032,
+          "cgroup_file_bytes": 88977408,
+          "cgroup_events": {
+            "low": 0,
+            "high": 8405,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 34103643648,
+          "cuda_reserved_bytes": 37310431232,
+          "cuda_peak_bytes": 36798287872
+        }
+      },
+      "initial_noise_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+      "initial_noise_boundary": "UNOBSERVED: artifact present; no precise phase memory snapshot",
+      "start_available_bytes": 94813200384,
+      "terminal_available_bytes": 25661333504,
+      "terminal_cgroup": {
+        "current_bytes": 34293071872,
+        "anon_file_bytes": {
+          "anon": 33895464960,
+          "file": 101482496
+        },
+        "events": {
+          "low": 0,
+          "high": 8405,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        }
+      },
+      "saved_forward_calls": 1,
+      "unobserved_boundaries": [
+        "text_encode_start/end",
+        "reference_vae_encode_start/end",
+        "clip_encode_start/end",
+        "driving_vae_encode_start/end",
+        "initial_noise_start/end",
+        "dit_cpu_to_device_start/end"
+      ]
+    },
+    "F": {
+      "evidence_sha256": {
+        "phases": "bb4dad849fc1ec87ae2ba71982be5885f12b468d672b0beaacc9bf72f9bfc706",
+        "resources": "a88b3612127df55667cb6e059687d5485d3f37660004be1c5bc72c1a7cc491ab",
+        "run": "5eab30972532b3dfed102ee2dfce89bb7c3eb4c4256a8dfa4a6d2e8529d49352"
+      },
+      "phase_snapshots": {
+        "full_pipeline_load_start": {
+          "epoch": 1792684856.7439973,
+          "mem_available_bytes": 92079267840,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 470982656,
+          "rss_file_bytes": 326590464,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.18999552726745605,
+          "cgroup_source": "exact phase",
+          "cgroup_anon_bytes": 470982656,
+          "cgroup_file_bytes": 272441344,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 0,
+          "cuda_reserved_bytes": 0,
+          "cuda_peak_bytes": 0
+        },
+        "t5_complete": {
+          "epoch": 1792684933.201689,
+          "mem_available_bytes": 76911353856,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 13220478976,
+          "rss_file_bytes": 266969088,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.4229402542114258,
+          "cgroup_source": "exact phase",
+          "cgroup_anon_bytes": 13220478976,
+          "cgroup_file_bytes": 148680704,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 0,
+          "cuda_reserved_bytes": 0,
+          "cuda_peak_bytes": 0
+        },
+        "clip_complete": {
+          "epoch": 1792684936.0996177,
+          "mem_available_bytes": 74757435392,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 13641826304,
+          "rss_file_bytes": 303489024,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": -0.46589016914367676,
+          "cgroup_source": "exact phase",
+          "cgroup_anon_bytes": 13641826304,
+          "cgroup_file_bytes": 209457152,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "dit_meta_init_done": {
+          "epoch": 1792684936.1640873,
+          "mem_available_bytes": 74734907392,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 13644054528,
+          "rss_file_bytes": 305799168,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.4742701053619385,
+          "cgroup_source": "exact phase",
+          "cgroup_anon_bytes": 13644058624,
+          "cgroup_file_bytes": 210833408,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "dit_loader_complete_cpu": {
+          "epoch": 1792685188.172321,
+          "mem_available_bytes": 43198640128,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 45685211136,
+          "rss_file_bytes": 21086105600,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": -0.3889749050140381,
+          "cgroup_source": "exact phase",
+          "cgroup_anon_bytes": 45685211136,
+          "cgroup_file_bytes": 20071383040,
+          "cgroup_events": {
+            "low": 0,
+            "high": 8034,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "full_pipeline_load_complete": {
+          "epoch": 1792685188.1843438,
+          "mem_available_bytes": 43181301760,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 45685215232,
+          "rss_file_bytes": 21086105600,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": -0.4009976387023926,
+          "cgroup_source": "exact phase",
+          "cgroup_anon_bytes": 45685211136,
+          "cgroup_file_bytes": 20071383040,
+          "cgroup_events": {
+            "low": 0,
+            "high": 8034,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "pipeline_loaded": {
+          "epoch": 1792685197.644302,
+          "mem_available_bytes": 43032317952,
+          "swap_bytes": 0,
+          "rss_anon_bytes": 46008602624,
+          "rss_file_bytes": 19694608384,
+          "rss_source": "exact phase",
+          "resource_offset_seconds": 0.22378158569335938,
+          "cgroup_source": "exact phase",
+          "cgroup_anon_bytes": 46008602624,
+          "cgroup_file_bytes": 18722910208,
+          "cgroup_events": {
+            "low": 0,
+            "high": 8466,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_allocated_bytes": 1817430528,
+          "cuda_reserved_bytes": 3204448256,
+          "cuda_peak_bytes": 3134905856
+        },
+        "first_dit_forward": "UNOBSERVED",
+        "first_dit_forward_complete": "UNOBSERVED"
+      },
+      "initial_noise_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+      "initial_noise_boundary": "UNOBSERVED: artifact present; no precise phase memory snapshot",
+      "start_available_bytes": 93902163968,
+      "terminal_available_bytes": 25676087296,
+      "terminal_cgroup": {
+        "current_bytes": 41165955072,
+        "anon_file_bytes": {
+          "anon": 30751260672,
+          "file": 10142924800
+        },
+        "events": {
+          "low": 0,
+          "high": 9396,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        }
+      },
+      "saved_forward_calls": 0,
+      "unobserved_boundaries": [
+        "text_encode_start/end",
+        "reference_vae_encode_start/end",
+        "clip_encode_start/end",
+        "driving_vae_encode_start/end",
+        "initial_noise_start/end",
+        "dit_cpu_to_device_start/end"
+      ]
+    }
+  },
+  "conclusion": "F exact allocating operation UNKNOWN. Initial-noise artifact and pinned code bound execution after condition preparation, before observed first DiT forward; no evidence establishes post-loop policy causality."
+}

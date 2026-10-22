@@ -1,0 +1,39 @@
+{
+  "source_sha256": "53079bd481178fccc87f0b2f6081938a7dfc086f1ce26d218a98b1db91babd9f",
+  "source_matches_E": true,
+  "code_hashes": {
+    "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+    "code/extract.py": "5040c8df34d57b1913b28be1ccef6a1ec892c9f3921e12dc4ad6c9adff3d3f8f",
+    "code/media.py": "cfce991f32f54b94b59fd18ef68dcfb2ae7f280412ed14a3fabff2f4875071e3",
+    "code/phase_decode.py": "9ffcbdbfde87e0896d6f28906bb80a4c2cd67b1d051b6dd96a9320f320710ee1",
+    "code/phase_prepare.py": "874ed12a54e8f54eb25537064aca1bf03d3c361bda6aace6295185a84e4c388f",
+    "code/phase_sample.py": "9fa4a0548a0c6796d3e90474f6d9710d1e817619c6d74a454a2f16a8c496f621",
+    "code/prepare_layout.py": "e5f8029ec52a5984aca3a1167037339faa6c76f62af2ded308330423e433ea38",
+    "code/run_phase.py": "b7ac26f23b95fa92158896e619908751579f6c6bb8f28d09ece88cbee20ea8e4",
+    "code/runtime_guard.py": "b19b2f47693084b304505ed92914c0adf5a0d4b917fd10cf86a4cfa664bce547",
+    "code/runtime_launch.py": "77f7a4337685062ff882094aa01c09b2dcf38305c84f1b5ad3595a5dfa6b8e5a",
+    "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+    "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+    "code/test_contracts.py": "53b0d594f1b2da3fd67b406c64f2b430a4a4c6c863f37e775aa2ac0dde45b7b0"
+  },
+  "status": "CPU_FIXTURES_PASS",
+  "tests_passed": 5,
+  "seconds": 1.77,
+  "cuda_visible_devices": "",
+  "timeout_seconds": 120,
+  "log_sha256": "cad76cbfcaa0d8df7d14e57952dfd7709195ac2c755e56b23bc0e4b6475de4c5",
+  "coverage": [
+    "Tensor tree value/dtype readback; list/None/scalar and CPU RNG continuation",
+    "Exact pinned source extraction preserving three CPU solver/prediction moves",
+    "Original versus separated sampler numerical equality with small mocked model/scheduler",
+    "Pinned actual UniPC timesteps/sigmas and generator state unchanged over40 CPU steps",
+    "Actual extracted preparation graph with mock encoders; condition branch structure/history/additional=None; no DiT; reference versus driving autocast placement"
+  ],
+  "limitations": [
+    "CPU fixtures do not prove full14B numerical or GPU memory/video quality parity.",
+    "Alias topology is not preserved by tensor-tree serialization; shared values may be copied as separate entries.",
+    "No complete real condition artifact exists in these fixtures; real handoff checks remain runtime gates.",
+    "Corrupted artifact/sidecar rejection negative fixture not included; runtime hash checks inspected.",
+    "No new model load, GPU operation, environment modification or dependency install."
+  ]
+}
