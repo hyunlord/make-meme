@@ -1,0 +1,27 @@
+{
+  "utc": "2026-10-22T04:24:38.869902+00:00",
+  "compile_ast": "PASS",
+  "files": [
+    "scripts/audit_reuse.py",
+    "scripts/vace_observe.py",
+    "scripts/launch_video.py",
+    "scripts/guard.py",
+    "scripts/vace_experiment.py",
+    "reports/check_validator_fixtures.py",
+    "reports/validate_runs.py"
+  ],
+  "public_files_scanned": [
+    "code/audit_reuse.py",
+    "code/vace_observe.py",
+    "code/launch_video.py",
+    "code/guard.py",
+    "code/vace_experiment.py",
+    "configs/policy.json",
+    "configs/R-gray-C-null-20261022.json",
+    "configs/R-gray-C-null-20261023.json"
+  ],
+  "privacy_findings": [],
+  "static_cap2_present": true,
+  "static_duplicate_label_rejection": true,
+  "note": "Static inspection only; no new call reservation or invocation. Lint/typechecker NOT_RUN."
+}

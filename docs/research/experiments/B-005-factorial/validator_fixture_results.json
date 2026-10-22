@@ -1,0 +1,10 @@
+{
+  "scope": "Synthetic validator wiring only, not inference or visual quality. Exact factorial block extracted from reports/validate_runs.py. No actual assets/records changed.",
+  "checks": {
+    "positive_expected_pass": true,
+    "noise_mismatch_detected": true,
+    "reference_mismatch_detected": true,
+    "reactive_mismatch_detected": true
+  },
+  "all_pass": true
+}

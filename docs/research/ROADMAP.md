@@ -56,3 +56,9 @@ COMPLETED: 신규2·재사용2·학습0. R-gray에서1/2seed직립형태,1/2착�
 - 상태 **PLANNED / NOT_RUN**. [B-005 PLAN](experiments/B-005-factorial/PLAN.md).
 - R-bg/R-gray × C-real/C-null의 2×2 요인 비교를 두 seed에서 완료하는 마지막 작은 frozen 조건 제거 실험. 기존 B-003의 4개 및 B-004의 2개를 엄격 검증 후 재사용하여 **R-gray+C-null 두 회만 신규 실행**, 학습0.
 - 결과가 네 조합 모두 원본 춤+실제 Lab identity를 충족하지 못하면 같은 입력 제거 실험의 반복을 중단하고, 실제 동작 조건을 더 직접적으로 쓰는 로컬 동작 전이 baseline/표현 연구를 선택한다. 서비스·논문 가치를 앞서 선언하지 않는다.
+
+## B-005 실제 결론 (2026-10-22)
+
+COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증통과,모든조합에서실제Labidentity+원본춤동시수용실패. 입력민감도와seed에따른반응차이는있지만유용한동작전이미입증. 시간UNVERIFIED. [결과](experiments/B-005-factorial/RESULTS.md).
+
+동일Canny/reference제거실험은여기서종료한다. 다음하나는명시적동물관절궤적·가시성·발접촉표현의원본동작보존및모델연결적합성검증이다. 아직NOT_RUN/미승인이며자동설치·학습·추론하지않는다. 이전PLANNED기록은사전상태로보존한다.

@@ -113,3 +113,14 @@
 
 - 시작HEAD `582e67ca0b153b5d602b04587b9f57cd36ad3426`, 기존PLAN유지. 기존6결과재사용검증통과,모델/입력/noise/코드해시고정.
 - 신규gray+null두seed만실행예정,학습0,상한2회·2시간. [RUNNING](experiments/B-005-factorial/RUNNING.md).
+
+## 2026-10-22 — B-005 첫 신규 run 완료
+
+- 실행 고정 `ac0ecbec709ac72a36668ed22f2d09a42577f257` 원격 확인 후 첫 gray+null seed가 exit0으로 종료했다. 두 번째만 순차 실행.
+- 신규 모델·학습 없음. 전체8셀 비교는 아직 미완료이며 정적대표프레임을 시간품질 통과로 해석하지 않음.
+
+## 2026-10-22 — B-005 요인 비교 완료
+
+- 신규gray+null2/2완료·실패0·기존6재사용·학습0. 전체8셀noise/text/조건tensor와코드무결성대조통과.
+- 신규2개사족. 직립형태는gray+real의seed23한개뿐이며실제Lab+원본춤동시수용0/8. 시간UNVERIFIED.
+- 같은제거실험반복중단. 다음하나는동물관절궤적·가시성·발접촉표현적합성검증제안만(NOT_RUN). [RESULTS](experiments/B-005-factorial/RESULTS.md),[이론](lessons/B-005-conditioning-interaction.md).

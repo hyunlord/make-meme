@@ -1,0 +1,1092 @@
+{
+  "experiment": "B-005",
+  "prereg_commit": "ac0ecbec709ac72a36668ed22f2d09a42577f257",
+  "new_attempts": 2,
+  "attempt_cap_2": true,
+  "new_completed": 2,
+  "new_failed": 0,
+  "reused": [
+    "B003/C-real-20261022",
+    "B003/C-real-20261023",
+    "B003/C-null-20261022",
+    "B003/C-null-20261023",
+    "B004/R-gray-20261022",
+    "B004/R-gray-20261023"
+  ],
+  "code_hash_matches_prereg": {
+    "audit_reuse.py": true,
+    "vace_observe.py": true,
+    "launch_video.py": true,
+    "guard.py": true,
+    "vace_experiment.py": true
+  },
+  "paired_controls": {
+    "20261022": {
+      "pair_complete": true,
+      "same_noise": true,
+      "same_positive_text": true,
+      "same_negative_text": true,
+      "different_context": true,
+      "slice_equal": {
+        "reference_prefix": false,
+        "video_inactive": true,
+        "video_reactive": true,
+        "mask_all": true
+      },
+      "reused_output_sha256": "6ff948a6317a82fabd37f45354820e298c9fec2874bbf0218c686b7098afef54"
+    },
+    "20261023": {
+      "pair_complete": true,
+      "same_noise": true,
+      "same_positive_text": true,
+      "same_negative_text": true,
+      "different_context": true,
+      "slice_equal": {
+        "reference_prefix": false,
+        "video_inactive": true,
+        "video_reactive": true,
+        "mask_all": true
+      },
+      "reused_output_sha256": "54477fe63bee8f333618dc667a356aa296f6e2b397376079d6e86893394c88fe"
+    }
+  },
+  "runs": [
+    {
+      "label": "R-gray-C-null-20261022",
+      "attempt": 1,
+      "seed": 20261022,
+      "status": "COMPLETED",
+      "checks": {
+        "config_ledger_hash": true,
+        "same_fixed_settings": true,
+        "prereg_commit": true,
+        "saved_config_semantics": true,
+        "source_mask_unchanged": true,
+        "reference_preprocess_matches": true,
+        "condition_matches_config_rgb": true,
+        "actual_noise_vace_shapes": true,
+        "actual_noise_matches_saved_noise": true,
+        "preprocess_cpu_rng_unchanged": true,
+        "adapter_off_no_offload_bf16": true,
+        "parameter_counts_unchanged": true,
+        "17_frames_24fps_512x288": true,
+        "40_model_calls": true
+      },
+      "hashes": {
+        "shared.noise": "2e9cb4e5dea03c81bc772a0a7dc960fe659480fd85826b616bf8df49507e1e78",
+        "shared.vace_context": "789cfee8dcd480fe4657fc449d58c120c73e4e08cab398b69da31c9e2a6be40f",
+        "positive.context": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a",
+        "negative.context": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+      },
+      "returncode": 0,
+      "vace_slices": {
+        "reference_prefix": {
+          "shape": [
+            1,
+            96,
+            1,
+            36,
+            64
+          ],
+          "sha256": "2c3a2333f7ed7461638d4e820c86da8493deba643ed06ddeb2deb5fe1728b8cd"
+        },
+        "video_inactive": {
+          "shape": [
+            1,
+            16,
+            5,
+            36,
+            64
+          ],
+          "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+        },
+        "video_reactive": {
+          "shape": [
+            1,
+            16,
+            5,
+            36,
+            64
+          ],
+          "sha256": "eed5d07c20ca76a617d9c731ff2f77341ab154db19669f6106047668a95add16"
+        },
+        "mask_all": {
+          "shape": [
+            1,
+            64,
+            6,
+            36,
+            64
+          ],
+          "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+        }
+      },
+      "tensor_shapes": {
+        "shared.noise": [
+          1,
+          16,
+          6,
+          36,
+          64
+        ],
+        "shared.vace_context": [
+          1,
+          96,
+          6,
+          36,
+          64
+        ],
+        "positive.context": [
+          1,
+          512,
+          4096
+        ],
+        "negative.context": [
+          1,
+          512,
+          4096
+        ]
+      },
+      "runtime": {
+        "vram_management_enabled": false,
+        "torch_dtype": "torch.bfloat16",
+        "device": "cuda",
+        "attention": "upstream SDPA fallback",
+        "adapter": null
+      },
+      "parameter_counts": {
+        "text_encoder": 5680910336,
+        "dit": 1418996800,
+        "vae": 126892531,
+        "vace": 734975232
+      },
+      "video": {
+        "width": 512,
+        "height": 288,
+        "r_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_frames": "17"
+      },
+      "output_sha256": "4269ed0022abbb3a7da9c3ee021d5a1b37046186995f5840d73627a261298431",
+      "resources": {
+        "label": "R-gray-C-null-20261022",
+        "process_seconds": 52.05800914764404,
+        "runner_seconds": 46.81453223701101,
+        "pipeline_seconds": 38.176367930020206,
+        "model_seconds": 31.81269956502365,
+        "cuda_peak_allocated_bytes": 17056366080,
+        "cuda_peak_reserved_bytes": 17687379968,
+        "os_mem_available_min_bytes": 74433101824,
+        "swap_peak_bytes": 0
+      },
+      "technical_checks_pass": true
+    },
+    {
+      "label": "R-gray-C-null-20261023",
+      "attempt": 2,
+      "seed": 20261023,
+      "status": "COMPLETED",
+      "checks": {
+        "config_ledger_hash": true,
+        "same_fixed_settings": true,
+        "prereg_commit": true,
+        "saved_config_semantics": true,
+        "source_mask_unchanged": true,
+        "reference_preprocess_matches": true,
+        "condition_matches_config_rgb": true,
+        "actual_noise_vace_shapes": true,
+        "actual_noise_matches_saved_noise": true,
+        "preprocess_cpu_rng_unchanged": true,
+        "adapter_off_no_offload_bf16": true,
+        "parameter_counts_unchanged": true,
+        "17_frames_24fps_512x288": true,
+        "40_model_calls": true
+      },
+      "hashes": {
+        "shared.noise": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3",
+        "shared.vace_context": "789cfee8dcd480fe4657fc449d58c120c73e4e08cab398b69da31c9e2a6be40f",
+        "positive.context": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a",
+        "negative.context": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+      },
+      "returncode": 0,
+      "vace_slices": {
+        "reference_prefix": {
+          "shape": [
+            1,
+            96,
+            1,
+            36,
+            64
+          ],
+          "sha256": "2c3a2333f7ed7461638d4e820c86da8493deba643ed06ddeb2deb5fe1728b8cd"
+        },
+        "video_inactive": {
+          "shape": [
+            1,
+            16,
+            5,
+            36,
+            64
+          ],
+          "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+        },
+        "video_reactive": {
+          "shape": [
+            1,
+            16,
+            5,
+            36,
+            64
+          ],
+          "sha256": "eed5d07c20ca76a617d9c731ff2f77341ab154db19669f6106047668a95add16"
+        },
+        "mask_all": {
+          "shape": [
+            1,
+            64,
+            6,
+            36,
+            64
+          ],
+          "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+        }
+      },
+      "tensor_shapes": {
+        "shared.noise": [
+          1,
+          16,
+          6,
+          36,
+          64
+        ],
+        "shared.vace_context": [
+          1,
+          96,
+          6,
+          36,
+          64
+        ],
+        "positive.context": [
+          1,
+          512,
+          4096
+        ],
+        "negative.context": [
+          1,
+          512,
+          4096
+        ]
+      },
+      "runtime": {
+        "vram_management_enabled": false,
+        "torch_dtype": "torch.bfloat16",
+        "device": "cuda",
+        "attention": "upstream SDPA fallback",
+        "adapter": null
+      },
+      "parameter_counts": {
+        "text_encoder": 5680910336,
+        "dit": 1418996800,
+        "vae": 126892531,
+        "vace": 734975232
+      },
+      "video": {
+        "width": 512,
+        "height": 288,
+        "r_frame_rate": "24/1",
+        "duration": "0.708333",
+        "nb_frames": "17"
+      },
+      "output_sha256": "3cced486b0eb344a3d110600f64c8069a2e8b1d63847f47c7bd0d9e2496fed4e",
+      "resources": {
+        "label": "R-gray-C-null-20261023",
+        "process_seconds": 54.03954792022705,
+        "runner_seconds": 48.43876209500013,
+        "pipeline_seconds": 38.09553195798071,
+        "model_seconds": 31.812274766038172,
+        "cuda_peak_allocated_bytes": 17056366080,
+        "cuda_peak_reserved_bytes": 17687379968,
+        "os_mem_available_min_bytes": 74433343488,
+        "swap_peak_bytes": 0
+      },
+      "technical_checks_pass": true
+    }
+  ],
+  "training_updates": 0,
+  "temporal_quality": "UNVERIFIED",
+  "quality_acceptance": "NOT_INFERRED_FROM_TECHNICAL_CHECKS",
+  "paired_control_checks_pass": true,
+  "all_completed_technical_checks_pass": true,
+  "full_design_completed": true,
+  "factorial_controls": {
+    "20261022": {
+      "cells": {
+        "bg-real": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "2e9cb4e5dea03c81bc772a0a7dc960fe659480fd85826b616bf8df49507e1e78"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "48724efe2aee2ee9d0615cf8de0b83809e884b9b9895b0cbc1e2233c1f7bb735"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "240887ac4bb7cf687c00248e036cc2d93ce7468a33df9d3b4eb13b6b671d7ffc"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "c155970fb8be18e5ba79e56a9f4e7479b1c3d447004a30ffb561a5719a1825d7"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "7927e74e5d932a0edd94828a73fe4a7bbe785c9fa2b8e5fc7873058a9bc8f7fa"
+        },
+        "bg-null": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "2e9cb4e5dea03c81bc772a0a7dc960fe659480fd85826b616bf8df49507e1e78"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "8f0ad34ed8332ea843b16cce6abc617bc7783b76f85b0687c363910477dac593"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "240887ac4bb7cf687c00248e036cc2d93ce7468a33df9d3b4eb13b6b671d7ffc"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "eed5d07c20ca76a617d9c731ff2f77341ab154db19669f6106047668a95add16"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "6ff948a6317a82fabd37f45354820e298c9fec2874bbf0218c686b7098afef54"
+        },
+        "gray-real": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "2e9cb4e5dea03c81bc772a0a7dc960fe659480fd85826b616bf8df49507e1e78"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "6ec68d2ca166a874d8e2460a91bb0267687f7e20380e92083a6ed659209c032d"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "2c3a2333f7ed7461638d4e820c86da8493deba643ed06ddeb2deb5fe1728b8cd"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "c155970fb8be18e5ba79e56a9f4e7479b1c3d447004a30ffb561a5719a1825d7"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "59d6a5920bcfbb3250cd24fb187e639b92dd89fc7430adaf75c0250824351e67"
+        },
+        "gray-null": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "2e9cb4e5dea03c81bc772a0a7dc960fe659480fd85826b616bf8df49507e1e78"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "789cfee8dcd480fe4657fc449d58c120c73e4e08cab398b69da31c9e2a6be40f"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "2c3a2333f7ed7461638d4e820c86da8493deba643ed06ddeb2deb5fe1728b8cd"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "eed5d07c20ca76a617d9c731ff2f77341ab154db19669f6106047668a95add16"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "4269ed0022abbb3a7da9c3ee021d5a1b37046186995f5840d73627a261298431"
+        }
+      },
+      "checks": {
+        "four_cells": true,
+        "shared.noise_all_equal": true,
+        "positive.context_all_equal": true,
+        "negative.context_all_equal": true,
+        "video_inactive_all_equal": true,
+        "mask_all_all_equal": true,
+        "bg_reference_equal_across_structure": true,
+        "gray_reference_equal_across_structure": true,
+        "real_reactive_equal_across_reference": true,
+        "null_reactive_equal_across_reference": true,
+        "two_reference_contents": true,
+        "two_reactive_contents": true,
+        "four_full_contexts": true
+      },
+      "pass": true
+    },
+    "20261023": {
+      "cells": {
+        "bg-real": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "48724efe2aee2ee9d0615cf8de0b83809e884b9b9895b0cbc1e2233c1f7bb735"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "240887ac4bb7cf687c00248e036cc2d93ce7468a33df9d3b4eb13b6b671d7ffc"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "c155970fb8be18e5ba79e56a9f4e7479b1c3d447004a30ffb561a5719a1825d7"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "bfd11a840156fb62cb780625522850726e2fc485225d94b6f49503b9e7841969"
+        },
+        "bg-null": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "8f0ad34ed8332ea843b16cce6abc617bc7783b76f85b0687c363910477dac593"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "240887ac4bb7cf687c00248e036cc2d93ce7468a33df9d3b4eb13b6b671d7ffc"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "eed5d07c20ca76a617d9c731ff2f77341ab154db19669f6106047668a95add16"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "54477fe63bee8f333618dc667a356aa296f6e2b397376079d6e86893394c88fe"
+        },
+        "gray-real": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "6ec68d2ca166a874d8e2460a91bb0267687f7e20380e92083a6ed659209c032d"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "2c3a2333f7ed7461638d4e820c86da8493deba643ed06ddeb2deb5fe1728b8cd"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "c155970fb8be18e5ba79e56a9f4e7479b1c3d447004a30ffb561a5719a1825d7"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "54c02baab4d358483820da08a2e87b9dffd4147c57c420666d59d2ffa7c7a21f"
+        },
+        "gray-null": {
+          "hashes": {
+            "shared.noise": {
+              "shape": [
+                1,
+                16,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "d486f3cc9ea457718e32cb1c6749f4304e681263682ebce065de825e08356ca3"
+            },
+            "shared.vace_context": {
+              "shape": [
+                1,
+                96,
+                6,
+                36,
+                64
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "789cfee8dcd480fe4657fc449d58c120c73e4e08cab398b69da31c9e2a6be40f"
+            },
+            "positive.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "109a975af676a10bff173fdb905378e6bb735119e82d7c44992460de5527748a"
+            },
+            "negative.context": {
+              "shape": [
+                1,
+                512,
+                4096
+              ],
+              "dtype": "torch.bfloat16",
+              "device": "cuda:0",
+              "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+            }
+          },
+          "slices": {
+            "reference_prefix": {
+              "shape": [
+                1,
+                96,
+                1,
+                36,
+                64
+              ],
+              "sha256": "2c3a2333f7ed7461638d4e820c86da8493deba643ed06ddeb2deb5fe1728b8cd"
+            },
+            "video_inactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "f1e0b5341ebd86212dda6b70aab5d532521c72c7a34f80524346a61f72df7172"
+            },
+            "video_reactive": {
+              "shape": [
+                1,
+                16,
+                5,
+                36,
+                64
+              ],
+              "sha256": "eed5d07c20ca76a617d9c731ff2f77341ab154db19669f6106047668a95add16"
+            },
+            "mask_all": {
+              "shape": [
+                1,
+                64,
+                6,
+                36,
+                64
+              ],
+              "sha256": "faa02e88bf2125de9b047c15acab775c88d67be48209a9b92e2626ad9fcf0c6d"
+            }
+          },
+          "output_sha256": "3cced486b0eb344a3d110600f64c8069a2e8b1d63847f47c7bd0d9e2496fed4e"
+        }
+      },
+      "checks": {
+        "four_cells": true,
+        "shared.noise_all_equal": true,
+        "positive.context_all_equal": true,
+        "negative.context_all_equal": true,
+        "video_inactive_all_equal": true,
+        "mask_all_all_equal": true,
+        "bg_reference_equal_across_structure": true,
+        "gray_reference_equal_across_structure": true,
+        "real_reactive_equal_across_reference": true,
+        "null_reactive_equal_across_reference": true,
+        "two_reference_contents": true,
+        "two_reactive_contents": true,
+        "four_full_contexts": true
+      },
+      "pass": true
+    }
+  },
+  "factorial_controls_pass": true
+}

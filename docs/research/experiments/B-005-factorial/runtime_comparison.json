@@ -1,0 +1,74 @@
+[
+  {
+    "seed": 20261022,
+    "reused": "B-003-structure-condition/C-real-20261022",
+    "all_runtime_fields_equal": true,
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  },
+  {
+    "seed": 20261022,
+    "reused": "B-003-structure-condition/C-null-20261022",
+    "all_runtime_fields_equal": true,
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  },
+  {
+    "seed": 20261022,
+    "reused": "B-004-reference-neutral/R-gray-20261022",
+    "all_runtime_fields_equal": true,
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  },
+  {
+    "seed": 20261023,
+    "reused": "B-003-structure-condition/C-real-20261023",
+    "all_runtime_fields_equal": true,
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  },
+  {
+    "seed": 20261023,
+    "reused": "B-003-structure-condition/C-null-20261023",
+    "all_runtime_fields_equal": true,
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  },
+  {
+    "seed": 20261023,
+    "reused": "B-004-reference-neutral/R-gray-20261023",
+    "all_runtime_fields_equal": true,
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  }
+]
