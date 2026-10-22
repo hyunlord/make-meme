@@ -100,3 +100,10 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 **BLOCKED / baseline 미확보.** 소형변환검증·필수다운로드해시는통과했지만실제SAT의NumPy pickle globals를안전metadata검사가거부했다. 전체변환·모델·영상NOT_RUN,추론0/2·학습0. 모델능력이나FlashAttention실패의증거가아니다. [결과](experiments/B-007B-scail-baseline/RESULTS.md).
 
 다음한경로는동일공식checkpoint의비텐서RNG메타데이터를객체실행없이안전하게분리하고tensor/storage동등성을검증할수있는지감사하는것이다. 이를확인하기전추론재개·다른모델·LoRA학습을자동진행하지않는다. 이전B007B계획과B007A통과기록은역사기록으로유지한다.
+
+## B-007C — checkpoint 비텐서 RNG 메타데이터 감사 (2026-10-22)
+
+- **PLANNED / NOT_RUN**. [B-007C PLAN](experiments/B-007C-checkpoint-audit/PLAN.md).
+- B-007B는 tensor checkpoint 다운로드 성공 이후 NumPy pickle globals 관련 **명시적 fail-closed 정책**에서 BLOCKED. 실제 대형 변환·SCAIL 로딩/생성/학습을 아직 시도하지 않았다.
+- 다음 목표는 원본 SAT ZIP/data.pkl의 pickle GLOBAL+memo/storage 관계를 **객체 실행 없이** 감사하고, 공식 tensor-only export 또는 안전한 제한 loader 경로의 위험·동등성 증거를 확보하는 것. 새로운 실험용 fixture 외 실제 checkpoint에 broad allowlist/weights_only=False 사용 금지.
+- 모델 재다운로드0, diffusion 추론0, 학습0. 감사만 완료돼도 full 14B inference PASS가 아니다. 안전한 경로를 확보한 경우에만 다음 bounded conversion/model baseline을 별도 검토.
