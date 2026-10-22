@@ -1,0 +1,29 @@
+{
+  "reference_id_rgb": [
+    255,
+    0,
+    0
+  ],
+  "driver_id_rgb": [
+    255,
+    0,
+    0
+  ],
+  "background_rgb": [
+    0,
+    0,
+    0
+  ],
+  "mode": "animation",
+  "replace_flag": false,
+  "target_h": 896,
+  "target_w": 512,
+  "fps": 24,
+  "frames": 17,
+  "upstream_default_fps": 16,
+  "mask_interpolation": "nearest",
+  "rgb_interpolation": "bicubic",
+  "driver_segmentation": "OpenCV GrabCut5; fixed rough seeds plus B006 observed points; independent per frame",
+  "no_learned_models": true,
+  "quality_acceptance": "NOT_RUN"
+}

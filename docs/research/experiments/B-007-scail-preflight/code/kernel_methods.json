@@ -1,0 +1,48 @@
+{
+  "max_methods": 2,
+  "total_download_cap_bytes": 2000000000,
+  "deadline_utc": "2026-10-22T08:01:33Z",
+  "method1": {
+    "package": "flash-attn2.8.3.post2",
+    "source": {
+      "comment_text": null,
+      "core-metadata": false,
+      "digests": {
+        "blake2b_256": "6cb1b77625e3d11260d2bd6a4fc249a4be9a3da97ff848e2222e810c4f0e0211",
+        "md5": "6370efae12ef538b5ee9e6e91a859868",
+        "sha256": "d0f9f0b08a986cdeadbffcf5ec8b3a8f514366c68ad1853d3ab061bc83cc340b"
+      },
+      "downloads": -1,
+      "filename": "flash_attn-2.8.3.post2.tar.gz",
+      "has_sig": false,
+      "md5_digest": "6370efae12ef538b5ee9e6e91a859868",
+      "packagetype": "sdist",
+      "python_version": "source",
+      "requires_python": ">=3.9",
+      "size": 8453127,
+      "upload_time": "2026-10-14T01:37:12",
+      "upload_time_iso_8601": "2026-10-14T01:37:12.132859Z",
+      "url": "https://files.pythonhosted.org/packages/6c/b1/b77625e3d11260d2bd6a4fc249a4be9a3da97ff848e2222e810c4f0e0211/flash_attn-2.8.3.post2.tar.gz",
+      "yanked": false,
+      "yanked_reason": null
+    },
+    "build": "official source archive; FLASH_ATTN_CUDA_ARCHS=120 FLASH_ATTENTION_FORCE_BUILD=TRUE MAX_JOBS=4 NVCC_THREADS=1; system CUDA13; no build isolation/dependencies/index; existing torch readonly"
+  },
+  "method2": {
+    "only_if": "method1 fails with recorded build/import/kernel error and remaining resources/time permit",
+    "source": "Dao-AILab/flash-attention@2bdeddd15af6f1c44cd41e6f5b08b9e544398397",
+    "build": "official upstream native121 support; FLASH_ATTN_CUDA_ARCHS=121; no backend/source patch; exact submodule URLs/bytes/hashes recorded before download"
+  },
+  "smoke": {
+    "wrapper": "SCAIL-2@78fe19576bb06be96c2375e088574a262a300edb/wan/modules/attention.py",
+    "heads": 40,
+    "head_dim": 128,
+    "dtype": "BF16",
+    "causal": false,
+    "dropout": 0,
+    "atol": 0.01,
+    "rtol": 0.02,
+    "cases": "self, masked-key self, image cross, text cross; reference float32 SDPA MATH"
+  },
+  "not_authorized": "SCAIL modelweights, diffusion/model forward, optimizer/training"
+}

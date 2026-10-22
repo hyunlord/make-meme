@@ -153,3 +153,9 @@
 - SCAIL-2 wan-scail2 공식 RGB driving+color masks 경로가 다음 후보. 현 Spark에는 필수 flash_attn module이 없으며 SM121 actual kernel/14B peak 및 입력 FPS 정합 미검증. 선택 LoRA 제외 약80GB checkpoint와 추가 변환 공간 필요. 다른 모델의 SM121 kernel 문제 사례만으로 SCAIL 직접 실패를 확정하지 않는다.
 - [B-007A PLAN](experiments/B-007-scail-preflight/PLAN.md) 등록: 최대 2시간, 격리 환경의 실제 FlashAttention kernel smoke, 색상마스크·24fps·crop 및 checkpoint 변환 메모리 위험 사전검증. 80GB 모델 다운로드/전체 영상 inference/학습은 NOT_RUN 및 이번 승인 범위 밖. 통과 이후에만 별도 B-007B 승인 계획.
 - 사용자 제공 ZIP `make-meme-B-006-20261022.zip`과 SHA `da563753334b2e94b5b95391cb1e0916d32f4b8121006b688e2329b1ea201f8c`의 실제 CRC/파일 해시 및 영상 재생은 이번 검토의 컨테이너 도구 오류로 독립 검증하지 못함. 개인 영상 공개하지 않음.
+
+## 2026-10-22 — B-007A 실행 전 고정
+
+- 시작 remote `6ca9271b8d565cf88db22bbfe61bbedecf7b915c`; 2시간/의존성2GB/최대두방법 경계를 유지한다. 격리된 실제 BF16 FlashAttention smoke와 CPU 입력 검사를 고정한다.
+- 세로 Lab reference가 공식 출력 H/W를 교환하는 조건을 발견했다. 같은 crop geometry로 RGB/mask와 머리·발 보존을 확인한다.
+- [실행 기록](experiments/B-007-scail-preflight/RUNNING.md). 모델 가중치·diffusion·학습은0이며 B-007B로 자동 확대하지 않는다.

@@ -1,0 +1,5 @@
+--- a/generate.py
++++ b/generate.py
+@@
+-            fps=cfg.sample_fps,
++            fps=(args.output_fps if args.output_fps is not None else cfg.sample_fps),
