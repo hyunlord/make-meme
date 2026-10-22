@@ -101,3 +101,10 @@
 - 신규2/2완료,기존2재사용,실패0,학습0. 두seed의noise/text/구조/mask동일과referenceprefix변경실측.
 - R-bg는두seed착석; R-gray는seed22착석/seed23직립형태. 실제Labidentity와원본안무미수용,연속재생미관측시간UNVERIFIED.
 - 다음하나는R-gray고정C-real/C-null비교제안만이며NOT_RUN. [RESULTS](experiments/B-004-reference-neutral/RESULTS.md),[이론](lessons/B-004-reference-condition.md). 과거PLANNED기록은당시상태로보존.
+
+## 2026-10-22 — B-004 원격 결과 검토와 B-005 사전 등록
+
+- B-004 원격 결과 commit `546221cd887c18ec308bba4ac2f33444b6f23096`에서 RESULTS/학습 문서/run_summary를 조회함. 신규2/2, 기존2재사용, adapter=null/학습0, paired 실험은 noise/text/structure/mask 동일·reference prefix 상이로 기록됨. GPU나 비공개 MP4/ZIP을 독립 실행·시청한 것은 아님.
+- R-bg의 C-real은 양 seed 착석. R-gray는 seed22 착석/seed23 직립 실루엣만 생성. 실제 Lab identity·안무는 두 seed 모두 미수용, 시간 품질 UNVERIFIED. 회색은 정상적인 identity 참조가 아닌 OOD일 수 있음.
+- 다음 B-005는 2×2 factorial의 빠진 R-gray+C-null 두 seed만 신규 실행하도록 사전 계획했음. B-003(R-bg+C-real/null) 4개 및 B-004(R-gray+C-real) 2개를 설정·noise 검증 후 재사용. 최대 신규2회·학습0. 원본 동작·Lab identity를 모두 수용하기 전에는 조건 차이를 성공으로 부르지 않음.
+- [B-004 결과](experiments/B-004-reference-neutral/RESULTS.md) · [B-005 계획](experiments/B-005-factorial/PLAN.md). 이 기록은 문서 작업으로, B-005 GPU 실험은 NOT_RUN.
