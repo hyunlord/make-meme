@@ -10,6 +10,10 @@
 - 세로 reference로 인한 공식 H/W 자동 교환을 반영한다. RGB bicubic과 categorical mask nearest는 동일 geometry를 사용하나 upstream과 픽셀 동일하다고 주장하지 않는다.
 - 가중치 다운로드0, 전체 영상 diffusion 추론0, 학습0. 커널 성공과 SCAIL 전체 실행/생성 품질은 별도다.
 
-## 방법1 실패 및 방법2 선택 — 2026-10-22 06:12 UTC
+## 방법1 실패 및 방법2 선택 — 2026-10-22 06:10 UTC
 
 릴리스 flash-attn 2.8.3.post2 source 8,453,127 bytes를 hash 확인 후 격리 prefix에 빌드했다. 실제 컴파일은 C++17 대 Torch2.14 ATen의 C++20 요구 충돌로 실패했다. import/커널 성공으로 처리하지 않는다. 공식 고정 main의 torch>=2.13 C++20 분기와 SM121 분기가 해당 오류에 대한 근거이므로 사전 등록한 두 번째 방법만 시도한다. 임의 source patch/세 번째 버전 탐색은 하지 않는다.
+
+## 동일 방법2 실행기 경로 수정 — 2026-10-22 06:14 UTC
+
+`ninja.BIN_DIR`가 빈 문자열이어서 기존 실제 Ninja 실행 파일을 PATH에 넣지 못하고 serial distutils로 내려갔다. 기존 실행 파일의 `--version`을 확인하고 owned build process group만 중단했다. 로그와 object를 보존하고, 같은 source/arch/compiler를 실제 Ninja 경로로 재개한다. 새로운 설치 방법이나 다운로드가 아니며 원래 방법2 deadline 06:45:33 UTC를 명시적으로 유지한다.

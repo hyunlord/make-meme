@@ -14,6 +14,7 @@ def memory():
     return values['MemAvailable'],values['SwapTotal']-values['SwapFree']
 available,swap0=memory()
 method_deadline=min(time.time()+2100,deadline-900) if label.startswith('build') else min(time.time()+300,deadline-120)
+method_deadline=min(method_deadline,float(os.environ.get('KERNEL_METHOD_DEADLINE',method_deadline)))
 assert available>=40*1024**3 and time.time()<method_deadline-60
 queue=json.loads(subprocess.check_output(['curl','-fsS','--max-time','5','http://127.0.0.1:8190/queue']))
 assert not queue['queue_running'] and not queue['queue_pending']
