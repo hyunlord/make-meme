@@ -29,3 +29,9 @@
 - FFmpeg RGB24 reader를 사용하는 isolated runner이며 pipeline.generate와 upstream resize/normalization/cache_video를 유지한다. 전체 generate.py CLI 무변경 실행이라고 부르지 않는다. 독립 코드 검토에서 입력layout·정규화순서·API계약이 맞음을 확인했다.
 - 첫 명시적generator의 실제noise와 DiT/attention입력shape를 관측한다. hook은 RNG를 추가 호출하지 않는다. 각 infer-* 작업은 로딩 전에2회장부를 예약한다.
 - mixedBF16 CPU가중치와 GPU이동·activation의 실제peak는 미확인이다. 작은fixturePASS가 이를 보장하지 않는다. 추후guard는 다른서비스작업/가용메모리/swap/deadline의 정확한 종료이유를 기록한다. 이미 실행 중인 downloadguard는 변경하지 않았다.
+
+## 08:29–08:34 UTC — 실물 metadata 차단, 실행 종료
+
+- 다운로드68,111,049,006bytes와 재사용6파일 검증을 완료했다. 실제 metadata 검사에서 NumPy globals3개를 거부했다. 오류는 torch.load/FakeTensor 이전이므로 mmap·모델·GPU 실패로 해석하지 않는다.
+- 읽기 전용 pickle opcode에 np_rng_state/MT19937 문맥이 있으나 객체 복원/allowlist/새parser로 우회하지 않았다. 전체 변환·모델로드·diffusion NOT_RUN,0/2시도,학습0이다.
+- 모든 소유 프로세스 종료, 기존환경138파일/알려진A111파일과FA바이너리 보존. 실제 모델·변환peak NOT_MEASURED. [결과](RESULTS.md)에 한계와 다음직렬화감사 한경로를 기록했다.

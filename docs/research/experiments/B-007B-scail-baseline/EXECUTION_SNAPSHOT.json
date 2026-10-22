@@ -1,0 +1,107 @@
+{
+  "upstream_commit": "78fe19576bb06be96c2375e088574a262a300edb",
+  "model_revision": "150cc0ca4e98e50e60b9295dacde39442fdccab2",
+  "preexecution_code_commit": "d7fcc5f",
+  "files": [
+    {
+      "path": "GATE1_SUMMARY.json",
+      "sha256": "8098e35d3a9d68847083fa651e6806c240a1eb994bf7a8a5ff9f7bf44f2cd519"
+    },
+    {
+      "path": "INPUT_HASHES.json",
+      "sha256": "f861178e469afcf3d443520cc1db32ff43efa4fae764be628c1d4f75b3652cf6"
+    },
+    {
+      "path": "METRICS_SUMMARY.json",
+      "sha256": "4d8e876a3d4c39aaac738a8ed318d15a6eba54d0215e865c52334a98b29534a1"
+    },
+    {
+      "path": "WRITER_INTEGRATION.json",
+      "sha256": "a73aa378dd77c79d7a49085a0919f0b396747fbd5e4c807919d59634a4dd6502"
+    },
+    {
+      "path": "code/converter.py",
+      "sha256": "00e27b90c836227247f5600071ff22ffbf47c1f179633046e52de1b36102bc2d"
+    },
+    {
+      "path": "code/converter_mapping.py",
+      "sha256": "6e5036c8ea450e8aced25cdc73ee8da0a5570028c5d36147a48b4fe808c0db37"
+    },
+    {
+      "path": "code/converter_metadata.py",
+      "sha256": "0d9b593dd7d079240f1df32be358c44be219fe835dc31487ccac1ef107825026"
+    },
+    {
+      "path": "code/converter_stream.py",
+      "sha256": "1148c7c5efd0f1d1eec46b4d266248f1f3afeb7bb47ee4ffff9e973575c2a510"
+    },
+    {
+      "path": "code/converter_verify.py",
+      "sha256": "8b14576d0185fa0debae424180bbdedfe75715f55d18e8d24d064413fc36749d"
+    },
+    {
+      "path": "code/input_gate0.py",
+      "sha256": "420458904e93398908d7677787a84f66c20d53c6124dfc32e69f851fe0126eca"
+    },
+    {
+      "path": "code/output_review.py",
+      "sha256": "f61d5d79dc5f1f1abfdbc45d87002f14991131717587087899e116360ea98150"
+    },
+    {
+      "path": "code/runtime_contract.py",
+      "sha256": "831ce6736161479308201c82688fbaaad11fcbada4d873cd99d041b74ea50135"
+    },
+    {
+      "path": "code/runtime_download.py",
+      "sha256": "4f7f2d504d936ffabafdcc61f8f131c875330a641a725947ddeb9e49613cfbdf"
+    },
+    {
+      "path": "code/runtime_guard.py",
+      "sha256": "aef1e5a86dd9f295ee356e408beea8eb8f67959788614390e22b543b5524263a"
+    },
+    {
+      "path": "code/runtime_infer.py",
+      "sha256": "c48da34b2d9bbae78f2c06168a77ec3c6f881a6d14bea06b789280abaf0cf45b"
+    },
+    {
+      "path": "code/runtime_loader.py",
+      "sha256": "a510210a1b8ee9942d868df3ed727473930c8bc68b66ccf66f42f0819120077a"
+    },
+    {
+      "path": "code/runtime_loader_fixture.py",
+      "sha256": "cddbd913e436071381af0328d0a917f10b495c13c85fca03eb3393d91e9e6c04"
+    },
+    {
+      "path": "code/runtime_prepare.py",
+      "sha256": "9f44f2ff9f00e1a7a2a12464264b12edb02f6db12e14b9879b0cf0599e3666d5"
+    },
+    {
+      "path": "code/test_conversion.py",
+      "sha256": "579912c52c3ac4500f84e9a3f49f1846245b2096a49fc75847e0c2ee55705047"
+    },
+    {
+      "path": "code/writer_integration.py",
+      "sha256": "c69a33d44bcc2162704a55c0837cd13e20539ca6cd60375b363ecd8a3cb6479b"
+    },
+    {
+      "path": "code/writer_patch.py",
+      "sha256": "028a6454969b98657eec1ed597d4e55de57a11b240a25db004dfe90de3f875e8"
+    },
+    {
+      "path": "configs/lab.json",
+      "sha256": "ce05010aee9349af5b4bfdc8b4f7d982c371d2d9883a680da4e076a03d6632b9"
+    },
+    {
+      "path": "configs/official.json",
+      "sha256": "354676d6dda0c4ef6bce72daebadde6f2fa59eeb2a953e9d1dfd617a64162d6f"
+    },
+    {
+      "path": "download_manifest.json",
+      "sha256": "9e53f16f64de405670b055f465f1c6709dfc3cebec75b7db11da6e058f656ee2"
+    },
+    {
+      "path": "runtime_dependencies.json",
+      "sha256": "acd2dea50654f60f2f04831726262f942bbf495632aeecd14598bea948e11222"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "BLOCKED_AT_METADATA_SECURITY_GATE",
+  "new_model_download_bytes": 68111049006,
+  "new_dependency_wheel_bytes": 26031848,
+  "actual_inference_attempts": 0,
+  "attempt_cap": 2,
+  "full_conversion": "NOT_RUN",
+  "independent_full_verification": "NOT_RUN",
+  "full_model_state_contract": "NOT_RUN",
+  "full_model_load": "NOT_RUN",
+  "model_forward": "NOT_RUN",
+  "training": "NOT_RUN",
+  "unsupported_globals": [
+    "numpy.core.multiarray._reconstruct",
+    "numpy.ndarray",
+    "numpy.dtype"
+  ],
+  "opcode_only_evidence": "np_rng_state and MT19937 precede the three NumPy globals; no deserialization performed",
+  "system_available_min_bytes": 75377397760,
+  "system_swap_max_bytes": 0,
+  "memory_limitations": [
+    "System available memory includes other processes.",
+    "Cgroup charge/peak is not total process RSS or model peak; metadata failed in under one second and coarse sampling is incomplete.",
+    "Actual model and conversion memory peak NOT_MEASURED."
+  ],
+  "base_environment_files_unchanged": 138,
+  "owned_execution_processes_remaining": 0,
+  "download_stage_seconds": 1670.8620505332947,
+  "metadata_stage_seconds": 1.025874137878418,
+  "known_A_files_preserved": 111
+}

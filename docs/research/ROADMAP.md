@@ -94,3 +94,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 - B-007A FA2 BF16 tiny QKV4/4 PASS는 전체14B 실행 증명이 아님. checkpoint 대용량 eager load·safetensors load의 peak 위험이 있음.
 - **게이트 순서:** fresh Spark 자원/색상 mask·24fps → 소형 fixture로 메모리 안전 SAT→Wan 변환 방식 검증 → 필요 파일 최대85GB selective download → 변환/로딩 자원 측정 → 공식 예제 1건 및 Lab 실제 단일17f 1건까지 조건부 추론.
 - 신규 전체 diffusion inference 최대2회·학습0·다른 작업 비간섭. memory safe path 증명 못 하면 대형 변환을 강행하지 않고 BLOCKED. 영상이 나오면 동작·개체·시간적 품질을 독립 평가하며 Kling 수용 주장을 피한다.
+
+## B-007B 실제 결론 (2026-10-22)
+
+**BLOCKED / baseline 미확보.** 소형변환검증·필수다운로드해시는통과했지만실제SAT의NumPy pickle globals를안전metadata검사가거부했다. 전체변환·모델·영상NOT_RUN,추론0/2·학습0. 모델능력이나FlashAttention실패의증거가아니다. [결과](experiments/B-007B-scail-baseline/RESULTS.md).
+
+다음한경로는동일공식checkpoint의비텐서RNG메타데이터를객체실행없이안전하게분리하고tensor/storage동등성을검증할수있는지감사하는것이다. 이를확인하기전추론재개·다른모델·LoRA학습을자동진행하지않는다. 이전B007B계획과B007A통과기록은역사기록으로유지한다.

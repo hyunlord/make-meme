@@ -22,7 +22,7 @@
     "Reject noncontiguous, overwritten output, changed official source, unsafe globals, legacy format",
     "Independent safetensors parser + chunked source/output hash, payload corruption rejection"
   ],
-  "large_checkpoint_compatibility": "NOT_RUN",
+  "large_checkpoint_compatibility": "BLOCKED_UNSUPPORTED_NUMPY_GLOBALS_BEFORE_TORCH_LOAD",
   "conversion_peak": "NOT_MEASURED",
   "model_forward": "NOT_RUN",
   "optimizer_updates": 0,
@@ -32,5 +32,35 @@
     "converter_stream.py": "1148c7c5efd0f1d1eec46b4d266248f1f3afeb7bb47ee4ffff9e973575c2a510",
     "converter_verify.py": "8b14576d0185fa0debae424180bbdedfe75715f55d18e8d24d064413fc36749d",
     "test_conversion.py": "579912c52c3ac4500f84e9a3f49f1846245b2096a49fc75847e0c2ee55705047"
+  },
+  "gate2_selected_download": "VERIFIED_BY_RUNTIME_OWNER",
+  "actual_metadata_gate": {
+    "status": "BLOCKED",
+    "stage": "get_unsafe_globals_in_checkpoint guard; before torch.load/FakeTensorMode key mapping",
+    "unsupported_globals": [
+      "numpy.core.multiarray._reconstruct",
+      "numpy.ndarray",
+      "numpy.dtype"
+    ],
+    "field_context": "Read-only opcode neighborhood: np_rng_state -> MT19937 -> NumPy reconstruction/dtype u4/shape624; strong RNG-metadata evidence, no unpickling or full ownership proof",
+    "unsafe_fallback_used": false,
+    "opcode_evidence": {
+      "pickle_bytes": 163821,
+      "opcode_count": 31271,
+      "np_rng_state_position": 3975,
+      "numpy_reconstruct_position": 4009,
+      "numpy_ndarray_position": 4047,
+      "numpy_dtype_position": 4129,
+      "private_report_sha256": "c06ddd9a5a6081950a4537d48db2969904cc8286f7eac9fb256a3924d96f1b6c"
+    }
+  },
+  "actual_conversion": "NOT_RUN",
+  "inference_attempts": 0,
+  "inference_attempt_limit": 2,
+  "actual_metadata_memory": {
+    "true_peak": "NOT_MEASURED",
+    "sampled_peak_bytes": 503808,
+    "systemd_peak_bytes": 331776,
+    "interpretation": "Incomplete observations; not credible overall process RSS or a model memory bound"
   }
 }

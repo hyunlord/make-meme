@@ -1,6 +1,6 @@
 # B-007B — 가중치 변환부터 실제 모델 forward까지
 
-현재 확인된 실행은 [Gate1 합성 fixture](../experiments/B-007B-scail-baseline/GATE1_SUMMARY.json)다. 실제 checkpoint의 dtype·parameter 수·load peak·forward tensor shape와 생성 결과는 실행 담당자의 관측 뒤 추가한다. 아래 예상값을 실측으로 읽지 않는다. LoRA와 optimizer update는0회다.
+[Gate1 합성 fixture](../experiments/B-007B-scail-baseline/GATE1_SUMMARY.json)는 통과했고 Gate2 선택 파일 다운로드·해시 검증도 완료했다. 그러나 실제 SAT checkpoint의 NumPy globals 사전 검사에서 metadata gate가 **BLOCKED**됐다. 실제 변환·모델 forward·영상 inference는 0/2회, LoRA와 optimizer update는 0회다. 아래 모델 shape·호출 수 예상값을 실측으로 읽지 않는다.
 
 ## 1. 이름을 바꾸는 것과 모델을 바꾸는 것
 
@@ -50,11 +50,18 @@ attention은 `softmax(QKᵀ/√128)V`다. FlashAttention은 전체 score 행렬�
 
 원본17장의 sample time은 τ_i=i/24초, 끝점 간격16/24초, 파일 표시 길이17/24초다. writer를24fps로 명시하는 것은 이 표시 시간을 지키기 위한 변경이다. 모델의 학습된16fps temporal prior를24fps에 맞게 재학습한 것은 아니다. 안무 phase·속도·접촉은 동일 원본 시각에서 별도 평가해야 한다. frame 복제·보간으로 조건 실패를 숨기지 않는다.
 
-## 7. 실제 모델 관측을 채울 자리
+## 7. 실제로 어디까지 도달했는가
 
-- 원본 checkpoint dtype/count·안전 mmap 지원: 아직 미관측.
+- 실제 SAT metadata: NumPy globals 사전 검사에서 BLOCKED. 원본 weight dtype/count·안전 mmap 지원은 아직 미관측.
 - 대형 변환·독립 hash 검증·최대 메모리: NOT_RUN / NOT_MEASURED.
 - 실제 DiT/VAE/text/reference shape·full sequence forward: NOT_RUN.
 - output frames·fps·개체/안무·시간 품질: NOT_RUN. 실제 연속 재생을 관찰하지 못하면 시간 품질 UNVERIFIED로 남긴다.
 
 [질문](../experiments/B-007B-scail-baseline/QUESTIONS_KO.md)과 [해설](../experiments/B-007B-scail-baseline/ANSWERS_KO.md)은 분리했다.
+
+
+실제 차단된 이름은 `numpy.core.multiarray._reconstruct`, `numpy.ndarray`, `numpy.dtype`다. 우리 fail-closed guard가 `torch.load`를 부르기 전에 멈췄으므로 FlashAttention이나 모델 forward가 실패했다고 해석하면 안 된다. 추가 read-only opcode 문맥에서는 np_rng_state → MT19937 → NumPy 재구성·dtype u4·shape624가 이어져 RNG metadata라는 강한 단서를 얻었다. 이는 원본을 unpickle하거나 수정한 결과가 아니며 전체 참조 graph에서 model storage와 독립이라는 증명까지 수행한 것은 아니다. 파일 해시 검증은 provenance·완전성을 확인할 뿐 모든 pickle 재구성을 안전하게 허용한다는 뜻이 아니다.
+
+다음에는 비텐서 metadata의 위치·참조 graph와 weight 보존을 안전하게 감사하는 한 경로만 검토한다. 실제 제거·호환 로더 구현·baseline 재개는 별도 승인과 검증 후의 작업이다. 이번에는 allowlist나 unsafe unpickle로 차단을 넘지 않았고, 원본·실패·미실행 기록을 그대로 보존했다.
+
+실패한 metadata 프로세스의 sampler와 systemd가 각각 503,808 bytes와 331,776 bytes를 기록했지만, 프로세스 전체 RSS를 대표하는 신뢰할 수 있는 peak 측정으로 볼 수 없다. 따라서 이 단계의 실제 peak도 **NOT_MEASURED**이며, 이 수치를 대형 checkpoint 처리의 메모리 근거로 사용하지 않는다.

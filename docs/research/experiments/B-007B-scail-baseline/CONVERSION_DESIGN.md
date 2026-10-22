@@ -1,6 +1,6 @@
 # Gate 1 — mmap CPU 변환 설계와 고정 비교
 
-상태: `f1cbdff` 고정 후 Spark CPU의 작은 fixture 8/8 PASS. [실행 요약](GATE1_SUMMARY.json). 실제 대형 checkpoint 호환성·변환 peak는 UNKNOWN이다. 새 모델 다운로드·GPU·diffusion·학습 실행은 없다.
+상태: `f1cbdff` 고정 후 Spark CPU의 작은 fixture 8/8 PASS. [실행 요약](GATE1_SUMMARY.json). 실제 선택 파일의 다운로드·해시 검증은 Gate2에서 완료됐지만, 실제 SAT checkpoint의 안전 metadata 진입은 **BLOCKED**다. 대형 변환·모델 forward·diffusion 시도는 0/2, 학습은 0회이며 실제 변환 peak는 NOT_MEASURED다.
 
 ## 유지하는 것과 바꾸는 것
 
@@ -36,3 +36,16 @@ Spark CPU Python3.12.3, torch2.14.0+cu130, safetensors0.8.0, pytest8.4.2에서 8
 `converter_verify.py`는 Rust safetensors parser로 key/dtype/shape/format을 확인한 뒤, source CPU mmap과 출력 파일을 tensor별 최대8MiB로 읽어 SHA256을 비교한다. `safetensors.load_file`로 전체 출력 state를 materialize하지 않는다. 실제 source metadata mapping과 값을 다시 대조하므로 converter가 작성한 manifest만 믿는 검사가 아니다. synthetic 출력의 payload1byte를 바꾸자 검증이 거부됐다.
 
 대형 변환 뒤 별도 resource/deadline guard 아래 `python code/converter_verify.py <checkpoint> <pinned convert.py> <output.safetensors>`로 검증한다. 원본 mmap resident/file cache는 여전히 메모리에 포함되므로 검사 자체도 무제한 실행하지 않는다. 실제 checkpoint의 안전한 mmap 지원과 대형 변환·검증 peak는 아직 미측정이다.
+
+
+## 실제 SAT metadata 차단과 다음 경계
+
+Gate2에서 고정 revision의 필요한 파일 다운로드·검증은 완료했다. 실제 SAT 파일에 대한 metadata-only 명령은 `get_unsafe_globals_in_checkpoint`가 다음 세 global을 찾아 사전 차단했다: `numpy.core.multiarray._reconstruct`, `numpy.ndarray`, `numpy.dtype`.
+
+차단 위치는 `torch.load`와 FakeTensorMode의 tensor mapping보다 앞이다. 따라서 실제 weight dtype·tensor shape·mmap 호환성·변환 peak는 여전히 미확인이다. 이는 NumPy 객체의 재구성 의존성이 있다는 증거이지 파일이 악성이라는 판정, FlashAttention 실패, 모델 OOM, 생성 품질 실패가 아니다. 제한된 read-only opcode 검사에서는 data.pkl163,821bytes의31,271개 opcode를 읽었고, position3975의 np_rng_state 뒤에 MT19937, NumPy _reconstruct4009/ndarray4047/dtype4129와 u4·shape624가 이어졌다. 이는 RNG metadata라는 강한 구조적 단서다. 다만 unpickle이나 전체 참조 graph 해석을 수행하지 않았으므로 완전한 필드 소유·독립성 증명은 아니다. opcode 읽기는 unpickle 실행과 다르며 payload를 신뢰해 재구성하지 않는다.
+
+사전 규칙대로 allowlist 추가, weights_only=False, 새로운 parser fallback을 하지 않았다. 실제 변환·독립 전체 tensor 검증·모델 로드·inference는 실행하지 않았다. 기존 fixture PASS와 실제 파일 차단 결과를 둘 다 보존한다.
+
+다음 한 경로는 **checkpoint 비텐서 metadata의 안전한 분리 가능성을 먼저 감사**하는 것이다. 참조 graph와 필드 위치를 비실행 방식으로 확인하고, metadata 제거가 weight storage·key·dtype·값을 바꾸지 않는지 별도 작은 fixture와 독립 비교로 검증할 설계를 준비한다. 가능하다고 미리 단정하거나 원본 pickle을 임의 수정하지 않는다. 감사와 별도 승인 후에만 후속 baseline을 검토하며, 이번에 호환 로더나 allowlist를 구현하지 않는다.
+
+실패한 metadata 프로세스의 sampler와 systemd가 각각 503,808 bytes와 331,776 bytes를 기록했지만, 프로세스 전체 RSS를 대표하는 신뢰할 수 있는 peak 측정으로 볼 수 없다. 따라서 이 단계의 실제 peak도 **NOT_MEASURED**이며, 이 수치를 대형 checkpoint 처리의 메모리 근거로 사용하지 않는다.

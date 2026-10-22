@@ -185,3 +185,10 @@
 - 실행 기록에서 GB10 FA2 BF16 tiny attention4/4 PASS, max abs error0.00465846, 기준 atol0.01/rtol0.02, 본체 추론/peak UNKNOWN 확인. 공식 SAT checkpoint65.58GB, 필수 비선택 파일80.002GB, 변환 원본 torch.load→safetensors.save_file 및 로딩 시 peak 위험. 마스크 경계 PARTIAL, 기본 writer16fps vs source24fps mismatch.
 - 결정: 작은 kernel PASS는 실질적 진전이므로 다음은 **B-007B**로 전체 모델 baseline을 단계별 시도할 가치가 있다. 다만 대규모 변환이 RAM/다른 작업에 위험하므로 다운로드 전에 메모리 안전 변환 경로를 확인하고 실제 안전 조건을 통과할 때만 80GB 파일 확보·변환·공식 예제/실제 Lab 17f 최대2건 추론하도록 사전 계획한다.
 - [B-007B PLAN](experiments/B-007B-scail-baseline/PLAN.md) 등록은 계획 공개만으로, 대형 다운로드·변환·확산 영상·학습은 여전히 NOT_RUN. 사용자 또는 실행 agent의 다음 명시 지시 전 자동 실행하지 않는다.
+
+## 2026-10-22 — B-007B 제한 baseline 실행, 실제 metadata에서 차단
+
+- 사용자 승인 후53c58f3부터 Gate0~4를 순서대로 진행했다. 실행 전 변환기·guard·두baseline설정을 연구브랜치에 고정했다. 기존환경/A를 보존하고8개합성변환fixture와CPU writer계약을 확인했다.
+- 필수SAT/CLIP 신규68,111,049,006bytes를 받고공식SHA검증,나머지6파일은검증후재사용했다. 실제SATmetadata의NumPy globals3개가사전fail-closed정책에걸렸다. np_rng_state/MT19937 opcode문맥은확인했지만unsafe역직렬화나새parser로우회하지않았다.
+- **BLOCKED: 전체변환·모델load·forward·영상NOT_RUN,추론0/2,학습0.** B007A커널PASS를전체모델PASS로확대하지않는다. 실제메모리peak미측정,소유프로세스종료. 다음한경로는동일checkpoint의비텐서RNG메타데이터안전분리감사이며자동실행하지않는다.
+- [RESULTS](experiments/B-007B-scail-baseline/RESULTS.md), [재현](experiments/B-007B-scail-baseline/REPRODUCE.md), [수학·코드](lessons/B-007B-conversion-and-model-forward.md). 이전PLANNED와B007A기록은그당시상태로보존한다.
