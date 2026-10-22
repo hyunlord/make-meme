@@ -237,3 +237,9 @@
 **LOAD_PASS / FIRST_FORWARD_PASS / VIDEO_OUTPUT_BLOCKED.** 실제 SCAIL pipeline은268.587초에 적재,1,307tensor strict검사와12,992-token 첫 finite forward를 통과했다. 공식 sampler1회에서40/40 progress 뒤 post-sampler offload/decode 경계의 MemAvailable23.899GiB가24GiB 하한을 밑돌아 자기 프로세스만 종료했다. 정확한 종료 subphase는UNOBSERVED이며 OOM/FlashAttention 실패로 단정하지 않는다. 최종 raw/MP4/denoisedlatent 없음, Lab NOT_RUN, 추론1/2·학습0·다운로드0. [결과](experiments/B-007E-scail-forward/RESULTS.md).
 
 다음 하나는 final latent 저장·phase hook과 post-loop DiT GPU 유지 경로의 제한된 메모리 전이 검증이다. 별도 승인 전 새 sampler·모델·학습을 자동 시작하지 않는다. 기존 계획·과거 NOT_RUN은 해당 시점 기록으로 보존한다.
+
+## 2026-10-23 — B-007F 착수: 최종 latent 보존과 post-loop 이동 한 곳 변경
+
+- 시작 원격 HEAD `fcd1fda723b3828d416fa4de7b14fa292f9e02a6`와 [사전 계획](experiments/B-007F-post-sampler-memory/PLAN.md)을 확인했다. B-007E의 1/2 시도·실패 기록은 보존한다.
+- 기존 mixed-BF16 loader·가중치·입력·sampler·72/24GiB 가드를 유지하고 post-loop `self.model.cpu()` 한 곳만 생략한다. final decode latent의 원자적 저장·정확한 counter·단계별 메모리 관측을 선행 구현한다.
+- 신규 sampler 최대2회: 공식1회, raw/MP4 검증과 종료 후 자원 회복이 모두 통과한 경우에만 별도 프로세스의 Lab1회. 자동 재시도·다운로드·학습0. 실행 코드를 공개 고정한 뒤 시작하며 현재 sampler NOT_RUN이다.
