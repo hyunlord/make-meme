@@ -21,3 +21,7 @@
 ## 실제 색상 압축 함수 CPU 검사 추가 고정
 
 생성 없이 pinned helper 자체를 실행해 실제 준비 mask의28채널/시간축/색상 슬롯을 확인한다. driver 실제 순서는 bilinear 절반 resize 뒤 helper(additional_spatial_downsample=1)이며, helper2와 같다고 가정하지 않는다. 함수 AST만 추출해 CPU 실행하고 전체 pipeline/model import는 하지 않는다. area 보간의 fractional occupancy도 기록한다. 이는 기존 mask/FPS 사전검증 범위의 세부 검증이며 새로운 모델 실험이 아니다.
+
+## 빌드 진행률과 시간 상한 — 2026-10-22 06:20 UTC
+
+교정된 실행기는 CUDA compiler4개를 실제 병렬 실행한다. 06:19:20 기준97개 object 중11개 완료, MemAvailable 약79.63GB, swap0이었다. 진행률을 근거로35분에서65분으로 늘리는 방안을 검토했으나 live supervisor는 deadline을 시작 때 고정한다. 안전한 live 변경이 없어 **연장은 적용하지 않았다**. 같은 빌드를 감시 밖으로 떼거나 재시작하지 않고 기존 방법2 종료 상한06:45:33 UTC를 유지한다. timeout은 SM121 kernel 비호환 판정이 아니라 BUILD_TIME_BUDGET_EXCEEDED이며 실제 kernel은 그때까지 설치가 끝나야만 실행한다.

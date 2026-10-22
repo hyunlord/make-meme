@@ -165,3 +165,9 @@
 - FlashAttention 릴리스의 C++17과 기존 Torch2.14의 C++20 요구가 충돌했다. 설치/연산 성공을 선언하지 않는다.
 - 고정 공식 main은 현재 Torch를 위한 C++20 및 SM121 분기를 제공하므로 두 번째이자 마지막 설치 방법으로 선택했다. [RUNNING](experiments/B-007-scail-preflight/RUNNING.md).
 - 원본 RGB와 mask의 동일 crop에서 머리/발은 보존되지만 초기 GrabCut에 바닥 반사가 포함됐다. 해당 v1을 보존하고 관측 가능한 바닥 경계의 수동 수정과 한계를 기록한다.
+
+## 2026-10-22 — B-007A CPU 입력 계약과 실제 mask 함수 검증 완료
+
+- 동일 red ID/black 배경, RGB/mask 동일 crop와119개 가시점 보존,17장24fps encode/decode 일치를 확인했다. v1 반사 오염과 v2 수동 국소 제외를 모두 보존했으며 얇은 경계는 PARTIAL이다.
+- 실제 pinned mask 함수 CPU 실행에서 reference[28,1,112,64], driver[28,5,56,32], red4슬롯만 활성임을 확인했다. driver 실제 순서는 bilinear half resize 후 helper1이며 area 결과는 fractional occupancy다. [입력 검사](experiments/B-007-scail-preflight/INPUT_PREFLIGHT.md).
+- 격리 FlashAttention 방법2 컴파일은 진행 중이며 실제 kernel/SDPA 오차는 아직 NOT_RUN이다. 모델 다운로드·전체 추론·학습0을 유지한다.
