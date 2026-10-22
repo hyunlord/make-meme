@@ -1,0 +1,12 @@
+{
+  "public_files_checked": 20,
+  "privacy_path_scan": "PASS",
+  "python_ast": "PASS",
+  "relative_links": "PASS",
+  "errors": [],
+  "lint_typecheck": "NOT_RUN: ruff/basedpyright unavailable; environment preserved",
+  "new_model_downloads": 0,
+  "diffusion_inference": 0,
+  "optimizer_updates": 0,
+  "scan_note": "Explicit public text types; ignored __pycache__ excluded."
+}

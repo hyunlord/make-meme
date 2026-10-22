@@ -1,0 +1,41 @@
+{
+  "scope": "CPU manual-coordinate representation; not estimated pose or generated visual content",
+  "input_sha256": "879640146eb96f191bfa892313c0f20401101b0254a265fc4a97b9f2c96373fe",
+  "device": "cpu",
+  "gaussian": "peak-normalized, sigma2 heatmap cells; xy normalized by512x288; missing channels all-zero plus validity",
+  "visibility_codes": {
+    "visible": 0,
+    "occluded": 1,
+    "unobservable": 2,
+    "not_annotated": 3
+  },
+  "valid_points": 119,
+  "tensors": {
+    "heatmaps": {
+      "shape": [
+        17,
+        17,
+        72,
+        128
+      ],
+      "dtype": "torch.float32",
+      "sha256": "0c4238cf487da765041f4d6d2c068549550a33011e8ea3670cc7258cd8b3d184"
+    },
+    "valid": {
+      "shape": [
+        17,
+        17
+      ],
+      "dtype": "torch.bool",
+      "sha256": "def4589390e8a21da7c93fd6fdc64a7459d1a41bac0ed58dc3c44d0f26a60d89"
+    },
+    "visibility": {
+      "shape": [
+        17,
+        17
+      ],
+      "dtype": "torch.uint8",
+      "sha256": "d798c0003992ce0a5cc1d440be874f81f211b952fb0cbcee5782d21819024ed2"
+    }
+  }
+}

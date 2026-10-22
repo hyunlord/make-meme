@@ -1,0 +1,8 @@
+{
+  "code/annotation_schema.json": "af2a3fd9d24f108be267e27e9ff69e237036d5eeba02ad2e85849bf9cc415407",
+  "code/joint_heatmaps.py": "2ddc76524eec7f5db491d6563814b8c723910f395a6830ab8d5056fcfe0956da",
+  "code/package_review.py": "ea6370bd379f6d867f60020d0db221a8ffe88dfcf4beb4f3f0316fec6d4e6f1c",
+  "code/prepare_inputs.py": "ed74152c9805f9ca2ce8e164af453f212e46c27022a22d21ea57bcc56a738832",
+  "code/render_motion.py": "de7a0a9f8764d4a408cdc70374c6ec10cd229473dd0d72ae8313938d710053e6",
+  "code/test_joint_heatmaps.py": "80679dbc3acb9bd82d35b2716414203495da21b5a8b7da95e148bb058c028112"
+}

@@ -21,3 +21,10 @@
 - 주석 전에 validation을 보완했다: visible-null / hidden-coordinate 모순, 4발 contact 상태, possible/unknown의 touching=null 검사. 대표 확대 overlay에 ID 라벨을 추가했다. 표현 의미·상한은 바꾸지 않았다.
 - 17장 모두 개별 관측. 실제 보이는 7개 표면점/프레임만 기록하고 나머지는 null로 유지했다. 원본 RGB/Canny34파일 해시 대조와 CPU 영상 인코딩 완료; 시각화가 모델 동작 전이 성공은 아니다.
 - 교육용 PyTorch CPU heatmap 코드와 synthetic contract fixture를 추가했다. 실제 annotation 입력에 실행하기 전에 별도 code commit을 고정한다. 별도 velocity 계산기를 만들지 않고 기존 finite-difference 기록을 재사용한다. toy fixture는 동물 추정 성능이 아니다.
+
+## 완료
+
+- CPU heatmap 실제 입력 실행은 코드 사전등록 `4e0403ac80ca9edb0d4524d282c4a44d86561ac9` 원격 확인 후 수행했다. 119개 유효 관측과170개 미관측을 분리한 tensor 및 저장 후 검사 완료.
+- annotation 담당의17장 개별 검토와 총괄의 대표 ID overlay/전체시트/궤적 독립 검토를 기록했다. 정적 관측이며 시간 품질은 UNVERIFIED다.
+- 공식 모델 두 branch·VACE 코드·Spark 환경 감사와 한국어 해설을 완료했다. 다음 후보 한 개를 선정했지만 SCAIL 설치·가중치 다운로드·추론·학습은 하지 않았다.
+- 작은 ZIP은 기존 검증된 packager를 확장해 이번 CPU heatmap tensor 한 경로만 명시적으로 포함한다. 모델/캐시는 제외하며 synthetic fixture로 포함/제외 계약을 검사했다. 파일/ZIP hash 및 Mac/Spark 전송 판정은 private 보고서와 최종 응답에 기록한다.

@@ -138,3 +138,11 @@
 - 시작 원격 HEAD `f6819d2a5e487516896e1169237d910bd98354fd`와 사전 PLAN을 확인했다. 기존 실행 환경과 공개 문서 worktree를 분리하고 A 및 이전 결과를 보존한다.
 - 수동 가시성 schema와 CPU 가시화 코드를 결과 전에 고정한다. 관측 불가능한 관절은 null; 3D 접촉/체중 분배를 2D 점으로 확정하지 않는다.
 - 신규 모델 다운로드·영상 diffusion 추론·학습은 0회. 공식 SCAIL-2/VACE 코드 조사와 원본 17프레임의 동작 표현 감사만 진행한다. [RUNNING](experiments/B-006-motion-representation/RUNNING.md).
+
+## 2026-10-22 — B-006 동작 표현·공식 조건 경로 검토 완료
+
+- 17프레임 RGB/Canny34파일을 해시 대조하고 실제 개별 관측했다. 119개 보이는 표면점, 153개 관측 불가 관절 중심, 17개 가려진 꼬리 부착점을 구분했다. null을 보간 정답으로 바꾸지 않았다.
+- 원본/Canny/overlay 비교·궤적·24fps17프레임 영상 및 Spark CPU heatmap 실습 완료. 수동점 표현이지 pose 모델 성능이 아니며 연속 재생 품질 UNVERIFIED.
+- 공식 SCAIL-2 두 branch와 기존 VACE의 조건·학습 코드를 고정 commit에서 비교했다. VACE 공식 pose 지원은 있지만 animal schema 직접 지원은 미확인. SCAIL RGB driving은 공식 경로가 있으나 현재 환경의 FlashAttention 부재로 실행 BLOCKED, 전체 peak 메모리는 UNKNOWN이다.
+- 다음 후보는 SCAIL-2 공식 Wan RGB driving baseline 하나. 색상 마스크·시간축16/24fps·추가 저장공간과 의존성 검증이 선행한다. 새 모델 다운로드·diffusion 추론·학습은0, B-007은 미실행이며 자동 확대하지 않는다.
+- [RESULTS](experiments/B-006-motion-representation/RESULTS.md), [모델 감사](experiments/B-006-motion-representation/MODEL_AUDIT.md), [이론](lessons/B-006-animal-motion-representation.md).

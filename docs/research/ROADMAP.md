@@ -70,3 +70,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 - B-002~005의 input sensitivity 진단은 완료. 조건 형태를 바꿔도 8셀 모두 실제 Lab 정체성과 원본 안무를 동시 수용하지 못했으므로 **동작 표현/모델 조건 인터페이스 적합성**을 다음 연구 대상으로 정한다.
 - 다음은 17프레임에서 Canny/관절·가시성·접촉/RGB driving의 동작 정보 보존 능력, 공식 SCAIL-2 및 현 VACE의 실제 입력 경로, DGX Spark 환경의 실용성을 비교한다.
 - **B-006의 GPU 생성/학습 모델 실행 0회**; 새로운 pretrained 14B 체크포인트 다운로드·설치도 없음. 예산·구현 가능성 검사 후 B-007의 제한된 공식 baseline 한 건을 별도로 결정. 단순 keypoint 시각화만으로 생성 모델이 그 조건을 지원한다고 주장하지 않는다.
+
+## B-006 실제 결론 (2026-10-22)
+
+**COMPLETED: 동작 표현 감사·공식 모델 인터페이스 검토.** 원본17프레임에서 보이는 표면점119개와 미관측170개를 구분하고, 실제 관절 중심/3D 접촉을 지어내지 않았다. CPU overlay·궤적·heatmap 완료는 생성 성공과 다르다. [결과](experiments/B-006-motion-representation/RESULTS.md).
+
+다음 한 경로는 **B-007 공식 SCAIL-2 Wan RGB driving의 제한된 baseline**이다. 현재 FlashAttention 의존성 부재, ARM64/GB10 kernel·변환/로딩 peak UNKNOWN,16fps 기본 출력과 원본24fps의 차이가 선행 조건이다. 모델 파일 약80GB 및 추가 변환 공간은 별도 예산을 필요로 한다. 설치·추론·학습은 이번에 실행하지 않았고 다음 승인 전 자동 시작하지 않는다. 임의 animal skeleton을 VACE에 대입하거나 Canny/reference 제거 실험을 반복하지 않는다.

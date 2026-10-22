@@ -1,0 +1,75 @@
+{
+  "visibility": {
+    "visible": 119,
+    "unobservable": 153,
+    "occluded": 17
+  },
+  "per_landmark": {
+    "nose": {
+      "visible": 17
+    },
+    "left_eye": {
+      "visible": 17
+    },
+    "right_eye": {
+      "visible": 17
+    },
+    "neck": {
+      "unobservable": 17
+    },
+    "tail_base": {
+      "occluded": 17
+    },
+    "left_shoulder": {
+      "unobservable": 17
+    },
+    "right_shoulder": {
+      "unobservable": 17
+    },
+    "left_elbow": {
+      "unobservable": 17
+    },
+    "right_elbow": {
+      "unobservable": 17
+    },
+    "left_front_paw": {
+      "visible": 17
+    },
+    "right_front_paw": {
+      "visible": 17
+    },
+    "left_hip": {
+      "unobservable": 17
+    },
+    "right_hip": {
+      "unobservable": 17
+    },
+    "left_knee": {
+      "unobservable": 17
+    },
+    "right_knee": {
+      "unobservable": 17
+    },
+    "left_hind_paw": {
+      "visible": 17
+    },
+    "right_hind_paw": {
+      "visible": 17
+    }
+  },
+  "annotated_frames": 17,
+  "root_relative": "NOT_COMPUTED: anatomical pelvis root and reliable body scale unresolved; pixel normalization is separate.",
+  "temporal_quality": "UNVERIFIED",
+  "source_frames": 17,
+  "fps": 24,
+  "new_diffusion_inference": 0,
+  "optimizer_updates": 0,
+  "new_model_downloads": 0,
+  "contact_summary": {
+    "visible_evidence_airborne_front_paws": 34,
+    "possible_rear_contact_touching_null": 34,
+    "weight_bearing_confirmed": 0
+  },
+  "inspection": "All17 viewed individually by annotation agent; root independently reviewed f0/f8/f16 enlarged labeled overlays and f0/4/8/12/16 source/Canny/overlay sheet.",
+  "points_are": "Manual surface proxies, not internal anatomical joint ground truth or learned estimator performance."
+}
