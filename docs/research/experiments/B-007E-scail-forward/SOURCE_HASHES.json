@@ -1,0 +1,37 @@
+{
+  "source_commit": "78fe19576bb06be96c2375e088574a262a300edb",
+  "files": {
+    "wan/scail.py": {
+      "original_sha256": "a796d49aead95a140554e0f139b5c87a964a19c939f923318da8cc94b980630f",
+      "runtime_sha256": "53079bd481178fccc87f0b2f6081938a7dfc086f1ce26d218a98b1db91babd9f"
+    },
+    "wan/modules/t5.py": {
+      "original_sha256": "8b0cebf3192c542f92a344255a06c203df3ba24160715899a055cc8de0cd930f",
+      "runtime_sha256": "a3a23739b4601b66874253112a608fd200f9c455cb374f1c6bebe26d41fcd9b8"
+    },
+    "wan/modules/clip.py": {
+      "original_sha256": "e695d0d1b062abbabe96f5005182c438b4f6566ad427e9307d0655a2d4e34d44",
+      "runtime_sha256": "20cf48d7cd265b1286f8c10bf3bec88beac4437f87bd34919c3388b3d0800d7a"
+    },
+    "wan/modules/vae.py": {
+      "original_sha256": "d0d6a19a8114005c897c0dd63c2c40186c413cb70fe51f5f3f3783d29490567c",
+      "runtime_sha256": "d0d6a19a8114005c897c0dd63c2c40186c413cb70fe51f5f3f3783d29490567c"
+    },
+    "wan/modules/model_scail2.py": {
+      "original_sha256": "bbcfc38ee8c4dc8e9f31987e617b57af267c46e8bd25ee046f76e7426d6f5d6c",
+      "runtime_sha256": "bbcfc38ee8c4dc8e9f31987e617b57af267c46e8bd25ee046f76e7426d6f5d6c"
+    },
+    "wan/modules/attention.py": {
+      "original_sha256": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc",
+      "runtime_sha256": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc"
+    },
+    "wan/utils/scail_utils.py": {
+      "original_sha256": "59de115e3b61a3aae7c7e1bf8a2f1be8abc76efff58ec2fbe463af3a24e956f6",
+      "runtime_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7"
+    },
+    "configs/config-14b.json": {
+      "original_sha256": "6ee207c641c5dff168d58ad020431a418318054b213c996e8a7f9b152cdd1cac",
+      "runtime_sha256": "6ee207c641c5dff168d58ad020431a418318054b213c996e8a7f9b152cdd1cac"
+    }
+  }
+}
