@@ -225,3 +225,9 @@
 **CONVERSION_PASS, 모델 실행·영상 baseline NOT_RUN.** OS 격리·정확한 scoped globals·실제 metadata 통과 후 두 번째이자 마지막 CPU mmap load로 SAT→Wan tensor-only 변환을 완료했다. 원본987개에서 mapped1,307개를 만들고 모든 값 hash·dtype·shape·QKV 순서와 원본 SHA를 검증했다. 전체 변환 guard456.759초, cgroup cap32GiB, 표본 RSS 약53GiB(서로 다른 회계), OOM0. 실제 load2회·재시도0. [결과](experiments/B-007D-safe-conversion/RESULTS.md), [이론](lessons/B-007D-real-checkpoint-loading.md).
 
 다음 하나는 별도 승인된 SCAIL 모델 적재·공식/Lab17프레임 제한 baseline이다. CPU 변환 성공은 GPU 모델 fit·영상 동작·개체 품질 성공이 아니다. 이번에는 모델·추론·학습을 시작하지 않았다.
+
+## 2026-10-22 — B-007D 변환 성공 독립 자료 확인 / B-007E 첫 전체 모델 baseline 사전 등록
+
+- 사용자 제출 ZIP `make-meme-B-007D-20261022-1308.zip` 369,538 bytes를 현 세션 컨테이너로 직접 열어 SHA256 `ef6d94c37a1720223b52a1e61d0776e93bc2e11f299e73003801a271a954e96c` 확인, ZIP CRC 정상, manifest 59개 파일의 크기·해시 독립 PASS. Spark 저장 65.58GB 실물과 Mac 원본은 이 검토에서 직접 읽지 않았으므로 host 간 일치·실제 모델 forward를 검증했다고 주장하지 않는다.
+- GitHub B-007D 결과 commit `5e396f0cee097423e7c2ecdc3e7c4d80cc78ed64` RESULTS와 ZIP conversion ledger/code/checks를 대조. 실제 CPU mmap 제한 load 2회, SAT 987개→Wan 1,307개 tensor value/dtype/shape/hash 대응 PASS, converted output 65,582,313,560 bytes/SHA `8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118`. 변환 guard 456.759초, cgroup peak32GiB/RSS HWM약53GiB라는 별도 회계, OOM0. 변환 코드의 lint/type 지적은 잔존.
+- 다음 [B-007E PLAN](experiments/B-007E-scail-forward/PLAN.md): 변환본 재사용, SCAIL2 official full-model RAM/디바이스 적재 계측과 메모리-안전한 로딩만 통과 시 공식17f·Lab17f 각 최대1회 생성(새 전체 diffusion 최대2회), 학습/재다운로드0. **SCAIL 모델 load/forward/영상 출력은 아직 NOT_RUN.**
