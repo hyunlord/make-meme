@@ -1,0 +1,224 @@
+{
+  "scope": "SYNTHETIC_ONLY; no actual checkpoint/model/forward",
+  "torch": "2.14.0+cu130",
+  "numpy": "2.5.2",
+  "strict_gate": "REJECTED_AS_EXPECTED",
+  "static_globals": [
+    "numpy.ndarray",
+    "numpy.core.multiarray._reconstruct",
+    "numpy.dtype"
+  ],
+  "scoped_allowlist_exact": [
+    "numpy.core.multiarray._reconstruct -> numpy._core.multiarray._reconstruct",
+    "numpy.ndarray",
+    "numpy.dtype",
+    "numpy.dtypes.UInt32DType"
+  ],
+  "dynamic_dtype_class": "numpy.dtypes.UInt32DType",
+  "safe_globals_restored": true,
+  "ambient_safe_globals_after_import_count": 73,
+  "ambient_safe_globals_after_fake_warmup": [
+    "builtins.ArithmeticError",
+    "builtins.AssertionError",
+    "builtins.AttributeError",
+    "builtins.BaseException",
+    "builtins.BaseExceptionGroup",
+    "builtins.BlockingIOError",
+    "builtins.BrokenPipeError",
+    "builtins.BufferError",
+    "builtins.BytesWarning",
+    "builtins.ChildProcessError",
+    "builtins.ConnectionAbortedError",
+    "builtins.ConnectionError",
+    "builtins.ConnectionRefusedError",
+    "builtins.ConnectionResetError",
+    "builtins.DeprecationWarning",
+    "builtins.EOFError",
+    "builtins.EncodingWarning",
+    "builtins.Exception",
+    "builtins.ExceptionGroup",
+    "builtins.FileExistsError",
+    "builtins.FileNotFoundError",
+    "builtins.FloatingPointError",
+    "builtins.FutureWarning",
+    "builtins.GeneratorExit",
+    "builtins.ImportError",
+    "builtins.ImportWarning",
+    "builtins.IndentationError",
+    "builtins.IndexError",
+    "builtins.InterruptedError",
+    "builtins.IsADirectoryError",
+    "builtins.KeyError",
+    "builtins.KeyboardInterrupt",
+    "builtins.LookupError",
+    "builtins.MemoryError",
+    "builtins.ModuleNotFoundError",
+    "builtins.NameError",
+    "builtins.NotADirectoryError",
+    "builtins.NotImplementedError",
+    "builtins.OSError",
+    "builtins.OverflowError",
+    "builtins.PendingDeprecationWarning",
+    "builtins.PermissionError",
+    "builtins.ProcessLookupError",
+    "builtins.RecursionError",
+    "builtins.ReferenceError",
+    "builtins.ResourceWarning",
+    "builtins.RuntimeError",
+    "builtins.RuntimeWarning",
+    "builtins.StopAsyncIteration",
+    "builtins.StopIteration",
+    "builtins.SyntaxError",
+    "builtins.SyntaxWarning",
+    "builtins.SystemError",
+    "builtins.SystemExit",
+    "builtins.TabError",
+    "builtins.TimeoutError",
+    "builtins.TypeError",
+    "builtins.UnboundLocalError",
+    "builtins.UnicodeDecodeError",
+    "builtins.UnicodeEncodeError",
+    "builtins.UnicodeError",
+    "builtins.UnicodeTranslateError",
+    "builtins.UnicodeWarning",
+    "builtins.UserWarning",
+    "builtins.ValueError",
+    "builtins.Warning",
+    "builtins.ZeroDivisionError",
+    "torch._dynamo.decorators._DimRange",
+    "torch.distributed._mesh_layout._FlatLayout",
+    "torch.distributed._mesh_layout._MeshLayout",
+    "torch.distributed.device_mesh.DeviceMesh",
+    "torch.distributed.tensor.DTensor",
+    "torch.distributed.tensor._dtensor_spec.DTensorSpec",
+    "torch.distributed.tensor._dtensor_spec.ShardOrderEntry",
+    "torch.distributed.tensor._dtensor_spec.TensorMeta",
+    "torch.distributed.tensor.placement_types.Partial",
+    "torch.distributed.tensor.placement_types.Replicate",
+    "torch.distributed.tensor.placement_types.Shard",
+    "torch.distributed.tensor.placement_types._StridedShard",
+    "torch.nested._internal.nested_tensor.NestedTensor",
+    "torch.nested._internal.nested_tensor._rebuild_njt",
+    "traceback.FrameSummary",
+    "traceback.StackSummary"
+  ],
+  "fake_lazy_import_added_globals": [
+    "torch._dynamo.decorators._DimRange",
+    "torch.distributed.device_mesh.DeviceMesh",
+    "torch.distributed.tensor.DTensor",
+    "torch.distributed.tensor._dtensor_spec.DTensorSpec",
+    "torch.distributed.tensor._dtensor_spec.ShardOrderEntry",
+    "torch.distributed.tensor._dtensor_spec.TensorMeta",
+    "torch.distributed.tensor.placement_types.Partial",
+    "torch.distributed.tensor.placement_types.Replicate",
+    "torch.distributed.tensor.placement_types.Shard",
+    "torch.distributed.tensor.placement_types._StridedShard"
+  ],
+  "rng_algorithm": "MT19937",
+  "rng_state_shape": [
+    624
+  ],
+  "rng_state_dtype": "uint32",
+  "tests": [
+    {
+      "test": "restricted_full_fixture",
+      "mmap": false,
+      "status": "PASS"
+    },
+    {
+      "test": "restricted_full_fixture",
+      "mmap": true,
+      "status": "PASS"
+    },
+    {
+      "test": "fake_tensor_mmap_metadata",
+      "status": "PASS",
+      "value_check": "NOT_APPLICABLE",
+      "storage_object_identity_shared": false,
+      "storage_object_identity_status": "NOT_PRESERVED",
+      "checkpoint_storage_offsets": [
+        4806,
+        4806,
+        4806
+      ],
+      "zip_payload_offset": 4806,
+      "scope": "Checkpoint-offset evidence only; not physical storage alias or real checkpoint validation"
+    }
+  ],
+  "unexpected_global_rejected": true,
+  "tensors": {
+    "model.diffusion_model.transformer.layers.0.attention.query_key_value.weight": {
+      "dtype": "torch.float32",
+      "shape": [
+        6,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ],
+      "storage_offset": 0,
+      "storage_bytes": 144
+    },
+    "model.diffusion_model.time_embed.0.weight": {
+      "dtype": "torch.float32",
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ],
+      "storage_offset": 6,
+      "storage_bytes": 144
+    },
+    "model.diffusion_model.time_embed.2.weight": {
+      "dtype": "torch.float32",
+      "shape": [
+        6,
+        6
+      ],
+      "stride": [
+        1,
+        6
+      ],
+      "storage_offset": 0,
+      "storage_bytes": 144
+    }
+  },
+  "mapping": {
+    "official_source_sha256": "0519f688643b0a2c3f13660f196e34280704ddb3e2575aa226e2d2f8f2b4397f",
+    "existing_mapping_code_sha256": "6e5036c8ea450e8aced25cdc73ee8da0a5570028c5d36147a48b4fe808c0db37",
+    "output_keys": [
+      "blocks.0.self_attn.k.weight",
+      "blocks.0.self_attn.q.weight",
+      "blocks.0.self_attn.v.weight",
+      "time_embedding.0.weight",
+      "time_embedding.2.weight"
+    ],
+    "tensor_roundtrip": "PASS",
+    "shared_storage_after_safetensors": "NOT_PRESERVED_BY_DESIGN; cloned independent tensor payloads"
+  },
+  "artifacts": {
+    "locally-created-rng-fixture.pt": {
+      "bytes": 6261,
+      "sha256": "da2afbb1897d217c70ff9f4067c7f7d7aa93dd1404cc4a0f470014fa788cd54a"
+    },
+    "locally-created-legacy-global-fixture.pt": {
+      "bytes": 5762,
+      "sha256": "ced85ac48eff0627145646a542d5849274c59f71026844a8b62eeede99919569"
+    },
+    "locally-created-unexpected-global.pt": {
+      "bytes": 2335,
+      "sha256": "5183d4486bd2a1aa2cfec1c6bf5fb7aa52fbb43d2a4c56474e3c48a69b429e9a"
+    },
+    "mapped-tensor-only.safetensors": {
+      "bytes": 760,
+      "sha256": "b1c43378d804898b88227561ca983947f7b7aa46418189a231afbf85b84b978a"
+    }
+  },
+  "elapsed_seconds": 0.6847631459822878,
+  "actual_65GB_loading": "NOT_RUN",
+  "GPU": "NOT_RUN"
+}

@@ -1,0 +1,24 @@
+{
+  "experiment": "B-007C",
+  "plan_head": "6e2594fea94a31340989e022339d2c4340d23e0d",
+  "graph_prereg_commit": "003c733",
+  "fixture_final_prereg_commit": "542399b",
+  "summary_prereg_commit": "f781c25",
+  "code_sha256": {
+    "checkpoint_graph_audit.py": "1c53a4dfdfdbe119ca90f22a5eb60f3333e57fb7638a0ce1d38317ec2707ffd1",
+    "fixture_rng.py": "a0cb06186d8d2ba16db67e7c8f43fe87c07c6230719fff2b4ad3e319e867295b",
+    "graph_guard.py": "b63b7e1acab9b6ce23dbddb106e9b7fc72caa1dfdaf2f12577a3e73e3531495d",
+    "pickle_graph.py": "0189400e95975845035f1d29b626595a80f62a9be1b8b27912080e4eda0e0548",
+    "summarize_graph.py": "6025e2b38dcfe49bf19c6f1d83eef699ca2f16b56e68903bcfe0ad01b889f183",
+    "test_pickle_graph.py": "0867202e7ee03e143d1859f02005e74b4be9578ac2de35d1b9f5ce328a040f8e"
+  },
+  "synthetic_runs": 3,
+  "synthetic_failures_preserved": 2,
+  "actual_checkpoint_unpickle": 0,
+  "new_large_downloads": 0,
+  "full_conversion": 0,
+  "model_load": 0,
+  "diffusion": 0,
+  "training": 0,
+  "audit_review": "Independent read-only review PASS for bounded claims, not real conversion"
+}

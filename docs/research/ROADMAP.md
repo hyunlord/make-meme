@@ -107,3 +107,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 - B-007B는 tensor checkpoint 다운로드 성공 이후 NumPy pickle globals 관련 **명시적 fail-closed 정책**에서 BLOCKED. 실제 대형 변환·SCAIL 로딩/생성/학습을 아직 시도하지 않았다.
 - 다음 목표는 원본 SAT ZIP/data.pkl의 pickle GLOBAL+memo/storage 관계를 **객체 실행 없이** 감사하고, 공식 tensor-only export 또는 안전한 제한 loader 경로의 위험·동등성 증거를 확보하는 것. 새로운 실험용 fixture 외 실제 checkpoint에 broad allowlist/weights_only=False 사용 금지.
 - 모델 재다운로드0, diffusion 추론0, 학습0. 감사만 완료돼도 full 14B inference PASS가 아니다. 안전한 경로를 확보한 경우에만 다음 bounded conversion/model baseline을 별도 검토.
+
+## B-007C 실제 결론 (2026-10-22)
+
+**AUDIT_PASS: 고정 checkpoint 비실행 의존성 감사 + 소형 제한 loader 검증 + 후속 한 경로 선정.** NumPy globals의 RNG 전용 구문 의존성과 원본 SHA 보존을 확인했다. synthetic legacy alias/dynamic dtype/CPU storage parity는 검증됐지만 실제65GB 로딩·변환·모델 실행은 NOT_RUN이다. [결과](experiments/B-007C-checkpoint-audit/RESULTS.md).
+
+다음 후보 하나는 **원본 SHA·환경 고정, 실제 격리 검증, exact scoped safe_globals/weights_only CPU mmap의 metadata-only 확인을 선행하는 bounded tensor-only 변환**이다. 실제 제한 loader의 메모리·storage parity와 보안 격리는 후속 실행에서 검증해야 한다. B-007B 영상 baseline은 여전히 미확보이며 다음 단계 승인 전 대형 변환·모델·추론을 자동 시작하지 않는다.

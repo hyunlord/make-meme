@@ -1,0 +1,265 @@
+{
+  "status": "STATIC_GRAPH_COMPLETED",
+  "claim_scope": "Syntactic pickle graph reachability only; reducer/build code never invoked; arbitrary callable semantics not modeled.",
+  "checkpoint_sha256_before": "d6c73e94c57eb36e6351c800d1228e41ed7e45db1ccf410dd875bcfdd2945e7f",
+  "checkpoint_sha256_after": "d6c73e94c57eb36e6351c800d1228e41ed7e45db1ccf410dd875bcfdd2945e7f",
+  "original_unchanged": true,
+  "elapsed_seconds": 151.63325330702355,
+  "checkpoint_bytes": 65582563395,
+  "pickle_bytes": 163821,
+  "zip_members": 993,
+  "zip_compression_counts": {
+    "0": 993
+  },
+  "format_metadata": {
+    "byteorder": "little",
+    "version": "3"
+  },
+  "storage_zip_total_bytes": 65582182608,
+  "crc_scope": "Header CRC/offset metadata recorded; individual storage CRC not recomputed. Whole-file SHA checked; tensor contents not loaded.",
+  "top_roots": [
+    "iteration",
+    "lr_scheduler",
+    "random_rng_state",
+    "np_rng_state",
+    "torch_rng_state",
+    "cuda_rng_state",
+    "module"
+  ],
+  "numpy_globals": [
+    {
+      "node": 649,
+      "name": "numpy.core.multiarray _reconstruct",
+      "offset": 4009,
+      "roots": [
+        "np_rng_state"
+      ]
+    },
+    {
+      "node": 650,
+      "name": "numpy ndarray",
+      "offset": 4047,
+      "roots": [
+        "np_rng_state"
+      ]
+    },
+    {
+      "node": 663,
+      "name": "numpy dtype",
+      "offset": 4129,
+      "roots": [
+        "np_rng_state"
+      ]
+    }
+  ],
+  "cross_root_shared_nonliteral_count": 0,
+  "storage_cross_root_shared_keys": {},
+  "storage_reference_count": 989,
+  "module_declared_float_storage_count": 987,
+  "module_declared_float_storage_numel": 16395544384,
+  "module_declared_float_storage_bytes": 65582177536,
+  "storage_count_scope": "Declared serialized FloatStorage elements, NOT measured model parameter count.",
+  "module_declared_tensor_shape_histogram": [
+    {
+      "shape": [
+        1,
+        2,
+        5120
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        1,
+        6,
+        5120
+      ],
+      "count": 40
+    },
+    {
+      "shape": [
+        64
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        64,
+        5120
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        1280
+      ],
+      "count": 3
+    },
+    {
+      "shape": [
+        1280,
+        1280
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        5120
+      ],
+      "count": 450
+    },
+    {
+      "shape": [
+        5120,
+        20,
+        1,
+        2,
+        2
+      ],
+      "count": 2
+    },
+    {
+      "shape": [
+        5120,
+        28,
+        1,
+        2,
+        2
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        5120,
+        256
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        5120,
+        1280
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        5120,
+        4096
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        5120,
+        5120
+      ],
+      "count": 122
+    },
+    {
+      "shape": [
+        5120,
+        13824
+      ],
+      "count": 40
+    },
+    {
+      "shape": [
+        10240
+      ],
+      "count": 80
+    },
+    {
+      "shape": [
+        10240,
+        5120
+      ],
+      "count": 80
+    },
+    {
+      "shape": [
+        13824
+      ],
+      "count": 40
+    },
+    {
+      "shape": [
+        13824,
+        5120
+      ],
+      "count": 40
+    },
+    {
+      "shape": [
+        15360
+      ],
+      "count": 40
+    },
+    {
+      "shape": [
+        15360,
+        5120
+      ],
+      "count": 40
+    },
+    {
+      "shape": [
+        30720
+      ],
+      "count": 1
+    },
+    {
+      "shape": [
+        30720,
+        5120
+      ],
+      "count": 1
+    }
+  ],
+  "numpy_structure": {
+    "root": "np_rng_state",
+    "rng_name": "MT19937",
+    "subtype_symbol": "numpy ndarray",
+    "reconstruct_initial_shape": [
+      0
+    ],
+    "reconstruct_third_arg_symbolic_encode_args": [
+      "b",
+      "latin1"
+    ],
+    "array_BUILD_state_version": 1,
+    "array_shape": [
+      624
+    ],
+    "dtype_REDUCE_args": [
+      "u4",
+      false,
+      true
+    ],
+    "dtype_BUILD_state": [
+      3,
+      "<",
+      null,
+      null,
+      null,
+      -1,
+      -1,
+      0
+    ],
+    "fortran_order": false,
+    "raw_data_expression": "symbolic _codecs.encode(unicode_scalar, latin1)",
+    "raw_unicode_length": 2496,
+    "raw_all_codepoints_latin1": true,
+    "derived_raw_byte_length_if_latin1": 2496,
+    "rng_position": 624,
+    "has_gauss": 0,
+    "cached_gaussian": 0.0,
+    "persistent_storage_references": 0,
+    "runtime_numpy_array_constructed": false,
+    "dtype_interpretation": "u4/little-endian flags0 is static uint32 interpretation; NumPy was not invoked."
+  },
+  "actual_checkpoint_deserializations": 0,
+  "model_loads": 0,
+  "diffusion_calls": 0,
+  "full_conversion": "NOT_RUN"
+}

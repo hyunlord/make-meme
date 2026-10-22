@@ -32,3 +32,19 @@ CPU에서 `type(numpy.dtype(numpy.uint32))`는 `numpy.dtypes.UInt32DType`로 확
 | scoped safe_globals + weights_only | upstream 제한 unpickler와 tensor reconstruction 사용 | 허용 함수·BUILD가 실행됨. 동적 dtype, 프로세스 공용 허용 집합, allocation 위험. 이번에는 작은 fixture에 한정 |
 
 B-007B opcode 근접성만으로 RNG와 model storage의 독립성을 입증하지 않는다. 이번 graph 감사가 독립성을 확인하더라도 실제 tensor 값을 읽고 검증한 것과 다르다. 작은 fixture PASS도 실제 checkpoint의 metadata load·변환·model peak를 승인하지 않는다. 후속 한 경로의 최종 선택은 이번 실제 감사 결과를 근거로 [RESULTS](RESULTS.md)에 정리한다. 실제 대형 allowlist 로딩은 후속 PLAN과 별도 결정 대상이다.
+
+### Fixture v1에서 관측한 ambient 허용 집합
+
+실행 담당자가 보고한 첫 fixture는 FakeTensor의 lazy initialization 과정에서 framework globals 10개가 추가되어, 시작 시점과 종료 시점의 전체 허용 집합 동일성 검사를 통과하지 못했다. 실패는 보존한다. 이것을 NumPy context가 10개를 유출했다는 증거로 단정하지 않는다. 수정된 검증 설계는 별도 fresh process에서 FakeTensor를 먼저 준비하고 ambient 허용 집합을 기록한 뒤, 정확한 NumPy 항목 4개의 scoped context 진입·종료를 비교한다. 기존 ambient 항목을 지워 성공을 만들지 않는다. 이 수정만으로 최종 PASS가 확정된 것은 아니다. 이후 상태는 아래 실제 감사 결과에 기록한다. 이 prewarm은 권한 축소나 sandbox가 아니라 초기화와 context 복구 효과를 분리하는 측정 조건이다.
+
+## 실제 비실행 graph 감사 결과
+
+실행 담당자의 실제 전체 정적 감사는 151.633초에 완료됐으며 원본 SHA256은 전후 동일했다. data.pkl 163,821 bytes, opcode 31,271개, graph node 16,374개, storage 참조 989개, ZIP member 993개를 확인했다. member는 모두 STORED이며 storage bytes 합계는 65,582,182,608이다.
+
+지원된 opcode를 대상으로 memo alias까지 추적한 결과, NumPy globals 세 개와 `_codecs.encode`의 도달 root는 `np_rng_state`뿐이었다. tensor rebuild와 OrderedDict global **기호**는 module 및 torch/cuda RNG root에서 공유되지만, root 사이에 공유되는 비리터럴 객체 node나 storage key는 관측되지 않았다. module은 FloatStorage 987개, torch/cuda RNG는 ByteStorage 합계 2개로 분리됐다. 이는 앞선 단순 opcode 인접성보다 강한 구조적 증거다. 다만 비실행 graph 분석의 지원 opcode·모델링 범위 안에서의 결과이며, 실제 tensor 값을 읽거나 큰 checkpoint를 역직렬화한 검증은 아니다.
+
+최종 소형 fixture v3는 **PASS**이며, v1·v2 실패도 보존한다. 실제 wall time 1.85초, max RSS 593,476 KiB, swap 0이었다. strict 거부, 동적 dtype 요구, 예상하지 않은 global에 대한 negative 검사가 통과했다. materialized load의 mmap=False/True 양쪽에서 값·dtype·shape·stride·offset과 실제 공유 storage를 확인했다. 공식 mapping의 출력 5개 key와 760-byte safetensors roundtrip도 통과했다.
+
+중요한 한계: FakeTensor 경로의 storage 객체 alias 동일성은 **NOT_PRESERVED**였다. 대신 tensor metadata와 실제 ZIP storage offset 4806의 대응을 확인했다. 이 관측을 FakeTensor의 물리적 storage 공유 성공으로 표현하지 않는다. ambient 허용 목록은 초기 73개에서 prewarm 후 83개로 늘었다. 이 10개 framework 항목은 초기화 효과로 기록하고 유지했으며, 그 기준에서 NumPy 4개 scoped 항목의 context 종료 복구를 검사했다. 두 초기 실패를 숨기거나 전체 허용 목록을 지워 성공시킨 것이 아니다.
+
+이 PASS는 작은 fixture의 제한된 경로에만 해당한다. 실제 65GB checkpoint의 scoped load·metadata/FakeTensor 호환성·값 검증·변환·모델 peak는 **NOT_RUN/NOT_MEASURED**다.

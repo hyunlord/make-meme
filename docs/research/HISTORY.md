@@ -199,3 +199,11 @@
 - 사용자 제공 업로드 `make-meme-B-007B-20261022.zip` 직접 확인: 28,160,888bytes, SHA256 `1351e61ad9ff4ba1f9af39008424c0dafe13e8f647750803b5c8ff14b3450c84`, ZIP CRC PASS, manifest의 포함 171파일 길이/SHA 모두 PASS. Mac/Spark 간 바이트 동일성은 실행 담당자의 별도 확인 보고이며 이번 검토자가 해당 호스트에 직접 재연결한 것은 아님.
 - private 실패 로그에서 실제 `get_unsafe_globals_in_checkpoint()` 기반 검사 거부는 `torch.load`/FakeTensorMode 이전임을 확인. opcode의 인접성만으로 NumPy globals가 RNG metadata 외에는 안 쓰인다고 확증하지 않음.
 - [B-007C 안전 직렬화 감사 사전 PLAN](experiments/B-007C-checkpoint-audit/PLAN.md): 모델 재다운로드0·diffusion 추론0·optimizer0; static pickle/storage graph + synthetic fixture로 안전한 tensor-only extraction 경로 검토. `weights_only=False` 우회 금지. scoped safe_globals도 실제 65GB에 곧바로 적용하지 않음. 성공 후에도 대형 변환/모델 실행은 별도 PLAN 필요. 이 기록 시점 B-007C는 PLANNED/NOT_RUN.
+
+## 2026-10-22 — B-007C 비실행 checkpoint 감사와 제한 fixture
+
+- 원격 `6e2594f`의 PLAN을 확인하고 그래프·guard·fixture 코드를 실행 전에 등록했다. 실제65,582,563,395-byte SAT의 ZIP/data.pkl을 실행 없이 읽고 전후 전체 SHA와 다운로드 장부 보존을 확인했다.
+- memo/BUILD를 포함한 symbolic graph에서 NumPy3 globals는 `np_rng_state`에서만 도달했다. nonliteral 객체·storage key의 root 간 공유는0. RNG는 MT19937, uint32[624],2496-byte 표현이며 실제 NumPy 객체 생성은 하지 않았다. 이는 임의 reducer 의미까지 증명한 것이 아니다.
+- 소형 legacy-name fixture에서 exact scoped NumPy4항목 + weights_only CPU/mmap 값·형상·storage parity와 공식mapping/safetensors roundtrip 확인. 최초 FakeTensor framework globals 추가 및 두 번째 FakeTensor 객체 identity 실패를 보존했다. 실제 storage 검증과 FakeTensor ZIP offset 검증을 분리했다.
+- **AUDIT_PASS는 감사/후속 경로 선정에 한정**. 실제65GB allowlist load·변환·모델·diffusion·학습은 모두 NOT_RUN/0. 다음 한 경로는 SHA고정·검증된격리에서 exact scoped loader metadata-only부터 시작하는 조건부 변환이며, 이번에 실행하지 않는다.
+- [RESULTS](experiments/B-007C-checkpoint-audit/RESULTS.md), [코드 감사](experiments/B-007C-checkpoint-audit/CODE_AUDIT.md), [이론](lessons/B-007C-serialization-and-metadata.md). 기존 B-007B BLOCKED 기록과 strict gate는 보존한다.

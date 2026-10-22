@@ -25,3 +25,7 @@
 ## 10:34 UTC second and final fixture amendment
 
 두 번째 실행에서는 scope 복원이 통과했지만 FakeTensor storage 객체의 `is` 동일성 검사가 실패했다. 별도 관측에서 세 객체의 식별자는 다르지만 checkpoint offset 4806과 storage 144 bytes는 같았다. 실제 CPU/mmap 로드의 storage 공유 검사는 그대로 유지한다. FakeTensor 객체 공유는 NOT_PRESERVED로 기록하고, metadata와 `_checkpoint_offset`을 실제 ZIP storage payload 위치에 대조한다. 이전 실패를 PASS로 덮어쓰지 않는다. 이 시험은 FakeTensor 객체 identity가 물리 storage alias의 일반 대리 지표가 아님을 드러냈다. 수정은 두 번으로 제한하며 실제 대형 checkpoint에는 적용하지 않는다.
+
+## 종료 관측
+
+실제 ZIP/graph 감사151.633초 완료, 원본 전후 SHA동일. NumPy3globals의 RNG-only 도달과 cross-root nonliteral/storage 공유0 확인. synthetic v3 PASS, v1/v2 실패 보존, FakeTensor object alias NOT_PRESERVED 별도. 최종 판단·미검증·한 후속 경로는 RESULTS에 기록했다. A의 기존111개 파일 hash는 B-007B 종료 snapshot과 모두 동일했다. 작업은 audit에서 종료하며 전체 변환·모델·추론은 시작하지 않는다.
