@@ -32,7 +32,7 @@ class GraphTests(unittest.TestCase):
         self.assertEqual(result['numpy_globals'][0]['roots'],['np_rng_state','module'])
 
     def test_unknown_and_trailing_fail_closed(self) -> None:
-        for data in (b'\x80\x04}.', b'\x80\x02}0.', b'\x80\x02}.garbage'):
+        for data in (b'}.', b'\x80\x02}}b.', b'\x80\x04}.', b'\x80\x02}0.', b'\x80\x02}.garbage'):
             with self.assertRaises(AuditBlocked): parse(data)
 
 

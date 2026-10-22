@@ -75,6 +75,8 @@ def parse(payload: bytes) -> Graph:
         if index >= 500000:
             raise AuditBlocked('Opcode budget')
         op = opcode.name
+        if index == 0 and op != 'PROTO':
+            raise AuditBlocked('Missing initial protocol declaration')
         counts[op] = counts.get(op, 0)+1
         if op == 'PROTO':
             if index != 0 or arg != 2:
@@ -111,6 +113,8 @@ def parse(payload: bytes) -> Graph:
             state = pop()
             if not stack or stack[-1] is None:
                 raise AuditBlocked('BUILD without instance')
+            if nodes[stack[-1]].kind != 'reduce':
+                raise AuditBlocked('BUILD target is not observed reduce instance')
             nodes[stack[-1]].edges.append(state)
         elif op == 'BINPERSID':
             stack.append(add('persistent', edges=[pop()]))
