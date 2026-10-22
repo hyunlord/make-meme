@@ -46,3 +46,7 @@ B-002에서는 새 학습 update를 하지 않는다. B-001에서 학습한 도�
 - 상태 **PLANNED / NOT_RUN**. C-real을 고정하고 균일 회색 참조(R-gray)와 기존 Lab R-bg를 비교한다. [B-004 PLAN](experiments/B-004-reference-neutral/PLAN.md).
 - 기존 B-003 C-real의 두 seed를 실제 조건·노이즈 검증 후 재사용하면 새 추론은 최대 2회이며 학습은 0회다. 이 재사용이 불가능하면 결과를 억지로 짝짓지 않고 BLOCKED로 보고한다.
 - 연구 질문은 reference 시각정보 개입에 대한 출력 민감도이며, identity/pose를 독립 분리한 결과나 실제 춤 전이의 수용이 아니다.
+
+## B-004 실제 결론 (2026-10-22)
+
+COMPLETED: 신규2·재사용2·학습0. R-gray에서1/2seed직립형태,1/2착석. 참조내용민감도는관측됐으나실제Lab개체/안무전이미수용. Canny고정이므로직립의구조인과효과미식별. 시간UNVERIFIED. [결과](experiments/B-004-reference-neutral/RESULTS.md). 다음하나는R-gray고정C-real/C-null비교제안이며NOT_RUN/미승인. 기존PLANNED는사전기록이다.

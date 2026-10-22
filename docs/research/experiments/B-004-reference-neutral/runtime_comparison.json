@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 20261022,
+    "all_runtime_fields_equal": true,
+    "differences": {},
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  },
+  {
+    "seed": 20261023,
+    "all_runtime_fields_equal": true,
+    "differences": {},
+    "runtime": {
+      "vram_management_enabled": false,
+      "torch_dtype": "torch.bfloat16",
+      "device": "cuda",
+      "attention": "upstream SDPA fallback",
+      "adapter": null
+    }
+  }
+]

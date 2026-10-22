@@ -90,3 +90,14 @@
 - 회색 참조는 reference branch 제거가 아니고 개체·자세·배경 정보를 함께 없앤다. 직립이 나오더라도 실제 Lab identity/춤 성공이라고 판정하지 않는다.
 - 실험 실행은 아직 NOT_RUN, 결과·시간 품질 미검증. GitHub에 계획 등록은 모델 호출이나 사용자 GPU 실행이 아님.
 - [B-004 PLAN](experiments/B-004-reference-neutral/PLAN.md). 다음은 Codex가 계획과 실제 코드/데이터를 대조한 후 사전 등록된 조건으로 실행하고 결과를 보고하는 것.
+
+## 2026-10-22 — B-004 실행 착수 및 첫 seed 완료
+
+- 시작 HEAD `b08f4a5a163bd0e8256a2c7491585dd9074cc2e9`; 기존 PLAN 보존. 재사용 감사 후 코드/설정 commit `eafa250e9d03818bf6b94e69f3d2ae657076ec98` push 확인.
+- 모델/입력/초기 noise 비교 가능. 첫 회색 참조 seed 완료, 두 번째 순차 실행. 학습0/adapter=null, 최대 신규2회. [RUNNING](experiments/B-004-reference-neutral/RUNNING.md).
+
+## 2026-10-22 — B-004 통제 비교 완료
+
+- 신규2/2완료,기존2재사용,실패0,학습0. 두seed의noise/text/구조/mask동일과referenceprefix변경실측.
+- R-bg는두seed착석; R-gray는seed22착석/seed23직립형태. 실제Labidentity와원본안무미수용,연속재생미관측시간UNVERIFIED.
+- 다음하나는R-gray고정C-real/C-null비교제안만이며NOT_RUN. [RESULTS](experiments/B-004-reference-neutral/RESULTS.md),[이론](lessons/B-004-reference-condition.md). 과거PLANNED기록은당시상태로보존.

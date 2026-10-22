@@ -1,0 +1,6 @@
+{
+  "scope": "Post-run validator only, frozen inference scripts unchanged",
+  "reason": "Preregistered code hash keys can be scripts/name.py or bare name.py",
+  "change": "Resolve scripts-prefixed keys from root; bare keys from root/scripts",
+  "validation": "Python compile passes"
+}

@@ -1,0 +1,27 @@
+{
+  "observed_utc": "2026-10-22T02:32:46.839928+00:00",
+  "A_files_match": true,
+  "public_code_config_files": [
+    "code/audit_reuse.py",
+    "code/vace_observe.py",
+    "code/launch_video.py",
+    "code/guard.py",
+    "code/vace_experiment.py",
+    "configs/policy.json",
+    "configs/R-gray-20261022.json",
+    "configs/R-gray-20261023.json"
+  ],
+  "privacy_findings": [],
+  "privacy_scan": "PASS",
+  "python_compile_ast": "PASS",
+  "compiled_files": [
+    "scripts/audit_reuse.py",
+    "scripts/vace_observe.py",
+    "scripts/launch_video.py",
+    "scripts/guard.py",
+    "scripts/vace_experiment.py",
+    "reports/validate_runs.py"
+  ],
+  "lint_typecheck": "NOT_RUN; Ruff/BasedPyright not present in earlier PATH/uv-tool checks; no installations",
+  "scope": "Bounded exact-path/privacy-token and syntax checks; not comprehensive secret scan or quality acceptance"
+}
