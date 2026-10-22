@@ -1,0 +1,13 @@
+{
+  "critical_ruff": "PASS",
+  "command": "uv tool run --offline ruff check code --select E9,F63,F7,F82",
+  "typecheck": {
+    "filesAnalyzed": 13,
+    "errorCount": 520,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 1.046
+  },
+  "strict_typecheck_clean": false,
+  "scope": "No cleanup or suppressed diagnostics; full report retained privately."
+}
