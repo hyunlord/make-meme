@@ -15,3 +15,10 @@
 - 변환은 공식 key mapping과 원래 tensor dtype을 유지하는 mmap CPU/weights_only + 순차 safetensors 쓰기를 검증한다. 메타데이터 구조나 contiguity가 호환되지 않으면 eager/unsafe pickle로 fallback하지 않는다.
 - 기본 DiT FP32 전체상주 대신 **메모리 제한 mixed-BF16 baseline**을 사전 선택한다. 큰 projection/FFN/conv는BF16, 실제 FP32 연산 경로의 time_embedding/time_projection/head 및 modulation/norm은FP32로 유지한다. 이 선택은 공식FP32출력 동등성 주장이 아니다. meta/assign의 같은dtype 동등성과BF16반올림을 소형 fixture에서 별도로 확인한다.
 - 고정 공식 tree에 animation_001의 reference/mask/driving이 실제 blob으로 존재한다. 별도 추출·시간축 검사 후 호환되면 공식17f1회→Lab17f1회 순서이며 결과를 보고 prompt/seed/steps를 튜닝하지 않는다.
+
+## 08:01 UTC 부근 — Gate 0/1 조건부 통과, Gate 2 시작 조건 충족
+
+- 실제 Spark 격리 Python/Torch2.14.0+cu130에서 변환 fixture8개 PASS(1.21초). 공식 mapping/save_file tensor 값·dtype·hash와 independent verifier의 payload 손상 거부를 확인했다. 합성 fixture이며 실제65GB형식/peak는 여전히 UNKNOWN이다.
+- 실제 upstream cache_video로 원본RGB17장을24fps512×896 MP4로 저장하고 ffprobe17f/0.708333초 확인. 최초 FFMPEG plugin 누락 실패는 기록에 보존했다. 신규환경에만 작은필수패키지26,031,848bytes를 설치했고 Torch는 교체하지 않았다.
+- 입력80파일 Mac/Spark 해시동일, 기존Lab148artifact검증. LabmaskPARTIAL과공식예제16fps 유지.
+- 공개 고정 downloader/manifest에 따라재사용파일해시를먼저검증하고 신규SAT+CLIP만최대85GB범위에서받는다. actualmetadata gate가실패하면 eager/unsafe로우회하지않는다.
