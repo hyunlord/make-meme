@@ -14,13 +14,12 @@ from pathlib import Path
 
 import pytest
 import torch
-from safetensors import safe_open
-from safetensors.torch import load_file, save_file
-from torch._subclasses.fake_tensor import FakeTensor
-
 from converter import convert
 from converter_mapping import ConversionError, MappingSource, checkpoint_tensors, mapped_tensors
 from converter_stream import stream_safetensors
+from safetensors import safe_open
+from safetensors.torch import load_file, save_file
+from torch._subclasses.fake_tensor import FakeTensor
 
 
 @pytest.fixture
@@ -152,3 +151,21 @@ def test_legacy_mmap_rejected(tmp_path: Path) -> None:
     torch.save({"module": {"x": torch.ones(1)}}, checkpoint, _use_new_zipfile_serialization=False)
     with pytest.raises((RuntimeError, ValueError)):
         checkpoint_tensors(checkpoint, metadata=True)
+
+
+def test_independent_verifier_detects_payload_corruption(tmp_path: Path, state: dict[str, torch.Tensor], official_source: Path) -> None:
+    from converter_verify import verify
+
+    checkpoint = tmp_path / "verify.pt"
+    output = tmp_path / "verify.safetensors"
+    torch.save({"module": state}, checkpoint)
+    convert(checkpoint, official_source, output)
+    report = verify(checkpoint, official_source, output)
+    assert report.tensor_count == len(load_file(output))
+    with output.open("r+b") as handle:
+        handle.seek(-1, 2)
+        last = handle.read(1)
+        handle.seek(-1, 2)
+        handle.write(bytes([last[0] ^ 1]))
+    with pytest.raises(ConversionError, match="payload hash"):
+        verify(checkpoint, official_source, output)

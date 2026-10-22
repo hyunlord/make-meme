@@ -17,7 +17,6 @@ from pathlib import Path
 from typing import Final, TypedDict
 
 import torch
-
 from converter_mapping import ConversionError
 
 CHUNK_BYTES: Final = 8 * 1024 * 1024
