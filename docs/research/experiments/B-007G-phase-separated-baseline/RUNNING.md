@@ -18,3 +18,7 @@ E/F의 사용량과 실패를 보존한다. F post-sampler 변경은 NOT_REACHED
 ## 18:03 UTC — CPU 감사 종료, 실제 실행 준비
 
 E/F 동시각으로 볼 수 없는 표본을 구분한 [비교](E_F_COMPARISON.md)와 [객체 수명](OBJECT_LIFETIME.md)을 작성했다. 정확한 F allocating operation은 UNKNOWN이다. cast_state와 model의 assign alias를 두 payload로 계산하지 않았다. 공식 generate와 nested sampler를 좁게 추출해 P/S/D로 연결하는 코드와 CPU fixture 검증을 진행한다. 아직 P/S/D 모두 NOT_RUN이다.
+
+## 18:10 UTC — P 실물 조건 준비 시작
+
+실행 전 고정 commit `648bbe4a1cf9cb13ddf25a6c9b5ca111282b0d6b`의 원격 일치를 확인했다. 가중치8·의존성 증거168·원본 코드8·기존 입력/config10·G 공식 입력 subset5항목을 새로 해시 비교해 일치했다. 최종 고정 코드13개와 CPU fixtures5/5(2.59초)를 확인했다. P는 별도 guarded process에서 시작했고 DiT를 생성하지 않는다. S/D는 아직 NOT_RUN이며 P 저장물·정상 종료·자원 회복 검사를 기다린다.
