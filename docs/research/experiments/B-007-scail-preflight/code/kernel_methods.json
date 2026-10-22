@@ -31,7 +31,17 @@
   "method2": {
     "only_if": "method1 fails with recorded build/import/kernel error and remaining resources/time permit",
     "source": "Dao-AILab/flash-attention@2bdeddd15af6f1c44cd41e6f5b08b9e544398397",
-    "build": "official upstream native121 support; FLASH_ATTN_CUDA_ARCHS=121; no backend/source patch; exact submodule URLs/bytes/hashes recorded before download"
+    "build": "official upstream native121 support; FLASH_ATTN_CUDA_ARCHS=121; no backend/source patch; exact submodule URLs/bytes/hashes recorded before download",
+    "continuation_policy": {
+      "only_if": "original guard exits on time budget with no compiler error; verify owned group stopped",
+      "max_continuations_after_original_guard": 1,
+      "same_source_objects_and_environment": true,
+      "new_downloads": 0,
+      "deadline_utc": "2026-10-22T07:15:33.303499Z",
+      "deadline_epoch": 1792653333.3034995,
+      "cumulative_method2_wall_clock_max_minutes": 65,
+      "reason": "35min initial internal guard may be insufficient for97official compilation units; user total2h and2methods unchanged"
+    }
   },
   "smoke": {
     "wrapper": "SCAIL-2@78fe19576bb06be96c2375e088574a262a300edb/wan/modules/attention.py",

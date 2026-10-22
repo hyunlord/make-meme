@@ -25,3 +25,9 @@
 ## 빌드 진행률과 시간 상한 — 2026-10-22 06:20 UTC
 
 교정된 실행기는 CUDA compiler4개를 실제 병렬 실행한다. 06:19:20 기준97개 object 중11개 완료, MemAvailable 약79.63GB, swap0이었다. 진행률을 근거로35분에서65분으로 늘리는 방안을 검토했으나 live supervisor는 deadline을 시작 때 고정한다. 안전한 live 변경이 없어 **연장은 적용하지 않았다**. 같은 빌드를 감시 밖으로 떼거나 재시작하지 않고 기존 방법2 종료 상한06:45:33 UTC를 유지한다. timeout은 SM121 kernel 비호환 판정이 아니라 BUILD_TIME_BUDGET_EXCEEDED이며 실제 kernel은 그때까지 설치가 끝나야만 실행한다.
+
+## 시간 예산 재검토: 감시 종료 후 동일 빌드 한 번만 이어가기 — 2026-10-22 06:36 UTC
+
+앞선 live deadline 연장 거절은 그대로다. 사용자 상한은 총2시간/최대2가지 설치 방법이며35분은 실행자가 보수적으로 정한 한 프로세스의 내부 상한이다. 56/97 object까지 오류 없이 진행되는 증거를 근거로, 단순 내부 timeout 때문에 실제 연산 검증을 미리 포기하지 않도록 **원래 감시가 완전히 종료된 뒤 동일 방법2를 한 번만 이어가는 것**을 사전 등록한다.
+
+조건: 원래 guard 종료와 owned group 부재 확인, TIMEOUT 기록 보존, 동일 pinned source/compiler/arch/Ninja와 기존 object 사용, 추가 다운로드/설치방법/환경 수정 없음. `kernel_method2_resume.py`를 동일하게 사용하며 KERNEL_METHOD_DEADLINE=1792653333.3034995(07:15:33 UTC, 방법2 원래 시작+65분)로 제한한다. 새 guard도 자체35분/global reserve보다 늘어나지 않는다. continuation의 시작·종료·object 재사용 여부를 별도로 기록한다. 이것이 마지막 continuation이며 실패하거나 누적 상한에 도달하면 중단한다. 사용자 전체2시간 deadline08:01:33은 바뀌지 않는다.
