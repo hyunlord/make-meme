@@ -1,0 +1,7 @@
+{
+  "scripts/audit_reuse.py": "ad11df5235f3cb4146d09bb0d786b0525eaa469fe37d8e3528d98d5994255b13",
+  "scripts/vace_observe.py": "f108dbbc2e97bca840c650ce71bc6b87856805c6dbf80c3bd984a6945ec2270b",
+  "scripts/launch_video.py": "cafc3d438e533087d11d313340f4ca26f0987e241e1b05bdd6d38487196f6595",
+  "scripts/guard.py": "2c0d08a3ae012897a7afd4abdcd82f7377095def56bcfe50ff9f951fcb1f7848",
+  "scripts/vace_experiment.py": "06c07c730c93b1c76571639e1b3cce0884d838124adf13c10ac5b7426d8021a0"
+}

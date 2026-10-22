@@ -1,0 +1,6 @@
+{
+  "deadline": "2026-10-22T04:28:07Z",
+  "attempt_cap": 2,
+  "shared_gpu_lock": "${B_ROOT}/.b-research-gpu.lock",
+  "queue_url": "http://127.0.0.1:8190/queue"
+}
