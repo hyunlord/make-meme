@@ -255,3 +255,8 @@
 - 시작 원격 `62c9ef583f109080e640184cecd58a7ad90a853d`와 [PLAN](experiments/B-007G-phase-separated-baseline/PLAN.md)을 확인했다. F post-sampler 정책은 NOT_REACHED이므로 실패 원인으로 단정하지 않는다.
 - E/F CPU-only 비교 최대45분 후, 기존 수학·noise·dtype·입력 계약을 유지한 P(조건 인코딩)/S(DiT)/D(VAE) 별도 프로세스를 검증한다. 기존 pipeline 전체를 반복 적재하는 경로는 사용하지 않는다.
 - 전체4시간, 공식17f16fps 한정 P1/S최대1/D1, 선행 실패 시 후속 중지. 24GiB 가드·기존 서비스·A와 E/F 기록 보존. 코드/fixture/검토/사전 push 이전 실제 실행 NOT_RUN. [진행](experiments/B-007G-phase-separated-baseline/RUNNING.md).
+
+## 2026-10-23 — B-007G 조건 준비 프로세스 통과
+
+- 사전 실행 고정 `648bbe4`와 신선한 가중치·환경·입력 해시를 확인한 뒤 P1을 실행했다. DiT 없이 공식 조건과 E와 같은 실제 initial noise를 저장하고 정상 종료했다.
+- 조건17,365,660bytes readback/hash PASS, 전체 guarded P143.331초. 메모리 회복과 PID0 확인 후 S1에 진입하며 T5/CLIP/VAE는 인스턴스화하지 않는다. S/D 결과와 영상 품질은 아직 미확인이다. [진행](experiments/B-007G-phase-separated-baseline/RUNNING.md).

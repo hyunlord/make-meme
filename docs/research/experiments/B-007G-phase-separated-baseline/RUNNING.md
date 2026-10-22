@@ -22,3 +22,7 @@ E/F 동시각으로 볼 수 없는 표본을 구분한 [비교](E_F_COMPARISON.m
 ## 18:10 UTC — P 실물 조건 준비 시작
 
 실행 전 고정 commit `648bbe4a1cf9cb13ddf25a6c9b5ca111282b0d6b`의 원격 일치를 확인했다. 가중치8·의존성 증거168·원본 코드8·기존 입력/config10·G 공식 입력 subset5항목을 새로 해시 비교해 일치했다. 최종 고정 코드13개와 CPU fixtures5/5(2.59초)를 확인했다. P는 별도 guarded process에서 시작했고 DiT를 생성하지 않는다. S/D는 아직 NOT_RUN이며 P 저장물·정상 종료·자원 회복 검사를 기다린다.
+
+## P 완료 / S 한정 시도 시작
+
+P guard 정상 종료143.331초, pipeline/watchdog inactive·MainPID0을 확인했다. 조건 저장물17,365,660bytes의 SHA는 `1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308`; lossless readback과 E initial noise 실제 값·해시가 일치한다. P 최소 MemAvailable70,981,316,608bytes, 관측 CUDA allocator peak4,320,272,384bytes. 종료 뒤 MemAvailable93,767,056KiB로 회복한 것을 확인한 후 S1을 시작한다. P 성공은 sampler/MP4 성공이 아니다.
