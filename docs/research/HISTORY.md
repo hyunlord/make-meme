@@ -62,7 +62,7 @@
 ## 2026-10-22 — B-003 첫 seed 실행 완료
 
 - 계획7368c1f 및 실행코드49c41ec의 원격 SHA를 확인한 뒤 실행했다.
-- 첫 seed real/null 두 run 완료, 실제 noise/text/reference/inactive/mask 동일 및 reactive 차이를 확인했다. 대표 f8의 real 착석/null 네발 자세 차이를 정적으로 관측했다. 전체 결론은 두 번째 seed와 모든 프레임 검토 뒤 기록한다.
+- 첫 seed real/null 두 run 완료, 실제 noise/text/reference/inactive/mask동일 및 reactive 차이를 확인했다. 대표 f8의 real 착석/null 네발 자세 차이를 정적으로 관측했다. 전체 결론은 두 번째 seed와 모든 프레임 검토 뒤 기록한다.
 - 모델9파일·핵심코드5파일을 새로 해시 검사했다. [진행 기록](experiments/B-003-structure-condition/RUNNING.md).
 
 ## 2026-10-22 — B-003 통제 비교 완료
@@ -72,3 +72,13 @@
 - 모든17프레임 시트와 대표 원본프레임을 정적 검토. 연속재생미관측으로 시간UNVERIFIED. 개인자료는GitHub비공개.
 - 다음 하나: C-real 고정 R-bg/균일회색 reference 비교 제안만. 자동실행없음.
 - [RESULTS](experiments/B-003-structure-condition/RESULTS.md),[이론](lessons/B-003-structure-conditioning.md),[실측](experiments/B-003-structure-condition/run_summary.json).
+
+## 2026-10-22 — B-003 원격 실행 코드 검토 / 새 실행 없음
+
+- 목적: 결과 요약뿐 아니라 원격에 게시된 실행·관측·검증 코드와 실제 기록의 연결을 확인한다. 검토 기준 commit은 `29f2576e56dbc5c5ed5a97d795a11d1fd5834eb5`이며, 검토 시작 시 연구 branch HEAD가 이 SHA임을 직접 조회했다.
+- 직접 읽은 핵심: [runner](experiments/B-003-structure-condition/code/vace_experiment.py), [runtime observer](experiments/B-003-structure-condition/code/vace_observe.py), [validator](experiments/B-003-structure-condition/code/validate_runs.py), C-real 설정, PLAN, RESULTS, run_summary의 paired-controls 및 연구 기록 문서.
+- 코드 확인: source RGB는 기록·비교용이고, 실제 `pipe(...)`에는 condition 영상·white mask·reference가 전달된다. B-003 runner는 adapter/optimizer checkpoint가 null임을 검사하며 별도 adapter load·학습 경로를 실행하지 않는다.
+- 관측 확인: observer는 sampler 입력의 실제 noise/text/VACE tensor 및 reference/inactive/reactive/mask 구역을 해시한다. 공개 run_summary는 같은 seed에서 noise/text/reference/inactive/mask 동일과 reactive 차이를 기록한다. 이는 기록·코드 대조이며 검토자가 Spark에서 새로 tensor를 채취한 것은 아니다.
+- 해석 정정: 구조 입력에 대한 출력 민감도와 원하는 원본 동작의 전달은 다르다. real착석/null사족 결과는 입력의 영향을 지지하지만, reference가 단독으로 지배하거나 Canny가 정답 동작을 전달한다는 증거는 아니다. 검정 영상과 회색 reference는 각각 별도의 내용 개입이며 해당 조건 branch의 제거와 같지 않다.
+- 범위 제한: 이번에는 ZIP 내부·원본 이미지·연속 재생·Spark GPU 실행을 독립 검증하지 않았다. upstream 전체와 원격 공개 코드가 로컬 실행 파일의 모든 바이트와 동일한지도 새로 검증하지 않았다. 새 생성·학습·가중치 변경은 0회다.
+- 다음 연구는 기존 RESULTS의 회색 reference 비교 제안을 유지하되 아직 PLANNED로 확정하거나 실행·승인하지 않는다. 이번 변경은 이 검토 이력 추가뿐이며 기존 실험 결과와 코드, A 상태는 보존한다.
