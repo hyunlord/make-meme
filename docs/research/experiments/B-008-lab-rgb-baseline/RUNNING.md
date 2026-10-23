@@ -25,4 +25,12 @@ CPU fixture5개(0.76초), critical Ruff와 syntax 검사가 통과했다. 전체
 
 ## Lab P 통과
 
-P1은 guarded118.06초에 service_exit0·자체 unit inactive로 완료됐다. Lab 새 캐시는17,685,156bytes, 실제 noise는FP32 `[16,5,112,64]`, reference `[16,1,112,64]`, driving `[16,5,56,32]`, text `[44,4096]`다. 독립 CPU 전처리4개 hash가 실제 P와 일치했다. flattened initial noise 값 hash는 같은 seed/element 수인 H와 우연히 같지만 shape는 다르며, 일치를 요구하거나 H cache를 재사용하지 않았다. 검증 대상은 이번 Lab P→S 값/shape/state 계보다. 종료·자원 회복 후 PROBE1으로 진행한다.
+P1은 guarded118.06초에 service_exit0·자체 unit inactive로 완료됐다. Lab 새 캐시는17,685,156bytes, 실제 noise는FP32 `[16,5,112,64]`, reference `[16,1,112,64]`, driving `[16,5,56,32]`, text `[44,4096]`다. 독립 CPU 전처리4개 hash가 실제 P와 일치했다. flattened initial noise 값 hash는 같은 seed/element 수인 H와 같게 관측됐지만 shape는 다르며, 일치를 요구하거나 H cache를 재사용하지 않았다. 검증 대상은 이번 Lab P→S 값/shape/state 계보다. 종료·자원 회복 후 PROBE1으로 진행한다.
+
+## PROBE 통과 / S 시작
+
+PROBE1 guarded6.063초, 실제 tiny CUDA 연산·16leaf 값/device·RNG 검증과 정상 종료를 확인했다. 선행 gate·자원 회복 후 S1을 시작했다. 완료되지 않은 sampler·영상 품질을 PASS로 취급하지 않는다.
+
+## S 첫 forward 통과
+
+실제 첫 forward 완료가 stage 약115.2초에 관측됐다. 캐시 복원·anchor 재검사·DiT device 이동을 통과했고4/40step·8forward까지 확인했다. 이 시점에는 sampler/final latent/video 완료를 주장하지 않는다. 최근 headroom약52.4GiB,swap/OOM0.
