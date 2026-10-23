@@ -1,0 +1,15 @@
+# B-013 실행 기록
+
+**RUNNING / 실제 P·PROBE·S·D NOT_RUN.** 시작2026-10-24 00:43 KST(2026-10-23 15:43 UTC), hard deadline19:43 UTC, worker deadline19:30 UTC. 시작 원격 HEAD `28a8540172768481efad7013281a7ce649985245`를 확인했고 기존 문서 worktree를 fast-forward로 갱신했다. A와 이전 B 입력·결과·사용량은 보존한다.
+
+[PLAN](PLAN.md), [전환 결정](../../decisions/20261024-B-012-review-and-B-013.md)에 따라 기존 B-012 source[7,24) driving RGB/mask와 B-009 실제 Lab RGB·RED+WHITE reference mask를 재사용한다. 신규 LAB_MOV/LAB_STILL 각각1회, full sampler 최대2회·실패포함·재시도0, 각 조건 P/PROBE/S/D 최대1회다. source MOV/STILL은 재생성하지 않는다.
+
+1. IN_PROGRESS: 실제 입력 byte 계보·참조 외형·기존 자원/코드 검토. 새 crop·mask·사진 편집은 없다.
+2. PENDING: Lab prompt, config, 최소 runtime 변경, 내부4변경/12보존 및 대응 B-012 조건 계보, CPU 검사와 사전 commit/push.
+3. NOT_RUN: Lab 전용 양 P → 내부/계보 비교 → 각 PROBE/S/D. 조건·안전 실패는 후속 중지, 단순 첫 출력 품질 실패는 STILL 생략 사유가 아니다.
+4. NOT_RUN: 사전local0/12/14/16 및 전체17장, 전신 자세/국소roll/실제개체·체형 별도 관측. temporal은 실제 연속 품질 관찰이 없으면 UNVERIFIED.
+5. PENDING: 결과·수학·실측·재현·GitHub 원격 동기화, 비공개 ZIP 양호스트 CRC/hash.
+
+기존 tiny CUDA 선행/anchor·mixed loader·FlashAttention·phase 분리·final latent 저장과72GiB시작/24GiB실행headroom·swap0·타 서비스 보호를 유지한다. 모델·다운로드·학습·LoRA·imagegen·외부 생성0. 완료 후 추가 seed/low-pass/SR/모델 변경을 시작하지 않는다.
+
+B-012 codegraph entry 경고는 TOOLING_WARNING이며 완료된 생성 결과와 분리한다. 정확한 hook 위치/entry 유형은 현재 미확인이고 이번 단계에서 플러그인 삭제·hook 전체 해제·환경 재설치를 하지 않는다.

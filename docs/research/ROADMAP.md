@@ -224,3 +224,7 @@ source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 
 **COMPLETED / 실행·조건 통제 PASS / temporal UNVERIFIED.** source-only f7~23에서 MOV/STILL 각각 P/PROBE/S/D1회·40step80forward·17f24fps MP4와 final latent를 확보했다. 양 CFG driving4leaf만 변경되고 나머지12leaf는 실제 bit-exact였다. 전체17장 정적 검토에서 MOV는 후반 머리-몸통 상대 roll의 방향·순서를 원본에 가깝게 재현했고 STILL은 초기 자세 부근이었다. 한 same-identity pair의 동적RGB+mask 공동 기여에 대한 탐색적 근거이며 정밀 앞발·접촉·Lab 전이는 미입증이다. sampler2/2·실패/재시도/학습0, 최소 시스템가용52.095GiB·swap/OOM0. [RESULTS](experiments/B-012-clear-motion-driving-control/RESULTS.md).
 
 다음 연구 제안은 같은 [7,24) 구간의 실제 Lab cross-identity 전이 비교 하나다. NOT_RUN이며 이번에 추가 생성·모델·학습을 시작하지 않았다. 앞선 단계의 RUNNING/NOT_RUN 기록은 당시 이력으로 보존한다.
+
+## B-013 착수: 같은 driving에서 Lab 전이의 전신·국소 제어 분리 (2026-10-24)
+
+**RUNNING / GPU NOT_RUN.** 시작 원격 `28a8540172768481efad7013281a7ce649985245`의 [PLAN](experiments/B-013-lab-driving-transfer/PLAN.md)과 [결정](decisions/20261024-B-012-review-and-B-013.md)을 확인했다. B-012 same-identity의 동적RGB+mask 기여를 실제 Lab 과제에서 비교한다. 기존 source[7,24) 처리RGB/mask 및 결과2개를 보존·재사용하며 새LAB_MOV/LAB_STILL만각1회다. Lab 내부가 주 통제이며 source/Lab 사이 reference·자세·체형·장면·text 차이를 순수identity효과로 부르지 않는다. 전신직립·국소머리roll·실제개체를 별도 평가한다. 4시간·sampler최대2·재시도/학습0, codegraph경고는TOOLING_WARNING으로 분리한다. [진행](experiments/B-013-lab-driving-transfer/RUNNING.md).
