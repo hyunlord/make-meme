@@ -314,3 +314,9 @@ P1 guarded118.06초, 세로 noise/reference/driving shape와 독립 전처리4�
 ## B-010 착수 (2026-10-23)
 
 B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색상 탐색을 끝내고 [동물 자기 재현](experiments/B-010-animal-self-reenactment/PLAN.md)을 진단한다. 원본f0를 reference로 사용하고 실제17프레임의 변화가 STATIC COPY보다 잘 전달되는지를 묻는다. GPU 전에 표면점 관측가능성과 기준을 고정하며 직립 복사 자체는 성공이 아니다. 새P/PROBE/S/D각최대1회·sampler1·재시도/학습0. 현재 NOT_RUN. [진행](experiments/B-010-animal-self-reenactment/RUNNING.md).
+
+## B-010 생성 전 중단 (2026-10-23)
+
+**DIAGNOSTIC_INSUFFICIENT / GPU NOT_RUN.** source f0 반복 STATIC COPY를 먼저 만들고 보이는 표면점20개 비교를 수행했다. E_copy15.5107px가 전파된 평균 관측오차19.4222px보다 작고 앞발 변화도 오차 범위였다. 일부 머리 위치 변화는 관측됐으나 전체 이동/배율과 분리한 관절 동작 증거가 부족했다. 원본 무동작이나 모델 실패가 아니라 현재 주석 정밀도의 한계다. P/PROBE/S/D모두0, 새로운 latent/생성영상 없음. [RESULTS](experiments/B-010-animal-self-reenactment/RESULTS.md).
+
+다음 한 작업은 동일17프레임의 실제512×896 표면점 직접 재주석 CPU 감사다. 이를 이번에 수행하거나 새 sampler/구간/seed로 자동 확대하지 않았다.

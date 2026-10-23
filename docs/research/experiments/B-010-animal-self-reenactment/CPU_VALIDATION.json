@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "executed_on": "Spark",
+  "cuda_visible_devices": "",
+  "tests": 8,
+  "seconds": 0.91,
+  "scope": "CPU serialization/case contracts, changed-set acceptance and negative cache fixtures; not model numerical parity"
+}

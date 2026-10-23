@@ -1,0 +1,53 @@
+{
+  "experiment": "B-010",
+  "status": "NOT_RUN",
+  "decision": "DIAGNOSTIC_INSUFFICIENT",
+  "reason": "Pre-generation source-motion observability gate did not separate motion from annotation uncertainty and global-motion confounds. No GPU stage launched.",
+  "stages": {
+    "P": {
+      "status": "NOT_RUN",
+      "attempts": 0,
+      "cap": 1
+    },
+    "PROBE": {
+      "status": "NOT_RUN",
+      "attempts": 0,
+      "cap": 1
+    },
+    "S": {
+      "status": "NOT_RUN",
+      "attempts": 0,
+      "cap": 1
+    },
+    "D": {
+      "status": "NOT_RUN",
+      "attempts": 0,
+      "cap": 1
+    }
+  },
+  "sampler_attempts": 0,
+  "sampler_cap": 1,
+  "retries": 0,
+  "failed_generation_attempts": 0,
+  "model_loads": 0,
+  "training_updates": 0,
+  "new_model_downloads": 0,
+  "generated_artifacts": 0,
+  "owned_processes_remaining": false,
+  "prior_runs_preserved": [
+    "B-007H",
+    "B-008",
+    "B-009"
+  ],
+  "prepared_runtime": {
+    "code_config_input_upstream_checks": 540,
+    "status": "PASS",
+    "cpu_tests": 8,
+    "critical_ruff": "PASS",
+    "syntax": "PASS",
+    "targeted_typecheck": "NOT_CLEAN: 81 errors; no strict typing pass claimed"
+  },
+  "deadline_utc": "2026-10-23T08:00:00Z",
+  "quality": "NOT_RUN",
+  "no_execution_evidence": "No attempt receipts, no generated artifacts; both owned unit names inactive and MainPID 0."
+}

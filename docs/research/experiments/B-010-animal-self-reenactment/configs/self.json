@@ -1,0 +1,20 @@
+{
+  "name": "self",
+  "frames": 17,
+  "fps": 24,
+  "height": 896,
+  "width": 512,
+  "seed": 20261022,
+  "steps": 40,
+  "solver": "unipc",
+  "shift": 3.0,
+  "guide_scale": 5.0,
+  "segment_overlap": 5,
+  "adapter": null,
+  "prompt": "A small light-colored short-haired dog stands upright indoors, making subtle head and front-paw movements.",
+  "precision": "mixed BF16 with FP32 normalization/time/head islands",
+  "reference": "inputs/self/reference.png",
+  "reference_mask": "inputs/self/reference-mask-white.png",
+  "driver": "inputs/self/driver-24fps.mp4",
+  "driver_mask": "inputs/self/mask-24fps.mp4"
+}

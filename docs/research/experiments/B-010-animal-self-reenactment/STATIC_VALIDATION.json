@@ -1,0 +1,13 @@
+{
+  "syntax": "PASS",
+  "critical_ruff": "PASS",
+  "targeted_basedpyright": {
+    "filesAnalyzed": 1,
+    "errorCount": 81,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 0.642
+  },
+  "type_status": "NOT_CLEAN",
+  "note": "Targeted comparator check; inherited dynamic tree interfaces and missing external stubs remain, not a strict typing pass."
+}

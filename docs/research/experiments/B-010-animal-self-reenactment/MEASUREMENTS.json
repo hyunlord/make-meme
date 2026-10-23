@@ -1,0 +1,80 @@
+{
+  "scope": "CPU preflight only; no GPU stage started",
+  "judgement": "DIAGNOSTIC_INSUFFICIENT",
+  "limitation": "Existing B006 transferred annotation precision, not intrinsic impossibility of this clip",
+  "frames": 17,
+  "fps": 24,
+  "selected_frames": [
+    0,
+    4,
+    8,
+    12,
+    16
+  ],
+  "selected_visible_surface_points": 5,
+  "source_comparison_coverage": {
+    "observed": 20,
+    "expected": 20
+  },
+  "E_copy_px": 15.510671754361123,
+  "mean_displacement_uncertainty_px": 19.422222222222224,
+  "normalization_px": 896,
+  "gain": "UNDEFINED",
+  "relative_ratio_bounds": [
+    {
+      "frame": 0,
+      "nose_to_frontpaw_midpoint_over_frontpaw_span": 1.2392194683699698,
+      "conservative_interval": [
+        0.9477597560066136,
+        1.6499142947108338
+      ],
+      "not_a_joint_or_body_root": true
+    },
+    {
+      "frame": 4,
+      "nose_to_frontpaw_midpoint_over_frontpaw_span": 1.2279269927653793,
+      "conservative_interval": [
+        0.947015742885766,
+        1.6188419450520781
+      ],
+      "not_a_joint_or_body_root": true
+    },
+    {
+      "frame": 8,
+      "nose_to_frontpaw_midpoint_over_frontpaw_span": 1.2608081705750955,
+      "conservative_interval": [
+        0.9810627043898126,
+        1.647032815064014
+      ],
+      "not_a_joint_or_body_root": true
+    },
+    {
+      "frame": 12,
+      "nose_to_frontpaw_midpoint_over_frontpaw_span": 1.2615715049996326,
+      "conservative_interval": [
+        0.9912843493437754,
+        1.6299461033737068
+      ],
+      "not_a_joint_or_body_root": true
+    },
+    {
+      "frame": 16,
+      "nose_to_frontpaw_midpoint_over_frontpaw_span": 1.326715257520707,
+      "conservative_interval": [
+        1.0523302545923052,
+        1.698462262814592
+      ],
+      "not_a_joint_or_body_root": true
+    }
+  ],
+  "all_ratio_intervals_overlap_f0": true,
+  "generation": "NOT_RUN",
+  "P": "NOT_RUN",
+  "PROBE": "NOT_RUN",
+  "S": "NOT_RUN",
+  "D": "NOT_RUN",
+  "gpu_memory": "NOT_MEASURED",
+  "gpu_wall_seconds": "NOT_RUN",
+  "temporal_quality": "UNVERIFIED",
+  "new_generated_output": "NOT_RUN"
+}
