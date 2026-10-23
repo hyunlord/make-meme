@@ -1,0 +1,11 @@
+{
+  "float_unchanged_rtol": 1e-05,
+  "float_unchanged_atol": 1e-06,
+  "tolerance_rationale": "Preserve prior encoder-roundoff limit; masks/noise/RNG/schedule exact. Both actual P caches required before any S.",
+  "expected_changed_locations": [
+    "root.arg_c.pose_latents[0]",
+    "root.arg_c.driving_masks[0]",
+    "root.arg_null.pose_latents[0]",
+    "root.arg_null.driving_masks[0]"
+  ]
+}

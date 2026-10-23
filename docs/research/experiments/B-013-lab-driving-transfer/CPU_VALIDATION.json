@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "test_command": "CUDA_VISIBLE_DEVICES=\"\" PYTHONDONTWRITEBYTECODE=1 timeout 120 ENV/bin/python -m pytest CODE/test_contracts.py -q -p no:cacheprovider",
+  "result": ".........                                                                [100%]\n9 passed in 0.96s",
+  "log_sha256": "971240c0fdd5c3ada26ebc90947d2fc1e105b86cf86bb9ccd2ceb0a54684cccf",
+  "code_sha256": {
+    "test_contracts.py": "3ef0e51c8335edee82c0021031bf7314e959016786921c1fe0adeb0edacc86fb",
+    "media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+    "runtime_guard.py": "17cd1cfc9e2031aba9087f91448eb275f612658bf1a6ae8e51c0e80663d825b5",
+    "runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+    "compare_conditions.py": "e7daf27e7b059df990aa00a45f5ad7973456b2edf8e413a66b1142c079900879",
+    "staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+    "runtime_launch.py": "11c37dd606bcc7cf812051ef3db56b40eb000e90c107a4dedec55903aafe4cbb",
+    "compare_lineage.py": "3925754a7c14855136a0da499cce7709051b24c599b0e052056661560e24f850",
+    "contracts.py": "f887ff5586d1051298fb1f0ed2e2a4ef8d19506bc6511fad9567aa718f637550",
+    "prepare_pair_layout.py": "763d5873135f65820ee4da471b33bb1ace745f7e00c7fb0c6a290f57de7a21c5",
+    "phase_sample.py": "f1c72f81b3826fc211928056a16b57d4773516dac2db4011ede6ac2f44096993",
+    "artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+    "phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+    "cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+    "run_phase.py": "68b210246fc787e0a9006948be770616af5a69ef74cc757af90536b73cb5fd3c",
+    "extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+    "phase_prepare.py": "6b9b778f9da54a13721696333a465797d4e1c316bc888d4a2bb527db3c71bed0",
+    "prepare_layout.py": "95fb7a3509c8f2b2e2eaebf03200f0db024dc1e3571528877c769c653709ba59"
+  },
+  "critical_ruff": "PASS",
+  "typecheck": "NOT_CLEAN: new compare_lineage.py has 86 diagnostics while consuming inherited dynamically typed tensor-tree interfaces; these are not claimed to be wholly pre-existing. No broad typing refactor in this experiment.",
+  "GPU_calls": 0,
+  "typecheck_summary": {
+    "filesAnalyzed": 1,
+    "errorCount": 86,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 0.356
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "img": {
+    "shape": [
+      3,
+      896,
+      512
+    ],
+    "dtype": "torch.float32",
+    "sha256": "816a470d3c9c665b3775d2915712609c2df9b1bb42b9e568e9f78e56ac5da602"
+  },
+  "ref_mask_img": {
+    "shape": [
+      3,
+      896,
+      512
+    ],
+    "dtype": "torch.float32",
+    "sha256": "67c43d812cd0f8f889defa496357929aae73d96b0a6ac9421c1eb9e1ffbd3ff3"
+  },
+  "pose_video": {
+    "shape": [
+      17,
+      3,
+      896,
+      512
+    ],
+    "dtype": "torch.float32",
+    "sha256": "8111d3470f9933a72dc2274347f98be1e30cc9866e0e328f30f8e8f37c916009"
+  },
+  "driving_mask_video": {
+    "shape": [
+      3,
+      17,
+      896,
+      512
+    ],
+    "dtype": "torch.float32",
+    "sha256": "a52438284074ea86e1ad1122f0aa22e263597900c2c0e7799dcfaa221d5372fa"
+  }
+}

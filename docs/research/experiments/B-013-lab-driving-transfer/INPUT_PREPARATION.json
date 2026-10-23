@@ -1,0 +1,167 @@
+{
+  "status": "PASS_CPU_INPUT_REUSE",
+  "reference_palette": {
+    "RED": 113928,
+    "WHITE": 344824,
+    "other": 0
+  },
+  "reference_quality": "Existing seated real black Lab, same RGB and segmentation as B009; boundary quality PARTIAL, no enhancement",
+  "cases": {
+    "LAB_MOV": {
+      "files": {
+        "reference.png": {
+          "sha256": "703884c8e2a657d4294cf4e74efeb463c9cd6e05e1ad582f99d6546b954cfdce",
+          "bytes": 498994
+        },
+        "reference-mask-white.png": {
+          "sha256": "ea54f417f109793210c405d2452152b839fd57f81329811fb650958e830bab9f",
+          "bytes": 5025
+        },
+        "driver-24fps.mp4": {
+          "sha256": "7072f6bf49de44469da36d001a3b297a1f8504e362944765ddc346e6f7caac0d",
+          "bytes": 2585339
+        },
+        "mask-24fps.mp4": {
+          "sha256": "5597bcae72a4232910f4acde90231717b9110b5b4e80e15e2805700d27a738b4",
+          "bytes": 46949
+        }
+      },
+      "tensor_hashes": {
+        "img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "816a470d3c9c665b3775d2915712609c2df9b1bb42b9e568e9f78e56ac5da602"
+        },
+        "ref_mask_img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "67c43d812cd0f8f889defa496357929aae73d96b0a6ac9421c1eb9e1ffbd3ff3"
+        },
+        "pose_video": {
+          "shape": [
+            17,
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "bba9d860670f67728c035487f6148d2b31fcc21b55f2b6270b4bdb0f373ba3e6"
+        },
+        "driving_mask_video": {
+          "shape": [
+            3,
+            17,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "4751f82bca4d9914649eb7d59f284f721bdc525b23eb273bb475dd8388c3dc2f"
+        }
+      },
+      "video_metadata": {
+        "driver-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        },
+        "mask-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        }
+      },
+      "helper_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+      "B012_corresponding_driving_tensor_exact": true
+    },
+    "LAB_STILL": {
+      "files": {
+        "reference.png": {
+          "sha256": "703884c8e2a657d4294cf4e74efeb463c9cd6e05e1ad582f99d6546b954cfdce",
+          "bytes": 498994
+        },
+        "reference-mask-white.png": {
+          "sha256": "ea54f417f109793210c405d2452152b839fd57f81329811fb650958e830bab9f",
+          "bytes": 5025
+        },
+        "driver-24fps.mp4": {
+          "sha256": "59c5f5a99b2b924026b4276e559e80ceb9d391d00c7aac1209c23c8dce342653",
+          "bytes": 170028
+        },
+        "mask-24fps.mp4": {
+          "sha256": "04480ea2ff574db5f89c6e95d77bbf4ca07cd7bc554cf383d6de43a403662e38",
+          "bytes": 4851
+        }
+      },
+      "tensor_hashes": {
+        "img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "816a470d3c9c665b3775d2915712609c2df9b1bb42b9e568e9f78e56ac5da602"
+        },
+        "ref_mask_img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "67c43d812cd0f8f889defa496357929aae73d96b0a6ac9421c1eb9e1ffbd3ff3"
+        },
+        "pose_video": {
+          "shape": [
+            17,
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "8111d3470f9933a72dc2274347f98be1e30cc9866e0e328f30f8e8f37c916009"
+        },
+        "driving_mask_video": {
+          "shape": [
+            3,
+            17,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "a52438284074ea86e1ad1122f0aa22e263597900c2c0e7799dcfaa221d5372fa"
+        }
+      },
+      "video_metadata": {
+        "driver-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        },
+        "mask-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        }
+      },
+      "helper_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+      "B012_corresponding_driving_tensor_exact": true
+    }
+  }
+}

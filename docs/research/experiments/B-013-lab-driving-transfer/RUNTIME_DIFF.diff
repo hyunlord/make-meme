@@ -1,0 +1,184 @@
+--- B012/code/compare_conditions.py
++++ B013/code/compare_conditions.py
+@@ -48 +48 @@
+-    roots=[root/'cases'/case for case in ('MOV','STILL')]
++    roots=[root/'cases'/case for case in ('LAB_MOV','LAB_STILL')]
+@@ -81 +81 @@
+-    receipt={'status':'PASS' if passed else 'FAIL','rows':rows,'case_cache_sha256':{case:meta['file_sha256'] for case,meta in zip(('MOV','STILL'),metadata)},'policy_sha256':hashlib.sha256((root/'configs/comparison_policy.json').read_bytes()).hexdigest(),'code_manifest_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'helper_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'device':'cpu','cuda_initialized':torch.cuda.is_initialized()}
++    receipt={'status':'PASS' if passed else 'FAIL','rows':rows,'case_cache_sha256':{case:meta['file_sha256'] for case,meta in zip(('LAB_MOV','LAB_STILL'),metadata)},'policy_sha256':hashlib.sha256((root/'configs/comparison_policy.json').read_bytes()).hexdigest(),'code_manifest_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'helper_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'device':'cpu','cuda_initialized':torch.cuda.is_initialized()}
+--- B012/code/compare_lineage.py
++++ B013/code/compare_lineage.py
+@@ -0,0 +1,70 @@
++"""CPU-only B012-to-Lab task lineage; seven task leaves differ, nine stay controlled."""
++from pathlib import Path
++import hashlib
++import json
++import sys
++from typing import Final
++import torch
++from artifacts import atomic_json, load_tree
++from compare_conditions import expected_mask
++
++CHANGED: Final = frozenset([
++    f'root.{branch}.{field}'
++    for branch in ('arg_c','arg_null')
++    for field in ('ref_latents[0]','ref_masks[0]','clip_fea')
++] + ['root.arg_c.context[0]'])
++
++
++def compare_leaf(location: str, a: torch.Tensor, b: torch.Tensor) -> bool:
++    """Preserve B012 numeric tolerances; discrete/mask/noise controls are exact."""
++    if a.dtype!=b.dtype or not bool(torch.isfinite(b).all()):return False
++    if location=='root.arg_c.context[0]':return a.ndim==b.ndim==2 and a.shape[1]==b.shape[1]==4096 and 0<a.shape[0]<=512 and 0<b.shape[0]<=512 and not torch.equal(a,b)
++    if a.shape!=b.shape:return False
++    if '.ref_masks[' in location:return not torch.equal(a[:,:1],b[:,:1]) and torch.equal(a[:,1:],b[:,1:]) and bool((b[:,1:]==0).all())
++    if location in CHANGED:return not torch.equal(a,b)
++    if 'mask' in location or location in ('root.noise','root.generator_state','root.timesteps','root.sigmas') or not a.is_floating_point():return torch.equal(a,b)
++    return bool(torch.allclose(a,b,rtol=1e-5,atol=1e-6))
++
++
++def compare(root: Path) -> None:
++    """Bind old artifacts to preregistered hashes and new artifacts to the actual P pair."""
++    baseline=json.loads((root/'configs/lineage_baseline.json').read_text())
++    pair=json.loads((root/'reports/condition_comparison.json').read_text())
++    assert pair['status']=='PASS'
++    cases={};passed=True
++    for old_name,new_name in [('MOV','LAB_MOV'),('STILL','LAB_STILL')]:
++        old_root=root.parent/baseline['experiment_directory']/'cases'/old_name
++        new_root=root/'cases'/new_name
++        spec=baseline['cases'][old_name]
++        for name,digest in spec['artifacts'].items():assert hashlib.sha256((old_root/'artifacts'/name).read_bytes()).hexdigest()==digest,name
++        for name,digest in spec['driving_inputs'].items():
++            assert hashlib.sha256((old_root/'inputs'/name).read_bytes()).hexdigest()==digest
++            assert hashlib.sha256((new_root/'inputs'/name).read_bytes()).hexdigest()==digest
++        old,om=load_tree(old_root/'artifacts/conditions.safetensors',device='cpu')
++        new,nm=load_tree(new_root/'artifacts/conditions.safetensors',device='cpu')
++        assert nm['file_sha256']==pair['case_cache_sha256'][new_name]
++        assert om['structure']==nm['structure'] and len(om['tensors'])==len(nm['tensors'])==16
++        old_cfg=om['provenance']['config'];new_cfg=nm['provenance']['config']
++        assert {k:v for k,v in old_cfg.items() if k!='prompt'}=={k:v for k,v in new_cfg.items() if k!='prompt'}
++        assert old_cfg['prompt']!=new_cfg['prompt']
++        expected=expected_mask(new_root/'inputs/reference-mask-white.png',new_root/'upstream/wan/utils/scail_utils.py')
++        for branch in ('arg_c','arg_null'):assert torch.equal(new[branch]['ref_masks'][0][:,:1],expected)
++        rows=[]
++        def visit(node, a, b, location):
++            if 'tensor' in node:
++                key=node['tensor'];ok=compare_leaf(location,a,b)
++                rows.append({'location':location,'baseline_shape':list(a.shape),'shape':list(b.shape),'dtype':str(a.dtype),'device':node['device'],'B012_sha256':om['tensors'][key]['sha256'],'Lab_sha256':nm['tensors'][key]['sha256'],'expected_change':location in CHANGED,'exact_equal':torch.equal(a,b),'max_abs':float((a.double()-b.double()).abs().max()) if a.shape==b.shape else None,'pass':ok})
++            elif 'dict' in node:
++                for key,child in node['dict'].items():visit(child,a[key],b[key],location+'.'+key)
++            elif 'list' in node:
++                for index,child in enumerate(node['list']):visit(child,a[index],b[index],location+f'[{index}]')
++            else:assert a==b
++        visit(om['structure'],old,new,'root')
++        assert {row['location'] for row in rows if row['expected_change']}==CHANGED
++        case_pass=all(row['pass'] for row in rows);passed=passed and case_pass
++        cases[new_name]={'status':'PASS' if case_pass else 'FAIL','baseline_case':old_name,'baseline_cache_sha256':om['file_sha256'],'cache_sha256':nm['file_sha256'],'rows':rows}
++    receipt={'status':'PASS' if passed else 'FAIL','cases':cases,'baseline_policy_sha256':hashlib.sha256((root/'configs/lineage_baseline.json').read_bytes()).hexdigest(),'code_manifest_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'device':'cpu','cuda_initialized':torch.cuda.is_initialized()}
++    atomic_json(root/'reports/lineage_comparison.json',receipt)
++    assert passed,'B012-to-Lab controls differ; S must not run'
++
++if __name__=='__main__':compare(Path(sys.argv[1]))
+--- B012/code/contracts.py
++++ B013/code/contracts.py
+@@ -44 +44 @@
+-    assert receipt['experiment']=='B-012' and receipt['case']==active_contract(root).name
++    assert receipt['experiment']=='B-013' and receipt['case']==active_contract(root).name
+--- B012/code/phase_prepare.py
++++ B013/code/phase_prepare.py
+@@ -43,2 +43,2 @@
+-        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-012','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
+-        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-012','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
++        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-013','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
++        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-013','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
+--- B012/code/phase_sample.py
++++ B013/code/phase_sample.py
+@@ -55 +55 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-012','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-012-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-013','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-013-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
+--- B012/code/prepare_layout.py
++++ B013/code/prepare_layout.py
+@@ -1 +1 @@
+-"""Isolated B-012 stages; new cache, read-only E environment/models/inputs."""
++"""Isolated B-013 stages; new cache, read-only E environment/models/inputs."""
+--- B012/code/prepare_pair_layout.py
++++ B013/code/prepare_pair_layout.py
+@@ -6 +6 @@
+-for case in ('MOV','STILL'):
++for case in ('LAB_MOV','LAB_STILL'):
+--- B012/code/run_phase.py
++++ B013/code/run_phase.py
+@@ -1 +1 @@
+-"""Fresh bounded B-012 case worker; each P/PROBE/S/D stage runs at most once."""
++"""Fresh bounded B-013 case worker; each P/PROBE/S/D stage runs at most once."""
+@@ -16 +16 @@
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1},'max_stage_attempts':1},file)
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2},'max_stage_attempts':1},file)
+@@ -30 +30 @@
+-        assert case_name in ('MOV','STILL')
++        assert case_name in ('LAB_MOV','LAB_STILL')
+@@ -45,0 +46,5 @@
++            lineage=json.loads((root.parent.parent.parent.parent/'reports/lineage_comparison.json').read_text())
++            assert lineage['status']=='PASS'
++            assert lineage['cases'][case_name]['cache_sha256']==cache_receipt['hashes']['conditions.safetensors']
++            assert lineage['baseline_policy_sha256']==hashlib.sha256((root/'configs/lineage_baseline.json').read_bytes()).hexdigest()
++            assert lineage['code_manifest_sha256']==hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest()
+@@ -54 +59 @@
+-                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-012'
++                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-013'
+@@ -63 +68 @@
+-                assert meta['provenance']['executing_experiment']=='B-012'
++                assert meta['provenance']['executing_experiment']=='B-013'
+--- B012/code/runtime_guard.py
++++ B013/code/runtime_guard.py
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T17:10:00+00:00').timestamp()
+-UNIT: Final = 'make-meme-b012-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T19:30:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b013-pipeline'
+--- B012/code/runtime_launch.py
++++ B013/code/runtime_launch.py
+@@ -18 +18 @@
+-    '--unit=make-meme-b012-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b013-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
+--- B012/code/test_contracts.py
++++ B013/code/test_contracts.py
+@@ -40 +40 @@
+-    receipt={'experiment':'B-012','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
++    receipt={'experiment':'B-013','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
+@@ -71 +71 @@
+-    for case,number in [('MOV',1.),('STILL',2.)]:
++    for case,number in [('LAB_MOV',1.),('LAB_STILL',2.)]:
+@@ -75 +75 @@
+-        (r/'configs/active_case.json').write_text('{"name":"self"}');(r/'configs/input_config_hashes.json').write_text('{}');(r/'PREREGISTERED_CODE.json').write_text(json.dumps({'case_configs':{'MOV':{},'STILL':{}}}))
++        (r/'configs/active_case.json').write_text('{"name":"self"}');(r/'configs/input_config_hashes.json').write_text('{}');(r/'PREREGISTERED_CODE.json').write_text(json.dumps({'case_configs':{'LAB_MOV':{},'LAB_STILL':{}}}))
+@@ -79 +79 @@
+-        receipt={'experiment':'B-012','case':'self','code_sha256':hashlib.sha256((r/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((r/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
++        receipt={'experiment':'B-013','case':'self','code_sha256':hashlib.sha256((r/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((r/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
+@@ -81 +81 @@
+-    monkeypatch.setattr(module,'expected_driving_mask',lambda r,s:torch.full((2,),1. if r.name=='MOV' else 2.))
++    monkeypatch.setattr(module,'expected_driving_mask',lambda r,s:torch.full((2,),1. if r.name=='LAB_MOV' else 2.))
+@@ -86 +86 @@
+-    r=tmp_path/'cases/STILL';(r/'stages/P/reports/pipeline-process.json').write_text('{"reason":"service_exit","returncode":1,"final_service":"MainPID=0"}')
++    r=tmp_path/'cases/LAB_STILL';(r/'stages/P/reports/pipeline-process.json').write_text('{"reason":"service_exit","returncode":1,"final_service":"MainPID=0"}')
+@@ -87,0 +88,20 @@
++
++
++def test_lineage_seven_changed_nine_controlled():
++    from compare_lineage import compare_leaf,CHANGED
++    a=torch.ones(2,3);b=a+1
++    assert len(CHANGED)==7
++    for location in CHANGED-{'root.arg_c.context[0]'}:
++        x=torch.ones(28,6,2,2) if '.ref_masks[' in location else a
++        if '.ref_masks[' in location:x[:,1:]=0
++        y=x.clone();y[:,:1]+=1
++        assert compare_leaf(location,x,y)
++        assert not compare_leaf(location,x,x)
++    assert compare_leaf('root.arg_c.context[0]',torch.ones(91,4096),torch.ones(93,4096))
++    assert not compare_leaf('root.arg_c.context[0]',torch.ones(91,4096),torch.ones(91,4096))
++    mask=torch.zeros(28,6,2,2);bad=mask.clone();bad[:,1:]=1
++    assert not compare_leaf('root.arg_c.ref_masks[0]',mask,bad)
++    for location in ('root.arg_c.pose_latents[0]','root.arg_null.context[0]','root.noise','root.generator_state','root.timesteps','root.sigmas'):
++        assert compare_leaf(location,a,a)
++        assert not compare_leaf(location,a,b)
++    assert not compare_leaf('root.arg_c.driving_masks[0]',a,a+1e-7)

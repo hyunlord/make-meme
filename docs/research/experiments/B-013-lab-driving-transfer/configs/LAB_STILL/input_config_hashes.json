@@ -1,0 +1,8 @@
+{
+  "inputs/reference.png": "703884c8e2a657d4294cf4e74efeb463c9cd6e05e1ad582f99d6546b954cfdce",
+  "inputs/reference-mask-white.png": "ea54f417f109793210c405d2452152b839fd57f81329811fb650958e830bab9f",
+  "inputs/driver-24fps.mp4": "59c5f5a99b2b924026b4276e559e80ceb9d391d00c7aac1209c23c8dce342653",
+  "inputs/mask-24fps.mp4": "04480ea2ff574db5f89c6e95d77bbf4ca07cd7bc554cf383d6de43a403662e38",
+  "configs/self.json": "b4236ae586108afce5588f1fea5de6c8d9135492845c61b963e3c43cc228b6ee",
+  "configs/active_case.json": "2249cefc678125812d7a7bd6e323aa92e337709d34d12ece594236fc5aa7dfa7"
+}
