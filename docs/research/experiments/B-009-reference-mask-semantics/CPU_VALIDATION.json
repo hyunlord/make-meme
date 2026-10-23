@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "tests": 10,
+  "seconds": 1.11,
+  "GPU_calls": 0,
+  "scope": [
+    "inherited case/writer/serialization gates",
+    "both mask branch helper acceptance",
+    "RED/generated-plane/noise/large-float rejection",
+    "driving mask delta1e-7 exact rejection"
+  ],
+  "prior_fixture_failure": "Synthetic temp immutable file overwrite rejected; fixture temp file removed before negative case. Production saver unchanged."
+}

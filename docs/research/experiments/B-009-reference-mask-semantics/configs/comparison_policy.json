@@ -1,0 +1,14 @@
+{
+  "float_unchanged_rtol": 1e-05,
+  "float_unchanged_atol": 1e-06,
+  "exact_leaves": [
+    "noise",
+    "generator_state",
+    "timesteps",
+    "sigmas"
+  ],
+  "mask_comparison": "exact pinned helper; only white indices0,7,14,21 reference time0 may change; all other colors and temporal planes exact",
+  "rationale": "Same model/input/precision; tight fixed numerical tolerance allows tiny floating roundoff only, not a semantic condition change. Report every exact mismatch and max error; any allclose violation blocks S.",
+  "baseline_cache_sha256": "96164a2c54d38e86f006504824a85499f669eaca12f05ee3e6afe5a3858a0287",
+  "baseline_mask_sha256": "281d5d7ebacfc510b2eba8cedc2b12cc9e5399c5024715e67a5006859cf8d6f3"
+}

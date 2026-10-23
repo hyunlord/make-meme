@@ -1,0 +1,102 @@
+--- B008/code/test_contracts.py
++++ B009/code/test_contracts.py
+@@ -40 +40 @@
+-    receipt={'experiment':'B-008','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
++    receipt={'experiment':'B-009','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
+@@ -47,0 +48,35 @@
++
++
++@pytest.mark.parametrize('damage',['float','red','generated_mask','driving_mask','noise'])
++def test_single_factor_gate_accepts_mask_and_rejects_other_change(tmp_path,damage):
++    import os
++    import shutil
++    import numpy as np
++    from PIL import Image
++    from compare_conditions import compare,expected_mask
++    baseline=tmp_path/'baseline'
++    for folder in [tmp_path/'artifacts',baseline/'artifacts',tmp_path/'inputs/lab',baseline/'inputs/lab',tmp_path/'upstream/wan/utils',tmp_path/'configs',tmp_path/'reports']:
++        folder.mkdir(parents=True,exist_ok=True)
++    helper=tmp_path/'upstream/wan/utils/scail_utils.py'
++    shutil.copyfile(os.environ['SCAIL_UTILS'],helper)
++    original=np.zeros((8,8,3),dtype=np.uint8);original[:4,:,0]=255
++    changed=original.copy();changed[4:]=255
++    old_image=tmp_path/'inputs/lab/reference-mask.png';new_image=tmp_path/'inputs/lab/reference-mask-white.png'
++    Image.fromarray(original).save(old_image);Image.fromarray(changed).save(new_image)
++    def tree(image):
++        mask=torch.cat([expected_mask(image,helper),torch.zeros(28,5,1,1)],dim=1)
++        return {'arg_c':{'ref_masks':[mask],'context':torch.ones(2),'driving_masks':[torch.zeros(28,5,1,1)]},'arg_null':{'ref_masks':[mask],'context':torch.ones(2),'driving_masks':[torch.zeros(28,5,1,1)]},'noise':torch.ones(2),'generator_state':torch.zeros(16,dtype=torch.uint8),'timesteps':torch.arange(40),'sigmas':torch.arange(41,dtype=torch.float32),'history':None}
++    old_tree,new_tree=tree(old_image),tree(new_image)
++    oldpath=baseline/'artifacts/conditions.safetensors';newpath=tmp_path/'artifacts/conditions.safetensors'
++    oldcfg={'reference_mask':'inputs/lab/reference-mask.png'};newcfg={'reference_mask':'inputs/lab/reference-mask-white.png'}
++    save_tree(oldpath,old_tree,{'config':oldcfg});save_tree(newpath,new_tree,{'config':newcfg})
++    policy={'baseline_mask_sha256':hashlib.sha256(old_image.read_bytes()).hexdigest(),'baseline_cache_sha256':hashlib.sha256(oldpath.read_bytes()).hexdigest(),'float_unchanged_atol':1e-6,'float_unchanged_rtol':1e-5}
++    (tmp_path/'configs/comparison_policy.json').write_text(json.dumps(policy));(tmp_path/'PREREGISTERED_CODE.json').write_text('{}')
++    compare(tmp_path)
++    assert json.loads((tmp_path/'reports/condition_comparison.json').read_text())['status']=='PASS'
++    targets={'float':new_tree['arg_c']['context'],'red':new_tree['arg_c']['ref_masks'][0][1,:1],'generated_mask':new_tree['arg_c']['ref_masks'][0][:,1:],'driving_mask':new_tree['arg_c']['driving_masks'][0],'noise':new_tree['noise']}
++    targets[damage].add_(1e-7 if damage=='driving_mask' else 0.1)
++    newpath.unlink();newpath.with_suffix('.json').unlink()  # Synthetic fixture only.
++    save_tree(newpath,new_tree,{'config':newcfg})
++    with pytest.raises(AssertionError):compare(tmp_path)
++    assert json.loads((tmp_path/'reports/condition_comparison.json').read_text())['status']=='FAIL'
+--- B008/code/runtime_guard.py
++++ B009/code/runtime_guard.py
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T04:28:00+00:00').timestamp()
+-UNIT: Final = 'make-meme-b008-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T06:55:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b009-pipeline'
+--- B008/code/runtime_launch.py
++++ B009/code/runtime_launch.py
+@@ -18 +18 @@
+-    '--unit=make-meme-b008-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b009-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
+--- B008/code/contracts.py
++++ B009/code/contracts.py
+@@ -42 +42 @@
+-    assert receipt['experiment']=='B-008' and receipt['case']==active_contract(root).name
++    assert receipt['experiment']=='B-009' and receipt['case']==active_contract(root).name
+--- B008/code/phase_sample.py
++++ B009/code/phase_sample.py
+@@ -55 +55 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-008','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-008-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-009','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-009-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
+@@ -66 +66 @@
+-    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1}})
++    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1}})
+--- B008/code/run_phase.py
++++ B009/code/run_phase.py
+@@ -1 +1 @@
+-"""Fresh bounded B-008 case worker; each P/PROBE/S/D stage runs at most once."""
++"""Fresh bounded B-009 case worker; each P/PROBE/S/D stage runs at most once."""
+@@ -16 +16 @@
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1},'max_stage_attempts':1},file)
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1},'max_stage_attempts':1},file)
+@@ -40,0 +41,5 @@
++            comparison=json.loads((root.parent.parent/'reports/condition_comparison.json').read_text())
++            assert comparison['status']=='PASS'
++            assert comparison['new_cache_sha256']==cache_receipt['hashes']['conditions.safetensors']
++            assert comparison['policy_sha256']==hashlib.sha256((root/'configs/comparison_policy.json').read_bytes()).hexdigest()
++            assert comparison['code_manifest_sha256']==hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest()
+@@ -46 +51 @@
+-                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-008'
++                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-009'
+@@ -55 +60 @@
+-                assert meta['provenance']['executing_experiment']=='B-008'
++                assert meta['provenance']['executing_experiment']=='B-009'
+--- B008/code/phase_prepare.py
++++ B009/code/phase_prepare.py
+@@ -43,2 +43,2 @@
+-        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-008','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
+-        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-008','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
++        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-009','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
++        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-009','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
+--- B008/code/prepare_layout.py
++++ B009/code/prepare_layout.py
+@@ -1 +1 @@
+-"""Isolated B-008 stages; new cache, read-only E environment/models/inputs."""
++"""Isolated B-009 stages; new cache, read-only E environment/models/inputs."""
+@@ -11 +11,2 @@
+-    for name in ('environment','models','inputs','upstream'):(target/name).symlink_to(previous/name,target_is_directory=True)
++    for name in ('environment','models','upstream'):(target/name).symlink_to(previous/name,target_is_directory=True)
++    (target/'inputs').symlink_to(root/'inputs',target_is_directory=True)

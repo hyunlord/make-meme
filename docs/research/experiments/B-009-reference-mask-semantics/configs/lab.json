@@ -1,0 +1,20 @@
+{
+  "name": "lab",
+  "frames": 17,
+  "fps": 24,
+  "height": 896,
+  "width": 512,
+  "seed": 20261022,
+  "steps": 40,
+  "solver": "unipc",
+  "shift": 3.0,
+  "guide_scale": 5.0,
+  "segment_overlap": 5,
+  "adapter": null,
+  "prompt": "A black Labrador retriever with the face, ears and black fur of the reference photograph, a broad chest, heavy torso and thick limbs, performing the upright dance motion of the driving video.",
+  "precision": "mixed BF16 with FP32 normalization/time/head islands",
+  "reference": "inputs/lab/reference.png",
+  "reference_mask": "inputs/lab/reference-mask-white.png",
+  "driver": "inputs/lab/driver-24fps.mp4",
+  "driver_mask": "inputs/lab/mask-24fps.mp4"
+}

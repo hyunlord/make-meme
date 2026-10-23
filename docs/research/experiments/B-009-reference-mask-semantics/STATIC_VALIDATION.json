@@ -1,0 +1,12 @@
+{
+  "critical_ruff": "PASS",
+  "syntax": "PASS",
+  "typecheck": {
+    "filesAnalyzed": 17,
+    "errorCount": 832,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 1.275
+  },
+  "strict_clean": false
+}
