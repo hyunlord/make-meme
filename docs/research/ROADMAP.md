@@ -163,3 +163,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 ## B-007H 착수 (2026-10-23)
 
 **RUNNING / probe·S·D NOT_RUN.** 원격 `51daacac291f161a21edeac3a551375fdd24f08c`와 [PLAN](experiments/B-007H-cuda-lifecycle/PLAN.md)을 확인했다. G의 조건 캐시를 재사용하며 P는 반복하지 않는다. 같은 서비스 환경의 작은 실제 CUDA 연산과 leaf별 복원 검증을 선행하고, 통과하면 별도 worker에서 CPU DiT 적재 전 CUDA 연산을 수행한다. initialized flag와 실제 연산 성공을 구분하며 원인을 사전 확정하지 않는다. probe1·CPU DiT load1·sampler1·decode1 상한, 선행 실패 시 후속 중지, 기존72/24GiB·swap0 가드 보존.
+
+## B-007H 종료 (2026-10-23)
+
+**PROBE/S/D PASS / 공식17프레임 MP4·final latent 확보.** G 조건을 재사용하고 CPU DiT 적재 전 실제64-byte CUDA 연산을 완료했다. S1회에서80 forward·40step, D1회에서896×512·16fps·1.0625초 영상을 저장했다. guarded S1199.009초/D15.228초, 최소 MemAvailable52.44GiB, swap/OOM0. P·재시도·Lab·학습0. G 원인UNKNOWN과 시간 품질UNVERIFIED를 유지한다. [RESULTS](experiments/B-007H-cuda-lifecycle/RESULTS.md).
+
+다음 하나는 기존 Lab 참조/RGB/mask의 제한된17프레임 baseline이다. 별도 결정 전 자동 실행하지 않는다.

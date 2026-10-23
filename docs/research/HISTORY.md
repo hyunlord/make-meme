@@ -274,3 +274,9 @@
 ## B-007H 모델 없는 실제 CUDA 검사 통과 (2026-10-23)
 
 사전 코드 `80f51ff`로 PROBE1을 실행해6.062초에 실제64-byte CUDA 연산·캐시16leaf 원래 device/값 복원을 통과했다. P 재실행0. 정상 종료·자원 가드를 확인한 뒤 별도 S1을 시작한다. 초기화 순서가 G 실패의 유일한 원인이었다는 결론은 아직 내리지 않는다.
+
+## B-007H 종료 (2026-10-23)
+
+**PROBE/S/D PASS / 공식17프레임 MP4·final latent 확보.** G 조건을 재사용하고 CPU DiT 적재 전 실제64-byte CUDA 연산을 완료했다. S1회에서80 forward·40step, D1회에서896×512·16fps·1.0625초 영상을 저장했다. guarded S1199.009초/D15.228초, 최소 MemAvailable52.44GiB, swap/OOM0. P·재시도·Lab·학습0. G 원인UNKNOWN과 시간 품질UNVERIFIED를 유지한다. [RESULTS](experiments/B-007H-cuda-lifecycle/RESULTS.md).
+
+다음 하나는 기존 Lab 참조/RGB/mask의 제한된17프레임 baseline이다. 별도 결정 전 자동 실행하지 않는다.

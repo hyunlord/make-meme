@@ -1,0 +1,117 @@
+{
+  "experiment": "B-007H",
+  "prereg_commit": "80f51ffacdb0b20a75e3ff8b1625784f7ded1d37",
+  "deadline_utc": "2026-10-23T02:35:00Z",
+  "stages": {
+    "PROBE": {
+      "status": "COMPLETED",
+      "attempts": 1,
+      "attempt_cap": 1,
+      "started_epoch": 1792712667.3806224,
+      "finished_epoch": 1792712673.4429321,
+      "guard_elapsed_seconds": 6.062309741973877,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "initial_available_bytes": 96018878464
+    },
+    "S": {
+      "status": "COMPLETED",
+      "attempts": 1,
+      "attempt_cap": 1,
+      "started_epoch": 1792712695.0567603,
+      "finished_epoch": 1792713894.066244,
+      "guard_elapsed_seconds": 1199.009483575821,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "initial_available_bytes": 96008777728
+    },
+    "D": {
+      "status": "COMPLETED",
+      "attempts": 1,
+      "attempt_cap": 1,
+      "started_epoch": 1792713974.127978,
+      "finished_epoch": 1792713989.3561556,
+      "guard_elapsed_seconds": 15.228177547454834,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "initial_available_bytes": 95685365760
+    }
+  },
+  "P_attempts": 0,
+  "condition_cache_reused_from": "B-007G",
+  "model_load_attempts": 1,
+  "sampler_attempts": 1,
+  "sampler_attempt_cap": 1,
+  "model_calls": 80,
+  "completed_steps": 40,
+  "counter_evidence": "Final latent sidecar and per-step persisted sampler progress",
+  "decode_attempts": 1,
+  "Lab": "NOT_RUN",
+  "training": "NOT_RUN",
+  "outputs": {
+    "final_latent.safetensors": {
+      "bytes": 2293840,
+      "sha256": "d9014a440d1c5998d720310935b039a4bddde876f92567b28949ecd0773a9aec"
+    },
+    "output.mp4": {
+      "bytes": 1206562,
+      "sha256": "9f5b04d9c4e0798330423ed90a12b3cb3ae2b7c9e7f84200474b9af6ec4dac8f"
+    },
+    "final_latent.json": {
+      "bytes": 29603,
+      "sha256": "fbf8a135c3a4d99d9e53461dfcc65898622a02aaf511423fbe537cb42f4e7e25"
+    },
+    "raw_output.pt": {
+      "bytes": 93587006,
+      "sha256": "bf91c20c230cb80683b5a9cfedc59687d6c8c9fbaad6861156738029ed024150"
+    }
+  },
+  "final_latent_value_validation": {
+    "finite": true,
+    "shape": [
+      16,
+      5,
+      64,
+      112
+    ],
+    "dtype": "torch.float32",
+    "final_value_hash": "f129057bb2cbaca33cc0e494eb472c6ccf03a753fcf37afc48e0649ddf075bd6",
+    "initial_noise_value_hash": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+    "distinct_values": true,
+    "readback_exact": true,
+    "cuda_initialized": false
+  },
+  "video": {
+    "finite": true,
+    "shape": [
+      3,
+      17,
+      512,
+      896
+    ],
+    "frames": 17,
+    "fps": "16/1",
+    "seconds": "1.062500",
+    "quality": "UNVERIFIED"
+  },
+  "preservation": {
+    "code_upstream_cache_checks": 287,
+    "all_match": true,
+    "full_weight_rehash": false,
+    "weights_environment": "Prior verified G lineage reused; no new full-weight audit claimed"
+  },
+  "owned_units": "MainPID=0\nActiveState=inactive\n\nMainPID=0\nActiveState=inactive\n",
+  "remaining_owned_processes": false,
+  "retries": 0,
+  "limitations": [
+    "Single successful run does not isolate the cause of G failure.",
+    "Tiny CUDA and mem_get_info diagnostics have runtime side effects.",
+    "Continuous playback and output quality remain UNVERIFIED."
+  ]
+}

@@ -1,6 +1,6 @@
 # B-007H — CUDA 상태와 실제 연산을 구별하기
 
-현재 H 실물 결과는 **NOT_RUN / 관측 대기**다. [PLAN](../experiments/B-007H-cuda-lifecycle/PLAN.md)의 개입은 큰 CPU 가중치 적재 전에 작은 실제 CUDA 연산을 완료하는 순서 변경이다. 새로운 모델이나 생성 방식이 아니다. [G 결과](../experiments/B-007G-phase-separated-baseline/RESULTS.md)는 보존하며 초기화 순서가 실패 원인이라고 미리 결론 내리지 않는다.
+현재 H 실물 결과는 **PROBE PASS / SAMPLER_LATENT_PASS / VIDEO_OUTPUT_PASS**다. probe는 6.062초에 service_exit0·PID0으로 종료했다. [PLAN](../experiments/B-007H-cuda-lifecycle/PLAN.md)의 개입은 큰 CPU 가중치 적재 전에 작은 실제 CUDA 연산을 완료하는 순서 변경이다. 새로운 모델이나 생성 방식이 아니다. [G 결과](../experiments/B-007G-phase-separated-baseline/RESULTS.md)는 보존하며 초기화 순서가 실패 원인이라고 미리 결론 내리지 않는다.
 
 ## 1. 초기화되었다는 말에는 여러 의미가 있다
 
@@ -20,7 +20,7 @@
 
 ## 2. 작은 probe는 무엇을 검증하는가
 
-RNG를 쓰지 않는 CPU 상수 tensor `a`를 CUDA로 복사하여 `b=a+1`을 계산하고 synchronize 뒤 CPU 값이 기대값과 같은지 본다. 이것은 seed를 소비하는 `randn` warmup과 다르다. payload는 승인된 1MiB 이내다. 연산 전후의 CPU/CUDA RNG 상태가 같다는 검증과 initial noise hash를 함께 보존한다.
+실제 [cuda_probe.py](../experiments/B-007H-cuda-lifecycle/code/cuda_probe.py)는 값3인 FP32 tensor `[16]`을 CUDA로 복사하여 `add_(2)`를 수행하고 synchronize 뒤 CPU 값이 모두5인지 확인했다. 보존하는 anchor payload는64 bytes다. 이것은 seed를 소비하는 `randn` warmup과 다르다. payload는 승인된 1MiB 이내다. tiny 연산 전후에는 CPU RNG 상태의 동일성을 확인했다. CUDA RNG 상태 조회 자체가 초기화에 영향을 줄 수 있어 tiny 이전에는 조회하지 않았다. 실제 CUDA RNG 비교 범위는 tiny 성공 후부터16개 cache leaf 복원 이후까지이며 같았다. 이를 tiny 전후 CUDA RNG 상태를 직접 측정한 증거로 확대하지 않는다. tiny 코드에는 RNG 연산이 없고 initial noise hash 계약은 별도로 유지한다.
 
 CUDA 연산은 비동기일 수 있다. launch 함수 반환은 완료 증거가 아니므로 synchronize와 readback을 구분한다. 동기화는 완료 경계를 만들지만 살아 있는 tensor를 해제하지 않는다. allocator allocated는 live tensor, reserved는 allocator가 확보한 block에 관한 관측이고 driver 비용 전체가 아니다. [PyTorch CUDA semantics](https://docs.pytorch.org/docs/2.14/notes/cuda.html#asynchronous-execution).
 
@@ -40,13 +40,24 @@ G 마지막 CPU 적재 phase에서 cgroup current는 66,564,358,144 bytes, anon�
 
 계산은 `c=E(inputs)`, `z=Sample(v_theta,c,noise)`, `video=D(z)`로 나눌 수 있다. H는 G에서 실제 저장한 c를 재사용한다. c는 text/CLIP/reference/driving/mask와 branch별 구조를 포함하고, noise와 generator state도 별도로 보존됐다. G 캐시 SHA는 `1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308`이다. 이 캐시는 denoised z가 아니므로 바로 decode할 수 없다.
 
-조건부 벡터장 `v_theta(z_sigma,sigma,c)`에 같은 값을 주려면 dtype·device·list/None·mask 순서를 보존해야 한다. CPU 검증을 위해 읽은 tensor를 전부 CUDA로 옮기면 원래 device 계약이 달라진다. H는 leaf별 원래 device를 복원하고 roundtrip 값 hash를 확인하도록 계획됐다. 공유 값이 별도 storage로 저장된 G의 alias 한계도 유지한다.
+조건부 벡터장 `v_theta(z_sigma,sigma,c)`에 같은 값을 주려면 dtype·device·list/None·mask 순서를 보존해야 한다. CPU 검증을 위해 읽은 tensor를 전부 CUDA로 옮기면 원래 device 계약이 달라진다. H는 실제16개 leaf를 원래 device로 복원하고 roundtrip 값 hash를 확인했다. 공유 값이 별도 storage로 저장된 G의 alias 한계도 유지한다.
 
 공식 [sample loop](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)의 CFG5, UniPC40 step, shift3 및 CPU solver 계산을 유지한다. 작은 warmup은 수학적 noise를 바꾸지 않아야 한다. eval·precision·입력 값이 같다는 계약 검사는 GPU 전체 출력의 byte-identical 증명을 대신하지 않는다. encoder를 학습한다면 캐시 파일은 gradient graph를 보존하지 않으므로 이 추론 논리를 그대로 적용할 수 없다.
 
 ## 5. 결과를 해석할 경계
 
-H의 probe, CPU weight load, cache device restore, DiT device move, first forward, sampler, final latent, decode, video는 각각 별도 결과다. P는 H에서 실행하지 않으며 G의 성공 artifact를 parent로 연결한다. 현재 H 실물 결과는 아직 등록되지 않았다. 실패한 뒤 재시도하거나 다른 backend로 바꾸는 계획이 아니다. 성공해도 공식 사람 예제의 baseline이며 Lab 개체·안무·Kling 품질 수용은 아니다. 직접 연속 재생이 없으면 시간 품질은 UNVERIFIED다.
+H의 probe, CPU weight load, cache device restore, DiT device move, first forward, sampler, final latent, decode, video는 각각 별도 결과다. P는 H에서 실행하지 않으며 G의 성공 artifact를 parent로 연결한다. 실제 probe에서는64-byte copy/add/synchronize/readback과16개 leaf의 원래 device 복원·값 hash가 모두 통과했다. `cuDevicePrimaryCtxGetState`는 새 driver binding을 추가하지 않아 NOT_CALLED였다. S는 실제80회 forward와40 step을 완료했다. D도 완료해 raw/MP4를 확보했다. 시간 품질은 UNVERIFIED다. 작은 probe 자체가 이를 보장한 것은 아니며 S의 별도 실행 기록이 근거다. 실패한 뒤 재시도하거나 다른 backend로 바꾸는 계획이 아니다. 성공해도 공식 사람 예제의 baseline이며 Lab 개체·안무·Kling 품질 수용은 아니다. 직접 연속 재생이 없으면 시간 품질은 UNVERIFIED다.
+
+### S 실제 관측
+
+S는 약204초에 CPU 적재를 완료한 뒤 tiny 재검사와16개 original-device 조건 복원에 통과했다. DiT device 이동도 통과했고 stage 시작240.642초에 `first_forward_start`가 관측됐다. 해당 시점 CUDA allocated는33,268,072,448 bytes, 시스템 MemAvailable은59,302,164 KiB였다. G에서 실패한 복원 경계를 이번 실행에서는 넘었다는 증거이며, 초기화 순서가 유일한 원인이라는 증명은 아니다. 이후 S는80회 forward·40 step을 완료하여 stage_S_complete가1196.45초에 기록됐다. S의 전체 guard 시간은1199.009초이며, final latent 값 hash는 initial noise와 다르다. S 종료와 자원 회복 뒤 별도 D가 phase 기준13.262초에 완료해 VIDEO_OUTPUT_PASS를 기록했다. D 전체 guard 시간은15.228초이며 decode 구간은6.720초다. 단계 완료13.262초와 guard 전체 시간을 혼동하지 않는다. 실제 연속 재생 품질은 UNVERIFIED다. 실행 순서 변경이 관측된 실패 경계를 넘게 한 사실은 새 생성 방법이나 G 원인 확정의 근거가 아니다.
+
+다음 제안은 기존 입력을 사용하는 Lab17프레임 고정 baseline 한 가지이며 이번에는 실행하지 않았다. 공식 사람 예제의 출력 확보는 Lab identity·안무 수용이나 초기화 순서의 유일한 인과 증명이 아니다. 추가 sampler·decode·실험은 실행하지 않는다.
+
+
+최종 [장부](../experiments/B-007H-cuda-lifecycle/RUN_LEDGER.json)와 [실측](../experiments/B-007H-cuda-lifecycle/MEASUREMENTS.json)을 대조했다. S의 CPU load 구간은201.431초, DiT device 이동35.968초, 첫 forward14.291초다. S 최소 MemAvailable은56,311,533,568 bytes, 관측 cgroup peak66,577,215,488 bytes, phase snapshot의 CUDA peak allocated36,325,785,600 bytes였다. D의 같은 세 항목은 각각81,109,180,416 / 2,340,904,960 / 9,565,265,920 bytes다. 서로 중복되는 회계를 합산하지 않으며 phase snapshot을 미관측 순간의 절대 peak라고 하지 않는다. S high2426에도 oom/oom_kill0, 모든 stage swap0이었다.
+
+최종 latent는 finite FP32 `[16,5,64,112]`, readback exact다. 값 SHA는 `f129057bb2cbaca33cc0e494eb472c6ccf03a753fcf37afc48e0649ddf075bd6`으로 initial noise와 다르며, 파일 SHA와 별개다. 실제 raw는 finite `[3,17,512,896]`, MP4는17프레임·16fps·1.0625초다. 모든 자체 worker는 PID0/inactive이며 retry0, P 재실행0, model load1, sampler1, decode1이다.
 
 ## 이해 확인 질문
 

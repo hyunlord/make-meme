@@ -1,0 +1,5351 @@
+{
+  "scope": "Terminal stage observations; code/fixture success is separate from video/quality acceptance.",
+  "accounting": "System, process RSS, cgroup and CUDA allocator are separate overlapping accounts, never summed.",
+  "cuda_sampling": "Phase snapshots only; last recorded CUDA peak is not asserted to be the unobserved terminal peak.",
+  "stages": {
+    "PROBE": {
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "service_returncode": 0,
+      "service_seconds": 6.062309741973877,
+      "memory_cap_bytes": 68719476736,
+      "samples": 6,
+      "minimum_available_bytes": 95122866176,
+      "last_available_bytes": 95122866176,
+      "max_swap_bytes": 0,
+      "max_sampled_cgroup_current_bytes": 736710656,
+      "max_recorded_cgroup_peak_bytes": 751427584,
+      "last_cgroup_events": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "last_durable_phase": "stage_PROBE_complete",
+      "paired_durations": [
+        {
+          "phase": "tiny_copy",
+          "seconds": 0.2225039469776675
+        },
+        {
+          "phase": "cache_t0_restore",
+          "seconds": 0.04739187896484509
+        },
+        {
+          "phase": "cache_t1_restore",
+          "seconds": 0.017597660014871508
+        },
+        {
+          "phase": "cache_t2_restore",
+          "seconds": 0.020326759025920182
+        },
+        {
+          "phase": "cache_t3_restore",
+          "seconds": 0.026291778951417655
+        },
+        {
+          "phase": "cache_t4_restore",
+          "seconds": 0.05593675503041595
+        },
+        {
+          "phase": "cache_t5_restore",
+          "seconds": 0.016988985997159034
+        },
+        {
+          "phase": "cache_t6_restore",
+          "seconds": 0.02726431400515139
+        },
+        {
+          "phase": "cache_t7_restore",
+          "seconds": 0.015786873002070934
+        },
+        {
+          "phase": "cache_t8_restore",
+          "seconds": 0.02216997800860554
+        },
+        {
+          "phase": "cache_t9_restore",
+          "seconds": 0.016814926988445222
+        },
+        {
+          "phase": "cache_t10_restore",
+          "seconds": 0.045735777996014804
+        },
+        {
+          "phase": "cache_t11_restore",
+          "seconds": 0.02913423703284934
+        },
+        {
+          "phase": "cache_t12_restore",
+          "seconds": 0.020505330990999937
+        },
+        {
+          "phase": "cache_t13_restore",
+          "seconds": 0.01588552602333948
+        },
+        {
+          "phase": "cache_t14_restore",
+          "seconds": 0.01564546796726063
+        },
+        {
+          "phase": "cache_t15_restore",
+          "seconds": 0.01470181200420484
+        }
+      ],
+      "unpaired_start_markers": [
+        "stage_PROBE",
+        "tiny_kernel"
+      ],
+      "progress": null,
+      "phase_snapshots": [
+        {
+          "phase": "stage_PROBE_start",
+          "epoch": 1792712668.056129,
+          "elapsed_seconds": 0.03579561901278794,
+          "mem_available_bytes": 95689682944,
+          "rss_anon_bytes": 299798528,
+          "rss_file_bytes": 185524224,
+          "cgroup_current_bytes": 304320512,
+          "cgroup_peak_bytes": 317177856,
+          "cgroup_anon_bytes": 299798528,
+          "cgroup_file_bytes": 1826816,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": false,
+          "cuda_allocated": null,
+          "cuda_reserved": null,
+          "cuda_peak_allocated": null,
+          "swap_used": 0
+        },
+        {
+          "phase": "before_official_import",
+          "epoch": 1792712668.0649836,
+          "elapsed_seconds": 0.04464965400984511,
+          "mem_available_bytes": 95689715712,
+          "rss_anon_bytes": 299999232,
+          "rss_file_bytes": 185524224,
+          "cgroup_current_bytes": 304582656,
+          "cgroup_peak_bytes": 317177856,
+          "cgroup_anon_bytes": 299798528,
+          "cgroup_file_bytes": 1826816,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": false,
+          "cuda_allocated": null,
+          "cuda_reserved": null,
+          "cuda_peak_allocated": null,
+          "swap_used": 0
+        },
+        {
+          "phase": "after_official_import",
+          "epoch": 1792712671.4510796,
+          "elapsed_seconds": 3.43074591801269,
+          "mem_available_bytes": 95526416384,
+          "rss_anon_bytes": 470937600,
+          "rss_file_bytes": 231952384,
+          "cgroup_current_bytes": 598179840,
+          "cgroup_peak_bytes": 598179840,
+          "cgroup_anon_bytes": 469372928,
+          "cgroup_file_bytes": 123310080,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 0,
+          "cuda_reserved": 0,
+          "cuda_peak_allocated": 0,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_copy_start",
+          "epoch": 1792712671.464875,
+          "elapsed_seconds": 3.444541527016554,
+          "mem_available_bytes": 95522381824,
+          "rss_anon_bytes": 473063424,
+          "rss_file_bytes": 232312832,
+          "cgroup_current_bytes": 600260608,
+          "cgroup_peak_bytes": 600276992,
+          "cgroup_anon_bytes": 473063424,
+          "cgroup_file_bytes": 123404288,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 0,
+          "cuda_reserved": 0,
+          "cuda_peak_allocated": 0,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_copy_end",
+          "epoch": 1792712671.6873689,
+          "elapsed_seconds": 3.6670355219976045,
+          "mem_available_bytes": 95258365952,
+          "rss_anon_bytes": 494800896,
+          "rss_file_bytes": 264499200,
+          "cgroup_current_bytes": 676806656,
+          "cgroup_peak_bytes": 676806656,
+          "cgroup_anon_bytes": 494800896,
+          "cgroup_file_bytes": 174895104,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_kernel_start",
+          "epoch": 1792712671.6926756,
+          "elapsed_seconds": 3.672341517987661,
+          "mem_available_bytes": 95258365952,
+          "rss_anon_bytes": 494800896,
+          "rss_file_bytes": 264499200,
+          "cgroup_current_bytes": 676937728,
+          "cgroup_peak_bytes": 676941824,
+          "cgroup_anon_bytes": 494800896,
+          "cgroup_file_bytes": 174895104,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_kernel_complete",
+          "epoch": 1792712671.7120473,
+          "elapsed_seconds": 3.6917140610166825,
+          "mem_available_bytes": 95214776320,
+          "rss_anon_bytes": 516542464,
+          "rss_file_bytes": 265920512,
+          "cgroup_current_bytes": 701054976,
+          "cgroup_peak_bytes": 701054976,
+          "cgroup_anon_bytes": 516546560,
+          "cgroup_file_bytes": 177201152,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t0_restore_start",
+          "epoch": 1792712671.7586315,
+          "elapsed_seconds": 3.7382979770191014,
+          "mem_available_bytes": 95182221312,
+          "rss_anon_bytes": 533913600,
+          "rss_file_bytes": 284151808,
+          "cgroup_current_bytes": 718618624,
+          "cgroup_peak_bytes": 718618624,
+          "cgroup_anon_bytes": 533913600,
+          "cgroup_file_bytes": 177266688,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t0_restore_end",
+          "epoch": 1792712671.8060234,
+          "elapsed_seconds": 3.7856902080238797,
+          "mem_available_bytes": 95156948992,
+          "rss_anon_bytes": 541847552,
+          "rss_file_bytes": 285745152,
+          "cgroup_current_bytes": 727265280,
+          "cgroup_peak_bytes": 727265280,
+          "cgroup_anon_bytes": 541847552,
+          "cgroup_file_bytes": 177868800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2294272,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2294272,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t1_restore_start",
+          "epoch": 1792712671.8100011,
+          "elapsed_seconds": 3.7896670370246284,
+          "mem_available_bytes": 95156948992,
+          "rss_anon_bytes": 534458368,
+          "rss_file_bytes": 285745152,
+          "cgroup_current_bytes": 721719296,
+          "cgroup_peak_bytes": 727265280,
+          "cgroup_anon_bytes": 534458368,
+          "cgroup_file_bytes": 177868800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2294272,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2294272,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t1_restore_end",
+          "epoch": 1792712671.8275912,
+          "elapsed_seconds": 3.8072572399978526,
+          "mem_available_bytes": 95156948992,
+          "rss_anon_bytes": 534614016,
+          "rss_file_bytes": 285892608,
+          "cgroup_current_bytes": 721711104,
+          "cgroup_peak_bytes": 727265280,
+          "cgroup_anon_bytes": 534458368,
+          "cgroup_file_bytes": 177868800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2335232,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2335232,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t2_restore_start",
+          "epoch": 1792712671.8320155,
+          "elapsed_seconds": 3.8116819619899616,
+          "mem_available_bytes": 95156948992,
+          "rss_anon_bytes": 534614016,
+          "rss_file_bytes": 285892608,
+          "cgroup_current_bytes": 721956864,
+          "cgroup_peak_bytes": 727265280,
+          "cgroup_anon_bytes": 534458368,
+          "cgroup_file_bytes": 177868800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2335232,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2335232,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t2_restore_end",
+          "epoch": 1792712671.8523722,
+          "elapsed_seconds": 3.832038385036867,
+          "mem_available_bytes": 95153123328,
+          "rss_anon_bytes": 539353088,
+          "rss_file_bytes": 285925376,
+          "cgroup_current_bytes": 726667264,
+          "cgroup_peak_bytes": 727265280,
+          "cgroup_anon_bytes": 539353088,
+          "cgroup_file_bytes": 177954816,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2993152,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2993152,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t3_restore_start",
+          "epoch": 1792712671.8566804,
+          "elapsed_seconds": 3.836346518015489,
+          "mem_available_bytes": 95153123328,
+          "rss_anon_bytes": 539353088,
+          "rss_file_bytes": 285925376,
+          "cgroup_current_bytes": 726667264,
+          "cgroup_peak_bytes": 727265280,
+          "cgroup_anon_bytes": 539353088,
+          "cgroup_file_bytes": 177954816,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2993152,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2993152,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t3_restore_end",
+          "epoch": 1792712671.882965,
+          "elapsed_seconds": 3.8626310490071774,
+          "mem_available_bytes": 95153127424,
+          "rss_anon_bytes": 540311552,
+          "rss_file_bytes": 285794304,
+          "cgroup_current_bytes": 727429120,
+          "cgroup_peak_bytes": 727433216,
+          "cgroup_anon_bytes": 539353088,
+          "cgroup_file_bytes": 177954816,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 3451904,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 3451904,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t4_restore_start",
+          "epoch": 1792712671.8872545,
+          "elapsed_seconds": 3.8669205739861354,
+          "mem_available_bytes": 95153127424,
+          "rss_anon_bytes": 540311552,
+          "rss_file_bytes": 285794304,
+          "cgroup_current_bytes": 727429120,
+          "cgroup_peak_bytes": 727433216,
+          "cgroup_anon_bytes": 539353088,
+          "cgroup_file_bytes": 177954816,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 3451904,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 3451904,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t4_restore_end",
+          "epoch": 1792712671.9431584,
+          "elapsed_seconds": 3.92282488202909,
+          "mem_available_bytes": 95138545664,
+          "rss_anon_bytes": 557031424,
+          "rss_file_bytes": 285663232,
+          "cgroup_current_bytes": 743944192,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 557035520,
+          "cgroup_file_bytes": 177958912,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8268800,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8268800,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t5_restore_start",
+          "epoch": 1792712671.9475555,
+          "elapsed_seconds": 3.927221765043214,
+          "mem_available_bytes": 95138545664,
+          "rss_anon_bytes": 541569024,
+          "rss_file_bytes": 285663232,
+          "cgroup_current_bytes": 728543232,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 541569024,
+          "cgroup_file_bytes": 177963008,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8268800,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8268800,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t5_restore_end",
+          "epoch": 1792712671.9645402,
+          "elapsed_seconds": 3.9442066870396957,
+          "mem_available_bytes": 95138545664,
+          "rss_anon_bytes": 543145984,
+          "rss_file_bytes": 285663232,
+          "cgroup_current_bytes": 729985024,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 543145984,
+          "cgroup_file_bytes": 177963008,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8842240,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8842240,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t6_restore_start",
+          "epoch": 1792712671.9686542,
+          "elapsed_seconds": 3.948320217023138,
+          "mem_available_bytes": 95138291712,
+          "rss_anon_bytes": 543145984,
+          "rss_file_bytes": 285663232,
+          "cgroup_current_bytes": 730234880,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 543145984,
+          "cgroup_file_bytes": 177963008,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8842240,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8842240,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t6_restore_end",
+          "epoch": 1792712671.9959116,
+          "elapsed_seconds": 3.9755783079890534,
+          "mem_available_bytes": 95135612928,
+          "rss_anon_bytes": 546148352,
+          "rss_file_bytes": 285536256,
+          "cgroup_current_bytes": 733241344,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 546148352,
+          "cgroup_file_bytes": 177967104,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9845760,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9845760,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t7_restore_start",
+          "epoch": 1792712672.0000734,
+          "elapsed_seconds": 3.979739692993462,
+          "mem_available_bytes": 95135612928,
+          "rss_anon_bytes": 546148352,
+          "rss_file_bytes": 285536256,
+          "cgroup_current_bytes": 733241344,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 546148352,
+          "cgroup_file_bytes": 177967104,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9845760,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9845760,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t7_restore_end",
+          "epoch": 1792712672.0158925,
+          "elapsed_seconds": 3.9955586760188453,
+          "mem_available_bytes": 95133474816,
+          "rss_anon_bytes": 546148352,
+          "rss_file_bytes": 285536256,
+          "cgroup_current_bytes": 733245440,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 546148352,
+          "cgroup_file_bytes": 177967104,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9853952,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9853952,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t8_restore_start",
+          "epoch": 1792712672.0195792,
+          "elapsed_seconds": 3.999245305021759,
+          "mem_available_bytes": 95133474816,
+          "rss_anon_bytes": 546148352,
+          "rss_file_bytes": 285536256,
+          "cgroup_current_bytes": 733245440,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 546148352,
+          "cgroup_file_bytes": 177967104,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9853952,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9853952,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t8_restore_end",
+          "epoch": 1792712672.041749,
+          "elapsed_seconds": 4.02141547499923,
+          "mem_available_bytes": 95133470720,
+          "rss_anon_bytes": 548843520,
+          "rss_file_bytes": 285470720,
+          "cgroup_current_bytes": 736129024,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 548843520,
+          "cgroup_file_bytes": 177975296,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10511872,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 10511872,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t9_restore_start",
+          "epoch": 1792712672.0458446,
+          "elapsed_seconds": 4.025510429986753,
+          "mem_available_bytes": 95133016064,
+          "rss_anon_bytes": 548843520,
+          "rss_file_bytes": 285470720,
+          "cgroup_current_bytes": 735932416,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 548843520,
+          "cgroup_file_bytes": 177975296,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10511872,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 10511872,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t9_restore_end",
+          "epoch": 1792712672.0626554,
+          "elapsed_seconds": 4.042322205030359,
+          "mem_available_bytes": 95130918912,
+          "rss_anon_bytes": 548843520,
+          "rss_file_bytes": 285470720,
+          "cgroup_current_bytes": 735944704,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 548843520,
+          "cgroup_file_bytes": 177975296,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10970624,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 10970624,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t10_restore_start",
+          "epoch": 1792712672.066712,
+          "elapsed_seconds": 4.046378072001971,
+          "mem_available_bytes": 95130918912,
+          "rss_anon_bytes": 548843520,
+          "rss_file_bytes": 285470720,
+          "cgroup_current_bytes": 735956992,
+          "cgroup_peak_bytes": 743948288,
+          "cgroup_anon_bytes": 548843520,
+          "cgroup_file_bytes": 177975296,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10970624,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 10970624,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t10_restore_end",
+          "epoch": 1792712672.1124308,
+          "elapsed_seconds": 4.092097451037262,
+          "mem_available_bytes": 95112105984,
+          "rss_anon_bytes": 564310016,
+          "rss_file_bytes": 285405184,
+          "cgroup_current_bytes": 751423488,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 564310016,
+          "cgroup_file_bytes": 177987584,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 15787520,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 15787520,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t11_restore_start",
+          "epoch": 1792712672.1169124,
+          "elapsed_seconds": 4.09657839499414,
+          "mem_available_bytes": 95128096768,
+          "rss_anon_bytes": 548974592,
+          "rss_file_bytes": 285405184,
+          "cgroup_current_bytes": 736088064,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 548974592,
+          "cgroup_file_bytes": 177987584,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 15787520,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 15787520,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t11_restore_end",
+          "epoch": 1792712672.1460123,
+          "elapsed_seconds": 4.12567914603278,
+          "mem_available_bytes": 95109562368,
+          "rss_anon_bytes": 551682048,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 738562048,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 551682048,
+          "cgroup_file_bytes": 177987584,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 16360960,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 16360960,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t12_restore_start",
+          "epoch": 1792712672.1500695,
+          "elapsed_seconds": 4.129735380993225,
+          "mem_available_bytes": 95109562368,
+          "rss_anon_bytes": 551682048,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 738562048,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 551682048,
+          "cgroup_file_bytes": 177987584,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 16360960,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 16360960,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t12_restore_end",
+          "epoch": 1792712672.170569,
+          "elapsed_seconds": 4.150235097040422,
+          "mem_available_bytes": 95122948096,
+          "rss_anon_bytes": 554872832,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 741953536,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 554872832,
+          "cgroup_file_bytes": 177991680,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t13_restore_start",
+          "epoch": 1792712672.1745644,
+          "elapsed_seconds": 4.154230165993795,
+          "mem_available_bytes": 95122948096,
+          "rss_anon_bytes": 554872832,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 741953536,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 554872832,
+          "cgroup_file_bytes": 177991680,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t13_restore_end",
+          "epoch": 1792712672.1904485,
+          "elapsed_seconds": 4.170114571985323,
+          "mem_available_bytes": 95122739200,
+          "rss_anon_bytes": 554872832,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 741855232,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 554872832,
+          "cgroup_file_bytes": 177991680,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t14_restore_start",
+          "epoch": 1792712672.1942441,
+          "elapsed_seconds": 4.173909966018982,
+          "mem_available_bytes": 95122739200,
+          "rss_anon_bytes": 554872832,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 741855232,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 554872832,
+          "cgroup_file_bytes": 177991680,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t14_restore_end",
+          "epoch": 1792712672.209884,
+          "elapsed_seconds": 4.189550089999102,
+          "mem_available_bytes": 95122866176,
+          "rss_anon_bytes": 554872832,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 741838848,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 554872832,
+          "cgroup_file_bytes": 177991680,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t15_restore_start",
+          "epoch": 1792712672.2133744,
+          "elapsed_seconds": 4.193040226993617,
+          "mem_available_bytes": 95122866176,
+          "rss_anon_bytes": 554872832,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 741838848,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 554872832,
+          "cgroup_file_bytes": 177991680,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t15_restore_end",
+          "epoch": 1792712672.2280726,
+          "elapsed_seconds": 4.207738727040123,
+          "mem_available_bytes": 95122866176,
+          "rss_anon_bytes": 549769216,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 736710656,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 549769216,
+          "cgroup_file_bytes": 178003968,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "probe_cache_restore_complete",
+          "epoch": 1792712672.2316933,
+          "elapsed_seconds": 4.211359293025453,
+          "mem_available_bytes": 95122866176,
+          "rss_anon_bytes": 549769216,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 736710656,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 549769216,
+          "cgroup_file_bytes": 178003968,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "stage_PROBE_complete",
+          "epoch": 1792712672.2468927,
+          "elapsed_seconds": 4.226558708003722,
+          "mem_available_bytes": 95122866176,
+          "rss_anon_bytes": 549773312,
+          "rss_file_bytes": 285339648,
+          "cgroup_current_bytes": 736710656,
+          "cgroup_peak_bytes": 751427584,
+          "cgroup_anon_bytes": 549769216,
+          "cgroup_file_bytes": 178003968,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 0,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        }
+      ],
+      "diagnostic_snapshots": [
+        {
+          "label": "after_official_import",
+          "is_initialized": true,
+          "cuda_mem_get_info": null,
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "598179840\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "36035252224\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "39060951040\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84217970688\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84497858560\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "8e6d4894a226fff4d7b6272528c5069319b0beae5832b80375f0d76d2fa6dd47"
+        },
+        {
+          "label": "before_official_import",
+          "is_initialized": false,
+          "cuda_mem_get_info": null,
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "304582656\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "35742621696\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "38768230400\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "83925192704\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84205080576\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "43ce9d8fc9f990ab525c5f1df68cf2481eb0942c94b46354fe0164d294106bfc"
+        },
+        {
+          "label": "probe_cache_restore_complete",
+          "is_initialized": true,
+          "cuda_mem_get_info": {
+            "free": 14025191424,
+            "total": 128524300288
+          },
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "736710656\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "36173115392\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "39198572544\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84354588672\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84634947584\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "6dce2e263ac5a633d255d9681664d0888c84c3658b43eee26f80b6ef809fb961"
+        },
+        {
+          "label": "tiny_copy_start",
+          "is_initialized": true,
+          "cuda_mem_get_info": null,
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "600260608\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "36037332992\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "39063031808\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84220051456\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84499939328\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "04e8199ed79e71cc06028723185e4896cfbf5a1bb6199c127c25ffd1193aee16"
+        },
+        {
+          "label": "tiny_kernel_complete",
+          "is_initialized": true,
+          "cuda_mem_get_info": {
+            "free": 14118666240,
+            "total": 128524300288
+          },
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "701054976\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "36137877504\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "39163576320\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84320595968\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84600676352\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "c2ed04a649ac2f520a6e6413dd88fdd2926d45df146b8fb4047eb3cd4da5e779"
+        }
+      ],
+      "cache_leaves": [
+        {
+          "key": "t0",
+          "location": "root.noise",
+          "target_device": "cuda:0",
+          "bytes": 2293760,
+          "shape": [
+            16,
+            5,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t1",
+          "location": "root.arg_c.context[0]",
+          "target_device": "cuda:0",
+          "bytes": 40960,
+          "shape": [
+            5,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "status": "PASS",
+          "sha256": "c32a54b985b135fa58ce3c981d177dd4c694a40cecee0493df07fc6711212472",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t2",
+          "location": "root.arg_c.clip_fea",
+          "target_device": "cuda:0",
+          "bytes": 657920,
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "status": "PASS",
+          "sha256": "47cfb6be7a08f4374e3077901627d5a1e06731c26f6a5566bcc39e501bddd17f",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t3",
+          "location": "root.arg_c.ref_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 458752,
+          "shape": [
+            16,
+            1,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "6e686bc9159595ccad9823110063f15199b0cb36baef25dbb59de4ec11ad5f47",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t4",
+          "location": "root.arg_c.ref_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 4816896,
+          "shape": [
+            28,
+            6,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "c4ddb91908fcdd54c9057bdb2e9b31740381b9108aea37d5e4ec2dfc0cda7217",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t5",
+          "location": "root.arg_c.pose_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 573440,
+          "shape": [
+            16,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "e65367a7783864e2d3022acd880ddc592bc367810937c95ca460d2781194ac71",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t6",
+          "location": "root.arg_c.driving_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 1003520,
+          "shape": [
+            28,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "2b3a07a8a5f0a980a420d32af39cd9f4a5a0e0cc10704a48c52684493c7af09b",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t7",
+          "location": "root.arg_null.context[0]",
+          "target_device": "cuda:0",
+          "bytes": 8192,
+          "shape": [
+            1,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "status": "PASS",
+          "sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t8",
+          "location": "root.arg_null.clip_fea",
+          "target_device": "cuda:0",
+          "bytes": 657920,
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "status": "PASS",
+          "sha256": "47cfb6be7a08f4374e3077901627d5a1e06731c26f6a5566bcc39e501bddd17f",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t9",
+          "location": "root.arg_null.ref_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 458752,
+          "shape": [
+            16,
+            1,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "6e686bc9159595ccad9823110063f15199b0cb36baef25dbb59de4ec11ad5f47",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t10",
+          "location": "root.arg_null.ref_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 4816896,
+          "shape": [
+            28,
+            6,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "c4ddb91908fcdd54c9057bdb2e9b31740381b9108aea37d5e4ec2dfc0cda7217",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t11",
+          "location": "root.arg_null.pose_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 573440,
+          "shape": [
+            16,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "e65367a7783864e2d3022acd880ddc592bc367810937c95ca460d2781194ac71",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t12",
+          "location": "root.arg_null.driving_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 1003520,
+          "shape": [
+            28,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "2b3a07a8a5f0a980a420d32af39cd9f4a5a0e0cc10704a48c52684493c7af09b",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t13",
+          "location": "root.generator_state",
+          "target_device": "cpu",
+          "bytes": 16,
+          "shape": [
+            16
+          ],
+          "dtype": "torch.uint8",
+          "status": "PASS",
+          "sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+          "actual_device": "cpu"
+        },
+        {
+          "key": "t14",
+          "location": "root.timesteps",
+          "target_device": "cuda:0",
+          "bytes": 320,
+          "shape": [
+            40
+          ],
+          "dtype": "torch.int64",
+          "status": "PASS",
+          "sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t15",
+          "location": "root.sigmas",
+          "target_device": "cpu",
+          "bytes": 164,
+          "shape": [
+            41
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+          "actual_device": "cpu"
+        }
+      ],
+      "tiny_result": {
+        "status": "PASS",
+        "retained_payload_bytes": 64,
+        "cpu_rng_unchanged": true,
+        "operations": [
+          "constant CPU fill",
+          "H2D copy",
+          "add_ constant",
+          "synchronize",
+          "D2H exact equality"
+        ],
+        "CUDA_RNG": "No RNG operation invoked; initial CUDA state baseline captured only after successful real work"
+      },
+      "probe_result": {
+        "status": "PASS",
+        "cache_sha256": "1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308",
+        "cuda_rng_unchanged_after_tiny": true,
+        "leaf_count": 16
+      },
+      "error_kind": null,
+      "forward_and_steps": {
+        "recorded_counter": null,
+        "control_flow": "Inspect last durable phase and exception; no zero counter inferred from absent progress"
+      },
+      "evidence_sha256": {
+        "pipeline-process.json": "802c5b4992c5585401d72a55f6040a21b239619f885990eabd9357a108685854",
+        "resource_metrics.jsonl": "8ae1a922a40b1dc3402d27cac5ff93f23c6f43d507d4fae78a13c02d3e3cc40f",
+        "phases.jsonl": "3c7aaecab5d8a20710a78077042f7aceb42687f77d281ed8625a9e826a7a5a1f"
+      }
+    },
+    "S": {
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "service_returncode": 0,
+      "service_seconds": 1199.009483575821,
+      "memory_cap_bytes": 68719476736,
+      "samples": 1183,
+      "minimum_available_bytes": 56311533568,
+      "last_available_bytes": 59606851584,
+      "max_swap_bytes": 0,
+      "max_sampled_cgroup_current_bytes": 66571948032,
+      "max_recorded_cgroup_peak_bytes": 66577215488,
+      "last_cgroup_events": {
+        "low": 0,
+        "high": 2426,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "last_durable_phase": "stage_S_complete",
+      "paired_durations": [
+        {
+          "phase": "tiny_copy",
+          "seconds": 0.1878585980157368
+        },
+        {
+          "phase": "dit_load",
+          "seconds": 201.43062546203146
+        },
+        {
+          "phase": "cache_t0_restore",
+          "seconds": 0.054932967002969235
+        },
+        {
+          "phase": "cache_t1_restore",
+          "seconds": 0.02195423998637125
+        },
+        {
+          "phase": "cache_t2_restore",
+          "seconds": 0.034365805971901864
+        },
+        {
+          "phase": "cache_t3_restore",
+          "seconds": 0.02530841901898384
+        },
+        {
+          "phase": "cache_t4_restore",
+          "seconds": 0.06189264799468219
+        },
+        {
+          "phase": "cache_t5_restore",
+          "seconds": 0.01777673204196617
+        },
+        {
+          "phase": "cache_t6_restore",
+          "seconds": 0.027145009022206068
+        },
+        {
+          "phase": "cache_t7_restore",
+          "seconds": 0.017183079035021365
+        },
+        {
+          "phase": "cache_t8_restore",
+          "seconds": 0.023425029998179525
+        },
+        {
+          "phase": "cache_t9_restore",
+          "seconds": 0.017828716023359448
+        },
+        {
+          "phase": "cache_t10_restore",
+          "seconds": 0.06083818897604942
+        },
+        {
+          "phase": "cache_t11_restore",
+          "seconds": 0.01896627899259329
+        },
+        {
+          "phase": "cache_t12_restore",
+          "seconds": 0.018569262989331037
+        },
+        {
+          "phase": "cache_t13_restore",
+          "seconds": 0.017724892997648567
+        },
+        {
+          "phase": "cache_t14_restore",
+          "seconds": 0.016582450014539063
+        },
+        {
+          "phase": "cache_t15_restore",
+          "seconds": 0.01765078300377354
+        },
+        {
+          "phase": "dit_to_device",
+          "seconds": 35.96798909804784
+        },
+        {
+          "phase": "first_forward",
+          "seconds": 14.291482651024126
+        }
+      ],
+      "unpaired_start_markers": [
+        "dit_meta_init",
+        "final_latent_save",
+        "sampler",
+        "stage_S",
+        "tiny_kernel"
+      ],
+      "progress": {
+        "model_calls": 80,
+        "completed_steps": 40,
+        "last_timestep": 71.0
+      },
+      "phase_snapshots": [
+        {
+          "phase": "stage_S_start",
+          "epoch": 1792712695.6810257,
+          "elapsed_seconds": 0.028260090039111674,
+          "mem_available_bytes": 95669964800,
+          "rss_anon_bytes": 299839488,
+          "rss_file_bytes": 186445824,
+          "cgroup_current_bytes": 302653440,
+          "cgroup_peak_bytes": 315826176,
+          "cgroup_anon_bytes": 299839488,
+          "cgroup_file_bytes": 8192,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": false,
+          "cuda_allocated": null,
+          "cuda_reserved": null,
+          "cuda_peak_allocated": null,
+          "swap_used": 0
+        },
+        {
+          "phase": "before_official_import",
+          "epoch": 1792712695.6978157,
+          "elapsed_seconds": 0.045049799024127424,
+          "mem_available_bytes": 95669563392,
+          "rss_anon_bytes": 300048384,
+          "rss_file_bytes": 186445824,
+          "cgroup_current_bytes": 302915584,
+          "cgroup_peak_bytes": 315826176,
+          "cgroup_anon_bytes": 299839488,
+          "cgroup_file_bytes": 8192,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": false,
+          "cuda_allocated": null,
+          "cuda_reserved": null,
+          "cuda_peak_allocated": null,
+          "swap_used": 0
+        },
+        {
+          "phase": "after_official_import",
+          "epoch": 1792712697.9188123,
+          "elapsed_seconds": 2.266046422009822,
+          "mem_available_bytes": 95517212672,
+          "rss_anon_bytes": 470958080,
+          "rss_file_bytes": 232742912,
+          "cgroup_current_bytes": 474750976,
+          "cgroup_peak_bytes": 474750976,
+          "cgroup_anon_bytes": 470962176,
+          "cgroup_file_bytes": 16384,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 0,
+          "cuda_reserved": 0,
+          "cuda_peak_allocated": 0,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_copy_start",
+          "epoch": 1792712697.9450164,
+          "elapsed_seconds": 2.29225065902574,
+          "mem_available_bytes": 95512743936,
+          "rss_anon_bytes": 473079808,
+          "rss_file_bytes": 233140224,
+          "cgroup_current_bytes": 477093888,
+          "cgroup_peak_bytes": 477110272,
+          "cgroup_anon_bytes": 473079808,
+          "cgroup_file_bytes": 24576,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 0,
+          "cuda_reserved": 0,
+          "cuda_peak_allocated": 0,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_copy_end",
+          "epoch": 1792712698.1328673,
+          "elapsed_seconds": 2.4801017860299908,
+          "mem_available_bytes": 95252103168,
+          "rss_anon_bytes": 494882816,
+          "rss_file_bytes": 265306112,
+          "cgroup_current_bytes": 546299904,
+          "cgroup_peak_bytes": 546299904,
+          "cgroup_anon_bytes": 494878720,
+          "cgroup_file_bytes": 44265472,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_kernel_start",
+          "epoch": 1792712698.14772,
+          "elapsed_seconds": 2.4949546310235746,
+          "mem_available_bytes": 95251849216,
+          "rss_anon_bytes": 494882816,
+          "rss_file_bytes": 265306112,
+          "cgroup_current_bytes": 546299904,
+          "cgroup_peak_bytes": 546299904,
+          "cgroup_anon_bytes": 494878720,
+          "cgroup_file_bytes": 44265472,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "tiny_kernel_complete",
+          "epoch": 1792712698.1663754,
+          "elapsed_seconds": 2.513610025984235,
+          "mem_available_bytes": 95206400000,
+          "rss_anon_bytes": 516636672,
+          "rss_file_bytes": 266702848,
+          "cgroup_current_bytes": 570417152,
+          "cgroup_peak_bytes": 570417152,
+          "cgroup_anon_bytes": 516640768,
+          "cgroup_file_bytes": 46366720,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_load_start",
+          "epoch": 1792712698.1932325,
+          "elapsed_seconds": 2.5404667599941604,
+          "mem_available_bytes": 95206400000,
+          "rss_anon_bytes": 516644864,
+          "rss_file_bytes": 266760192,
+          "cgroup_current_bytes": 570417152,
+          "cgroup_peak_bytes": 570417152,
+          "cgroup_anon_bytes": 516640768,
+          "cgroup_file_bytes": 46366720,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_meta_init_start",
+          "epoch": 1792712698.1966443,
+          "elapsed_seconds": 2.543878199008759,
+          "mem_available_bytes": 95206400000,
+          "rss_anon_bytes": 516648960,
+          "rss_file_bytes": 266760192,
+          "cgroup_current_bytes": 570417152,
+          "cgroup_peak_bytes": 570417152,
+          "cgroup_anon_bytes": 516640768,
+          "cgroup_file_bytes": 46366720,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_meta_init_done",
+          "epoch": 1792712698.3251343,
+          "elapsed_seconds": 2.6723686489858665,
+          "mem_available_bytes": 95200489472,
+          "rss_anon_bytes": 519827456,
+          "rss_file_bytes": 270274560,
+          "cgroup_current_bytes": 575954944,
+          "cgroup_peak_bytes": 575954944,
+          "cgroup_anon_bytes": 519831552,
+          "cgroup_file_bytes": 48418816,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_staged_weights_done",
+          "epoch": 1792712899.548985,
+          "elapsed_seconds": 203.8962196020293,
+          "mem_available_bytes": 62600601600,
+          "rss_anon_bytes": 33054957568,
+          "rss_file_bytes": 44891361280,
+          "cgroup_current_bytes": 66570518528,
+          "cgroup_peak_bytes": 66572255232,
+          "cgroup_anon_bytes": 33054957568,
+          "cgroup_file_bytes": 33316511744,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2228,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_loader_complete_cpu",
+          "epoch": 1792712899.612709,
+          "elapsed_seconds": 203.95994316099677,
+          "mem_available_bytes": 62584631296,
+          "rss_anon_bytes": 33074860032,
+          "rss_file_bytes": 44868546560,
+          "cgroup_current_bytes": 66569064448,
+          "cgroup_peak_bytes": 66572255232,
+          "cgroup_anon_bytes": 33074860032,
+          "cgroup_file_bytes": 33294880768,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2231,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_load_end",
+          "epoch": 1792712899.6238375,
+          "elapsed_seconds": 203.971071759006,
+          "mem_available_bytes": 62583693312,
+          "rss_anon_bytes": 33074860032,
+          "rss_file_bytes": 44868546560,
+          "cgroup_current_bytes": 66569064448,
+          "cgroup_peak_bytes": 66572255232,
+          "cgroup_anon_bytes": 33074860032,
+          "cgroup_file_bytes": 33294880768,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2231,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "after_cpu_load_tiny_recheck",
+          "epoch": 1792712899.6302736,
+          "elapsed_seconds": 203.97750836098567,
+          "mem_available_bytes": 62583693312,
+          "rss_anon_bytes": 33074860032,
+          "rss_file_bytes": 44868546560,
+          "cgroup_current_bytes": 66569064448,
+          "cgroup_peak_bytes": 66572255232,
+          "cgroup_anon_bytes": 33074860032,
+          "cgroup_file_bytes": 33294880768,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2231,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t0_restore_start",
+          "epoch": 1792712899.6868143,
+          "elapsed_seconds": 204.03404861100717,
+          "mem_available_bytes": 62572986368,
+          "rss_anon_bytes": 33092030464,
+          "rss_file_bytes": 44870447104,
+          "cgroup_current_bytes": 66569908224,
+          "cgroup_peak_bytes": 66572263424,
+          "cgroup_anon_bytes": 33092030464,
+          "cgroup_file_bytes": 33278640128,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2233,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t0_restore_end",
+          "epoch": 1792712899.7417507,
+          "elapsed_seconds": 204.08898497000337,
+          "mem_available_bytes": 62551068672,
+          "rss_anon_bytes": 33095696384,
+          "rss_file_bytes": 44863209472,
+          "cgroup_current_bytes": 66567319552,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33095696384,
+          "cgroup_file_bytes": 33272238080,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2294272,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2294272,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t1_restore_start",
+          "epoch": 1792712899.7457013,
+          "elapsed_seconds": 204.09293510601856,
+          "mem_available_bytes": 62551158784,
+          "rss_anon_bytes": 33091846144,
+          "rss_file_bytes": 44863209472,
+          "cgroup_current_bytes": 66563534848,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091846144,
+          "cgroup_file_bytes": 33272238080,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2294272,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2294272,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t1_restore_end",
+          "epoch": 1792712899.7676334,
+          "elapsed_seconds": 204.1148679869948,
+          "mem_available_bytes": 62551277568,
+          "rss_anon_bytes": 33092005888,
+          "rss_file_bytes": 44863344640,
+          "cgroup_current_bytes": 66563985408,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091846144,
+          "cgroup_file_bytes": 33272238080,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2335232,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2335232,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t2_restore_start",
+          "epoch": 1792712899.7708943,
+          "elapsed_seconds": 204.1181279750308,
+          "mem_available_bytes": 62551277568,
+          "rss_anon_bytes": 33092005888,
+          "rss_file_bytes": 44863344640,
+          "cgroup_current_bytes": 66563985408,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091846144,
+          "cgroup_file_bytes": 33272238080,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2335232,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2335232,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t2_restore_end",
+          "epoch": 1792712899.8052316,
+          "elapsed_seconds": 204.15246603800915,
+          "mem_available_bytes": 62549803008,
+          "rss_anon_bytes": 33094914048,
+          "rss_file_bytes": 44863328256,
+          "cgroup_current_bytes": 66567041024,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094914048,
+          "cgroup_file_bytes": 33272356864,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2993152,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2993152,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t3_restore_start",
+          "epoch": 1792712899.8088446,
+          "elapsed_seconds": 204.15607834002003,
+          "mem_available_bytes": 62549803008,
+          "rss_anon_bytes": 33092599808,
+          "rss_file_bytes": 44863328256,
+          "cgroup_current_bytes": 66564730880,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094914048,
+          "cgroup_file_bytes": 33272356864,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 2993152,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 2993152,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t3_restore_end",
+          "epoch": 1792712899.8341389,
+          "elapsed_seconds": 204.18137335102074,
+          "mem_available_bytes": 62549291008,
+          "rss_anon_bytes": 33094385664,
+          "rss_file_bytes": 44863197184,
+          "cgroup_current_bytes": 66566291456,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094385664,
+          "cgroup_file_bytes": 33272360960,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 3451904,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 3451904,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t4_restore_start",
+          "epoch": 1792712899.8376079,
+          "elapsed_seconds": 204.184841704031,
+          "mem_available_bytes": 62549291008,
+          "rss_anon_bytes": 33094389760,
+          "rss_file_bytes": 44863197184,
+          "cgroup_current_bytes": 66566520832,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094385664,
+          "cgroup_file_bytes": 33272360960,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2234,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 3451904,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 3451904,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t4_restore_end",
+          "epoch": 1792712899.89948,
+          "elapsed_seconds": 204.24671436898643,
+          "mem_available_bytes": 62535045120,
+          "rss_anon_bytes": 33104498688,
+          "rss_file_bytes": 44854939648,
+          "cgroup_current_bytes": 66568519680,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33104498688,
+          "cgroup_file_bytes": 33264238592,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8268800,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8268800,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t5_restore_start",
+          "epoch": 1792712899.904555,
+          "elapsed_seconds": 204.25178877200233,
+          "mem_available_bytes": 62545698816,
+          "rss_anon_bytes": 33091661824,
+          "rss_file_bytes": 44854939648,
+          "cgroup_current_bytes": 66555486208,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091661824,
+          "cgroup_file_bytes": 33264238592,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8268800,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8268800,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t5_restore_end",
+          "epoch": 1792712899.9223223,
+          "elapsed_seconds": 204.2695564010064,
+          "mem_available_bytes": 62542815232,
+          "rss_anon_bytes": 33092362240,
+          "rss_file_bytes": 44854939648,
+          "cgroup_current_bytes": 66556002304,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091661824,
+          "cgroup_file_bytes": 33264238592,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8842240,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8842240,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t6_restore_start",
+          "epoch": 1792712899.9254591,
+          "elapsed_seconds": 204.27269362303196,
+          "mem_available_bytes": 62541451264,
+          "rss_anon_bytes": 33092362240,
+          "rss_file_bytes": 44854939648,
+          "cgroup_current_bytes": 66556190720,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091661824,
+          "cgroup_file_bytes": 33264238592,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 8842240,
+          "cuda_reserved": 23068672,
+          "cuda_peak_allocated": 8842240,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t6_restore_end",
+          "epoch": 1792712899.9526083,
+          "elapsed_seconds": 204.29984237701865,
+          "mem_available_bytes": 62529851392,
+          "rss_anon_bytes": 33094569984,
+          "rss_file_bytes": 44837445632,
+          "cgroup_current_bytes": 66558406656,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094569984,
+          "cgroup_file_bytes": 33264242688,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9845760,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9845760,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t7_restore_start",
+          "epoch": 1792712899.9565895,
+          "elapsed_seconds": 204.3038235999993,
+          "mem_available_bytes": 62529396736,
+          "rss_anon_bytes": 33094569984,
+          "rss_file_bytes": 44837445632,
+          "cgroup_current_bytes": 66558410752,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094569984,
+          "cgroup_file_bytes": 33264242688,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9845760,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9845760,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t7_restore_end",
+          "epoch": 1792712899.9737737,
+          "elapsed_seconds": 204.32100805500522,
+          "mem_available_bytes": 62524514304,
+          "rss_anon_bytes": 33091719168,
+          "rss_file_bytes": 44837445632,
+          "cgroup_current_bytes": 66555518976,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091719168,
+          "cgroup_file_bytes": 33264246784,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9853952,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9853952,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t8_restore_start",
+          "epoch": 1792712899.977271,
+          "elapsed_seconds": 204.32450501498533,
+          "mem_available_bytes": 62522695680,
+          "rss_anon_bytes": 33091719168,
+          "rss_file_bytes": 44837445632,
+          "cgroup_current_bytes": 66555518976,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33091719168,
+          "cgroup_file_bytes": 33264246784,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 9853952,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 9853952,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t8_restore_end",
+          "epoch": 1792712900.0006816,
+          "elapsed_seconds": 204.3479159330018,
+          "mem_available_bytes": 62519349248,
+          "rss_anon_bytes": 33094426624,
+          "rss_file_bytes": 44837380096,
+          "cgroup_current_bytes": 66558267392,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094426624,
+          "cgroup_file_bytes": 33264250880,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10511872,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 10511872,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t9_restore_start",
+          "epoch": 1792712900.004278,
+          "elapsed_seconds": 204.35151177103398,
+          "mem_available_bytes": 62519287808,
+          "rss_anon_bytes": 33094426624,
+          "rss_file_bytes": 44837380096,
+          "cgroup_current_bytes": 66558267392,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094426624,
+          "cgroup_file_bytes": 33264250880,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10511872,
+          "cuda_reserved": 25165824,
+          "cuda_peak_allocated": 10511872,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t9_restore_end",
+          "epoch": 1792712900.02209,
+          "elapsed_seconds": 204.3693241510191,
+          "mem_available_bytes": 62515482624,
+          "rss_anon_bytes": 33094795264,
+          "rss_file_bytes": 44837380096,
+          "cgroup_current_bytes": 66558750720,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094426624,
+          "cgroup_file_bytes": 33264250880,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10970624,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 10970624,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t10_restore_start",
+          "epoch": 1792712900.0256753,
+          "elapsed_seconds": 204.372909222031,
+          "mem_available_bytes": 62515482624,
+          "rss_anon_bytes": 33094795264,
+          "rss_file_bytes": 44837380096,
+          "cgroup_current_bytes": 66558750720,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33094426624,
+          "cgroup_file_bytes": 33264250880,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2235,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 10970624,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 10970624,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t10_restore_end",
+          "epoch": 1792712900.0864992,
+          "elapsed_seconds": 204.43373393901857,
+          "mem_available_bytes": 62492119040,
+          "rss_anon_bytes": 33111883776,
+          "rss_file_bytes": 44829188096,
+          "cgroup_current_bytes": 66567401472,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33111883776,
+          "cgroup_file_bytes": 33256136704,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 15787520,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 15787520,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t11_restore_start",
+          "epoch": 1792712900.0908232,
+          "elapsed_seconds": 204.43805715703638,
+          "mem_available_bytes": 62492119040,
+          "rss_anon_bytes": 33099841536,
+          "rss_file_bytes": 44829188096,
+          "cgroup_current_bytes": 66555359232,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33099841536,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 15787520,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 15787520,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t11_restore_end",
+          "epoch": 1792712900.1097903,
+          "elapsed_seconds": 204.45702415501,
+          "mem_available_bytes": 62491271168,
+          "rss_anon_bytes": 33100890112,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556391424,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 16360960,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 16360960,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t12_restore_start",
+          "epoch": 1792712900.113197,
+          "elapsed_seconds": 204.46043084503617,
+          "mem_available_bytes": 62491271168,
+          "rss_anon_bytes": 33100890112,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556391424,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 16360960,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 16360960,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t12_restore_end",
+          "epoch": 1792712900.1317644,
+          "elapsed_seconds": 204.4789984120289,
+          "mem_available_bytes": 62490652672,
+          "rss_anon_bytes": 33101295616,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556899328,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t13_restore_start",
+          "epoch": 1792712900.1357787,
+          "elapsed_seconds": 204.48301243502647,
+          "mem_available_bytes": 62490603520,
+          "rss_anon_bytes": 33101295616,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556899328,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t13_restore_end",
+          "epoch": 1792712900.1534925,
+          "elapsed_seconds": 204.50072649598587,
+          "mem_available_bytes": 62474235904,
+          "rss_anon_bytes": 33101295616,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556882944,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t14_restore_start",
+          "epoch": 1792712900.1568975,
+          "elapsed_seconds": 204.50413136201678,
+          "mem_available_bytes": 62474235904,
+          "rss_anon_bytes": 33101295616,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556882944,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364480,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t14_restore_end",
+          "epoch": 1792712900.173484,
+          "elapsed_seconds": 204.520717876032,
+          "mem_available_bytes": 62482333696,
+          "rss_anon_bytes": 33101295616,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556866560,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t15_restore_start",
+          "epoch": 1792712900.1767986,
+          "elapsed_seconds": 204.52403247199254,
+          "mem_available_bytes": 62482333696,
+          "rss_anon_bytes": 33101295616,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66556866560,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33100890112,
+          "cgroup_file_bytes": 33256140800,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "cache_t15_restore_end",
+          "epoch": 1792712900.194473,
+          "elapsed_seconds": 204.54170699900715,
+          "mem_available_bytes": 62486724608,
+          "rss_anon_bytes": 33098145792,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66553864192,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33098145792,
+          "cgroup_file_bytes": 33256157184,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "after_cache_restore_tiny_recheck",
+          "epoch": 1792712900.1977105,
+          "elapsed_seconds": 204.54494441201678,
+          "mem_available_bytes": 62486724608,
+          "rss_anon_bytes": 33098145792,
+          "rss_file_bytes": 44829122560,
+          "cgroup_current_bytes": 66553864192,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33098145792,
+          "cgroup_file_bytes": 33256157184,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2236,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17364992,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17364992,
+          "swap_used": 0
+        },
+        {
+          "phase": "sampler_start",
+          "epoch": 1792712900.2854245,
+          "elapsed_seconds": 204.63265886402223,
+          "mem_available_bytes": 62454509568,
+          "rss_anon_bytes": 33132519424,
+          "rss_file_bytes": 44798988288,
+          "cgroup_current_bytes": 66564112384,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33132519424,
+          "cgroup_file_bytes": 33232023552,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2240,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17365504,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17366528,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_to_device_start",
+          "epoch": 1792712900.2897756,
+          "elapsed_seconds": 204.63700955203967,
+          "mem_available_bytes": 62454509568,
+          "rss_anon_bytes": 33132519424,
+          "rss_file_bytes": 44798988288,
+          "cgroup_current_bytes": 66564112384,
+          "cgroup_peak_bytes": 66573316096,
+          "cgroup_anon_bytes": 33132519424,
+          "cgroup_file_bytes": 33232023552,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2240,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 17365504,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17366528,
+          "swap_used": 0
+        },
+        {
+          "phase": "dit_to_device_end",
+          "epoch": 1792712936.2577722,
+          "elapsed_seconds": 240.60500679403776,
+          "mem_available_bytes": 60701827072,
+          "rss_anon_bytes": 923668480,
+          "rss_file_bytes": 62758912,
+          "cgroup_current_bytes": 19828523008,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 923668480,
+          "cgroup_file_bytes": 18747437056,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33268071936,
+          "cuda_reserved": 33275510784,
+          "cuda_peak_allocated": 33268071936,
+          "swap_used": 0
+        },
+        {
+          "phase": "after_dit_move_tiny_recheck",
+          "epoch": 1792712936.2687542,
+          "elapsed_seconds": 240.61598841001978,
+          "mem_available_bytes": 60727341056,
+          "rss_anon_bytes": 923668480,
+          "rss_file_bytes": 63299584,
+          "cgroup_current_bytes": 19805347840,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 923459584,
+          "cgroup_file_bytes": 18748428288,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33268071936,
+          "cuda_reserved": 33275510784,
+          "cuda_peak_allocated": 33268071936,
+          "swap_used": 0
+        },
+        {
+          "phase": "first_forward_start",
+          "epoch": 1792712936.294499,
+          "elapsed_seconds": 240.64173321099952,
+          "mem_available_bytes": 60725415936,
+          "rss_anon_bytes": 923688960,
+          "rss_file_bytes": 64548864,
+          "cgroup_current_bytes": 19807969280,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 923688960,
+          "cgroup_file_bytes": 18750722048,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33268072448,
+          "cuda_reserved": 33275510784,
+          "cuda_peak_allocated": 33268072448,
+          "swap_used": 0
+        },
+        {
+          "phase": "first_forward_end",
+          "epoch": 1792712950.5859811,
+          "elapsed_seconds": 254.9332157180179,
+          "mem_available_bytes": 57063854080,
+          "rss_anon_bytes": 1317773312,
+          "rss_file_bytes": 210911232,
+          "cgroup_current_bytes": 20626632704,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1317781504,
+          "cgroup_file_bytes": 19166277632,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33329033216,
+          "cuda_reserved": 36391878656,
+          "cuda_peak_allocated": 35923275776,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_1",
+          "epoch": 1792712962.4562178,
+          "elapsed_seconds": 266.803452224005,
+          "mem_available_bytes": 60032618496,
+          "rss_anon_bytes": 1341677568,
+          "rss_file_bytes": 212930560,
+          "cgroup_current_bytes": 20647682048,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1341681664,
+          "cgroup_file_bytes": 19169361920,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33344052736,
+          "cuda_reserved": 33409728512,
+          "cuda_peak_allocated": 35939594240,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_2",
+          "epoch": 1792712986.5486684,
+          "elapsed_seconds": 290.8959028730169,
+          "mem_available_bytes": 59912581120,
+          "rss_anon_bytes": 1350946816,
+          "rss_file_bytes": 212983808,
+          "cgroup_current_bytes": 20657397760,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1350950912,
+          "cgroup_file_bytes": 19169406976,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33375796736,
+          "cuda_reserved": 33522974720,
+          "cuda_peak_allocated": 35975925760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_3",
+          "epoch": 1792713010.3513415,
+          "elapsed_seconds": 314.6985762260156,
+          "mem_available_bytes": 59882446848,
+          "rss_anon_bytes": 1357279232,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20668108800,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1357279232,
+          "cgroup_file_bytes": 19173924864,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33407540736,
+          "cuda_reserved": 33522974720,
+          "cuda_peak_allocated": 36009394176,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_4",
+          "epoch": 1792713034.1540475,
+          "elapsed_seconds": 338.5012818580144,
+          "mem_available_bytes": 59899514880,
+          "rss_anon_bytes": 1342578688,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20653334528,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1342578688,
+          "cgroup_file_bytes": 19173928960,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33439284736,
+          "cuda_reserved": 33522974720,
+          "cuda_peak_allocated": 36039413760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_5",
+          "epoch": 1792713058.0666056,
+          "elapsed_seconds": 362.4138400669908,
+          "mem_available_bytes": 60023308288,
+          "rss_anon_bytes": 1348542464,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659109888,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348542464,
+          "cgroup_file_bytes": 19173928960,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33344052736,
+          "cuda_reserved": 33409728512,
+          "cuda_peak_allocated": 36039413760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_6",
+          "epoch": 1792713081.9069343,
+          "elapsed_seconds": 386.2541686100303,
+          "mem_available_bytes": 59889242112,
+          "rss_anon_bytes": 1344937984,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656070656,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1344937984,
+          "cgroup_file_bytes": 19173933056,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33375796736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36039413760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_7",
+          "epoch": 1792713105.6807134,
+          "elapsed_seconds": 410.02794787602033,
+          "mem_available_bytes": 59911405568,
+          "rss_anon_bytes": 1348546560,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659343360,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348550656,
+          "cgroup_file_bytes": 19173933056,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33407540736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36039413760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_8",
+          "epoch": 1792713129.4917836,
+          "elapsed_seconds": 433.8390180050046,
+          "mem_available_bytes": 59898675200,
+          "rss_anon_bytes": 1348558848,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659683328,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348558848,
+          "cgroup_file_bytes": 19173933056,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33439284736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36039413760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_9",
+          "epoch": 1792713153.2867954,
+          "elapsed_seconds": 457.63402975100325,
+          "mem_available_bytes": 59785379840,
+          "rss_anon_bytes": 1348554752,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659937280,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348554752,
+          "cgroup_file_bytes": 19173937152,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33471028736,
+          "cuda_reserved": 33632026624,
+          "cuda_peak_allocated": 36071833600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_10",
+          "epoch": 1792713177.0984166,
+          "elapsed_seconds": 481.44565121398773,
+          "mem_available_bytes": 59799724032,
+          "rss_anon_bytes": 1344958464,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656050176,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1344962560,
+          "cgroup_file_bytes": 19173937152,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33502772736,
+          "cuda_reserved": 33632026624,
+          "cuda_peak_allocated": 36103950336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_11",
+          "epoch": 1792713200.8906415,
+          "elapsed_seconds": 505.2378760690335,
+          "mem_available_bytes": 59781214208,
+          "rss_anon_bytes": 1348567040,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659601408,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348571136,
+          "cgroup_file_bytes": 19173941248,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33534516736,
+          "cuda_reserved": 33634123776,
+          "cuda_peak_allocated": 36135321600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_12",
+          "epoch": 1792713224.690753,
+          "elapsed_seconds": 529.0379874950158,
+          "mem_available_bytes": 59671633920,
+          "rss_anon_bytes": 1344970752,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656398336,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1344974848,
+          "cgroup_file_bytes": 19173941248,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33566260736,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36166389760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_13",
+          "epoch": 1792713248.4671078,
+          "elapsed_seconds": 552.8143422650173,
+          "mem_available_bytes": 59646595072,
+          "rss_anon_bytes": 1348583424,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659953664,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348587520,
+          "cgroup_file_bytes": 19173945344,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33598004736,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36199858176,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_14",
+          "epoch": 1792713272.2262619,
+          "elapsed_seconds": 576.5734962070128,
+          "mem_available_bytes": 59671121920,
+          "rss_anon_bytes": 1344987136,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656214016,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1344987136,
+          "cgroup_file_bytes": 19173945344,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33629748736,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36229877760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_15",
+          "epoch": 1792713295.97565,
+          "elapsed_seconds": 600.3228842800017,
+          "mem_available_bytes": 59579596800,
+          "rss_anon_bytes": 1348595712,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20660023296,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348595712,
+          "cgroup_file_bytes": 19173949440,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33661492736,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36262297600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_16",
+          "epoch": 1792713319.7680259,
+          "elapsed_seconds": 624.1152601570357,
+          "mem_available_bytes": 59556376576,
+          "rss_anon_bytes": 1344999424,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656422912,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345003520,
+          "cgroup_file_bytes": 19173949440,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33693236736,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_17",
+          "epoch": 1792713343.5453756,
+          "elapsed_seconds": 647.8926097929943,
+          "mem_available_bytes": 59870244864,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659441664,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348608000,
+          "cgroup_file_bytes": 19173953536,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33359924736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_18",
+          "epoch": 1792713367.3847804,
+          "elapsed_seconds": 671.7320148390136,
+          "mem_available_bytes": 59879837696,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659490816,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348608000,
+          "cgroup_file_bytes": 19173953536,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33391668736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_19",
+          "epoch": 1792713391.2307048,
+          "elapsed_seconds": 695.5779394090059,
+          "mem_available_bytes": 59906998272,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659470336,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348608000,
+          "cgroup_file_bytes": 19173953536,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33423412736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_20",
+          "epoch": 1792713415.1700275,
+          "elapsed_seconds": 719.5172621250385,
+          "mem_available_bytes": 59678048256,
+          "rss_anon_bytes": 1345003520,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656017408,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345003520,
+          "cgroup_file_bytes": 19173957632,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33455156736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_21",
+          "epoch": 1792713439.0315382,
+          "elapsed_seconds": 743.3787727170275,
+          "mem_available_bytes": 59725455360,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659933184,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348608000,
+          "cgroup_file_bytes": 19173957632,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33486900736,
+          "cuda_reserved": 33632026624,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_22",
+          "epoch": 1792713462.9034498,
+          "elapsed_seconds": 767.2506843270385,
+          "mem_available_bytes": 59761348608,
+          "rss_anon_bytes": 1345003520,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656476160,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345003520,
+          "cgroup_file_bytes": 19173961728,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33518644736,
+          "cuda_reserved": 33634123776,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_23",
+          "epoch": 1792713486.7570808,
+          "elapsed_seconds": 791.10431526904,
+          "mem_available_bytes": 59795222528,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659851264,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348608000,
+          "cgroup_file_bytes": 19173961728,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33550388736,
+          "cuda_reserved": 33634123776,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_24",
+          "epoch": 1792713510.5969894,
+          "elapsed_seconds": 814.9442237840267,
+          "mem_available_bytes": 59668721664,
+          "rss_anon_bytes": 1345003520,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656545792,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345003520,
+          "cgroup_file_bytes": 19173965824,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33582132736,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_25",
+          "epoch": 1792713534.4000278,
+          "elapsed_seconds": 838.7472619999899,
+          "mem_available_bytes": 59667410944,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20660219904,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348608000,
+          "cgroup_file_bytes": 19173965824,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33613876736,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_26",
+          "epoch": 1792713558.2228694,
+          "elapsed_seconds": 862.5701041470165,
+          "mem_available_bytes": 59652124672,
+          "rss_anon_bytes": 1345003520,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656287744,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345003520,
+          "cgroup_file_bytes": 19173969920,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33645620736,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_27",
+          "epoch": 1792713582.0190434,
+          "elapsed_seconds": 886.366277832014,
+          "mem_available_bytes": 59522998272,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20660060160,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348608000,
+          "cgroup_file_bytes": 19173969920,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33677364736,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36294414336,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_28",
+          "epoch": 1792713605.8152874,
+          "elapsed_seconds": 910.1625217840192,
+          "mem_available_bytes": 59466432512,
+          "rss_anon_bytes": 1348608000,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20660084736,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173974016,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33709108736,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36309237760,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_29",
+          "epoch": 1792713629.6562455,
+          "elapsed_seconds": 934.0034799420391,
+          "mem_available_bytes": 59828899840,
+          "rss_anon_bytes": 1348612096,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659646464,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173974016,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33328180736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_30",
+          "epoch": 1792713653.5005755,
+          "elapsed_seconds": 957.8478096569888,
+          "mem_available_bytes": 59877908480,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20655902720,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173974016,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33359924736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_31",
+          "epoch": 1792713677.3516839,
+          "elapsed_seconds": 981.6989182450343,
+          "mem_available_bytes": 59885178880,
+          "rss_anon_bytes": 1348612096,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659462144,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173978112,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33391668736,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_32",
+          "epoch": 1792713701.1994638,
+          "elapsed_seconds": 1005.5466983320075,
+          "mem_available_bytes": 59898187776,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20655833088,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173978112,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33424317952,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_33",
+          "epoch": 1792713725.0128343,
+          "elapsed_seconds": 1029.3600687170401,
+          "mem_available_bytes": 59861504000,
+          "rss_anon_bytes": 1348612096,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659482624,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173982208,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33456061952,
+          "cuda_reserved": 33520877568,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_34",
+          "epoch": 1792713748.8601904,
+          "elapsed_seconds": 1053.2074250880396,
+          "mem_available_bytes": 59796176896,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656087040,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173982208,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33487805952,
+          "cuda_reserved": 33632026624,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_35",
+          "epoch": 1792713772.721425,
+          "elapsed_seconds": 1077.0686595870066,
+          "mem_available_bytes": 59780562944,
+          "rss_anon_bytes": 1348612096,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20660015104,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173986304,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33519549952,
+          "cuda_reserved": 33634123776,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_36",
+          "epoch": 1792713796.58695,
+          "elapsed_seconds": 1100.9341844600276,
+          "mem_available_bytes": 59768459264,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656414720,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173986304,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33551293952,
+          "cuda_reserved": 33634123776,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_37",
+          "epoch": 1792713820.4228005,
+          "elapsed_seconds": 1124.7700349090155,
+          "mem_available_bytes": 59683713024,
+          "rss_anon_bytes": 1348612096,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659924992,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173990400,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33583037952,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_38",
+          "epoch": 1792713844.2978678,
+          "elapsed_seconds": 1148.6451020400273,
+          "mem_available_bytes": 59632009216,
+          "rss_anon_bytes": 1348612096,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20659978240,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173990400,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33614781952,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_39",
+          "epoch": 1792713868.154266,
+          "elapsed_seconds": 1172.5015006600297,
+          "mem_available_bytes": 59689590784,
+          "rss_anon_bytes": 1348612096,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20660047872,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1348612096,
+          "cgroup_file_bytes": 19173994496,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33646525952,
+          "cuda_reserved": 33745272832,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "step_completed_40",
+          "epoch": 1792713892.0609186,
+          "elapsed_seconds": 1196.408152826014,
+          "mem_available_bytes": 59547758592,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656713728,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173994496,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33678269952,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "sampler_loop_exit",
+          "epoch": 1792713892.0641444,
+          "elapsed_seconds": 1196.4113782880013,
+          "mem_available_bytes": 59547758592,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656713728,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173994496,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33678269952,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "sampler_cuda_complete",
+          "epoch": 1792713892.0677898,
+          "elapsed_seconds": 1196.415023506037,
+          "mem_available_bytes": 59547758592,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656713728,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173994496,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33678269952,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "final_latent_save_start",
+          "epoch": 1792713892.0708466,
+          "elapsed_seconds": 1196.4180802810006,
+          "mem_available_bytes": 59547758592,
+          "rss_anon_bytes": 1345007616,
+          "rss_file_bytes": 215945216,
+          "cgroup_current_bytes": 20656713728,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1345007616,
+          "cgroup_file_bytes": 19173994496,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33678269952,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "SAMPLER_LATENT_PASS",
+          "epoch": 1792713892.0951557,
+          "elapsed_seconds": 1196.4423896989902,
+          "mem_available_bytes": 59550539776,
+          "rss_anon_bytes": 1347293184,
+          "rss_file_bytes": 216592384,
+          "cgroup_current_bytes": 20662480896,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1347293184,
+          "cgroup_file_bytes": 19177496576,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33678269952,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        },
+        {
+          "phase": "stage_S_complete",
+          "epoch": 1792713892.1024718,
+          "elapsed_seconds": 1196.4497057840344,
+          "mem_available_bytes": 59583275008,
+          "rss_anon_bytes": 1313816576,
+          "rss_file_bytes": 216592384,
+          "cgroup_current_bytes": 20629004288,
+          "cgroup_peak_bytes": 66577215488,
+          "cgroup_anon_bytes": 1313816576,
+          "cgroup_file_bytes": 19177496576,
+          "cgroup_events": {
+            "low": 0,
+            "high": 2426,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 33658611712,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36325785600,
+          "swap_used": 0
+        }
+      ],
+      "diagnostic_snapshots": [
+        {
+          "label": "after_cache_restore_tiny_recheck",
+          "is_initialized": true,
+          "cuda_mem_get_info": {
+            "free": 8907100160,
+            "total": 128524300288
+          },
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "66553860096\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 2236\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=86.21 avg60=76.23 avg300=36.53 total=145628700\nfull avg10=86.21 avg60=76.23 avg300=36.53 total=145628700\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "69318471680\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145511\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=82.07 avg60=74.44 avg300=35.80 total=463237127\nfull avg10=82.07 avg60=74.44 avg300=35.80 total=462828588\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "71691440128\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145511\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=82.85 avg60=74.15 avg300=35.65 total=411826037\nfull avg10=82.85 avg60=74.15 avg300=35.65 total=399452625\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "91150983168\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145511\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=83.14 avg60=72.89 avg300=34.79 total=494959147\nfull avg10=83.14 avg60=72.89 avg300=34.79 total=481797518\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "91430965248\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145511\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=83.22 avg60=72.87 avg300=34.89 total=495354307\nfull avg10=83.22 avg60=72.87 avg300=34.89 total=482186074\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=78.26 avg60=68.20 avg300=32.50 total=543351298\nfull avg10=78.22 avg60=68.15 avg300=32.48 total=529654286\n"
+              }
+            }
+          ],
+          "source_sha256": "695aad7524c201656c3ef053bc196ffb2fa2d25a33f2c5b749c7829e1a00e755"
+        },
+        {
+          "label": "after_cpu_load_tiny_recheck",
+          "is_initialized": true,
+          "cuda_mem_get_info": {
+            "free": 8966090752,
+            "total": 128524300288
+          },
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "66569064448\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 2231\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=86.21 avg60=76.23 avg300=36.53 total=145604274\nfull avg10=86.21 avg60=76.23 avg300=36.53 total=145604274\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "69335277568\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145506\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=84.74 avg60=74.59 avg300=35.56 total=463197661\nfull avg10=84.74 avg60=74.59 avg300=35.56 total=462789122\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "71708508160\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145506\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=84.15 avg60=74.05 avg300=35.37 total=411791848\nfull avg10=84.15 avg60=74.05 avg300=35.37 total=399418436\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "91167436800\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145506\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=83.14 avg60=72.89 avg300=34.79 total=494944785\nfull avg10=83.14 avg60=72.89 avg300=34.79 total=481783156\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "91446943744\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145506\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=83.22 avg60=72.87 avg300=34.89 total=495340343\nfull avg10=83.22 avg60=72.87 avg300=34.89 total=482172110\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=78.26 avg60=68.20 avg300=32.50 total=543343632\nfull avg10=78.22 avg60=68.15 avg300=32.48 total=529646645\n"
+              }
+            }
+          ],
+          "source_sha256": "e35bb6265164f14391cd4ef007b39a05e5911f9cb031c5edd5a99eef3870c533"
+        },
+        {
+          "label": "after_dit_move_tiny_recheck",
+          "is_initialized": true,
+          "cuda_mem_get_info": {
+            "free": 38105853952,
+            "total": 128524300288
+          },
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "19805609984\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 2426\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=78.53 avg60=75.92 avg300=40.94 total=172407973\nfull avg10=78.53 avg60=75.92 avg300=40.94 total=172407973\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "20157788160\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145701\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=73.31 avg60=73.83 avg300=40.05 total=489397776\nfull avg10=73.31 avg60=73.83 avg300=40.05 total=488989237\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "21125828608\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145701\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=74.72 avg60=73.74 avg300=39.91 total=437976447\nfull avg10=74.72 avg60=73.74 avg300=39.91 total=425603035\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "30582947840\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145701\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=74.64 avg60=72.59 avg300=39.03 total=520494524\nfull avg10=74.64 avg60=72.59 avg300=39.03 total=507332895\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "30852595712\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 145701\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=74.25 avg60=72.39 avg300=39.08 total=520833111\nfull avg10=74.25 avg60=72.39 avg300=39.08 total=507664878\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=78.21 avg60=71.05 avg300=37.25 total=569752515\nfull avg10=78.17 avg60=70.98 avg300=37.22 total=556038095\n"
+              }
+            }
+          ],
+          "source_sha256": "9a05309c2047971d32365dd486f16921961e3792c0e6624c25e9d691c82dbeba"
+        },
+        {
+          "label": "after_official_import",
+          "is_initialized": true,
+          "cuda_mem_get_info": null,
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "474750976\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "36044398592\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "39070130176\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84226383872\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84506247168\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "9eac11b07d30d90946c70cee70efc8010513cbe09b7c0fefceb3fd14b6fec199"
+        },
+        {
+          "label": "before_official_import",
+          "is_initialized": false,
+          "cuda_mem_get_info": null,
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "302915584\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "35872350208\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "38897840128\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84054196224\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84334059520\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "0f970799515c434e8e4737c6ae75316da62dd790d6ff3506dbf64ca38a3b2fdb"
+        },
+        {
+          "label": "tiny_copy_start",
+          "is_initialized": true,
+          "cuda_mem_get_info": null,
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "477093888\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "36046741504\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "39072473088\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84228726784\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84508590080\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "0da03f8a1f70ebd478ba405752a4484b1aeb244f5ca3b6d0fdc414a3b4db56c0"
+        },
+        {
+          "label": "tiny_kernel_complete",
+          "is_initialized": true,
+          "cuda_mem_get_info": {
+            "free": 14108004352,
+            "total": 128524300288
+          },
+          "primary_context_get_state": "NOT_CALLED: no new driver binding introduced",
+          "ancestors_leaf_to_root": [
+            {
+              "depth_from_leaf": 0,
+              "values": {
+                "memory.current": "570417152\n",
+                "memory.high": "66571993088\n",
+                "memory.max": "68719476736\n",
+                "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=0\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\n"
+              }
+            },
+            {
+              "depth_from_leaf": 1,
+              "values": {
+                "memory.current": "36140027904\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=320726039\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=320317500\n"
+              }
+            },
+            {
+              "depth_from_leaf": 2,
+              "values": {
+                "memory.current": "39165743104\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=269635700\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=257262288\n"
+              }
+            },
+            {
+              "depth_from_leaf": 3,
+              "values": {
+                "memory.current": "84321996800\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=355960611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342799164\n"
+              }
+            },
+            {
+              "depth_from_leaf": 4,
+              "values": {
+                "memory.current": "84601860096\n",
+                "memory.high": "max\n",
+                "memory.max": "max\n",
+                "memory.events": "low 0\nhigh 143275\nmax 2265\noom 0\noom_kill 0\noom_group_kill 0\n",
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=356106555\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=342938512\n"
+              }
+            },
+            {
+              "depth_from_leaf": 5,
+              "values": {
+                "memory.pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=413838806\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=400196339\n"
+              }
+            }
+          ],
+          "source_sha256": "31969685df6c604aa9fbdd22e76d03627e0606dcb352bd90529a89b4ad31bd27"
+        }
+      ],
+      "cache_leaves": [
+        {
+          "key": "t0",
+          "location": "root.noise",
+          "target_device": "cuda:0",
+          "bytes": 2293760,
+          "shape": [
+            16,
+            5,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t1",
+          "location": "root.arg_c.context[0]",
+          "target_device": "cuda:0",
+          "bytes": 40960,
+          "shape": [
+            5,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "status": "PASS",
+          "sha256": "c32a54b985b135fa58ce3c981d177dd4c694a40cecee0493df07fc6711212472",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t2",
+          "location": "root.arg_c.clip_fea",
+          "target_device": "cuda:0",
+          "bytes": 657920,
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "status": "PASS",
+          "sha256": "47cfb6be7a08f4374e3077901627d5a1e06731c26f6a5566bcc39e501bddd17f",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t3",
+          "location": "root.arg_c.ref_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 458752,
+          "shape": [
+            16,
+            1,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "6e686bc9159595ccad9823110063f15199b0cb36baef25dbb59de4ec11ad5f47",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t4",
+          "location": "root.arg_c.ref_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 4816896,
+          "shape": [
+            28,
+            6,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "c4ddb91908fcdd54c9057bdb2e9b31740381b9108aea37d5e4ec2dfc0cda7217",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t5",
+          "location": "root.arg_c.pose_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 573440,
+          "shape": [
+            16,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "e65367a7783864e2d3022acd880ddc592bc367810937c95ca460d2781194ac71",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t6",
+          "location": "root.arg_c.driving_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 1003520,
+          "shape": [
+            28,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "2b3a07a8a5f0a980a420d32af39cd9f4a5a0e0cc10704a48c52684493c7af09b",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t7",
+          "location": "root.arg_null.context[0]",
+          "target_device": "cuda:0",
+          "bytes": 8192,
+          "shape": [
+            1,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "status": "PASS",
+          "sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t8",
+          "location": "root.arg_null.clip_fea",
+          "target_device": "cuda:0",
+          "bytes": 657920,
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "status": "PASS",
+          "sha256": "47cfb6be7a08f4374e3077901627d5a1e06731c26f6a5566bcc39e501bddd17f",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t9",
+          "location": "root.arg_null.ref_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 458752,
+          "shape": [
+            16,
+            1,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "6e686bc9159595ccad9823110063f15199b0cb36baef25dbb59de4ec11ad5f47",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t10",
+          "location": "root.arg_null.ref_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 4816896,
+          "shape": [
+            28,
+            6,
+            64,
+            112
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "c4ddb91908fcdd54c9057bdb2e9b31740381b9108aea37d5e4ec2dfc0cda7217",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t11",
+          "location": "root.arg_null.pose_latents[0]",
+          "target_device": "cuda:0",
+          "bytes": 573440,
+          "shape": [
+            16,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "e65367a7783864e2d3022acd880ddc592bc367810937c95ca460d2781194ac71",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t12",
+          "location": "root.arg_null.driving_masks[0]",
+          "target_device": "cuda:0",
+          "bytes": 1003520,
+          "shape": [
+            28,
+            5,
+            32,
+            56
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "2b3a07a8a5f0a980a420d32af39cd9f4a5a0e0cc10704a48c52684493c7af09b",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t13",
+          "location": "root.generator_state",
+          "target_device": "cpu",
+          "bytes": 16,
+          "shape": [
+            16
+          ],
+          "dtype": "torch.uint8",
+          "status": "PASS",
+          "sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+          "actual_device": "cpu"
+        },
+        {
+          "key": "t14",
+          "location": "root.timesteps",
+          "target_device": "cuda:0",
+          "bytes": 320,
+          "shape": [
+            40
+          ],
+          "dtype": "torch.int64",
+          "status": "PASS",
+          "sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+          "actual_device": "cuda:0"
+        },
+        {
+          "key": "t15",
+          "location": "root.sigmas",
+          "target_device": "cpu",
+          "bytes": 164,
+          "shape": [
+            41
+          ],
+          "dtype": "torch.float32",
+          "status": "PASS",
+          "sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+          "actual_device": "cpu"
+        }
+      ],
+      "tiny_result": {
+        "status": "PASS",
+        "retained_payload_bytes": 64,
+        "cpu_rng_unchanged": true,
+        "operations": [
+          "constant CPU fill",
+          "H2D copy",
+          "add_ constant",
+          "synchronize",
+          "D2H exact equality"
+        ],
+        "CUDA_RNG": "No RNG operation invoked; initial CUDA state baseline captured only after successful real work"
+      },
+      "probe_result": null,
+      "error_kind": null,
+      "forward_and_steps": {
+        "recorded_counter": {
+          "model_calls": 80,
+          "completed_steps": 40,
+          "last_timestep": 71.0
+        },
+        "control_flow": "Inspect last durable phase and exception; no zero counter inferred from absent progress"
+      },
+      "evidence_sha256": {
+        "pipeline-process.json": "829b2dd02b36f4bf18d42be5a70219cf854f64fab0951aef6a2319bb0a87e761",
+        "resource_metrics.jsonl": "fae571c707e6d0969bac593a09ab0d8db9c27afe4c6e7e69c0e23791e61f9d54",
+        "phases.jsonl": "a1ba0d5bbcaef490af7d874d98265958e1577681da48a0e0f857da9dd65aee62"
+      }
+    },
+    "D": {
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "service_returncode": 0,
+      "service_seconds": 15.228177547454834,
+      "memory_cap_bytes": 68719476736,
+      "samples": 15,
+      "minimum_available_bytes": 81109180416,
+      "last_available_bytes": 81109180416,
+      "max_swap_bytes": 0,
+      "max_sampled_cgroup_current_bytes": 2334703616,
+      "max_recorded_cgroup_peak_bytes": 2340904960,
+      "last_cgroup_events": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "last_durable_phase": "stage_D_complete",
+      "paired_durations": [
+        {
+          "phase": "vae_load",
+          "seconds": 0.8218972919858061
+        },
+        {
+          "phase": "vae_decode",
+          "seconds": 6.719924576987978
+        },
+        {
+          "phase": "decoded_raw_save",
+          "seconds": 0.7089468669728376
+        }
+      ],
+      "unpaired_start_markers": [
+        "stage_D",
+        "video_encode"
+      ],
+      "progress": null,
+      "phase_snapshots": [
+        {
+          "phase": "stage_D_start",
+          "epoch": 1792713974.8230965,
+          "elapsed_seconds": 0.037092938960995525,
+          "mem_available_bytes": 95375884288,
+          "rss_anon_bytes": 297308160,
+          "rss_file_bytes": 229441536,
+          "cgroup_current_bytes": 312487936,
+          "cgroup_peak_bytes": 318152704,
+          "cgroup_anon_bytes": 297308160,
+          "cgroup_file_bytes": 12193792,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": false,
+          "cuda_allocated": null,
+          "cuda_reserved": null,
+          "cuda_peak_allocated": null,
+          "swap_used": 0
+        },
+        {
+          "phase": "vae_load_start",
+          "epoch": 1792713978.939338,
+          "elapsed_seconds": 4.1533346439828165,
+          "mem_available_bytes": 95201816576,
+          "rss_anon_bytes": 471130112,
+          "rss_file_bytes": 326770688,
+          "cgroup_current_bytes": 691118080,
+          "cgroup_peak_bytes": 691118080,
+          "cgroup_anon_bytes": 471134208,
+          "cgroup_file_bytes": 215224320,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 0,
+          "cuda_reserved": 0,
+          "cuda_peak_allocated": 0,
+          "swap_used": 0
+        },
+        {
+          "phase": "vae_load_end",
+          "epoch": 1792713979.761226,
+          "elapsed_seconds": 4.975222622975707,
+          "mem_available_bytes": 93822062592,
+          "rss_anon_bytes": 1040125952,
+          "rss_file_bytes": 361492480,
+          "cgroup_current_bytes": 1829797888,
+          "cgroup_peak_bytes": 1829797888,
+          "cgroup_anon_bytes": 1040125952,
+          "cgroup_file_bytes": 778403840,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 530316288,
+          "cuda_reserved": 534773760,
+          "cuda_peak_allocated": 530316288,
+          "swap_used": 0
+        },
+        {
+          "phase": "vae_decode_start",
+          "epoch": 1792713979.7814996,
+          "elapsed_seconds": 4.995496527990326,
+          "mem_available_bytes": 93821714432,
+          "rss_anon_bytes": 1042391040,
+          "rss_file_bytes": 363790336,
+          "cgroup_current_bytes": 1832157184,
+          "cgroup_peak_bytes": 1832157184,
+          "cgroup_anon_bytes": 1042391040,
+          "cgroup_file_bytes": 778407936,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 533150720,
+          "cuda_reserved": 534773760,
+          "cuda_peak_allocated": 533150720,
+          "swap_used": 0
+        },
+        {
+          "phase": "vae_decode_end",
+          "epoch": 1792713986.5014267,
+          "elapsed_seconds": 11.715423360990826,
+          "mem_available_bytes": 81287327744,
+          "rss_anon_bytes": 1091198976,
+          "rss_file_bytes": 491687936,
+          "cgroup_current_bytes": 1922772992,
+          "cgroup_peak_bytes": 2340904960,
+          "cgroup_anon_bytes": 1091198976,
+          "cgroup_file_bytes": 795901952,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 720321536,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920,
+          "swap_used": 0
+        },
+        {
+          "phase": "decoded_raw_save_start",
+          "epoch": 1792713986.541137,
+          "elapsed_seconds": 11.755133848986588,
+          "mem_available_bytes": 81229987840,
+          "rss_anon_bytes": 1149657088,
+          "rss_file_bytes": 494530560,
+          "cgroup_current_bytes": 1981493248,
+          "cgroup_peak_bytes": 2340904960,
+          "cgroup_anon_bytes": 1149665280,
+          "cgroup_file_bytes": 795975680,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 720321536,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920,
+          "swap_used": 0
+        },
+        {
+          "phase": "decoded_raw_save_end",
+          "epoch": 1792713987.250087,
+          "elapsed_seconds": 12.46408393298043,
+          "mem_available_bytes": 81227374592,
+          "rss_anon_bytes": 1049014272,
+          "rss_file_bytes": 494592000,
+          "cgroup_current_bytes": 1977102336,
+          "cgroup_peak_bytes": 2340904960,
+          "cgroup_anon_bytes": 1049014272,
+          "cgroup_file_bytes": 889704448,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 720321536,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920,
+          "swap_used": 0
+        },
+        {
+          "phase": "video_encode_start",
+          "epoch": 1792713987.2557616,
+          "elapsed_seconds": 12.46975836798083,
+          "mem_available_bytes": 81227403264,
+          "rss_anon_bytes": 1049014272,
+          "rss_file_bytes": 494592000,
+          "cgroup_current_bytes": 1977102336,
+          "cgroup_peak_bytes": 2340904960,
+          "cgroup_anon_bytes": 1049014272,
+          "cgroup_file_bytes": 889704448,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 720321536,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920,
+          "swap_used": 0
+        },
+        {
+          "phase": "VIDEO_OUTPUT_PASS",
+          "epoch": 1792713988.0406158,
+          "elapsed_seconds": 13.25461246498162,
+          "mem_available_bytes": 81109311488,
+          "rss_anon_bytes": 1086504960,
+          "rss_file_bytes": 493359104,
+          "cgroup_current_bytes": 2084184064,
+          "cgroup_peak_bytes": 2340904960,
+          "cgroup_anon_bytes": 1086504960,
+          "cgroup_file_bytes": 954834944,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 720321536,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920,
+          "swap_used": 0
+        },
+        {
+          "phase": "stage_D_complete",
+          "epoch": 1792713988.0477753,
+          "elapsed_seconds": 13.261771272984333,
+          "mem_available_bytes": 81109311488,
+          "rss_anon_bytes": 1086504960,
+          "rss_file_bytes": 493359104,
+          "cgroup_current_bytes": 2083639296,
+          "cgroup_peak_bytes": 2340904960,
+          "cgroup_anon_bytes": 1086504960,
+          "cgroup_file_bytes": 954834944,
+          "cgroup_events": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "cuda_initialized": true,
+          "cuda_allocated": 0,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920,
+          "swap_used": 0
+        }
+      ],
+      "diagnostic_snapshots": [],
+      "cache_leaves": null,
+      "tiny_result": null,
+      "probe_result": null,
+      "error_kind": null,
+      "forward_and_steps": {
+        "recorded_counter": null,
+        "control_flow": "Inspect last durable phase and exception; no zero counter inferred from absent progress"
+      },
+      "evidence_sha256": {
+        "pipeline-process.json": "101a3c97ab688d2f8b27df01428f9419c0b77f0d34486571df11946af0efd12f",
+        "resource_metrics.jsonl": "a064180024768675ce13de1b9e9ea3b378bcbeb90e114e1377eed6c1ba069c52",
+        "phases.jsonl": "ecea735b0fc814fcbb503a5c86026228729b0b24c14774f8d2764d39fd0f95e9"
+      }
+    }
+  }
+}

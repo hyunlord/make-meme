@@ -19,3 +19,7 @@ PROBE는6.062초에 정상 종료했다. 실제64-byte CUDA copy/add/synchronize
 ## S가 기존 실패 지점을 통과
 
 이번 실행에서 CPU staged load 뒤 tiny 재검사와16leaf 복원이 통과했다. DiT device 이동·재검사 후 첫 forward는254.93초에 완료됐고 첫 scheduler step은266.80초에 완료됐다. 동일40step sampler 진행 중이며 final latent·D·MP4는 아직 미완료다. 이전 G 원인을 초기화 순서 하나로 확정하지 않는다.
+
+## Terminal
+
+PROBE/S/D COMPLETED. No running owned processes; see [RESULTS](RESULTS.md) and [RUN_LEDGER](RUN_LEDGER.json). Historical RUNNING entries above retain their observation time. No further GPU work.
