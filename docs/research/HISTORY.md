@@ -342,3 +342,7 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 
 - 실제24fps·361프레임 원본에서 후보3개를 검토하고 첫 적합구간 f7~23을 선정했다. 늦은 머리 roll과 몸통 상대 배치를 local0/12/14/16에 사전 고정했다. 끝 자세의 난점·얇은 mask 경계 PARTIAL은 유지한다.
 - MOV/STILL은 동일reference/text 아래 RGB와mask의 시간 정보만 공동 변경한다. CPU STATIC COPY와 모델STILL을 구분한다. 두 P에서 실제4변경/12보존·noise/RNG 검증 후 순차 sampler2회만 허용한다. 이 기록 시점 실제 GPU0. [실행](experiments/B-012-clear-motion-driving-control/RUNNING.md).
+## 2026-10-23 — B-012 실제 인코딩·paired 조건 통과
+
+- 사전 고정 `8e80bdcfb9351bde5960cea4655f95ffaf22e98b` 이후 MOV/STILL을 각각 실제17장 비디오로 인코딩하고 정상 종료했다. latent slice 반복은 사용하지 않았다.
+- 두 CFG의 driving4leaf만 달랐고 나머지12leaf는 모두 bit-exact였다. 초기noise/RNG/schedule·reference/text 보존을 확인했다. 두 결과 영상·동작 품질은 아직 미확인이며 정상 자원 조건에서 PROBE/S/D를 순차 실행한다. [조건 실측](experiments/B-012-clear-motion-driving-control/CONDITION_COMPARISON.json).

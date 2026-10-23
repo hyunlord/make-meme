@@ -4,7 +4,7 @@
 
 1. COMPLETED: 실제24fps·361프레임 원본과 후보3개 확인. 가장 이른 적합 [7,24)를 선정하고 local0/12/14/16 사건을 고정했다. 큰 마지막 머리 기울임은 난점으로 유지한다. [선정](SOURCE_SELECTION.md).
 2. COMPLETED / GPU0: RGB·mask 모두 동적/정적 대응, 동일reference/text, 실제CPU 전처리와 입력 해시를 고정했다. 4변경/12보존 검사와 CPU8fixture·critical lint 통과. strict typecheck는92개 진단으로 NOT_CLEAN이며 이를 숨기지 않는다. [입력](INPUT_PREPARATION.json), [CPU](CPU_VALIDATION.json), [평가](PREREG_EVALUATION.md). 과거 B009 mask metadata가 복사된 것을 사전 검토에서 발견해 제거했으며 actual B012 입력만 기록한다. 생성 후 계약 변경이 아니다.
-3. PENDING: MOV P1→STILL P1→실제 조건pair 검사 후, 각 PROBE/S/D를 순차 실행. 각단계1회·전체sampler2회·실패포함·재시도0.
+3. IN_PROGRESS: MOV P1·STILL P1 정상 완료/종료. 실제16leaf 중 예상 driving4개만 변경, 나머지12개 모두 bit-exact(max_abs0). noise/RNG/scheduler 포함. [실측 비교](CONDITION_COMPARISON.json). 사전 코드 `8e80bdcfb9351bde5960cea4655f95ffaf22e98b`를 원격 확인한 뒤 실행했으며 이제 각 PROBE/S/D를 순차 진행한다. 각단계1회·전체sampler2회·실패포함·재시도0.
 4. PENDING: 전체17장 SOURCE/STATIC COPY/MOV/STILL, 사전 상대 사건·coverage·불확실성·실측·한국어 해설.
 5. PENDING: RESULTS/HISTORY/ROADMAP·재현 commit/push/원격 SHA와 비공개 ZIP·양호스트 무결성.
 

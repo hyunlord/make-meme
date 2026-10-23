@@ -1,0 +1,287 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "key": "t14",
+      "location": "root.timesteps",
+      "shape": [
+        40
+      ],
+      "dtype": "torch.int64",
+      "device": "cuda:0",
+      "MOV_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+      "STILL_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t0",
+      "location": "root.noise",
+      "shape": [
+        16,
+        5,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+      "STILL_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t10",
+      "location": "root.arg_null.ref_masks[0]",
+      "shape": [
+        28,
+        6,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+      "STILL_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t11",
+      "location": "root.arg_null.pose_latents[0]",
+      "shape": [
+        16,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "f25a23436c02aa7b36ad5daad9aed7a64b7d7db4ccfaddf0fd67d47665a394ee",
+      "STILL_sha256": "3a1a0309469ff5fcc4316a519beb9ab3ed3490eb14c95d333e944ab9ba9b8d71",
+      "exact_equal": false,
+      "max_abs": 4.467950105667114,
+      "expected_change": true,
+      "pass": true
+    },
+    {
+      "key": "t12",
+      "location": "root.arg_null.driving_masks[0]",
+      "shape": [
+        28,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "2a4832f9302ed5e07923517a623b5e11b4c2eb410f7cf364e8daa6a3a236da7a",
+      "STILL_sha256": "80a3ef562119a2e1b70ac84e2f65ac71fdd4a846a0c64839c0a8a24c660352a0",
+      "exact_equal": false,
+      "max_abs": 1.0,
+      "expected_change": true,
+      "pass": true
+    },
+    {
+      "key": "t15",
+      "location": "root.sigmas",
+      "shape": [
+        41
+      ],
+      "dtype": "torch.float32",
+      "device": "cpu",
+      "MOV_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+      "STILL_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t3",
+      "location": "root.arg_c.ref_latents[0]",
+      "shape": [
+        16,
+        1,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+      "STILL_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t4",
+      "location": "root.arg_c.ref_masks[0]",
+      "shape": [
+        28,
+        6,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+      "STILL_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t5",
+      "location": "root.arg_c.pose_latents[0]",
+      "shape": [
+        16,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "f25a23436c02aa7b36ad5daad9aed7a64b7d7db4ccfaddf0fd67d47665a394ee",
+      "STILL_sha256": "3a1a0309469ff5fcc4316a519beb9ab3ed3490eb14c95d333e944ab9ba9b8d71",
+      "exact_equal": false,
+      "max_abs": 4.467950105667114,
+      "expected_change": true,
+      "pass": true
+    },
+    {
+      "key": "t6",
+      "location": "root.arg_c.driving_masks[0]",
+      "shape": [
+        28,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "2a4832f9302ed5e07923517a623b5e11b4c2eb410f7cf364e8daa6a3a236da7a",
+      "STILL_sha256": "80a3ef562119a2e1b70ac84e2f65ac71fdd4a846a0c64839c0a8a24c660352a0",
+      "exact_equal": false,
+      "max_abs": 1.0,
+      "expected_change": true,
+      "pass": true
+    },
+    {
+      "key": "t9",
+      "location": "root.arg_null.ref_latents[0]",
+      "shape": [
+        16,
+        1,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "MOV_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+      "STILL_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t1",
+      "location": "root.arg_c.context[0]",
+      "shape": [
+        91,
+        4096
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "MOV_sha256": "7dd1815ee7640a26a00d38403951bdd35b9cd0d9a43b313a985d155b62ea1093",
+      "STILL_sha256": "7dd1815ee7640a26a00d38403951bdd35b9cd0d9a43b313a985d155b62ea1093",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t7",
+      "location": "root.arg_null.context[0]",
+      "shape": [
+        1,
+        4096
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "MOV_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+      "STILL_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t2",
+      "location": "root.arg_c.clip_fea",
+      "shape": [
+        1,
+        257,
+        1280
+      ],
+      "dtype": "torch.float16",
+      "device": "cuda:0",
+      "MOV_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+      "STILL_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t8",
+      "location": "root.arg_null.clip_fea",
+      "shape": [
+        1,
+        257,
+        1280
+      ],
+      "dtype": "torch.float16",
+      "device": "cuda:0",
+      "MOV_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+      "STILL_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    },
+    {
+      "key": "t13",
+      "location": "root.generator_state",
+      "shape": [
+        16
+      ],
+      "dtype": "torch.uint8",
+      "device": "cpu",
+      "MOV_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+      "STILL_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "expected_change": false,
+      "pass": true
+    }
+  ],
+  "case_cache_sha256": {
+    "MOV": "715099fba103415f48138669d72e1da650215dcb275171f119cdf884402e11ad",
+    "STILL": "86f143e450c38c8a3457b335cd3cb2ad5c58256d87cf1152e521e8b8eb138734"
+  },
+  "policy_sha256": "666745c109e584e9b93f14f972393473c5bd34f5de9d7ba8c0fc1cde54ade39c",
+  "code_manifest_sha256": "8e88a4a51fb254734873286846eeb65c1fb5350f89d6cae778d5c3e42ece6f9c",
+  "helper_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+  "device": "cpu",
+  "cuda_initialized": false
+}
