@@ -346,3 +346,6 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 
 - 사전 고정 `8e80bdcfb9351bde5960cea4655f95ffaf22e98b` 이후 MOV/STILL을 각각 실제17장 비디오로 인코딩하고 정상 종료했다. latent slice 반복은 사용하지 않았다.
 - 두 CFG의 driving4leaf만 달랐고 나머지12leaf는 모두 bit-exact였다. 초기noise/RNG/schedule·reference/text 보존을 확인했다. 두 결과 영상·동작 품질은 아직 미확인이며 정상 자원 조건에서 PROBE/S/D를 순차 실행한다. [조건 실측](experiments/B-012-clear-motion-driving-control/CONDITION_COMPARISON.json).
+## 2026-10-23 — B-012 MOV 첫 출력 확보
+
+MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24fps raw/MP4를 저장하고 정상 종료했다. S guard1102.221초, 재시도0. 첫 결과의 품질과 무관하게 같은 계약의 STILL 대조군을 순차 실행한다. 동작 전달 수용은 두 출력의 사전 사건 비교 뒤 판단하며 현재 미판정이다.

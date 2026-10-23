@@ -8,6 +8,8 @@
 4. PENDING: 전체17장 SOURCE/STATIC COPY/MOV/STILL, 사전 상대 사건·coverage·불확실성·실측·한국어 해설.
 5. PENDING: RESULTS/HISTORY/ROADMAP·재현 commit/push/원격 SHA와 비공개 ZIP·양호스트 무결성.
 
+MOV PROBE/S/D 각1회 기술 완료: 실제40step·80forward, finite FP32 final latent `[16,5,112,64]`, raw `[3,17,896,512]`,17f24fps MP4. S guard1102.221초, 정상exit0/PID0. 최종 latent 파일SHA `7f407b8d2acf3c8b8b30d73732676be7ac9a7c964e0646f477c70b98f63f177d`; initial noise가 아닌 최종 값의 lossless readback을 확인했다. STILL PROBE도 통과해 마지막 S1을 시작했다. 두 출력의 유용한 동작 비교·연속 시간 품질은 아직 판정하지 않았다.
+
 기존 tiny CUDA/anchor/mixed loader/FlashAttention/조건-샘플링-decode 분리·72GiB시작/24GiB실행 headroom·swap0·타 서비스 보호를 유지한다. 새 모델·다운로드·학습·LoRA·imagegen·외부생성0. 첫 결과의 품질만으로 STILL을 생략하지 않으며 입력·자원·안전 실패는 후속 중단 사유다. 동일seed만이 아닌 실제noise/RNG를 비교한다. 현재 결과·품질 미실행이며 실제 연속 재생을 관찰하지 못하면 temporal UNVERIFIED다.
 
 대형4가중치는 이전 검증 SHA와 이번 실제 파일 크기/stat를 재사용 확인했다. 이번 전체 바이트 SHA 재계산으로 표현하지 않는다. tokenizer4파일은 이번 SHA를 대조했다. 실행 코드·case config·upstream·입력의 격리된 case/stage1080개 대조를 통과했다. 실제 두 P의 조건 비교를 통과해야 sampler로 진행한다.
