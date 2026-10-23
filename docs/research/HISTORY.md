@@ -284,3 +284,7 @@
 ## B-008 착수 (2026-10-23)
 
 **RUNNING / Lab P·PROBE·S·D NOT_RUN.** 원격 `c7d38938e51943576637611cdec9ae51902e0d65`와 [PLAN](experiments/B-008-lab-rgb-baseline/PLAN.md), [단계 전환 결정](decisions/20261023-B-007H-to-B-008.md)을 확인했다. H의 공식 MP4 확보를 기반으로 실행 진단에서 실제 Lab 품질 연구로 옮긴다. 성공한 tiny CUDA 선행/anchor·단계 분리·loader를 유지하고 기존 실제 사진/RED mask/f0~16으로 Lab 전용 P를 만든다. 가로 공식값을 삭제해 우회하지 않고 case별 manifest로 검증한다. 3시간, P1/PROBE1/S1/D1·학습0·재시도0. 결과 관찰 전 코드·config를 고정한다.
+
+## B-008 Lab 전용 조건 준비 통과 (2026-10-23)
+
+P1 guarded118.06초, 세로 noise/reference/driving shape와 독립 전처리4개 hash 통과. 원본 Lab 입력에서 새 캐시를 생성했으며 공식 인간 cache 재사용0이다. fresh PROBE/S/D는 순차 선행 gate에 따라 진행한다. [진행](experiments/B-008-lab-rgb-baseline/RUNNING.md).
