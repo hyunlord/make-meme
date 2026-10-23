@@ -56,7 +56,7 @@
 
 ## 자원·보존·검증의 한계
 
-S의 최소 시스템 MemAvailable은52.86GiB, cgroup peak62.00GiB, 관측된 CUDA allocator peak33.83GiB였다. 서로 다른 회계이므로 더해서 총 메모리로 쓰지 않는다. swap0,oom/oom_kill0, cgroup high3357이며 high 이벤트를 숨기거나 OOM으로 잘못 세지 않는다. 기존24GiB runtime headroom·swap0·타 서비스 보호 조건을 유지했다. [단계별 실측](MEASUREMENTS.json).
+S의 최소 시스템 MemAvailable은52.86GiB, cgroup peak62.01GiB, 관측된 CUDA allocator peak33.83GiB였다. 서로 다른 회계이므로 더해서 총 메모리로 쓰지 않는다. swap0,oom/oom_kill0, cgroup high3357이며 high 이벤트를 숨기거나 OOM으로 잘못 세지 않는다. 기존24GiB runtime headroom·swap0·타 서비스 보호 조건을 유지했다. [단계별 실측](MEASUREMENTS.json).
 
 종료 후 보존 해시540개와 자기 unit inactive/MainPID0를 확인했다. A·기존 환경·다른 서비스는 변경하지 않았다. CPU fixture8개와 syntax/핵심 lint는 통과했다. 상속된 B-010 기반 코드의 targeted typecheck81오류는 **NOT_CLEAN**으로 남겼고 이번 범위 밖의 리팩터링이나 무시 주석으로 숨기지 않았다. [검증 범위](STATIC_VALIDATION.json).
 

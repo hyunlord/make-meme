@@ -59,7 +59,7 @@ B-011 P/PROBE/S/D는 각각 121.123/6.055/1062.421/15.219초에 완료됐다. �
 
 생성 후 유리한 점·프레임·시간 lag를 고르거나 출력별 warp로 오차를 줄이지 않는다. 가려지거나 무너진 대응점은 coverage 실패로 남긴다. 작은 정적 오차를 분모로 나누는 개선율은 불안정하므로 필요하면 UNDEFINED다. 실제 속도 연속 재생을 관찰하지 못하면 시간 품질은 **UNVERIFIED**다.
 
-[자원 실측](../experiments/B-011-exploratory-self-reenactment/MEASUREMENTS.json)에서 S의 시스템 최소 MemAvailable은 약 52.86GiB, cgroup peak는 약 62.00GiB, 관측된 CUDA allocator peak는 약 33.83GiB였다. 이 셋은 서로 다른 회계이며 더해 실제 메모리 사용량으로 삼지 않는다. cgroup high 이벤트 3357은 OOM 횟수가 아니며 oom/oom_kill은 0, swap은 0이었다. 자원·파일 검사는 영상의 동작이나 개체 품질을 통과시키지 않는다.
+[자원 실측](../experiments/B-011-exploratory-self-reenactment/MEASUREMENTS.json)에서 S의 시스템 최소 MemAvailable은 약 52.86GiB, cgroup peak는 약 62.01GiB, 관측된 CUDA allocator peak는 약 33.83GiB였다. 이 셋은 서로 다른 회계이며 더해 실제 메모리 사용량으로 삼지 않는다. cgroup high 이벤트 3357은 OOM 횟수가 아니며 oom/oom_kill은 0, swap은 0이었다. 자원·파일 검사는 영상의 동작이나 개체 품질을 통과시키지 않는다.
 
 ## 실제 생성 관측: 작은 raw 오차와 큰 결론 사이
 
