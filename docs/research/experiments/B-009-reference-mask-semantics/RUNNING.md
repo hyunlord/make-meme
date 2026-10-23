@@ -7,7 +7,7 @@
 2. COMPLETED: 최소 실행 코드/config/입력 hash 사전 commit/push 및 독립 검토.
 3. COMPLETED: P1→조건 비교→PROBE1→S1→D1, fresh worker 종료와 자원 회복 확인. 실패 시 재시도 없이 후속 중지.
 4. COMPLETED: 원본/B-008/B-009 전체17장·24fps 비교와 평가·한국어 이론.
-5. PENDING: 공개 결과 commit/push·비공개 ZIP 양호스트 CRC/해시·자체 프로세스 종료 검증.
+5. COMPLETED: 공개 결과 commit/push·비공개 ZIP 양호스트 CRC/해시·자체 프로세스 종료 검증.
 
 이번 변경은 Lab 사진 배경 수정이 아니라 reference semantic mask의 가시성 조건만 바꾸는 것이다. replace_flag=False/animation 유지. 침실 잔류 자체는 실패가 아니며 직립·앞발·동작 단계가 주 평가다. 기존 mask 결함PARTIAL, temporal은 실제 연속 관찰 전UNVERIFIED. 자기 재현은 보류하며 자동 실행하지 않는다.
 
@@ -24,3 +24,5 @@ Spark aarch64, MemAvailable95,114,608,640bytes,swap0,연구 디스크 여유1,12
 실행 전 고정 `1936356099823ebf720a26a5e82671fdbe6cec67`와 원격 SHA 일치를 확인했다. P1 guarded114.974초, 새 cache SHA `e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3`. 실제 양 CFG reference mask(t4/t10)만 pinned helper대로 WHITE prefix가 달라졌고 다른14leaf는bit-identical/maxabs0이다. RGB ref/driving·CLIP·text·driving mask·noise·RNG·scheduler가 실제로 보존돼 수치 허용오차를 사용할 필요가 없었다. 주 에이전트와 독립 검토가 receipt/cache/policy/code 결합을 확인했다.
 
 PROBE1 guarded6.079초,16leaf/RNG 복원·정상 종료 후 S1을 시작했다. 최종latent/MP4·동작 결과는 아직 미확인이다.
+
+최종 실제 실행·관찰은 [RESULTS](RESULTS.md), ZIP CRC/268payload 해시·양호스트 동일성은 [DELIVERY](DELIVERY.md)에 기록했다. 승인된 한 번의 비교를 종료했으며 추가 실행은 없다.
