@@ -75,7 +75,7 @@
 
 브라우저의 이전/다음·slider·끝점·한 번 재생 종료·autoplay/loop OFF 및 desktop/mobile 표시를 실제 확인했다. 모바일6열은 세부 판독에 작으므로 desktop 또는 원본 PNG를 사용한다. 파일 재생 가능성과 사람의 연속 품질 관찰은 다르다. 이번 관측은 정적 전체 프레임 검토이며 **temporal=UNVERIFIED**를 유지한다.
 
-[재현 방법](REPRODUCE.md), 실행 코드/config·입력 hash·수학은 공개한다. 개인 미디어·좌표·조건 cache·latent·weights·개인 절대 경로는 공개하지 않는다. private ZIP에는 두 실제 raw/MP4/최종 latent·조건·재현·실패/불확실성 기록과 비교 자료를 포함하며 weights는 제외한다. 전달 검증은 별도 DELIVERY 기록으로 남긴다.
+[재현 방법](REPRODUCE.md), 실행 코드/config·입력 hash·수학은 공개한다. 개인 미디어·좌표·조건 cache·latent·weights·개인 절대 경로는 공개하지 않는다. private ZIP에는 두 실제 raw/MP4/최종 latent·조건·재현·실패/불확실성 기록과 비교 자료를 포함하며 weights는 제외한다. [전달 검증](DELIVERY.md)에 양 호스트 CRC·551개 payload SHA·전송 동일성을 기록했다.
 
 [codegraph 경고](TOOLING_WARNING.md)는 TOOLING_WARNING이다. 이번8개 worker의 정상 종료와 무관하며 hook 삭제·전역 해제·GPU 재설치나 완료 결과 재생성을 하지 않았다. 과거 경고의 정확한 원인은 UNKNOWN으로 유지한다.
 

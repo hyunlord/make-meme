@@ -8,10 +8,14 @@
 2. [로드맵](ROADMAP.md)
 3. [누적 히스토리](HISTORY.md)
 4. [모든 작업에 적용할 기록 규칙](RECORDING_PROTOCOL.md)
-5. [최근 실험: B-003 구조 조건 비교](experiments/B-003-structure-condition/RESULTS.md)
+5. [최근 실험: B-013 Lab driving 전이 비교](experiments/B-013-lab-driving-transfer/RESULTS.md)
 6. [새 실험 문서 양식](templates/EXPERIMENT.md)
 
-## 현재 상태 — 2026-10-22 기준
+## 현재 상태 — 2026-10-24
+
+B-013은 동일 구간의 Lab MOV/STILL을 각각 한 번 생성하고 종료했다. 실행·조건 통제 PASS, 전신 직립 FAIL, 국소 반응 PARTIAL, temporal UNVERIFIED다. [결과](experiments/B-013-lab-driving-transfer/RESULTS.md) · [한국어 이론](lessons/B-013-cross-identity-driving.md). 다음 연구 제안은 한 가지만 남겼으며 추가 추론·학습은 실행하지 않았다. A는 계속 보존·동결한다.
+
+## 초기 상태 — 2026-10-22 기록 보존
 
 - A: native imagegen 전용 MCP 실험. 기존 자산과 이력은 보존하고 추가 생성·보정 확장은 동결한다.
 - B: DGX Spark에서 로컬 모델을 이해하고 학습·추론·개선하는 연구·학습 트랙.
