@@ -1,6 +1,6 @@
 # B-009 재현 계약
 
-현재 실물 실행 **NOT_RUN / 대기**. [PLAN](PLAN.md)의 reference mask BLACK→WHITE 비교 한 번만 수행하며 B-008 대조군은 재생성하지 않는다. A 및 기존 결과를 보존한다.
+현재 **CPU 사전 검증 PASS / P·조건 통제 PASS**. 실행 사전 등록은 `1936356`이다. [PLAN](PLAN.md)의 reference mask BLACK→WHITE 비교 한 번만 수행하며 B-008 대조군은 재생성하지 않는다. A 및 기존 결과를 보존한다.
 
 ## 고정과 변경
 
@@ -20,3 +20,11 @@ pinned SCAIL은 `78fe19576bb06be96c2375e088574a262a300edb`다. helper strict thr
 ## 판정
 
 원본/B-008/B-009 전체17장과 f0/4/8/12/16, native24fps 비교를 유지한다. WHITE animation에서 참조 침실 유지 자체를 FAIL로 삼지 않는다. 직립·앞발·머리/몸 phase를 주 평가로 삼고 견종 유사성과 개체 일치를 구분한다. 직접 연속 재생이 없으면 temporal=UNVERIFIED다. 추가 자기 재현·학습·생성으로 자동 확대하지 않는다.
+
+## 사전 고정 비교 정책
+
+[CPU_VALIDATION](CPU_VALIDATION.json)은10개 검증 PASS/1.11초/GPU0을 기록한다. [compare_conditions.py](code/compare_conditions.py)의 비마스크 floating encoder 조건은 rtol1e-5/atol1e-6, noise/RNG/timesteps/sigmas와 모든 비개입 mask·비부동소수 tensor는 exact다. reference mask 양 branch는 pinned helper의 old/new prefix에 exact 일치하고 WHITE 외 channel 및 generated plane을 exact 보존해야 한다. driving mask1e-7 변화도 거부한다. 이 CPU fixture를 실제 P condition 통제 완료로 대체하지 않으며 실제 비교 receipt를 별도로 확인한다.
+
+### 실제 P 조건 통제 결과
+
+P114.974초 PASS, 새 cache SHA256은 `e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3`이다.16개 leaf 중 t4/t10(양 CFG branch의 reference mask)만 예상 WHITE prefix 변화가 있었고 max absolute delta는1이었다. 다른14개 leaf는 bit-identical, max delta0이었다. 따라서 사전 등록된 비마스크 float tolerance 범위에 기대어 통과한 사례가 아니라 실제 exact equality를 관측했다. non-WHITE/reference RED 및 generated plane도 통제 검사를 통과했다. 이는 실제 입력 조건 통제의 증거이며 생성 자세 개선이나 유일 원인 규명은 아직 아니다. 후속 생성·시각 품질은 대기다.

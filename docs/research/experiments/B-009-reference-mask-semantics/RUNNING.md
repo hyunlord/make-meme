@@ -18,3 +18,9 @@ Spark aarch64, MemAvailable95,114,608,640bytes,swap0,연구 디스크 여유1,12
 ## 사전 입력·코드 검사
 
 새 mask는RED113,928픽셀을 정확히 보존하고BLACK344,824픽셀만WHITE로 변경했다. 독립 pinned helper 검사와 전처리ref_mask_img FP32[3,896,512] SHA `67c43d812cd0f8f889defa496357929aae73d96b0a6ac9421c1eb9e1ffbd3ff3`를 확인했다. 사진/driver는 변경하지 않았다. CPU10fixture·criticalRuff·syntax PASS, 전체typecheck832errors/17files는NOT_CLEAN으로 기록한다. 같은마스크·noise·RNG·scheduler는exact, 비마스크 인코더 float만사전 rtol1e-5/atol1e-6; 의미있는차이는S차단이다. 독립 코드 검토PASS, GPU는아직NOT_RUN.
+
+## P·조건 통제·PROBE 통과 / S 시작
+
+실행 전 고정 `1936356099823ebf720a26a5e82671fdbe6cec67`와 원격 SHA 일치를 확인했다. P1 guarded114.974초, 새 cache SHA `e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3`. 실제 양 CFG reference mask(t4/t10)만 pinned helper대로 WHITE prefix가 달라졌고 다른14leaf는bit-identical/maxabs0이다. RGB ref/driving·CLIP·text·driving mask·noise·RNG·scheduler가 실제로 보존돼 수치 허용오차를 사용할 필요가 없었다. 주 에이전트와 독립 검토가 receipt/cache/policy/code 결합을 확인했다.
+
+PROBE1 guarded6.079초,16leaf/RNG 복원·정상 종료 후 S1을 시작했다. 최종latent/MP4·동작 결과는 아직 미확인이다.

@@ -300,3 +300,7 @@ P1 guarded118.06초, 세로 noise/reference/driving shape와 독립 전처리4�
 **RUNNING / P·PROBE·S·D NOT_RUN.** [독립 검토 결정](decisions/20261023-B-008-review-and-B-009.md)에 따라 자기 재현보다 [reference mask 단일 변경](experiments/B-009-reference-mask-semantics/PLAN.md)을 우선한다. 기존 Lab mask의 정확한BLACK만WHITE로 바꾸고RED·RGB·driving·text·모드·seed·sampler는 유지한다. B-008을 대조군으로 재사용하며 새 P/PROBE/S/D 각1회·sampler1회·재시도/학습0이다.
 
 해석 정정: animation의WHITE는 참조 배경 가시성 조건이므로 침실이 남는 것 자체를 실패로 판단하지 않는다. B-008의 직립 전달 실패 관측은 유지한다. 공식 mixed-fps 학습 설명상 writer16fps 기본값을 고정16fps 학습 분포의 증거로 사용할 수 없다. 과거 기록은 보존하고 현재 해석을 이 항목으로 보완한다.
+
+## B-009 실제 조건 단일 변경 검증 통과 (2026-10-23)
+
+사전 코드1936356으로 P1을 실행해114.974초에 완료했다. 두 CFG reference mask WHITE prefix만 변하고 나머지14leaf가 모두비트동일함을 확인했다. RGB reference가 달라진 비교가 아니다. PROBE1도6.079초에 종료돼 승인된 S1을 시작한다. 영상 품질은 아직 미확인. [진행](experiments/B-009-reference-mask-semantics/RUNNING.md).
