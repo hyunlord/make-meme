@@ -1,6 +1,6 @@
 # B-011 — 측정 불확실성과 탐색적 생성 진단
 
-현재 P 조건 생성·비교와 PROBE는 **PASS**, S sampler는 **RUNNING**이다. 출력은 **NOT_AVAILABLE**, D와 출력 품질 검토는 **NOT_RUN**이다. [B-011 계획](../experiments/B-011-exploratory-self-reenactment/PLAN.md)은 화면상 시간 변화(A)와 부위 상대 운동(B)을 분리한다. B가 불확실해도 입력·안전 계약과 실제 source 변화가 확인되면 A의 탐색 생성 한 번을 허용한다. B-010의 DIAGNOSTIC_INSUFFICIENT와 GPU 0회 기록은 그대로다.
+현재 P/PROBE/S/D는 각각 1회 **PASS**이며 실제 영상 출력이 있다. 전체 17장 정적 시각 검토에서 source 화면 변화와의 서술적 대응 근거가 확인됐다. 정밀한 부위 상대 운동은 **INCONCLUSIVE**, 시간 품질은 **UNVERIFIED**다. [B-011 계획](../experiments/B-011-exploratory-self-reenactment/PLAN.md)은 화면상 시간 변화(A)와 부위 상대 운동(B)을 분리한다. B가 불확실해도 입력·안전 계약과 실제 source 변화가 확인되면 A의 탐색 생성 한 번을 허용한다. B-010의 DIAGNOSTIC_INSUFFICIENT와 GPU 0회 기록은 그대로다.
 
 ## 1. 반경은 표준편차가 아니다
 
@@ -51,13 +51,33 @@ B-011 P의 **실측** noise는 `[16,5,112,64]` FP32, reference는 `[16,1,112,64]
 
 [실제 조건 비교](../experiments/B-011-exploratory-self-reenactment/CONDITION_COMPARISON.json)에서 예정된 7leaf만 변경됐고 9개 control은 모두 bit-exact, 최대 차이 0이었다. 허용 tolerance에 겨우 들어온 결과가 아니다. 변경은 positive text 1, 양 branch reference 2·CLIP 2·reference mask prefix 2다. driving/mask, negative, noise/RNG/schedule은 보존됐다. noise의 실제 SHA256은 `9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950`, 새 cache는 `2af5acb5e3835e1e3f23609dcf83a326980818075aff3c11c36cbd5a095583cb`다. 이는 입력 계약의 증거이며 동작 전이 성공은 아니다.
 
-[실제 sampler](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)의 CFG는 \(v_{cfg}=v_u+5(v_c-v_u)\)다. 두 branch에 visual 조건이 공유되므로 \(u\)가 reference/driving 제거 실험은 아니다. UniPC 40step은 CFG 80forward를 계획하지만 완료 횟수는 실제 장부로 판정한다. \(\sigma\)는 noise time이고 영상 frame \(k\)의 물리 시각 \(k/24\)와 다르다. 17장의 파일 길이 17/24초와 첫·끝 프레임 표본 간격 16/24초도 구분한다.
+[실제 sampler](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)의 CFG는 \(v_{cfg}=v_u+5(v_c-v_u)\)다. 두 branch에 visual 조건이 공유되므로 \(u\)가 reference/driving 제거 실험은 아니다. 이번 실제 [장부](../experiments/B-011-exploratory-self-reenactment/RUN_LEDGER.json)는 UniPC 40step·CFG 80forward 완료를 기록한다. \(\sigma\)는 noise time이고 영상 frame \(k\)의 물리 시각 \(k/24\)와 다르다. 17장의 파일 길이 17/24초와 첫·끝 프레임 표본 간격 16/24초도 구분한다.
 
 ## 6. 현재 근거와 해석 한계
 
-B-011 S sampler는 **RUNNING**이며 출력은 **NOT_AVAILABLE**이다. PROBE는 6.055초에 완료됐고, D와 출력 품질 검토는 **NOT_RUN**이다. 사전 source 관측과 새 P의 7leaf 변경/9leaf 보존 검증은 완료됐으며, sampler·decode·출력 검토와 구분한다. [생성 전 평가 계약](../experiments/B-011-exploratory-self-reenactment/PREREG_EVALUATION.md)은 수준 A를 OBSERVABLE_SCREEN_CHANGE, B를 INCONCLUSIVE로 고정했다. 현재 source 변위 평균 16.5407px와 기존 반경합 19.4222px를 함께 남겼고 통합 gain은 UNDEFINED다. 이전 대비 판독 차이는 머리 평균 2.5607px, 앞발 평균 5.6347px이며 정확도나 새 신뢰구간이 아니다. B-009 대비 reference와 text가 함께 바뀌므로 순수 단일요인 인과 실험이 아니다. 한 seed의 자기 재현 성공도 cross-identity, Lab 체형 전이, 동물 일반화나 접촉 물리를 증명하지 않는다.
+B-011 P/PROBE/S/D는 각각 121.123/6.055/1062.421/15.219초에 완료됐다. 이는 guard가 측정한 시작·정리 포함 wall time이며 각 모델 연산 시간과 다르다. 최종 latent `[16,5,112,64]` FP32는 finite·저장 후 readback을 통과했고 initial noise와 다른 값이다. raw `[3,17,896,512]`와 17프레임·24fps·0.708333초 MP4가 생성됐다. 생성 1회, 재시도 0, 학습 0이며 모든 자체 unit은 inactive/PID0다. 전체 17장의 root·독립 검토자는 작은 source 방향/크기 변화와 눈에 띄는 큰 형상 붕괴의 부재를 확인했다. 이는 정적 이미지 검토이며 실제 연속 재생 검증은 아니다. 사전 source 관측과 새 P의 7leaf 변경/9leaf 보존 검증은 완료됐으며, sampler·decode·출력 검토와 구분한다. [생성 전 평가 계약](../experiments/B-011-exploratory-self-reenactment/PREREG_EVALUATION.md)은 수준 A를 OBSERVABLE_SCREEN_CHANGE, B를 INCONCLUSIVE로 고정했다. 현재 source 변위 평균 16.5407px와 기존 반경합 19.4222px를 함께 남겼고 통합 gain은 UNDEFINED다. 이전 대비 판독 차이는 머리 평균 2.5607px, 앞발 평균 5.6347px이며 정확도나 새 신뢰구간이 아니다. B-009 대비 reference와 text가 함께 바뀌므로 순수 단일요인 인과 실험이 아니다. 한 seed의 자기 재현 성공도 cross-identity, Lab 체형 전이, 동물 일반화나 접촉 물리를 증명하지 않는다.
 
 생성 후 유리한 점·프레임·시간 lag를 고르거나 출력별 warp로 오차를 줄이지 않는다. 가려지거나 무너진 대응점은 coverage 실패로 남긴다. 작은 정적 오차를 분모로 나누는 개선율은 불안정하므로 필요하면 UNDEFINED다. 실제 속도 연속 재생을 관찰하지 못하면 시간 품질은 **UNVERIFIED**다.
+
+[자원 실측](../experiments/B-011-exploratory-self-reenactment/MEASUREMENTS.json)에서 S의 시스템 최소 MemAvailable은 약 52.86GiB, cgroup peak는 약 62.00GiB, 관측된 CUDA allocator peak는 약 33.83GiB였다. 이 셋은 서로 다른 회계이며 더해 실제 메모리 사용량으로 삼지 않는다. cgroup high 이벤트 3357은 OOM 횟수가 아니며 oom/oom_kill은 0, swap은 0이었다. 자원·파일 검사는 영상의 동작이나 개체 품질을 통과시키지 않는다.
+
+## 실제 생성 관측: 작은 raw 오차와 큰 결론 사이
+
+[OUTPUT_EVALUATION](../experiments/B-011-exploratory-self-reenactment/OUTPUT_EVALUATION.json)은 사전 고정 5시점×5점의 25개 위치와 20개 변위를 전부 유지했다. 머리 15개 위치는 VISIBLE, 앞발 10개 위치는 흐린 발가락 묶음 때문에 UNCERTAIN이며 불확실한 변위 8개도 제외하지 않았다. 출력 위치 오차는 **NOT_CALIBRATED**다.
+
+측정량은 \(d_j^s(t)=p_j^s(t)-p_j^s(0)\), \(d_j^g(t)=p_j^g(t)-p_j^g(0)\), \(E_{copy}=\|d_j^s(t)\|_2\), \(E_{gen}=\|d_j^g(t)-d_j^s(t)\|_2\)다. 이는 초기 위치를 각각 빼서 비교하는 변위 오차이며, 생성물의 절대 위치·크기·개체 외형을 모두 평가하는 지표가 아니다.
+
+| 사전 고정 집계 | 항목 수 | E_copy 평균(px) | E_gen 평균(px) |
+|---|---:|---:|---:|
+| 전체 | 20 | 16.5407 | 3.5212 |
+| 머리 | 12 | 18.0420 | 2.2804 |
+| 앞발 | 8 | 14.2887 | 5.3823 |
+
+출력 변위 평균은 17.0948px로, 기록된 표면점 관측에서는 literal static copy와 다르다. 전체 시트에서도 작은 source 방향·크기 변화가 보였다. 따라서 **수준 A의 화면 변화 대응은 서술적으로 뒷받침된다.** 그러나 raw 오차 감소를 보정된 우월성·신뢰도·개선율로 바꿀 수 없다. source의 기존 반경을 유지했고 output 오차분포는 보정되지 않았으며 공통 f0 편향도 남는다. 통합 gain은 사전대로 **UNDEFINED**, 부위 상대 운동 B는 **INCONCLUSIVE**다. 앞발의 작은 수치만 보고 접촉·안무 성공으로 승격하지 않는다.
+
+이 실험에는 driving을 static으로 바꾼 ablation이 없다. STATIC COPY는 비생성 대조군이지, 모델의 driving 조건을 제거한 대조군이 아니다. 따라서 source와 비슷한 변화가 관측됐어도 driving 활용의 인과적 증명은 아니다. reference와 text도 B-009에서 함께 바뀌었다. Lab cross-identity 전이·체형·일반화는 여전히 미검증이다.
+
+실제 속도에서 사람이 연속 시청한 근거는 없어 temporal=UNVERIFIED다. 다음 제안은 기존 원본에서 더 명확한 동작을 가진 짧은 구간을 **source-only로 선택하는 후속 실험 한 가지**이며, 이번에는 실행하지 않는다.
 
 ## 이해 확인 질문
 

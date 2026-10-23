@@ -205,3 +205,9 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 ## B-011 착수: 측정 정밀도와 탐색 생성 분리 (2026-10-23)
 
 **RUNNING / 생성 NOT_RUN.** B-010의 DIAGNOSTIC_INSUFFICIENT는 유지한다. [B-011 PLAN](experiments/B-011-exploratory-self-reenactment/PLAN.md)은 같은17프레임에서 일부 화면상 변화가 관측되는 정상 입력의 탐색 생성1회를 허용한다. 정확한 관절 정량성이 부족하면 해당 B평가는 INCONCLUSIVE이며 A의 시간 변화 관측까지 계속 미루지 않는다. 원본/STATIC COPY/출력 전체를 비교하고 단순 직립·전체 흔들림을 안무 성공으로 올리지 않는다. 이후에도 불명확하면 같은17장 재주석 반복 대신 더 명확한 source-only 구간 검토 한 가지를 후속 후보로 남긴다.
+
+## B-011 실제 결론과 다음 한 작업 (2026-10-23)
+
+**COMPLETED / 실행 PASS / A화면 변화 대응 근거 / B관절 운동 INCONCLUSIVE.** 자기 재현1회에서17f24fps·finite final latent를 확보했다. 원본과 비슷한 화면 변화는 관측됐고 고정20변위의 raw 잔차는 정적 복사16.5407px/생성3.5212px였다. 그러나 출력 오차가 보정되지 않았고 앞발 위치가 불확실하여 gain UNDEFINED·temporal UNVERIFIED이며 Lab cross-identity 전이 성공은 아니다. [RESULTS](experiments/B-011-exploratory-self-reenactment/RESULTS.md).
+
+후속 후보는 기존 원본의 더 명확한 머리·앞발 상대 움직임을 가진 짧은 구간을 **source-only로 검토**하는 한 작업이다. 같은17프레임 재주석을 다시 반복하지 않는다. 새 구간 생성·seed·low-pass·모델 변경·학습은 NOT_RUN이며 자동 실행하지 않는다. 이전 착수 NOT_RUN은 당시 이력이다.

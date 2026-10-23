@@ -328,3 +328,9 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 ## B-011 새 자기 재현 조건 검증 완료 (2026-10-23)
 
 사전 고정 `ee730af08a29ecfce3d0b6a243e18f04a2c64584` 뒤 P1을121.123초에 완료했다. 실제 cache에서 reference/text 관련7leaf 변경과 driving/negative/noise/RNG/scheduler9leaf 보존을 확인했고, 보존9개는 모두 비트 동일했다. positive text는44→27token으로 바뀌었으며 Lab cache를 재사용한 결과가 아니다. P 종료/PID0 확인 후 fresh PROBE→S→D를 선행 gate에 따라 진행한다. 생성 품질은 아직 미확인이다. [진행](experiments/B-011-exploratory-self-reenactment/RUNNING.md).
+
+## B-011 종료 (2026-10-23)
+
+**실행 PASS / 화면 변화 대응 근거 / 관절 운동 INCONCLUSIVE.** P/PROBE/S/D각1회·sampler1회·재시도0회로40step80forward,finite final latent와17f24fps MP4를 확보했다. 고정25위치/20변위를 모두 포함한 raw E_copy16.5407px/E_gen3.5212px이며 머리의 위·왼쪽 이동과 후반 오른쪽 복귀가 대응했다. 출력의 미보정 위치 오차·앞발10위치 UNCERTAIN·같은 관측자 편향이 남으므로 통계적 우월성이나 관절 안무를 수용하지 않는다. gain UNDEFINED, temporal UNVERIFIED. B-010 중단/GPU0은 보존한다. S1062.421초,최소가용52.86GiB,swap/OOM0,cgroup high3357. [RESULTS](experiments/B-011-exploratory-self-reenactment/RESULTS.md).
+
+다음 한 작업은 기존 원본의 더 명확한 머리·앞발 상대 동작 구간을 source-only로 검토하는 것이다. 동일17장 재주석 반복·추가 생성·seed·학습은 실행하지 않았다.

@@ -1,0 +1,42 @@
+{
+  "frames": [
+    0,
+    4,
+    8,
+    12,
+    16
+  ],
+  "expected_positions": 25,
+  "observed_positions": 25,
+  "output_visible_positions": 15,
+  "output_uncertain_positions": 10,
+  "expected_deltas": 20,
+  "retained_deltas": 20,
+  "uncertain_deltas": 8,
+  "gain": "UNDEFINED",
+  "uncertainty": "Source radii remain 7.222222 head / 13.444444 paw px, not RMSE. Output localization uncertainty is NOT_CALIBRATED; blurry toe-cluster endpoints UNCERTAIN. No CI or quality threshold inferred. All estimates retained, not filtered.",
+  "groups": {
+    "all": {
+      "n": 20,
+      "mean_E_copy_px": 16.540681322640985,
+      "mean_E_gen_px": 3.521189533211853,
+      "mean_output_displacement_px": 17.094798452915132
+    },
+    "head": {
+      "n": 12,
+      "mean_E_copy_px": 18.04201521780318,
+      "mean_E_gen_px": 2.2804215151659792,
+      "mean_output_displacement_px": 16.28355281710953
+    },
+    "forepaws": {
+      "n": 8,
+      "mean_E_copy_px": 14.288680479897693,
+      "mean_E_gen_px": 5.382341560280664,
+      "mean_output_displacement_px": 18.311666906623532
+    }
+  },
+  "A": "Observable screen-change correspondence supported descriptively; superiority to STATIC COPY not uncertainty-calibrated",
+  "B": "INCONCLUSIVE",
+  "temporal_quality": "UNVERIFIED",
+  "method": "Manual visual read of fixed native-coordinate panels. No alignment, scale correction, inferred joints, temporal shift, or point exclusion."
+}
