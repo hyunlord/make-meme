@@ -320,3 +320,7 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 **DIAGNOSTIC_INSUFFICIENT / GPU NOT_RUN.** source f0 반복 STATIC COPY를 먼저 만들고 보이는 표면점20개 비교를 수행했다. E_copy15.5107px가 전파된 평균 관측오차19.4222px보다 작고 앞발 변화도 오차 범위였다. 일부 머리 위치 변화는 관측됐으나 전체 이동/배율과 분리한 관절 동작 증거가 부족했다. 원본 무동작이나 모델 실패가 아니라 현재 주석 정밀도의 한계다. P/PROBE/S/D모두0, 새로운 latent/생성영상 없음. [RESULTS](experiments/B-010-animal-self-reenactment/RESULTS.md).
 
 다음 한 작업은 동일17프레임의 실제512×896 표면점 직접 재주석 CPU 감사다. 이를 이번에 수행하거나 새 sampler/구간/seed로 자동 확대하지 않았다.
+
+## B-011 착수: 평가 수준을 나눈 탐색적 자기 재현 (2026-10-23)
+
+시작 원격 `dfa23d6ffeb49a8471eb3487085739f35e82d646`의 [PLAN](experiments/B-011-exploratory-self-reenactment/PLAN.md)과 [사전 변경 결정](decisions/20261023-B-010-review-and-B-011.md)을 확인했다. B-010 중단은 보존하며 평균 전파 반경을 실측 RMSE로 해석하지 않는다. source의 관측 가능한 시간 변화(A)와 정확한 부위 상대 운동(B)을 생성 전에 분리하고 B 불확실성은 결과의 한계로 남긴다. 동일17장·source-f0 참조·고정 prompt로 새 P/PROBE/S/D 각최대1회, sampler1회·재시도/학습0. 관측 검토30분·전체3시간 상한. [진행](experiments/B-011-exploratory-self-reenactment/RUNNING.md).

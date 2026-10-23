@@ -201,3 +201,7 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 **DIAGNOSTIC_INSUFFICIENT / GPU NOT_RUN.** source f0 반복 STATIC COPY를 먼저 만들고 보이는 표면점20개 비교를 수행했다. E_copy15.5107px가 전파된 평균 관측오차19.4222px보다 작고 앞발 변화도 오차 범위였다. 일부 머리 위치 변화는 관측됐으나 전체 이동/배율과 분리한 관절 동작 증거가 부족했다. 원본 무동작이나 모델 실패가 아니라 현재 주석 정밀도의 한계다. P/PROBE/S/D모두0, 새로운 latent/생성영상 없음. [RESULTS](experiments/B-010-animal-self-reenactment/RESULTS.md).
 
 다음 한 작업은 동일17프레임의 실제512×896 표면점 직접 재주석 CPU 감사다. 이를 이번에 수행하거나 새 sampler/구간/seed로 자동 확대하지 않았다.
+
+## B-011 착수: 측정 정밀도와 탐색 생성 분리 (2026-10-23)
+
+**RUNNING / 생성 NOT_RUN.** B-010의 DIAGNOSTIC_INSUFFICIENT는 유지한다. [B-011 PLAN](experiments/B-011-exploratory-self-reenactment/PLAN.md)은 같은17프레임에서 일부 화면상 변화가 관측되는 정상 입력의 탐색 생성1회를 허용한다. 정확한 관절 정량성이 부족하면 해당 B평가는 INCONCLUSIVE이며 A의 시간 변화 관측까지 계속 미루지 않는다. 원본/STATIC COPY/출력 전체를 비교하고 단순 직립·전체 흔들림을 안무 성공으로 올리지 않는다. 이후에도 불명확하면 같은17장 재주석 반복 대신 더 명확한 source-only 구간 검토 한 가지를 후속 후보로 남긴다.
