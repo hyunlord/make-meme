@@ -218,3 +218,9 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 ## B-012 입력 고정 (2026-10-23)
 
 source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 MOV 대 STILL로 RGB+mask 시간 정보의 추가 기여를 검토한다. CPU 입력·계약 검증 완료, 실제 sampler는 아직 NOT_RUN. 기존 B-011의 정밀 운동/기여 미입증을 보존하며 [실행 기록](experiments/B-012-clear-motion-driving-control/RUNNING.md)을 따른다.
+
+## B-012 종료: 동적 driving의 제한된 상대 동작 근거 (2026-10-23)
+
+**COMPLETED / 실행·조건 통제 PASS / temporal UNVERIFIED.** source-only f7~23에서 MOV/STILL 각각 P/PROBE/S/D1회·40step80forward·17f24fps MP4와 final latent를 확보했다. 양 CFG driving4leaf만 변경되고 나머지12leaf는 실제 bit-exact였다. 전체17장 정적 검토에서 MOV는 후반 머리-몸통 상대 roll의 방향·순서를 원본에 가깝게 재현했고 STILL은 초기 자세 부근이었다. 한 same-identity pair의 동적RGB+mask 공동 기여에 대한 탐색적 근거이며 정밀 앞발·접촉·Lab 전이는 미입증이다. sampler2/2·실패/재시도/학습0, 최소 시스템가용52.095GiB·swap/OOM0. [RESULTS](experiments/B-012-clear-motion-driving-control/RESULTS.md).
+
+다음 연구 제안은 같은 [7,24) 구간의 실제 Lab cross-identity 전이 비교 하나다. NOT_RUN이며 이번에 추가 생성·모델·학습을 시작하지 않았다. 앞선 단계의 RUNNING/NOT_RUN 기록은 당시 이력으로 보존한다.

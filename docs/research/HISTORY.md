@@ -349,3 +349,9 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 ## 2026-10-23 — B-012 MOV 첫 출력 확보
 
 MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24fps raw/MP4를 저장하고 정상 종료했다. S guard1102.221초, 재시도0. 첫 결과의 품질과 무관하게 같은 계약의 STILL 대조군을 순차 실행한다. 동작 전달 수용은 두 출력의 사전 사건 비교 뒤 판단하며 현재 미판정이다.
+
+## B-012 종료: 동적 driving의 제한된 상대 동작 근거 (2026-10-23)
+
+**COMPLETED / 실행·조건 통제 PASS / temporal UNVERIFIED.** source-only f7~23에서 MOV/STILL 각각 P/PROBE/S/D1회·40step80forward·17f24fps MP4와 final latent를 확보했다. 양 CFG driving4leaf만 변경되고 나머지12leaf는 실제 bit-exact였다. 전체17장 정적 검토에서 MOV는 후반 머리-몸통 상대 roll의 방향·순서를 원본에 가깝게 재현했고 STILL은 초기 자세 부근이었다. 한 same-identity pair의 동적RGB+mask 공동 기여에 대한 탐색적 근거이며 정밀 앞발·접촉·Lab 전이는 미입증이다. sampler2/2·실패/재시도/학습0, 최소 시스템가용52.095GiB·swap/OOM0. [RESULTS](experiments/B-012-clear-motion-driving-control/RESULTS.md).
+
+다음 연구 제안은 같은 [7,24) 구간의 실제 Lab cross-identity 전이 비교 하나다. NOT_RUN이며 이번에 추가 생성·모델·학습을 시작하지 않았다. 앞선 단계의 RUNNING/NOT_RUN 기록은 당시 이력으로 보존한다.

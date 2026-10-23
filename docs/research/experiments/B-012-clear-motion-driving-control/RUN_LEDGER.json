@@ -1,0 +1,297 @@
+{
+  "experiment": "B-012",
+  "prereg_commit": "8e80bdcfb9351bde5960cea4655f95ffaf22e98b",
+  "status": "EXECUTION_PASS",
+  "sampler_attempts": 2,
+  "sampler_cap": 2,
+  "failed_attempts": 0,
+  "retries": 0,
+  "cases": {
+    "MOV": {
+      "stages": {
+        "P": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 119.01314234733582,
+          "worker_phase_seconds": 117.23832815000787,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "PROBE": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 6.058937072753906,
+          "worker_phase_seconds": 4.029172147042118,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "S": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 1102.2213065624237,
+          "worker_phase_seconds": 1099.3619558779756,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "D": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 16.189351558685303,
+          "worker_phase_seconds": 13.582813433953561,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        }
+      },
+      "artifacts": {
+        "conditions.json": {
+          "bytes": 27129,
+          "sha256": "a8b26754d0b6e71aff3ad5315389bbc69bd2239c44f51287b15710f550745532",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions.safetensors": {
+          "bytes": 18070180,
+          "sha256": "715099fba103415f48138669d72e1da650215dcb275171f119cdf884402e11ad",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions_receipt.json": {
+          "bytes": 523,
+          "sha256": "c00d9631ebc11de94f4bf9bc1b9b8b6b8f903c2d9c35aeda6e7e092fb6cd260e",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.json": {
+          "bytes": 34896,
+          "sha256": "107b6364cb71490c2ef807c3c2bb8dd3182d1f732c4067a8843bd451607726ae",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "7f407b8d2acf3c8b8b30d73732676be7ac9a7c964e0646f477c70b98f63f177d",
+          "included_in_mac_runtime_copy": true
+        },
+        "initial_noise.pt": {
+          "bytes": 2295379,
+          "sha256": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc",
+          "included_in_mac_runtime_copy": true
+        },
+        "output.mp4": {
+          "bytes": 361427,
+          "sha256": "767ccab1763994a66c6c08d1061b3394d52cbfe1669faebb9c74e22323fc9473",
+          "included_in_mac_runtime_copy": true
+        },
+        "preprocessed_inputs.pt": {
+          "bytes": 198183445,
+          "sha256": "91ab3d256ba78de7b22d40348029ac0d8ba16ad56dcc11c7d712fd18c8ee0d15",
+          "included_in_mac_runtime_copy": false
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "fc6b6695c79017805c886a98234d8480b5cee074fcc09e4b5889630f4f978977",
+          "included_in_mac_runtime_copy": true
+        }
+      },
+      "final_latent_gate": {
+        "status": "PASS",
+        "shape": [
+          16,
+          5,
+          112,
+          64
+        ],
+        "dtype": "torch.float32",
+        "finite": true,
+        "counters": {
+          "model_calls": 80,
+          "completed_steps": 40
+        },
+        "final_value_sha256": "9f61d866d290169cd2db32ecc3b7512d00959ff6350b6ad4815ddfca747eaaf0",
+        "initial_noise_value_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+        "final_file_sha256": "7f407b8d2acf3c8b8b30d73732676be7ac9a7c964e0646f477c70b98f63f177d",
+        "condition_sha256": "715099fba103415f48138669d72e1da650215dcb275171f119cdf884402e11ad",
+        "cuda_initialized": false,
+        "guard_seconds": 1102.2213065624237
+      },
+      "output": {
+        "status": "VIDEO_OUTPUT_PASS",
+        "raw_shape": [
+          3,
+          17,
+          896,
+          512
+        ],
+        "finite": true,
+        "width": 512,
+        "height": 896,
+        "frames": 17,
+        "fps": "24/1",
+        "duration": "0.708333",
+        "quality": "UNVERIFIED_BY_RUNTIME"
+      }
+    },
+    "STILL": {
+      "stages": {
+        "P": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 97.79204058647156,
+          "worker_phase_seconds": 95.57226204499602,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "PROBE": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 5.077953100204468,
+          "worker_phase_seconds": 3.2396919849561527,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "S": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 1055.610095500946,
+          "worker_phase_seconds": 1052.8545620728983,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "D": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 15.171440839767456,
+          "worker_phase_seconds": 12.75966827699449,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        }
+      },
+      "artifacts": {
+        "conditions.json": {
+          "bytes": 27129,
+          "sha256": "1eb805c21eb000fecc09493ba323be32edc1866146843056f8cfc8ca861ab5a7",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions.safetensors": {
+          "bytes": 18070180,
+          "sha256": "86f143e450c38c8a3457b335cd3cb2ad5c58256d87cf1152e521e8b8eb138734",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions_receipt.json": {
+          "bytes": 523,
+          "sha256": "660a34fcbeb65d29cc4f30e3727d781431c6840a94788cec0c801d0d57f6233b",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.json": {
+          "bytes": 34896,
+          "sha256": "b49baabfc957fd9e01edec3f2b7f0d3d0e1fbea03be259ee59ed21cf36bd2fcf",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "bb1ab69a6684d8d25f515da78664f60403be279eb790bd7f43798cfca2e53971",
+          "included_in_mac_runtime_copy": true
+        },
+        "initial_noise.pt": {
+          "bytes": 2295379,
+          "sha256": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc",
+          "included_in_mac_runtime_copy": true
+        },
+        "output.mp4": {
+          "bytes": 203904,
+          "sha256": "b79527e47b112e03a688f201f7dcad41cb47d7c33dc21a3d2615d6b9243c9cc2",
+          "included_in_mac_runtime_copy": true
+        },
+        "preprocessed_inputs.pt": {
+          "bytes": 198183445,
+          "sha256": "832179fcd7db321c7852a208073ef0de4650ae926b01f5190b05d176a3fbd780",
+          "included_in_mac_runtime_copy": false
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "8fdb55b804dcd98687c0844c9f49d043125c3365251ad4a31fb28c1c5b0a769b",
+          "included_in_mac_runtime_copy": true
+        }
+      },
+      "final_latent_gate": {
+        "status": "PASS",
+        "shape": [
+          16,
+          5,
+          112,
+          64
+        ],
+        "dtype": "torch.float32",
+        "finite": true,
+        "counters": {
+          "model_calls": 80,
+          "completed_steps": 40
+        },
+        "final_tensor_sha256": "6d6acf8f7ed4a6d1bcfa7935ed4e1fcfa02478f5b059f2cac1e9d316cbbe16a1",
+        "initial_noise_tensor_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+        "initial_noise_exact": true,
+        "final_file_sha256": "bb1ab69a6684d8d25f515da78664f60403be279eb790bd7f43798cfca2e53971",
+        "condition_sha256": "86f143e450c38c8a3457b335cd3cb2ad5c58256d87cf1152e521e8b8eb138734",
+        "guard_seconds": 1055.610095500946,
+        "service_exit": "MainPID=0\nResult=success\nActiveState=inactive\n"
+      },
+      "output": {
+        "status": "VIDEO_OUTPUT_PASS",
+        "raw_shape": [
+          3,
+          17,
+          896,
+          512
+        ],
+        "finite": true,
+        "width": 512,
+        "height": 896,
+        "frames": 17,
+        "fps": "24/1",
+        "duration": "0.708333",
+        "quality": "UNVERIFIED_BY_RUNTIME"
+      }
+    }
+  },
+  "quality": "UNVERIFIED_BY_RUNTIME",
+  "new_downloads": 0,
+  "training_updates": 0,
+  "condition_comparison": {
+    "status": "PASS",
+    "changed": 4,
+    "preserved": 12,
+    "all_preserved_bit_exact": true
+  },
+  "prior_sampler_history": {
+    "B010": 0,
+    "B011": 1,
+    "B009": 1,
+    "B008": 1,
+    "B007H": 1
+  },
+  "preservation": {
+    "postrun_code_config_upstream_input_sha": {
+      "status": "PASS",
+      "checks": 848,
+      "method": "Fresh SHA256 on every worker code/config/upstream and fixed input file",
+      "runtime_code_mutations": 0
+    },
+    "large_weights": "fresh size/mtime unchanged; prior verified SHA retained, not recomputed",
+    "existing_comfy": "same preapproved PID and 3271MiB, queue empty; no termination performed",
+    "owned_workers": "both runtime units inactive, MainPID=0",
+    "prior_experiment_writes": 0,
+    "A_generation_calls": 0
+  }
+}

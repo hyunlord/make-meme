@@ -1,0 +1,169 @@
+{
+  "experiment": "B-012",
+  "units": "bytes and seconds unless stated",
+  "cases": {
+    "MOV": {
+      "P": {
+        "guard_seconds": 119.01314234733582,
+        "worker_phase_seconds": 117.23832815000787,
+        "start_epoch": 1792762472.3074942,
+        "end_epoch": 1792762591.3206365,
+        "minimum_system_available_bytes": 70814334976,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 31283675136,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 4320272384,
+        "memory_cap_bytes": 68719476736
+      },
+      "PROBE": {
+        "guard_seconds": 6.058937072753906,
+        "worker_phase_seconds": 4.029172147042118,
+        "start_epoch": 1792762831.9009557,
+        "end_epoch": 1792762837.9598927,
+        "minimum_system_available_bytes": 94471180288,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 711802880,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 18069504,
+        "memory_cap_bytes": 68719476736
+      },
+      "S": {
+        "guard_seconds": 1102.2213065624237,
+        "worker_phase_seconds": 1099.3619558779756,
+        "start_epoch": 1792762845.2727106,
+        "end_epoch": 1792763947.4940171,
+        "minimum_system_available_bytes": 55936552960,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 66576678912,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 3630,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 36326490112,
+        "memory_cap_bytes": 68719476736
+      },
+      "D": {
+        "guard_seconds": 16.189351558685303,
+        "worker_phase_seconds": 13.582813433953561,
+        "start_epoch": 1792763995.5857468,
+        "end_epoch": 1792764011.7750983,
+        "minimum_system_available_bytes": 81816907776,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 2240876544,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 9565265920,
+        "memory_cap_bytes": 68719476736
+      }
+    },
+    "STILL": {
+      "P": {
+        "guard_seconds": 97.79204058647156,
+        "worker_phase_seconds": 95.57226204499602,
+        "start_epoch": 1792762641.5003483,
+        "end_epoch": 1792762739.292389,
+        "minimum_system_available_bytes": 70038523904,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 25572343808,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 4320272384,
+        "memory_cap_bytes": 68719476736
+      },
+      "PROBE": {
+        "guard_seconds": 5.077953100204468,
+        "worker_phase_seconds": 3.2396919849561527,
+        "start_epoch": 1792764022.8477523,
+        "end_epoch": 1792764027.9257054,
+        "minimum_system_available_bytes": 95336054784,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 656748544,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 18069504,
+        "memory_cap_bytes": 68719476736
+      },
+      "S": {
+        "guard_seconds": 1055.610095500946,
+        "worker_phase_seconds": 1052.8545620728983,
+        "start_epoch": 1792764044.217136,
+        "end_epoch": 1792765099.8272314,
+        "minimum_system_available_bytes": 56915619840,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 66577977344,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 2959,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 36326490112,
+        "memory_cap_bytes": 68719476736
+      },
+      "D": {
+        "guard_seconds": 15.171440839767456,
+        "worker_phase_seconds": 12.75966827699449,
+        "start_epoch": 1792765133.991716,
+        "end_epoch": 1792765149.1631567,
+        "minimum_system_available_bytes": 81884524544,
+        "maximum_swap_used_bytes": 0,
+        "cgroup_peak_bytes": 2229149696,
+        "cgroup_events_max": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "cuda_peak_allocated_bytes": 9565265920,
+        "memory_cap_bytes": 68719476736
+      }
+    }
+  },
+  "memory_note": "System availability, cgroup charged memory, process RSS and CUDA allocator measurements are distinct; do not sum them. Cgroup high events indicate throttling/reclaim, not OOM.",
+  "model_verification": "Fresh stat/size of four large weights with prior verified SHA; fresh SHA of four tokenizer files. No new full large-weight SHA claimed.",
+  "execution_first_stage_start_epoch": 1792762472.3074942,
+  "execution_last_stage_end_epoch": 1792765149.1631567,
+  "execution_wall_seconds": 2676.855662584305,
+  "minimum_system_available_bytes": 55936552960,
+  "maximum_swap_used_bytes": 0
+}
