@@ -69,6 +69,6 @@ NFE는10% 늘었고 실제 walltime은 위와 같다. 파일 캐시·시스템 �
 
 이번은 수식/코드 이식과 한 seed의 기술적 pilot 완료다. 전신 목표는 FAIL이며 유용한 motion+shape의 동시 개선은 **NOT_ESTABLISHED**다. 초기/중기 가독성 차이와 후기 손상 지속을 함께 보존한다. ALG 전체가 무효라거나 원래 실패가 고주파 하나 때문이라고 일반화하지 않는다. 이 실험은 새 알고리즘·논문 성능·상용급 품질·15초 제작 수용이 아니다.
 
-비공개 검토물에는 raw/최종latent·재사용 규약/filtered sidecar/전체17장/native24fps 비교MP4/원본 입력·대조군/시도·실패·불확실성·trace·재현을 포함한다. 17프레임의 파일 길이17/24=0.708333초와 첫–끝 sample 간격16/24=0.666667초를 구분한다. 업스케일·보간·warp·추가생성은 없다. [재현](REPRODUCE.md), [한국어 수식·코드 해설](../../lessons/B-014-alg-and-conditional-velocity.md). ZIP 경로·CRC·SHA는 최종 DELIVERY에 별도 기록한다.
+비공개 검토물에는 raw/최종latent·재사용 규약/filtered sidecar/전체17장/native24fps 비교MP4/원본 입력·대조군/시도·실패·불확실성·trace·재현을 포함한다. 17프레임의 파일 길이17/24=0.708333초와 첫–끝 sample 간격16/24=0.666667초를 구분한다. 업스케일·보간·warp·추가생성은 없다. [재현](REPRODUCE.md), [한국어 수식·코드 해설](../../lessons/B-014-alg-and-conditional-velocity.md), [ZIP 전달·CRC·SHA 검증](DELIVERY.md). 개인 절대 경로는 비공개 전달 기록에만 남긴다.
 
 **다음 연구 하나만 제안:** 같은 고정 ALG를 LAB_STILL에 적용하는 대조군 한 번으로, 이미 있는 MOV/STILL/ALG_MOV와 함께 guidance×driving의 네 셀을 완성한다. 국소 반응/번짐 변화가 실제 동적 driving과 상호작용하는지 분리하는 진단이며 직립 개선을 약속하는 설정 탐색이 아니다. 이번에는 실행하지 않았고 별도 승인이 필요하다. 추가 seed·강도 탐색·학습·SR·모델 교체는 NOT_RUN이다.
