@@ -61,7 +61,7 @@ B-014의 수치 ALG·필터 구현은 byte 그대로 유지했다. 변경은 STI
 
 ## 보기·재현·전달
 
-비공개 `reports/output-review/review.html`과 native24fps 비교 MP4, 모든17장·사전4시점·원본 PNG를 제공한다. 기존 세 셀의51장 PNG는 byte 그대로 재사용하고 새 raw만 같은 양자화 규칙으로 변환했다. 실제 참조와 source도 포함한다. 비교 MP4는3072×928·17f24fps·0.708333초다. 브라우저 이전/다음·slider·끝점·한 번 재생 종료·loop/autoplay OFF와 desktop/mobile 표시를 검증했다. 모바일6열은 개요용이며 세부 판독은 desktop/원본PNG가 필요하다. [재현 명령](REPRODUCE.md), [한국어 수식·코드 해설과 질문/답](../../lessons/B-015-guidance-driving-interaction.md)을 연결한다. private ZIP에는 새 raw·MP4·final latent·STILL parent 캐시·새 sidecar·기존 세 셀 비교·실패/불확실성·재현을 포함하고 weights는 제외한다. 공개에는 개인 미디어·tensor·개인 절대경로를 넣지 않는다.
+비공개 `reports/output-review/review.html`과 native24fps 비교 MP4, 모든17장·사전4시점·원본 PNG를 제공한다. 기존 세 셀의51장 PNG는 byte 그대로 재사용하고 새 raw만 같은 양자화 규칙으로 변환했다. 실제 참조와 source도 포함한다. 비교 MP4는3072×928·17f24fps·0.708333초다. 브라우저 이전/다음·slider·끝점·한 번 재생 종료·loop/autoplay OFF와 desktop/mobile 표시를 검증했다. 모바일6열은 개요용이며 세부 판독은 desktop/원본PNG가 필요하다. [재현 명령](REPRODUCE.md), [한국어 수식·코드 해설과 질문/답](../../lessons/B-015-guidance-driving-interaction.md)을 연결한다. private ZIP에는 새 raw·MP4·final latent·STILL parent 캐시·새 sidecar·기존 세 셀 비교·실패/불확실성·재현을 포함하고 weights는 제외한다. 공개에는 개인 미디어·tensor·개인 절대경로를 넣지 않는다. [전달 검증](DELIVERY.md)에 양 호스트 CRC·471개 payload SHA·전송 동일성과 제외 항목을 기록했다.
 
 ## 다음 검증 가능한 가설 하나 — NOT_RUN
 
