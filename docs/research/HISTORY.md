@@ -373,3 +373,7 @@ MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24f
 **COMPLETED / 실행·조건 PASS / 전신 FAIL / 국소 PARTIAL / temporal UNVERIFIED.** LAB_MOV/LAB_STILL 각각 P/PROBE/S/D1회·40step80forward·finite final latent·17f24fps MP4를 확보했다. pair4변경/12bit-exact, 대응 B-0127변경/9bit-exact로 입력 계보를 확인했다. 전체17장 정적 검토에서 두 출력 모두 착석·지지 앞발이 남았다. LAB_MOV의 후반 머리 반응은 더 크지만 눈·주둥이·귀 번짐으로 충실한 roll·실제 개체 유지 수용은 어렵다. 단순 검은 Lab 유사성과 실제 반려견 일치를 구분한다. sampler2/2·실패/재시도/학습0, 최소가용46.139GiB·swap/OOM0, cgroup high4242/3670은 공개한다. [RESULTS](experiments/B-013-lab-driving-transfer/RESULTS.md).
 
 다음 연구 하나는 SCAIL reference conditioning에 ALG의 시간별 참조 완화 원리를 적용할 수 있는지 검토하고 전신 자세 대 개체 보존의 통제 실험을 설계하는 것이다. 공식3branch와2→3forward 비용, 저주파 착석 실루엣·identity 약화 위험, SCAIL 미검증을 명시한다. 이번에는 수정·추론·학습 NOT_RUN이며 자동 실행하지 않는다. 앞선 RUNNING 기록은 당시 이력으로 보존한다.
+
+## B-014 착수: 입력 비교에서 제한된 sampling 개입으로 (2026-10-24)
+
+**RUNNING / CPU 이식 검증 중 / GPU NOT_RUN.** 원격`152b6771397176ac0eb1860debc0902331c5d523`의 [PLAN](experiments/B-014-alg-scail-pilot/PLAN.md)과 [결정](decisions/20261024-B-013-review-and-B-014.md)을 확인했다. B-013의 전신FAIL/국소PARTIAL/얼굴번짐을 보존하며 단순움직임증가를 목표로 삼지 않는다. 공식ALG의 원본negative 기준항을 보존한3항식을 ref-latent 공간필터로 이식하고, CPU계약·사전코드고정이 통과할 때만 기존LAB_MOV조건으로 pilot1회 수행한다. ratio0.4·45×26·bilinearAA·i0..7고정,40step88forward; P0·retry0·학습0·3시간. 새모델·ALG_STILL·추가seed·강도탐색은 실행하지 않는다. [진행](experiments/B-014-alg-scail-pilot/RUNNING.md).
