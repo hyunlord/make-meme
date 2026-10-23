@@ -6,6 +6,6 @@
 2. COMPLETED: 입력/prompt/기대 변경 집합·최소 코드·회귀 검증·공개 사전 고정.
 3. NOT_RUN (사전 관측성 부족): 관측가능성 통과 시 P1→조건 비교→PROBE1→S1→D1; 선행 실패 후 후속 미실행, 재시도0.
 4. COMPLETED (실제 source/static만, 생성 출력 없음): 원본/STATIC COPY/출력의 전체17프레임 및24fps 비교, coverage/invalid·정적변화 평가와 한국어 해설.
-5. PENDING: 결과/HISTORY/ROADMAP commit/push·비공개 ZIP CRC/해시·양호스트 전달 및 프로세스 종료 확인.
+5. COMPLETED: 결과/HISTORY/ROADMAP commit/push 및 원격 SHA 확인, 비공개 ZIP CRC·238개 payload 해시 검증, Mac/Spark 바이트 동일성·작업 프로세스 종료 확인. 최종 전달 영수증은 DELIVERY.md 참조.
 
 직립 자체는 성공 기준이 아니다. reference/text가 바뀌는 자기 재현 진단이며 B-009는 맥락용이다. source 움직임이 관측오차보다 작으면 DIAGNOSTIC_INSUFFICIENT로 남기고 추가구간이나seed를 고르지 않는다. 마스크/저역필터/학습/새모델/외부생성0. 기존72GiB시작/24GiB런타임·swap0가드를 유지한다.
