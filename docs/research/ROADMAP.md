@@ -211,3 +211,7 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 **COMPLETED / 실행 PASS / A화면 변화 대응 근거 / B관절 운동 INCONCLUSIVE.** 자기 재현1회에서17f24fps·finite final latent를 확보했다. 원본과 비슷한 화면 변화는 관측됐고 고정20변위의 raw 잔차는 정적 복사16.5407px/생성3.5212px였다. 그러나 출력 오차가 보정되지 않았고 앞발 위치가 불확실하여 gain UNDEFINED·temporal UNVERIFIED이며 Lab cross-identity 전이 성공은 아니다. [RESULTS](experiments/B-011-exploratory-self-reenactment/RESULTS.md).
 
 후속 후보는 기존 원본의 더 명확한 머리·앞발 상대 움직임을 가진 짧은 구간을 **source-only로 검토**하는 한 작업이다. 같은17프레임 재주석을 다시 반복하지 않는다. 새 구간 생성·seed·low-pass·모델 변경·학습은 NOT_RUN이며 자동 실행하지 않는다. 이전 착수 NOT_RUN은 당시 이력이다.
+
+## B-012 착수 (2026-10-23)
+
+**RUNNING / 생성 NOT_RUN.** [PLAN](experiments/B-012-clear-motion-driving-control/PLAN.md)에 따라 source-only 최초 적합 구간을 고정하고, 같은reference/text/noise에서 동적 RGB+mask(MOV)와 첫RGB+첫mask 반복(STILL)의 모델 생성pair를 비교한다. 정적출력 STATIC COPY와 정적입력 STILL을 구분한다. 단순 변화량·직립이 아닌 source 상대 사건의 방향·순서·시점을 평가하며 정확한 좌표는 불확실성을 유지한다. 최대2sampler·각1회·4시간·학습0, 추가전이/low-pass/seed/모델은 실행하지 않는다.

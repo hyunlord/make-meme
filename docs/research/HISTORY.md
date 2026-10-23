@@ -334,3 +334,7 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 **실행 PASS / 화면 변화 대응 근거 / 관절 운동 INCONCLUSIVE.** P/PROBE/S/D각1회·sampler1회·재시도0회로40step80forward,finite final latent와17f24fps MP4를 확보했다. 고정25위치/20변위를 모두 포함한 raw E_copy16.5407px/E_gen3.5212px이며 머리의 위·왼쪽 이동과 후반 오른쪽 복귀가 대응했다. 출력의 미보정 위치 오차·앞발10위치 UNCERTAIN·같은 관측자 편향이 남으므로 통계적 우월성이나 관절 안무를 수용하지 않는다. gain UNDEFINED, temporal UNVERIFIED. B-010 중단/GPU0은 보존한다. S1062.421초,최소가용52.86GiB,swap/OOM0,cgroup high3357. [RESULTS](experiments/B-011-exploratory-self-reenactment/RESULTS.md).
 
 다음 한 작업은 기존 원본의 더 명확한 머리·앞발 상대 동작 구간을 source-only로 검토하는 것이다. 동일17장 재주석 반복·추가 생성·seed·학습은 실행하지 않았다.
+
+## B-012 착수: 동적 driving pair의 추가 시간 정보 (2026-10-23)
+
+최신 원격 `aea64a71baf75db31a4aa4b9240ae4de8ad44545`와 [PLAN](experiments/B-012-clear-motion-driving-control/PLAN.md), [전환 결정](decisions/20261023-B-011-review-and-B-012.md)을 확인했다. B-011의 화면 변화 대응은 보존하되 정적 driving 모델 대조군이 없었던 한계를 직접 비교한다. 최대45분 source-only 후보3개에서 최초 적합17장 구간을 선정하고 같은reference/text/noise의 MOV 대 STILL을 각1회 실행한다. STATIC COPY는 모델 출력이 아닌 별도CPU 반복 기준이다. 4시간·sampler최대2회·재시도/학습0. 이전 연결 장애 시도는 sampler0이며 새 실험의 모델 실패로 세지 않는다. [진행](experiments/B-012-clear-motion-driving-control/RUNNING.md).
