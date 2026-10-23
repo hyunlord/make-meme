@@ -1,6 +1,6 @@
 # B-008 — 외형 참조와 RGB 동작 조건이 만나는 곳
 
-상태: **Lab 실물 실행 NOT_RUN / 결과 대기**. [계획](../experiments/B-008-lab-rgb-baseline/PLAN.md)은 실제 앉은 Lab 사진과 원본 f0~16을 사용한 한 번의 기준선이다. H의 공식 인간 영상 성공은 이번 개체·체형·안무 성공을 보장하지 않는다. 이번에는 가중치 theta를 학습하지 않고 조건 c를 바꾼다.
+최종 상태: **Lab P/PROBE/S/D 기술 실행 PASS / 동작 전달 FAIL / 실제 개체 UNCERTAIN / 시간 품질 UNVERIFIED**. [계획](../experiments/B-008-lab-rgb-baseline/PLAN.md)은 실제 앉은 Lab 사진과 원본 f0~16을 사용한 한 번의 기준선이다. H의 공식 인간 영상 성공은 이번 개체·체형·안무 성공을 보장하지 않는다. 이번에는 가중치 theta를 학습하지 않고 조건 c를 바꾼다.
 
 ## 1. 직관과 변수
 
@@ -21,24 +21,24 @@
 
 ## 3. shape를 코드에서 예측하고 실측과 구분하기
 
-다음은 세로 H896×W512·17프레임의 **예상값**이다. 실제 P/S/D 관측 전에는 측정값이라고 쓰지 않는다. 공간 VAE stride8, 시간 압축 후 T5, patch(1,2,2)를 적용한다.
+다음 표에서 noise/reference/driving/mask는 실제 Lab P의 **관측값**이다. final latent와 raw output도 실제 S/D에서 확인됐다. 공간 VAE stride8, 시간 압축 후 T5, patch(1,2,2)를 적용한다.
 
-| 항목 | 예상 shape | 의미 |
+| 항목 | shape | 증거 범위 |
 |---|---|---|
-| generated noise/final latent | `[16,5,112,64]` | batch를 제외한 C,T,H,W |
-| reference latent | `[16,1,112,64]` | 생성 프레임이 아닌 참조 prefix |
-| reference mask | `[28,6,112,64]` | 참조1+generated5의 grid |
-| driving latent | `[16,5,56,32]` | half-size RGB 조건 |
-| driving mask | `[28,5,56,32]` | driving 조건과 같은 grid |
-| raw output | `[3,17,896,512]` | 실제 RGB 영상 |
+| generated noise | `[16,5,112,64]` FP32 | P 관측, batch 제외 C,T,H,W; S final도 같은 shape로 확인 |
+| reference latent | `[16,1,112,64]` FP32 | P 관측, 생성 프레임이 아닌 참조 prefix |
+| reference mask | `[28,6,112,64]` FP32 | P 관측, 참조1+generated5 grid |
+| driving latent | `[16,5,56,32]` FP32 | P 관측, half-size RGB 조건 |
+| driving mask | `[28,5,56,32]` FP32 | P 관측, driving과 같은 grid |
+| raw output | `[3,17,896,512]` | D 관측, finite RGB output |
 
-reference token은112×64/4=1792, generated는5×1792=8960, driving은5×56×32/4=2240으로 합계12992다. 이 예측은 H의 가로 shape를 reshape한 것이 아니라 세로 입력의 각 축에서 유도한 값이다. 면적이 같아 token 수가 같더라도 회전된 공간 좌표·내용·RoPE 의미가 동일하지는 않다. text token 길이는 실제 prompt encoder 출력으로 확인해야 한다.
+reference token은112×64/4=1792, generated는5×1792=8960, driving은5×56×32/4=2240으로 합계12992다. 이 예측은 H의 가로 shape를 reshape한 것이 아니라 세로 입력의 각 축에서 유도한 값이다. 면적이 같아 token 수가 같더라도 회전된 공간 좌표·내용·RoPE 의미가 동일하지는 않다. 실제 P text는 positive `[44,4096]` BF16, negative `[1,4096]` BF16이고 CLIP는 `[1,257,1280]` FP16이다.12992 token 계산은 이 shape에 대한 코드상 계산이며 아직 실제 DiT hook 관측은 아니다.
 
 ## 4. velocity와 최종 영상
 
 시간 규약을 `z_sigma=(1-sigma)x+sigma*epsilon`으로 설명하면 velocity는 `epsilon-x`이며 sampling은 sigma가 줄어드는 방향이다. 실제 [UniPC flow prediction 변환](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/utils/fm_solvers_unipc.py#L300-L327)은 이를 clean sample 추정과 solver에 연결한다. 교육용 Euler와 실제 UniPC predictor/corrector를 같은 구현으로 부르지 않는다.
 
-[공식 CFG loop](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)는 `v_cfg=v_null+5*(v_cond-v_null)`을 계산한다. arg_null에도 동일 reference/driving/mask/CLIP가 있고 text context가 다르다. null을 “모든 조건이 없는 모델”로 해석하지 않는다.40 step이면 두 branch의80 forward가 필요하며 실제 완료 counter는 실행 후 확인한다.
+[공식 CFG loop](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)는 `v_cfg=v_null+5*(v_cond-v_null)`을 계산한다. arg_null에도 동일 reference/driving/mask/CLIP가 있고 text context가 다르다. null을 “모든 조건이 없는 모델”로 해석하지 않는다.40 step이면 두 branch의80 forward가 필요하며 이번 실제 완료 counter는80 forward·40 step으로 확인됐다.
 
 최종 generated latent만 [VAE decode](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/vae.py#L544-L568)에 전달한다. wrapper가 scaling을 복원하므로 외부에서 중복 적용하지 않는다. reference prefix나 초기 noise가 final latent를 대신하지 않는다.
 
@@ -56,7 +56,23 @@ H의 사람 조건 캐시는 Lab에 사용할 수 없다. R/D/M/p, crop·resize,
 
 ## 7. 이번 관측과 반례의 자리
 
-현재 Lab 실행·출력은 NOT_RUN이다. H는 기술 경로의 근거이며 Lab 결과가 아니다. 이후 source/preprocess/reference/output의 f0,4,8,12,16과 전체17장을 같은 framing으로 검토하고, 개체·체형·동작 phase·경계·배경을 각각 기록한다. 정적 시트만 보았다면 시간 품질은 UNVERIFIED다. 생성 성공과 개체/안무 수용은 분리하며 통계적 성공률이나 임의 종합점수를 만들지 않는다.
+Lab P는118.06초에 완료했고4개 독립 전처리 tensor hash가 일치했다. 새 Lab cache는17,685,156 bytes, SHA256 `96164a2c54d38e86f006504824a85499f669eaca12f05ee3e6afe5a3858a0287`이다. 이후 S는80 forward·40 step을 완료했고 D raw/MP4를 확보했다. flatten된 noise 값 hash는 H와 같은 `9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950`으로 관측됐다. 같은 seed와 element 수에서 나온 일치이며 H와 같도록 강제한 검사가 아니다. shape는 Lab `[16,5,112,64]`와 H `[16,5,64,112]`로 다르므로 hash 하나만으로 공간 tensor가 같다고 말하지 않는다. H cache/사람 자산은 재사용하지 않았다. H는 기술 경로의 근거이며 Lab 결과가 아니다. 품질 검토에서는 source/preprocess/reference/output의 f0,4,8,12,16과 전체17장을 같은 framing으로 검토하고, 개체·체형·동작 phase·경계·배경을 각각 기록한다. 정적 시트만 보았다면 시간 품질은 UNVERIFIED다. 생성 성공과 개체/안무 수용은 분리하며 통계적 성공률이나 임의 종합점수를 만들지 않는다.
+
+### 실제 생성 완료와 품질의 구분
+
+[실행 장부](../experiments/B-008-lab-rgb-baseline/RUN_LEDGER.json)의 guarded 시간은 P118.060초, PROBE6.063초, S1066.317초, D15.219초다. 각1회, 재시도0, 종료 PID0/inactive다. final latent는 finite FP32 `[16,5,112,64]`, readback exact이며 P→S noise exact다. final 값 hash `24f40d5fd79571fdecd969f5e5ba1227c55a096c9a8770e2022469c270fe1813`은 initial noise와 다르다. raw `[3,17,896,512]`와17프레임·24fps·0.708333초 MP4를 확인했다.
+
+이는 새 Lab 입력으로 기술 경로가 완료됐다는 증거다. 실행 담당자는 실제 f0/4/8/12/16과 전체17프레임을 정적으로 검토했다. 결과는 아래와 같으며 개체·안무 수용과 기술 완료를 구분한다. 시간 품질은 UNVERIFIED다. 출력이 있다는 이유로 source RGB가 의도한 motion만 전달했다고 결론 내리지 않는다.
+
+### 실제 정적 품질 관측
+
+출력은 실제 참조의 검은 Lab 얼굴·귀와 넓은 앉은 가슴을 닮았고, 참조의 침대·커튼 배경이 강하게 남았다. 검은 Lab 견종 외형이 알아볼 만하다는 사실은 특정 반려견 identity 성공을 뜻하지 않아 **실제 개체는 UNCERTAIN**이다. 보이는 가슴·얼굴의 형태는 대체로 알아볼 수 있으나 가려진 뒷부분과 접촉은 UNCERTAIN이다.
+
+전체17프레임에서 앉은 자세가 유지되고 앞발은 침대에 남았다. 원본의 뒷발 직립 자세·앞발 동작이 전달되지 않아 **motion transfer는 FAIL**이다. 머리·몸 위치의 작은 변화가 보여 동일 프레임 복제라고 주장하지 않는다. 참조 pose/background의 잔류는 실제 관측됐고, 원본 흰 강아지의 외형 복사는 뚜렷하지 않았다. 연속 재생을 직접 확인하지 않았으므로 temporal=UNVERIFIED다.
+
+이 결과는 “참조의 외형을 남겼으니 조건 분리가 성공했다”는 해석의 반례다. 얼굴·가슴뿐 아니라 원치 않은 앉은 자세와 배경도 함께 남았다. 다만 이를 특정 attention branch나 학습 데이터의 유일 원인으로 단정할 수 없다. 이번 단일 입력으로 일반적 동물 motion 능력 부재와 cross-body identity transfer의 난점을 분리해 입증하지 못했다.
+
+다음 제안은 **같은 원본 동물의 첫 프레임을 reference로 쓰는 RGB-driving 자기 재구성 진단 한 가지**다. 기본 동물 동작 재현과 다른 체형·개체로의 전달 난점을 구분할 단서를 얻는 목적이며, 아직 실행하지 않았다. 이 비교도 reference 정보가 달라지므로 모든 인과를 분리하는 증명이라고 부르지 않는다. 이번 실행 뒤 추가 생성·학습은 하지 않았다.
 
 ## 이해 확인 질문
 

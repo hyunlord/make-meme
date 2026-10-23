@@ -288,3 +288,9 @@
 ## B-008 Lab 전용 조건 준비 통과 (2026-10-23)
 
 P1 guarded118.06초, 세로 noise/reference/driving shape와 독립 전처리4개 hash 통과. 원본 Lab 입력에서 새 캐시를 생성했으며 공식 인간 cache 재사용0이다. fresh PROBE/S/D는 순차 선행 gate에 따라 진행한다. [진행](experiments/B-008-lab-rgb-baseline/RUNNING.md).
+
+## B-008 종료 (2026-10-23)
+
+**P/PROBE/S/D PASS / Lab MP4·final latent 확보 / 직립 동작 전달 FAIL.** 실제17f24fps·512×896,40step80forward, 신규 sampler1회·재시도/학습0. 전체17장 정적 검토에서 검은 Lab 외형은 유지됐지만 참조의 착석·침실 구도가 남아 원본 직립/앞발 동작을 재현하지 못했다. 특정 개체UNCERTAIN, temporalUNVERIFIED. S1066.317초, D15.219초, 최소MemAvailable51.978GiB,swap/OOM0. [RESULTS](experiments/B-008-lab-rgb-baseline/RESULTS.md).
+
+다음 한 실험은 동일 source 동물의 첫 프레임을 참조로 한 RGB-driving 자기 재현 진단이다. 기본 동물 움직임 재현과 cross-identity/체형 전이의 어려움을 구분하려는 계획이며 새 실행은 별도 결정 전 시작하지 않는다.

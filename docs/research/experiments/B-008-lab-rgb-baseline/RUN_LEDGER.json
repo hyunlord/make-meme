@@ -1,0 +1,154 @@
+{
+  "experiment": "B-008",
+  "prereg_commit": "e1424cb088c745ef83ee1ce5d4f4ee05a1e22dec",
+  "deadline_utc": "2026-10-23T04:28:00Z",
+  "stages": {
+    "P": {
+      "status": "COMPLETED",
+      "attempts": 1,
+      "attempt_cap": 1,
+      "started_epoch": 1792719281.0387726,
+      "finished_epoch": 1792719399.0991836,
+      "guard_elapsed_seconds": 118.06041097640991,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "initial_available_bytes": 95701651456
+    },
+    "PROBE": {
+      "status": "COMPLETED",
+      "attempts": 1,
+      "attempt_cap": 1,
+      "started_epoch": 1792719455.69128,
+      "finished_epoch": 1792719461.753869,
+      "guard_elapsed_seconds": 6.062589168548584,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "initial_available_bytes": 95712346112
+    },
+    "S": {
+      "status": "COMPLETED",
+      "attempts": 1,
+      "attempt_cap": 1,
+      "started_epoch": 1792719476.7237678,
+      "finished_epoch": 1792720543.0404656,
+      "guard_elapsed_seconds": 1066.3166978359222,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "initial_available_bytes": 95678988288
+    },
+    "D": {
+      "status": "COMPLETED",
+      "attempts": 1,
+      "attempt_cap": 1,
+      "started_epoch": 1792720592.055735,
+      "finished_epoch": 1792720607.2742996,
+      "guard_elapsed_seconds": 15.218564510345459,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "initial_available_bytes": 95073214464
+    }
+  },
+  "new_condition_cache": true,
+  "parent_runtime": "B-007H",
+  "model_load_attempts": 1,
+  "sampler_attempts": 1,
+  "sampler_attempt_cap": 1,
+  "model_calls": 80,
+  "completed_steps": 40,
+  "counter_evidence": "Actual final latent sidecar and per-step progress",
+  "decode_attempts": 1,
+  "training": "NOT_RUN",
+  "outputs": {
+    "final_latent.safetensors": {
+      "bytes": 2293840,
+      "sha256": "480bacf8b868ad5f175196bf6345a2b5a17a2ad6415c5b8a0675649092a34394"
+    },
+    "conditions.safetensors": {
+      "bytes": 17685156,
+      "sha256": "96164a2c54d38e86f006504824a85499f669eaca12f05ee3e6afe5a3858a0287"
+    },
+    "conditions_receipt.json": {
+      "bytes": 522,
+      "sha256": "d8cbc9c2f19679373dcbdb42d6e4ca8802b25aa2c9c1848b48bf365421be1cb8"
+    },
+    "preprocessed_inputs.pt": {
+      "bytes": 198183445,
+      "sha256": "d5945e5306af7dedc675a1b6568f6d67571a54d9057926f6451547c69a06a4e8"
+    },
+    "output.mp4": {
+      "bytes": 605364,
+      "sha256": "774a637b48f82c3eba3120842b42f05e8653184f67c9ff606c5b04adf4fa00e6"
+    },
+    "initial_noise.pt": {
+      "bytes": 2295379,
+      "sha256": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc"
+    },
+    "final_latent.json": {
+      "bytes": 31910,
+      "sha256": "ca04f5aec577fc8c053d19e671846aa45388986db0202bfad5d89a7b8c20e14b"
+    },
+    "raw_output.pt": {
+      "bytes": 93587006,
+      "sha256": "eadad46956804f87356f57581d1e547842088125c1470283765187a719441bf4"
+    },
+    "conditions.json": {
+      "bytes": 25264,
+      "sha256": "18a2c6936e25f4278daed430a23cc3db3e01352ab5bd8eae74a362a9172d01e5"
+    }
+  },
+  "final_latent_value_validation": {
+    "finite": true,
+    "shape": [
+      16,
+      5,
+      112,
+      64
+    ],
+    "dtype": "torch.float32",
+    "final_value_hash": "24f40d5fd79571fdecd969f5e5ba1227c55a096c9a8770e2022469c270fe1813",
+    "initial_noise_value_hash": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+    "distinct_values": true,
+    "readback_exact": true,
+    "cuda_initialized": false,
+    "counters": {
+      "model_calls": 80,
+      "completed_steps": 40
+    },
+    "P_S_noise_exact": true
+  },
+  "video": {
+    "finite": true,
+    "shape": [
+      3,
+      17,
+      896,
+      512
+    ],
+    "frames": 17,
+    "fps": "24/1",
+    "seconds": "0.708333",
+    "quality": "UNVERIFIED"
+  },
+  "preservation": {
+    "code_upstream_inputs_checks": 424,
+    "all_match": true,
+    "full_weight_rehash": false,
+    "weights_environment": "Verified prior lineage reused; no full weight rehash claimed"
+  },
+  "owned_units": "MainPID=0\nActiveState=inactive\n\nMainPID=0\nActiveState=inactive\n",
+  "remaining_owned_processes": false,
+  "retries": 0,
+  "limitations": [
+    "Noise flat-byte hash equals H with same seed and element count; portrait tensor shape differs. No H cache or noise file used.",
+    "Technical output is not animal identity or dance quality acceptance.",
+    "Continuous playback remains UNVERIFIED."
+  ]
+}

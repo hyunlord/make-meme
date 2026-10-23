@@ -1,0 +1,279 @@
+{
+  "scope": "Terminal stage observations; code/fixture success is separate from video/quality acceptance.",
+  "accounting": "System, process RSS, cgroup and CUDA allocator are separate overlapping accounts, never summed.",
+  "cuda_sampling": "Phase snapshots only; last recorded CUDA peak is not asserted to be the unobserved terminal peak.",
+  "private_full_trace": "Complete phase JSON and resource samples retained in review ZIP; public contains aggregates only",
+  "stages": {
+    "P": {
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "service_returncode": 0,
+      "service_seconds": 118.06041097640991,
+      "memory_cap_bytes": 68719476736,
+      "samples": 117,
+      "minimum_available_bytes": 70257184768,
+      "last_available_bytes": 78002012160,
+      "max_swap_bytes": 0,
+      "max_sampled_cgroup_current_bytes": 31248441344,
+      "max_recorded_cgroup_peak_bytes": 31309377536,
+      "last_cgroup_events": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "last_durable_phase": "stage_P_complete",
+      "error_kind": null,
+      "evidence_sha256": {
+        "pipeline-process.json": "c17fc2cc40e8a106ae11ee7a0b73dd2835217670e09169cac5156cd56601f879",
+        "resource_metrics.jsonl": "2919fee3f4db1078dc5084daea1f05ee4cebceef1773c09442abbd4d35b3d42d",
+        "phases.jsonl": "17f20782921dd66105202325dc553b0b0be3b00bd7c0735a07514b96b3db123c"
+      },
+      "paired_phase_seconds": {
+        "encoders_load": 74.91589721501805
+      },
+      "max_sampled_rss_anon_bytes": 25500938240,
+      "max_sampled_rss_file_bytes": 10471448576,
+      "max_recorded_cuda_allocated_bytes": 3125935616,
+      "max_recorded_cuda_reserved_bytes": 3204448256,
+      "max_recorded_cuda_peak_allocated_bytes": 4320272384,
+      "minimum_diagnostic_cuda_free_bytes": null,
+      "key_boundaries": [
+        {
+          "phase": "encoders_load_end",
+          "elapsed_seconds": 77.11928362998879,
+          "mem_available_bytes": 77642416128,
+          "rss_anon_bytes": 14450479104,
+          "rss_file_bytes": 367136768,
+          "cgroup_current_bytes": 29004193792,
+          "cuda_allocated": 1817430528,
+          "cuda_reserved": 3204448256,
+          "cuda_peak_allocated": 3134905856
+        },
+        {
+          "phase": "CONDITION_CACHE_PASS",
+          "elapsed_seconds": 116.415972089977,
+          "mem_available_bytes": 78001885184,
+          "rss_anon_bytes": 16279879680,
+          "rss_file_bytes": 525828096,
+          "cgroup_current_bytes": 31309295616,
+          "cuda_allocated": 825473024,
+          "cuda_reserved": 1004535808,
+          "cuda_peak_allocated": 4320272384
+        }
+      ]
+    },
+    "PROBE": {
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "service_returncode": 0,
+      "service_seconds": 6.062589168548584,
+      "memory_cap_bytes": 68719476736,
+      "samples": 6,
+      "minimum_available_bytes": 94839050240,
+      "last_available_bytes": 94839050240,
+      "max_swap_bytes": 0,
+      "max_sampled_cgroup_current_bytes": 730279936,
+      "max_recorded_cgroup_peak_bytes": 738586624,
+      "last_cgroup_events": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "last_durable_phase": "stage_PROBE_complete",
+      "error_kind": null,
+      "evidence_sha256": {
+        "pipeline-process.json": "5de2a763225be5757a43c08533619db9fb14f370662b8d0b617fc121c9f752ed",
+        "resource_metrics.jsonl": "3a173ed45721c03c9e40700778b467db0794abf2ceefd325d93a2762d94fa62a",
+        "phases.jsonl": "21fe2a31a5e39c64a65571522e8bd3204cc9612a6436569e7ea5a0eb55aaa207"
+      },
+      "paired_phase_seconds": {
+        "tiny_copy": 0.19118379201972857
+      },
+      "max_sampled_rss_anon_bytes": 549974016,
+      "max_sampled_rss_file_bytes": 383741952,
+      "max_recorded_cuda_allocated_bytes": 17684480,
+      "max_recorded_cuda_reserved_bytes": 27262976,
+      "max_recorded_cuda_peak_allocated_bytes": 17684480,
+      "minimum_diagnostic_cuda_free_bytes": 68560691200,
+      "key_boundaries": [
+        {
+          "phase": "tiny_kernel_complete",
+          "elapsed_seconds": 3.6614010759512894,
+          "mem_available_bytes": 94910570496,
+          "rss_anon_bytes": 518676480,
+          "rss_file_bytes": 364060672,
+          "cgroup_current_bytes": 696414208,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512
+        },
+        {
+          "phase": "probe_cache_restore_complete",
+          "elapsed_seconds": 4.19788371497998,
+          "mem_available_bytes": 94830718976,
+          "rss_anon_bytes": 554106880,
+          "rss_file_bytes": 383610880,
+          "cgroup_current_bytes": 734068736,
+          "cuda_allocated": 17684480,
+          "cuda_reserved": 27262976,
+          "cuda_peak_allocated": 17684480
+        }
+      ]
+    },
+    "S": {
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "service_returncode": 0,
+      "service_seconds": 1066.3166978359222,
+      "memory_cap_bytes": 68719476736,
+      "samples": 1052,
+      "minimum_available_bytes": 55811121152,
+      "last_available_bytes": 60447232000,
+      "max_swap_bytes": 0,
+      "max_sampled_cgroup_current_bytes": 66573492224,
+      "max_recorded_cgroup_peak_bytes": 66578833408,
+      "last_cgroup_events": {
+        "low": 0,
+        "high": 3537,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "last_durable_phase": "stage_S_complete",
+      "error_kind": null,
+      "evidence_sha256": {
+        "pipeline-process.json": "60fb5a5ea9c4cd05d29689bacd1eae2cf17bd5f1daf5452dd7ed4a90b69a4c00",
+        "resource_metrics.jsonl": "156209c8bf757c266e503106485dcde9905aed8dbbfb1da5667a8d55cf19f62a",
+        "phases.jsonl": "b6402d6b01b3d566d176dd0d258cb95fda437f823bf9294b49f2a451aa6ddeaa"
+      },
+      "paired_phase_seconds": {
+        "tiny_copy": 0.19367614202201366,
+        "dit_load": 91.02930100099184,
+        "dit_to_device": 7.369832620024681,
+        "first_forward": 13.35436217696406
+      },
+      "max_sampled_rss_anon_bytes": 33819037696,
+      "max_sampled_rss_file_bytes": 44124319744,
+      "max_recorded_cuda_allocated_bytes": 33709428224,
+      "max_recorded_cuda_reserved_bytes": 36391878656,
+      "max_recorded_cuda_peak_allocated_bytes": 36326105088,
+      "minimum_diagnostic_cuda_free_bytes": 8651292672,
+      "key_boundaries": [
+        {
+          "phase": "dit_load_end",
+          "elapsed_seconds": 93.648158906959,
+          "mem_available_bytes": 62342520832,
+          "rss_anon_bytes": 33289109504,
+          "rss_file_bytes": 33654788096,
+          "cgroup_current_bytes": 66567159808,
+          "cuda_allocated": 512,
+          "cuda_reserved": 2097152,
+          "cuda_peak_allocated": 512
+        },
+        {
+          "phase": "dit_to_device_end",
+          "elapsed_seconds": 101.79463660897454,
+          "mem_available_bytes": 59225579520,
+          "rss_anon_bytes": 1609551872,
+          "rss_file_bytes": 262262784,
+          "cgroup_current_bytes": 34110033920,
+          "cuda_allocated": 33268391424,
+          "cuda_reserved": 33275510784,
+          "cuda_peak_allocated": 33268391424
+        },
+        {
+          "phase": "first_forward_end",
+          "elapsed_seconds": 115.18113355699461,
+          "mem_available_bytes": 56384573440,
+          "rss_anon_bytes": 1309777920,
+          "rss_file_bytes": 405487616,
+          "cgroup_current_bytes": 34098204672,
+          "cuda_allocated": 33329352704,
+          "cuda_reserved": 36391878656,
+          "cuda_peak_allocated": 35923595264
+        },
+        {
+          "phase": "SAMPLER_LATENT_PASS",
+          "elapsed_seconds": 1063.6734370949562,
+          "mem_available_bytes": 58962128896,
+          "rss_anon_bytes": 1352249344,
+          "rss_file_bytes": 409468928,
+          "cgroup_current_bytes": 34149367808,
+          "cuda_allocated": 33678589440,
+          "cuda_reserved": 33856421888,
+          "cuda_peak_allocated": 36326105088
+        }
+      ]
+    },
+    "D": {
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "service_returncode": 0,
+      "service_seconds": 15.218564510345459,
+      "memory_cap_bytes": 68719476736,
+      "samples": 15,
+      "minimum_available_bytes": 80099418112,
+      "last_available_bytes": 80607436800,
+      "max_swap_bytes": 0,
+      "max_sampled_cgroup_current_bytes": 2230628352,
+      "max_recorded_cgroup_peak_bytes": 2237050880,
+      "last_cgroup_events": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "last_durable_phase": "stage_D_complete",
+      "error_kind": null,
+      "evidence_sha256": {
+        "pipeline-process.json": "830cc45e48d20c7005dc348ee34f7e14eca6eaa6042d44231e2c451f6d9ad93a",
+        "resource_metrics.jsonl": "b2bbf28675d2f6aae7af15aabb9c6cb3984575915c98b421b56bdf756a0a8a6c",
+        "phases.jsonl": "2523365051597edbbb493044b64e0ad0b8f672753e5c5cd88f5186aef456c041"
+      },
+      "paired_phase_seconds": {
+        "vae_load": 0.9072563049849123,
+        "vae_decode": 6.782010246999562,
+        "decoded_raw_save": 0.6960915529634804
+      },
+      "max_sampled_rss_anon_bytes": 1502400512,
+      "max_sampled_rss_file_bytes": 411959296,
+      "max_recorded_cuda_allocated_bytes": 720321536,
+      "max_recorded_cuda_reserved_bytes": 12415139840,
+      "max_recorded_cuda_peak_allocated_bytes": 9565265920,
+      "minimum_diagnostic_cuda_free_bytes": null,
+      "key_boundaries": [
+        {
+          "phase": "vae_decode_end",
+          "elapsed_seconds": 11.341849718010053,
+          "mem_available_bytes": 80270102528,
+          "rss_anon_bytes": 1091358720,
+          "rss_file_bytes": 394412032,
+          "cgroup_current_bytes": 1818918912,
+          "cuda_allocated": 720321536,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920
+        },
+        {
+          "phase": "VIDEO_OUTPUT_PASS",
+          "elapsed_seconds": 12.720372034003958,
+          "mem_available_bytes": 80094318592,
+          "rss_anon_bytes": 1086648320,
+          "rss_file_bytes": 396148736,
+          "cgroup_current_bytes": 1931845632,
+          "cuda_allocated": 720321536,
+          "cuda_reserved": 12415139840,
+          "cuda_peak_allocated": 9565265920
+        }
+      ]
+    }
+  }
+}

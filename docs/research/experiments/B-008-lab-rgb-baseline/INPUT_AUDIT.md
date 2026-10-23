@@ -24,7 +24,7 @@ GPU 실행 전 CPU에서 기존 B-007B/E의 Lab 입력을 읽기 전용으로 �
 | `pose_video` | `[17, 3, 896, 512]` | `torch.float32` | `65db3b40ae4055568df327131c1690e5505bb0622f0458a51b4ff3e4f975d245` |
 | `driving_mask_video` | `[3, 17, 896, 512]` | `torch.float32` | `7a855687cb97c22b0e4a5e7cfde9e8adfedb114927c1b7e052a83cdf269f3e6f` |
 
-upstream helper 파일 SHA256: `59de115e3b61a3aae7c7e1bf8a2f1be8abc76efff58ec2fbe463af3a24e956f6`. 실제 P worker의 값 해시와 대조는 P 실행 후 별도로 기록한다. 위 값은 CPU 사전 계산이며 P 실행 완료 증거가 아니다.
+upstream helper 파일 SHA256: `59de115e3b61a3aae7c7e1bf8a2f1be8abc76efff58ec2fbe463af3a24e956f6`. 실제 P worker의 `preprocessed_inputs.json`과 사전 CPU 계산을 대조한 결과 네 tensor의 shape/dtype/value SHA256이 모두 정확히 일치했다. 이 비교는 조건 인코더 이후 값이나 생성 품질 승인을 뜻하지 않는다.
 
 ## 정적 관찰과 한계
 
