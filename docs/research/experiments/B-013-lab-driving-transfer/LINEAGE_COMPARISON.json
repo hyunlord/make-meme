@@ -1,0 +1,701 @@
+{
+  "status": "PASS",
+  "cases": {
+    "LAB_MOV": {
+      "status": "PASS",
+      "baseline_case": "MOV",
+      "baseline_cache_sha256": "715099fba103415f48138669d72e1da650215dcb275171f119cdf884402e11ad",
+      "cache_sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+      "rows": [
+        {
+          "location": "root.noise",
+          "baseline_shape": [
+            16,
+            5,
+            112,
+            64
+          ],
+          "shape": [
+            16,
+            5,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+          "Lab_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.context[0]",
+          "baseline_shape": [
+            91,
+            4096
+          ],
+          "shape": [
+            108,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "device": "cuda:0",
+          "B012_sha256": "7dd1815ee7640a26a00d38403951bdd35b9cd0d9a43b313a985d155b62ea1093",
+          "Lab_sha256": "2ef28002b7478ea9447ad0726e9c9dd1406ddb739fc2d71ddef18f3c10acebc8",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": null,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.clip_fea",
+          "baseline_shape": [
+            1,
+            257,
+            1280
+          ],
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "device": "cuda:0",
+          "B012_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+          "Lab_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 13.916015625,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.ref_latents[0]",
+          "baseline_shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+          "Lab_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 2.641739845275879,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.ref_masks[0]",
+          "baseline_shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+          "Lab_sha256": "b1cafd036d30565b505e322b88c823e1183ad4b920c1c0b394952d15b38bcbd8",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 1.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.pose_latents[0]",
+          "baseline_shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "f25a23436c02aa7b36ad5daad9aed7a64b7d7db4ccfaddf0fd67d47665a394ee",
+          "Lab_sha256": "f25a23436c02aa7b36ad5daad9aed7a64b7d7db4ccfaddf0fd67d47665a394ee",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.driving_masks[0]",
+          "baseline_shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "2a4832f9302ed5e07923517a623b5e11b4c2eb410f7cf364e8daa6a3a236da7a",
+          "Lab_sha256": "2a4832f9302ed5e07923517a623b5e11b4c2eb410f7cf364e8daa6a3a236da7a",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.context[0]",
+          "baseline_shape": [
+            1,
+            4096
+          ],
+          "shape": [
+            1,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "device": "cuda:0",
+          "B012_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+          "Lab_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.clip_fea",
+          "baseline_shape": [
+            1,
+            257,
+            1280
+          ],
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "device": "cuda:0",
+          "B012_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+          "Lab_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 13.916015625,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.ref_latents[0]",
+          "baseline_shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+          "Lab_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 2.641739845275879,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.ref_masks[0]",
+          "baseline_shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+          "Lab_sha256": "b1cafd036d30565b505e322b88c823e1183ad4b920c1c0b394952d15b38bcbd8",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 1.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.pose_latents[0]",
+          "baseline_shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "f25a23436c02aa7b36ad5daad9aed7a64b7d7db4ccfaddf0fd67d47665a394ee",
+          "Lab_sha256": "f25a23436c02aa7b36ad5daad9aed7a64b7d7db4ccfaddf0fd67d47665a394ee",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.driving_masks[0]",
+          "baseline_shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "2a4832f9302ed5e07923517a623b5e11b4c2eb410f7cf364e8daa6a3a236da7a",
+          "Lab_sha256": "2a4832f9302ed5e07923517a623b5e11b4c2eb410f7cf364e8daa6a3a236da7a",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.generator_state",
+          "baseline_shape": [
+            16
+          ],
+          "shape": [
+            16
+          ],
+          "dtype": "torch.uint8",
+          "device": "cpu",
+          "B012_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+          "Lab_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.timesteps",
+          "baseline_shape": [
+            40
+          ],
+          "shape": [
+            40
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "B012_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+          "Lab_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.sigmas",
+          "baseline_shape": [
+            41
+          ],
+          "shape": [
+            41
+          ],
+          "dtype": "torch.float32",
+          "device": "cpu",
+          "B012_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+          "Lab_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        }
+      ]
+    },
+    "LAB_STILL": {
+      "status": "PASS",
+      "baseline_case": "STILL",
+      "baseline_cache_sha256": "86f143e450c38c8a3457b335cd3cb2ad5c58256d87cf1152e521e8b8eb138734",
+      "cache_sha256": "1e8f065e70bfef8cd723d70575a4a04f472567950a1b2d6ba0c61d189c53e87b",
+      "rows": [
+        {
+          "location": "root.noise",
+          "baseline_shape": [
+            16,
+            5,
+            112,
+            64
+          ],
+          "shape": [
+            16,
+            5,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+          "Lab_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.context[0]",
+          "baseline_shape": [
+            91,
+            4096
+          ],
+          "shape": [
+            108,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "device": "cuda:0",
+          "B012_sha256": "7dd1815ee7640a26a00d38403951bdd35b9cd0d9a43b313a985d155b62ea1093",
+          "Lab_sha256": "2ef28002b7478ea9447ad0726e9c9dd1406ddb739fc2d71ddef18f3c10acebc8",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": null,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.clip_fea",
+          "baseline_shape": [
+            1,
+            257,
+            1280
+          ],
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "device": "cuda:0",
+          "B012_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+          "Lab_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 13.916015625,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.ref_latents[0]",
+          "baseline_shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+          "Lab_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 2.641739845275879,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.ref_masks[0]",
+          "baseline_shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+          "Lab_sha256": "b1cafd036d30565b505e322b88c823e1183ad4b920c1c0b394952d15b38bcbd8",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 1.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.pose_latents[0]",
+          "baseline_shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "3a1a0309469ff5fcc4316a519beb9ab3ed3490eb14c95d333e944ab9ba9b8d71",
+          "Lab_sha256": "3a1a0309469ff5fcc4316a519beb9ab3ed3490eb14c95d333e944ab9ba9b8d71",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_c.driving_masks[0]",
+          "baseline_shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "80a3ef562119a2e1b70ac84e2f65ac71fdd4a846a0c64839c0a8a24c660352a0",
+          "Lab_sha256": "80a3ef562119a2e1b70ac84e2f65ac71fdd4a846a0c64839c0a8a24c660352a0",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.context[0]",
+          "baseline_shape": [
+            1,
+            4096
+          ],
+          "shape": [
+            1,
+            4096
+          ],
+          "dtype": "torch.bfloat16",
+          "device": "cuda:0",
+          "B012_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+          "Lab_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.clip_fea",
+          "baseline_shape": [
+            1,
+            257,
+            1280
+          ],
+          "shape": [
+            1,
+            257,
+            1280
+          ],
+          "dtype": "torch.float16",
+          "device": "cuda:0",
+          "B012_sha256": "1a601cfb1a1b2326e58ce1006df5c79cf23d1f82b06d5ca1c25679a6550fb0ce",
+          "Lab_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 13.916015625,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.ref_latents[0]",
+          "baseline_shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "shape": [
+            16,
+            1,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "371ab431d165f9bf75cc3110ac7e65aa4ffa141d0f450074be5a449b07b777c3",
+          "Lab_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 2.641739845275879,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.ref_masks[0]",
+          "baseline_shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "shape": [
+            28,
+            6,
+            112,
+            64
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "350d96e7a5dd29d2eda21460b8240e6c225131e16623c72efccf9b670e0d8c99",
+          "Lab_sha256": "b1cafd036d30565b505e322b88c823e1183ad4b920c1c0b394952d15b38bcbd8",
+          "expected_change": true,
+          "exact_equal": false,
+          "max_abs": 1.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.pose_latents[0]",
+          "baseline_shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            16,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "3a1a0309469ff5fcc4316a519beb9ab3ed3490eb14c95d333e944ab9ba9b8d71",
+          "Lab_sha256": "3a1a0309469ff5fcc4316a519beb9ab3ed3490eb14c95d333e944ab9ba9b8d71",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.arg_null.driving_masks[0]",
+          "baseline_shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "shape": [
+            28,
+            5,
+            56,
+            32
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "B012_sha256": "80a3ef562119a2e1b70ac84e2f65ac71fdd4a846a0c64839c0a8a24c660352a0",
+          "Lab_sha256": "80a3ef562119a2e1b70ac84e2f65ac71fdd4a846a0c64839c0a8a24c660352a0",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.generator_state",
+          "baseline_shape": [
+            16
+          ],
+          "shape": [
+            16
+          ],
+          "dtype": "torch.uint8",
+          "device": "cpu",
+          "B012_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+          "Lab_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.timesteps",
+          "baseline_shape": [
+            40
+          ],
+          "shape": [
+            40
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "B012_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+          "Lab_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        },
+        {
+          "location": "root.sigmas",
+          "baseline_shape": [
+            41
+          ],
+          "shape": [
+            41
+          ],
+          "dtype": "torch.float32",
+          "device": "cpu",
+          "B012_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+          "Lab_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+          "expected_change": false,
+          "exact_equal": true,
+          "max_abs": 0.0,
+          "pass": true
+        }
+      ]
+    }
+  },
+  "baseline_policy_sha256": "4ce912c7f97bee5ace7644a22ab99a7ae1458a141eb4fcc475541a4c33167dc0",
+  "code_manifest_sha256": "4772dcbc7a6df6c50259e9a7a48fcf90315dcc8c43e32466fdf24eadd207d60e",
+  "device": "cpu",
+  "cuda_initialized": false
+}

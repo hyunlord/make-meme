@@ -228,3 +228,7 @@ source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 
 ## B-013 착수: 같은 driving에서 Lab 전이의 전신·국소 제어 분리 (2026-10-24)
 
 **RUNNING / GPU NOT_RUN.** 시작 원격 `28a8540172768481efad7013281a7ce649985245`의 [PLAN](experiments/B-013-lab-driving-transfer/PLAN.md)과 [결정](decisions/20261024-B-012-review-and-B-013.md)을 확인했다. B-012 same-identity의 동적RGB+mask 기여를 실제 Lab 과제에서 비교한다. 기존 source[7,24) 처리RGB/mask 및 결과2개를 보존·재사용하며 새LAB_MOV/LAB_STILL만각1회다. Lab 내부가 주 통제이며 source/Lab 사이 reference·자세·체형·장면·text 차이를 순수identity효과로 부르지 않는다. 전신직립·국소머리roll·실제개체를 별도 평가한다. 4시간·sampler최대2·재시도/학습0, codegraph경고는TOOLING_WARNING으로 분리한다. [진행](experiments/B-013-lab-driving-transfer/RUNNING.md).
+
+## B-013 조건 통과·생성 진행 (2026-10-24)
+
+양 Lab P 완료. 실제 pair4변경/12보존 및 대응 B-0127변경/9보존 통과이며 보존 leaf는 모두 bit-exact다. 새 Lab reference/task 조건을 생성한 것이며 source cache 전체를 재사용하지 않았다. 품질 판단은 두 PROBE/S/D 결과의 사전 사건·전체17장 관측 이후로 남긴다. [진행](experiments/B-013-lab-driving-transfer/RUNNING.md).

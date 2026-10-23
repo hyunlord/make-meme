@@ -1,6 +1,6 @@
 # B-013 재현 계약
 
-현재 신규 생성 결과는 **NOT_RUN**이다. [PLAN](PLAN.md)에 따라 LAB_MOV/LAB_STILL 각 sampler1회·실패 포함 총2회·retry0만 사용한다. B-012 MOV/STILL은 기존 결과 그대로 재사용하며 재생성하지 않는다.
+현재 양 P와 [Lab pair](CONDITION_COMPARISON.json)·[계보](LINEAGE_COMPARISON.json) 비교는 **PASS**다. 후속 PROBE/S/D는 순차 진행 중이며 신규 생성 출력은 **NOT_AVAILABLE**, 품질은 미판정이다. [PLAN](PLAN.md)에 따라 LAB_MOV/LAB_STILL 각 sampler1회·실패 포함 총2회·retry0만 사용한다. B-012 MOV/STILL은 기존 결과 그대로 재사용하며 재생성하지 않는다.
 
 ## 입력과 실행 통제
 
@@ -19,3 +19,7 @@ SOURCE와 실제 Lab reference, 기존 B-012 MOV/STILL, 새 LAB_MOV/LAB_STILL을
 전신 직립/앞발 배치와 몸통 대비 국소 머리 roll을 따로 평가한다. 착석 유지 중 국소 제어가 관측돼도 전체 목표 성공으로 승격하지 않는다. Lab 유사성과 실제 개체 일치를 구분하며 숨은 부위·접촉은 UNKNOWN일 수 있다. UI 기능/ffmpeg decode PASS가 시간 품질 수용은 아니고, 실제 연속 검토가 없으면 UNVERIFIED다.
 
 실제 code/input/condition/output hash와 자체 프로세스 종료는 완료 receipt로 확인한다. 개인 영상·사진·mask·좌표·경로는 공개하지 않는다. 수학과 코드 연결은 [학습 문서](../../lessons/B-013-cross-identity-driving.md)에 있다.
+
+사전 고정 runtime commit: `f02896f825703a321c84127d4ef8135720176811`. CPU 검토 도구는 frozen runtime 밖에 두며 새 sampler 결과를 만들지 않는다. 비공개 A/B 패널의 대응표는 별도 JSON에 두고 관측 기록 전에는 공개하지 않는다. 같은 에이전트가 source를 본 점은 독립 인간 blind 평가와 구분한다.
+
+실제 Lab pair는4변경/12bit-exact 보존, 각 B-012 대비는7변경/9bit-exact 보존을 확인했다. positive T5는91→108tokens, 양 Lab pair에서는 `[108,4096]` BF16으로 동일하다. 조건별 cache hash·tensor shape/dtype와 actual max_abs는 위 receipt를 따른다. 이를 출력 품질 통과로 해석하지 않는다.

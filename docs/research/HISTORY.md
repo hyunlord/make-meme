@@ -359,3 +359,7 @@ MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24f
 ## B-013 착수: 같은 driving에서 Lab 전이의 전신·국소 제어 분리 (2026-10-24)
 
 **RUNNING / GPU NOT_RUN.** 시작 원격 `28a8540172768481efad7013281a7ce649985245`의 [PLAN](experiments/B-013-lab-driving-transfer/PLAN.md)과 [결정](decisions/20261024-B-012-review-and-B-013.md)을 확인했다. B-012 same-identity의 동적RGB+mask 기여를 실제 Lab 과제에서 비교한다. 기존 source[7,24) 처리RGB/mask 및 결과2개를 보존·재사용하며 새LAB_MOV/LAB_STILL만각1회다. Lab 내부가 주 통제이며 source/Lab 사이 reference·자세·체형·장면·text 차이를 순수identity효과로 부르지 않는다. 전신직립·국소머리roll·실제개체를 별도 평가한다. 4시간·sampler최대2·재시도/학습0, codegraph경고는TOOLING_WARNING으로 분리한다. [진행](experiments/B-013-lab-driving-transfer/RUNNING.md).
+
+## B-013 실제 조건 인코딩 완료 (2026-10-24)
+
+사전 고정 `f02896f825703a321c84127d4ef8135720176811`을 push·원격 확인한 뒤 두 Lab P를 각각1회 실행하고 정상 종료했다. [실측 pair](experiments/B-013-lab-driving-transfer/CONDITION_COMPARISON.json)의 driving4개만 바뀌었고 나머지12개는 bit-exact다. [B-012 계보](experiments/B-013-lab-driving-transfer/LINEAGE_COMPARISON.json)는 각7개 reference/text 변경과9개 통제 bit-exact를 확인했다. mask prefix/zero suffix 검사도 유지했다. 영상 품질은 아직 미판정이며 자원 회복 후 PROBE/S/D를 순차 진행한다.
