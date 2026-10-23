@@ -1,0 +1,41 @@
+{
+  "experiment": "B-014",
+  "new_P_attempts": 0,
+  "parent": "B-013 LAB_MOV",
+  "parent_binding": {
+    "experiment": "B-013",
+    "case": "LAB_MOV",
+    "cache_receipt_sha256": "62cb3dde9f6b0220c00260aa2b0db156ccebe40f2e4457c7737cbcbfb7e5d940",
+    "parent_code_sha256": "4772dcbc7a6df6c50259e9a7a48fcf90315dcc8c43e32466fdf24eadd207d60e",
+    "parent_inputs_sha256": "b7c22855aa1d9e9f1bed8638890260e0ef5da15ed8593892c5f1134ee5b9e0b1",
+    "records": {
+      "p_result.json": "b6f41213d7a9e8316d511d494df10f027cb4d97e87f934d4762a6d97096d3ee3",
+      "p_process.json": "40672e2af498da01aa43b1f9405bee21b642cf2ef38a81bdb129b6c4cc7f1919",
+      "pair.json": "ceaee039a3e555cb9796832b5004a6baff8bb1ef65f3d8c2b2f752e4d3374008",
+      "lineage.json": "30493f1b59c1b9f455b8f86998c689e912fa32940139714950556bf76674a1fb"
+    }
+  },
+  "input_config_hashes": {
+    "inputs/reference.png": "703884c8e2a657d4294cf4e74efeb463c9cd6e05e1ad582f99d6546b954cfdce",
+    "inputs/reference-mask-white.png": "ea54f417f109793210c405d2452152b839fd57f81329811fb650958e830bab9f",
+    "inputs/driver-24fps.mp4": "7072f6bf49de44469da36d001a3b297a1f8504e362944765ddc346e6f7caac0d",
+    "inputs/mask-24fps.mp4": "5597bcae72a4232910f4acde90231717b9110b5b4e80e15e2805700d27a738b4",
+    "configs/self.json": "b4236ae586108afce5588f1fea5de6c8d9135492845c61b963e3c43cc228b6ee",
+    "configs/active_case.json": "2249cefc678125812d7a7bd6e323aa92e337709d34d12ece594236fc5aa7dfa7"
+  },
+  "cache_receipt": {
+    "experiment": "B-013",
+    "case": "self",
+    "code_sha256": "4772dcbc7a6df6c50259e9a7a48fcf90315dcc8c43e32466fdf24eadd207d60e",
+    "hashes": {
+      "conditions.safetensors": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+      "conditions.json": "7dbcddd695c7148f59a5790ae74c0569e0517d491cc1c26550c828ca995d68aa",
+      "initial_noise.pt": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc"
+    },
+    "initial_noise_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950"
+  },
+  "derived_artifacts": {
+    "artifacts/filtered_reference.json": "2e8465db730e63c32c762bf6c2d6dae10ac8374ab71b69370ad161a4a7787d11",
+    "artifacts/filtered_reference.safetensors": "4615c2ba16f47a65a661989f00dc8d055c58120276f8e41dc397b497d31b8cbc"
+  }
+}

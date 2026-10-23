@@ -1,0 +1,157 @@
+{
+  "status": "CPU_CONTRACT_PASS",
+  "red": {
+    "failures": 5,
+    "seconds": 0.88,
+    "reason": "Functions not implemented (AttributeError), before helper implementation"
+  },
+  "final": {
+    "passed": 9,
+    "seconds": 0.69,
+    "log_sha256": "39afe83ab2490c3550749c662dc54bc67a2c4ef7a1b819abda039bd344f39849",
+    "command": "CUDA_VISIBLE_DEVICES=\"\" B014_ROOT=\"$B014_ROOT\" SCAIL_SOURCE=\"$SCAIL_SOURCE\" \"$ENV_PYTHON\" -m pytest \"$B014_ROOT/code/test_alg.py\" -q"
+  },
+  "actual_parent_cache": {
+    "status": "PASS",
+    "scope": "CPU actual-cache contract; no DiT quality claim",
+    "parent_cache_sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+    "parent_all_16_value_hashes_verified": true,
+    "observations": [
+      {
+        "branch": "u_orig",
+        "unchanged_kwargs": [
+          "context",
+          "clip_fea",
+          "seq_len",
+          "ref_masks",
+          "pose_latents",
+          "driving_masks",
+          "history_mask",
+          "replace_flag",
+          "additional_ref_latents",
+          "additional_ref_masks"
+        ],
+        "reference_source": "original_parent"
+      },
+      {
+        "branch": "u_low",
+        "unchanged_kwargs": [
+          "context",
+          "clip_fea",
+          "seq_len",
+          "ref_masks",
+          "pose_latents",
+          "driving_masks",
+          "history_mask",
+          "replace_flag",
+          "additional_ref_latents",
+          "additional_ref_masks"
+        ],
+        "reference_source": "filtered_cpu_sidecar"
+      },
+      {
+        "branch": "c_low",
+        "unchanged_kwargs": [
+          "context",
+          "clip_fea",
+          "seq_len",
+          "ref_masks",
+          "pose_latents",
+          "driving_masks",
+          "history_mask",
+          "replace_flag",
+          "additional_ref_latents",
+          "additional_ref_masks"
+        ],
+        "reference_source": "filtered_cpu_sidecar"
+      },
+      {
+        "branch": "c_orig",
+        "unchanged_kwargs": [
+          "context",
+          "clip_fea",
+          "seq_len",
+          "ref_masks",
+          "pose_latents",
+          "driving_masks",
+          "history_mask",
+          "replace_flag",
+          "additional_ref_latents",
+          "additional_ref_masks"
+        ],
+        "reference_source": "original_parent"
+      }
+    ],
+    "rng_unchanged": true,
+    "expected_calls": 88,
+    "filter_provenance": {
+      "experiment": "B-014",
+      "parent_cache_sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+      "parent_ref_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+      "filtered_ref_sha256": "40e6a0c2132cfc19f0a211a8cc654b21425e681b58cd45472656f3191454abda",
+      "alg_config": {
+        "enabled": true,
+        "ratio": 0.4,
+        "start": 0.0,
+        "end": 0.2,
+        "steps": 40,
+        "guide_scale": 5.0,
+        "expected_calls": 88,
+        "active_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "interpolation": "bilinear",
+        "align_corners": false,
+        "antialias": true
+      },
+      "parent_code_sha256": "4772dcbc7a6df6c50259e9a7a48fcf90315dcc8c43e32466fdf24eadd207d60e",
+      "filter_code_sha256": "f4546f40dac2f3fe394e1a3581bbe047f022b8b0a61475d1a344f11b221efdab",
+      "input_shape": [
+        16,
+        1,
+        112,
+        64
+      ],
+      "intermediate_size": [
+        45,
+        26
+      ],
+      "active_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "rng_unchanged": true,
+      "original_ref_unchanged": true,
+      "parent_leaf_count": 16,
+      "prior_provenance_sha256": "b6f632f447abc6363d15385e4e15bf5bb203f3e2e35dff3e30bb745423e16b1d",
+      "metadata_rebinding": "Only exhaustive branch assertion location changed; low_pass_reference source and saved filtered tensor bytes unchanged. No filter rerun."
+    },
+    "unchanged_parent_receipt": true
+  },
+  "critical_ruff": "PASS E9,F63,F7,F82",
+  "compileall": "PASS",
+  "typecheck": {
+    "status": "TYPED_HELPER_PASS",
+    "helper_errors": 0,
+    "helper_warnings": 0,
+    "scope": "alg.py only, final actual checker receipt; inherited dynamic runtime not strict-clean claim"
+  },
+  "not_claimed": [
+    "full DiT OFF/ratio1 replay",
+    "GPU kernel quality",
+    "production quality"
+  ]
+}

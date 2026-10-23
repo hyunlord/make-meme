@@ -1,0 +1,13 @@
+{
+  "experiment": "B-013",
+  "case": "LAB_MOV",
+  "cache_receipt_sha256": "62cb3dde9f6b0220c00260aa2b0db156ccebe40f2e4457c7737cbcbfb7e5d940",
+  "parent_code_sha256": "4772dcbc7a6df6c50259e9a7a48fcf90315dcc8c43e32466fdf24eadd207d60e",
+  "parent_inputs_sha256": "b7c22855aa1d9e9f1bed8638890260e0ef5da15ed8593892c5f1134ee5b9e0b1",
+  "records": {
+    "p_result.json": "b6f41213d7a9e8316d511d494df10f027cb4d97e87f934d4762a6d97096d3ee3",
+    "p_process.json": "40672e2af498da01aa43b1f9405bee21b642cf2ef38a81bdb129b6c4cc7f1919",
+    "pair.json": "ceaee039a3e555cb9796832b5004a6baff8bb1ef65f3d8c2b2f752e4d3374008",
+    "lineage.json": "30493f1b59c1b9f455b8f86998c689e912fa32940139714950556bf76674a1fb"
+  }
+}

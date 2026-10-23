@@ -9,3 +9,11 @@
 5. 대기: RESULTS/ADAPTATION_AUDIT/이론·실측·재현·원격동기화·비공개ZIP 양호스트검증.
 
 기존72GiB시작/24GiB실행headroom·swap0·타서비스 보호, tiny CUDA 선행/anchor·mixedloader·FlashAttention·단계분리·final latent 우선보존을 유지한다. 원본negative+CFG*(lowpositive-lownegative)를 순차3forward로 초기8step에만 적용해40step88forward를 기대한다. 단순low-low CFG, batch3, first-frame overwrite, cache수정은 하지 않는다. 이전B/A기록과자산은보존한다.
+
+## 실행 전 계약 고정
+
+CPU 계약9개 PASS, 실제 부모 cache16leaf 및 원본/RNG 불변 PASS, 별도 코드 검토 PASS. 실행 manifest SHA `71be87d69e5e10d6e7ac52219123413aa4582a3f5c4b8ec6b0816b96dc8965cb`를 고정했다. 공개27개 code/config와 비공개 allowed-process config1개를 실제 해시 대조했다. Spark의 PROBE/S/D 세 worker는 총330개 manifest 항목을 검증했다. 가중치 전체 신규 재해시는 하지 않았으며 기존 receipt 및 fresh size/mtime를 사용한다.
+
+ALG0..7 활성,8..39 기존 CFG;40step·88forward. P0/PROBE최대1/S최대1/D최대1, 재시도0. 기존 runtime24GiB/start72GiB·swap0 가드 유지. CPU fixture는14B numeric replay나 품질 통과가 아니다. 초기 helper의 exhaustive match fallback 진단을 계산 변경 없이 수정해 typecheck0error/0warning을 확인했다. 최종 CPU9개는0.69초 PASS다. 과거 진단과 superseded receipt는 비공개에 보존했다. 기존 동적 runtime 전체 strict typing을 새로 확립했다는 주장은 하지 않는다.
+
+`configs/allowed_gpu_processes.json`은 기존 서비스 PID를 담아 비공개로 보존하고 공개 manifest에는 해시만 둔다. 이 커밋 시점 신규 GPU 실행0이다.

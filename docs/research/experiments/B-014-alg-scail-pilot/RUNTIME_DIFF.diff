@@ -1,0 +1,586 @@
+--- B013/code/alg.py
++++ B014/code/alg.py
+@@ -0,0 +1,88 @@
++"""Typed, tensor-only ALG adaptation; no model loading or RNG operations."""
++from collections.abc import Callable
++from dataclasses import dataclass
++from typing import Literal, TypedDict, assert_never
++
++from torch import Tensor
++from torch.nn import functional as F
++
++Branch = Literal['c_orig', 'u_orig', 'u_low', 'c_low']
++
++
++@dataclass(frozen=True, slots=True)
++class AlgSettings:
++    enabled: bool = True
++    ratio: float = 0.4
++    start: float = 0.0
++    end: float = 0.2
++
++    def __post_init__(self) -> None:
++        assert 0 < self.ratio <= 1 and 0 <= self.start <= self.end <= 1
++
++    def active(self, index: int, steps: int) -> bool:
++        assert steps > 0 and 0 <= index < steps
++        return self.enabled and self.ratio < 1 and self.start <= index / max(steps - 1, 1) <= self.end
++
++    def expected_calls(self, steps: int) -> int:
++        return sum(3 if self.active(i, steps) else 2 for i in range(steps))
++
++
++def spatial_size(height: int, width: int, ratio: float) -> tuple[int, int]:
++    return max(1, round(height * ratio)), max(1, round(width * ratio))
++
++
++def low_pass_reference(value: Tensor, ratio: float) -> Tensor:
++    """Filter independent H/W planes of CTHW or BCTHW, preserving signed values."""
++    assert value.ndim in (4, 5) and value.is_floating_point() and 0 < ratio <= 1
++    if ratio == 1:
++        return value.clone()
++    batched = value.unsqueeze(0) if value.ndim == 4 else value
++    b, c, t, h, w = batched.shape
++    planes = batched.permute(0, 2, 1, 3, 4).reshape(b * t, c, h, w)
++    low = F.interpolate(planes, size=spatial_size(h, w, ratio), mode='bilinear', align_corners=False, antialias=True)
++    restored = F.interpolate(low, size=(h, w), mode='bilinear', align_corners=False, antialias=True)
++    result = restored.reshape(b, t, c, h, w).permute(0, 2, 1, 3, 4).contiguous()
++    return result.squeeze(0) if value.ndim == 4 else result
++
++
++def guided_prediction(predict: Callable[[Branch], Tensor], settings: AlgSettings,
++                      index: int, steps: int, scale: float) -> Tensor:
++    """Sequential predictions retain baseline order when ALG is inactive."""
++    assert scale > 1
++    if settings.active(index, steps):
++        original_negative = predict('u_orig')
++        low_negative = predict('u_low')
++        low_positive = predict('c_low')
++        return original_negative + scale * (low_positive - low_negative)
++    positive = predict('c_orig')
++    negative = predict('u_orig')
++    return negative + scale * (positive - negative)
++
++
++class Condition(TypedDict):
++    context: list[Tensor]
++    clip_fea: Tensor
++    ref_latents: list[Tensor]
++    ref_masks: list[Tensor]
++    pose_latents: list[Tensor]
++    driving_masks: list[Tensor]
++    seq_len: float
++    history_mask: Tensor | None
++    replace_flag: bool
++    additional_ref_latents: list[Tensor] | None
++    additional_ref_masks: list[Tensor] | None
++
++
++def branch_condition(branch: Branch, positive: Condition, negative: Condition,
++                     filtered: Tensor) -> Condition:
++    """Replace only the reference list in a new container, never its parent."""
++    match branch:
++        case 'c_orig':
++            return positive
++        case 'u_orig':
++            return negative
++        case 'c_low':
++            return {**positive, 'ref_latents': [filtered]}
++        case 'u_low':
++            return {**negative, 'ref_latents': [filtered]}
++    assert_never(branch)
+--- B013/code/alg_extract.py
++++ B014/code/alg_extract.py
+@@ -0,0 +1,33 @@
++"""One checked replacement of the pinned official prediction block."""
++import ast
++from textwrap import dedent
++from extract import sample_source
++
++PREDICTION = dedent("""\
++                    noise_pred_cond = self.model(
++                        latent_model_input, t=timestep, **arg_c)[0].to(
++                            torch.device('cpu') if offload_model else self.device)
++                    if offload_model:
++                        torch.cuda.empty_cache()
++                    if guide_scale <= 1.0:
++                        noise_pred = noise_pred_cond
++                    else:
++                        noise_pred_uncond = self.model(
++                            latent_model_input, t=timestep, **arg_null)[0].to(
++                                torch.device('cpu') if offload_model else self.device)
++                        if offload_model:
++                            torch.cuda.empty_cache()
++                        noise_pred = noise_pred_uncond + guide_scale * (
++                            noise_pred_cond - noise_pred_uncond)
++""")
++
++
++def alg_sample_source(source: str) -> str:
++    baseline = sample_source(source, separated=True)
++    block = ''.join('        ' + line if line.strip() else line for line in PREDICTION.splitlines(keepends=True))
++    assert baseline.count(block) == 1
++    replacement = '        noise_pred = alg_predict(latent_model_input, timestep, arg_c, arg_null)\n'
++    patched = baseline.replace(block, replacement)
++    assert patched.count(replacement) == 1
++    assert ast.dump(ast.parse(patched.replace(replacement, block))) == ast.dump(ast.parse(baseline))
++    return patched
+--- B013/code/alg_runtime.py
++++ B014/code/alg_runtime.py
+@@ -0,0 +1,41 @@
++"""Thin adapter from legacy sampler dictionaries to typed ALG arithmetic."""
++import hashlib
++import json
++import torch
++from alg import branch_condition, guided_prediction
++from artifacts import load_tree
++from contracts import alg_settings
++
++
++def prepare_prediction(root, model, tree, counters):
++    settings=alg_settings(root)
++    filtered_tree,sidecar=load_tree(root/'artifacts/filtered_reference.safetensors',device='cpu')
++    provenance=sidecar['provenance'];original=tree['arg_c']['ref_latents'][0]
++    digest=lambda value:hashlib.sha256(value.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes()).hexdigest()
++    assert provenance['parent_ref_sha256']==digest(original)==digest(tree['arg_null']['ref_latents'][0])
++    assert provenance['parent_cache_sha256']==hashlib.sha256((root/'artifacts/conditions.safetensors').read_bytes()).hexdigest()
++    assert provenance['alg_config']==json.loads((root/'configs/alg.json').read_text())
++    assert provenance['filter_code_sha256']==hashlib.sha256((root/'code/alg.py').read_bytes()).hexdigest()
++    filtered=filtered_tree['reference'].to(device=original.device,dtype=original.dtype)
++    assert filtered.shape==original.shape and digest(filtered)==provenance['filtered_ref_sha256']
++    assert filtered.data_ptr()!=original.data_ptr()
++    trace=root/'reports/alg_branches.jsonl'
++    assert not trace.exists()
++    def alg_predict(latents,timestep,positive,negative):
++        index=counters['completed_steps']
++        def predict(branch):
++            condition=branch_condition(branch,positive,negative,filtered)
++            reference_hash=provenance['filtered_ref_sha256'] if branch.endswith('low') else provenance['parent_ref_sha256']
++            prediction=model(latents,t=timestep,**condition)[0].to(torch.device('cpu'))
++            torch.cuda.empty_cache()
++            assert bool(torch.isfinite(prediction).all())
++            with trace.open('a') as stream:
++                stream.write(json.dumps({'step_index':index,'step_fraction':index/39,'branch':branch,
++                    'model_call':counters['model_calls'],'reference_sha256':reference_hash,
++                    'prediction_norm':float(prediction.float().norm()),'timestep':float(timestep.detach().cpu()[0]),
++                    'active':settings.active(index,40)})+'\n');stream.flush()
++            return prediction
++        result=guided_prediction(predict,settings,index,40,5.0)
++        assert bool(torch.isfinite(result).all())
++        return result
++    return alg_predict,sidecar
+--- B013/code/audit_parent_cache.py
++++ B014/code/audit_parent_cache.py
+@@ -0,0 +1,33 @@
++"""CPU-only verification against actual immutable B013 cache, not model inference."""
++import hashlib
++from pathlib import Path
++import sys
++import torch
++from alg import branch_condition
++from artifacts import load_tree,atomic_json
++from contracts import verify_cache_receipt,expected_calls
++
++
++def main(root:Path) -> None:
++    receipt=verify_cache_receipt(root)
++    tree,meta=load_tree(root/'artifacts/conditions.safetensors',device='cpu')
++    filtered,sidecar=load_tree(root/'artifacts/filtered_reference.safetensors',device='cpu')
++    positive,negative=tree['arg_c'],tree['arg_null'];rng=torch.get_rng_state().clone()
++    observations=[]
++    for branch in ('u_orig','u_low','c_low','c_orig'):
++        base=positive if branch.startswith('c_') else negative
++        selected=branch_condition(branch,positive,negative,filtered['reference'])
++        unchanged=[name for name in base if name!='ref_latents' and selected[name] is base[name]]
++        assert len(unchanged)==len(base)-1
++        assert selected['ref_latents'][0] is (filtered['reference'] if branch.endswith('low') else base['ref_latents'][0])
++        observations.append({'branch':branch,'unchanged_kwargs':unchanged,'reference_source':'filtered_cpu_sidecar' if branch.endswith('low') else 'original_parent'})
++    assert torch.equal(rng,torch.get_rng_state())
++    assert hashlib.sha256((root/'artifacts/conditions.safetensors').read_bytes()).hexdigest()==receipt['hashes']['conditions.safetensors']
++    assert len(meta['tensors'])==16
++    atomic_json(root/'reports/actual_parent_cache_audit.json',{'status':'PASS','scope':'CPU actual-cache contract; no DiT quality claim',
++        'parent_cache_sha256':meta['file_sha256'],'parent_all_16_value_hashes_verified':True,'observations':observations,
++        'rng_unchanged':True,'expected_calls':expected_calls(root),'filter_provenance':sidecar['provenance'],
++        'unchanged_parent_receipt':verify_cache_receipt(root)==receipt})
++
++
++if __name__=='__main__':main(Path(sys.argv[1]))
+--- B013/code/contracts.py
++++ B014/code/contracts.py
+@@ -40,0 +41,15 @@
++def alg_settings(root: Path):
++    from alg import AlgSettings
++    value=json.loads((root/'configs/alg.json').read_text())
++    settings=AlgSettings(value['enabled'],value['ratio'],value['start'],value['end'])
++    assert value['steps']==40 and value['guide_scale']==5.0
++    assert value['expected_calls']==settings.expected_calls(40)
++    assert value['active_indices']==[i for i in range(40) if settings.active(i,40)]
++    assert value['interpolation']=='bilinear' and value['align_corners'] is False and value['antialias'] is True
++    return settings
++
++
++def expected_calls(root: Path) -> int:
++    return alg_settings(root).expected_calls(40)
++
++
+@@ -42 +57,18 @@
+-    """Bind immutable new P payload AND device/provenance sidecar before reuse."""
++    """Bind original B013 P to its own immutable code/input/exit receipts."""
++    binding=json.loads((root/'configs/parent_binding.json').read_text())
++    assert binding['experiment']=='B-013' and binding['case']=='LAB_MOV'
++    digest=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
++    assert digest(root/'configs/parent_code.json')==binding['parent_code_sha256']
++    assert digest(root/'configs/parent_inputs.json')==binding['parent_inputs_sha256']
++    assert digest(root/'artifacts/conditions_receipt.json')==binding['cache_receipt_sha256']
++    assert set(binding['records'])=={'p_result.json','p_process.json','pair.json','lineage.json'}
++    for name,sha in binding['records'].items():assert digest(root/'parent_records'/name)==sha
++    parent_code=json.loads((root/'configs/parent_code.json').read_text())
++    parent_inputs=json.loads((root/'configs/parent_inputs.json').read_text())
++    assert parent_code['experiment']=='B-013'
++    assert parent_inputs==json.loads((root/'configs/input_config_hashes.json').read_text())
++    result=json.loads((root/'parent_records/p_result.json').read_text())
++    process=json.loads((root/'parent_records/p_process.json').read_text())
++    assert result['status']=='COMPLETED' and result['stage']=='P'
++    assert result['condition_receipt_sha256']==binding['cache_receipt_sha256']
++    assert process['reason']=='service_exit' and process['returncode']==0 and 'MainPID=0' in process['final_service']
+@@ -46,3 +78,2 @@
+-    for filename,digest in receipt['hashes'].items():
+-        assert hashlib.sha256((root/'artifacts'/filename).read_bytes()).hexdigest()==digest,filename
+-    assert receipt['code_sha256']==hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest()
++    for filename,sha in receipt['hashes'].items():assert digest(root/'artifacts'/filename)==sha,filename
++    assert receipt['code_sha256']==binding['parent_code_sha256']
+@@ -50,2 +81,7 @@
+-    assert metadata['provenance']['code']==json.loads((root/'PREREGISTERED_CODE.json').read_text())
+-    assert metadata['provenance']['input_hashes']==json.loads((root/'configs/input_config_hashes.json').read_text())
++    assert metadata['provenance']['code']==parent_code
++    assert metadata['provenance']['input_hashes']==parent_inputs
++    pair=json.loads((root/'parent_records/pair.json').read_text())
++    lineage=json.loads((root/'parent_records/lineage.json').read_text())
++    assert pair['status']==lineage['status']=='PASS'
++    assert pair['code_manifest_sha256']==lineage['code_manifest_sha256']==binding['parent_code_sha256']
++    assert pair['case_cache_sha256']['LAB_MOV']==lineage['cases']['LAB_MOV']['cache_sha256']==receipt['hashes']['conditions.safetensors']
+--- B013/code/phase_decode.py
++++ B014/code/phase_decode.py
+@@ -8 +8 @@
+-from contracts import active_contract
++from contracts import active_contract, expected_calls
+@@ -21 +21 @@
+-    assert meta['provenance']['counters']=={'model_calls':80,'completed_steps':40}
++    assert meta['provenance']['counters']=={'model_calls':expected_calls(root),'completed_steps':40}
+--- B013/code/phase_sample.py
++++ B014/code/phase_sample.py
+@@ -9 +9,2 @@
+-from extract import sample_source
++from alg_extract import alg_sample_source
++from alg_runtime import prepare_prediction
+@@ -12 +13 @@
+-from contracts import active_contract
++from contracts import active_contract, expected_calls, alg_settings
+@@ -52 +53 @@
+-        assert counters=={'model_calls':80,'completed_steps':40} and history is None
++        assert counters=={'model_calls':expected_calls(root),'completed_steps':40} and history is None
+@@ -53,0 +55,10 @@
++        trace=[json.loads(line) for line in (root/'reports/alg_branches.jsonl').read_text().splitlines()]
++        settings=alg_settings(root)
++        expected=[(i,b) for i in range(40) for b in (('u_orig','u_low','c_low') if settings.active(i,40) else ('c_orig','u_orig'))]
++        assert [(row['step_index'],row['branch']) for row in trace]==expected
++        assert [row['model_call'] for row in trace]==list(range(1,expected_calls(root)+1))
++        for row in trace:
++            key='filtered_ref_sha256' if row['branch'].endswith('low') else 'parent_ref_sha256'
++            assert row['reference_sha256']==filter_sidecar['provenance'][key]
++        original_hash=hashlib.sha256(tree['arg_c']['ref_latents'][0].detach().cpu().contiguous().view(torch.uint8).numpy().tobytes()).hexdigest()
++        assert original_hash==filter_sidecar['provenance']['parent_ref_sha256']
+@@ -55 +66 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-013','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-013-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-014','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-013-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest(),'alg_reference_sidecar':filter_sidecar,'alg_branches_sha256':hashlib.sha256((root/'reports/alg_branches.jsonl').read_bytes()).hexdigest()})
+@@ -60 +71,2 @@
+-    extracted=sample_source((root/'upstream/wan/scail.py').read_text(),separated=True)
++    alg_predict,filter_sidecar=prepare_prediction(root,model,tree,counters)
++    extracted=alg_sample_source((root/'upstream/wan/scail.py').read_text())
+@@ -64 +76 @@
+-    namespace={'torch':torch,'tqdm':tqdm,'self':SimpleNamespace(model=model,device=device,rank=0),'offload_model':True,'apply_clean_history':apply_clean_history,'timesteps':scheduler.timesteps,'sample_scheduler':scheduler,'guide_scale':5.0,'seed_g':generator,'completed':completed,'complete':complete,'phase':measured_phase}
++    namespace={'alg_predict':alg_predict,'torch':torch,'tqdm':tqdm,'self':SimpleNamespace(model=model,device=device,rank=0),'offload_model':True,'apply_clean_history':apply_clean_history,'timesteps':scheduler.timesteps,'sample_scheduler':scheduler,'guide_scale':5.0,'seed_g':generator,'completed':completed,'complete':complete,'phase':measured_phase}
+@@ -66 +78 @@
+-    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1}})
++    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2,'B013':2}})
+--- B013/code/prepare_filter.py
++++ B014/code/prepare_filter.py
+@@ -0,0 +1,33 @@
++"""CPU-only derived reference; parent cache and all 16 leaves remain immutable."""
++from pathlib import Path
++import hashlib
++import json
++import sys
++import torch
++from alg import low_pass_reference, spatial_size
++from artifacts import load_tree, save_tree
++from contracts import alg_settings, verify_cache_receipt
++
++
++def main(root: Path) -> None:
++    receipt=verify_cache_receipt(root);settings=alg_settings(root)
++    tree,metadata=load_tree(root/'artifacts/conditions.safetensors',device='cpu')
++    positive=tree['arg_c']['ref_latents'][0];negative=tree['arg_null']['ref_latents'][0]
++    assert torch.equal(positive,negative) and list(positive.shape)==[16,1,112,64] and positive.dtype==torch.float32
++    rng=torch.get_rng_state().clone();original=positive.clone()
++    filtered=low_pass_reference(positive,settings.ratio)
++    assert torch.equal(positive,original) and torch.equal(rng,torch.get_rng_state())
++    assert bool(torch.isfinite(filtered).all())
++    assert torch.equal(filtered,positive) if settings.ratio==1 else not torch.equal(filtered,positive)
++    digest=lambda value:hashlib.sha256(value.contiguous().view(torch.uint8).numpy().tobytes()).hexdigest()
++    provenance={'experiment':'B-014','parent_cache_sha256':receipt['hashes']['conditions.safetensors'],
++        'parent_ref_sha256':digest(positive),'filtered_ref_sha256':digest(filtered),
++        'alg_config':json.loads((root/'configs/alg.json').read_text()),'parent_code_sha256':receipt['code_sha256'],
++        'filter_code_sha256':hashlib.sha256((root/'code/alg.py').read_bytes()).hexdigest(),
++        'input_shape':list(positive.shape),'intermediate_size':list(spatial_size(112,64,settings.ratio)),
++        'active_indices':[i for i in range(40) if settings.active(i,40)],'rng_unchanged':True,
++        'original_ref_unchanged':True,'parent_leaf_count':len(metadata['tensors'])}
++    save_tree(root/'artifacts/filtered_reference.safetensors',{'reference':filtered},provenance)
++
++
++if __name__=='__main__':main(Path(sys.argv[1]))
+--- B013/code/prepare_layout.py
++++ B014/code/prepare_layout.py
+@@ -1 +1 @@
+-"""Isolated B-013 stages; new cache, read-only E environment/models/inputs."""
++"""Create only new B014 worker directories; immutable parent P stays outside."""
+@@ -5,3 +5,3 @@
+-root,previous=map(Path,sys.argv[1:])
+-(root/'artifacts').mkdir(exist_ok=True)
+-for stage in ('P','PROBE','S','D'):
++
++root,environment_root=map(Path,sys.argv[1:])
++for stage in ('PROBE','S','D'):
+@@ -11,3 +11,2 @@
+-    for name in ('environment','models','upstream'):(target/name).symlink_to(previous/name,target_is_directory=True)
+-    (target/'inputs').symlink_to(root/'inputs',target_is_directory=True)
+-    (target/'artifacts').symlink_to(root/'artifacts',target_is_directory=True)
++    for name in ('environment','models','upstream'):(target/name).symlink_to(environment_root/name,target_is_directory=True)
++    for name in ('inputs','artifacts','parent_records'):(target/name).symlink_to(root/name,target_is_directory=True)
+@@ -15 +13,0 @@
+-    shutil.copy2(previous/'configs/allowed_gpu_processes.json',target/'configs/allowed_gpu_processes.json')
+--- B013/code/run_phase.py
++++ B014/code/run_phase.py
+@@ -1 +1 @@
+-"""Fresh bounded B-013 case worker; each P/PROBE/S/D stage runs at most once."""
++"""Fresh B-014 worker; immutable parent P reuse, one PROBE/S/D maximum."""
+@@ -13 +13 @@
+-    assert stage in ('P','PROBE','S','D')
++    assert stage in ('PROBE','S','D')
+@@ -16 +16 @@
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2},'max_stage_attempts':1},file)
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2,'B013':2,'B014_P':0},'max_stage_attempts':1},file)
+@@ -21 +21 @@
+-    from contracts import active_contract,verify_cache_receipt
++    from contracts import active_contract,verify_cache_receipt,expected_calls
+@@ -29,3 +29,2 @@
+-        case_name=root.parent.parent.name
+-        assert case_name in ('LAB_MOV','LAB_STILL')
+-        for name,digest in manifest['case_configs'][case_name].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
++        for name,digest in manifest['configs'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
++        for name,digest in manifest['derived_artifacts'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
+@@ -33,2 +32,2 @@
+-        if stage!='P':
+-            previous=root.parent/{'PROBE':'P','S':'PROBE','D':'S'}[stage]
++        if stage!='PROBE':
++            previous=root.parent/{'S':'PROBE','D':'S'}[stage]
+@@ -39,15 +38,2 @@
+-        if stage!='P':
+-            prepared=json.loads((root.parent/'P/reports/result.json').read_text())
+-            assert prepared['status']=='COMPLETED'
+-            assert prepared['condition_receipt_sha256']==hashlib.sha256((root/'artifacts/conditions_receipt.json').read_bytes()).hexdigest()
+-            cache_receipt=verify_cache_receipt(root)
+-            comparison=json.loads((root.parent.parent.parent.parent/'reports/condition_comparison.json').read_text())
+-            assert comparison['status']=='PASS'
+-            lineage=json.loads((root.parent.parent.parent.parent/'reports/lineage_comparison.json').read_text())
+-            assert lineage['status']=='PASS'
+-            assert lineage['cases'][case_name]['cache_sha256']==cache_receipt['hashes']['conditions.safetensors']
+-            assert lineage['baseline_policy_sha256']==hashlib.sha256((root/'configs/lineage_baseline.json').read_bytes()).hexdigest()
+-            assert lineage['code_manifest_sha256']==hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest()
+-            assert comparison['case_cache_sha256'][root.parent.parent.name]==cache_receipt['hashes']['conditions.safetensors']
+-            assert comparison['policy_sha256']==hashlib.sha256((root/'configs/comparison_policy.json').read_bytes()).hexdigest()
+-            assert comparison['code_manifest_sha256']==hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest()
++        cache_receipt=verify_cache_receipt(root)
++        if stage in ('PROBE','S','D'):
+@@ -67,2 +53,4 @@
+-                assert meta['provenance']['counters']=={'model_calls':80,'completed_steps':40}
+-                assert meta['provenance']['executing_experiment']=='B-013'
++                assert meta['provenance']['counters']=={'model_calls':expected_calls(root),'completed_steps':40}
++                assert meta['provenance']['executing_experiment']=='B-014'
++                assert meta['provenance']['executing_code']==manifest
++                assert meta['provenance']['alg_reference_sidecar']==json.loads((root/'artifacts/filtered_reference.json').read_text())
+@@ -77 +64,0 @@
+-        elif stage=='P':from phase_prepare import run
+@@ -82 +68,0 @@
+-        if stage=='P':result['condition_receipt_sha256']=hashlib.sha256((root/'artifacts/conditions_receipt.json').read_bytes()).hexdigest()
+--- B013/code/runtime_guard.py
++++ B014/code/runtime_guard.py
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T19:30:00+00:00').timestamp()
+-UNIT: Final = 'make-meme-b013-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T20:30:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b014-pipeline'
+--- B013/code/runtime_launch.py
++++ B014/code/runtime_launch.py
+@@ -18 +18 @@
+-    '--unit=make-meme-b013-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b014-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
+--- B013/code/test_alg.py
++++ B014/code/test_alg.py
+@@ -0,0 +1,156 @@
++"""CPU contracts: no model, no GPU and no learned preprocessing."""
++import torch
++import pytest
++import alg
++
++
++def test_disabled_and_ratio_one_preserve_baseline_order_and_values():
++    # Given original CFG predicts positive then negative.
++    for settings in (alg.AlgSettings(enabled=False), alg.AlgSettings(ratio=1.0)):
++        calls = []
++        def predict(branch):
++            calls.append(branch)
++            return torch.tensor(3.0 if branch == "c_orig" else 2.0)
++        # When ALG is disabled or the filter is identity.
++        result = alg.guided_prediction(predict, settings, 0, 40, 5.0)
++        # Then the exact baseline order/arithmetic is retained.
++        assert calls == ["c_orig", "u_orig"]
++        assert result == 7.0
++        assert settings.expected_calls(40) == 80
++
++
++def test_active_formula_and_schedule():
++    # Given distinct branch predictions distinguish ALG from naive low CFG.
++    settings = alg.AlgSettings()
++    values = {"u_orig": 2.0, "u_low": 3.0, "c_low": 7.0, "c_orig": 11.0}
++    calls = []
++    def predict(branch):
++        calls.append(branch)
++        return torch.tensor(values[branch])
++    # When every sampling step is evaluated.
++    results = [alg.guided_prediction(predict, settings, i, 40, 5.0) for i in range(40)]
++    # Then eight ALG steps and 32 baseline steps produce 88 calls.
++    assert results[0] == results[7] == 22.0
++    assert results[8] == results[39] == 47.0
++    assert calls[:3] == ["u_orig", "u_low", "c_low"]
++    assert calls[24:26] == ["c_orig", "u_orig"]
++    assert len(calls) == settings.expected_calls(40) == 88
++
++
++@pytest.mark.parametrize("shape", [(16,1,112,64),(2,3,4,12,8)])
++def test_filter_isolates_planes_and_preserves_input_and_rng(shape):
++    # Given independently valued signed channel/frame planes.
++    value = torch.arange(torch.tensor(shape[:-2]).prod().item(), dtype=torch.float32).reshape(*shape[:-2],1,1)-12
++    original = value.expand(shape).clone()
++    before = original.clone(); rng = torch.get_rng_state().clone()
++    # When spatial down/up is applied.
++    filtered = alg.low_pass_reference(original, 0.4)
++    # Then no channels/frames/batches mix and signed values are not clamped.
++    assert filtered.shape == original.shape and filtered.dtype == original.dtype and filtered.device == original.device
++    assert torch.allclose(filtered, original, atol=1e-5, rtol=1e-6)
++    assert torch.equal(original,before) and torch.equal(rng,torch.get_rng_state())
++    assert filtered.data_ptr() != original.data_ptr()
++
++
++def test_impulse_stays_in_its_channel_frame_and_batch():
++    # Given one impulse in one plane.
++    value=torch.zeros(2,3,4,112,64);value[1,2,3,50,30]=100
++    # When filtered spatially.
++    result=alg.low_pass_reference(value,.4)
++    # Then only that plane changes and resolution is the registered round rule.
++    assert alg.spatial_size(112,64,.4)==(45,26)
++    assert result[1,2,3].abs().sum()>0
++    result[1,2,3]=0
++    assert torch.count_nonzero(result)==0
++
++
++def test_branch_kwargs_only_replace_reference_without_parent_mutation():
++    # Given two branches sharing visual containers and different text.
++    reference=torch.ones(16,1,12,8);filtered=alg.low_pass_reference(reference,.4)
++    common={'ref_latents':[reference],'clip_fea':torch.ones(1),'ref_masks':[torch.ones(1)],
++            'pose_latents':[torch.ones(1)],'driving_masks':[torch.ones(1)],'seq_len':1e10,
++            'history_mask':None,'replace_flag':False,'additional_ref_latents':None,'additional_ref_masks':None}
++    positive={**common,'context':[torch.ones(2)]};negative={**common,'context':[torch.zeros(2)]}
++    # When every branch kwargs is selected.
++    branches={name:alg.branch_condition(name,positive,negative,filtered) for name in ('c_orig','u_orig','c_low','u_low')}
++    # Then only a fresh low-reference container changes; all other fields retain identity.
++    for name,actual in branches.items():
++        original=positive if name.startswith('c_') else negative
++        for key in original:
++            if key!='ref_latents':assert actual[key] is original[key]
++        assert actual['ref_latents'][0] is (filtered if name.endswith('low') else reference)
++    assert positive['ref_latents'] is negative['ref_latents'] is common['ref_latents']
++    assert torch.equal(reference,torch.ones_like(reference))
++
++
++def test_checked_extraction_rejects_changed_prediction_source():
++    # Given the actual pinned source file supplied by the fixture command.
++    import os
++    from pathlib import Path
++    from alg_extract import alg_sample_source
++    source=Path(os.environ['SCAIL_SOURCE']).read_text()
++    # When the exact original block is extracted and an altered block is attempted.
++    patched=alg_sample_source(source)
++    # Then the patch is singular and fails closed on a changed model call.
++    assert patched.count('noise_pred = alg_predict(')==1
++    with pytest.raises(AssertionError):
++        alg_sample_source(source.replace('noise_pred_cond = self.model(', 'noise_pred_cond = other_model('))
++
++
++def test_off_extracted_sampler_matches_original_cpu_loop():
++    # Given the real extracted loop and a deterministic CPU scheduler/model fixture.
++    import os
++    from pathlib import Path
++    from types import SimpleNamespace
++    from extract import sample_source
++    from alg_extract import alg_sample_source
++    source=Path(os.environ['SCAIL_SOURCE']).read_text()
++    def execute(patched,settings):
++        calls=[];final=[];counter=[0]
++        class Model:
++            def __call__(self,latents,t,**kwargs):
++                calls.append(kwargs['tag'])
++                return [latents[0]*.01+kwargs['value']]
++        class Scheduler:
++            def step(self,pred,t,latent,**kwargs):return [latent-pred*.005]
++        model=Model();positive={'tag':'c','value':3.0};negative={'tag':'u','value':2.0}
++        def predict(latents,t,c,u):
++            def branch(name):return model(latents,t=t,**(c if name.startswith('c_') else u))[0]
++            return alg.guided_prediction(branch,settings,counter[0],40,5.)
++        def completed(*unused):counter[0]+=1
++        namespace={'torch':torch,'tqdm':lambda x:x,'self':SimpleNamespace(model=model,device=torch.device('cpu'),rank=0),
++                   'offload_model':False,'apply_clean_history':lambda value,history:value,
++                   'timesteps':torch.arange(40),'sample_scheduler':Scheduler(),'guide_scale':5.,'seed_g':None,
++                   'completed':completed,'complete':lambda x,h:final.append(x[0].clone()),'phase':lambda x:None,'alg_predict':predict}
++        exec(compile(patched,'<cpu-real-loop-fixture>','exec'),namespace)
++        namespace['sample_func'](torch.ones(2,3),positive,negative,None)
++        return final[0],calls,counter[0]
++    # When original, OFF and identity-filter modes run the actual extraction.
++    baseline=execute(sample_source(source,separated=True),alg.AlgSettings(enabled=False))
++    off=execute(alg_sample_source(source),alg.AlgSettings(enabled=False))
++    identity=execute(alg_sample_source(source),alg.AlgSettings(ratio=1))
++    # Then output values and 80-call order are byte-identical with 40 steps.
++    for actual in (off,identity):
++        assert torch.equal(actual[0],baseline[0]) and actual[1:]==baseline[1:]
++    assert baseline[1]==['c','u']*40 and baseline[2]==40
++
++
++def test_parent_receipt_binds_original_code_not_new_execution_manifest(tmp_path):
++    # Given immutable actual B013 P, its own code/input receipts and a new worker.
++    import json
++    import os
++    import shutil
++    from pathlib import Path
++    from contracts import verify_cache_receipt
++    actual=Path(os.environ['B014_ROOT'])
++    shutil.copytree(actual/'configs',tmp_path/'configs')
++    for name in ('artifacts','parent_records'):(tmp_path/name).symlink_to(actual/name,target_is_directory=True)
++    (tmp_path/'PREREGISTERED_CODE.json').write_text('{"experiment":"B-014"}')
++    # When the parent contract is verified independently of current execution code.
++    receipt=verify_cache_receipt(tmp_path)
++    # Then immutable provenance passes, while modified parent provenance is rejected.
++    assert receipt['experiment']=='B-013'
++    parent=tmp_path/'configs/parent_code.json'
++    changed=json.loads(parent.read_text());changed['experiment']='B-014'
++    parent.write_text(json.dumps(changed))
++    with pytest.raises(AssertionError):verify_cache_receipt(tmp_path)

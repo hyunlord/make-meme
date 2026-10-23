@@ -1,0 +1,20 @@
+{
+  "name": "self",
+  "frames": 17,
+  "fps": 24,
+  "height": 896,
+  "width": 512,
+  "seed": 20261022,
+  "steps": 40,
+  "solver": "unipc",
+  "shift": 3.0,
+  "guide_scale": 5.0,
+  "segment_overlap": 5,
+  "adapter": null,
+  "prompt": "A broad-chested black Labrador retriever with short black fur, floppy ears, a broad muzzle, and sturdy limbs stands upright on its hind legs in the room shown in the reference photo. Its front paws hang bent in front of its chest as it gently leans and progressively tilts its head to the side near the end, while the torso remains facing the camera. Preserve the same Labrador appearance, room, full-body framing, and the observed sequence of movement.",
+  "precision": "mixed BF16 with FP32 normalization/time/head islands",
+  "reference": "inputs/reference.png",
+  "reference_mask": "inputs/reference-mask-white.png",
+  "driver": "inputs/driver-24fps.mp4",
+  "driver_mask": "inputs/mask-24fps.mp4"
+}
