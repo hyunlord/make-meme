@@ -1,6 +1,6 @@
 # B-013 — 개체가 달라졌을 때 driving 활용을 어떻게 읽는가
 
-현재 양 P와 Lab pair/B-012 계보 비교는 **PASS**이며 후속 PROBE/S/D가 순차 진행 중이다. 새 생성 출력·품질은 아직 **NOT_AVAILABLE/미판정**이다. [계획](../experiments/B-013-lab-driving-transfer/PLAN.md)은 기존 B-012 source [7,24) MOV/STILL을 보존하고, 실제 Lab reference를 쓰는 LAB_MOV/LAB_STILL만 한 번씩 생성한다. 다음 shape는 실제 양 P cache 검사로 확인한 값이다.
+양 조건의 P/PROBE/S/D가 모두 완료됐다. 신규 sampler는 **2/2회, 실패0·재시도0**, 각40step·80forward다. 기술적 영상 출력은 PASS지만 전신 자세 전이는 양쪽 모두 **FAIL**이다. LAB_MOV의 후반 국소 반응은 **PARTIAL**이며 깨끗하고 충실한 머리 roll 수용은 아니다. 시간 품질은 **UNVERIFIED**다. [계획](../experiments/B-013-lab-driving-transfer/PLAN.md)은 기존 B-012 source [7,24) MOV/STILL을 보존하고, 실제 Lab reference를 쓰는 LAB_MOV/LAB_STILL만 한 번씩 생성한다. 다음 shape는 실제 양 P cache 검사로 확인한 값이다.
 
 ## 1. 두 비교의 질문이 다르다
 
@@ -30,8 +30,8 @@ source는 뒷발 직립·앞발을 든 자세이고 reference Lab는 착석이�
 | noise | `[16,5,112,64]` FP32 | 동일 |
 | reference | `[16,1,112,64]` FP32 | 동일 |
 | reference mask | `[28,6,112,64]` FP32 | 동일 |
-| driving | `[16,5,56,32]` FP32 | 변경 기대 |
-| driving mask | `[28,5,56,32]` FP32 | 변경 기대 |
+| driving | `[16,5,56,32]` FP32 | 실제 변경 |
+| driving mask | `[28,5,56,32]` FP32 | 실제 변경 |
 | CLIP | `[1,257,1280]` FP16 | 동일 |
 | text | `[108,4096]` BF16 | Lab pair 동일; B-012는91tokens |
 
@@ -61,7 +61,17 @@ noise time \(\tau\)와 frame time \(t_k=k/24\)는 다른 축이다. UniPC40step�
 
 B-012의 local0/12/14/16 사건과 전체17장 coverage를 유지한다. 두 Lab 조건은 가능하면 동일 크기 A/B 패널로 먼저 읽을 수 있지만 source를 본 같은 에이전트의 검토를 독립 인간 blind 평가로 부르지 않는다. mask 경계 결함과 흐린 발끝은 숨기지 않는다. 실제 연속 재생이 없으면 temporal=UNVERIFIED다.
 
-양 P·조건 검사는 완료됐고 sampler·decode·시각 결과의 완료 근거는 아직 대기다. 같은 seed 한 pair는 탐색 증거이며 여러 개체/동작/seed의 일반화나 새로운 학습 방법의 기여가 아니다. 이번은 학습0 baseline이다. 결과 후 다음 가설 하나를 고르되 자동 실행하지 않는다.
+[실제 실행 장부](../experiments/B-013-lab-driving-transfer/RUN_LEDGER.json)에서 양 final latent는 `[16,5,112,64]` FP32 finite, raw 출력은 `[3,17,896,512]` finite다. 양 MP4는17장·24fps·0.708333초이며 모든8단계 exit0/PID0로 종료됐다. S guard 시간은 LAB_MOV1181.602초, LAB_STILL1149.802초, D는 각각16.198초와16.219초다. 학습 update는0이다.
+
+두 검토자가 전체17장과 고정 사건을 A/B로 읽고 각 기록을 저장한 뒤 대응표를 공개했다. A는 LAB_STILL, B는 LAB_MOV였다. 양쪽 모두 착석·앞발 내림이 유지되어 source의 직립·앞발 들기 전이는 실패했다. LAB_STILL은 reference에 가까운 정적 모습이고, LAB_MOV는 local12~16에서 머리 변화가 더 뚜렷하지만 눈·주둥이·귀의 심한 번짐과 형태 차이가 함께 나타났다. 따라서 국소 반응은 PARTIAL이며 충실하고 깨끗한 roll 성공이나 유용한 전체 안무 전이로 보고하지 않는다. 후반 실제 개체 일치는 UNCERTAIN이다. animation 조건에서 침실 유지 자체를 실패로 세지 않는다.
+
+동일한 full canvas로 raw-derived PNG를 비교했다. 이전 B-012 PNG34장은 원래 raw의 동일 quantization과 pixel별 완전 일치했고 그대로 재사용했다. 새 raw는 기존 clamp/make_grid/uint8 경로만 거쳤다. UI의 프레임 이동·한 번 재생·모바일/CJK 표시 확인은 PASS지만 실제 연속 영상 품질의 관찰을 대신하지 않아 temporal=UNVERIFIED다.
+
+이것은 한 seed의 joint RGB+mask 비교다. reference의 coarse pose와 driving이 경쟁한다는 설명은 후속 가설이며 특정 feature의 인과 원인이나 해결법이 입증된 것이 아니다. 여러 개체·동작·seed 일반화, Lab 전체 안무 성공, 새로운 학습 방법 기여는 주장하지 않는다. 다음 실험은 별도 승인 전 실행하지 않는다.
+
+## 다음 제안 하나 — 미실행
+
+다음은 SCAIL reference-conditioning에 ALG를 적용할 수 있는지 확인하고 전신 자세를 통제 비교하는 **실현 가능성 실험 제안 하나**다. 상태는 NOT_RUN이다. [ALG 논문](https://arxiv.org/html/2506.08456v2)과 [고정 공식 구현](https://github.com/choi403/ALG/blob/3657bfd0d408631db2443b491498c44e1cb2e5c6/pipeline_wan_image2video_lowpass.py#L782-L849)은 early low-pass와 later detail을 다루지만, nonzero filtering 구간의 구현은 단순 reference blur가 아니다. 원래 reference의 negative branch와 filtered reference의 negative/positive branch를 결합하고 원래 CLIP 조건은 유지한다. 해당 구간은 기존2회에서3회 forward로 증가한다. SCAIL의 reference prefix·semantic mask·RGB driving 경로에 대한 효과는 검증되지 않았다. low-frequency에도 착석 실루엣은 남으므로 자세가 풀린다는 보장이 없고, 얼굴·털 단서를 약화하면 source 외형 누출이나 개체 손실 위험이 있다. 이번 결과는 이 가설의 동기일 뿐 성공이나 원인 입증이 아니다. 별도 승인 전 코드 적용·생성·추가 비교를 실행하지 않는다.
 
 ## 이해 확인 질문
 

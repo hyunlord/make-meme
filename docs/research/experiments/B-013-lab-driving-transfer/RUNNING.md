@@ -1,6 +1,6 @@
 # B-013 실행 기록
 
-**RUNNING / 양 P 완료·조건 비교 PASS / PROBE·S·D 순차 진행.** 시작2026-10-24 00:43 KST(2026-10-23 15:43 UTC), hard deadline19:43 UTC, worker deadline19:30 UTC. 시작 원격 HEAD `28a8540172768481efad7013281a7ce649985245`를 확인했고 기존 문서 worktree를 fast-forward로 갱신했다. A와 이전 B 입력·결과·사용량은 보존한다.
+**COMPLETED / 양 P·PROBE·S·D 완료 / 조건 PASS / 전신 FAIL / 국소 PARTIAL / temporal UNVERIFIED.** 시작2026-10-24 00:43 KST(2026-10-23 15:43 UTC), hard deadline19:43 UTC, worker deadline19:30 UTC. 시작 원격 HEAD `28a8540172768481efad7013281a7ce649985245`를 확인했고 기존 문서 worktree를 fast-forward로 갱신했다. A와 이전 B 입력·결과·사용량은 보존한다. 아래 중간 기록의 PREREG_READY/NOT_RUN/RUNNING은 당시 상태이며 최종 판정은 [RESULTS](RESULTS.md)를 따른다.
 
 [PLAN](PLAN.md), [전환 결정](../../decisions/20261024-B-012-review-and-B-013.md)에 따라 기존 B-012 source[7,24) driving RGB/mask와 B-009 실제 Lab RGB·RED+WHITE reference mask를 재사용한다. 신규 LAB_MOV/LAB_STILL 각각1회, full sampler 최대2회·실패포함·재시도0, 각 조건 P/PROBE/S/D 최대1회다. source MOV/STILL은 재생성하지 않는다.
 
@@ -19,3 +19,7 @@ B-012 codegraph entry 경고는 TOOLING_WARNING이며 완료된 생성 결과와
 LAB_MOV는 P/PROBE/S/D 각1회로 정상 종료했다. S는 실제40step·80forward, guard1181.60초이며 final latent FP32 `[16,5,112,64]` 유한값·재읽기 PASS다. tensor value SHA `9323d8ed6541180abe905651a2cf42434f01f771dd87ad83ee2660c9d2b94f0b`는 초기noise와 다르다. D는 guard16.20초, raw `[3,17,896,512]` 및17f24fps MP4 저장·검증 완료다. 둘 모두 exit0/inactive/PID0을 확인했다. 이미지 품질은 아직 열람·판정하지 않았다.
 
 자원 회복 후 LAB_STILL PROBE도 정상 종료했고 두 번째 S를 시작했다. 신규 sampler 사용2/2, 재시도0이며 이 실행 이후 추가 생성은 없다. 두 결과가 모인 뒤 A/B 정적 관측과 사전 사건 평가를 한다.
+
+## 종료 기록
+
+두 case의 P/PROBE/S/D 각1회·40step80forward·finite final latent·17f24fps MP4가 모두 완료됐고 owned unit inactive/MainPID0을 확인했다. sampler2/2·실패/재시도/학습0. 모든17프레임 및 사전4시점의 blind 기록을 저장한 뒤 mapping을 공개하고 labelled 비교도 확인했다. 두 조건의 전신직립 FAIL, LAB_MOV의 국소반응 PARTIAL과 후반 얼굴번짐, 실제개체 UNCERTAIN, temporal UNVERIFIED를 구분한다. [실측](MEASUREMENTS.md)·[재현](REPRODUCE.md)·[결과](RESULTS.md)에 기록하며 추가 sampler는 실행하지 않는다.

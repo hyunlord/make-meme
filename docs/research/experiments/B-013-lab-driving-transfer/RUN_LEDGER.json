@@ -1,0 +1,304 @@
+{
+  "experiment": "B-013",
+  "prereg_commit": "f02896f825703a321c84127d4ef8135720176811",
+  "status": "EXECUTION_PASS",
+  "sampler_attempts": 2,
+  "sampler_cap": 2,
+  "failed_attempts": 0,
+  "retries": 0,
+  "cases": {
+    "LAB_MOV": {
+      "stages": {
+        "P": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 148.2202296257019,
+          "worker_phase_seconds": 146.58690404403023,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "PROBE": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 7.075990200042725,
+          "worker_phase_seconds": 4.690649491967633,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "S": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 1181.6015193462372,
+          "worker_phase_seconds": 1179.2865222900873,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "D": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 16.19752049446106,
+          "worker_phase_seconds": 13.494739852962084,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        }
+      },
+      "artifacts": {
+        "conditions.json": {
+          "bytes": 27571,
+          "sha256": "7dbcddd695c7148f59a5790ae74c0569e0517d491cc1c26550c828ca995d68aa",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions.safetensors": {
+          "bytes": 18209444,
+          "sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions_receipt.json": {
+          "bytes": 523,
+          "sha256": "62cb3dde9f6b0220c00260aa2b0db156ccebe40f2e4457c7737cbcbfb7e5d940",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.json": {
+          "bytes": 35748,
+          "sha256": "f286177e1d779baf1b34204f2a72c82394f973bb0ee2727f3528df053185d8cd",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "f36e76fe6066dd8a044e3a5d6d3048e16a60e765e1ef228f6e8cb08bd2757f98",
+          "included_in_mac_runtime_copy": true
+        },
+        "initial_noise.pt": {
+          "bytes": 2295379,
+          "sha256": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc",
+          "included_in_mac_runtime_copy": true
+        },
+        "output.mp4": {
+          "bytes": 586683,
+          "sha256": "0434344bf50ec266d71fbe9bb07cff81eb81fe58ac4cf75b39a283004ef3d56a",
+          "included_in_mac_runtime_copy": true
+        },
+        "preprocessed_inputs.pt": {
+          "bytes": 198183445,
+          "sha256": "f40ff1dfd77c2e2955ba54d5d03e418e37249c5a62cd54ed2b3101f207da9287",
+          "included_in_mac_runtime_copy": false
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "cc9440ace1793bff6e9cfef8cb73ba9a7e4332f8e506025ccdecfa17ad964ab6",
+          "included_in_mac_runtime_copy": true
+        }
+      },
+      "final_latent_gate": {
+        "status": "PASS",
+        "shape": [
+          16,
+          5,
+          112,
+          64
+        ],
+        "dtype": "torch.float32",
+        "finite": true,
+        "counters": {
+          "model_calls": 80,
+          "completed_steps": 40
+        },
+        "final_tensor_sha256": "9323d8ed6541180abe905651a2cf42434f01f771dd87ad83ee2660c9d2b94f0b",
+        "initial_noise_tensor_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+        "initial_noise_exact": true,
+        "final_file_sha256": "f36e76fe6066dd8a044e3a5d6d3048e16a60e765e1ef228f6e8cb08bd2757f98",
+        "condition_sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+        "guard_seconds": 1181.6015193462372,
+        "service_exit": "MainPID=0\nResult=success\nActiveState=inactive\n"
+      },
+      "output": {
+        "status": "VIDEO_OUTPUT_PASS",
+        "raw_shape": [
+          3,
+          17,
+          896,
+          512
+        ],
+        "finite": true,
+        "width": 512,
+        "height": 896,
+        "frames": 17,
+        "fps": "24/1",
+        "duration": "0.708333",
+        "quality": "UNVERIFIED_BY_RUNTIME"
+      }
+    },
+    "LAB_STILL": {
+      "stages": {
+        "P": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 112.06673955917358,
+          "worker_phase_seconds": 109.51250065700151,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "PROBE": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 6.0749595165252686,
+          "worker_phase_seconds": 3.6195453009568155,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "S": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 1149.8024582862854,
+          "worker_phase_seconds": 1146.7883128680987,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "D": {
+          "attempts": 1,
+          "cap": 1,
+          "status": "COMPLETED",
+          "guard_seconds": 16.218708515167236,
+          "worker_phase_seconds": 13.506341009982862,
+          "returncode": 0,
+          "reason": "service_exit",
+          "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        }
+      },
+      "artifacts": {
+        "conditions.json": {
+          "bytes": 27571,
+          "sha256": "eff2cd9cafbe0455b38c2563f8474241254d4da4b7e03d6c319436e68e3e2afc",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions.safetensors": {
+          "bytes": 18209444,
+          "sha256": "1e8f065e70bfef8cd723d70575a4a04f472567950a1b2d6ba0c61d189c53e87b",
+          "included_in_mac_runtime_copy": true
+        },
+        "conditions_receipt.json": {
+          "bytes": 523,
+          "sha256": "1b1589c253ab0347f80b5bd3b5dc15df87809a99fbf4e7ba573245cc68efa470",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.json": {
+          "bytes": 35748,
+          "sha256": "73e8824aff827db53e7ad38287372c05ca05f57f96aa834ca962d6b0cef9ae8a",
+          "included_in_mac_runtime_copy": true
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "7a66819d2426bf8e9bef11611d6a32b00f3f6e10e77c77f82870b2b2bb6943a5",
+          "included_in_mac_runtime_copy": true
+        },
+        "initial_noise.pt": {
+          "bytes": 2295379,
+          "sha256": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc",
+          "included_in_mac_runtime_copy": true
+        },
+        "output.mp4": {
+          "bytes": 402669,
+          "sha256": "0e68ecbf04d0f86763848973eb5d298c8106c30d7e0872781669672d31179372",
+          "included_in_mac_runtime_copy": true
+        },
+        "preprocessed_inputs.pt": {
+          "bytes": 198183445,
+          "sha256": "daa2a2a840697573dc222dd1779131b031299de554a6ccf082876651040bf2cb",
+          "included_in_mac_runtime_copy": false
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "f5d0a9aae90906fc8d0dfea71a7a6bfece330c8999d1d5397429a2ed59319728",
+          "included_in_mac_runtime_copy": true
+        }
+      },
+      "final_latent_gate": {
+        "status": "PASS",
+        "shape": [
+          16,
+          5,
+          112,
+          64
+        ],
+        "dtype": "torch.float32",
+        "finite": true,
+        "counters": {
+          "model_calls": 80,
+          "completed_steps": 40
+        },
+        "final_tensor_sha256": "55e57ca3829f338fc427d3423657dfb14738fd37a12796c79ff88c4864ff4ce5",
+        "initial_noise_tensor_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+        "initial_noise_exact": true,
+        "final_file_sha256": "7a66819d2426bf8e9bef11611d6a32b00f3f6e10e77c77f82870b2b2bb6943a5",
+        "condition_sha256": "1e8f065e70bfef8cd723d70575a4a04f472567950a1b2d6ba0c61d189c53e87b",
+        "guard_seconds": 1149.8024582862854,
+        "service_exit": "MainPID=0\nResult=success\nActiveState=inactive\n"
+      },
+      "output": {
+        "status": "VIDEO_OUTPUT_PASS",
+        "raw_shape": [
+          3,
+          17,
+          896,
+          512
+        ],
+        "finite": true,
+        "width": 512,
+        "height": 896,
+        "frames": 17,
+        "fps": "24/1",
+        "duration": "0.708333",
+        "quality": "UNVERIFIED_BY_RUNTIME"
+      }
+    }
+  },
+  "quality": "UNVERIFIED_BY_RUNTIME",
+  "new_downloads": 0,
+  "training_updates": 0,
+  "prior_sampler_history": {
+    "B010": 0,
+    "B011": 1,
+    "B012": 2
+  },
+  "prior_experiment_writes": 0,
+  "condition_comparison": {
+    "status": "PASS",
+    "changed": 4,
+    "preserved": 12,
+    "all_preserved_bit_exact": true
+  },
+  "B012_lineage_comparison": {
+    "status": "PASS",
+    "changed_per_case": 7,
+    "preserved_per_case": 9,
+    "all_preserved_bit_exact": true,
+    "positive_context_tokens_B012": 91,
+    "positive_context_tokens_B013": 108
+  },
+  "preservation": {
+    "postrun_sha_check": {
+      "status": "PASS",
+      "checks": 864,
+      "method": "Fresh SHA256 of every worker code/config/upstream and fixed input",
+      "runtime_code_mutations": 0
+    },
+    "large_weights": "fresh size/mtime unchanged; previous verified SHA retained, not recomputed",
+    "existing_comfy": "same preapproved process, 3271MiB, queue empty; no termination",
+    "owned_workers": "both runtime units inactive, MainPID=0",
+    "A_generation_calls": 0
+  }
+}

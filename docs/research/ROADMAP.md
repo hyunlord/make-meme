@@ -232,3 +232,9 @@ source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 
 ## B-013 조건 통과·생성 진행 (2026-10-24)
 
 양 Lab P 완료. 실제 pair4변경/12보존 및 대응 B-0127변경/9보존 통과이며 보존 leaf는 모두 bit-exact다. 새 Lab reference/task 조건을 생성한 것이며 source cache 전체를 재사용하지 않았다. 품질 판단은 두 PROBE/S/D 결과의 사전 사건·전체17장 관측 이후로 남긴다. [진행](experiments/B-013-lab-driving-transfer/RUNNING.md).
+
+## B-013 종료: 착석 전신과 국소 머리 반응의 분리 (2026-10-24)
+
+**COMPLETED / 실행·조건 PASS / 전신 FAIL / 국소 PARTIAL / temporal UNVERIFIED.** LAB_MOV/LAB_STILL 각각 P/PROBE/S/D1회·40step80forward·finite final latent·17f24fps MP4를 확보했다. pair4변경/12bit-exact, 대응 B-0127변경/9bit-exact로 입력 계보를 확인했다. 전체17장 정적 검토에서 두 출력 모두 착석·지지 앞발이 남았다. LAB_MOV의 후반 머리 반응은 더 크지만 눈·주둥이·귀 번짐으로 충실한 roll·실제 개체 유지 수용은 어렵다. 단순 검은 Lab 유사성과 실제 반려견 일치를 구분한다. sampler2/2·실패/재시도/학습0, 최소가용46.139GiB·swap/OOM0, cgroup high4242/3670은 공개한다. [RESULTS](experiments/B-013-lab-driving-transfer/RESULTS.md).
+
+다음 연구 하나는 SCAIL reference conditioning에 ALG의 시간별 참조 완화 원리를 적용할 수 있는지 검토하고 전신 자세 대 개체 보존의 통제 실험을 설계하는 것이다. 공식3branch와2→3forward 비용, 저주파 착석 실루엣·identity 약화 위험, SCAIL 미검증을 명시한다. 이번에는 수정·추론·학습 NOT_RUN이며 자동 실행하지 않는다. 앞선 RUNNING 기록은 당시 이력으로 보존한다.
