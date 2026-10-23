@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "tests": 5,
+  "seconds": 0.76,
+  "CUDA_VISIBLE_DEVICES": "",
+  "scope": [
+    "two-case portrait/landscape geometry",
+    "actual ffmpeg17frame16/24fps writers",
+    "lossless RNG/noise cache roundtrip and corruption rejection",
+    "case receipt code/input integrity",
+    "unknown case rejection"
+  ],
+  "GPU_model_execution": false,
+  "critical_ruff": "PASS",
+  "syntax": "PASS"
+}

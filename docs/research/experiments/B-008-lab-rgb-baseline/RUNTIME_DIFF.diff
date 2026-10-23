@@ -1,0 +1,146 @@
+--- H/code/cuda_probe.py
++++ B008/code/cuda_probe.py
+@@ -8,0 +9 @@
++from contracts import verify_cache_receipt
+@@ -53 +54,2 @@
+-    assert meta['file_sha256']=='1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308'
++    receipt=verify_cache_receipt(root)
++    assert meta['file_sha256']==receipt['hashes']['conditions.safetensors']
+--- H/code/media.py
++++ B008/code/media.py
+@@ -8,0 +9 @@
++from contracts import active_contract
+@@ -19 +20 @@
+-        assert int(probe['nb_frames'])==17 and probe['avg_frame_rate']=='16/1'
++        assert int(probe['nb_frames'])==17 and probe['avg_frame_rate']==str(cfg['fps'])+'/1'
+@@ -28 +29,2 @@
+-    cfg=json.loads((root/'configs/official.json').read_text())
++    contract=active_contract(root)
++    cfg=json.loads((root/'configs'/f'{contract.name}.json').read_text())
+@@ -32 +34 @@
+-    assert (cfg['frames'],cfg['fps'],cfg['steps'],cfg['seed'],cfg['height'],cfg['width'])==(17,16,40,20261022,512,896)
++    assert (cfg['frames'],cfg['fps'],cfg['steps'],cfg['seed'],cfg['height'],cfg['width'])==(17,contract.fps,40,20261022,contract.height,contract.width)
+@@ -33,0 +36 @@
++    assert (cfg['solver'],cfg['shift'],cfg['guide_scale'],cfg['segment_overlap'])==('unipc',3.0,5.0,5)
+--- H/code/phase_decode.py
++++ B008/code/phase_decode.py
+@@ -7,0 +8 @@
++from contracts import active_contract
+@@ -10,0 +12 @@
++    contract=active_contract(root)
+@@ -26 +28 @@
+-    assert list(result.shape)==[3,17,512,896] and bool(torch.isfinite(result).all())
++    assert list(result.shape)==contract.decoded_shape and bool(torch.isfinite(result).all())
+@@ -31 +33 @@
+-    cache_video(tensor=result[None],save_file=str(output),fps=16,nrow=1,normalize=True,value_range=(-1,1))
++    cache_video(tensor=result[None],save_file=str(output),fps=contract.fps,nrow=1,normalize=True,value_range=(-1,1))
+@@ -34 +36 @@
+-    assert (int(probe['nb_frames']),probe['avg_frame_rate'],probe['width'],probe['height'])==(17,'16/1',896,512)
++    assert (int(probe['nb_frames']),probe['avg_frame_rate'],probe['width'],probe['height'])==(17,str(contract.fps)+'/1',contract.width,contract.height)
+--- H/code/phase_sample.py
++++ B008/code/phase_sample.py
+@@ -11,0 +12 @@
++from contracts import active_contract
+@@ -15,0 +17 @@
++    contract=active_contract(root)
+@@ -22 +24 @@
+-    atomic_json(root/'reports/model-load-attempt.json',{'attempt':1,'max':1,'parent':'B-007G','intervention':'tiny real CUDA before unchanged staged loader'})
++    atomic_json(root/'reports/model-load-attempt.json',{'attempt':1,'max':1,'parent':'B-007H','intervention':'tiny real CUDA before unchanged staged loader'})
+@@ -51 +53 @@
+-        assert len(x0)==1 and list(x0[0].shape)==[16,5,64,112] and bool(torch.isfinite(x0[0]).all())
++        assert len(x0)==1 and list(x0[0].shape)==contract.latent_shape and bool(torch.isfinite(x0[0]).all())
+@@ -53 +55 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-007H','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-007G','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-008','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-008-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
+@@ -64 +66 @@
+-    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':'official17f','parent_history':{'E':1,'F':1,'G_reserved':1}})
++    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1}})
+--- H/code/prepare_layout.py
++++ B008/code/prepare_layout.py
+@@ -1 +1 @@
+-"""Isolated H roots, read-only references to verified G cache and E environment."""
++"""Isolated B-008 stages; new cache, read-only E environment/models/inputs."""
+@@ -5 +5 @@
+-root,previous,parent=map(Path,sys.argv[1:])
++root,previous=map(Path,sys.argv[1:])
+@@ -7,2 +7 @@
+-for name in ('conditions.safetensors','conditions.json'):(root/'artifacts'/name).symlink_to(parent/'artifacts'/name)
+-for stage in ('PROBE','S','D'):
++for stage in ('P','PROBE','S','D'):
+--- H/code/run_phase.py
++++ B008/code/run_phase.py
+@@ -1 +1 @@
+-"""Fresh bounded H worker; parent G cache is immutable, P is never rerun."""
++"""Fresh bounded B-008 case worker; each P/PROBE/S/D stage runs at most once."""
+@@ -13 +13 @@
+-    assert stage in ('PROBE','S','D')
++    assert stage in ('P','PROBE','S','D')
+@@ -16 +16 @@
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1},'max_stage_attempts':1},file)
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1},'max_stage_attempts':1},file)
+@@ -20,0 +21,2 @@
++    from contracts import active_contract,verify_cache_receipt
++    import torch
+@@ -28,2 +30,2 @@
+-        if stage!='PROBE':
+-            previous=root.parent/('PROBE' if stage=='S' else 'S')
++        if stage!='P':
++            previous=root.parent/{'PROBE':'P','S':'PROBE','D':'S'}[stage]
+@@ -33,12 +35,8 @@
+-        cfg=verify_inputs(root)
+-        parent_contract=json.loads((root/'PREREGISTERED_INPUTS.json').read_text())['parent_cache']
+-        assert hashlib.sha256((root/'artifacts/conditions.json').read_bytes()).hexdigest()==parent_contract['metadata_sha256']
+-        path=root/'artifacts'/('final_latent.safetensors' if stage=='D' else 'conditions.safetensors')
+-        cached,meta=load_tree(path,device='cpu')
+-        if stage!='D':
+-            assert meta['file_sha256']=='1f1e0b68495b2276a5b6d12eaf160897a16acb2bd2a089e616a55c40bf590308'
+-            assert len(meta['tensors'])==16 and meta['provenance']['config']==cfg
+-            assert list(cached['noise'].shape)==[16,5,64,112] and cached['history'] is None
+-            assert meta['provenance']['initial_noise_sha256']=='9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950'
+-        else:
+-            assert meta['provenance']['counters']=={'model_calls':80,'completed_steps':40}
++        cfg=verify_inputs(root);contract=active_contract(root)
++        if stage!='P':
++            prepared=json.loads((root.parent/'P/reports/result.json').read_text())
++            assert prepared['status']=='COMPLETED'
++            assert prepared['condition_receipt_sha256']==hashlib.sha256((root/'artifacts/conditions_receipt.json').read_bytes()).hexdigest()
++            cache_receipt=verify_cache_receipt(root)
++            path=root/'artifacts'/('final_latent.safetensors' if stage=='D' else 'conditions.safetensors')
++            cached,meta=load_tree(path,device='cpu')
+@@ -46,2 +44,15 @@
+-            assert list(cached['x0'][0].shape)==[16,5,64,112]
+-        del cached,meta
++            if stage!='D':
++                assert meta['file_sha256']==cache_receipt['hashes']['conditions.safetensors']
++                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-008'
++                assert list(cached['noise'].shape)==contract.latent_shape and cached['history'] is None
++                prior_noise=torch.load(root/'artifacts/initial_noise.pt',map_location='cpu',weights_only=True)
++                assert torch.equal(cached['noise'],prior_noise)
++                digest=hashlib.sha256(cached['noise'].contiguous().numpy().tobytes()).hexdigest()
++                assert digest==cache_receipt['initial_noise_sha256']==meta['provenance']['initial_noise_sha256']
++                del prior_noise
++            else:
++                assert meta['provenance']['counters']=={'model_calls':80,'completed_steps':40}
++                assert meta['provenance']['executing_experiment']=='B-008'
++                assert meta['provenance']['condition_sha256']==cache_receipt['hashes']['conditions.safetensors']
++                assert list(cached['x0'][0].shape)==contract.latent_shape
++            del cached,meta
+@@ -52,0 +64 @@
++        elif stage=='P':from phase_prepare import run
+@@ -56 +68,3 @@
+-        atomic_json(root/'reports/result.json',{'status':'COMPLETED','stage':stage})
++        result={'status':'COMPLETED','stage':stage}
++        if stage=='P':result['condition_receipt_sha256']=hashlib.sha256((root/'artifacts/conditions_receipt.json').read_bytes()).hexdigest()
++        atomic_json(root/'reports/result.json',result)
+--- H/code/runtime_guard.py
++++ B008/code/runtime_guard.py
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T02:35:00+00:00').timestamp()
+-UNIT: Final = 'make-meme-b007h-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T04:28:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b008-pipeline'
+--- H/code/runtime_launch.py
++++ B008/code/runtime_launch.py
+@@ -18 +18 @@
+-    '--unit=make-meme-b007h-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b008-watchdog','-p',f'RuntimeMaxSec={seconds+30}',

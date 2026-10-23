@@ -1,0 +1,12 @@
+{
+  "critical_ruff": "PASS",
+  "typecheck": {
+    "filesAnalyzed": 15,
+    "errorCount": 701,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 0.885
+  },
+  "strict_clean": false,
+  "note": "Full type diagnostics retained privately; inherited dynamic tensor/tree code not rewritten."
+}

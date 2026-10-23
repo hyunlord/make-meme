@@ -7,10 +7,14 @@
 
 ## 단계별 완료 계획
 
-1. IN_PROGRESS: 기존 Lab 입력·prompt·RED mask·17f24fps 계보 확인 및 명시적 case 계약 구현/CPU fixture.
-2. PENDING: 코드·config·입력 해시 사전 고정과 공개 push, 독립 검토.
+1. COMPLETED: 기존 Lab 입력·prompt·RED mask·17f24fps 계보 확인 및 명시적 case 계약 구현/CPU fixture.
+2. IN_PROGRESS: 코드·config·입력 해시 사전 고정과 공개 push, 독립 검토.
 3. PENDING: fresh P → 종료/회복 → PROBE → 종료/회복 → S → 종료/회복 → D. 선행 실패 시 후속 미실행.
 4. PENDING: 전체17장·native24fps 비교·품질 축별 정적 검토·한국어 수학 설명.
 5. PENDING: 최종 GitHub 기록·원격 SHA와 비공개 ZIP 양호스트 CRC/해시 검증·자체 프로세스 종료 확인.
 
 이번 목표는 CUDA 원인 감사 확대가 아니라 실제 Lab identity와 RGB driving motion의 첫 품질 기준선이다. sampler 수학·정밀도·72/24GiB 및 swap0 가드는 유지한다. 실제 연속 재생을 관찰하지 못한 경우 temporal=UNVERIFIED다.
+
+## 실행 전 검증
+
+CPU fixture5개(0.76초), critical Ruff와 syntax 검사가 통과했다. 전체 typecheck는 NOT_CLEAN701errors/15files로 별도 기록했다. 신선한 입력 파일·원본34PNG와 독립 CPU 전처리 hash를 확인했고, 실제 P는 같은4개 tensor shape/dtype/hash 일치를 검사한다. 원격 코드/upstream/input424개와 로컬 실행manifest20개 hash가 일치한다. 실제 입력 시트를 보았고 RED 대응·착석 참조·직립 source와 얇은 발/바닥 mask 결함을 확인했다. GPU는 아직 NOT_RUN.

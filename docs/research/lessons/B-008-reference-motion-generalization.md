@@ -1,0 +1,71 @@
+# B-008 — 외형 참조와 RGB 동작 조건이 만나는 곳
+
+상태: **Lab 실물 실행 NOT_RUN / 결과 대기**. [계획](../experiments/B-008-lab-rgb-baseline/PLAN.md)은 실제 앉은 Lab 사진과 원본 f0~16을 사용한 한 번의 기준선이다. H의 공식 인간 영상 성공은 이번 개체·체형·안무 성공을 보장하지 않는다. 이번에는 가중치 theta를 학습하지 않고 조건 c를 바꾼다.
+
+## 1. 직관과 변수
+
+참조 사진 R은 “누구인가”, 원본 RGB 영상 D는 “어떻게 움직이는가”에 관한 정보를 제공하도록 기대한다. 그러나 RGB에는 자세뿐 아니라 얼굴·털·체형·배경도 들어 있고, 사진에는 외형뿐 아니라 앉은 자세·시점도 있다. 역할을 프롬프트로 지정했다고 이 정보들이 완전히 분리된 것은 아니다.
+
+설명용 표현은 `c=E(R,D,M,p)`, `v_theta(z_sigma,sigma,c)`, `Y=Decode(z_final)`이다. M은 reference/driving instance mask, p는 고정 prompt, z는 생성할 영상 latent다. c는 하나의 단순 벡터가 아니라 여러 branch의 tensor·list·None과 설정을 묶은 표기다. 원본의 물리적 영상 시점 i/24초와 denoising sigma는 서로 다른 축이다.
+
+## 2. 실제 코드의 조건 경로
+
+고정 소스는 SCAIL `78fe19576bb06be96c2375e088574a262a300edb`다. [reference/CLIP/text 준비](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L200-L350)와 [driving encode·조건 구성](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L431-L511)을 연결해서 읽는다.
+
+1. RGB reference는 VAE latent와 CLIP feature로 처리된다. instance mask도 별도 latent-grid 표현을 만든다.
+2. driving RGB는 공식 코드에서 bilinear half-size 처리 후 VAE encode된다. 코드의 `pose_latents`라는 변수명은 이 경로가 관절 좌표만 담는다는 뜻이 아니다. 실제 입력은 RGB다.
+3. driving mask도 half-size 처리 후28채널 표현으로 압축된다. RED는 이번 Lab의 instance 대응이며 일반적인 검은색/흰색 alpha 개념으로 대체하지 않는다. mask의 얇은 발·꼬리·반사 경계 불확실성은 남긴다.
+4. [DiT forward](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L741-L803)는 reference와 noisy generated latent를 시간축으로 연결하여 patch embedding한다. reference mask embedding을 더하고, 별도 driving latent/mask embedding을 token축으로 연결한다. text와 CLIP는 context embedding 경로로 들어간다.
+
+이는 참조와 driving에 서로 영향을 줄 수 있는 계산 경로가 있음을 보여준다. 어느 branch가 어떤 픽셀을 만들었는지는 이 소스만으로 증명되지 않는다. “누수”의 구체적 원인 판정에는 입력을 통제한 후속 비교가 필요하다.
+
+## 3. shape를 코드에서 예측하고 실측과 구분하기
+
+다음은 세로 H896×W512·17프레임의 **예상값**이다. 실제 P/S/D 관측 전에는 측정값이라고 쓰지 않는다. 공간 VAE stride8, 시간 압축 후 T5, patch(1,2,2)를 적용한다.
+
+| 항목 | 예상 shape | 의미 |
+|---|---|---|
+| generated noise/final latent | `[16,5,112,64]` | batch를 제외한 C,T,H,W |
+| reference latent | `[16,1,112,64]` | 생성 프레임이 아닌 참조 prefix |
+| reference mask | `[28,6,112,64]` | 참조1+generated5의 grid |
+| driving latent | `[16,5,56,32]` | half-size RGB 조건 |
+| driving mask | `[28,5,56,32]` | driving 조건과 같은 grid |
+| raw output | `[3,17,896,512]` | 실제 RGB 영상 |
+
+reference token은112×64/4=1792, generated는5×1792=8960, driving은5×56×32/4=2240으로 합계12992다. 이 예측은 H의 가로 shape를 reshape한 것이 아니라 세로 입력의 각 축에서 유도한 값이다. 면적이 같아 token 수가 같더라도 회전된 공간 좌표·내용·RoPE 의미가 동일하지는 않다. text token 길이는 실제 prompt encoder 출력으로 확인해야 한다.
+
+## 4. velocity와 최종 영상
+
+시간 규약을 `z_sigma=(1-sigma)x+sigma*epsilon`으로 설명하면 velocity는 `epsilon-x`이며 sampling은 sigma가 줄어드는 방향이다. 실제 [UniPC flow prediction 변환](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/utils/fm_solvers_unipc.py#L300-L327)은 이를 clean sample 추정과 solver에 연결한다. 교육용 Euler와 실제 UniPC predictor/corrector를 같은 구현으로 부르지 않는다.
+
+[공식 CFG loop](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)는 `v_cfg=v_null+5*(v_cond-v_null)`을 계산한다. arg_null에도 동일 reference/driving/mask/CLIP가 있고 text context가 다르다. null을 “모든 조건이 없는 모델”로 해석하지 않는다.40 step이면 두 branch의80 forward가 필요하며 실제 완료 counter는 실행 후 확인한다.
+
+최종 generated latent만 [VAE decode](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/vae.py#L544-L568)에 전달한다. wrapper가 scaling을 복원하므로 외부에서 중복 적용하지 않는다. reference prefix나 초기 noise가 final latent를 대신하지 않는다.
+
+## 5. 체형과 동작 단계를 분리해서 읽기
+
+morphology는 가슴·몸통 폭, 사지 길이·굵기, 얼굴·귀 비율이다. motion phase는 머리가 어느 방향으로 얼마나 진행해 회전하는지, 앞발이 오르고 내리는 단계와 시점이다. 묵직한 Lab에 원본의 가는 실루엣이나 모든 픽셀 위치를 그대로 요구하면 올바른 체형 변화도 실패로 오해할 수 있다. 반대로 직립 실루엣 하나만 맞으면 안무가 전달됐다고 판단하는 것도 부족하다.
+
+앉은 참조 자세 고정, 원본의 가는 체형/귀/얼굴 복사, 참조/원본 배경 혼입은 **관측할 실패 유형**이다. 가능한 설명은 RGB와 참조의 결합 정보, 학습 분포, condition 간 충돌이지만 이번 출력 전에는 실제 실패나 원인으로 단정하지 않는다. 한 사례로 조건 분리 학습의 인과효과나 일반화 확률을 추정할 수 없다. 참조에 안 보이는 부위와 발 접촉은 불확실로 남긴다.
+
+## 6. 24fps와 cache 유효성
+
+source 시점은 `t_i=i/24`초다.17프레임/24fps 파일 길이는0.708333초, 첫/끝 sample 간격은0.666667초다.16fps로 저장하면 같은17장을1.0625초에 재생하므로 물리적 동작 속도가 바뀐다.24fps 저장은 source의 시간을 유지하는 일이며 모델의 native16fps prior를 다시 학습하는 것은 아니다. H 인간16fps와 Lab24fps의 차이를 동물 도메인 하나의 통제된 효과로 해석하지 않는다.
+
+H의 사람 조건 캐시는 Lab에 사용할 수 없다. R/D/M/p, crop·resize, encoder weights, dtype·autocast가 달라지면 E의 출력 계약을 다시 확인해야 한다. device는 저장된 leaf별로 복원한다. CPU sigma와 generator state를 일괄 CUDA로 옮기지 않는다. 같은 seed라도 shape와 RNG 소비가 달라질 수 있어 H noise hash와 같아야 한다고 강제하지 않고, **Lab P→S의 실제 noise 값·state**를 확인한다. `eval()`과 `no_grad()`는 모드와 graph 기록을 각각 다루며 서로 대체하지 않는다. [PyTorch autograd modes](https://docs.pytorch.org/docs/2.14/notes/autograd.html#locally-disabling-gradient-computation).
+
+## 7. 이번 관측과 반례의 자리
+
+현재 Lab 실행·출력은 NOT_RUN이다. H는 기술 경로의 근거이며 Lab 결과가 아니다. 이후 source/preprocess/reference/output의 f0,4,8,12,16과 전체17장을 같은 framing으로 검토하고, 개체·체형·동작 phase·경계·배경을 각각 기록한다. 정적 시트만 보았다면 시간 품질은 UNVERIFIED다. 생성 성공과 개체/안무 수용은 분리하며 통계적 성공률이나 임의 종합점수를 만들지 않는다.
+
+## 이해 확인 질문
+
+1. `pose_latents`를 사용했는데도 원본 강아지의 얼굴이나 체형이 출력에 남을 수 있다는 가설은 어떤 실제 입력 경로에 근거하는가?
+2. 두 출력에서 머리 중심의 픽셀 좌표가 다르면 항상 동작 전달 실패인가? 체형과 phase를 어떻게 분리할 것인가?
+3. H와 같은 seed인데 Lab noise hash가 다르면 오류인가? 무엇을 비교해야 하는가?
+
+## 해설 — 먼저 질문에 답한 뒤 읽기
+
+1. 이 경로는 RGB를 줄여 VAE encode하므로 자세 이외 정보도 포함할 수 있다. 이는 가능성의 근거이지 실제 누수 원인의 증명은 아니다.
+2. 가슴·머리 크기와 framing 변화로 좌표가 달라질 수 있다. 회전 방향·단계·앞발의 상대 이동을 확인하면서 체형도 별도 평가한다. 보이지 않는 관절을 지어내어 정답으로 쓰지 않는다.
+3. shape·조건 및 RNG 소비가 다르면 동일 seed만으로 같은 tensor를 보장하지 않는다. Lab의 실제 P noise와 S 입력 값/hash/state, dtype/device 및 scheduler 계약을 대조해야 한다.
