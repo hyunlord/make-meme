@@ -1,0 +1,13 @@
+{
+  "experiment": "B-012",
+  "zip_basename": "make-meme-B-012-20261023-1436.zip",
+  "bytes": 257112039,
+  "sha256": "215cbce3e87aa4111ce2673ea5d23d42edaece8b7b1c6bcb4173169e799d3a02",
+  "payload_count": 525,
+  "spark_crc_and_payload_hashes_verified": true,
+  "mac_crc_and_payload_hashes_verified": true,
+  "transferred_spark_to_mac": true,
+  "byte_identical": true,
+  "result_commit": "cce466d19afde6d19e79a2d748eb541a768bf79e",
+  "generated_at_utc": "2026-10-23T14:34:20.243623+00:00"
+}
