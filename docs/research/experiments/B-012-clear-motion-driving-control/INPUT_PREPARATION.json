@@ -1,0 +1,203 @@
+{
+  "source_sha256": "da33bb95d4e05c49c537f3fdb27b2189fafec2b4f8d1a27e6b14efe034071f6b",
+  "selected_original_frames": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "source_frame_count": 361,
+  "source_fps": 24,
+  "preprocessing": "cv2 INTER_AREA512x288 -> PIL BICUBIC1592x896 -> crop540,0,1052,896; no per-frame alignment",
+  "mask_methods": "source7..16 prior recorded mask;17..23 manual contour seeds+CPUGrabCut3. One f19 background-wedge correction; prior masks retained privately. PARTIAL remains.",
+  "verification": {
+    "status": "PASS",
+    "MOV_STILL_same_reference_pixels": true,
+    "reference_red_equals_MOV_f0_red_support": true,
+    "reference_other_pixels_WHITE": true,
+    "STILL_all17_RGB_identical": true,
+    "STILL_all17_mask_identical": true,
+    "all_four_MP4_decoded_pixels_equal_PNG": true,
+    "all_shape": [
+      17,
+      896,
+      512,
+      3
+    ],
+    "fps": 24,
+    "duration_seconds": 0.7083333333333334,
+    "STATIC_COPY_sha256": "59c5f5a99b2b924026b4276e559e80ceb9d391d00c7aac1209c23c8dce342653",
+    "red_pixels": 69585,
+    "white_pixels": 389167,
+    "mask_quality": "PARTIAL; thin boundary/reflection/interleg uncertainty not erased"
+  },
+  "conditions": {
+    "MOV": {
+      "files": {
+        "reference.png": {
+          "sha256": "62cd190b69892ff3e7b849a63697287d417b4eae8d01d239630fc864b9d530eb",
+          "bytes": 156738
+        },
+        "reference-mask-white.png": {
+          "sha256": "abd8548f8b7710b2ad0dbe20070ade7a97908b2bafecd6677c92438b80fd1965",
+          "bytes": 4124
+        },
+        "driver-24fps.mp4": {
+          "sha256": "7072f6bf49de44469da36d001a3b297a1f8504e362944765ddc346e6f7caac0d",
+          "bytes": 2585339
+        },
+        "mask-24fps.mp4": {
+          "sha256": "5597bcae72a4232910f4acde90231717b9110b5b4e80e15e2805700d27a738b4",
+          "bytes": 46949
+        }
+      },
+      "tensor_hashes": {
+        "img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "71d3aaff5f43ac7053abe027a8eaef16c2e28b756edfb90961428c8cbd92d87e"
+        },
+        "ref_mask_img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "f09f4e50e26f537ace6e6fa17099106192073411316942dbefc475c3f2e1c753"
+        },
+        "pose_video": {
+          "shape": [
+            17,
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "bba9d860670f67728c035487f6148d2b31fcc21b55f2b6270b4bdb0f373ba3e6"
+        },
+        "driving_mask_video": {
+          "shape": [
+            3,
+            17,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "4751f82bca4d9914649eb7d59f284f721bdc525b23eb273bb475dd8388c3dc2f"
+        }
+      },
+      "video_metadata": {
+        "driver-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        },
+        "mask-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        }
+      },
+      "helper_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7"
+    },
+    "STILL": {
+      "files": {
+        "reference.png": {
+          "sha256": "62cd190b69892ff3e7b849a63697287d417b4eae8d01d239630fc864b9d530eb",
+          "bytes": 156738
+        },
+        "reference-mask-white.png": {
+          "sha256": "abd8548f8b7710b2ad0dbe20070ade7a97908b2bafecd6677c92438b80fd1965",
+          "bytes": 4124
+        },
+        "driver-24fps.mp4": {
+          "sha256": "59c5f5a99b2b924026b4276e559e80ceb9d391d00c7aac1209c23c8dce342653",
+          "bytes": 170028
+        },
+        "mask-24fps.mp4": {
+          "sha256": "04480ea2ff574db5f89c6e95d77bbf4ca07cd7bc554cf383d6de43a403662e38",
+          "bytes": 4851
+        }
+      },
+      "tensor_hashes": {
+        "img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "71d3aaff5f43ac7053abe027a8eaef16c2e28b756edfb90961428c8cbd92d87e"
+        },
+        "ref_mask_img": {
+          "shape": [
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "f09f4e50e26f537ace6e6fa17099106192073411316942dbefc475c3f2e1c753"
+        },
+        "pose_video": {
+          "shape": [
+            17,
+            3,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "8111d3470f9933a72dc2274347f98be1e30cc9866e0e328f30f8e8f37c916009"
+        },
+        "driving_mask_video": {
+          "shape": [
+            3,
+            17,
+            896,
+            512
+          ],
+          "dtype": "torch.float32",
+          "sha256": "a52438284074ea86e1ad1122f0aa22e263597900c2c0e7799dcfaa221d5372fa"
+        }
+      },
+      "video_metadata": {
+        "driver-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        },
+        "mask-24fps.mp4": {
+          "width": 512,
+          "height": 896,
+          "avg_frame_rate": "24/1",
+          "duration": "0.708333",
+          "nb_read_frames": "17"
+        }
+      },
+      "helper_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7"
+    }
+  }
+}

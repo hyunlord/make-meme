@@ -338,3 +338,7 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 ## B-012 착수: 동적 driving pair의 추가 시간 정보 (2026-10-23)
 
 최신 원격 `aea64a71baf75db31a4aa4b9240ae4de8ad44545`와 [PLAN](experiments/B-012-clear-motion-driving-control/PLAN.md), [전환 결정](decisions/20261023-B-011-review-and-B-012.md)을 확인했다. B-011의 화면 변화 대응은 보존하되 정적 driving 모델 대조군이 없었던 한계를 직접 비교한다. 최대45분 source-only 후보3개에서 최초 적합17장 구간을 선정하고 같은reference/text/noise의 MOV 대 STILL을 각1회 실행한다. STATIC COPY는 모델 출력이 아닌 별도CPU 반복 기준이다. 4시간·sampler최대2회·재시도/학습0. 이전 연결 장애 시도는 sampler0이며 새 실험의 모델 실패로 세지 않는다. [진행](experiments/B-012-clear-motion-driving-control/RUNNING.md).
+## 2026-10-23 — B-012 source-only 선정과 실행 계약 고정
+
+- 실제24fps·361프레임 원본에서 후보3개를 검토하고 첫 적합구간 f7~23을 선정했다. 늦은 머리 roll과 몸통 상대 배치를 local0/12/14/16에 사전 고정했다. 끝 자세의 난점·얇은 mask 경계 PARTIAL은 유지한다.
+- MOV/STILL은 동일reference/text 아래 RGB와mask의 시간 정보만 공동 변경한다. CPU STATIC COPY와 모델STILL을 구분한다. 두 P에서 실제4변경/12보존·noise/RNG 검증 후 순차 sampler2회만 허용한다. 이 기록 시점 실제 GPU0. [실행](experiments/B-012-clear-motion-driving-control/RUNNING.md).

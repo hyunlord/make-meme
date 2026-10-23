@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "test_command": "CUDA_VISIBLE_DEVICES=\"\" PYTHONDONTWRITEBYTECODE=1 ENV/bin/python -m pytest CODE/test_contracts.py -q",
+  "result": "........                                                                 [100%]\n8 passed in 0.92s",
+  "log_sha256": "85ecab48f20a0572b0cdd20e0402239427b158d844eedb156d530bf807c5ee4b",
+  "code_sha256": {
+    "artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+    "compare_conditions.py": "f59d478988db2d22c28c3acff1b7aef25c11efe10a628cca75e94b2376d6f9ae",
+    "contracts.py": "8a66fdd3f87c1f1d676aa42e8b7bebad05c19ac76d854928dd46fa574a632879",
+    "cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+    "extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+    "media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+    "phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+    "phase_prepare.py": "afc826038984d760353b99769b615c87e05b58142bff7f0f0f05ec745ac7a74b",
+    "phase_sample.py": "5ad3b8d24a09d8dac9866b3264d6a37178670ce2fc3b76028e1d3c8062ff5484",
+    "prepare_layout.py": "384c80b3b6df3503435065b609272ab2f07d0dcf3fed441ec103563ffbd9f382",
+    "prepare_pair_layout.py": "9be82ef0e74ea1de148fb9a0e09ed27a3ea59cef419fd9f98e473ee39c530fde",
+    "run_phase.py": "6a7576207a82817ef9a3fa64f1ce246ea8415b39f7cec8eee5c032d796c4ba7c",
+    "runtime_guard.py": "2419a1a731b2abfcd7f46b44f76dd8a2348b0349edf2d5a9255c1d35478a3ab0",
+    "runtime_launch.py": "8a7881cb844f55ea927f39238b3bc8c50a522306a39b62e6b2e777b2a044ca7d",
+    "runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+    "staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+    "test_contracts.py": "97842c4778ee5e4e6718370bac342cf37d03b1edd1c9b7b08527bcc14f69168b"
+  }
+}

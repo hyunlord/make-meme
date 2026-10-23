@@ -1,0 +1,12 @@
+{
+  "syntax": "PASS",
+  "critical_ruff": "PASS",
+  "targeted_basedpyright": {
+    "filesAnalyzed": 1,
+    "errorCount": 92,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 0.492
+  },
+  "type_status": "NOT_CLEAN"
+}

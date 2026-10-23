@@ -215,3 +215,6 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 ## B-012 착수 (2026-10-23)
 
 **RUNNING / 생성 NOT_RUN.** [PLAN](experiments/B-012-clear-motion-driving-control/PLAN.md)에 따라 source-only 최초 적합 구간을 고정하고, 같은reference/text/noise에서 동적 RGB+mask(MOV)와 첫RGB+첫mask 반복(STILL)의 모델 생성pair를 비교한다. 정적출력 STATIC COPY와 정적입력 STILL을 구분한다. 단순 변화량·직립이 아닌 source 상대 사건의 방향·순서·시점을 평가하며 정확한 좌표는 불확실성을 유지한다. 최대2sampler·각1회·4시간·학습0, 추가전이/low-pass/seed/모델은 실행하지 않는다.
+## B-012 입력 고정 (2026-10-23)
+
+source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 MOV 대 STILL로 RGB+mask 시간 정보의 추가 기여를 검토한다. CPU 입력·계약 검증 완료, 실제 sampler는 아직 NOT_RUN. 기존 B-011의 정밀 운동/기여 미입증을 보존하며 [실행 기록](experiments/B-012-clear-motion-driving-control/RUNNING.md)을 따른다.

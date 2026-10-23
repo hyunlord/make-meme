@@ -1,0 +1,237 @@
+--- B011/code/compare_conditions.py	2026-10-23 15:26:52
++++ B012/code/compare_conditions.py	2026-10-23 22:26:09
+@@ -25,6 +25,3 @@
+-    """Expected reference/text changes differ; all other values remain constrained."""
+-    if a.dtype!=b.dtype or not bool(torch.isfinite(b).all()):return False
+-    if location=='root.arg_c.context[0]':
+-        return a.ndim==b.ndim==2 and a.shape[1]==b.shape[1] and not torch.equal(a,b)
+-    if a.shape!=b.shape:return False
+-    if '.ref_latents[' in location or '.clip_fea' in location:return not torch.equal(a,b)
++    """Exactly four driving leaves change; all other semantic values stay controlled."""
++    if a.shape!=b.shape or a.dtype!=b.dtype or not bool(torch.isfinite(b).all()):return False
++    if '.pose_latents[' in location or '.driving_masks[' in location:return not torch.equal(a,b)
+@@ -34,0 +32,14 @@
++def expected_driving_mask(root: Path, source: Path) -> torch.Tensor:
++    """Evaluate the pinned helper on the actual saved normalized mask video, on CPU."""
++    text=source.read_text();node=next(n for n in ast.parse(text).body if isinstance(n,ast.FunctionDef) and n.name=='extract_and_compress_mask_to_latent')
++    scope={'torch':torch,'F':F,'logging':logging}
++    exec(compile(ast.Module(body=[node],type_ignores=[]),str(source),'exec'),scope)
++    inputs=torch.load(root/'artifacts/preprocessed_inputs.pt',map_location='cpu',weights_only=True)
++    tensor=inputs['driving_mask_video']
++    expected=json.loads((root/'configs/expected_preprocessed.json').read_text())['driving_mask_video']
++    assert list(tensor.shape)==expected['shape'] and str(tensor.dtype)==expected['dtype']
++    assert hashlib.sha256(tensor.contiguous().numpy().tobytes()).hexdigest()==expected['sha256']
++    value=F.interpolate(tensor,scale_factor=0.5,mode='bilinear',align_corners=False)
++    return scope[node.name](value,additional_spatial_downsample=1)
++
++
+@@ -36,10 +47,16 @@
+-    previous=root/'baseline';policy=json.loads((root/'configs/comparison_policy.json').read_text())
+-    _,old_meta=load_tree(previous/'artifacts/conditions.safetensors',device='cpu')
+-    _,new_meta=load_tree(root/'artifacts/conditions.safetensors',device='cpu')
+-    assert old_meta['file_sha256']==policy['baseline_cache_sha256']
+-    old_config=old_meta['provenance']['config'].copy();new_config=new_meta['provenance']['config'].copy()
+-    for key in ('name','reference','reference_mask','driver','driver_mask','prompt'):
+-        assert old_config.pop(key)==policy['old_config'][key]
+-        assert new_config.pop(key)==policy['new_config'][key]
+-    assert old_config==new_config
+-    old=load_file(str(previous/'artifacts/conditions.safetensors'));new=load_file(str(root/'artifacts/conditions.safetensors'))
++    policy=json.loads((root/'configs/comparison_policy.json').read_text())
++    roots=[root/'cases'/case for case in ('MOV','STILL')]
++    metadata=[];values=[]
++    for case in roots:
++        pr=json.loads((case/'stages/P/reports/pipeline-process.json').read_text())
++        assert pr['reason']=='service_exit' and pr['returncode']==0 and 'MainPID=0' in pr['final_service']
++        result=json.loads((case/'stages/P/reports/result.json').read_text());assert result['status']=='COMPLETED'
++        assert result['condition_receipt_sha256']==hashlib.sha256((case/'artifacts/conditions_receipt.json').read_bytes()).hexdigest()
++        from contracts import verify_cache_receipt
++        verify_cache_receipt(case)
++        manifest=json.loads((case/'PREREGISTERED_CODE.json').read_text())
++        for name,digest in manifest['case_configs'][case.name].items():assert hashlib.sha256((case/name).read_bytes()).hexdigest()==digest,name
++        _,meta=load_tree(case/'artifacts/conditions.safetensors',device='cpu');metadata.append(meta)
++        values.append(load_file(str(case/'artifacts/conditions.safetensors')))
++    old_meta,new_meta=metadata;old,new=values
++    assert old_meta['provenance']['config']==new_meta['provenance']['config']
+@@ -47,4 +64,2 @@
+-    source=root/'upstream/wan/utils/scail_utils.py'
+-    old_mask_path=previous/'inputs/lab/reference-mask-white.png'
+-    assert hashlib.sha256(old_mask_path.read_bytes()).hexdigest()==policy['baseline_mask_sha256']
+-    old_mask=expected_mask(old_mask_path,source);new_mask=expected_mask(root/'inputs/self/reference-mask-white.png',source)
++    source=roots[0]/'upstream/wan/utils/scail_utils.py'
++    masks=[expected_driving_mask(case,source) for case in roots]
+@@ -61,7 +76,4 @@
+-        a,b=old[key],new[key];location,device=locations[key];exact=torch.equal(a,b)
+-        is_ref_mask='.ref_masks[' in location
+-        if is_ref_mask:
+-            ok=a.shape==b.shape and a.dtype==b.dtype and torch.equal(a[:,:1],old_mask) and torch.equal(b[:,:1],new_mask) and torch.equal(a[:,1:],b[:,1:]) and not exact
+-        else:ok=compare_leaf(location,a,b,policy)
+-        changed=is_ref_mask or '.ref_latents[' in location or '.clip_fea' in location or location=='root.arg_c.context[0]'
+-        rows.append({'key':key,'location':location,'old_shape':list(a.shape),'new_shape':list(b.shape),'dtype':str(b.dtype),'device':device,'old_sha256':old_meta['tensors'][key]['sha256'],'new_sha256':new_meta['tensors'][key]['sha256'],'exact_equal':exact,'max_abs':float((a.double()-b.double()).abs().max()) if a.shape==b.shape else None,'expected_change':changed,'pass':ok});passed=passed and ok
++        a,b=old[key],new[key];location,device=locations[key];changed='.pose_latents[' in location or '.driving_masks[' in location
++        ok=compare_leaf(location,a,b,policy)
++        if '.driving_masks[' in location:ok=ok and torch.equal(a,masks[0]) and torch.equal(b,masks[1])
++        rows.append({'key':key,'location':location,'shape':list(a.shape),'dtype':str(a.dtype),'device':device,'MOV_sha256':old_meta['tensors'][key]['sha256'],'STILL_sha256':new_meta['tensors'][key]['sha256'],'exact_equal':torch.equal(a,b),'max_abs':float((a.double()-b.double()).abs().max()),'expected_change':changed,'pass':ok});passed=passed and ok
+@@ -69 +81 @@
+-    receipt={'status':'PASS' if passed else 'FAIL','rows':rows,'old_cache_sha256':old_meta['file_sha256'],'new_cache_sha256':new_meta['file_sha256'],'policy_sha256':hashlib.sha256((root/'configs/comparison_policy.json').read_bytes()).hexdigest(),'code_manifest_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'helper_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'device':'cpu','cuda_initialized':torch.cuda.is_initialized()}
++    receipt={'status':'PASS' if passed else 'FAIL','rows':rows,'case_cache_sha256':{case:meta['file_sha256'] for case,meta in zip(('MOV','STILL'),metadata)},'policy_sha256':hashlib.sha256((root/'configs/comparison_policy.json').read_bytes()).hexdigest(),'code_manifest_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'helper_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'device':'cpu','cuda_initialized':torch.cuda.is_initialized()}
+@@ -71 +83 @@
+-    assert passed,'Unexpected condition difference; S must not run'
++    assert passed,'Unexpected condition difference or insufficient manipulation; S must not run'
+--- B011/code/contracts.py	2026-10-23 15:26:52
++++ B012/code/contracts.py	2026-10-23 22:21:02
+@@ -44 +44 @@
+-    assert receipt['experiment']=='B-011' and receipt['case']==active_contract(root).name
++    assert receipt['experiment']=='B-012' and receipt['case']==active_contract(root).name
+--- B011/code/phase_prepare.py	2026-10-23 15:26:52
++++ B012/code/phase_prepare.py	2026-10-23 22:21:02
+@@ -43,2 +43,2 @@
+-        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-011','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
+-        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-011','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
++        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-012','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
++        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-012','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
+--- B011/code/phase_sample.py	2026-10-23 15:26:52
++++ B012/code/phase_sample.py	2026-10-23 22:21:02
+@@ -55 +55 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-011','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-011-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-012','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-012-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
+@@ -66 +66 @@
+-    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0}})
++    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1}})
+--- B011/code/prepare_layout.py	2026-10-23 15:26:52
++++ B012/code/prepare_layout.py	2026-10-23 22:21:02
+@@ -1 +1 @@
+-"""Isolated B-011 stages; new cache, read-only E environment/models/inputs."""
++"""Isolated B-012 stages; new cache, read-only E environment/models/inputs."""
+NEW code/prepare_pair_layout.py
+"""Copy frozen execution code into two isolated cases; preserve prepared inputs."""
+from pathlib import Path
+import shutil
+import sys
+root,previous=map(Path,sys.argv[1:])
+for case in ('MOV','STILL'):
+    target=root/'cases'/case
+    assert (target/'inputs').is_dir()
+    (target/'reports').mkdir(exist_ok=True);(target/'artifacts').mkdir(exist_ok=True)
+    shutil.copytree(root/'code',target/'code')
+    shutil.copytree(root/'configs'/case,target/'configs')
+    shutil.copy2(previous/'configs/allowed_gpu_processes.json',target/'configs/allowed_gpu_processes.json')
+    for name in ('environment','models','upstream'):(target/name).symlink_to(previous/name,target_is_directory=True)
+    for name in ('PREREGISTERED_CODE.json','PREREGISTERED_INPUTS.json'):shutil.copy2(root/name,target/name)
+    for stage in ('P','PROBE','S','D'):
+        worker=target/'stages'/stage;(worker/'reports').mkdir(parents=True)
+        for name in ('code','configs'):shutil.copytree(target/name,worker/name)
+        for name in ('environment','models','upstream','inputs','artifacts'):(worker/name).symlink_to(target/name,target_is_directory=True)
+        for name in ('PREREGISTERED_CODE.json','PREREGISTERED_INPUTS.json'):shutil.copy2(root/name,worker/name)
+--- B011/code/run_phase.py	2026-10-23 15:26:52
++++ B012/code/run_phase.py	2026-10-23 22:23:23
+@@ -1 +1 @@
+-"""Fresh bounded B-011 case worker; each P/PROBE/S/D stage runs at most once."""
++"""Fresh bounded B-012 case worker; each P/PROBE/S/D stage runs at most once."""
+@@ -16 +16 @@
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0},'max_stage_attempts':1},file)
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1},'max_stage_attempts':1},file)
+@@ -28,0 +29,3 @@
++        case_name=root.parent.parent.name
++        assert case_name in ('MOV','STILL')
++        for name,digest in manifest['case_configs'][case_name].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
+@@ -41 +44 @@
+-            comparison=json.loads((root.parent.parent/'reports/condition_comparison.json').read_text())
++            comparison=json.loads((root.parent.parent.parent.parent/'reports/condition_comparison.json').read_text())
+@@ -43 +46 @@
+-            assert comparison['new_cache_sha256']==cache_receipt['hashes']['conditions.safetensors']
++            assert comparison['case_cache_sha256'][root.parent.parent.name]==cache_receipt['hashes']['conditions.safetensors']
+@@ -51 +54 @@
+-                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-011'
++                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-012'
+@@ -60 +63 @@
+-                assert meta['provenance']['executing_experiment']=='B-011'
++                assert meta['provenance']['executing_experiment']=='B-012'
+--- B011/code/runtime_guard.py	2026-10-23 15:26:52
++++ B012/code/runtime_guard.py	2026-10-23 22:21:02
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T09:15:00+00:00').timestamp()
+-UNIT: Final = 'make-meme-b011-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T17:10:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b012-pipeline'
+--- B011/code/runtime_launch.py	2026-10-23 15:26:52
++++ B012/code/runtime_launch.py	2026-10-23 22:21:02
+@@ -18 +18 @@
+-    '--unit=make-meme-b011-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b012-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
+--- B011/code/test_contracts.py	2026-10-23 15:26:52
++++ B012/code/test_contracts.py	2026-10-23 22:26:09
+@@ -40 +40 @@
+-    receipt={'experiment':'B-011','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
++    receipt={'experiment':'B-012','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
+@@ -52 +52 @@
+-def test_expected_change_contract():
++def test_pair_leaf_contract():
+@@ -56,6 +56,5 @@
+-    assert compare_leaf('root.arg_c.context[0]',a,torch.ones(4,3),policy)
+-    assert compare_leaf('root.arg_c.ref_latents[0]',a,b,policy)
+-    assert not compare_leaf('root.arg_c.context[0]',a,a,policy)
+-    assert not compare_leaf('root.arg_c.clip_fea',a,a,policy)
+-    assert not compare_leaf('root.arg_c.ref_latents[0]',a,a,policy)
+-    assert not compare_leaf('root.arg_c.pose_latents[0]',a,b,policy)
++    assert compare_leaf('root.arg_c.pose_latents[0]',a,b,policy)
++    assert not compare_leaf('root.arg_c.pose_latents[0]',a,a,policy)
++    assert compare_leaf('root.arg_c.ref_latents[0]',a,a,policy)
++    assert not compare_leaf('root.arg_c.ref_latents[0]',a,b,policy)
++    assert not compare_leaf('root.arg_c.context[0]',a,b,policy)
+@@ -63 +61,0 @@
+-    assert not compare_leaf('root.arg_c.driving_masks[0]',a,a+1e-7,policy)
+@@ -65 +63 @@
+-    assert compare_leaf('root.arg_c.pose_latents[0]',a,a,policy)
++    assert not compare_leaf('root.arg_c.ref_masks[0]',a,a+1e-7,policy)
+@@ -68,29 +66,22 @@
+-def test_full_self_contract_rejects_generated_mask_change(tmp_path):
+-    import os
+-    import shutil
+-    import numpy as np
+-    from PIL import Image
+-    from compare_conditions import compare,expected_mask
+-    baseline=tmp_path/'baseline'
+-    for folder in [tmp_path/'artifacts',baseline/'artifacts',tmp_path/'inputs/self',baseline/'inputs/lab',tmp_path/'upstream/wan/utils',tmp_path/'configs',tmp_path/'reports']:
+-        folder.mkdir(parents=True,exist_ok=True)
+-    helper=tmp_path/'upstream/wan/utils/scail_utils.py';shutil.copyfile(os.environ['SCAIL_UTILS'],helper)
+-    old_image=baseline/'inputs/lab/reference-mask-white.png';new_image=tmp_path/'inputs/self/reference-mask-white.png'
+-    original=np.full((8,8,3),255,dtype=np.uint8);original[:4,:,1:]=0
+-    changed=np.full((8,8,3),255,dtype=np.uint8);changed[:2,:,1:]=0
+-    Image.fromarray(original).save(old_image);Image.fromarray(changed).save(new_image)
+-    def tree(image,new):
+-        mask=torch.cat([expected_mask(image,helper),torch.zeros(28,5,1,1)],dim=1)
+-        visual={'ref_masks':[mask],'ref_latents':[torch.full((2,3),2. if new else 1.)],'clip_fea':torch.full((2,3),2. if new else 1.),'pose_latents':[torch.ones(2,3)],'driving_masks':[torch.zeros(28,5,1,1)]}
+-        return {'noise':torch.ones(2),'arg_c':dict(visual,context=[torch.ones(4 if new else 2,3)]),'arg_null':dict(visual,context=[torch.ones(1,3)]),'history':None,'generator_state':torch.zeros(16,dtype=torch.uint8),'timesteps':torch.arange(40),'sigmas':torch.arange(41,dtype=torch.float32)}
+-    old_tree,new_tree=tree(old_image,False),tree(new_image,True)
+-    oldpath=baseline/'artifacts/conditions.safetensors';newpath=tmp_path/'artifacts/conditions.safetensors'
+-    keys=('name','reference','reference_mask','driver','driver_mask','prompt');oldcfg={k:'old-'+k for k in keys};newcfg={k:'new-'+k for k in keys}
+-    save_tree(oldpath,old_tree,{'config':oldcfg});save_tree(newpath,new_tree,{'config':newcfg})
+-    policy={'baseline_mask_sha256':hashlib.sha256(old_image.read_bytes()).hexdigest(),'baseline_cache_sha256':hashlib.sha256(oldpath.read_bytes()).hexdigest(),'float_unchanged_atol':1e-6,'float_unchanged_rtol':1e-5,'old_config':oldcfg,'new_config':newcfg,'expected_changed_locations':['root.arg_c.context[0]']+[f'root.{b}.{f}' for b in ['arg_c','arg_null'] for f in ['ref_latents[0]','ref_masks[0]','clip_fea']]}
+-    (tmp_path/'configs/comparison_policy.json').write_text(json.dumps(policy));(tmp_path/'PREREGISTERED_CODE.json').write_text('{}')
+-    compare(tmp_path)
+-    new_tree['arg_c']['ref_masks'][0][:,1:].add_(1e-7)
+-    newpath.unlink();newpath.with_suffix('.json').unlink()
+-    save_tree(newpath,new_tree,{'config':newcfg})
+-    with pytest.raises(AssertionError):compare(tmp_path)
++def test_pair_requires_both_real_P_receipts_and_controls(tmp_path,monkeypatch):
++    import compare_conditions as module
++    policy={'float_unchanged_rtol':1e-5,'float_unchanged_atol':1e-6,'expected_changed_locations':[f'root.{b}.{f}' for b in ('arg_c','arg_null') for f in ('pose_latents[0]','driving_masks[0]')]}
++    (tmp_path/'configs').mkdir();(tmp_path/'reports').mkdir();(tmp_path/'configs/comparison_policy.json').write_text(json.dumps(policy));(tmp_path/'PREREGISTERED_CODE.json').write_text('{}')
++    trees=[]
++    for case,number in [('MOV',1.),('STILL',2.)]:
++        r=tmp_path/'cases'/case
++        for d in ['configs','artifacts','stages/P/reports','upstream/wan/utils']:(r/d).mkdir(parents=True,exist_ok=True)
++        (r/'upstream/wan/utils/scail_utils.py').write_text('fixture')
++        (r/'configs/active_case.json').write_text('{"name":"self"}');(r/'configs/input_config_hashes.json').write_text('{}');(r/'PREREGISTERED_CODE.json').write_text(json.dumps({'case_configs':{'MOV':{},'STILL':{}}}))
++        visual={'ref_latents':[torch.ones(2)],'ref_masks':[torch.zeros(2)],'clip_fea':torch.ones(2),'pose_latents':[torch.full((2,),number)],'driving_masks':[torch.full((2,),number)]}
++        tree={'noise':torch.ones(2),'arg_c':dict(visual,context=[torch.ones(2)]),'arg_null':dict(visual,context=[torch.ones(2)]),'history':None,'generator_state':torch.zeros(16,dtype=torch.uint8),'timesteps':torch.arange(40),'sigmas':torch.arange(41,dtype=torch.float32)};trees.append(tree)
++        save_tree(r/'artifacts/conditions.safetensors',tree,{'config':{},'code':json.loads((r/'PREREGISTERED_CODE.json').read_text()),'input_hashes':{}});torch.save(torch.ones(2),r/'artifacts/initial_noise.pt')
++        receipt={'experiment':'B-012','case':'self','code_sha256':hashlib.sha256((r/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((r/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
++        (r/'artifacts/conditions_receipt.json').write_text(json.dumps(receipt));(r/'stages/P/reports/result.json').write_text(json.dumps({'status':'COMPLETED','condition_receipt_sha256':hashlib.sha256((r/'artifacts/conditions_receipt.json').read_bytes()).hexdigest()}));(r/'stages/P/reports/pipeline-process.json').write_text(json.dumps({'reason':'service_exit','returncode':0,'final_service':'MainPID=0'}))
++    monkeypatch.setattr(module,'expected_driving_mask',lambda r,s:torch.full((2,),1. if r.name=='MOV' else 2.))
++    module.compare(tmp_path)
++    assert json.loads((tmp_path/'reports/condition_comparison.json').read_text())['status']=='PASS'
++    monkeypatch.setattr(module,'expected_driving_mask',lambda r,s:torch.full((2,),9.))
++    with pytest.raises(AssertionError):module.compare(tmp_path)
++    r=tmp_path/'cases/STILL';(r/'stages/P/reports/pipeline-process.json').write_text('{"reason":"service_exit","returncode":1,"final_service":"MainPID=0"}')
++    with pytest.raises(AssertionError):module.compare(tmp_path)

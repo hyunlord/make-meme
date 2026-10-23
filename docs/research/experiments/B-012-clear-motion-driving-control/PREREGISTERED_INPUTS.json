@@ -1,0 +1,115 @@
+{
+  "experiment": "B-012",
+  "source_commit": "78fe19576bb06be96c2375e088574a262a300edb",
+  "hf_revision": "150cc0ca4e98e50e60b9295dacde39442fdccab2",
+  "model_hash_checked_utc": "2026-10-22T13:53:40.895590+00:00",
+  "environment_checked_utc": "2026-10-22T13:57:47.598261+00:00",
+  "versions": {
+    "torch": "2.14.0+cu130",
+    "torch_git": "08187d9e0fba026dc8217405802ab5381dc88d90",
+    "cuda": "13.0",
+    "numpy": "2.5.2",
+    "flash_attention": "2.8.4"
+  },
+  "inputs": {
+    "MOV": [
+      {
+        "alias": "reference.png",
+        "sha256": "62cd190b69892ff3e7b849a63697287d417b4eae8d01d239630fc864b9d530eb",
+        "bytes": 156738
+      },
+      {
+        "alias": "reference-mask-white.png",
+        "sha256": "abd8548f8b7710b2ad0dbe20070ade7a97908b2bafecd6677c92438b80fd1965",
+        "bytes": 4124
+      },
+      {
+        "alias": "driver-24fps.mp4",
+        "sha256": "7072f6bf49de44469da36d001a3b297a1f8504e362944765ddc346e6f7caac0d",
+        "bytes": 2585339
+      },
+      {
+        "alias": "mask-24fps.mp4",
+        "sha256": "5597bcae72a4232910f4acde90231717b9110b5b4e80e15e2805700d27a738b4",
+        "bytes": 46949
+      }
+    ],
+    "STILL": [
+      {
+        "alias": "reference.png",
+        "sha256": "62cd190b69892ff3e7b849a63697287d417b4eae8d01d239630fc864b9d530eb",
+        "bytes": 156738
+      },
+      {
+        "alias": "reference-mask-white.png",
+        "sha256": "abd8548f8b7710b2ad0dbe20070ade7a97908b2bafecd6677c92438b80fd1965",
+        "bytes": 4124
+      },
+      {
+        "alias": "driver-24fps.mp4",
+        "sha256": "59c5f5a99b2b924026b4276e559e80ceb9d391d00c7aac1209c23c8dce342653",
+        "bytes": 170028
+      },
+      {
+        "alias": "mask-24fps.mp4",
+        "sha256": "04480ea2ff574db5f89c6e95d77bbf4ca07cd7bc554cf383d6de43a403662e38",
+        "bytes": 4851
+      }
+    ]
+  },
+  "weights": [
+    {
+      "filename": "wan-model.safetensors",
+      "bytes": 65582313560,
+      "sha256": "8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118",
+      "prior_match": true
+    },
+    {
+      "filename": "Wan2.1_VAE.pth",
+      "bytes": 507609880,
+      "sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+      "prior_match": true
+    },
+    {
+      "filename": "models_clip_open-clip-xlm-roberta-large-vit-huge-14-onlyvisual.pth",
+      "bytes": 2528485611,
+      "sha256": "020daacf4c0ce94284df584d243cefb6ddfadefff8772226a8e85431df5de2da",
+      "prior_match": true
+    },
+    {
+      "filename": "models_t5_umt5-xxl-enc-bf16.pth",
+      "bytes": 11361920418,
+      "sha256": "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+      "prior_match": true
+    },
+    {
+      "filename": "special_tokens_map.json",
+      "bytes": 6623,
+      "sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d",
+      "prior_match": "NO_LFS_SHA_USE_BASELINE"
+    },
+    {
+      "filename": "spiece.model",
+      "bytes": 4548313,
+      "sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458",
+      "prior_match": true
+    },
+    {
+      "filename": "tokenizer.json",
+      "bytes": 16837417,
+      "sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b",
+      "prior_match": true
+    },
+    {
+      "filename": "tokenizer_config.json",
+      "bytes": 61728,
+      "sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05",
+      "prior_match": "NO_LFS_SHA_USE_BASELINE"
+    }
+  ],
+  "flash_attention_extension": {
+    "filename": "flash_attn_2_cuda.cpython-312-aarch64-linux-gnu.so",
+    "sha256": "ca0ca462a673878b30797f9f83c1218985bac00e85ee7c4e96909bc12f4f3511"
+  },
+  "reuse_status": "Prior verified model/environment SHA evidence retained; B012 fresh model stat/size and small tokenizer SHA recorded privately; no claim of fresh large-weight SHA."
+}
