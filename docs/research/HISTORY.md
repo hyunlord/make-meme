@@ -377,3 +377,12 @@ MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24f
 ## B-014 착수: 입력 비교에서 제한된 sampling 개입으로 (2026-10-24)
 
 **RUNNING / CPU 이식 검증 중 / GPU NOT_RUN.** 원격`152b6771397176ac0eb1860debc0902331c5d523`의 [PLAN](experiments/B-014-alg-scail-pilot/PLAN.md)과 [결정](decisions/20261024-B-013-review-and-B-014.md)을 확인했다. B-013의 전신FAIL/국소PARTIAL/얼굴번짐을 보존하며 단순움직임증가를 목표로 삼지 않는다. 공식ALG의 원본negative 기준항을 보존한3항식을 ref-latent 공간필터로 이식하고, CPU계약·사전코드고정이 통과할 때만 기존LAB_MOV조건으로 pilot1회 수행한다. ratio0.4·45×26·bilinearAA·i0..7고정,40step88forward; P0·retry0·학습0·3시간. 새모델·ALG_STILL·추가seed·강도탐색은 실행하지 않는다. [진행](experiments/B-014-alg-scail-pilot/RUNNING.md).
+
+## 2026-10-24 — B-014 ALG 이식 pilot 종료
+
+- GPU 이전 commit `3cd90e196307fe1f663e8533124a0cbe42f8f41e`; 공식3항식/공간필터/초기8step/88forward를 고정했다. CPU9·helper typecheck 및 실제 parent-cache 계약을 확인했다. 기존 결과는 보존했다.
+- P0, PROBE/S/D 각각1회·실패0·재시도0. 실제40step88forward·finite final latent·17f24fps MP4 완료. 자체unit inactive/PID0, 기존 서비스 유지.
+- 전신 착석 FAIL, 후기 국소 PARTIAL, 후기 얼굴·귀 번짐 지속, 실제개체 UNCERTAIN, 시간 UNVERIFIED. 일부 초기/중기 얼굴 가독성 차이가 있지만 동작충실도+개체형태 동시 개선은 NOT_ESTABLISHED.
+- S1266.471초 guard, 최소가용46.507GiB, CUDA peak33.847GiB, swap/OOM0. NFE80→88 비용과 관측 한계를 분리했다.
+- [결과](experiments/B-014-alg-scail-pilot/RESULTS.md), [이식감사](experiments/B-014-alg-scail-pilot/ADAPTATION_AUDIT.md), [학습](lessons/B-014-alg-and-conditional-velocity.md).
+- 다음 하나는 고정 ALG_STILL 대조군 제안이며 이번 NOT_RUN/미승인. 추가 실험으로 자동 진행하지 않는다.

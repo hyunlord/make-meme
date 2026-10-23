@@ -1,6 +1,6 @@
 # B-014 — 조건부 속도장의 차분을 바꾸는 ALG 이식
 
-공식 수식·소스 확인과 실제 CPU 계약 검증은 완료됐다. 최종9개 검사와 부모 cache binding은 PASS이며 실제 GPU pilot·시각 품질 결과는 아직 대기다. [계획](../experiments/B-014-alg-scail-pilot/PLAN.md), [정확한 이식 감사](../experiments/B-014-alg-scail-pilot/ADAPTATION_AUDIT.md)를 함께 읽는다. 새로운 학습이나 알고리즘 발명을 보고하는 실험이 아니다.
+공식 수식·소스 확인과 실제 CPU 계약 검증은 완료됐다. 최종9개 검사와 부모 cache binding은 PASS이며 실제 GPU pilot은40step·88forward와17f24fps 출력까지 완료됐고, 전체17장 정적 검토에서는 전신 개선을 확인하지 못했고 시간 품질은 UNVERIFIED다. [계획](../experiments/B-014-alg-scail-pilot/PLAN.md), [정확한 이식 감사](../experiments/B-014-alg-scail-pilot/ADAPTATION_AUDIT.md)를 함께 읽는다. 새로운 학습이나 알고리즘 발명을 보고하는 실험이 아니다.
 
 ## 1. 직관: 이미지를 흐리게 만드는 것과 guidance를 바꾸는 것
 
@@ -64,7 +64,7 @@ i8에서 원래 reference로 돌아가도 초기8step의 개입으로 zσ 자체
 
 ## 6. 필요한 증거와 남는 한계
 
-CPU 검사는 no-op, branch별 실제 kwargs, 원본 storage/hash 불변, channel/frame isolation, schedule 경계0/7/8/39,88회 합계, 정확한 세 항 조합을 구별해야 한다. 이는14B 실행이나 얼굴 품질 증명이 아니다. 실제 pilot에서는 step40/forward88·원래 noise/scheduler·초기/후반 branch 전환·final latent finite/readback을 별도로 확인한다. CPU 관측은 아래와 같고 GPU pilot 관측은 아직 대기다.
+CPU 검사는 no-op, branch별 실제 kwargs, 원본 storage/hash 불변, channel/frame isolation, schedule 경계0/7/8/39,88회 합계, 정확한 세 항 조합을 구별해야 한다. 이는14B 실행이나 얼굴 품질 증명이 아니다. 실제 pilot에서는 step40/forward88·원래 noise/scheduler·초기/후반 branch 전환·final latent finite/readback을 별도로 확인한다. CPU와 실제 runtime 관측은 아래와 같다.
 
 reference 저주파·CLIP·mask가 남아 착석이 지속될 수도 있고, 얼굴 단서가 줄어 원본 개체가 약해질 수도 있다. 한 seed의 baseline80NFE 대 pilot88NFE 비교는 compute-matched 검증이 아니다. 개선·악화 어느 쪽도 ALG 전체, 모든 reference 개입, 고주파 단일 원인, 일반화를 입증하지 않는다. 실제 연속 재생을 관찰하지 못하면 시간 품질은 UNVERIFIED다.
 
@@ -72,7 +72,21 @@ reference 저주파·CLIP·mask가 남아 착석이 지속될 수도 있고, 얼
 
 [최종 CPU receipt](../experiments/B-014-alg-scail-pilot/CPU_VALIDATION.json)는9개 검사 PASS(0.69초), 실제 부모16leaf의 hash 보존, RNG·원본 reference 불변,45×26 필터와88회 계획을 확인했다. [alg.py](../experiments/B-014-alg-scail-pilot/code/alg.py)의 `guided_prediction`은 세 항 식을, `branch_condition`은 reference만 바뀌는 조건 경계를, `low_pass_reference`는 채널/시간 평면 분리를 담당한다. [alg_extract.py](../experiments/B-014-alg-scail-pilot/code/alg_extract.py)는 고정 소스의 prediction block만 한 번 치환하고 역치환 AST를 검사한다. [alg_runtime.py](../experiments/B-014-alg-scail-pilot/code/alg_runtime.py)는 sidecar를 실제 부모 cache/reference hash에 연결한다.
 
-이 결과는 모델 출력을 mock으로 둔 식 검사와 실제 입력 cache 연결 검사다.14B DiT를 OFF/ratio1로 다시 생성해 같은 영상을 얻었다는 검증이 아니다. exhaustive match 뒤의 `assert_never` 배치 수정 후 helper typecheck는0 errors/0 warnings로 통과했다. 전체 legacy runtime의 strict typing까지 검증했다는 뜻은 아니다. 새로운 영상·전신 자세·개체·시간 품질은 실제 출력 뒤 별도로 판단해야 한다.
+이 결과는 모델 출력을 mock으로 둔 식 검사와 실제 입력 cache 연결 검사다.14B DiT를 OFF/ratio1로 다시 생성해 같은 영상을 얻었다는 검증이 아니다. exhaustive match 뒤의 `assert_never` 배치 수정 후 helper typecheck는0 errors/0 warnings로 통과했다. 전체 legacy runtime의 strict typing까지 검증했다는 뜻은 아니다. 실제 출력 확보와 전신 자세·개체·시간 품질 판정은 별개다.
+
+### 실제 runtime: 계획한 수식이 끝까지 실행됐는가
+
+[장부](../experiments/B-014-alg-scail-pilot/RUN_LEDGER.json)는 sampler1/1·실패0·재시도0·P재실행0, 실제40step·88forward와 초기8 ALG/후반32 baseline step을 확인한다. final latent `[16,5,112,64]` FP32는 finite/readback exact이며 decode raw는 `[3,17,896,512]`,17f24fps다. reference hash trace는 검증된 tensor를 kwargs가 선택한 계보이며 매 호출 GPU byte 전체를 재해시한 결과가 아니다.
+
+[실측](../experiments/B-014-alg-scail-pilot/MEASUREMENTS.json)의 sampler loop는1116.131초(기준선1020.890초), S guard1266.471초다. 이는 단일 실행의 실제 시간이며 cache·메모리 상태까지 통제한 비용 실험은 아니다. 최소 시스템 가용49,936,060,416bytes와 CUDA peak36,343,418,880bytes, cgroup peak62,941,532,160bytes를 서로 더하거나 같은 의미로 비교하지 않는다. high3518은 reclaim 압력 기록이고 OOM은0, swap도0이었다. 기술 성공이 얼굴 안정성이나 전신 자세 개선을 뜻하지 않는다. 시각 판정은 다음과 같이 분리했다.
+
+### 실제 관측: 식을 올바르게 실행해도 응용 목표는 실패할 수 있다
+
+두 A/B 기록을 먼저 저장하고 대응표를 공개했다. A는 기존 B013 LAB_MOV, B는 새 ALG다. 두 후보 모두 착석·앞발 지지를 유지해 직립/앞발 들기 전이는 FAIL이었다. ALG에도 후반 국소 기울임 반응은 있지만 심한 눈·코·주둥이·귀 번짐이 남았다. 따라서 국소 반응 PARTIAL이며 충실한 roll이나 개체/전신의 동시 개선은 수용하지 않았다.
+
+한 관찰자는 ALG의 초중반 일부에서 얼굴 경계가 상대적으로 더 구별된다고 기록했다. 전체17장 후반 손상을 해결하지 못했으므로 이를 전체 품질 개선이나 우승으로 바꾸지 않는다. 실제 개체·체형 수용은 UNCERTAIN이다. 참조 방 유지 자체는 실패 기준이 아니고 정밀 접촉·그림자는 별도 미해결이다. 같은 에이전트 계열의 정적 A/B 검토이지 독립 인간 평가가 아니며 연속 재생 품질은 UNVERIFIED다.
+
+이는 **고정된 한 설정의 이식이 이번 목표를 명확히 개선하지 못했다**는 결과다. 저주파 착석 실루엣·CLIP·mask 잔존, reference/driving 구조 차이는 가능한 설명이지만 각각을 분리해 검증하지 않았다. 올바른88회 호출과 finite 출력은 구현 근거이지 가설 성공의 근거가 아니다. 반대로 이 한 실패로 ALG 전체나 모든 reference 개입을 기각할 수도 없다. 추가 강도·seed·조건 실행 없이 종료했다.
 
 ## 이해 확인 질문
 

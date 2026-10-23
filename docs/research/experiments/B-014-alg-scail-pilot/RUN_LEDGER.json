@@ -1,0 +1,136 @@
+{
+  "experiment": "B-014",
+  "prereg_commit": "3cd90e196307fe1f663e8533124a0cbe42f8f41e",
+  "code_manifest_sha256": "71be87d69e5e10d6e7ac52219123413aa4582a3f5c4b8ec6b0816b96dc8965cb",
+  "P": {
+    "attempts": 0,
+    "status": "REUSED_PARENT_B013_LAB_MOV",
+    "parent_receipt_sha256": "62cb3dde9f6b0220c00260aa2b0db156ccebe40f2e4457c7737cbcbfb7e5d940"
+  },
+  "stages": {
+    "PROBE": {
+      "attempts": 1,
+      "maximum": 1,
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "exit_code": 0,
+      "owned_worker_pid_after_exit": 0,
+      "guard_seconds": 5.073583602905273,
+      "worker_phase_seconds": 3.5656615280313417
+    },
+    "S": {
+      "attempts": 1,
+      "maximum": 1,
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "exit_code": 0,
+      "owned_worker_pid_after_exit": 0,
+      "guard_seconds": 1266.4706556797028,
+      "worker_phase_seconds": 1262.838402776979
+    },
+    "D": {
+      "attempts": 1,
+      "maximum": 1,
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "exit_code": 0,
+      "owned_worker_pid_after_exit": 0,
+      "guard_seconds": 16.184135913848877,
+      "worker_phase_seconds": 13.541355410940014
+    }
+  },
+  "sampler": {
+    "attempts": 1,
+    "maximum": 1,
+    "failures": 0,
+    "retries": 0,
+    "steps": 40,
+    "forward_calls": 88,
+    "active_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "sequential_branch_counts": {
+      "ALG_steps": 8,
+      "baseline_steps": 32
+    },
+    "trace_sha256": "75d425ea36b34a4b438a291e1584bfc314e8ef5b95014f97d3f7ed38a643aa51",
+    "branch_hash_evidence": "Reference bytes verified at CPU filter creation and actual device restore/readback; each call records the verified reference hash selected by actual kwargs. Not a GPU byte rehash on every forward."
+  },
+  "final_latent": {
+    "shape": [
+      16,
+      5,
+      112,
+      64
+    ],
+    "dtype": "float32",
+    "finite": true,
+    "readback_exact": true,
+    "file_sha256": "3d76cbc4f95e881346da2500c037d413e05e79e360f8b3ef3001d0ad2ee24594",
+    "value_sha256": "d99d52d2ef1ba3c84b26289f5d740fced484072d6f91fdc453dcac861b9c8bf8",
+    "different_from_initial_noise": true
+  },
+  "output": {
+    "shape": [
+      3,
+      17,
+      896,
+      512
+    ],
+    "finite": true,
+    "frames": 17,
+    "fps": 24,
+    "duration_seconds": 0.7083333333333334,
+    "ffmpeg_decode": "PASS",
+    "files": {
+      "raw_output.pt": {
+        "sha256": "542e41a1cf73afc0b9508ea8bd6abec6fb0add78811e3c0c2797bdef9e1cc3da",
+        "bytes": 93587006
+      },
+      "output.mp4": {
+        "sha256": "5135eb5789cb245963f1cf9418805378554beb1e6c36437ed5bedad368a3b8b0",
+        "bytes": 485652
+      },
+      "final_latent.safetensors": {
+        "sha256": "3d76cbc4f95e881346da2500c037d413e05e79e360f8b3ef3001d0ad2ee24594",
+        "bytes": 2293840
+      },
+      "final_latent.json": {
+        "sha256": "1d3ce45160c530f2ca863607e9435a770dbeec38d180c3aec20c194e614dfffe",
+        "bytes": 38127
+      },
+      "filtered_reference.safetensors": {
+        "sha256": "4615c2ba16f47a65a661989f00dc8d055c58120276f8e41dc397b497d31b8cbc",
+        "bytes": 458832
+      },
+      "filtered_reference.json": {
+        "sha256": "2e8465db730e63c32c762bf6c2d6dae10ac8374ab71b69370ad161a4a7787d11",
+        "bytes": 1968
+      }
+    }
+  },
+  "postrun": {
+    "integrity_status": "PASS",
+    "verified_hash_count": 426,
+    "parent_cache_sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+    "parent_metadata_sha256": "7dbcddd695c7148f59a5790ae74c0569e0517d491cc1c26550c828ca995d68aa",
+    "parent_initial_noise_file_sha256": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc",
+    "filter_sidecar_sha256": "2e8465db730e63c32c762bf6c2d6dae10ac8374ab71b69370ad161a4a7787d11",
+    "owned_units_inactive": true,
+    "protected_service_identity_unchanged": true,
+    "queue_idle": true
+  },
+  "acceptance": {
+    "technical_output": "COMPLETED",
+    "visual_quality": "NOT_ASSESSED_BY_RUNTIME_OWNER",
+    "continuous_playback": "UNVERIFIED",
+    "production": "NOT_RUN"
+  }
+}

@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**최신: B-014 RUNNING / 이식 감사·CPU 계약 검증.** [계획](experiments/B-014-alg-scail-pilot/PLAN.md)에 따라 공식ALG3항식의 SCAIL 연결을 검증하고 통과하면 한 번 pilot을 수행한다. B-013의 전신FAIL/국소PARTIAL/시간UNVERIFIED는 보존한다. 아래 단계별 기록은 당시 상태다.
+**최신: B-014 이식·실행 완료 / 품질 개선 미입증.** [결과](experiments/B-014-alg-scail-pilot/RESULTS.md): 실제40step88forward·final latent·17f24fps MP4를 확보했다. 전신FAIL/국소PARTIAL/개체UNCERTAIN/시간UNVERIFIED이며 후기 얼굴·귀 손상은 남았다. 아래 과거 단계별 기록은 당시 상태다.
 
 | 단계 | 질문 / 목표 | 상태 | 다음 단계에 필요한 근거 |
 |---|---|---|---|
@@ -244,3 +244,9 @@ source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 
 ## B-014 착수: 입력 비교에서 제한된 sampling 개입으로 (2026-10-24)
 
 **RUNNING / CPU 이식 검증 중 / GPU NOT_RUN.** 원격`152b6771397176ac0eb1860debc0902331c5d523`의 [PLAN](experiments/B-014-alg-scail-pilot/PLAN.md)과 [결정](decisions/20261024-B-013-review-and-B-014.md)을 확인했다. B-013의 전신FAIL/국소PARTIAL/얼굴번짐을 보존하며 단순움직임증가를 목표로 삼지 않는다. 공식ALG의 원본negative 기준항을 보존한3항식을 ref-latent 공간필터로 이식하고, CPU계약·사전코드고정이 통과할 때만 기존LAB_MOV조건으로 pilot1회 수행한다. ratio0.4·45×26·bilinearAA·i0..7고정,40step88forward; P0·retry0·학습0·3시간. 새모델·ALG_STILL·추가seed·강도탐색은 실행하지 않는다. [진행](experiments/B-014-alg-scail-pilot/RUNNING.md).
+
+## B-014 실제 결론 (2026-10-24)
+
+공식 ALG3항식의 SCAIL 이식과 단일 pilot은 완료했다. LP는 자세 제거기가 아니며 착석·후기 형태 손상을 해결하지 못했다. 부분적인 초중반 가독성 차이를 전신 동작 또는 전체 개체 보존 성공으로 확장하지 않는다. 모델 설치·추가 baseline·학습은0회다.
+
+다음 연구 하나는 고정 ALG_STILL 한 대조군으로 guidance×driving 상호작용을 확인하는 진단 제안이다. NOT_RUN/별도승인 전이며 강도탐색·추가seed·학습·SR·모델교체를 자동 실행하지 않는다. 이전 B014착수 RUNNING은 당시 기록이다.

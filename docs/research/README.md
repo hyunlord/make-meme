@@ -8,12 +8,12 @@
 2. [로드맵](ROADMAP.md)
 3. [누적 히스토리](HISTORY.md)
 4. [모든 작업에 적용할 기록 규칙](RECORDING_PROTOCOL.md)
-5. [최근 실험: B-013 Lab driving 전이 비교](experiments/B-013-lab-driving-transfer/RESULTS.md)
+5. [최근 실험: B-014 ALG SCAIL pilot](experiments/B-014-alg-scail-pilot/RESULTS.md)
 6. [새 실험 문서 양식](templates/EXPERIMENT.md)
 
 ## 현재 상태 — 2026-10-24
 
-B-013은 동일 구간의 Lab MOV/STILL을 각각 한 번 생성하고 종료했다. 실행·조건 통제 PASS, 전신 직립 FAIL, 국소 반응 PARTIAL, temporal UNVERIFIED다. [결과](experiments/B-013-lab-driving-transfer/RESULTS.md) · [한국어 이론](lessons/B-013-cross-identity-driving.md). 다음 연구 제안은 한 가지만 남겼으며 추가 추론·학습은 실행하지 않았다. A는 계속 보존·동결한다.
+B-014는 공식 ALG3항식을 SCAIL에 이식해 한 번의40step·88forward pilot과17f24fps 출력을 확보했다. 이식·실행 PASS, 전신 FAIL, 국소 PARTIAL, 실제개체 UNCERTAIN, temporal UNVERIFIED이며 목표 품질의 동시 개선은 미입증이다. [결과](experiments/B-014-alg-scail-pilot/RESULTS.md) · [한국어 이론](lessons/B-014-alg-and-conditional-velocity.md). 다음 ALG_STILL 대조군은 제안만 남겼고 실행하지 않았다. A와 기존 결과는 보존한다.
 
 ## 초기 상태 — 2026-10-22 기록 보존
 

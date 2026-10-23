@@ -1,6 +1,6 @@
 # B-014 재현과 읽기 전용 비교
 
-현재 공식 이식 감사와 검토 도구 준비 단계다. 아래 검토 명령은 **아직 실행하지 않았다**. 생성 예산은 PLAN의 조건부 pilot1회·재시도0이며 이 문서는 새로운 실행 승인이 아니다. frozen runtime 코드와 CPU 미디어 도구를 구분한다.
+공식 이식 감사·pilot1회와 CPU 검토 렌더1회·browser QA1회를 완료했다. sampler1/1은 소진됐으며 재시도0이다. 아래 명령은 완료된 실행의 기록이고 새로운 실행 승인이 아니다. frozen runtime 코드와 CPU 미디어 도구를 구분한다.
 
 ## 검토 입력과 도구
 
@@ -16,15 +16,21 @@ CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 "$CPU_PYTHON" "$TOOLS/output_r
 "$BROWSER_PYTHON" "$TOOLS/check_review_ui.py" "$OUT/review.html"
 ```
 
-별칭은 비공개 원본 경로를 가리키며 OUT은 새 경로여야 한다. 실제 D 종료·finite raw·17f24fps·전송 해시 검증 후에만 한 번 렌더한다. 이전 출력으로 실패한 신규 결과를 대체하지 않는다.
+별칭은 비공개 원본 경로를 가리키며 OUT은 새 경로여야 한다. 실제 D 종료·finite raw·17f24fps·아티팩트 해시 및 자원 회복 확인 후 Spark CPU에서 한 번 렌더하고 Mac에 동기화했다. 이전 출력으로 실패한 신규 결과를 대체하지 않는다.
 
 ## 비교 조건과 blind 절차
 
 primary panel은 SOURCE/실제 Lab reference/B013 LAB_MOV/B013 LAB_STILL/LAB_MOV_ALG의5열이다. 전체17장과 local0/12/14/16, grouped sheets를 보존한다. 프레임별 별도 확대·crop·warp·보간·안정화·속도 변경은 없다. 모든 full canvas는 동일 배율로 표시한다. 비교 MP4는 기존17장·24fps 출력 decode 후5열 재인코딩하므로 raw PNG와 인코딩 경로를 구분한다.
 
-A/B는 기존 MOV와 신규 ALG에 한 번 고정 무작위 배정하고 SOURCE/ref/STILL control은 고정 표시한다. mapping JSON은 두 검토 기록을 저장할 때까지 공개하지 않는다. 같은 에이전트 계열의 검토를 독립 인간 blind 평가로 부르지 않는다.
+A/B는 기존 MOV와 신규 ALG에 한 번 고정 무작위 배정하고 SOURCE/ref/STILL control은 고정 표시한다. mapping JSON은 두 검토 기록을 저장한 뒤 처음 읽어 공개했다. 실제 A=B013 LAB_MOV, B=LAB_MOV_ALG이며 비공개 `reports/blind-disclosure.json`에 공개 시각과 두 기록·mapping 해시를 보존했다. 같은 에이전트 계열의 검토를 독립 인간 blind 평가로 부르지 않는다.
 
-archive에는 primary17장·rawPNG·group/selected·비교MP4를 보존하되, MP4 인코딩용 full-resolution collage는 pipe로만 전달하여 중복 PNG를 남기지 않는다. tool/input/output SHA와 변환은 manifest로 남긴다. 실제 browser 기능·CJK·desktop/mobile 검증은 출력 준비 후 수행한다. 자동 ended/paused 이벤트는 시간적 영상 품질 검토를 대신하지 않으며 연속 시청이 없으면 UNVERIFIED다.
+archive에는 primary17장·rawPNG·group/selected·비교MP4를 보존하되, MP4 인코딩용 full-resolution collage는 pipe로만 전달하여 중복 PNG를 남기지 않는다. tool/input/output SHA와 변환은 manifest로 남긴다. 실제 browser 기능·CJK·desktop1280×960/mobile400×900 검증을 한 번 수행해 PASS했다. 이전/다음·slider·경계0/16·autoplay/loop OFF·한 번 재생 종료를 확인했다. 자동 ended/paused 이벤트는 시간적 영상 품질 검토를 대신하지 않으며 연속 시청이 없으면 UNVERIFIED다.
+
+### 실제 검토 파일
+
+비공개 `reports/output-review/`에 `review.html`, `source-reference-baseline-alg.mp4`(2560×928·17f24fps·0.708333초), `frames/000.png`~`016.png`, `all17.png`, `selected.png`, `group-00-04.png`·`05-08`·`09-12`·`13-16`을 보존했다. raw-derived PNG는 `baseline-mov-raw/`, `baseline-still-raw/`, `alg-raw/`에 있다. 기존34개 파일은 B013과 SHA가 완전히 같고 재렌더하지 않았다. `blind-frames/`, `blind-group-*.png`, `blind-selected.png`와 별도 `blind-mapping.json`도 보존한다.
+
+`manifest.json`에는 입력/output/tool 해시·변환·기존 PNG34개 byte-copy 확인·비교 영상 ffprobe가 있다. `UI_QA.json`, `ui-desktop.png`, `ui-mobile.png`는 기능과 표시 검증 근거다. 두 blind 관찰 기록과 공개 receipt를 포함해 Mac/Spark에 동기화했다. 시간 품질은 UNVERIFIED이며 기술적 재생 성공을 전신·개체 품질 수용으로 바꾸지 않는다.
 
 ## 고정 runtime 경로와 실행 명령
 
@@ -75,3 +81,9 @@ launch_recorded D 1800
 실제 worker 절대 deadline은 **2026-10-23 20:30:00 UTC**이고 요청의20:40보다 보수적이다. `runtime_launch`의 durable outer systemd와 `runtime_guard`의 owned inner unit은 기존72GiB 시작/24GiB 실행 headroom, swap0, 타 서비스 보호, cgroup·시간 상한을 그대로 유지한다. 위 초 단위 상한보다 전체 deadline이 먼저 오면 먼저 종료한다. 어떤 실패에서도 재시도·다음 생성은 없다.
 
 S는 부모 P의 16개 leaf를 원래 device로 복원하며 CPU RNG state/sigmas를 GPU로 옮기지 않는다. 같은 CUDA noise·generator state·timesteps를 사용하고, 별도 CPU filtered reference를 원래 reference device로 복원한다. i0..7은 original-negative→low-negative→low-positive의 세 순차 forward, i8..39는 원래 positive→negative의 두 forward다. 모든 예측은 다음 호출 전에 기존처럼 CPU로 offload한다. scheduler는40회이며 `alg_branches.jsonl`은 추가 forward 없이 실제 branch/index/reference SHA와 예측 norm만 남긴다. OFF/ratio1의80회 계약은 CPU fixture로 검증했으며 별도14B baseline을 재생성하지 않았다.
+
+### 이번 실행의 terminal 확인
+
+사전등록 `3cd90e196307fe1f663e8533124a0cbe42f8f41e` 이후 위 PROBE→S→D를 각각1회 실행해 모두 정상 종료했다. 실제 S counter는40step/88forward이고 branch trace는 i0..7의3회·i8..39의2회 순서와 일치했다. SHA는 filter 생성/device restore 때 검증한 tensor를 실제 kwargs 선택에 따라 기록한 것이며 매 forward마다 GPU bytes를 다시 해시한 것은 아니다.
+
+최종 latent file SHA `3d76cbc4f95e881346da2500c037d413e05e79e360f8b3ef3001d0ad2ee24594`, value SHA `d99d52d2ef1ba3c84b26289f5d740fced484072d6f91fdc453dcac861b9c8bf8`를 CPU에서 재읽어 확인했다. raw finite17f/24fps·MP4 전체 decode도 통과했다. [실행 장부](RUN_LEDGER.json), [실측](MEASUREMENTS.json), private `reports/final-latent-gate.json`, `output-artifact-receipt.json`, `postrun_integrity.json`이 근거다. 종료 후426개 보존 해시와 owned unit inactive/PID0을 확인했고, 부모/cache/가중치나 생성 결과를 덮어쓰지 않았다. 실제 영상 품질·효과 해석은 별도 검토에 따른다. 이 한정 sampler 예산은1/1로 소진됐다.

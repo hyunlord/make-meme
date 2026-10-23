@@ -1,6 +1,6 @@
 # B-014 ALG → SCAIL 이식 감사
 
-상태: **공식 수식·코드 확인 완료 / CPU_CONTRACT_PASS / 실제 pilot 결과 대기**. 이 문서는 실행 승인이나 영상 품질 판정이 아니다. 기존 B-013 결과와 실패 기록을 보존한다. 작은 공식 소스만 읽었으며 모델·데이터 다운로드, 새 모델 실행은 하지 않았다.
+상태: **공식 수식·코드 확인 완료 / CPU_CONTRACT_PASS / 실제88forward·영상 출력 완료 / 전신 개선 미확인·시간 UNVERIFIED**. 이 문서는 실행 승인이나 영상 품질 판정이 아니다. 기존 B-013 결과와 실패 기록을 보존한다. 작은 공식 소스만 읽었으며 모델·데이터 다운로드, 새 모델 실행은 하지 않았다.
 
 ## 고정 근거와 적용 경계
 
@@ -43,7 +43,7 @@ text-negative도 CLIP·reference·mask·driving을 받으므로 visual-unconditi
 
 ## 4. 아직 검증하지 않은 것
 
-공식 감사와 CPU 계약은 아래 근거까지 완료됐다. GPU88forward 완료나 얼굴·전신 자세·시간 품질은 아직 주장하지 않는다. 공식 ALG의 I2V 동적 정도 개선과 이 과제의 cross-identity 자세 충실도는 다른 질문이다. SCAIL 적용 효과는 미검증이며 저주파 착석 실루엣·CLIP·mask는 남는다. 개체 단서 약화나 source 외형 누출도 가능한 위험이다. 한 pilot은 ALG 전체의 유효성·고주파 원인·일반화를 판정하지 못한다.
+공식 감사와 CPU 계약은 아래 근거까지 완료됐다. 아래 실제 runtime receipt까지 확보했다. 얼굴·전신 자세·시간 품질은 별도 시각 판정이다. 공식 ALG의 I2V 동적 정도 개선과 이 과제의 cross-identity 자세 충실도는 다른 질문이다. SCAIL 적용 효과는 미검증이며 저주파 착석 실루엣·CLIP·mask는 남는다. 개체 단서 약화나 source 외형 누출도 가능한 위험이다. 한 pilot은 ALG 전체의 유효성·고주파 원인·일반화를 판정하지 못한다.
 
 
 ## 5. 실제 CPU 검증과 구현 위치
@@ -58,3 +58,21 @@ text-negative도 CLIP·reference·mask·driving을 받으므로 visual-unconditi
 - [test_alg.py](code/test_alg.py): no-op, 식 구분, schedule 경계, tensor isolation, 실제 부모 binding을 검사한다.
 
 실제 원본 reference hash는 `0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0`, CPU filtered hash는 `40e6a0c2132cfc19f0a211a8cc654b21425e681b58cd45472656f3191454abda`다. 중간45×26과 활성0..7은 receipt에 실측·기록됐다. helper critical Ruff와 compileall은 PASS다. exhaustive match 뒤로 `assert_never`를 옮긴 뒤 helper typecheck도 **0 errors / 0 warnings**로 통과했다. 전체 legacy runtime의 strict typing까지 통과했다는 뜻은 아니다. 최종 manifest SHA256은 `71be87d69e5e10d6e7ac52219123413aa4582a3f5c4b8ec6b0816b96dc8965cb`다. CPU mock·실제 cache 검사는14B OFF/ratio1 재생성의 bit-identical 결과나 GPU 영상 품질을 증명하지 않는다.
+
+
+## 6. 실제 runtime 관측
+
+[RUN_LEDGER](RUN_LEDGER.json)와 [MEASUREMENTS](MEASUREMENTS.json)를 확인했다. 사전 commit `3cd90e196307fe1f663e8533124a0cbe42f8f41e` 이후 PROBE/S/D 각1회 정상 종료, sampler1/1·실패0·재시도0, encoder P 재실행0이다. 실제40step·88forward, i0..7 ALG8step과 후반 baseline32step을 기록했다. branch hash는 CPU 생성 및 device restore/readback에서 검증된 reference를 실제 kwargs가 선택했다는 증거이며 매 forward마다 GPU bytes를 다시 해시했다는 뜻은 아니다.
+
+final latent `[16,5,112,64]` FP32 finite/readback exact, raw `[3,17,896,512]` finite 및17f24fps MP4를 확보했다. final file SHA는 `3d76cbc4f95e881346da2500c037d413e05e79e360f8b3ef3001d0ad2ee24594`다. S guard1266.471초, sampler loop1116.131초, D guard16.184초다. 기존 B-013 MOV loop1020.890초와 비교하면 관측 조건이 다른 단일 실측이며 보장된10% walltime 증가로 해석하지 않는다.
+
+S 최소 가용 메모리49,936,060,416bytes, CUDA allocator peak36,343,418,880bytes, cgroup peak62,941,532,160bytes다. 이 셋은 같은 메모리 지표가 아니다. cgroup high3518·OOM0·swap0, 자체 worker 종료 후 PID0를 확인했다. 모든 자산 해시를 새로 전수검증했다는 주장은 하지 않으며 대형 weights는 기존 SHA와 현재 stat/mtime 보존 근거다. 현재 감사는 실행 성공까지이며 동작·개체·시간 품질 수용을 대신하지 않는다.
+
+
+## 7. 출력 관찰과 수용 경계
+
+두 관찰자가 전체17장과 고정 local0/12/14/16을 A/B 패널로 확인하고 각각 기록을 저장한 뒤 mapping을 공개했다. A=B013 LAB_MOV, B=LAB_MOV_ALG다. 양쪽 모두 침대 착석과 지지 앞발이 유지되어 원본의 직립·앞발 들기는 FAIL이다. ALG도 후반 head/body 기울임 반응은 PARTIAL이지만 눈·주둥이·귀의 심한 번짐이 남아 충실한 roll 수용이나 전신·개체 동시 개선은 확인하지 못했다.
+
+보조 관찰자는 ALG의 일부 초중반 코/눈 경계가 덜 번져 보인다고 기록했다. 이는 후반 손상 해소나 전체 품질 우위로 승격하지 않는다. 실제 개체와 체형 수용은 UNCERTAIN, 배경 침실 유지 자체는 실패가 아니며 접촉·그림자는 별도 미해결이다. 독립 인간 평가나 정량 유의성 검증이 아니고 실제 연속 재생을 보지 않아 temporal=UNVERIFIED다.
+
+CPU 검토 렌더는 한 번만 실행했고, 기존 B013 PNG34장의 파일 해시 완전 일치를 확인해 그대로 재사용했다. 새 raw는 기존 양자화만 적용했다. 비교 영상17f24fps와 browser 기능·desktop/mobile CJK 표시는 PASS지만 영상 품질 수용은 아니다. 모델·threshold·강도·추가 seed를 바꾸거나 재실행하지 않았다.

@@ -17,3 +17,7 @@ CPU 계약9개 PASS, 실제 부모 cache16leaf 및 원본/RNG 불변 PASS, 별�
 ALG0..7 활성,8..39 기존 CFG;40step·88forward. P0/PROBE최대1/S최대1/D최대1, 재시도0. 기존 runtime24GiB/start72GiB·swap0 가드 유지. CPU fixture는14B numeric replay나 품질 통과가 아니다. 초기 helper의 exhaustive match fallback 진단을 계산 변경 없이 수정해 typecheck0error/0warning을 확인했다. 최종 CPU9개는0.69초 PASS다. 과거 진단과 superseded receipt는 비공개에 보존했다. 기존 동적 runtime 전체 strict typing을 새로 확립했다는 주장은 하지 않는다.
 
 `configs/allowed_gpu_processes.json`은 기존 서비스 PID를 담아 비공개로 보존하고 공개 manifest에는 해시만 둔다. 이 커밋 시점 신규 GPU 실행0이다.
+
+## 종료 상태
+
+PROBE/S/D 각1회 COMPLETED, P0, actual40step88forward. 출력과 final latent를 보존했다. 전체17장 정적 검토에서 전신FAIL·국소PARTIAL·개체UNCERTAIN·시간UNVERIFIED, 목표 품질 개선 미입증. 자세한 최종 상태는 RESULTS와 RUN_LEDGER를 따른다. 사전 기록은 변경하지 않는다.
