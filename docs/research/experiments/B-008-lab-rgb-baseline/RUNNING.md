@@ -11,7 +11,7 @@
 2. COMPLETED: 코드·config·입력 해시 사전 고정과 공개 push, 독립 검토.
 3. COMPLETED: fresh P → 종료/회복 → PROBE → 종료/회복 → S → 종료/회복 → D. 선행 실패 시 후속 미실행.
 4. COMPLETED: 전체17장·native24fps 비교·품질 축별 정적 검토·한국어 수학 설명.
-5. PENDING: 최종 GitHub 기록·원격 SHA와 비공개 ZIP 양호스트 CRC/해시 검증·자체 프로세스 종료 확인.
+5. COMPLETED: 최종 GitHub 기록·원격 SHA와 비공개 ZIP 양호스트 CRC/해시 검증·자체 프로세스 종료 확인.
 
 이번 목표는 CUDA 원인 감사 확대가 아니라 실제 Lab identity와 RGB driving motion의 첫 품질 기준선이다. sampler 수학·정밀도·72/24GiB 및 swap0 가드는 유지한다. 실제 연속 재생을 관찰하지 못한 경우 temporal=UNVERIFIED다.
 
@@ -38,3 +38,7 @@ PROBE1 guarded6.063초, 실제 tiny CUDA 연산·16leaf 값/device·RNG 검증�
 ## 실행 종료 및 품질 검토
 
 P/PROBE/S/D 각1회 정상 종료, S40step80forward와 실제17f24fps MP4 및 final latent 검증. 전체17장 정적 검토에서 착석 reference/침실 구도 유지와 직립 전달 실패를 확인했다. 특정 개체UNCERTAIN/temporalUNVERIFIED. [RESULTS](RESULTS.md). 남은 단계는 공개 문서 동기화와 비공개 ZIP 무결성 검증뿐이며 추가 생성은 없다.
+
+## 검토 자료 전달 완료
+
+Spark와 Mac ZIP 모두 CRC·255payload SHA 검증 PASS, 같은133,652,595bytes·같은 SHA256. 결과 snapshot01fd87ca254ab0fb151789c6ed3b7c3a89937ccc가 ZIP에 포함된다. 최종 전달 확인은 [DELIVERY](DELIVERY.md)에 별도로 기록한다. 자체 GPU/browser/전송 프로세스는 종료됐고 추가 실험은 없다.
