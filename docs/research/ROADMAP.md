@@ -179,3 +179,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 **P/PROBE/S/D PASS / Lab MP4·final latent 확보 / 직립 동작 전달 FAIL.** 실제17f24fps·512×896,40step80forward, 신규 sampler1회·재시도/학습0. 전체17장 정적 검토에서 검은 Lab 외형은 유지됐지만 참조의 착석·침실 구도가 남아 원본 직립/앞발 동작을 재현하지 못했다. 특정 개체UNCERTAIN, temporalUNVERIFIED. S1066.317초, D15.219초, 최소MemAvailable51.978GiB,swap/OOM0. [RESULTS](experiments/B-008-lab-rgb-baseline/RESULTS.md).
 
 다음 한 실험은 동일 source 동물의 첫 프레임을 참조로 한 RGB-driving 자기 재현 진단이다. 기본 동물 움직임 재현과 cross-identity/체형 전이의 어려움을 구분하려는 계획이며 새 실행은 별도 결정 전 시작하지 않는다.
+
+## B-009 착수 및 B-008 해석 보완 (2026-10-23)
+
+**RUNNING / P·PROBE·S·D NOT_RUN.** [독립 검토 결정](decisions/20261023-B-008-review-and-B-009.md)에 따라 자기 재현보다 [reference mask 단일 변경](experiments/B-009-reference-mask-semantics/PLAN.md)을 우선한다. 기존 Lab mask의 정확한BLACK만WHITE로 바꾸고RED·RGB·driving·text·모드·seed·sampler는 유지한다. B-008을 대조군으로 재사용하며 새 P/PROBE/S/D 각1회·sampler1회·재시도/학습0이다.
+
+해석 정정: animation의WHITE는 참조 배경 가시성 조건이므로 침실이 남는 것 자체를 실패로 판단하지 않는다. B-008의 직립 전달 실패 관측은 유지한다. 공식 mixed-fps 학습 설명상 writer16fps 기본값을 고정16fps 학습 분포의 증거로 사용할 수 없다. 과거 기록은 보존하고 현재 해석을 이 항목으로 보완한다.
