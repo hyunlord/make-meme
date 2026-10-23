@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "ratio": 0.4,
+  "start": 0.0,
+  "end": 0.2,
+  "steps": 40,
+  "guide_scale": 5.0,
+  "expected_calls": 88,
+  "active_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "interpolation": "bilinear",
+  "align_corners": false,
+  "antialias": true
+}

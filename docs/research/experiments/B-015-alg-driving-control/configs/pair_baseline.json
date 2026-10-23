@@ -1,0 +1,18 @@
+{
+  "moving_parent": "B-013-lab-driving-transfer/cases/LAB_MOV",
+  "still_parent": "B-013-lab-driving-transfer/cases/LAB_STILL",
+  "ALG_MOV": "B-014-alg-scail-pilot",
+  "old_filtered_file_sha256": "4615c2ba16f47a65a661989f00dc8d055c58120276f8e41dc397b497d31b8cbc",
+  "old_filtered_metadata_sha256": "2e8465db730e63c32c762bf6c2d6dae10ac8374ab71b69370ad161a4a7787d11",
+  "old_cache_sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+  "original_ref_value_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+  "filtered_ref_value_sha256": "40e6a0c2132cfc19f0a211a8cc654b21425e681b58cd45472656f3191454abda",
+  "filter_code_sha256": "f4546f40dac2f3fe394e1a3581bbe047f022b8b0a61475d1a344f11b221efdab",
+  "changed_paths": [
+    "root.arg_c.pose_latents[0]",
+    "root.arg_c.driving_masks[0]",
+    "root.arg_null.pose_latents[0]",
+    "root.arg_null.driving_masks[0]"
+  ],
+  "unchanged_count": 12
+}

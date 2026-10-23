@@ -1,0 +1,32 @@
+{
+  "status": "CPU_CONTRACT_PASS",
+  "passed": 11,
+  "seconds": 0.69,
+  "log_sha256": "3615c046b34fcf2c4a21ae298a98680195261fbb4931f236f3259a908b13b041",
+  "command": "CUDA_VISIBLE_DEVICES=\"\" B015_ROOT=\"$B015_ROOT\" SCAIL_SOURCE=\"$SCAIL_SOURCE\" \"$ENV_PYTHON\" -m pytest \"$B015_ROOT/code/test_alg.py\" -q",
+  "inherited_tests": 9,
+  "added_tests": 2,
+  "critical_ruff": "PASS E9,F63,F7,F82",
+  "compileall": "PASS",
+  "typecheck": {
+    "status": "NOT_CLEAN",
+    "file": "pair_audit.py",
+    "errors": 2,
+    "warnings": 7,
+    "prior_errors": 87,
+    "note": "Typed local schemas/tensors/traversal added. Correct code-directory search resolves local imports. Remaining implicit CLI-relative import errors and JSON/legacy/third-party boundary warnings preserved, without suppression or casts. Numerical ALG helper unchanged.",
+    "rules": [
+      "reportUnknownVariableType",
+      "reportImplicitRelativeImport",
+      "reportUnknownVariableType",
+      "reportImplicitRelativeImport",
+      "reportUnknownVariableType",
+      "reportAny",
+      "reportAny",
+      "reportUnknownVariableType",
+      "reportAny"
+    ]
+  },
+  "actual_pair": "4 driving changed / 12 bit-exact controls",
+  "filter": "Actual CPU regenerated tensor exactly equals B014 MOV filtered reference; separate STILL-parent sidecar"
+}

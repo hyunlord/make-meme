@@ -1,0 +1,246 @@
+--- B014/code/contracts.py
++++ B015/code/contracts.py
+@@ -59 +59 @@
+-    assert binding['experiment']=='B-013' and binding['case']=='LAB_MOV'
++    assert binding['experiment']=='B-013' and binding['case']=='LAB_STILL'
+@@ -87 +87 @@
+-    assert pair['case_cache_sha256']['LAB_MOV']==lineage['cases']['LAB_MOV']['cache_sha256']==receipt['hashes']['conditions.safetensors']
++    assert pair['case_cache_sha256']['LAB_STILL']==lineage['cases']['LAB_STILL']['cache_sha256']==receipt['hashes']['conditions.safetensors']
+--- B014/code/pair_audit.py
++++ B015/code/pair_audit.py
+@@ -0,0 +1,130 @@
++"""CPU actual-cache 4/12 audit; frozen outcome is required by all new workers."""
++from __future__ import annotations
++from pathlib import Path
++from collections.abc import Collection
++from typing import TypedDict
++import hashlib
++import json
++import sys
++import torch
++from safetensors.torch import load_file
++from artifacts import load_tree,atomic_json
++from contracts import verify_cache_receipt
++
++
++class TreeNode(TypedDict, total=False):
++    tensor: str
++    dict: dict[str, TreeNode]
++    list: list[TreeNode]
++    scalar: str | int | float | bool | None
++    device: str
++
++class TensorInfo(TypedDict):
++    sha256: str
++
++class Provenance(TypedDict):
++    parent_cache_sha256: str
++    filter_code_sha256: str
++    parent_ref_sha256: str
++    filtered_ref_sha256: str
++
++class Metadata(TypedDict):
++    file_sha256: str
++    structure: TreeNode
++    tensors: dict[str, TensorInfo]
++    provenance: Provenance
++
++class Policy(TypedDict):
++    moving_parent: str
++    ALG_MOV: str
++    old_cache_sha256: str
++    changed_paths: list[str]
++    unchanged_count: int
++    filter_code_sha256: str
++    original_ref_value_sha256: str
++    filtered_ref_value_sha256: str
++    old_filtered_metadata_sha256: str
++
++class Receipt(TypedDict):
++    hashes: dict[str, str]
++
++class Row(TypedDict):
++    location: str
++    same: bool
++    shape: list[int]
++    dtype: str
++    MOV_value_sha256: str
++    STILL_value_sha256: str
++    max_abs: float
++
++
++def file_hash(path: Path) -> str:
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def checked_metadata(path: Path) -> Metadata:
++    # Keep the existing payload, dtype and shape validation before typed JSON use.
++    _ = load_tree(path, device='cpu')
++    result: Metadata = json.loads(path.with_suffix('.json').read_text())
++    return result
++
++
++def check_pair_leaf(name: str, moving: torch.Tensor, still: torch.Tensor, changed_paths: Collection[str]) -> bool:
++    assert moving.shape==still.shape and moving.dtype==still.dtype,name
++    same=torch.equal(moving,still)
++    assert same == (name not in changed_paths),name
++    return same
++
++
++def locations(node: TreeNode, path: str='root') -> dict[str, str]:
++    if 'tensor' in node:return {path:node['tensor']}
++    if 'dict' in node:
++        return {k:v for name,value in node['dict'].items() for k,v in locations(value,path+'.'+name).items()}
++    if 'list' in node:
++        return {k:v for i,value in enumerate(node['list']) for k,v in locations(value,path+'['+str(i)+']').items()}
++    return {}
++
++
++def main(root:Path) -> None:
++    policy: Policy = json.loads((root/'configs/pair_baseline.json').read_text())
++    _ = verify_cache_receipt(root)
++    receipt: Receipt = json.loads((root/'artifacts/conditions_receipt.json').read_text())
++    moving=root.parent/policy['moving_parent'];old=root.parent/policy['ALG_MOV']
++    mov_meta=checked_metadata(moving/'artifacts/conditions.safetensors')
++    still_meta=checked_metadata(root/'artifacts/conditions.safetensors')
++    assert mov_meta['file_sha256']==policy['old_cache_sha256']
++    assert still_meta['file_sha256']==receipt['hashes']['conditions.safetensors']
++    assert mov_meta['structure']==still_meta['structure']
++    mov=load_file(str(moving/'artifacts/conditions.safetensors'));still=load_file(str(root/'artifacts/conditions.safetensors'))
++    paths=locations(mov_meta['structure']);assert len(paths)==16
++    rows: list[Row]=[]
++    for path,key in paths.items():
++        same=check_pair_leaf(path,mov[key],still[key],policy['changed_paths'])
++        rows.append({'location':path,'same':same,'shape':list(mov[key].shape),'dtype':str(mov[key].dtype),
++          'MOV_value_sha256':mov_meta['tensors'][key]['sha256'],'STILL_value_sha256':still_meta['tensors'][key]['sha256'],
++          'max_abs':float((mov[key].double()-still[key].double()).abs().max())})
++    assert sum(row['same'] for row in rows)==policy['unchanged_count']==12
++    new_meta=checked_metadata(root/'artifacts/filtered_reference.safetensors')
++    old_meta=checked_metadata(old/'artifacts/filtered_reference.safetensors')
++    new_filter=load_file(str(root/'artifacts/filtered_reference.safetensors'))
++    old_filter=load_file(str(old/'artifacts/filtered_reference.safetensors'))
++    new_key=locations(new_meta['structure'])['root.reference']
++    old_key=locations(old_meta['structure'])['root.reference']
++    assert torch.equal(new_filter[new_key],old_filter[old_key])
++    assert new_meta['provenance']['parent_cache_sha256']==still_meta['file_sha256']
++    assert old_meta['provenance']['parent_cache_sha256']==mov_meta['file_sha256']
++    assert new_meta['provenance']['filter_code_sha256']==old_meta['provenance']['filter_code_sha256']==policy['filter_code_sha256']
++    assert new_meta['provenance']['parent_ref_sha256']==old_meta['provenance']['parent_ref_sha256']==policy['original_ref_value_sha256']
++    assert new_meta['provenance']['filtered_ref_sha256']==old_meta['provenance']['filtered_ref_sha256']==policy['filtered_ref_value_sha256']
++    assert file_hash(old/'artifacts/filtered_reference.json')==policy['old_filtered_metadata_sha256']
++    report={'experiment':'B-015','status':'PASS','changed_count':4,'unchanged_count':12,'comparison':'bit-exact controls; all four driving leaves must differ',
++       'policy_sha256':file_hash(root/'configs/pair_baseline.json'),'STILL_cache_sha256':still_meta['file_sha256'],
++       'MOV_cache_sha256':mov_meta['file_sha256'],'new_filtered_metadata_sha256':file_hash(root/'artifacts/filtered_reference.json'),
++       'new_filtered_file_sha256':file_hash(root/'artifacts/filtered_reference.safetensors'),'old_filtered_metadata_sha256':policy['old_filtered_metadata_sha256'],
++       'filtered_values_exact':True,'original_reference_value_sha256':policy['original_ref_value_sha256'],
++       'filtered_reference_value_sha256':policy['filtered_ref_value_sha256'],'rows':rows}
++    atomic_json(root/'reports/PAIR_AUDIT.json',report)
++    atomic_json(root/'configs/pair_audit.json',report)
++
++
++if __name__=='__main__':main(Path(sys.argv[1]))
+--- B014/code/phase_sample.py
++++ B015/code/phase_sample.py
+@@ -66 +66 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-014','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-013-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest(),'alg_reference_sidecar':filter_sidecar,'alg_branches_sha256':hashlib.sha256((root/'reports/alg_branches.jsonl').read_bytes()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-015','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-013-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest(),'alg_reference_sidecar':filter_sidecar,'alg_branches_sha256':hashlib.sha256((root/'reports/alg_branches.jsonl').read_bytes()).hexdigest()})
+@@ -78 +78 @@
+-    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2,'B013':2}})
++    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2,'B013':2,'B014':1}})
+--- B014/code/prepare_filter.py
++++ B015/code/prepare_filter.py
+@@ -5,0 +6 @@
++import time
+@@ -13,0 +15,5 @@
++    policy=json.loads((root/'configs/pair_baseline.json').read_text())
++    old_root=root.parent/policy['ALG_MOV']
++    assert hashlib.sha256((old_root/'artifacts/filtered_reference.safetensors').read_bytes()).hexdigest()==policy['old_filtered_file_sha256']
++    assert hashlib.sha256((old_root/'artifacts/filtered_reference.json').read_bytes()).hexdigest()==policy['old_filtered_metadata_sha256']
++    old_filtered,old_sidecar=load_tree(old_root/'artifacts/filtered_reference.safetensors',device='cpu')
+@@ -23 +29,5 @@
+-    provenance={'experiment':'B-014','parent_cache_sha256':receipt['hashes']['conditions.safetensors'],
++    assert digest(positive)==policy['original_ref_value_sha256']
++    assert digest(filtered)==policy['filtered_ref_value_sha256'] and torch.equal(filtered,old_filtered['reference'])
++    assert receipt['hashes']['conditions.safetensors']!=old_sidecar['provenance']['parent_cache_sha256']
++    provenance={'created_epoch':time.time(),'origin_MOV_sidecar_sha256':policy['old_filtered_metadata_sha256'],
++        'same_filtered_values_as_MOV':True,'experiment':'B-015','parent_cache_sha256':receipt['hashes']['conditions.safetensors'],
+--- B014/code/prepare_layout.py
++++ B015/code/prepare_layout.py
+@@ -1 +1 @@
+-"""Create only new B014 worker directories; immutable parent P stays outside."""
++"""Create only new B015 worker directories; immutable parent P stays outside."""
+--- B014/code/run_phase.py
++++ B015/code/run_phase.py
+@@ -1 +1 @@
+-"""Fresh B-014 worker; immutable parent P reuse, one PROBE/S/D maximum."""
++"""Fresh B-015 worker; immutable parent P reuse, one PROBE/S/D maximum."""
+@@ -16 +16 @@
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2,'B013':2,'B014_P':0},'max_stage_attempts':1},file)
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0,'B011':1,'B012':2,'B013':2,'B014':1,'B015_P':0},'max_stage_attempts':1},file)
+@@ -38,0 +39,12 @@
++        pair=json.loads((root/'configs/pair_audit.json').read_text())
++        assert pair['status']=='PASS' and (pair['changed_count'],pair['unchanged_count'])==(4,12)
++        assert pair['STILL_cache_sha256']==cache_receipt['hashes']['conditions.safetensors']
++        assert pair['policy_sha256']==hashlib.sha256((root/'configs/pair_baseline.json').read_bytes()).hexdigest()
++        policy=json.loads((root/'configs/pair_baseline.json').read_text())
++        assert pair['MOV_cache_sha256']==policy['old_cache_sha256']
++        parent_base=root.parent.parent.parent
++        assert hashlib.sha256((parent_base/policy['moving_parent']/'artifacts/conditions.safetensors').read_bytes()).hexdigest()==policy['old_cache_sha256']
++        assert hashlib.sha256((parent_base/policy['ALG_MOV']/'artifacts/filtered_reference.json').read_bytes()).hexdigest()==policy['old_filtered_metadata_sha256']
++        assert hashlib.sha256((parent_base/policy['ALG_MOV']/'artifacts/filtered_reference.safetensors').read_bytes()).hexdigest()==policy['old_filtered_file_sha256']
++        assert pair['new_filtered_metadata_sha256']==hashlib.sha256((root/'artifacts/filtered_reference.json').read_bytes()).hexdigest()
++        assert pair['new_filtered_file_sha256']==hashlib.sha256((root/'artifacts/filtered_reference.safetensors').read_bytes()).hexdigest()
+@@ -54 +66 @@
+-                assert meta['provenance']['executing_experiment']=='B-014'
++                assert meta['provenance']['executing_experiment']=='B-015'
+--- B014/code/runtime_guard.py
++++ B015/code/runtime_guard.py
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T20:30:00+00:00').timestamp()
+-UNIT: Final = 'make-meme-b014-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T21:25:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b015-pipeline'
+--- B014/code/runtime_launch.py
++++ B015/code/runtime_launch.py
+@@ -18 +18 @@
+-    '--unit=make-meme-b014-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b015-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
+--- B014/code/test_alg.py
++++ B015/code/test_alg.py
+@@ -145 +145 @@
+-    actual=Path(os.environ['B014_ROOT'])
++    actual=Path(os.environ['B015_ROOT'])
+@@ -148 +148 @@
+-    (tmp_path/'PREREGISTERED_CODE.json').write_text('{"experiment":"B-014"}')
++    (tmp_path/'PREREGISTERED_CODE.json').write_text('{"experiment":"B-015"}')
+@@ -154 +154 @@
+-    changed=json.loads(parent.read_text());changed['experiment']='B-014'
++    changed=json.loads(parent.read_text());changed['experiment']='B-015'
+@@ -156,0 +157,27 @@
++
++
++def test_pair_gate_rejects_changed_control_or_unchanged_driving():
++    # Given a controlled text leaf and an explicitly changed driving leaf.
++    from pair_audit import check_pair_leaf
++    moving=torch.ones(2);still=moving.clone();changed=['root.arg_c.pose_latents[0]']
++    # When an unregistered control changes or driving is accidentally unchanged.
++    with pytest.raises(AssertionError):check_pair_leaf('root.noise',moving,still+1e-6,changed)
++    with pytest.raises(AssertionError):check_pair_leaf(changed[0],moving,still,changed)
++    # Then the intended changed driving leaf is accepted without relaxing controls.
++    assert check_pair_leaf(changed[0],moving,still+1,changed) is False
++
++
++def test_still_filter_rejects_MOV_parent_substitution():
++    # Given the actual STILL-parent sidecar and immutable MOV comparison policy.
++    import json
++    import os
++    from pathlib import Path
++    root=Path(os.environ['B015_ROOT'])
++    sidecar=json.loads((root/'artifacts/filtered_reference.json').read_text())
++    receipt=json.loads((root/'artifacts/conditions_receipt.json').read_text())
++    policy=json.loads((root/'configs/pair_baseline.json').read_text())
++    # When actual parent and filter contracts are compared.
++    parent=sidecar['provenance']['parent_cache_sha256']
++    # Then values match MOV but parent binding must be the different STILL cache.
++    assert parent==receipt['hashes']['conditions.safetensors'] and parent!=policy['old_cache_sha256']
++    assert sidecar['provenance']['filtered_ref_sha256']==policy['filtered_ref_value_sha256']
