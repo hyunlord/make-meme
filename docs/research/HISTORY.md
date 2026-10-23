@@ -280,3 +280,7 @@
 **PROBE/S/D PASS / 공식17프레임 MP4·final latent 확보.** G 조건을 재사용하고 CPU DiT 적재 전 실제64-byte CUDA 연산을 완료했다. S1회에서80 forward·40step, D1회에서896×512·16fps·1.0625초 영상을 저장했다. guarded S1199.009초/D15.228초, 최소 MemAvailable52.44GiB, swap/OOM0. P·재시도·Lab·학습0. G 원인UNKNOWN과 시간 품질UNVERIFIED를 유지한다. [RESULTS](experiments/B-007H-cuda-lifecycle/RESULTS.md).
 
 다음 하나는 기존 Lab 참조/RGB/mask의 제한된17프레임 baseline이다. 별도 결정 전 자동 실행하지 않는다.
+
+## B-008 착수 (2026-10-23)
+
+**RUNNING / Lab P·PROBE·S·D NOT_RUN.** 원격 `c7d38938e51943576637611cdec9ae51902e0d65`와 [PLAN](experiments/B-008-lab-rgb-baseline/PLAN.md), [단계 전환 결정](decisions/20261023-B-007H-to-B-008.md)을 확인했다. H의 공식 MP4 확보를 기반으로 실행 진단에서 실제 Lab 품질 연구로 옮긴다. 성공한 tiny CUDA 선행/anchor·단계 분리·loader를 유지하고 기존 실제 사진/RED mask/f0~16으로 Lab 전용 P를 만든다. 가로 공식값을 삭제해 우회하지 않고 case별 manifest로 검증한다. 3시간, P1/PROBE1/S1/D1·학습0·재시도0. 결과 관찰 전 코드·config를 고정한다.
