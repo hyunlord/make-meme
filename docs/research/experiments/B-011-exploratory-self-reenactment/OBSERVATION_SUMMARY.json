@@ -1,0 +1,50 @@
+{
+  "scope": "source-only, before new output; five fixed frames and five fixed visible proxies",
+  "level_A": "OBSERVABLE_SCREEN_CHANGE; exploratory GO subject to independent input/safety contract",
+  "level_B": "INCONCLUSIVE; absolute movement not proof of articulation",
+  "level_C": "NOT_RUN",
+  "annotation_sha256": "3049e5b2fa6d443283f4d22a769f10d2c0c2f49a6d76890398039672a9822221",
+  "same_agent_reread_not_ground_truth": true,
+  "systematic_bias": "UNKNOWN",
+  "radius_kind": "conservative heuristic radius, not trackerRMSE/stddev/95percentCI",
+  "old_B010_E_copy_px": 15.510671754361123,
+  "old_B010_radius_sum_mean_px": 19.422222222222224,
+  "current_E_copy_px": 16.540681322640985,
+  "current_radius_sum_mean_px": 19.422222222222224,
+  "coverage": {
+    "visible": 20,
+    "expected": 20
+  },
+  "groups": {
+    "head": {
+      "n_displacements": 12,
+      "mean_displacement_px": 18.04201521780318,
+      "mean_radius_sum_px": 14.444444444444445,
+      "above_radius_count": 9,
+      "same_agent_reread_difference_mean_px": 2.560690660543328,
+      "same_agent_reread_difference_max_px": 5.366282093493059,
+      "reread_not_independent_accuracy_measurement": true
+    },
+    "forepaw": {
+      "n_displacements": 8,
+      "mean_displacement_px": 14.288680479897693,
+      "mean_radius_sum_px": 26.88888888888889,
+      "above_radius_count": 0,
+      "same_agent_reread_difference_mean_px": 5.634685099298943,
+      "same_agent_reread_difference_max_px": 9.626928975625392,
+      "reread_not_independent_accuracy_measurement": true
+    }
+  },
+  "gain": "UNDEFINED for B011 integrated gain; fixed before generation, not a generation gate",
+  "temporal_quality": "UNVERIFIED",
+  "new_output": "NOT_RUN",
+  "observation_timing": {
+    "start_utc": "2026-10-23T06:21:00+00:00",
+    "start_basis": "root task wallclock start06:21UTC; conservative includes setup",
+    "first_panel_file_mtime_utc": "2026-10-23T06:22:58.137685+00:00",
+    "finished_utc": "2026-10-23T06:26:42.051779+00:00",
+    "elapsed_seconds": 342.051779,
+    "limit_seconds": 1800,
+    "new_generated_output_viewed": false
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "syntax": "PASS",
+  "critical_ruff": "PASS",
+  "type_status": "NOT_CLEAN",
+  "inherited_typecheck": "B010 comparator 81 errors; B011 comparator numerical logic unchanged except experiment provenance, no clean typecheck claim"
+}

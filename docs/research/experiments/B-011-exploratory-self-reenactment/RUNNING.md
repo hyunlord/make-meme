@@ -2,9 +2,9 @@
 
 상태 RUNNING / GPU NOT_RUN. 시작 2026-10-23 06:21 UTC, 원격 HEAD `dfa23d6ffeb49a8471eb3487085739f35e82d646`. 전체 deadline 09:21 UTC, 실행 worker는 보수적으로09:15 UTC를 사용한다. B-010 DIAGNOSTIC_INSUFFICIENT와 사용0 기록을 보존한다.
 
-1. IN_PROGRESS: 최대30분 source-only 관측 재검토 및 A(시간 변화)/B(부위 상대 운동) 평가 범위 사전 고정.
-2. PENDING: 동일 입력·prompt·최소 runtime/config 변경·fixture·해시 공개 고정.
-3. PENDING: 선행 입력/안전 검사 뒤 P→조건7변경/9보존→PROBE→S→D, 각최대1회·재시도0.
+1. COMPLETED (06:26:42 UTC; 최대342.052초): 최대30분 source-only 관측 재검토 및 A(시간 변화)/B(부위 상대 운동) 평가 범위 사전 고정.
+2. COMPLETED (CPU8fixture·540hash·독립 검토 PASS): 동일 입력·prompt·최소 runtime/config 변경·fixture·해시 공개 고정.
+3. IN_PROGRESS (사전 커밋 후 P부터 순차 실행): 선행 입력/안전 검사 뒤 P→조건7변경/9보존→PROBE→S→D, 각최대1회·재시도0.
 4. PENDING: 전체17장 source/STATIC COPY/출력 비교, 평가 불확실성·실측·한국어 해설.
 5. PENDING: 결과·HISTORY·ROADMAP·재현 공개 동기화 및 비공개 ZIP·양호스트 무결성 검증.
 

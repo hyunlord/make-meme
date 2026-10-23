@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "host": "Spark",
+  "tests": 8,
+  "seconds": 0.92,
+  "CUDA_VISIBLE_DEVICES": "",
+  "scope": "CPU-only contracts and negative fixtures; no model generation"
+}

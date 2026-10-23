@@ -1,0 +1,56 @@
+--- B010/code/contracts.py	2026-10-23 14:33:22
++++ B011/code/contracts.py	2026-10-23 15:26:52
+@@ -44 +44 @@
+-    assert receipt['experiment']=='B-010' and receipt['case']==active_contract(root).name
++    assert receipt['experiment']=='B-011' and receipt['case']==active_contract(root).name
+--- B010/code/phase_prepare.py	2026-10-23 14:33:22
++++ B011/code/phase_prepare.py	2026-10-23 15:26:52
+@@ -43,2 +43,2 @@
+-        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-010','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
+-        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-010','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
++        save_tree(root/'artifacts/conditions.safetensors',{'noise':noise,'arg_c':arg_c,'arg_null':arg_null,'history':history,'generator_state':generator.get_state(),'timesteps':scheduler.timesteps,'sigmas':scheduler.sigmas}, {'experiment':'B-011','case':contract.name,'preprocessed_inputs':observed,'observed_vae_stride':list(owner.vae_stride),'config':cfg,'initial_noise_sha256':digest,'source_method_hash':method_hash,'history':None,'segment':[0,17],'vae_mean_std':[owner.vae.mean.detach().cpu().tolist(),owner.vae.std.detach().cpu().tolist()],'vae_scale':[part.detach().cpu().tolist() for part in owner.vae.scale],'normalization':'Official WanVAE encode/decode wrapper; no external scaling','input_hashes':json.loads((root/'configs/input_config_hashes.json').read_text()),'code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'models':json.loads((root/'PREREGISTERED_INPUTS.json').read_text())})
++        atomic_json(root/'artifacts/conditions_receipt.json',{'experiment':'B-011','case':contract.name,'code_sha256':hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest(),'hashes':{name:hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest() for name in ('conditions.safetensors','conditions.json','initial_noise.pt')},'initial_noise_sha256':digest})
+--- B010/code/phase_sample.py	2026-10-23 14:33:22
++++ B011/code/phase_sample.py	2026-10-23 15:26:52
+@@ -55 +55 @@
+-        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-010','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-010-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
++        save_tree(root/'artifacts/final_latent.safetensors',{'x0':x0},{'executing_experiment':'B-011','executing_code':json.loads((root/'PREREGISTERED_CODE.json').read_text()),'parent_condition_experiment':'B-011-P','condition_sha256':meta['file_sha256'],'condition_provenance':meta['provenance'],'config':cfg,'counters':counters,'normalization':'Exact generated model-space x0; WanVAE decode applies mean/std internally','history':None,'reference_prefix_included':False,'sampler_source_sha256':hashlib.sha256(extracted.encode()).hexdigest()})
+@@ -66 +66 @@
+-    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1}})
++    atomic_json(root/'reports/sampler-attempt.json',{'attempt':1,'max':1,'scope':contract.name+'17f','parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0}})
+--- B010/code/prepare_layout.py	2026-10-23 14:33:22
++++ B011/code/prepare_layout.py	2026-10-23 15:26:52
+@@ -1 +1 @@
+-"""Isolated B-010 stages; new cache, read-only E environment/models/inputs."""
++"""Isolated B-011 stages; new cache, read-only E environment/models/inputs."""
+--- B010/code/run_phase.py	2026-10-23 14:33:22
++++ B011/code/run_phase.py	2026-10-23 15:26:52
+@@ -1 +1 @@
+-"""Fresh bounded B-010 case worker; each P/PROBE/S/D stage runs at most once."""
++"""Fresh bounded B-011 case worker; each P/PROBE/S/D stage runs at most once."""
+@@ -16 +16 @@
+-        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1},'max_stage_attempts':1},file)
++        json.dump({'stage':stage,'time':time.time(),'parent_history':{'E':1,'F':1,'G_reserved':1,'H':1,'B008':1,'B009':1,'B010':0},'max_stage_attempts':1},file)
+@@ -51 +51 @@
+-                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-010'
++                assert len(meta['tensors'])==16 and meta['provenance']['experiment']=='B-011'
+@@ -60 +60 @@
+-                assert meta['provenance']['executing_experiment']=='B-010'
++                assert meta['provenance']['executing_experiment']=='B-011'
+--- B010/code/runtime_guard.py	2026-10-23 14:33:22
++++ B011/code/runtime_guard.py	2026-10-23 15:26:52
+@@ -19,2 +19,2 @@
+-DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T08:00:00+00:00').timestamp()
+-UNIT: Final = 'make-meme-b010-pipeline'
++DEADLINE: Final = dt.datetime.fromisoformat('2026-10-23T09:15:00+00:00').timestamp()
++UNIT: Final = 'make-meme-b011-pipeline'
+--- B010/code/runtime_launch.py	2026-10-23 14:33:22
++++ B011/code/runtime_launch.py	2026-10-23 15:26:52
+@@ -18 +18 @@
+-    '--unit=make-meme-b010-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
++    '--unit=make-meme-b011-watchdog','-p',f'RuntimeMaxSec={seconds+30}',
+--- B010/code/test_contracts.py	2026-10-23 14:35:18
++++ B011/code/test_contracts.py	2026-10-23 15:26:52
+@@ -40 +40 @@
+-    receipt={'experiment':'B-010','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}
++    receipt={'experiment':'B-011','case':'lab','code_sha256':hashlib.sha256(code.read_bytes()).hexdigest(),'hashes':{n:hashlib.sha256((tmp_path/'artifacts'/n).read_bytes()).hexdigest() for n in ('conditions.safetensors','conditions.json','initial_noise.pt')}}

@@ -1,0 +1,32 @@
+{
+  "baseline_cache_sha256": "e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3",
+  "baseline_mask_sha256": "ea54f417f109793210c405d2452152b839fd57f81329811fb650958e830bab9f",
+  "float_unchanged_rtol": 1e-05,
+  "float_unchanged_atol": 1e-06,
+  "tolerance_rationale": "Only tiny encoder floating roundoff; masks/noise/RNG/scheduler exact. Changes beyond tolerance block S.",
+  "old_config": {
+    "name": "lab",
+    "reference": "inputs/lab/reference.png",
+    "reference_mask": "inputs/lab/reference-mask-white.png",
+    "driver": "inputs/lab/driver-24fps.mp4",
+    "driver_mask": "inputs/lab/mask-24fps.mp4",
+    "prompt": "A black Labrador retriever with the face, ears and black fur of the reference photograph, a broad chest, heavy torso and thick limbs, performing the upright dance motion of the driving video."
+  },
+  "new_config": {
+    "name": "self",
+    "reference": "inputs/self/reference.png",
+    "reference_mask": "inputs/self/reference-mask-white.png",
+    "driver": "inputs/self/driver-24fps.mp4",
+    "driver_mask": "inputs/self/mask-24fps.mp4",
+    "prompt": "A small light-colored short-haired dog stands upright indoors, making subtle head and front-paw movements."
+  },
+  "expected_changed_locations": [
+    "root.arg_c.context[0]",
+    "root.arg_c.ref_latents[0]",
+    "root.arg_c.ref_masks[0]",
+    "root.arg_c.clip_fea",
+    "root.arg_null.ref_latents[0]",
+    "root.arg_null.ref_masks[0]",
+    "root.arg_null.clip_fea"
+  ]
+}
