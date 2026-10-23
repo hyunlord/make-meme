@@ -62,6 +62,8 @@ S의 최소 시스템 MemAvailable은52.86GiB, cgroup peak62.01GiB, 관측된 CU
 
 동일 개체 자기 재현은 Lab로 바꾸는 cross-identity 전이의 증거가 아니다. Lab/IG 개체·체형/전체 춤/접촉 물리/일반화/Kling 수용은 NOT_RUN이다. [한국어 수학·코드 설명](../../lessons/B-011-measurement-and-generative-diagnostics.md), [재현 명령](REPRODUCE.md)을 함께 제공한다.
 
+비공개 ZIP은 Spark에서 만들고 Mac으로 전송한 뒤 CRC·290개 payload·전체 ZIP SHA256을 검증했다. [전달 영수증](DELIVERY.md). 공개 저장소에는 개인 미디어·좌표·cache·latent·가중치를 포함하지 않는다.
+
 ## 다음 한 작업
 
 기존 원본에서 머리·앞발의 상대 움직임이 더 명확한 짧은 구간을 **source-only로 검토**한다. 같은17장 재주석을 반복하거나 그 새 구간을 이번에 생성하지 않는다. 추가 sampler·seed·학습·모델 변경은 실행하지 않았다.
