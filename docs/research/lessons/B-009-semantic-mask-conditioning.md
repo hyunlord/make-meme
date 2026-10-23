@@ -1,6 +1,6 @@
 # B-009 — RGB를 지우는 마스크와 의미 조건의 차이
 
-현재 **CPU 사전 검증 PASS / P·조건 통제 PASS / 생성 결과 대기**다. [PLAN](../experiments/B-009-reference-mask-semantics/PLAN.md)은 B-008 결과를 보존하고 reference mask의 정확한 BLACK 픽셀만 WHITE로 바꾸는 한 번의 비교다. reference RGB, RED 개체 영역, driving RGB/mask, prompt와 sampling 설정은 고정한다. 착석 실패의 원인이 마스크였다고 미리 결론 내리지 않는다.
+최종 **P/PROBE/S/D 기술 PASS / mask-only 통제 PASS / 동작 개선 없음·동작 전달 FAIL**이다. [PLAN](../experiments/B-009-reference-mask-semantics/PLAN.md)은 B-008 결과를 보존하고 reference mask의 정확한 BLACK 픽셀만 WHITE로 바꾸는 한 번의 비교다. reference RGB, RED 개체 영역, driving RGB/mask, prompt와 sampling 설정은 고정한다. 착석 실패의 원인이 마스크였다고 미리 결론 내리지 않는다.
 
 ## 1. 먼저 바로잡는 역사적 해석
 
@@ -59,7 +59,19 @@ BLACK은7개가 모두0이다. 공간축은3번의 ceil-half로 줄이고 area i
 
 ## 6. 관측 상태
 
-B-008 원본 mask는 RED113,928/BLACK344,824/WHITE0 pixels였다. CPU 검증10개가1.11초에 PASS했으며 GPU 호출0이다. 양 CFG mask branch와 RED/generated/noise/큰 float 변화 거부를 확인했고 driving mask의1e-7 변화도 exact 검사에서 거부했다. 실제 자산 CPU audit도 PASS로 확인됐으며 P는114.974초에 완료했다. S/D 완료와 품질 판정은 대기다. 이 숫자는 계획의 parent 근거이며 신규 실행 성과가 아니다. 공개에는 hash/비민감 요약만 남긴다.
+B-008 원본 mask는 RED113,928/BLACK344,824/WHITE0 pixels였다. CPU 검증10개가1.11초에 PASS했으며 GPU 호출0이다. 양 CFG mask branch와 RED/generated/noise/큰 float 변화 거부를 확인했고 driving mask의1e-7 변화도 exact 검사에서 거부했다. 실제 자산 CPU audit도 PASS로 확인됐으며 P는114.974초에 완료했다. S는1093.089초에80 forward·40 step을 완료했고 D는15.233초에 finite raw17장·24fps MP4를 생성했다. 마스크 원본 수치는 B-008 근거이고, CPU 검사와 P 실행은 이번 B-009의 실제 측정이다. 공개에는 hash/비민감 요약만 남긴다.
+
+### 실제 P 조건 통제 결과
+
+P114.974초 PASS, 새 cache SHA256은 `e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3`이다.16개 leaf 중 t4/t10(양 CFG branch의 reference mask)만 예상 WHITE prefix 변화가 있었고 max absolute delta는1이었다. 다른14개 leaf는 bit-identical, max delta0이었다. 따라서 사전 등록된 비마스크 float tolerance 범위에 기대어 통과한 사례가 아니라 실제 exact equality를 관측했다. non-WHITE/reference RED 및 generated plane도 통제 검사를 통과했다. 이는 실제 입력 조건 통제의 증거이며 자세 개선이나 유일 원인 규명의 증거는 아니다.
+
+### 실제 정적 비교와 결론
+
+실행 담당자가 f0/4/8/12/16과 전체17장을 직접 비교했다. B-008과 B-009 모두 앉은 자세와 내려놓은 앞발을 유지해 원본의 직립·들어 올린 앞발을 재현하지 못했다. 따라서 **WHITE 개입에 따른 동작 개선은 관찰되지 않았고 motion transfer는 FAIL**이다. 작은 머리·화면상 크기 변화는 있으나 source 동작 단계 대응 PASS로 보지 않는다.
+
+두 결과 모두 검은 Lab와 넓은 가슴이 참조를 닮았지만 특정 개체 identity는 UNCERTAIN이다. 큰 정적 형상 붕괴는 뚜렷하지 않았고 발 접촉·반사는 UNCERTAIN이다. WHITE animation에서 침실 유지 자체는 FAIL이 아니다. 실제 연속 재생은 관찰하지 않아 temporal=UNVERIFIED다.
+
+이 사례에서 reference WHITE 가시성만으로 착석 pose 고정을 해소하기에 충분하지 않았다. 원인이 mask가 전혀 아니라는 일반 결론이나 모델의 동물 motion 능력 부재로 확대하지 않는다. 다음 제안은 **source 첫 프레임 reference를 쓰는 통제된 자기 재구성 진단 한 가지**다. 새 생성 없는 first-frame-repeat 정적 대조군과 motion 방향·phase·시간을 함께 비교해 단순 직립 reference 복사를 성공으로 세지 않는다. source 변화가 너무 작으면 INCONCLUSIVE로 남긴다. 이번에는 실행하지 않았다.
 
 ## 이해 확인 질문
 
@@ -72,7 +84,3 @@ B-008 원본 mask는 RED113,928/BLACK344,824/WHITE0 pixels였다. CPU 검증10�
 1. RGB는 따로 VAE/CLIP 처리되며 mask가 RGB를 곱해 지우는 alpha가 아니다. BLACK은 의미 조건의 zero이지 reference branch 제거가 아니다.
 2.4개 시간 slot 각각에7색이 들어가는 pack 순서다. area 평균은 각 latent 셀의 색 영역 coverage를 전달한다.
 3. WHITE animation은 배경 가시성을 요청하므로 침실 유지 자체는 실패가 아니다. 원본 직립·앞발 동작이 전달되지 않으면 motion은 실패이며, WHITE만으로 충분하지 않다는 결론만 가능하다.
-
-### 실제 P 조건 통제 결과
-
-P114.974초 PASS, 새 cache SHA256은 `e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3`이다.16개 leaf 중 t4/t10(양 CFG branch의 reference mask)만 예상 WHITE prefix 변화가 있었고 max absolute delta는1이었다. 다른14개 leaf는 bit-identical, max delta0이었다. 따라서 사전 등록된 비마스크 float tolerance 범위에 기대어 통과한 사례가 아니라 실제 exact equality를 관측했다. non-WHITE/reference RED 및 generated plane도 통제 검사를 통과했다. 이는 실제 입력 조건 통제의 증거이며 생성 자세 개선이나 유일 원인 규명은 아직 아니다. 후속 생성·시각 품질은 대기다.

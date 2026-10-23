@@ -1,0 +1,317 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "key": "t14",
+      "location": "root.timesteps",
+      "shape": [
+        40
+      ],
+      "dtype": "torch.int64",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+      "new_sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t0",
+      "location": "root.noise",
+      "shape": [
+        16,
+        5,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+      "new_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t10",
+      "location": "root.arg_null.ref_masks[0]",
+      "shape": [
+        28,
+        6,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": false,
+      "max_abs": 1.0,
+      "mask_intervention": true,
+      "pass": true,
+      "old_sha256": "f2cefee67f6c93a49de137401079ad48b85e2702f595304619f30efb0980bc82",
+      "new_sha256": "b1cafd036d30565b505e322b88c823e1183ad4b920c1c0b394952d15b38bcbd8",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t11",
+      "location": "root.arg_null.pose_latents[0]",
+      "shape": [
+        16,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "64b92467c59befc61ddf6df3c0f4f6728c049098509f0734b9c786c9cd67ceaa",
+      "new_sha256": "64b92467c59befc61ddf6df3c0f4f6728c049098509f0734b9c786c9cd67ceaa",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t12",
+      "location": "root.arg_null.driving_masks[0]",
+      "shape": [
+        28,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "04083e1871619de1ffc261fad689599674b08f89f894456c4f9490171a9c6ab5",
+      "new_sha256": "04083e1871619de1ffc261fad689599674b08f89f894456c4f9490171a9c6ab5",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t15",
+      "location": "root.sigmas",
+      "shape": [
+        41
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+      "new_sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+      "old_device": "cpu",
+      "new_device": "cpu"
+    },
+    {
+      "key": "t3",
+      "location": "root.arg_c.ref_latents[0]",
+      "shape": [
+        16,
+        1,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+      "new_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t4",
+      "location": "root.arg_c.ref_masks[0]",
+      "shape": [
+        28,
+        6,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": false,
+      "max_abs": 1.0,
+      "mask_intervention": true,
+      "pass": true,
+      "old_sha256": "f2cefee67f6c93a49de137401079ad48b85e2702f595304619f30efb0980bc82",
+      "new_sha256": "b1cafd036d30565b505e322b88c823e1183ad4b920c1c0b394952d15b38bcbd8",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t5",
+      "location": "root.arg_c.pose_latents[0]",
+      "shape": [
+        16,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "64b92467c59befc61ddf6df3c0f4f6728c049098509f0734b9c786c9cd67ceaa",
+      "new_sha256": "64b92467c59befc61ddf6df3c0f4f6728c049098509f0734b9c786c9cd67ceaa",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t6",
+      "location": "root.arg_c.driving_masks[0]",
+      "shape": [
+        28,
+        5,
+        56,
+        32
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "04083e1871619de1ffc261fad689599674b08f89f894456c4f9490171a9c6ab5",
+      "new_sha256": "04083e1871619de1ffc261fad689599674b08f89f894456c4f9490171a9c6ab5",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t9",
+      "location": "root.arg_null.ref_latents[0]",
+      "shape": [
+        16,
+        1,
+        112,
+        64
+      ],
+      "dtype": "torch.float32",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+      "new_sha256": "0ad957276e89e5692743ee9d8438044fe37daa48500c311746ccd949e93703c0",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t1",
+      "location": "root.arg_c.context[0]",
+      "shape": [
+        44,
+        4096
+      ],
+      "dtype": "torch.bfloat16",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "010eb46e52a73d3f94e08fd69165ab819d9d67ce98eb0039d40d1a73a21b3698",
+      "new_sha256": "010eb46e52a73d3f94e08fd69165ab819d9d67ce98eb0039d40d1a73a21b3698",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t7",
+      "location": "root.arg_null.context[0]",
+      "shape": [
+        1,
+        4096
+      ],
+      "dtype": "torch.bfloat16",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+      "new_sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t2",
+      "location": "root.arg_c.clip_fea",
+      "shape": [
+        1,
+        257,
+        1280
+      ],
+      "dtype": "torch.float16",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+      "new_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t8",
+      "location": "root.arg_null.clip_fea",
+      "shape": [
+        1,
+        257,
+        1280
+      ],
+      "dtype": "torch.float16",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+      "new_sha256": "6f4b2a995b3891af9f4f112cd59e38683bb51d2eba35bd755a668cfe7aa889a4",
+      "old_device": "cuda:0",
+      "new_device": "cuda:0"
+    },
+    {
+      "key": "t13",
+      "location": "root.generator_state",
+      "shape": [
+        16
+      ],
+      "dtype": "torch.uint8",
+      "exact_equal": true,
+      "max_abs": 0.0,
+      "mask_intervention": false,
+      "pass": true,
+      "old_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+      "new_sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+      "old_device": "cpu",
+      "new_device": "cpu"
+    }
+  ],
+  "mask_keys": [
+    "t4",
+    "t10"
+  ],
+  "old_cache_sha256": "96164a2c54d38e86f006504824a85499f669eaca12f05ee3e6afe5a3858a0287",
+  "new_cache_sha256": "e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3",
+  "policy_sha256": "c1e0a53328e0cf38f0032f5fc413b05645d9a46ca7dd576611c9dbfeae63d4ea",
+  "code_manifest_sha256": "c80d23012236e0b15277dbd3c6772eb23518cabe5a1781381e72218be07a4adb",
+  "helper_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+  "device": "cpu",
+  "cuda_initialized": false,
+  "evidence": "Post-run metadata-only enrichment of frozen condition comparison; no tensor modification or GPU operation.",
+  "configuration": {
+    "seed": 20261022,
+    "steps": 40,
+    "solver": "unipc",
+    "shift": 3.0,
+    "cfg": 5.0,
+    "replace_flag": false,
+    "history": null,
+    "negative_prompt": "",
+    "reference_mask_intervention": "exact BLACK to WHITE; RED unchanged"
+  }
+}

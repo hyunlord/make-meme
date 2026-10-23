@@ -1,0 +1,117 @@
+{
+  "experiment": "B-009",
+  "prereg_commit": "1936356099823ebf720a26a5e82671fdbe6cec67",
+  "stages": {
+    "P": {
+      "attempts": 1,
+      "cap": 1,
+      "status": "COMPLETED",
+      "seconds": 114.97426509857178,
+      "reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+    },
+    "PROBE": {
+      "attempts": 1,
+      "cap": 1,
+      "status": "COMPLETED",
+      "seconds": 6.078556776046753,
+      "reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+    },
+    "S": {
+      "attempts": 1,
+      "cap": 1,
+      "status": "COMPLETED",
+      "seconds": 1093.0887134075165,
+      "reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+    },
+    "D": {
+      "attempts": 1,
+      "cap": 1,
+      "status": "COMPLETED",
+      "seconds": 15.232725858688354,
+      "reason": "service_exit",
+      "returncode": 0,
+      "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+    }
+  },
+  "sampler_attempts": 1,
+  "sampler_cap": 1,
+  "retries": 0,
+  "model_calls": 80,
+  "completed_steps": 40,
+  "final_latent_gate": {
+    "status": "PASS",
+    "shape": [
+      16,
+      5,
+      112,
+      64
+    ],
+    "dtype": "torch.float32",
+    "finite": true,
+    "counters": {
+      "model_calls": 80,
+      "completed_steps": 40
+    },
+    "final_value_sha256": "103d3dfc2b9ac6bb7c3b101000f25ea3985779266beb1bf6671aa04bb9968dd7",
+    "initial_noise_value_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+    "final_file_sha256": "22055e7161a59364630598df41619d344c7ad7bbc2503e07464d7d7c46a903e5",
+    "condition_sha256": "e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3",
+    "noise_matches_P_saved": true,
+    "final_distinct_from_noise": true,
+    "cuda_initialized": false
+  },
+  "outputs": {
+    "conditions.safetensors": {
+      "bytes": 17685156,
+      "sha256": "e151044c4939c751b551c839f878acedfa233485db72275594d75e619e518ae3"
+    },
+    "conditions.json": {
+      "bytes": 25983,
+      "sha256": "6e33db6b7b14e0dab54e6220a857f0134c8b2b772d28ae42408e2107cabdc8ed"
+    },
+    "conditions_receipt.json": {
+      "bytes": 522,
+      "sha256": "12d5c8e7f9bb0b3efb5954df822ab3403c90c38ad3a0425bdc3e4139fcbc426e"
+    },
+    "initial_noise.pt": {
+      "bytes": 2295379,
+      "sha256": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc"
+    },
+    "final_latent.safetensors": {
+      "bytes": 2293840,
+      "sha256": "22055e7161a59364630598df41619d344c7ad7bbc2503e07464d7d7c46a903e5"
+    },
+    "final_latent.json": {
+      "bytes": 32975,
+      "sha256": "9fc2fceec2ddb0fda50f2129f377e232f04d80ceade47e99edb87fa898054958"
+    },
+    "raw_output.pt": {
+      "bytes": 93587006,
+      "sha256": "0d0ee1c8b3dca69e3094ecbc5bf5befee715200eea35ecd07cd2cb6d3ff2da75"
+    },
+    "output.mp4": {
+      "bytes": 595794,
+      "sha256": "c3dea3bd5a21f7768a92b0a434dbf7c195a4bc7365fa4b9b12161ed94dc40152"
+    }
+  },
+  "video": {
+    "width": 512,
+    "height": 896,
+    "frames": 17,
+    "fps": 24,
+    "duration_seconds": 0.7083333333333334,
+    "raw_finite": true,
+    "full_ffmpeg_decode": "PASS"
+  },
+  "owned_processes_remaining": false,
+  "preservation_checks": 535,
+  "quality": "UNVERIFIED",
+  "training": 0,
+  "new_downloads": 0
+}

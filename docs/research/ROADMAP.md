@@ -185,3 +185,9 @@ COMPLETED: 신규2·재사용6·실패0·학습0. 전체2×2×2seed통제검증�
 **RUNNING / P·PROBE·S·D NOT_RUN.** [독립 검토 결정](decisions/20261023-B-008-review-and-B-009.md)에 따라 자기 재현보다 [reference mask 단일 변경](experiments/B-009-reference-mask-semantics/PLAN.md)을 우선한다. 기존 Lab mask의 정확한BLACK만WHITE로 바꾸고RED·RGB·driving·text·모드·seed·sampler는 유지한다. B-008을 대조군으로 재사용하며 새 P/PROBE/S/D 각1회·sampler1회·재시도/학습0이다.
 
 해석 정정: animation의WHITE는 참조 배경 가시성 조건이므로 침실이 남는 것 자체를 실패로 판단하지 않는다. B-008의 직립 전달 실패 관측은 유지한다. 공식 mixed-fps 학습 설명상 writer16fps 기본값을 고정16fps 학습 분포의 증거로 사용할 수 없다. 과거 기록은 보존하고 현재 해석을 이 항목으로 보완한다.
+
+## B-009 종료 (2026-10-23)
+
+**실행/조건통제 PASS · 직립/앞발 전달 FAIL.** 각P/PROBE/S/D1회,40step80forward,17f24fps MP4와 final latent 확보. 양 CFG WHITE prefix만 바뀌고 나머지14leaf는비트동일했다. 전체17장 정적 검토에서 B-008/B-009 모두 착석과 내려놓은 앞발을 유지했다. WHITE 하나로 충분하지 않으며 침실 유지 자체는 실패가 아니다. 실제 개체UNCERTAIN,temporalUNVERIFIED. S1093.089초/D15.233초,최소가용51.975GiB,swap/OOM0,cgroup high2101. [RESULTS](experiments/B-009-reference-mask-semantics/RESULTS.md).
+
+다음 후보 하나는 source-first-frame 자기 재현과 생성 없는first-frame-repeat 정적 대조군의 동작 비교다. 직립 복사만으로 성공 처리하지 않으며 판별 어려우면INCONCLUSIVE. 이번에는 실행하지 않았다. 추가 생성/학습은 별도 결정 전 진행하지 않는다.

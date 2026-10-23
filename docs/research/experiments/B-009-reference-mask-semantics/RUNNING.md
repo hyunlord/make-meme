@@ -1,12 +1,12 @@
 # B-009 실행 기록
 
-현재 상태: RUNNING / 신규 P·PROBE·S·D NOT_RUN.
+현재 상태: COMPLETED / P·PROBE·S·D PASS / 동작 전달 FAIL / temporal UNVERIFIED.
 시작 원격 HEAD `2b734cbeef6cdca1b334a672b240a7b0f5c2f45f`. 기존 격리 문서 checkout을 fast-forward로 갱신하고 A/B-008/H 실행 자산을 보존한다. 전체 종료시각2026-10-23 06:55UTC를 보수적으로 적용한다.
 
 1. COMPLETED: 정확한 BLACK→WHITE 신규 mask, RED 및 RGB/driver 보존·pinned helper·실행 계약/비교 tolerance 사전 검증.
 2. COMPLETED: 최소 실행 코드/config/입력 hash 사전 commit/push 및 독립 검토.
-3. IN_PROGRESS: P1→조건 비교→PROBE1→S1→D1, fresh worker 종료와 자원 회복 확인. 실패 시 재시도 없이 후속 중지.
-4. PENDING: 원본/B-008/B-009 전체17장·24fps 비교와 평가·한국어 이론.
+3. COMPLETED: P1→조건 비교→PROBE1→S1→D1, fresh worker 종료와 자원 회복 확인. 실패 시 재시도 없이 후속 중지.
+4. COMPLETED: 원본/B-008/B-009 전체17장·24fps 비교와 평가·한국어 이론.
 5. PENDING: 공개 결과 commit/push·비공개 ZIP 양호스트 CRC/해시·자체 프로세스 종료 검증.
 
 이번 변경은 Lab 사진 배경 수정이 아니라 reference semantic mask의 가시성 조건만 바꾸는 것이다. replace_flag=False/animation 유지. 침실 잔류 자체는 실패가 아니며 직립·앞발·동작 단계가 주 평가다. 기존 mask 결함PARTIAL, temporal은 실제 연속 관찰 전UNVERIFIED. 자기 재현은 보류하며 자동 실행하지 않는다.
