@@ -386,3 +386,7 @@ MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24f
 - S1266.471초 guard, 최소가용46.507GiB, CUDA peak33.847GiB, swap/OOM0. NFE80→88 비용과 관측 한계를 분리했다.
 - [결과](experiments/B-014-alg-scail-pilot/RESULTS.md), [이식감사](experiments/B-014-alg-scail-pilot/ADAPTATION_AUDIT.md), [학습](lessons/B-014-alg-and-conditional-velocity.md).
 - 다음 하나는 고정 ALG_STILL 대조군 제안이며 이번 NOT_RUN/미승인. 추가 실험으로 자동 진행하지 않는다.
+
+## 2026-10-24 — B-015 착수: ALG pilot의 마지막 정적 driving 대조군
+
+원격 `7214ed16e550169d92eaeb5e98a36fc7fc5d5a5a`의 [PLAN](experiments/B-015-alg-driving-control/PLAN.md)과 [결정](decisions/20261024-B-014-review-and-B-015.md)을 확인했다. B-014 이식·실행 PASS와 목표품질 NOT_ESTABLISHED는 보존한다. 남은 ALG_STILL 한 칸만 생성해 CFG/ALG×MOV/STILL을 완성하는 진단이며 강도·스케줄 탐색이 아니다. B-013 STILL cache를 읽기 전용 재사용하고 실제4변경/12보존 및 새 STILL-bound sidecar를 CPU 검증한다. 현재 GPU NOT_RUN, P0·PROBE/S/D각최대1·재시도0·3시간. [진행](experiments/B-015-alg-driving-control/RUNNING.md), [사전 평가](experiments/B-015-alg-driving-control/PREREG_EVALUATION.md). 비교 후 현재 ALG pilot을 닫고 다음 가설 하나만 제안한다.

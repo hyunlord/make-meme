@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**최신: B-014 이식·실행 완료 / 품질 개선 미입증.** [결과](experiments/B-014-alg-scail-pilot/RESULTS.md): 실제40step88forward·final latent·17f24fps MP4를 확보했다. 전신FAIL/국소PARTIAL/개체UNCERTAIN/시간UNVERIFIED이며 후기 얼굴·귀 손상은 남았다. 아래 과거 단계별 기록은 당시 상태다.
+**최신: B-015 RUNNING / GPU NOT_RUN.** [계획](experiments/B-015-alg-driving-control/PLAN.md)에 따라 고정 ALG_STILL 한 칸으로 현재 pilot을 마무리한다. B-014의 이식·실행 완료와 목표품질 미입증은 [결과](experiments/B-014-alg-scail-pilot/RESULTS.md)대로 보존한다. 아래 과거 단계별 기록은 당시 상태다.
 
 | 단계 | 질문 / 목표 | 상태 | 다음 단계에 필요한 근거 |
 |---|---|---|---|
@@ -250,3 +250,7 @@ source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 
 공식 ALG3항식의 SCAIL 이식과 단일 pilot은 완료했다. LP는 자세 제거기가 아니며 착석·후기 형태 손상을 해결하지 못했다. 부분적인 초중반 가독성 차이를 전신 동작 또는 전체 개체 보존 성공으로 확장하지 않는다. 모델 설치·추가 baseline·학습은0회다.
 
 다음 연구 하나는 고정 ALG_STILL 한 대조군으로 guidance×driving 상호작용을 확인하는 진단 제안이다. NOT_RUN/별도승인 전이며 강도탐색·추가seed·학습·SR·모델교체를 자동 실행하지 않는다. 이전 B014착수 RUNNING은 당시 기록이다.
+
+## B-015 착수: 고정 ALG pilot 비교 종료를 위한 한 셀 (2026-10-24)
+
+**RUNNING / GPU NOT_RUN.** [PLAN](experiments/B-015-alg-driving-control/PLAN.md)에 따라 기존 세 결과를 보존하고 ALG_STILL 하나만 실행한다. reference/text/noise는 같고 MOV/STILL의 driving RGB+mask만 다르다는 실제 cache 계약을 먼저 확인한다. P0·PROBE/S/D각최대1, 재시도0. 새 sidecar의 STILL parent binding을 유지하고 B-014 수식·필터·스케줄을 바꾸지 않는다. 이 비교 뒤 현재 ALG pilot은 종료하며 정적인 외형 보존을 동작 개선으로 해석하지 않는다.
