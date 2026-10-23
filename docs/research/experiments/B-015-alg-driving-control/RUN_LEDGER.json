@@ -1,0 +1,153 @@
+{
+  "experiment": "B-015",
+  "prereg_commit": "a2847634d45d6860ea6c0d7d9c42d7dc18781b3f",
+  "code_manifest_sha256": "09960b41b642762170cfed805e9633bec25b60732482aa097cd11ebb882ed182",
+  "task_start_utc": "2026-10-23T19:00:00Z",
+  "task_deadline_utc": "2026-10-23T22:00:00Z",
+  "runtime_deadline_utc": "2026-10-23T21:25:00Z",
+  "P": {
+    "attempts": 0,
+    "status": "REUSED_PARENT_B013_LAB_STILL",
+    "parent_receipt_sha256": "1b1589c253ab0347f80b5bd3b5dc15df87809a99fbf4e7ba573245cc68efa470"
+  },
+  "stages": {
+    "PROBE": {
+      "attempts": 1,
+      "maximum": 1,
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "exit_code": 0,
+      "owned_worker_pid_after_exit": 0,
+      "guard_seconds": 5.067301273345947,
+      "worker_phase_seconds": 3.489953865064308
+    },
+    "S": {
+      "attempts": 1,
+      "maximum": 1,
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "exit_code": 0,
+      "owned_worker_pid_after_exit": 0,
+      "guard_seconds": 1264.9278457164764,
+      "worker_phase_seconds": 1261.937351915054
+    },
+    "D": {
+      "attempts": 1,
+      "maximum": 1,
+      "status": "COMPLETED",
+      "guard_reason": "service_exit",
+      "exit_code": 0,
+      "owned_worker_pid_after_exit": 0,
+      "guard_seconds": 16.206160306930542,
+      "worker_phase_seconds": 13.424886135966517
+    }
+  },
+  "sampler": {
+    "attempts": 1,
+    "maximum": 1,
+    "failures": 0,
+    "retries": 0,
+    "steps": 40,
+    "forward_calls": 88,
+    "active_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "sequential_branch_counts": {
+      "ALG_steps": 8,
+      "baseline_steps": 32
+    },
+    "trace_sha256": "cf71090eb5e969472474f99003aba4dae01b4e603b8f557c6be31d7dffaef744",
+    "branch_hash_evidence": "Reference values verified at CPU filter creation and actual device restore/readback; each branch records the verified hash selected by actual kwargs. Not a full GPU tensor rehash at every forward."
+  },
+  "pair_audit": {
+    "status": "PASS",
+    "changed_driving_leaves": 4,
+    "bit_exact_controls": 12,
+    "filtered_reference_equal_to_B014_MOV": true,
+    "report_sha256": "2bd8254ba1fbb79eb4c0394f1ff44c36a9903fe0b4ac946b71db82d944d45edf"
+  },
+  "final_latent": {
+    "shape": [
+      16,
+      5,
+      112,
+      64
+    ],
+    "finite": true,
+    "readback_exact": true,
+    "file_sha256": "b5af6b859f1e634235f1a6354ccdc3ae22df938b54308f7b5e1fab4a8842cd20",
+    "value_sha256": "53ba20e4e571702cd4338325145d192d2e30a08a6235972580254ec0051523e8",
+    "different_from_initial_noise": true
+  },
+  "output": {
+    "shape": [
+      3,
+      17,
+      896,
+      512
+    ],
+    "finite": true,
+    "frames": 17,
+    "fps": 24,
+    "duration_seconds": 0.7083333333333334,
+    "ffmpeg_decode": "PASS",
+    "files": {
+      "raw_output.pt": {
+        "sha256": "38f30338b7897662add1d2920d121860b31ab40ea38532d61652400025265110",
+        "bytes": 93587006
+      },
+      "output.mp4": {
+        "sha256": "ca1ae2335183bb7cbe1c59baa57ab62df358a5b93f551591a33c80c0d2dec16e",
+        "bytes": 391787
+      },
+      "final_latent.safetensors": {
+        "sha256": "b5af6b859f1e634235f1a6354ccdc3ae22df938b54308f7b5e1fab4a8842cd20",
+        "bytes": 2293840
+      },
+      "final_latent.json": {
+        "sha256": "808b0d7c3d03541ec54076615481387af85a854a83adaceb71668d20a22caf6a",
+        "bytes": 38355
+      },
+      "filtered_reference.safetensors": {
+        "sha256": "4615c2ba16f47a65a661989f00dc8d055c58120276f8e41dc397b497d31b8cbc",
+        "bytes": 458832
+      },
+      "filtered_reference.json": {
+        "sha256": "999e37daf7f0e7c0a60d0e5000a128760d6a10f1f25b16b20d6211efb23139ef",
+        "bytes": 1885
+      }
+    }
+  },
+  "postrun": {
+    "integrity_status": "PASS",
+    "verified_hash_count": 149,
+    "parent_hashes": {
+      "conditions.safetensors": "1e8f065e70bfef8cd723d70575a4a04f472567950a1b2d6ba0c61d189c53e87b",
+      "conditions.json": "eff2cd9cafbe0455b38c2563f8474241254d4da4b7e03d6c319436e68e3e2afc",
+      "initial_noise.pt": "456ea2333ea5633c98e842d6ff2cca8e440def39fc1abd750882fc75ab2b78fc"
+    },
+    "parent_receipt_sha256": "1b1589c253ab0347f80b5bd3b5dc15df87809a99fbf4e7ba573245cc68efa470",
+    "old_MOV_filter_metadata_sha256": "2e8465db730e63c32c762bf6c2d6dae10ac8374ab71b69370ad161a4a7787d11",
+    "new_STILL_filter_metadata_sha256": "999e37daf7f0e7c0a60d0e5000a128760d6a10f1f25b16b20d6211efb23139ef",
+    "models_stat_matches": 8,
+    "model_method": "Prior full SHA plus fresh stat/mtime; no new full weight hash",
+    "owned_units_inactive": true,
+    "protected_service_identity_unchanged": true,
+    "queue_idle": true,
+    "system_available_bytes": 88061378560,
+    "swap_used_bytes": 0
+  },
+  "acceptance": {
+    "technical_output": "COMPLETED",
+    "visual_quality": "NOT_ASSESSED_BY_RUNTIME_OWNER",
+    "continuous_playback": "UNVERIFIED",
+    "production": "NOT_RUN"
+  }
+}

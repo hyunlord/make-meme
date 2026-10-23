@@ -67,3 +67,7 @@ branch trace의 reference SHA는 restore 때 실제 값을 확인한 tensor와 b
 [review_code/README](review_code/README.md)의 CLI를 사용한다. 기존3셀의 raw-derived PNG51장은 바이트 그대로 복사하고, 신규 raw만 같은 원래 정규화로 PNG화한다. 여섯 열 SOURCE/reference/CFG_MOV/CFG_STILL/ALG_MOV/ALG_STILL의 full canvas 배율과17프레임24fps를 맞춘다. 전체17장과local0/12/14/16을 포함한다. UI 재생/seek 성공은 실제 연속 재생 품질 검토가 아니다.
 
 이미지 확대·warp·보간·프레임 선별·속도 변경·배경 수정·추가 생성은 하지 않는다. 전체 결과를 정성적2×2로 해석하며 실제 새 출력과 terminal 판정은 종료 후 RESULTS에 기록한다.
+
+## 이번 실행의 종료 증거
+
+PROBE/S/D 각각1회 COMPLETED·실패/재시도0, P0. 실제40step88forward와 final latent→S종료→D순서를 확인했다. [RUN_LEDGER](RUN_LEDGER.json), [실측](MEASUREMENTS.json), [품질·제한](RESULTS.md)을 함께 읽는다. 위 명령은 당시 재현 규약이지 이미 소진한 시도를 다시 실행하라는 지시가 아니다. 디코딩 재사용은 preserved final_latent 및JSON의VAE/shape/crop/FPS/model/config계약을 따른다. 초기noise/조건cache는final대체물이아니다.

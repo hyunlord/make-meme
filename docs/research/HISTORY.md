@@ -390,3 +390,9 @@ MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24f
 ## 2026-10-24 — B-015 착수: ALG pilot의 마지막 정적 driving 대조군
 
 원격 `7214ed16e550169d92eaeb5e98a36fc7fc5d5a5a`의 [PLAN](experiments/B-015-alg-driving-control/PLAN.md)과 [결정](decisions/20261024-B-014-review-and-B-015.md)을 확인했다. B-014 이식·실행 PASS와 목표품질 NOT_ESTABLISHED는 보존한다. 남은 ALG_STILL 한 칸만 생성해 CFG/ALG×MOV/STILL을 완성하는 진단이며 강도·스케줄 탐색이 아니다. B-013 STILL cache를 읽기 전용 재사용하고 실제4변경/12보존 및 새 STILL-bound sidecar를 CPU 검증한다. 현재 GPU NOT_RUN, P0·PROBE/S/D각최대1·재시도0·3시간. [진행](experiments/B-015-alg-driving-control/RUNNING.md), [사전 평가](experiments/B-015-alg-driving-control/PREREG_EVALUATION.md). 비교 후 현재 ALG pilot을 닫고 다음 가설 하나만 제안한다.
+
+## 2026-10-24 — B-015 대조군 완료 및 고정 ALG pilot 종료
+
+실행전고정a2847634d45d6860ea6c0d7d9c42d7dc18781b3f 이후 ALG_STILL만1회생성했다. P0·PROBE/S/D각1·재시도0·실제40step88forward·finite final latent·17f24fps MP4. 실제cache4변경/12bit-exact, STILL-bound sidecar와기존필터값일치, 종료149hash보존을확인했다. S guard1264.928초·최소가용46.226GiB·swap/OOM0, high4674는별도기록했다.
+
+전체17장검토에서두STILL은상대적으로선명한착석,두MOV는후반머리변화/얼굴·귀손상. 전신FAIL·개체UNCERTAIN·목표개선NOT_ESTABLISHED·temporalUNVERIFIED. [RESULTS](experiments/B-015-alg-driving-control/RESULTS.md), [학습](lessons/B-015-guidance-driving-interaction.md). 현재ALGpilot을닫고추가강도/스케줄/seed탐색을하지않는다. 다음가설은animation을유지한reference RoPE H offset단독개입이며코드상분리가능하지만미검증혼합규약이다. 구현/추론NOT_RUN. 이전착수기록과B014실패는보존한다.

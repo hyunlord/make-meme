@@ -11,3 +11,11 @@ B-014 수식·필터·활성구간·정밀도·sampler 코드는 유지한다. �
 예산 P0, PROBE/S/D 각최대1, 재시도0. 40step88forward, ratio0.4·i0..7·CFG5, 같은 source f7~23·17f24fps. 3시간 작업 상한은 보수적으로19:00UTC부터22:00UTC까지 계산하며 worker cutoff는 더 이른21:25UTC다. 72GiB 시작/24GiB 실행·swap0 가드를 유지한다.
 
 이 한 칸으로 CFG/ALG×MOV/STILL 비교를 닫는다. ALG_STILL의 정적인 외형이 좋아도 기존 ALG_MOV의 목표품질 실패를 뒤집지 않는다. 정량 보정 없는 interaction/gain, branch norm 기반 cosine/벡터 상쇄 수치는 만들지 않는다. 연속 재생 품질을 관찰하지 못하면 temporalUNVERIFIED다.
+
+## 사전 고정 완료
+
+실제 CPU 검사11 PASS(0.69s), 16leaf 중 driving4변경/나머지12 bit-exact, STILL parent에 새 sidecar 연결과 MOV filtered 값 일치를 확인했다. 실행 manifest SHA `09960b41b642762170cfed805e9633bec25b60732482aa097cd11ebb882ed182`. 코드·설정·입력은 `a2847634d45d6860ea6c0d7d9c42d7dc18781b3f`에 commit/push하고 원격 일치를 확인한 뒤 PROBE→S→D 각1회 실행을 시작했다. 로컬 타입 경계 진단2errors/7warnings는 NOT_CLEAN으로 보존하며 수치 경로를 바꾸지 않았다.
+
+## 종료
+
+PROBE/S/D각1회정상종료,40step88forward·finite final latent·17f24fps MP4. P0/재시도0. [RESULTS](RESULTS.md)로최종판정을연결한다. 고정ALGpilot CLOSED,추가실행없음.

@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**최신: B-015 RUNNING / GPU NOT_RUN.** [계획](experiments/B-015-alg-driving-control/PLAN.md)에 따라 고정 ALG_STILL 한 칸으로 현재 pilot을 마무리한다. B-014의 이식·실행 완료와 목표품질 미입증은 [결과](experiments/B-014-alg-scail-pilot/RESULTS.md)대로 보존한다. 아래 과거 단계별 기록은 당시 상태다.
+**최신: B-015 COMPLETED / 고정 ALG pilot CLOSED.** [결과](experiments/B-015-alg-driving-control/RESULTS.md): 남은 ALG_STILL1회로2×2를 완성했다. 두 STILL은 상대적으로 선명한 착석, 두 MOV는 후반 머리 변화와 얼굴 손상이며 전신FAIL·목표품질NOT_ESTABLISHED·temporalUNVERIFIED다. 추가ALG탐색은 중단한다. 아래 과거 기록은 당시 상태다.
 
 | 단계 | 질문 / 목표 | 상태 | 다음 단계에 필요한 근거 |
 |---|---|---|---|
@@ -254,3 +254,7 @@ source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 
 ## B-015 착수: 고정 ALG pilot 비교 종료를 위한 한 셀 (2026-10-24)
 
 **RUNNING / GPU NOT_RUN.** [PLAN](experiments/B-015-alg-driving-control/PLAN.md)에 따라 기존 세 결과를 보존하고 ALG_STILL 하나만 실행한다. reference/text/noise는 같고 MOV/STILL의 driving RGB+mask만 다르다는 실제 cache 계약을 먼저 확인한다. P0·PROBE/S/D각최대1, 재시도0. 새 sidecar의 STILL parent binding을 유지하고 B-014 수식·필터·스케줄을 바꾸지 않는다. 이 비교 뒤 현재 ALG pilot은 종료하며 정적인 외형 보존을 동작 개선으로 해석하지 않는다.
+
+## B-015 종료 (2026-10-24)
+
+P0·PROBE/S/D각1·40step88forward·finite final latent·17f24fps MP4를 확보했다. 실제4변경/12보존, 새STILL parent sidecar와기존MOV필터값동일, 원본보존을검증했다. 네셀모두착석으로전신FAIL이며두MOV의후반얼굴손상을두STILL의안정성으로뒤집지않는다. 고정ALGpilot은CLOSED이며기본값승격/추가강도/seed탐색없음. [결과](experiments/B-015-alg-driving-control/RESULTS.md). 다음가설하나는animation을유지한reference RoPE H offset만의통제개입으로, 자세전용제거가아닌위치관계변화의검증이다. 아직구현/실행NOT_RUN이며별도결정이필요하다.
