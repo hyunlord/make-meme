@@ -1,6 +1,6 @@
 # B-011 — 측정 불확실성과 탐색적 생성 진단
 
-현재 생성 결과는 **NOT_RUN**이다. [B-011 계획](../experiments/B-011-exploratory-self-reenactment/PLAN.md)은 화면상 시간 변화(A)와 부위 상대 운동(B)을 분리한다. B가 불확실해도 입력·안전 계약과 실제 source 변화가 확인되면 A의 탐색 생성 한 번을 허용한다. B-010의 DIAGNOSTIC_INSUFFICIENT와 GPU 0회 기록은 그대로다.
+현재 P 조건 생성·비교와 PROBE는 **PASS**, S sampler는 **RUNNING**이다. 출력은 **NOT_AVAILABLE**, D와 출력 품질 검토는 **NOT_RUN**이다. [B-011 계획](../experiments/B-011-exploratory-self-reenactment/PLAN.md)은 화면상 시간 변화(A)와 부위 상대 운동(B)을 분리한다. B가 불확실해도 입력·안전 계약과 실제 source 변화가 확인되면 A의 탐색 생성 한 번을 허용한다. B-010의 DIAGNOSTIC_INSUFFICIENT와 GPU 0회 기록은 그대로다.
 
 ## 1. 반경은 표준편차가 아니다
 
@@ -47,13 +47,15 @@ B-010의 전체 평균은 15.5107px 대 반경합 평균 19.4222px였다. 머리
 
 고정 SCAIL [조건 구성](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L436-L510)은 driving RGB를 절반 해상도 VAE 경로에 넣고 reference·mask·text·CLIP 조건을 구성한다. RGB가 semantic mask로 alpha-cut되는 것은 아니다. [모델 입력 결합](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L741-L803)에서 reference+generated patch와 driving patch를 함께 처리한다.
 
-B-011의 **예상** 주요 shape는 이전 동일 규격 경로에 근거한다: generated latent `[16,5,112,64]`, reference `[16,1,112,64]`, driving `[16,5,56,32]`. 새 positive text token 수와 모든 실제 tensor 값은 새 P 실행에서 확인해야 한다. B-009의 Lab cache를 새 이름으로 재사용하지 않는다.
+B-011 P의 **실측** noise는 `[16,5,112,64]` FP32, reference는 `[16,1,112,64]` FP32, driving은 `[16,5,56,32]` FP32다. reference mask `[28,6,112,64]`, driving mask `[28,5,56,32]`도 FP32다. positive text는 B-009의 `[44,4096]`에서 `[27,4096]` BF16으로 바뀌었고 negative `[1,4096]` BF16은 동일하다. CLIP은 `[1,257,1280]` FP16이다. 새 P는 121.123초에 완료했고, B-009 Lab cache를 새 이름으로 재사용하지 않았다.
+
+[실제 조건 비교](../experiments/B-011-exploratory-self-reenactment/CONDITION_COMPARISON.json)에서 예정된 7leaf만 변경됐고 9개 control은 모두 bit-exact, 최대 차이 0이었다. 허용 tolerance에 겨우 들어온 결과가 아니다. 변경은 positive text 1, 양 branch reference 2·CLIP 2·reference mask prefix 2다. driving/mask, negative, noise/RNG/schedule은 보존됐다. noise의 실제 SHA256은 `9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950`, 새 cache는 `2af5acb5e3835e1e3f23609dcf83a326980818075aff3c11c36cbd5a095583cb`다. 이는 입력 계약의 증거이며 동작 전이 성공은 아니다.
 
 [실제 sampler](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L375-L426)의 CFG는 \(v_{cfg}=v_u+5(v_c-v_u)\)다. 두 branch에 visual 조건이 공유되므로 \(u\)가 reference/driving 제거 실험은 아니다. UniPC 40step은 CFG 80forward를 계획하지만 완료 횟수는 실제 장부로 판정한다. \(\sigma\)는 noise time이고 영상 frame \(k\)의 물리 시각 \(k/24\)와 다르다. 17장의 파일 길이 17/24초와 첫·끝 프레임 표본 간격 16/24초도 구분한다.
 
 ## 6. 현재 근거와 해석 한계
 
-B-011 생성·품질 결과는 아직 **NOT_RUN**이다. 사전 source 관측과 새 P의 7leaf 변경/9leaf 보존 검증, GPU 실행, 출력 검토를 혼동하지 않는다. B-009 대비 reference와 text가 함께 바뀌므로 순수 단일요인 인과 실험이 아니다. 한 seed의 자기 재현 성공도 cross-identity, Lab 체형 전이, 동물 일반화나 접촉 물리를 증명하지 않는다.
+B-011 S sampler는 **RUNNING**이며 출력은 **NOT_AVAILABLE**이다. PROBE는 6.055초에 완료됐고, D와 출력 품질 검토는 **NOT_RUN**이다. 사전 source 관측과 새 P의 7leaf 변경/9leaf 보존 검증은 완료됐으며, sampler·decode·출력 검토와 구분한다. [생성 전 평가 계약](../experiments/B-011-exploratory-self-reenactment/PREREG_EVALUATION.md)은 수준 A를 OBSERVABLE_SCREEN_CHANGE, B를 INCONCLUSIVE로 고정했다. 현재 source 변위 평균 16.5407px와 기존 반경합 19.4222px를 함께 남겼고 통합 gain은 UNDEFINED다. 이전 대비 판독 차이는 머리 평균 2.5607px, 앞발 평균 5.6347px이며 정확도나 새 신뢰구간이 아니다. B-009 대비 reference와 text가 함께 바뀌므로 순수 단일요인 인과 실험이 아니다. 한 seed의 자기 재현 성공도 cross-identity, Lab 체형 전이, 동물 일반화나 접촉 물리를 증명하지 않는다.
 
 생성 후 유리한 점·프레임·시간 lag를 고르거나 출력별 warp로 오차를 줄이지 않는다. 가려지거나 무너진 대응점은 coverage 실패로 남긴다. 작은 정적 오차를 분모로 나누는 개선율은 불안정하므로 필요하면 UNDEFINED다. 실제 속도 연속 재생을 관찰하지 못하면 시간 품질은 **UNVERIFIED**다.
 

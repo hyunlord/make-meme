@@ -324,3 +324,7 @@ B-009 WHITE 단일 변경으로 직립/앞발 전달이 회복되지 않아 색�
 ## B-011 착수: 평가 수준을 나눈 탐색적 자기 재현 (2026-10-23)
 
 시작 원격 `dfa23d6ffeb49a8471eb3487085739f35e82d646`의 [PLAN](experiments/B-011-exploratory-self-reenactment/PLAN.md)과 [사전 변경 결정](decisions/20261023-B-010-review-and-B-011.md)을 확인했다. B-010 중단은 보존하며 평균 전파 반경을 실측 RMSE로 해석하지 않는다. source의 관측 가능한 시간 변화(A)와 정확한 부위 상대 운동(B)을 생성 전에 분리하고 B 불확실성은 결과의 한계로 남긴다. 동일17장·source-f0 참조·고정 prompt로 새 P/PROBE/S/D 각최대1회, sampler1회·재시도/학습0. 관측 검토30분·전체3시간 상한. [진행](experiments/B-011-exploratory-self-reenactment/RUNNING.md).
+
+## B-011 새 자기 재현 조건 검증 완료 (2026-10-23)
+
+사전 고정 `ee730af08a29ecfce3d0b6a243e18f04a2c64584` 뒤 P1을121.123초에 완료했다. 실제 cache에서 reference/text 관련7leaf 변경과 driving/negative/noise/RNG/scheduler9leaf 보존을 확인했고, 보존9개는 모두 비트 동일했다. positive text는44→27token으로 바뀌었으며 Lab cache를 재사용한 결과가 아니다. P 종료/PID0 확인 후 fresh PROBE→S→D를 선행 gate에 따라 진행한다. 생성 품질은 아직 미확인이다. [진행](experiments/B-011-exploratory-self-reenactment/RUNNING.md).
