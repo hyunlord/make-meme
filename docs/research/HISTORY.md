@@ -363,3 +363,7 @@ MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24f
 ## B-013 실제 조건 인코딩 완료 (2026-10-24)
 
 사전 고정 `f02896f825703a321c84127d4ef8135720176811`을 push·원격 확인한 뒤 두 Lab P를 각각1회 실행하고 정상 종료했다. [실측 pair](experiments/B-013-lab-driving-transfer/CONDITION_COMPARISON.json)의 driving4개만 바뀌었고 나머지12개는 bit-exact다. [B-012 계보](experiments/B-013-lab-driving-transfer/LINEAGE_COMPARISON.json)는 각7개 reference/text 변경과9개 통제 bit-exact를 확인했다. mask prefix/zero suffix 검사도 유지했다. 영상 품질은 아직 미판정이며 자원 회복 후 PROBE/S/D를 순차 진행한다.
+
+## B-013 LAB_MOV 출력 확보·STILL 진행 (2026-10-24)
+
+첫 Lab 조건은 실제40step·80forward·finite final latent와17f24fps raw/MP4를 확보했다. S guard1181.60초, D16.20초, 정상 프로세스 종료를 확인했다. 시각 품질은 판정 전이며 안전 조건이 충족돼 예정한 LAB_STILL을 이어간다. sampler2/2 예약·재시도0; 첫 품질에 따른 대조군 생략이나 추가 생성은 없다.

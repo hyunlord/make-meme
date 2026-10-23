@@ -13,3 +13,9 @@
 기존 tiny CUDA 선행/anchor·mixed loader·FlashAttention·phase 분리·final latent 저장과72GiB시작/24GiB실행headroom·swap0·타 서비스 보호를 유지한다. 모델·다운로드·학습·LoRA·imagegen·외부 생성0. 완료 후 추가 seed/low-pass/SR/모델 변경을 시작하지 않는다.
 
 B-012 codegraph entry 경고는 TOOLING_WARNING이며 완료된 생성 결과와 분리한다. 정확한 hook 위치/entry 유형은 현재 미확인이고 이번 단계에서 플러그인 삭제·hook 전체 해제·환경 재설치를 하지 않는다.
+
+## 첫 출력과 두 번째 실행
+
+LAB_MOV는 P/PROBE/S/D 각1회로 정상 종료했다. S는 실제40step·80forward, guard1181.60초이며 final latent FP32 `[16,5,112,64]` 유한값·재읽기 PASS다. tensor value SHA `9323d8ed6541180abe905651a2cf42434f01f771dd87ad83ee2660c9d2b94f0b`는 초기noise와 다르다. D는 guard16.20초, raw `[3,17,896,512]` 및17f24fps MP4 저장·검증 완료다. 둘 모두 exit0/inactive/PID0을 확인했다. 이미지 품질은 아직 열람·판정하지 않았다.
+
+자원 회복 후 LAB_STILL PROBE도 정상 종료했고 두 번째 S를 시작했다. 신규 sampler 사용2/2, 재시도0이며 이 실행 이후 추가 생성은 없다. 두 결과가 모인 뒤 A/B 정적 관측과 사전 사건 평가를 한다.
