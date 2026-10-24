@@ -50,4 +50,4 @@ Reverse driving은 기존 SCAIL 연구의 방법이다. local-only 생성 D+원�
 
 현재는 권한·진위·실제LabY가 부족하므로 backward/LoRA를 바로 시작하지 않는다. 필요한자료가 확보된 뒤에만 배선/gradient/base보존/reload/메모리 검증을 별도 결정한다. 추가 생성·학습·ALG/Hoffset탐색은0으로 종료한다.
 
-[한국어 수학·코드 해설](../../lessons/B-017-paired-data-and-flow-training.md), [재현](REPRODUCE.md). ZIP 전달은 최종 검증 후 별도 DELIVERY에 기록한다.
+[한국어 수학·코드 해설](../../lessons/B-017-paired-data-and-flow-training.md), [재현](REPRODUCE.md). 양 호스트 ZIP·CRC·해시·추출 재현 검증은 [전달 기록](DELIVERY.md)에 남겼다.
