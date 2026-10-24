@@ -33,3 +33,7 @@ P·target encoding·prefix·optimizer는0이다. S는 양 CFG `replace_flag=True
 private ZIP에는 실제 guard/phase 기록·실패·raw/MP4·최종latent·비교자료·runtime/config가 포함된다. 대형 weights와 중복 prefix는 제외한다. 공개 manifest의 `allowed_gpu_processes.json`은 개인 프로세스 정보라 실물은 비공개이고 hash만 남긴다.
 
 비생성 CPU 검토 스크립트와 명령: [review_code/REPRODUCE_MEDIA.md](review_code/REPRODUCE_MEDIA.md). 이 사후 검토 코드는 sampler 사전 고정 코드와 구분한다.
+
+## 패키지 수용 검사 보완
+
+첫 압축물은 저장된 payload의 CRC/SHA 검사는 통과했지만, 독립 필수항목 검사에서 public/experiment의 재현 문서가 누락된 것을 발견했다. private snapshot 중복 제외 규칙이 공개 사본에도 적용된 것이 원인이었다. 공개 tree는 private 중복 제외 대상에서 분리하고 작은 fixture로 실제 문서 포함/중복 제외를 확인한다. 누락 압축물과 실패 근거는 비공개로 보존하며 최종 전달 ZIP은 필요한 문서가 있는지도 별도로 검사한다. 이는 패키징 수정이며 GPU 생성/디코딩은 반복하지 않는다.

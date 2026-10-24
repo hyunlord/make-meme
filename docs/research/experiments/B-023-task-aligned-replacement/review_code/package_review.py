@@ -85,7 +85,7 @@ def main() -> None:
             if path.suffix not in allowed and not path.name.endswith('LICENSE'):
                 omit(path,prefix+'/'+str(rel),'extension outside explicit allowlist')
                 continue
-            reason=next((reason for pattern,reason in exclusions if path.is_relative_to(private) and fnmatchcase(str(path.relative_to(private)),pattern)),None)
+            reason=next((reason for pattern,reason in exclusions if kind != "public" and path.is_relative_to(private) and fnmatchcase(str(path.relative_to(private)),pattern)),None)
             if reason is not None:
                 omit(path,prefix+'/'+str(rel),reason)
                 continue
