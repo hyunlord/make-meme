@@ -60,7 +60,7 @@ S guard1057.032초·worker1054.303초·sampler965.419초, D guard16.223초. CUDA
 
 비공개 viewer는 source/reference/H0/H120 네 열, 전체17장·사전 사건·native24fps 비교 MP4를 제공한다. 기존 H0 PNG17장을 byte 그대로 복사하고 새 raw만 동일 양자화했다. 파일 재생/버튼 QA는 실제 연속 영상의 지각적 품질 확인과 다르며 temporal은 UNVERIFIED다. 최초 CPU renderer 명령의 미배치 스크립트 경로 오류는 보존했고 고정 도구 복사 후 렌더를 완료했다. 모델 재시도가 아니다.
 
-[한국어 수식·코드 해설](../../lessons/B-016-rope-and-spatial-conditioning.md), [재현](REPRODUCE.md), [실제 호출 기록](RUN_LEDGER.md)을 함께 제공한다. 공개에는 문서·비민감 코드·설정·해시만 포함하며 미디어·cache·latent·weights는 공개하지 않는다. private ZIP은 검증 후 별도 전달 기록으로 연결한다.
+[한국어 수식·코드 해설](../../lessons/B-016-rope-and-spatial-conditioning.md), [재현](REPRODUCE.md), [실제 호출 기록](RUN_LEDGER.md)을 함께 제공한다. 공개에는 문서·비민감 코드·설정·해시만 포함하며 미디어·cache·latent·weights는 공개하지 않는다. private ZIP의 양 호스트 CRC·해시·추출 검증과 전송 완료는 [전달 기록](DELIVERY.md)에 남겼다.
 
 ## 다음 가설 하나 — 실행하지 않음
 
