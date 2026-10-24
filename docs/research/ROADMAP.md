@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-25. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**현재: B-023 COMPLETED / 기술 PASS / 원본 보존 과제 FAIL.** [결과](experiments/B-023-task-aligned-replacement/RESULTS.md). 같은 실제Lab에서 정식replacement1회를 완료했지만 착석·중앙침실·세로경계와 후반얼굴손상이 남고 원본장면은 보존되지 않았다. 다음 병목 하나는 reference 공간배치와 개체외형의 분리이며 실행 계보의 구체적 오류와 모델 의존성을 구분할 제한 검증을 제안한다. 아직 후속 NOT_RUN. B021 FAIL/B022 결과와 학습량 확대 종료를 보존한다.
+**현재: B-024 RUNNING / GPU NOT_RUN.** [계획](experiments/B-024-reference-rgb-isolation/PLAN.md). 정식replacement와같은입력을유지하고reference비객체RGB만중립화해VAE/CLIP배경누수를한번검사한다. B023기술PASS/원본보존FAIL을보존한다. 연결확인은30분으로한정하고구체적결함은중단,원인UNKNOWN만으로무한감사하지않는다.
 
 **B-017 당시 요약: COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 
@@ -337,3 +337,7 @@ B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 
 ## B-023 종료와 범위 유지
 
 상위 목표는 단일Spark의 원본 보존 객체 편집이다. 정식모드 실행이 그 목표의 성공을 보장하지 않았다. EditSpec parser·새MCP·ROI/가림복원·다중객체·효율화는 후속 후보이며 이번에는 구현하지 않았다. 결과 기반 다음 병목 선택을 유지하고 추가생성·학습·합성을 자동 시작하지 않는다.
+
+## 2026-10-25 B-024 착수: 참조 RGB의 배경·padding 분리
+
+[B024 PLAN](experiments/B-024-reference-rgb-isolation/PLAN.md)에 따라 B023정식replacement과제FAIL을보존하고, 같은Lab의reference에서기존REDsupport밖RGB만128로바꾸는한정비교를착수한다. 원본보존객체편집의병목을조건경로에서좁히며VAE/CLIP두경로재계산,semanticmask/모드/noise불변을검증한다. 현재CPU준비/GPU NOT_RUN, 연결확인최대30분·전체3시간·sampler최대1이다. 배경제거는자세제거가아니며새학습/모델/합성은없다.
