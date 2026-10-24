@@ -1,0 +1,209 @@
+{
+  "scope": "Observed values from phase hooks and supervisor samples; different memory accounting, never summed",
+  "stages": {
+    "TRAIN": {
+      "status": "COMPLETED",
+      "supervisor_elapsed_s": 107.22037696838379,
+      "phase_elapsed_s": 105.41820939502213,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 17179869184,
+      "mem_available_min_bytes": 86591021056,
+      "swap_max_bytes": 0,
+      "rss_peak_observed_bytes": {
+        "VmRSS": 5077405696,
+        "RssAnon": 2958487552,
+        "RssFile": 3201236992,
+        "VmHWM": 5255000064
+      },
+      "cgroup_peak_bytes": 5311168512,
+      "cgroup_current_max_sample_bytes": 5132656640,
+      "cgroup_anon_max_sample_bytes": 2958487552,
+      "cgroup_file_max_sample_bytes": 2149699584,
+      "cgroup_events_max": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "cuda_allocated_max_hook_bytes": 884595200,
+      "cuda_reserved_max_hook_bytes": 6272581632,
+      "cuda_peak_allocated_hook_bytes": 4854839808,
+      "phase_rows": 86,
+      "supervisor_samples": 106
+    },
+    "PROBE": {
+      "status": "COMPLETED",
+      "supervisor_elapsed_s": 6.079529762268066,
+      "phase_elapsed_s": 3.667532071005553,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "mem_available_min_bytes": 95341461504,
+      "swap_max_bytes": 0,
+      "rss_peak_observed_bytes": {
+        "VmRSS": 1075376128,
+        "RssAnon": 565452800,
+        "RssFile": 480665600,
+        "VmHWM": 1076936704
+      },
+      "cgroup_peak_bytes": 727752704,
+      "cgroup_current_max_sample_bytes": 727748608,
+      "cgroup_anon_max_sample_bytes": 565452800,
+      "cgroup_file_max_sample_bytes": 152879104,
+      "cgroup_events_max": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "cuda_allocated_max_hook_bytes": 17954816,
+      "cuda_reserved_max_hook_bytes": 29360128,
+      "cuda_peak_allocated_hook_bytes": 17954816,
+      "phase_rows": 41,
+      "supervisor_samples": 6
+    },
+    "STEP20_S": {
+      "status": "COMPLETED",
+      "supervisor_elapsed_s": 1137.2526156902313,
+      "phase_elapsed_s": 1134.5137709518895,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "mem_available_min_bytes": 55965548544,
+      "swap_max_bytes": 0,
+      "rss_peak_observed_bytes": {
+        "VmRSS": 66726711296,
+        "RssAnon": 33866395648,
+        "RssFile": 44196294656,
+        "VmHWM": 66726711296
+      },
+      "cgroup_peak_bytes": 66575945728,
+      "cgroup_current_max_sample_bytes": 66573197312,
+      "cgroup_anon_max_sample_bytes": 33866395648,
+      "cgroup_file_max_sample_bytes": 43902545920,
+      "cgroup_events_max": {
+        "low": 0,
+        "high": 3533,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "cuda_allocated_max_hook_bytes": 33711484416,
+      "cuda_reserved_max_hook_bytes": 36393975808,
+      "cuda_peak_allocated_hook_bytes": 36326703104,
+      "phase_rows": 98,
+      "supervisor_samples": 1122
+    },
+    "STEP20_D": {
+      "status": "COMPLETED",
+      "supervisor_elapsed_s": 14.211423635482788,
+      "phase_elapsed_s": 11.799821204971522,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "mem_available_min_bytes": 80895901696,
+      "swap_max_bytes": 0,
+      "rss_peak_observed_bytes": {
+        "VmRSS": 1947484160,
+        "RssAnon": 1502248960,
+        "RssFile": 397357056,
+        "VmHWM": 1953071104
+      },
+      "cgroup_peak_bytes": 2278461440,
+      "cgroup_current_max_sample_bytes": 2272186368,
+      "cgroup_anon_max_sample_bytes": 1502248960,
+      "cgroup_file_max_sample_bytes": 909844480,
+      "cgroup_events_max": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "cuda_allocated_max_hook_bytes": 720321536,
+      "cuda_reserved_max_hook_bytes": 12415139840,
+      "cuda_peak_allocated_hook_bytes": 9565265920,
+      "phase_rows": 10,
+      "supervisor_samples": 14
+    },
+    "STEP100_S": {
+      "status": "COMPLETED",
+      "supervisor_elapsed_s": 1124.264582157135,
+      "phase_elapsed_s": 1120.846323383972,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "mem_available_min_bytes": 56435994624,
+      "swap_max_bytes": 0,
+      "rss_peak_observed_bytes": {
+        "VmRSS": 76667985920,
+        "RssAnon": 33955176448,
+        "RssFile": 46987431936,
+        "VmHWM": 76668194816
+      },
+      "cgroup_peak_bytes": 66578620416,
+      "cgroup_current_max_sample_bytes": 66572595200,
+      "cgroup_anon_max_sample_bytes": 33955176448,
+      "cgroup_file_max_sample_bytes": 42666364928,
+      "cgroup_events_max": {
+        "low": 0,
+        "high": 2553,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "cuda_allocated_max_hook_bytes": 33711484416,
+      "cuda_reserved_max_hook_bytes": 36393975808,
+      "cuda_peak_allocated_hook_bytes": 36326703104,
+      "phase_rows": 98,
+      "supervisor_samples": 1109
+    },
+    "STEP100_D": {
+      "status": "COMPLETED",
+      "supervisor_elapsed_s": 16.222846508026123,
+      "phase_elapsed_s": 13.701654304983094,
+      "guard_reason": "service_exit",
+      "returncode": 0,
+      "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+      "memory_cap_bytes": 68719476736,
+      "mem_available_min_bytes": 81932193792,
+      "swap_max_bytes": 0,
+      "rss_peak_observed_bytes": {
+        "VmRSS": 1963360256,
+        "RssAnon": 1502289920,
+        "RssFile": 413360128,
+        "VmHWM": 1968812032
+      },
+      "cgroup_peak_bytes": 2324594688,
+      "cgroup_current_max_sample_bytes": 2318319616,
+      "cgroup_anon_max_sample_bytes": 1502289920,
+      "cgroup_file_max_sample_bytes": 951025664,
+      "cgroup_events_max": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "cuda_allocated_max_hook_bytes": 720321536,
+      "cuda_reserved_max_hook_bytes": 12415139840,
+      "cuda_peak_allocated_hook_bytes": 9565265920,
+      "phase_rows": 10,
+      "supervisor_samples": 16
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**현재: B-022 추가80update 완료 / matched 영상 비교 진행 중.** B-021의 STOPPED_AT_REPLAY_20과 기존 FAIL을 보존했다. 같은20회 checkpoint의 optimizer/RNG/cursor를 복원했고 고정tuple loss는 감소했다. 영상 품질은 아직 미판정이다. [계획](experiments/B-022-resumed-update-comparison/PLAN.md).
+**현재: B-022 완료 / 품질 개선 NOT_ESTABLISHED.** B-021의 STOPPED_AT_REPLAY_20과 기존 FAIL을 보존했다. 정확한optimizer/RNG/cursor재개80update와matched20/100두영상은완료했으나착석·얼굴손상·잘림이남았다. temporal=UNVERIFIED. 다음방향은별도등록된B-023공식replacement이며이번에는실행하지않았다. [계획](experiments/B-022-resumed-update-comparison/PLAN.md).
 
 **B-017 당시 요약: COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 
@@ -325,3 +325,7 @@ B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 
 ## 2026-10-24 B-022 착수
 
 독립실행의 엄격한 A/B replay와 동일 checkpoint의 기능 복원을 분리한다. B-021 FAIL은 유지한다. [B-022](experiments/B-022-resumed-update-comparison/PLAN.md)는 저장된20회 상태에서80회만 추가하고 matched20/100을 비교하는 한정 실험이다. 현재 CPU 준비/GPU NOT_RUN, 추가 튜닝·커널 변경·200회 확대는 하지 않는다.
+
+## B-022 최종 상태 (2026-10-24 UTC / 2026-10-25 KST)
+
+위 CPU준비/GPU NOT_RUN은착수당시기록이다. 실제로정확한B02120회상태에서추가80update·matched20/100각sampler/decode를완료했다. 고정4tupleloss감소·재개/reload/base검사PASS이지만사족자세FAIL·품질개선NOT_ESTABLISHED·temporalUNVERIFIED다. 기존B021FAIL은보존한다. [최종결과](experiments/B-022-resumed-update-comparison/RESULTS.md). 자동증량하지않으며새상위방향의B023공식replacement는PLANNED/NOT_RUN이다.

@@ -1,0 +1,325 @@
+{
+  "status": "MATCHED_ENDPOINT_TECHNICAL_REVIEW_PASS",
+  "endpoints": {
+    "20": {
+      "latent_sha256": "d6e45650708d1da9a77c1afe83c7b58a164480085cbbdf224b76f2c21179792e",
+      "adapter_sha256": "6d12c6a4e572addbe2b1e19ee6a269cd62b44b707fd2e25758eab29cf481a7a7",
+      "counters": {
+        "model_calls": 80,
+        "completed_steps": 40
+      },
+      "latent_shape": [
+        16,
+        5,
+        64,
+        112
+      ],
+      "decoded_shape": [
+        3,
+        17,
+        512,
+        896
+      ],
+      "fps": 30,
+      "frames": 17,
+      "processes": {
+        "S": {
+          "returncode": 0,
+          "reason": "service_exit",
+          "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "D": {
+          "returncode": 0,
+          "reason": "service_exit",
+          "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        }
+      }
+    },
+    "100": {
+      "latent_sha256": "6ac68bf5e5ef148699ed1e9708bf02eb26e315e8505919205c5e93fdc86b2117",
+      "adapter_sha256": "812df21361d82c2604d35386bd82a99b395dcbf736692fd0e04bf93ed49b040a",
+      "counters": {
+        "model_calls": 80,
+        "completed_steps": 40
+      },
+      "latent_shape": [
+        16,
+        5,
+        64,
+        112
+      ],
+      "decoded_shape": [
+        3,
+        17,
+        512,
+        896
+      ],
+      "fps": 30,
+      "frames": 17,
+      "processes": {
+        "S": {
+          "returncode": 0,
+          "reason": "service_exit",
+          "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        },
+        "D": {
+          "returncode": 0,
+          "reason": "service_exit",
+          "terminal_service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+        }
+      }
+    }
+  },
+  "same_contracts": {
+    "all16_leaf_hashes_devices_shapes": true,
+    "config": true,
+    "condition_payload": true,
+    "sampler_source": true
+  },
+  "shared_contract": {
+    "leaves": {
+      "root.noise": {
+        "shape": [
+          16,
+          5,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_c.context[0]": {
+        "shape": [
+          77,
+          4096
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "703df58cd1aa0470b3d93630e348de9e084111058305ec612894f953cd206716",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_c.clip_fea": {
+        "shape": [
+          1,
+          257,
+          1280
+        ],
+        "dtype": "torch.float16",
+        "sha256": "ec959988117d6ef21926905bc960960683ec2a33d439fa72ffb1f9efd9fb2d09",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_c.ref_latents[0]": {
+        "shape": [
+          16,
+          1,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "5fa2f985c0a4188d856ca6725694283eb93aa54732e59b85a18fcd398e878e12",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_c.ref_masks[0]": {
+        "shape": [
+          28,
+          6,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "4229a9cd317fdfda7dcc37cd90061446cda5521434a8dd449c59330885fc2058",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_c.pose_latents[0]": {
+        "shape": [
+          16,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "31ca8e07c8ab660e0188152f46bc288b077d5b8e0051c4c201bca6df8b0d2818",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_c.driving_masks[0]": {
+        "shape": [
+          28,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "af02f93684bce79464f4607306e8dc30a7c55b0a01357654e2483e4035f4d15b",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_null.context[0]": {
+        "shape": [
+          1,
+          4096
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_null.clip_fea": {
+        "shape": [
+          1,
+          257,
+          1280
+        ],
+        "dtype": "torch.float16",
+        "sha256": "ec959988117d6ef21926905bc960960683ec2a33d439fa72ffb1f9efd9fb2d09",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_null.ref_latents[0]": {
+        "shape": [
+          16,
+          1,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "5fa2f985c0a4188d856ca6725694283eb93aa54732e59b85a18fcd398e878e12",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_null.ref_masks[0]": {
+        "shape": [
+          28,
+          6,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "4229a9cd317fdfda7dcc37cd90061446cda5521434a8dd449c59330885fc2058",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_null.pose_latents[0]": {
+        "shape": [
+          16,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "31ca8e07c8ab660e0188152f46bc288b077d5b8e0051c4c201bca6df8b0d2818",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.arg_null.driving_masks[0]": {
+        "shape": [
+          28,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "af02f93684bce79464f4607306e8dc30a7c55b0a01357654e2483e4035f4d15b",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.generator_state": {
+        "shape": [
+          16
+        ],
+        "dtype": "torch.uint8",
+        "sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425",
+        "target_device": "cpu",
+        "actual_device": "cpu"
+      },
+      "root.timesteps": {
+        "shape": [
+          40
+        ],
+        "dtype": "torch.int64",
+        "sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b",
+        "target_device": "cuda:0",
+        "actual_device": "cuda:0"
+      },
+      "root.sigmas": {
+        "shape": [
+          41
+        ],
+        "dtype": "torch.float32",
+        "sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7",
+        "target_device": "cpu",
+        "actual_device": "cpu"
+      }
+    },
+    "config": {
+      "name": "real",
+      "frames": 17,
+      "fps": 30,
+      "height": 512,
+      "width": 896,
+      "seed": 20261022,
+      "steps": 40,
+      "solver": "unipc",
+      "shift": 3.0,
+      "guide_scale": 5.0,
+      "segment_overlap": 5,
+      "adapter": null,
+      "negative_prompt": "",
+      "prompt": "A black Labrador retriever with a broad chest, sturdy body and thick legs, matching the reference dog, stands naturally on all four legs on a light tiled floor in a sunlit room. It gently turns its head toward the left side of the image while its body stays mostly in place and its tail moves. Natural realistic motion and a stable viewpoint.",
+      "precision": "mixed BF16 with FP32 normalization/time/head islands",
+      "reference": "inputs/clip/reference.png",
+      "reference_mask": "inputs/clip/reference-mask-white.png",
+      "driver": "inputs/clip/driver-30fps.mp4",
+      "driver_mask": "inputs/clip/mask-30fps.mp4"
+    },
+    "condition_sha256": "c5db9c9460f71f4c37c124db7b163221f65f9446b656c2f73a818dce3fcaa4dd",
+    "sampler_source_sha256": "5697a13bd2008eada99bf9e3496af23bad4cfd784e4986fa5d903adb315a94b2"
+  },
+  "limits": [
+    "No model forward/backward or CUDA initialization by reviewer",
+    "No temporal or identity quality acceptance",
+    "B021 historical FAIL/NOT_REACHED unchanged"
+  ],
+  "independent_raw_cpu_check": {
+    "method": "Existing pinned Torch, torch.load(weights_only=True,map_location=cpu), no CUDA initialized, no model instantiation",
+    "20": {
+      "shape": [
+        3,
+        17,
+        512,
+        896
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "min": -1.0,
+      "max": 1.0,
+      "sha256": "a8b52fd599f18887a98a4338fc0406ce9ec53fd160b608830fbb57e1b8369db1"
+    },
+    "100": {
+      "shape": [
+        3,
+        17,
+        512,
+        896
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "min": -1.0,
+      "max": 1.0,
+      "sha256": "c04be4f351b88a0b73c7442c17f78013dfa413e36dd2a14b7bd3389e867024e8"
+    }
+  },
+  "adapter_integration_trace": {
+    "status": "Pinned source plus successful run evidence; no additional forward",
+    "installation": "phase_sample.py wraps actual model.blocks.39.self_attn.q/v with LowRankLinear and set_submodule, then load_adapters copies checked endpoint payload values into those parameters before80 full-model calls",
+    "enabled": "LowRankLinear.__init__ enabled=True; sample path never sets False; model.requires_grad_(False) freezes training gradients but does not disable adapter",
+    "forward": "Pinned model_scail2.py288/290 invoke self.q/self.v;867 iterates self.blocks; config num_layers40. LowRankLinear.forward adds alpha/r BA delta inFP32, cast to baseline dtype",
+    "distinction": "STEP20 uses exactB021adapter SHA6d12c6a4..., STEP100 uses new trainingreceipt SHA812df213..., both enabled selection receipts; final latents and raw outputs have different hashes",
+    "limits": "No per-layer runtime parameter hash or separate per-adapter-call counter was recorded; source+payload validation+completed model calls support execution, not independent direct activation tracing"
+  }
+}

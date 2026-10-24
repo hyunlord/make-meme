@@ -17,3 +17,13 @@ B-020과 다른 parameter라는 사실을 새 기능 복원 실패와 혼동하�
 B-021 restart20의18개 tensor와 payload hash를 그대로 복원했다. update21=`train_2`부터100까지80행을 저장했고, 비학습tail forward33회·진단backward3회였다. restart50/100의optimizer step·cursor와 adapter값을 독립 CPU 검증했다. 새 module reload/OFF max_abs=0, 이번 실행의 frozen base/source hash PASS다. B-021 과거 미도달 검사는 바뀌지 않는다.
 
 네 고정tuple의 평가loss는20→100에서 모두 감소했다. 이는 동일clip·고정tuple의 FM 경험손실이며 영상품질 개선을 뜻하지 않는다. 같은checkpoint 반복3회의 prediction은 같았으나 gradient에는 최대2.28e-10 차이가 있었다. FA2만의 원인으로 확정하지 않는다. 이제 승인된 matched20/100 영상 각1회를 순차 실행한다.
+
+## matched20 영상 확보
+
+STEP20_S의40step/80forward·FP32 final latent `[16,5,64,112]` 저장/readback을 확인했다. STEP20_D는 finite raw `[3,17,512,896]`와17frame/30fps MP4를 저장했다. 두worker는각각종료·자원회복후다음단계로넘어갔다. 정적17장검토에서는착석/침실/padding이남고후반얼굴번짐·머리잘림이보였다.100회와의품질비교는아직대기다.
+
+실행 중 원격에 추가된 B 연구v2·B023계획은9fe722a6deeaf024c947ea909251f233200759b3에병합보존했다. 새문서도이미실행중인B022의완료를유지한다고명시한다. B023 GPU는실행하지않는다.
+
+## 종료
+
+TRAIN/PROBE/두S/두D가각한번으로완료했다. sampler총2회·추가update80·진단backward3·비학습tailforward33이며모든자체worker종료·자원회복을확인했다. 양쪽조건16leaf/noise/RNG/scheduler동일성,다른endpointadapter값,raw유한값을검증했다. 전체17장정적비교에서품질개선은입증되지않았으며temporalUNVERIFIED다. 상세RESULTS·MEASUREMENTS·한국어해설을갱신하고최종비공개ZIP검증으로종료한다.

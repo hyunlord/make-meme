@@ -24,3 +24,19 @@ CPU 검사→사전 코드/config 고정→TRAIN1(진단+재개80update)→자�
 PREREGISTERED_CODE는 실제 실행code/config를 묶는다. producer의 코드hash는 B-020으로 유지하고 consumerhash는별도검사한다. P·prefix 전체forward는0이다. 두endpoint의 실제latent는 decode전에 저장한다. 미디어는896×512,17f,30fps이며 보간·warp·선별없다.
 
 최종판정은 RESULTS와 실제receipt로확인한다. 준비된코드·CPU검사는 GPU학습·영상성공을뜻하지않는다.
+
+## 저장 결과의 CPU 재현
+
+아래는 이미 허가된 격리 Python과 비공개 B022_ROOT를 사용하는 분석 명령이다. 새 설치나 GPU 계산을 하지 않는다. 실제 전체 실행 argv는 ZIP의 stage별 pipeline-process/attempt 기록에 보존한다.
+
+```sh
+python analysis/build_loss_curves.py "$B022_ROOT"
+python analysis/build_comparison.py \
+  --target "$B022_ROOT/reports/comparison-inputs/source" \
+  --trained20 "$B022_ROOT/reports/comparison-inputs/step020" \
+  --trained100 "$B022_ROOT/reports/comparison-inputs/step100" \
+  --reference "$B022_ROOT/reports/comparison-inputs/reference.png" \
+  --output "$B022_ROOT/reports/comparison-review"
+```
+
+위 comparison은 실제 export된17개 PNG와 원래30fps를 사용한다. GPU phase의 entrypoint는 `code/run_phase.py STAGE_ROOT STAGE`이나, 반드시 기존 runtime_launch/runtime_guard의 service·메모리·deadline·1회 ledger 하에서만 호출했다. 이 entrypoint를 직접 재실행하거나 attempt 파일을 지워 제한을 초기화하는 것은 재현 명령에 포함되지 않는다.

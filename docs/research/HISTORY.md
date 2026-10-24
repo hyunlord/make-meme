@@ -483,3 +483,7 @@ TRAIN1에서 실제20update/8평가 후 사전adapter replay 기준을 넘겨21�
 ### B-022 동일checkpoint 재개 학습 완료
 
 restart20의18개tensor와 optimizer/RNG/cursor를 복원하고 추가80update를 완료했다.20/50/100 고정tuple 평가loss는 감소했으며 fresh reload/OFF·이번 실행 기반값 불변은PASS다. 진단3backward에서 prediction은 같고 gradient에는 작은 차이가 있었으나 FA2 단독 원인은UNKNOWN이다. 비학습tail forward33회로상한내이며 영상pair는진행중이다. B-021의FAIL과미도달검사는보존한다.
+
+## 2026-10-24 UTC / 2026-10-25 KST B-022 종료
+
+[RESULTS](experiments/B-022-resumed-update-comparison/RESULTS.md): 같은B021restart20에서optimizer/RNG/cursor복원후80회추가학습·33비학습forward·3진단backward를완료했다. 고정4tupleloss감소와새reload/OFF·이번base불변PASS다. matched20/100은동일16leaf/noise로각40/80sampler·decode1,17f30fps완료. 두영상모두착석/침실/padding/후반얼굴손상·잘림이남아전신FAIL·품질개선NOT_ESTABLISHED·temporalUNVERIFIED다. B021FAIL/NOT_REACHED는보존한다. 자체worker종료·swap/OOM0,high reclaim이벤트는원시기록유지. 자동증량은하지않는다. 실행중추가된B연구v2/B023문서도보존했으며,다음은이미계획된공식replacement로과제조건불일치가설을검사하는경로하나만제안한다. B023은NOT_RUN이다.
