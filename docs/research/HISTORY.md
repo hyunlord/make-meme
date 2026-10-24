@@ -466,3 +466,12 @@ BASE_S1의40step/80forward·final latent 저장을 확인하고 별도VAE decode
 ## 2026-10-24 B-021 착수: 고정 FM 문제의 update 예산 비교
 
 **RUNNING / GPU NOT_RUN.** 시작 원격 `5cde7b21d269234917ac5a0ddc30c21494fff69e`의 [PLAN](experiments/B-021-fixed-tuple-update-budget/PLAN.md)을 사용자 지시에 따라 실행한다. B-020 실제 initial adapter와 producer 캐시를 보존·재사용하고 fresh AdamW로0→100을 한 번 학습한다. 20회 replay를 증량 전에 검사하며, 기술 검증 통과 시 고정100endpoint 영상만 한 번 생성한다. 학습량 부족을 원인으로 미리 확정하지 않고, 실제3tuple 적합·sameclip holdout·CFG rollout·영상품질을 구분한다. [실행 기록](experiments/B-021-fixed-tuple-update-budget/RUNNING.md).
+
+### B-021 20회 replay 중단
+
+TRAIN1에서 실제20update/8평가 후 사전adapter replay 기준을 넘겨21이전 중단했다. loss replay4개는PASS지만adapter4개는FAIL이다. 50/100·영상은NOT_RUN, 기존실험은그대로보존한다. 실패원인과품질영향은아직UNKNOWN이며추가학습 없이저장물과기존로그를분석한다.
+
+
+## 2026-10-24 B-021 종료: update20 replay 중단
+
+[RESULTS](experiments/B-021-fixed-tuple-update-budget/RESULTS.md): 실제 initial+fresh AdamW로20update·8평가를 수행했다. 네 scalar loss replay는 PASS지만 네 adapter tensor는 사전 elementwise 기준을 초과해21이전 중단했다. 0/20 adapter·optimizer·RNG·cursor 저장/readback은 PASS,50/100·새 sampler/decode는 NOT_RUN이다. 100회 품질 효과는 미확인이며 원인은 UNKNOWN이다. 같은 입력의 FA2 backward 수치 반복성 가설 하나만 다음 연구로 제안하고 추가 실행은 하지 않는다. 사후 tolerance 완화·자동 재개는 하지 않으며 과거 품질 미입증을 보존한다.

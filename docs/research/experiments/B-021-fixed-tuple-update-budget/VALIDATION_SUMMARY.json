@@ -1,0 +1,93 @@
+{
+  "status": "INDEPENDENT_REVIEW_CONFIRMED_REPLAY_BLOCK",
+  "consumer_manifest_sha256": "3c30fca7bc3bf5379ac0eeeb2bb9fd23f3ecff5b17f8479b2ca5f86be090a330",
+  "actual_initial_values_exact": true,
+  "adapter20_independent_cpu_recompute": {
+    "q.lora_A": {
+      "max_abs": 2.191169187426567e-06,
+      "rms": 1.4545004386532014e-07,
+      "relative_l2": 1.779879209691801e-05,
+      "passed": false
+    },
+    "q.lora_B": {
+      "max_abs": 5.24159986525774e-06,
+      "rms": 3.205962199679672e-07,
+      "relative_l2": 0.00028730255928321763,
+      "passed": false
+    },
+    "v.lora_A": {
+      "max_abs": 9.792856872081757e-07,
+      "rms": 2.931076885159843e-08,
+      "relative_l2": 3.5674062277758675e-06,
+      "passed": false
+    },
+    "v.lora_B": {
+      "max_abs": 3.4683844205574133e-06,
+      "rms": 1.999359205561788e-07,
+      "relative_l2": 0.00015994965495528263,
+      "passed": false
+    }
+  },
+  "loss_replay_all_pass": true,
+  "loss_replay_difference_divided_by_B020_improvement": {
+    "train_0": 0.002368486661680379,
+    "train_1": 0.003643796658371845,
+    "train_2": 0.0005516632647432008,
+    "holdout": 0.00582952576020167
+  },
+  "updates": 20,
+  "tail_evaluations": 8,
+  "persisted_train_scalar_rows": 19,
+  "step20_evidence": "restart-020 step20 and all four AdamW state step20; adapter-020; evaluation snapshots0/20; replay20; runner assertion beforeupdate21",
+  "checkpoint_cpu_readback": {
+    "status": "PASS",
+    "cuda_initialized": false,
+    "step0": {
+      "step": 0,
+      "cursor": 0,
+      "optimizer_state_count": 0,
+      "hash": "2e110d9e732e883332f79585afd5e2518adbd2fb52680d19d40084b7dcfc61c6"
+    },
+    "step20": {
+      "step": 20,
+      "cursor": 2,
+      "optimizer_state_count": 4,
+      "all_optimizer_steps": 20,
+      "hash": "5e43183e452b1f16736a37986839059082dc3601d0b2c0649bd597ae58ad3934"
+    },
+    "adapter_values_match_separate_artifacts": true,
+    "rng_shapes": {
+      "cpu": [
+        5056
+      ],
+      "cuda": [
+        [
+          16
+        ]
+      ]
+    },
+    "resolved_optimizer": {
+      "lr": 0.0001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0,
+      "amsgrad": false,
+      "maximize": false,
+      "foreach": null,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null,
+      "decoupled_weight_decay": true
+    }
+  },
+  "split_parity_all_zero": true,
+  "full100_and_final_frozen_base_value_hash": "NOT_REACHED",
+  "fresh_reload_and_adapter_OFF_forward": "NOT_REACHED",
+  "PROBE_sampler_decode": "NOT_RUN",
+  "result": "FAILED: REPLAY_MISMATCH_STOP_BEFORE_UPDATE21",
+  "cause": "UNKNOWN; CPU evidence establishes initial/config/cache binding but does not identify numerical divergence source",
+  "interpretation": "Adapter mismatch fails registered replay criterion even though aggregate loss differences are small; not evidence of model training impossibility or video quality change. Do not loosen tolerance retrospectively."
+}

@@ -314,3 +314,8 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## 2026-10-24 B-021 착수
 
 B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 고정3tuple·초기adapter·optimizer에서20대100update를 비교한다. **RUNNING / 사전검증 중**이며 P/prefix 재계산·새 데이터 감사·rank/lr/layer 탐색은 하지 않는다. 100회 범위 이후 자동 증량 없이 [PLAN](experiments/B-021-fixed-tuple-update-budget/PLAN.md)의 관측에 따라 다음 가설 하나만 고른다.
+
+
+## 2026-10-24 B-021 종료: update20 replay 중단
+
+[RESULTS](experiments/B-021-fixed-tuple-update-budget/RESULTS.md): 실제 initial+fresh AdamW로20update·8평가를 수행했다. 네 scalar loss replay는 PASS지만 네 adapter tensor는 사전 elementwise 기준을 초과해21이전 중단했다. 0/20 adapter·optimizer·RNG·cursor 저장/readback은 PASS,50/100·새 sampler/decode는 NOT_RUN이다. 100회 품질 효과는 미확인이며 원인은 UNKNOWN이다. 같은 입력의 FA2 backward 수치 반복성 가설 하나만 다음 연구로 제안하고 추가 실행은 하지 않는다. 사후 tolerance 완화·자동 재개는 하지 않으며 과거 품질 미입증을 보존한다.

@@ -23,3 +23,7 @@ P·prefix 전체 forward는0이다. 캐시 producer의 코드/config/조건/targ
 ## 유지할 해석 경계
 
 고정3tuple regression이며 sameclip holdout1개는 독립영상test가 아니다. D=Y shortcut과 positive-only 감독은 그대로다. 100update는40samplingstep과 다른 단위이며, 학습 loss 감소·checkpoint복원·실제 영상 품질은 각각 보고한다. 기존 typing 진단을 성공으로 바꾸기 위한 ignore나 전역 정리는 하지 않는다.
+
+## 실제 종료 상태
+
+TRAIN1은20회 adapter replay assertion으로 종료했다. 0/20 checkpoint와 평가를 보존했으며 PROBE/S/D는 실행하지 않았다. 본 문서의 실행 순서는 사전 계약이지100회 완료 기록이 아니다. 비공개 ZIP의 재현 자료는 원인 검토용이며 이번 실행을 자동 재개하는 승인이 아니다.

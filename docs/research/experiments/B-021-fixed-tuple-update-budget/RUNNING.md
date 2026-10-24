@@ -27,3 +27,13 @@ CPU5검사·compile·critical Ruff는 PASS다. 정적 typing은43errors519warnin
 실제 GPU 실행 전 CPU 계약에서 B-020 입력 manifest가 fm.json도 hash로 고정하는 점을 확인했다. 기존 fm.json을 변경하는 안은 실행 전에 철회하고 producer bytes를 그대로 보존하며 새 예산을 consumer.json에만 두었다. 기존 입력 검사는 삭제하지 않았다. 전체4stage의 실제입력·code/upstream hash·producer cache binding 검사가 CPU에서 통과했다. GPU 시도는0이다.
 
 최종 사전 manifest SHA256: `3c30fca7bc3bf5379ac0eeeb2bb9fd23f3ecff5b17f8479b2ca5f86be090a330`. 독립 리뷰도 이 수정본에 PASS했다. 이전 candidate hash와 CPU 실패 원인은 비공개 기록에 보존했다.
+
+## TRAIN1: 20 replay에서 사전 중단
+
+사전 commit `62f853b087e7b48baf3401818bfec152110bfe63`을 push/원격 확인한 뒤 TRAIN1을 실행했다. 0평가 split parity는 네 tuple 모두 max_abs0이다. 실제20update와0/20의8평가를 완료하고,20checkpoint/optimizer/RNG/cursor를 저장한 다음 replay gate에서 exit1로 종료됐다.
+
+네 adapter의 사전 elementwise tolerance는 모두 FAIL: max_abs q.A2.191169e-6,q.B5.241600e-6,v.A9.792857e-7,v.B3.468384e-6. 네 loss replay는 모두 PASS이며 최대절대차2.831221e-7다. 전역적으로 큰 품질 차이가 증명됐다는 의미는 아니지만, 사전 규칙에 따라21update 이전에 중단했다. tolerance 완화·재시도·임의초기화는 없었다.
+
+50/100평가·100endpoint·PROBE/S/D는 NOT_RUN이다. 이후에 위치한 final base값해시/fresh adapter reload/OFF 검사도 NOT_REACHED다. 각학습step의 동결base grad=None과 저장물readback은 이 종료후검사와 구분한다.
+
+기존 train-progress는 gate 뒤에 기록되므로 durable update row가19개다. 실제20회는 restart-020의 optimizer step20·tuple cursor2와 adapter-020/20평가로 확인하며 누락row20을 사후 만들어 넣지 않는다. 원인 분류는 현재 UNKNOWN이며 보존 로그만 CPU로 대조한다. CUDA/FA2 비결정성이나 코드 변경 하나로 원인을 확정하지 않는다.
