@@ -438,3 +438,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## 2026-10-24 B-020 준비 확인: DATA_PENDING, 실행 미착수
 
 최신 원격 `82d22372693a641aa78eaa7974b0a269dab81665`의 [PLAN](experiments/B-020-real-fm-tail-overfit/PLAN.md)을 확인했다. B-019로 구성요소 smoke는 종료한다. 이번 요청에는 실제 Lab 자연동작 Y/R와 사용 범위가 새로 제공되지 않아 기존 데이터 부족을 유지한다. 같은 권한 감사·synthetic 대체 실험·GPU 실행은0이다. [준비 상태](experiments/B-020-real-fm-tail-overfit/STATUS.md)에 누락자료와 실행 재개 조건을 한 번 기록했다. 실제 자료·실행 지시 이후 입력/시간축·3학습tuple/1동일clip 보조tuple·공식FM/head 계약과 코드를 확정할 때만 착수를 기록한다. 현재 PLANNED / DATA_PENDING / GPU NOT_RUN이며 학습을 시작하지 않았다.
+
+## 2026-10-24 B-020 실제 자료 제공 후 착수
+
+**RUNNING / 입력 CPU 확인 완료 / GPU 아직 NOT_RUN.** 사용자가 새 자연동작 영상과 기존 앉은 Lab 사진의 동일 개체 및 비공개 연구 학습·평가 사용을 확인했다. 새 자료의 권한 게이트를 해소하되 B-017의 과거 제3자 자료 권한 부족은 보존한다. [입력 확정](experiments/B-020-real-fm-tail-overfit/INPUT_AMENDMENT.md): 최초 적합 f126~142,30fps,896×512 letterbox, D=Y SELF_RECON_FM_SMOKE. 실제 Y VAE velocity target의 고정3학습/1동일clip noise-time holdout, 마지막block Q/V LoRA 최대20update로 넘어간다. synthetic 구성요소 실험 반복·cross-ID 일반화·전체모델 학습은 이번 목표가 아니다. CPU계약과 런타임 소스 검토 이후 코드/config/hash를 고정하고 단계별 안전 조건하에만 실행한다.
