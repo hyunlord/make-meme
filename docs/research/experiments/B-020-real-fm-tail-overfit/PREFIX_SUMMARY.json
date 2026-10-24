@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "full_positive_forwards": 4,
+  "tuples": [
+    {
+      "tuple_id": "train_0",
+      "file_sha256": "fcc533f001cf9a82dac94bd9aa94fde886908bd09db1b930d15e892836212a81",
+      "sidecar_sha256": "7b6f2bb49bb51179a6384af7ce10e6decb4ae707afc60242b8d0ae74a22bb9f3"
+    },
+    {
+      "tuple_id": "train_1",
+      "file_sha256": "745acbb6c77aeadb6c040f67bed593c857a9b63ca49c13139848a656962a3323",
+      "sidecar_sha256": "1a18cefd59b732c51069e0a5e88d519fe8f6f7e7e193cef97fb11cce76caa6ba"
+    },
+    {
+      "tuple_id": "train_2",
+      "file_sha256": "722f168663066058f132575bf0314d07429e8cac86b80a764214e27dea228c67",
+      "sidecar_sha256": "2b78b4fa23ddfde7382e7d38abf9232de55c9ebb7e723ebcbba313077eae0e91"
+    },
+    {
+      "tuple_id": "holdout",
+      "file_sha256": "533167320621eba87764c0fd7c8a777925eca85c3d81b5485ed0ca5e76472ca7",
+      "sidecar_sha256": "c40ec212bbfb4029b853baacd2fde65431f4c45a3d4f0954c12e4cd0abbd5888"
+    }
+  ],
+  "code_sha256": "11d03f307f70724502534cbbc109fcb874ebe51b254bc65ed94d7921b60aa01c",
+  "conditions_sha256": "c5db9c9460f71f4c37c124db7b163221f65f9446b656c2f73a818dce3fcaa4dd",
+  "target_sha256": "685dc548c1110f00acb0f69f09d348f9ff8bb366530e3e813bbf73117eed1c1a"
+}

@@ -1,0 +1,65 @@
+{
+  "status": "FM_TAIL_UPDATE_RELOAD_PASS",
+  "updates": 20,
+  "tail_evaluations": 10,
+  "before": {
+    "train_0": {
+      "loss": 0.1455920785665512,
+      "parity": {
+        "passed": true,
+        "max_abs": 0.0,
+        "atol": 0.001,
+        "rtol": 0.001
+      }
+    },
+    "train_1": {
+      "loss": 0.05071360245347023,
+      "parity": {
+        "passed": true,
+        "max_abs": 0.0,
+        "atol": 0.001,
+        "rtol": 0.001
+      }
+    },
+    "train_2": {
+      "loss": 0.03156200796365738,
+      "parity": {
+        "passed": true,
+        "max_abs": 0.0,
+        "atol": 0.001,
+        "rtol": 0.001
+      }
+    },
+    "holdout": {
+      "loss": 0.03840317949652672,
+      "parity": {
+        "passed": true,
+        "max_abs": 0.0,
+        "atol": 0.001,
+        "rtol": 0.001
+      }
+    }
+  },
+  "after": {
+    "train_0": 0.14547254145145416,
+    "train_1": 0.05067168548703194,
+    "train_2": 0.03149447962641716,
+    "holdout": 0.03837953507900238
+  },
+  "reload": {
+    "passed": true,
+    "max_abs": 0.0,
+    "atol": 0.001,
+    "rtol": 0.001
+  },
+  "off": {
+    "passed": true,
+    "max_abs": 0.0,
+    "atol": 0.001,
+    "rtol": 0.001
+  },
+  "base_unchanged": true,
+  "adapter_sha256": "ed1e859f895cb4bb29c27514c283612a0c0494607d5e426d0976688823b62250",
+  "prefix_receipt_sha256": "e23d65073ce708c151571c0810edbd463866ab6d85312fba43dae3d05df44255",
+  "code_sha256": "11d03f307f70724502534cbbc109fcb874ebe51b254bc65ed94d7921b60aa01c"
+}

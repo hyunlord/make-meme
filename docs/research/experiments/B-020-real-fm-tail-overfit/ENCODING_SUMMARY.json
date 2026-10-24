@@ -1,0 +1,323 @@
+{
+  "target": {
+    "file_sha256": "685dc548c1110f00acb0f69f09d348f9ff8bb366530e3e813bbf73117eed1c1a",
+    "bytes": 2293840,
+    "tensors": {
+      "t0": {
+        "shape": [
+          16,
+          5,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "84379b6cb4315e3d23b727f8ffed72e013bde369080b3ec8a02948364becb54f"
+      }
+    },
+    "readback_exact": true
+  },
+  "conditions": {
+    "file_sha256": "c5db9c9460f71f4c37c124db7b163221f65f9446b656c2f73a818dce3fcaa4dd",
+    "bytes": 17955492,
+    "tensors": {
+      "t0": {
+        "shape": [
+          16,
+          5,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950"
+      },
+      "t1": {
+        "shape": [
+          77,
+          4096
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "703df58cd1aa0470b3d93630e348de9e084111058305ec612894f953cd206716"
+      },
+      "t2": {
+        "shape": [
+          1,
+          257,
+          1280
+        ],
+        "dtype": "torch.float16",
+        "sha256": "ec959988117d6ef21926905bc960960683ec2a33d439fa72ffb1f9efd9fb2d09"
+      },
+      "t3": {
+        "shape": [
+          16,
+          1,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "5fa2f985c0a4188d856ca6725694283eb93aa54732e59b85a18fcd398e878e12"
+      },
+      "t4": {
+        "shape": [
+          28,
+          6,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "4229a9cd317fdfda7dcc37cd90061446cda5521434a8dd449c59330885fc2058"
+      },
+      "t5": {
+        "shape": [
+          16,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "31ca8e07c8ab660e0188152f46bc288b077d5b8e0051c4c201bca6df8b0d2818"
+      },
+      "t6": {
+        "shape": [
+          28,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "af02f93684bce79464f4607306e8dc30a7c55b0a01357654e2483e4035f4d15b"
+      },
+      "t7": {
+        "shape": [
+          1,
+          4096
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4"
+      },
+      "t8": {
+        "shape": [
+          1,
+          257,
+          1280
+        ],
+        "dtype": "torch.float16",
+        "sha256": "ec959988117d6ef21926905bc960960683ec2a33d439fa72ffb1f9efd9fb2d09"
+      },
+      "t9": {
+        "shape": [
+          16,
+          1,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "5fa2f985c0a4188d856ca6725694283eb93aa54732e59b85a18fcd398e878e12"
+      },
+      "t10": {
+        "shape": [
+          28,
+          6,
+          64,
+          112
+        ],
+        "dtype": "torch.float32",
+        "sha256": "4229a9cd317fdfda7dcc37cd90061446cda5521434a8dd449c59330885fc2058"
+      },
+      "t11": {
+        "shape": [
+          16,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "31ca8e07c8ab660e0188152f46bc288b077d5b8e0051c4c201bca6df8b0d2818"
+      },
+      "t12": {
+        "shape": [
+          28,
+          5,
+          32,
+          56
+        ],
+        "dtype": "torch.float32",
+        "sha256": "af02f93684bce79464f4607306e8dc30a7c55b0a01357654e2483e4035f4d15b"
+      },
+      "t13": {
+        "shape": [
+          16
+        ],
+        "dtype": "torch.uint8",
+        "sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425"
+      },
+      "t14": {
+        "shape": [
+          40
+        ],
+        "dtype": "torch.int64",
+        "sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b"
+      },
+      "t15": {
+        "shape": [
+          41
+        ],
+        "dtype": "torch.float32",
+        "sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7"
+      }
+    },
+    "readback_exact": true
+  },
+  "structure": {
+    "dict": {
+      "noise": {
+        "tensor": "t0",
+        "device": "cuda:0"
+      },
+      "arg_c": {
+        "dict": {
+          "context": {
+            "list": [
+              {
+                "tensor": "t1",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "clip_fea": {
+            "tensor": "t2",
+            "device": "cuda:0"
+          },
+          "seq_len": {
+            "scalar": 10000000000.0
+          },
+          "ref_latents": {
+            "list": [
+              {
+                "tensor": "t3",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "ref_masks": {
+            "list": [
+              {
+                "tensor": "t4",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "pose_latents": {
+            "list": [
+              {
+                "tensor": "t5",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "driving_masks": {
+            "list": [
+              {
+                "tensor": "t6",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "history_mask": {
+            "scalar": null
+          },
+          "replace_flag": {
+            "scalar": false
+          },
+          "additional_ref_latents": {
+            "scalar": null
+          },
+          "additional_ref_masks": {
+            "scalar": null
+          }
+        }
+      },
+      "arg_null": {
+        "dict": {
+          "context": {
+            "list": [
+              {
+                "tensor": "t7",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "clip_fea": {
+            "tensor": "t8",
+            "device": "cuda:0"
+          },
+          "seq_len": {
+            "scalar": 10000000000.0
+          },
+          "ref_latents": {
+            "list": [
+              {
+                "tensor": "t9",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "ref_masks": {
+            "list": [
+              {
+                "tensor": "t10",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "pose_latents": {
+            "list": [
+              {
+                "tensor": "t11",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "driving_masks": {
+            "list": [
+              {
+                "tensor": "t12",
+                "device": "cuda:0"
+              }
+            ]
+          },
+          "history_mask": {
+            "scalar": null
+          },
+          "replace_flag": {
+            "scalar": false
+          },
+          "additional_ref_latents": {
+            "scalar": null
+          },
+          "additional_ref_masks": {
+            "scalar": null
+          }
+        }
+      },
+      "history": {
+        "scalar": null
+      },
+      "generator_state": {
+        "tensor": "t13",
+        "device": "cpu"
+      },
+      "timesteps": {
+        "tensor": "t14",
+        "device": "cuda:0"
+      },
+      "sigmas": {
+        "tensor": "t15",
+        "device": "cpu"
+      }
+    }
+  },
+  "target_is_actual_Y": true,
+  "D_equals_Y": true,
+  "public_tensor_values": false
+}

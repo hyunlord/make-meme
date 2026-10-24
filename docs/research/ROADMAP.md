@@ -302,3 +302,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## 2026-10-24 B-020 실제 자료 제공 후 착수
 
 **RUNNING / 입력 CPU 확인 완료 / GPU 아직 NOT_RUN.** 사용자가 새 자연동작 영상과 기존 앉은 Lab 사진의 동일 개체 및 비공개 연구 학습·평가 사용을 확인했다. 새 자료의 권한 게이트를 해소하되 B-017의 과거 제3자 자료 권한 부족은 보존한다. [입력 확정](experiments/B-020-real-fm-tail-overfit/INPUT_AMENDMENT.md): 최초 적합 f126~142,30fps,896×512 letterbox, D=Y SELF_RECON_FM_SMOKE. 실제 Y VAE velocity target의 고정3학습/1동일clip noise-time holdout, 마지막block Q/V LoRA 최대20update로 넘어간다. synthetic 구성요소 실험 반복·cross-ID 일반화·전체모델 학습은 이번 목표가 아니다. CPU계약과 런타임 소스 검토 이후 코드/config/hash를 고정하고 단계별 안전 조건하에만 실행한다.
+
+### B-020 실제FM 기술단계 완료·영상 비교 진행
+
+고정prefix와 미분가능한고정head를 사용한 실제Lab FM tail20update/reload/OFF를 완료했다. 생성품질·reference활용·cross-ID 분리는 별도이며 학습후영상 비교가 진행 중이다. 추가튜닝은 수행하지 않는다.

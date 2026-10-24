@@ -442,3 +442,19 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## 2026-10-24 B-020 실제 자료 제공 후 착수
 
 **RUNNING / 입력 CPU 확인 완료 / GPU 아직 NOT_RUN.** 사용자가 새 자연동작 영상과 기존 앉은 Lab 사진의 동일 개체 및 비공개 연구 학습·평가 사용을 확인했다. 새 자료의 권한 게이트를 해소하되 B-017의 과거 제3자 자료 권한 부족은 보존한다. [입력 확정](experiments/B-020-real-fm-tail-overfit/INPUT_AMENDMENT.md): 최초 적합 f126~142,30fps,896×512 letterbox, D=Y SELF_RECON_FM_SMOKE. 실제 Y VAE velocity target의 고정3학습/1동일clip noise-time holdout, 마지막block Q/V LoRA 최대20update로 넘어간다. synthetic 구성요소 실험 반복·cross-ID 일반화·전체모델 학습은 이번 목표가 아니다. CPU계약과 런타임 소스 검토 이후 코드/config/hash를 고정하고 단계별 안전 조건하에만 실행한다.
+
+### B-020 P 완료
+
+실제 Lab Y의 정상 VAE 인코딩과 조건 캐시 저장을 완료했다. worker170.530초, clean exit 후 고정4tuple prefix에 진입한다. 이는 target 확보이며 아직 학습·영상 품질 수용은 아니다. [실행 기록](experiments/B-020-real-fm-tail-overfit/RUNNING.md).
+
+### B-020 prefix 완료·baseline 시작
+
+고정4tuple의 실제 전체 positive forward에서 h38와기준velocity를 저장했다. 학습하지 않은 기준 영상 BASE_S1에 진입했으며 split parity/학습은 아직 미실행이다. 같은 clip/조건/noise의 사전 고정 비교만 진행한다.
+
+### B-020 학습 전 샘플링 완료
+
+BASE_S1의40step/80forward·final latent 저장을 확인하고 별도VAE decode로 이동했다. 실제FM 업데이트는 아직0이며, 기준출력은 학습 전 것으로 보존한다.
+
+### B-020 실제 FM 20update·reload 완료
+
+실제Y velocity target을 공식head/unpatchify까지 통과시킨 tail학습20update·10eval을 완료했다. parity/reload/OFF 오차0, base불변이며 고정3train/1sameclipholdout loss는 소폭 감소했다. 이는 학습배선/유한tuple회귀 결과로만 수용한다. 동일조건의 학습후샘플링1회에 진입하며 품질은 아직미검증이다.
