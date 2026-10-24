@@ -1,0 +1,79 @@
+{
+  "actual_mode_trace": {
+    "source": "actual first block kwargs, no RoPE override",
+    "rows": [
+      {
+        "forward": 1,
+        "rope_T_shift": {
+          "additional_ref": 0,
+          "ref": 0,
+          "pose": 0,
+          "video": 0
+        },
+        "rope_H_shift": {
+          "ref": 120,
+          "additional_ref": 120,
+          "pose": 0,
+          "video": 0
+        },
+        "rope_W_shift": {
+          "ref": 0,
+          "additional_ref": 0,
+          "pose": 120,
+          "video": 0
+        },
+        "rope_ref_T": {
+          "ref": 1,
+          "additional_ref": 0
+        }
+      },
+      {
+        "forward": 2,
+        "rope_T_shift": {
+          "additional_ref": 0,
+          "ref": 0,
+          "pose": 0,
+          "video": 0
+        },
+        "rope_H_shift": {
+          "ref": 120,
+          "additional_ref": 120,
+          "pose": 0,
+          "video": 0
+        },
+        "rope_W_shift": {
+          "ref": 0,
+          "additional_ref": 0,
+          "pose": 120,
+          "video": 0
+        },
+        "rope_ref_T": {
+          "ref": 1,
+          "additional_ref": 0
+        }
+      }
+    ]
+  },
+  "actual_vanilla_projection_gate": {
+    "enabled": false,
+    "sha256": null,
+    "active_lora": 0,
+    "ALG": false,
+    "manual_rope_override": false
+  },
+  "pinned_module_relative_path": "wan/modules/model_scail2.py",
+  "pinned_module_sha256": "bbcfc38ee8c4dc8e9f31987e617b57af267c46e8bd25ee046f76e7426d6f5d6c",
+  "runtime_warning_file_evidence": [
+    "upstream/wan/modules/model_scail2.py:32",
+    "upstream/wan/modules/model_scail2.py:43",
+    "upstream/wan/modules/model_scail2.py:82",
+    "upstream/wan/modules/model_scail2.py:88",
+    "upstream/wan/modules/model_scail2.py:126",
+    "upstream/wan/modules/model_scail2.py:783",
+    "upstream/wan/modules/model_scail2.py:442",
+    "upstream/wan/modules/model_scail2.py:449",
+    "upstream/wan/modules/model_scail2.py:456",
+    "upstream/wan/modules/model_scail2.py:488"
+  ],
+  "limitations": "No new in-process __file__ hash hook. Pinned file hash verified before worker dispatch; runtime warning identifies executed file. No mode patch or additional forward."
+}

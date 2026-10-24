@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-25. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**현재: B-023 사전검증 RUNNING / GPU NOT_RUN.** 실제Lab 자연동작의 정식replacement 1회만 준비한다. B-022 완료 / 품질 개선 NOT_ESTABLISHED. B-021의 STOPPED_AT_REPLAY_20과 기존 FAIL을 보존했다. 정확한optimizer/RNG/cursor재개80update와matched20/100두영상은완료했으나착석·얼굴손상·잘림이남았다. temporal=UNVERIFIED. 다음방향은별도등록된B-023공식replacement이며이번에는실행하지않았다. [계획](experiments/B-022-resumed-update-comparison/PLAN.md).
+**현재: B-023 COMPLETED / 기술 PASS / 원본 보존 과제 FAIL.** [결과](experiments/B-023-task-aligned-replacement/RESULTS.md). 같은 실제Lab에서 정식replacement1회를 완료했지만 착석·중앙침실·세로경계와 후반얼굴손상이 남고 원본장면은 보존되지 않았다. 다음 병목 하나는 reference 공간배치와 개체외형의 분리이며 실행 계보의 구체적 오류와 모델 의존성을 구분할 제한 검증을 제안한다. 아직 후속 NOT_RUN. B021 FAIL/B022 결과와 학습량 확대 종료를 보존한다.
 
 **B-017 당시 요약: COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 
@@ -333,3 +333,7 @@ B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 
 ## 2026-10-25 B-023 착수: 원본 보존 편집의 과제 적합성
 
 최신 원격 `fee6896bea73a2cd2a3b5f6c7f5baf062eb505d3`와 B-022 종료를 확인했다. B-023 기존 실행 디렉터리/활성 작업이 없는 상태에서 CPU 입력·계보 검증을 시작했다. B020 실제 Lab f126..142·30fps·896×512·미학습 기준선을 유지하고 ref RED/BLACK + driver RED/WHITE + 공식 replacement를 묶어 비교한다. 과거 밈2case/ROI 후보는 이번 범위가 아니다. 신규 sampler 최대1·decode1, 학습/다운로드/합성0; 미실행 상태에서 코드·EditSpec·조건 차이를 사전 고정한다. 최종 목표는 단일 Spark의 원본 보존 객체 편집이며 이번은 그 첫 제한 기준선이다. 결과에 따라 다음 병목 하나만 선택한다.
+
+## B-023 종료와 범위 유지
+
+상위 목표는 단일Spark의 원본 보존 객체 편집이다. 정식모드 실행이 그 목표의 성공을 보장하지 않았다. EditSpec parser·새MCP·ROI/가림복원·다중객체·효율화는 후속 후보이며 이번에는 구현하지 않았다. 결과 기반 다음 병목 선택을 유지하고 추가생성·학습·합성을 자동 시작하지 않는다.

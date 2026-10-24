@@ -491,3 +491,7 @@ restart20의18개tensor와 optimizer/RNG/cursor를 복원하고 추가80update�
 ## 2026-10-25 B-023 착수: 원본 보존 편집의 과제 적합성
 
 최신 원격 `fee6896bea73a2cd2a3b5f6c7f5baf062eb505d3`와 B-022 종료를 확인했다. B-023 기존 실행 디렉터리/활성 작업이 없는 상태에서 CPU 입력·계보 검증을 시작했다. B020 실제 Lab f126..142·30fps·896×512·미학습 기준선을 유지하고 ref RED/BLACK + driver RED/WHITE + 공식 replacement를 묶어 비교한다. 과거 밈2case/ROI 후보는 이번 범위가 아니다. 신규 sampler 최대1·decode1, 학습/다운로드/합성0; 미실행 상태에서 코드·EditSpec·조건 차이를 사전 고정한다. 최종 목표는 단일 Spark의 원본 보존 객체 편집이며 이번은 그 첫 제한 기준선이다. 결과에 따라 다음 병목 하나만 선택한다.
+
+## 2026-10-25 B-023 종료: 공식 replacement 실행, 과제 품질 미수용
+
+[RESULTS](experiments/B-023-task-aligned-replacement/RESULTS.md): 동일Lab 자연동작 f126..142/30fps에서 P0·PROBE1·S1(40/80)·D1을 완료했다. 양CFG ref RED/BLACK·driver RED/WHITE와 공식replacement 위치 계약, noise/14leaf보존·adapter/ALG/override OFF를 확인했다. raw에는 중앙 착석/침실/세로경계가 남고 양옆이 원본과 다른 방으로 생성되어 사족자세·장면보존 FAIL, 후반얼굴손상/잘림 지속·품질개선 미입증이다. temporal UNVERIFIED, 같은개체/sourcecopy 한계 유지. 새학습/설치/재시도/ROI합성0, 자체worker종료. 다음 병목은 참조 공간배치와 객체외형의 분리이며 조건 연결의 구현 문제와 모델 의존성을 구분할 한정 검증만 제안한다. 추가 실험은 실행/예약하지 않는다.
