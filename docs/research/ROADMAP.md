@@ -282,3 +282,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-018 착수 (2026-10-24)
 
 **RUNNING / 구성요소 검사 준비.** 실데이터 권한·target 부족은 그대로 남지만, synthetic hidden tensor로 LoRA 연결과 공식 FA backward를 별도로 검사한다. [계획](experiments/B-018-lora-component-smoke/PLAN.md)의 단일 모듈·worker1회·최대3 update 경계를 유지한다. 전체 영상 학습과 데이터 확보는 이번 실행에 포함하지 않는다.
+
+## B-018 종료 (2026-10-24)
+
+**단일 attention 구성요소의 실제 backward·adapter update·reload PASS.** synthetic 수치검사로 학습 배선을 분리해 검증했으며 동물data/권한은 여전히 미확보다. 전체모델학습·영상품질·개체/자세분리는NOT_RUN, 정적typing은NOT_CLEAN이다. [결과](experiments/B-018-lora-component-smoke/RESULTS.md). 다음 제안은 동일synthetic계약을 마지막transformerblock 전체로 한 단계 확장할 때의 gradient/메모리 검증 계획 하나다. 추가실행은 하지 않으며 ALG/H120 기본미채택과 이전 실패기록을 유지한다.

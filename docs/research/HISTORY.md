@@ -422,3 +422,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-018 착수 (2026-10-24)
 
 **RUNNING / GPU NOT_RUN.** 원격 `a8885357684904285014ee28ac568f568ee59762`의 계획과 실행 지시를 확인했다. B-017 RIGHTS_PENDING/DATA_GAP는 보존하며 실데이터 확보와 학습 배선 검증을 분리한다. 마지막 self-attention 하나에 synthetic tensor와 Q/V rank4 LoRA를 사용한다. CPU 계약을 먼저 검사하고 공식 FA backward·최대3 update·adapter 저장/재로딩을 GPU worker1회 안에서 확인한다. 전체 모델·영상·개인 미디어 학습은0, 실제 동물 품질은 NOT_RUN이다.
+
+## B-018 종료 (2026-10-24)
+
+**COMPONENT_BACKWARD_PASS / COMPONENT_UPDATE_RELOAD_PASS.** 사전고정 `2b562188cc0ad30cf822583d53a3d66babbd8e1e` 후 GPU worker1회에서 공식 FA2 backward3회·AdamW3update·attention8forward를 완료했다. Q/V rank4 adapter81,920개만 변경, base 불변·fresh reload·OFF 오차0. 선택10tensor419,553,280bytes만 읽었으며 개인미디어·전체모델·영상sampler0이다. worker7.9725s·CUDApeak297,412,096B·swap/OOM0·자체unit종료 확인. CPU11검사PASS이나 정적typing은helper19warnings/runner20errors135warnings로NOT_CLEAN을 보존한다. [RESULTS](experiments/B-018-lora-component-smoke/RESULTS.md). B-017 RIGHTS_PENDING/DATA_GAP, FULL_MODEL_TRAINING/VIDEO_QUALITY/IDENTITY_POSE_DISENTANGLEMENT NOT_RUN은 그대로다. 다음한연구는같은synthetic계약의마지막transformerblock단위backward/메모리검증계획이며 이번에는 실행하지 않았다.

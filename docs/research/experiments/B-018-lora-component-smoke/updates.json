@@ -1,0 +1,206 @@
+[
+  {
+    "update": 1,
+    "loss": 1.5443342924118042,
+    "gradients": {
+      "q.A": {
+        "present": true,
+        "finite": true,
+        "norm": 0.0,
+        "dtype": "torch.float32"
+      },
+      "q.B": {
+        "present": true,
+        "finite": true,
+        "norm": 0.019751524552702904,
+        "dtype": "torch.float32"
+      },
+      "v.A": {
+        "present": true,
+        "finite": true,
+        "norm": 0.0,
+        "dtype": "torch.float32"
+      },
+      "v.B": {
+        "present": true,
+        "finite": true,
+        "norm": 0.011200054548680782,
+        "dtype": "torch.float32"
+      }
+    },
+    "adapter_delta_norms": [
+      0.0,
+      0.014282330870628357,
+      0.0,
+      0.014274979010224342
+    ],
+    "step_seconds": 0.8340699229156598,
+    "autograd_nodes": [
+      "AccumulateGrad",
+      "AddBackward0",
+      "AddmmBackward0",
+      "CatBackward0",
+      "FlashAttnVarlenFuncBackward",
+      "MeanBackward0",
+      "MeanBackward1",
+      "MmBackward0",
+      "MulBackward0",
+      "PowBackward0",
+      "RsqrtBackward0",
+      "SelectBackward0",
+      "SliceBackward0",
+      "StackBackward0",
+      "SubBackward0",
+      "TBackward0",
+      "ToCopyBackward0",
+      "UnbindBackward0",
+      "UnsafeViewBackward0",
+      "ViewAsComplexBackward0",
+      "ViewAsRealBackward0",
+      "ViewBackward0"
+    ],
+    "optimizer_state_dtypes": [
+      "torch.float32"
+    ],
+    "elapsed_seconds": 5.572301912936382,
+    "cuda_allocated": 289145856,
+    "cuda_reserved": 310378496,
+    "cuda_peak_allocated": 296756736
+  },
+  {
+    "update": 2,
+    "loss": 1.5443276166915894,
+    "gradients": {
+      "q.A": {
+        "present": true,
+        "finite": true,
+        "norm": 0.001475578872486949,
+        "dtype": "torch.float32"
+      },
+      "q.B": {
+        "present": true,
+        "finite": true,
+        "norm": 0.01974574290215969,
+        "dtype": "torch.float32"
+      },
+      "v.A": {
+        "present": true,
+        "finite": true,
+        "norm": 0.0015977071598172188,
+        "dtype": "torch.float32"
+      },
+      "v.B": {
+        "present": true,
+        "finite": true,
+        "norm": 0.011199302971363068,
+        "dtype": "torch.float32"
+      }
+    },
+    "adapter_delta_norms": [
+      0.010578460060060024,
+      0.01427780743688345,
+      0.010571015067398548,
+      0.014271526597440243
+    ],
+    "step_seconds": 0.47274140804074705,
+    "autograd_nodes": [
+      "AccumulateGrad",
+      "AddBackward0",
+      "AddmmBackward0",
+      "CatBackward0",
+      "FlashAttnVarlenFuncBackward",
+      "MeanBackward0",
+      "MeanBackward1",
+      "MmBackward0",
+      "MulBackward0",
+      "PowBackward0",
+      "RsqrtBackward0",
+      "SelectBackward0",
+      "SliceBackward0",
+      "StackBackward0",
+      "SubBackward0",
+      "TBackward0",
+      "ToCopyBackward0",
+      "UnbindBackward0",
+      "UnsafeViewBackward0",
+      "ViewAsComplexBackward0",
+      "ViewAsRealBackward0",
+      "ViewBackward0"
+    ],
+    "optimizer_state_dtypes": [
+      "torch.float32"
+    ],
+    "elapsed_seconds": 6.045519687933847,
+    "cuda_allocated": 289145856,
+    "cuda_reserved": 310378496,
+    "cuda_peak_allocated": 297412096
+  },
+  {
+    "update": 3,
+    "loss": 1.544281005859375,
+    "gradients": {
+      "q.A": {
+        "present": true,
+        "finite": true,
+        "norm": 0.0029511169996112585,
+        "dtype": "torch.float32"
+      },
+      "q.B": {
+        "present": true,
+        "finite": true,
+        "norm": 0.022136786952614784,
+        "dtype": "torch.float32"
+      },
+      "v.A": {
+        "present": true,
+        "finite": true,
+        "norm": 0.0031952077988535166,
+        "dtype": "torch.float32"
+      },
+      "v.B": {
+        "present": true,
+        "finite": true,
+        "norm": 0.012884749099612236,
+        "dtype": "torch.float32"
+      }
+    },
+    "adapter_delta_norms": [
+      0.011807937175035477,
+      0.014202225022017956,
+      0.011805038899183273,
+      0.013619842007756233
+    ],
+    "step_seconds": 0.4691404990153387,
+    "autograd_nodes": [
+      "AccumulateGrad",
+      "AddBackward0",
+      "AddmmBackward0",
+      "CatBackward0",
+      "FlashAttnVarlenFuncBackward",
+      "MeanBackward0",
+      "MeanBackward1",
+      "MmBackward0",
+      "MulBackward0",
+      "PowBackward0",
+      "RsqrtBackward0",
+      "SelectBackward0",
+      "SliceBackward0",
+      "StackBackward0",
+      "SubBackward0",
+      "TBackward0",
+      "ToCopyBackward0",
+      "UnbindBackward0",
+      "UnsafeViewBackward0",
+      "ViewAsComplexBackward0",
+      "ViewAsRealBackward0",
+      "ViewBackward0"
+    ],
+    "optimizer_state_dtypes": [
+      "torch.float32"
+    ],
+    "elapsed_seconds": 6.515161496936344,
+    "cuda_allocated": 289145856,
+    "cuda_reserved": 312475648,
+    "cuda_peak_allocated": 297412096
+  }
+]

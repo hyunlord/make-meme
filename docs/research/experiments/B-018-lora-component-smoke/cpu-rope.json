@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "classification": "CPU_AST_HELPER_ONLY_NOT_FA",
+  "input_shape": [
+    1,
+    36,
+    40,
+    128
+  ],
+  "output_shape": [
+    1,
+    36,
+    40,
+    128
+  ],
+  "freq_dtype": "torch.complex128",
+  "finite_input_gradient": true,
+  "cuda_initialized": false
+}

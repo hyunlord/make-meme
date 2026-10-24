@@ -1,0 +1,97 @@
+{
+  "experiment": "B-018",
+  "classification": "SYNTHETIC_TENSOR_CONTRACT_TEST",
+  "status": "COMPONENT_UPDATE_RELOAD_PASS",
+  "workers": 1,
+  "optimizer_updates": 3,
+  "attention_forward_attempts": 8,
+  "completed_attention_forwards": 8,
+  "retry_attempts": 0,
+  "selected_tensors": 10,
+  "selected_payload_bytes": 419553280,
+  "frozen_component_parameters": 104888320,
+  "trainable_adapter_parameters": 81920,
+  "guard_seconds": 10.08278489112854,
+  "worker_seconds": 7.972472899942659,
+  "step_seconds": [
+    0.8340699229156598,
+    0.47274140804074705,
+    0.4691404990153387
+  ],
+  "losses": [
+    1.5443342924118042,
+    1.5443276166915894,
+    1.544281005859375
+  ],
+  "cuda_peak_allocated_bytes": 297412096,
+  "cuda_reserved_max_sampled_bytes": 312475648,
+  "cgroup_peak_bytes": 1729818624,
+  "minimum_system_available_bytes": 93343227904,
+  "maximum_system_swap_used_bytes": 0,
+  "cgroup_events": {
+    "low": 0,
+    "high": 0,
+    "max": 0,
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  },
+  "sampled_rss_max_bytes": 2498703360,
+  "sampled_hwm_max_bytes": 2498703360,
+  "memory_domains_note": "CUDA allocator, system available, RSS/HWM and cgroup charged memory are distinct; cgroup sampling is not a CUDA peak substitute.",
+  "autograd_backend_nodes": [
+    "FlashAttnVarlenFuncBackward"
+  ],
+  "zero_error_max": 0.0,
+  "reload_error_max": 0.0,
+  "off_error_max": 0.0,
+  "owned_services_inactive": true,
+  "checkpoint_integrity": "selected in-memory F32 payload hash unchanged; file size/mtime unchanged; no fresh full65GB hash",
+  "artifacts": {
+    "adapter-final.json": {
+      "bytes": 699,
+      "sha256": "21ab20ee6fe36a15a0577d7c8e7bbd1c340cb9740e23ce237b873ae44bc43b88"
+    },
+    "adapter-final.safetensors": {
+      "bytes": 327984,
+      "sha256": "726280e47e061fd51c79c230f5ebf16379eaf4bbd1f961578553a9b2e90ea5bc"
+    },
+    "adapter-initial.json": {
+      "bytes": 699,
+      "sha256": "b824fcd556403ec821c18dd5ee5f837db2ff668e61c3677c1bb08357b2a66537"
+    },
+    "adapter-initial.safetensors": {
+      "bytes": 327984,
+      "sha256": "1a603a234d0806dcfc2738a1aaf380f0ad98baf934d543a73d7dbea307d1a56b"
+    },
+    "synthetic-fixture.safetensors": {
+      "bytes": 1111216,
+      "sha256": "366f0a96d6ed9f1b2d2563900dcacbadd1ccf24bd1a27db66504a25b341bd98f"
+    }
+  },
+  "FULL_MODEL_TRAINING": "NOT_RUN",
+  "VIDEO_QUALITY": "NOT_RUN",
+  "IDENTITY_POSE_DISENTANGLEMENT": "NOT_RUN",
+  "sampled_RssAnon_max_bytes": 1643913216,
+  "sampled_RssFile_max_bytes": 803995648,
+  "sampled_RssShmem_max_bytes": 50794496,
+  "cgroup_current_max_sampled_bytes": 1729540096,
+  "trainable_count_evidence": "actual saved adapter safetensors shape products, matching explicit optimizer group membership",
+  "environment": {
+    "python": "3.12.3",
+    "architecture": "aarch64",
+    "OS": "Linux-6.14.0-1015-nvidia-aarch64-with-glibc2.39",
+    "packages": {
+      "torch": "2.14.0+cu130",
+      "numpy": "2.5.2",
+      "flash-attn": "2.8.4",
+      "safetensors": "0.8.0",
+      "pydantic": "2.14.1"
+    },
+    "gpu": "NVIDIA GB10, 580.126.09",
+    "CUDA_build": "13.0 from actual torch runtime-contract",
+    "GPU_model_loads_after_worker": 0
+  },
+  "source_code_postrun_hashes_match": true,
+  "runtime_code_postrun_hashes_match": true
+}

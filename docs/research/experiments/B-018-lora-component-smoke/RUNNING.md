@@ -15,3 +15,7 @@ CPU fixture의 성공은 GB10 FlashAttention backward 성공을 대체하지 않
 Helper7검사 통과: Bzero/OFF/재로딩 exact, 첫A0·B비영 및 이후Agradient, adapter-only optimizer와 base 불변, 변조된 저장 스키마 거부. GPU 검사 전 norm을 BF16으로 cast했다가 FP32로 복귀하는 구현 문제를 발견해 직접 FP32 보존 경로로 수정했다. 해당 반올림 회귀 검사를 추가했다. 공식 helper AST만 추출한 CPU RoPE36token forward/gradient도 통과했지만 full package/FA GPU 검증은 아니다.
 
 Helper Ruff 통과, basedpyright0errors/19warnings로 typing은 NOT_CLEAN이다. PyTorch/safetensors 동적 경계 경고를 숨기거나 전체 codebase 정리로 확대하지 않는다.
+
+## 종료
+
+실제 GPU worker1회·3update·8forward 완료, FA2 backward/기반불변/fresh reload/OFF 통과. 결과와 자원·한계는 RESULTS/MEASUREMENTS/VERIFICATION으로 연결한다. 이전 NOT_RUN은 해당 시점의 상태로 보존한다. GPU 재시도·추가학습·영상생성0. 공개기록·비공개 ZIP 검증을 마무리한다.
