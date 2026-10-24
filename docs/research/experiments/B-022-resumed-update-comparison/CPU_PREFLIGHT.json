@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "cuda_initialized": false,
+  "producer": "B-020",
+  "resume_parent": "B-021",
+  "consumer": "B-022",
+  "restart_sha256": "5e43183e452b1f16736a37986839059082dc3601d0b2c0649bd597ae58ad3934",
+  "adapter_sha256": "6d12c6a4e572addbe2b1e19ee6a269cd62b44b707fd2e25758eab29cf481a7a7",
+  "order": [
+    "q.A",
+    "q.B",
+    "v.A",
+    "v.B"
+  ],
+  "step": 20,
+  "cursor": 2,
+  "next_tuple": "train_2",
+  "tensor_dtype": {
+    "q.A": "torch.float32",
+    "q.B": "torch.float32",
+    "v.A": "torch.float32",
+    "v.B": "torch.float32"
+  },
+  "budgets": {
+    "additional_updates": 80,
+    "cumulative_updates": 100,
+    "train_workers": 1,
+    "diagnostic_backward": 3,
+    "evaluation_hard_cap": 40,
+    "planned_evaluation_forwards": 33,
+    "probe": 1,
+    "sampler": 2,
+    "decode": 2,
+    "P": 0,
+    "prefix_forwards": 0,
+    "retries": 0
+  }
+}

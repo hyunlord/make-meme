@@ -1,0 +1,12 @@
+{
+  "configs/real.json": "95d9b2c6acad87affd68207384509532a9224a3491e5bd6653a9c44c24b4da5e",
+  "configs/active_case.json": "d8f43ae41cab491f1b83ca8c6d7261076a2a767cc66cf9cd21f8bea7e5f16f8d",
+  "configs/fm.json": "d587f0bc97c4f3569b8341703476c76a2f4b42c9f88fb413365583cd1dc2211a",
+  "configs/expected_preprocessed.json": "f00762473df80b6b30e24b2661e96a3b6e1d6c09873529d1d2b4c291deef6b01",
+  "inputs/clip/reference.png": "2c4ecf243f1c33b5e7118741c38c9c7abfe4775437feaeeb202cdbd09856ed42",
+  "inputs/clip/reference-mask-white.png": "692b19a4935bf1b04f111584346c53b9ba1ca8ba6fd698af144217c620322b00",
+  "inputs/clip/driver-30fps.mp4": "da98aed9a77b632425266a3b58881a774794af1d94cab09ae992fed0c853cd62",
+  "inputs/clip/mask-30fps.mp4": "a9d28780960faef01df3ac216610ff76eb55c0974b5c9bffe61272d8a1c71e5e",
+  "inputs/clip/target-30fps.mp4": "da98aed9a77b632425266a3b58881a774794af1d94cab09ae992fed0c853cd62",
+  "inputs/fm-noises.safetensors": "f944397224d9c94862a0b1c21e4952bb03f4eb8093385adfcbe36997f2ca0157"
+}

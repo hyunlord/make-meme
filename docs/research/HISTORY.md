@@ -475,3 +475,7 @@ TRAIN1에서 실제20update/8평가 후 사전adapter replay 기준을 넘겨21�
 ## 2026-10-24 B-021 종료: update20 replay 중단
 
 [RESULTS](experiments/B-021-fixed-tuple-update-budget/RESULTS.md): 실제 initial+fresh AdamW로20update·8평가를 수행했다. 네 scalar loss replay는 PASS지만 네 adapter tensor는 사전 elementwise 기준을 초과해21이전 중단했다. 0/20 adapter·optimizer·RNG·cursor 저장/readback은 PASS,50/100·새 sampler/decode는 NOT_RUN이다. 100회 품질 효과는 미확인이며 원인은 UNKNOWN이다. 같은 입력의 FA2 backward 수치 반복성 가설 하나만 다음 연구로 제안하고 추가 실행은 하지 않는다. 사후 tolerance 완화·자동 재개는 하지 않으며 과거 품질 미입증을 보존한다.
+
+## 2026-10-24 B-022 착수: 저장된 같은20회 상태의 추가 학습
+
+[PLAN](experiments/B-022-resumed-update-comparison/PLAN.md)을 사용자 승인 범위에서 실행한다. B-021의 엄격한 독립 replay FAIL을 보존하고, 이번 질문은 유효한 동일 checkpoint에서 추가80update의 효과다. adapter뿐 아니라 AdamW/RNG/cursor를 복원하고 제한된 velocity/gradient 진단 후 matched20/100 영상 비교를 수행한다. 현재 CPU 사전검증 중, GPU NOT_RUN이며 실제 실행 전 코드/config를 고정한다.

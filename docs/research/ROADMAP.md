@@ -2,7 +2,9 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**최신: B-017 COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
+**현재: B-022 CPU 사전검증 / GPU NOT_RUN.** B-021의 STOPPED_AT_REPLAY_20과 기존 FAIL을 보존하고 같은20회 checkpoint를 복원하는 비교를 준비한다. [계획](experiments/B-022-resumed-update-comparison/PLAN.md).
+
+**B-017 당시 요약: COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 
 **B-015 당시 요약: COMPLETED / 고정 ALG pilot CLOSED.** [결과](experiments/B-015-alg-driving-control/RESULTS.md): 남은 ALG_STILL1회로2×2를 완성했다. 두 STILL은 상대적으로 선명한 착석, 두 MOV는 후반 머리 변화와 얼굴 손상이며 전신FAIL·목표품질NOT_ESTABLISHED·temporalUNVERIFIED다. 추가ALG탐색은 중단한다. 아래 과거 기록은 당시 상태다.
 
@@ -319,3 +321,7 @@ B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 
 ## 2026-10-24 B-021 종료: update20 replay 중단
 
 [RESULTS](experiments/B-021-fixed-tuple-update-budget/RESULTS.md): 실제 initial+fresh AdamW로20update·8평가를 수행했다. 네 scalar loss replay는 PASS지만 네 adapter tensor는 사전 elementwise 기준을 초과해21이전 중단했다. 0/20 adapter·optimizer·RNG·cursor 저장/readback은 PASS,50/100·새 sampler/decode는 NOT_RUN이다. 100회 품질 효과는 미확인이며 원인은 UNKNOWN이다. 같은 입력의 FA2 backward 수치 반복성 가설 하나만 다음 연구로 제안하고 추가 실행은 하지 않는다. 사후 tolerance 완화·자동 재개는 하지 않으며 과거 품질 미입증을 보존한다.
+
+## 2026-10-24 B-022 착수
+
+독립실행의 엄격한 A/B replay와 동일 checkpoint의 기능 복원을 분리한다. B-021 FAIL은 유지한다. [B-022](experiments/B-022-resumed-update-comparison/PLAN.md)는 저장된20회 상태에서80회만 추가하고 matched20/100을 비교하는 한정 실험이다. 현재 CPU 준비/GPU NOT_RUN, 추가 튜닝·커널 변경·200회 확대는 하지 않는다.

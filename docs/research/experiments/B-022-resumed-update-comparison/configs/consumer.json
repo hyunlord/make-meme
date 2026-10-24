@@ -1,0 +1,118 @@
+{
+  "status": "PREREGISTERED_CONTRACT",
+  "cuda_initialized": false,
+  "producer": "B-020",
+  "consumer": "B-022",
+  "producer_code_sha256": "11d03f307f70724502534cbbc109fcb874ebe51b254bc65ed94d7921b60aa01c",
+  "initial_adapter_sha256": "1a603a234d0806dcfc2738a1aaf380f0ad98baf934d543a73d7dbea307d1a56b",
+  "initial_tensors": {
+    "q.lora_A": {
+      "sha256": "fd7e9270733cc1e85c12af92638534e53d97d2d1cfea6d4d2eb9593385e1996a",
+      "shape": [
+        4,
+        5120
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.1555089950561523,
+      "nonzero": 20480
+    },
+    "q.lora_B": {
+      "sha256": "fa569e2360c540e6280e34a4627516770f1a5f34d81d35689334a99cc1013357",
+      "shape": [
+        5120,
+        4
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0,
+      "nonzero": 0
+    },
+    "v.lora_A": {
+      "sha256": "5a0f4bdab3579891c0805781cec3a379ddd05c5faac3f252ea59ff2727220f78",
+      "shape": [
+        4,
+        5120
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.1564453840255737,
+      "nonzero": 20480
+    },
+    "v.lora_B": {
+      "sha256": "fa569e2360c540e6280e34a4627516770f1a5f34d81d35689334a99cc1013357",
+      "shape": [
+        5120,
+        4
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0,
+      "nonzero": 0
+    }
+  },
+  "optimizer_options": {
+    "lr": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0,
+    "amsgrad": false,
+    "maximize": false,
+    "foreach": null,
+    "capturable": false,
+    "differentiable": false,
+    "fused": null,
+    "decoupled_weight_decay": true
+  },
+  "assets": {
+    "prefix-train_0.safetensors": "fcc533f001cf9a82dac94bd9aa94fde886908bd09db1b930d15e892836212a81",
+    "prefix-train_0.json": "7b6f2bb49bb51179a6384af7ce10e6decb4ae707afc60242b8d0ae74a22bb9f3",
+    "prefix-train_1.safetensors": "745acbb6c77aeadb6c040f67bed593c857a9b63ca49c13139848a656962a3323",
+    "prefix-train_1.json": "1a18cefd59b732c51069e0a5e88d519fe8f6f7e7e193cef97fb11cce76caa6ba",
+    "prefix-train_2.safetensors": "722f168663066058f132575bf0314d07429e8cac86b80a764214e27dea228c67",
+    "prefix-train_2.json": "2b78b4fa23ddfde7382e7d38abf9232de55c9ebb7e723ebcbba313077eae0e91",
+    "prefix-holdout.safetensors": "533167320621eba87764c0fd7c8a777925eca85c3d81b5485ed0ca5e76472ca7",
+    "prefix-holdout.json": "c40ec212bbfb4029b853baacd2fde65431f4c45a3d4f0954c12e4cd0abbd5888",
+    "target.safetensors": "685dc548c1110f00acb0f69f09d348f9ff8bb366530e3e813bbf73117eed1c1a",
+    "target.json": "dc24503a997bf340dbb47b48c4eca863e1781c2a05ebe1d84c1948a0055791bd",
+    "conditions.safetensors": "c5db9c9460f71f4c37c124db7b163221f65f9446b656c2f73a818dce3fcaa4dd",
+    "conditions.json": "e1c7bd8256e04d05f88d1283b2217777f792b29cdefc0edd08bc4a528a8bcf77",
+    "conditions_receipt.json": "c56c2c6481499e203f2acf58bf126afae57935cfec8079f10e2beb376e898e60",
+    "initial_noise.pt": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918",
+    "prefix_receipt.json": "e23d65073ce708c151571c0810edbd463866ab6d85312fba43dae3d05df44255",
+    "training_receipt.json": "36cc9cda3f934f3e8ddb2df44b7b44f29387c751a648f69695c395b837f93c34",
+    "adapter-initial.safetensors": "1a603a234d0806dcfc2738a1aaf380f0ad98baf934d543a73d7dbea307d1a56b",
+    "adapter-initial.json": "874eaca3088431451fd535b95979e3fe21ee96c401870f2fee297df38baa6d6c",
+    "adapter-final.safetensors": "ed1e859f895cb4bb29c27514c283612a0c0494607d5e426d0976688823b62250",
+    "adapter-final.json": "2444e5a0dcd204556dcde7e537ae0c7a4043156e25d7dfc2a286e2f7b5650898"
+  },
+  "replay_tolerance": {
+    "atol": 1e-07,
+    "rtol": 1e-05
+  },
+  "split_reload_off_tolerance": {
+    "atol": 0.001,
+    "rtol": 0.001
+  },
+  "budgets": {
+    "additional_updates": 80,
+    "cumulative_updates": 100,
+    "train_workers": 1,
+    "diagnostic_backward": 3,
+    "evaluation_hard_cap": 40,
+    "planned_evaluation_forwards": 33,
+    "probe": 1,
+    "sampler": 2,
+    "decode": 2,
+    "P": 0,
+    "prefix_forwards": 0,
+    "retries": 0
+  },
+  "resume_parent": "B-021",
+  "restart_sha256": "5e43183e452b1f16736a37986839059082dc3601d0b2c0649bd597ae58ad3934",
+  "adapter20_sha256": "6d12c6a4e572addbe2b1e19ee6a269cd62b44b707fd2e25758eab29cf481a7a7",
+  "start": "B-021 restart-020 exact adapter + AdamW moments/step + RNG + cursor2",
+  "legacy_initial_fields": "B-020 original initial metadata is provenance only, not the B-022 training start",
+  "legacy_replay_tolerance": "Historical B-021 failed gate preserved; not a B-022 independent replay acceptance gate",
+  "restart_sidecar_sha256": "df235ed2530eb3896092cbd98202cf562ddf6c22657f0acf87e7c3c25b9a4393",
+  "adapter20_sidecar_sha256": "444e2debff10f6501c2a44a46beb0b96e683e762879136d24f4b978631c676f6"
+}

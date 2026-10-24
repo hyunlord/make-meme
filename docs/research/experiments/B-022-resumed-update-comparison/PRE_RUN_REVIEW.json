@@ -1,0 +1,30 @@
+{
+  "status": "NO_BLOCKING_FINDING_STATIC_REVIEW",
+  "gpu_execution": "NOT_REVIEWED_OR_CLAIMED",
+  "files": {
+    "resume_contract.py": "95c34e39bed9f36a8c97bcf7017ce132e5ee44a3236f7ab34dc0d2a599ea68aa",
+    "phase_train.py": "cdf81e67e83b870b41833017b8dab113ae574d6eeec27f60e917679d6df8d1bb",
+    "tail_setup.py": "0b5d6b7ad70036e59c5328c56a4207878af8fcf70960029a04fe39ce622e2b60",
+    "run_phase.py": "fa4fee84e9784d0f72400acc1b4593c98e789f6e5d50b9473141318c8c617fa3",
+    "phase_sample.py": "dbdb7ef3a3a22045d5e080c5621847f52e2393bdc38a779c717d06cd834da12b",
+    "prepare_layout.py": "b0425fc1acb9fd279fe4fe3067c30c93f8b47019502750ec6d83e00121942ae0"
+  },
+  "observed_contracts": [
+    "Explicit q.A,q.B,v.A,v.B Parameter ordering and optimizer IDs0..3",
+    "Exact checkpoint A/B and moments/options readback after restore; CPU step policy",
+    "RNG restored after fresh build, repeated diagnostics and snapshot20",
+    "update21=train_2,80additional updates,20/50/100 checkpoints",
+    "33 planned nonupdate forwards with durable pre-call40cap,3 diagnostic backward",
+    "Durable train row before post-update parameter gates",
+    "Current-run finally base hashes before process termination",
+    "B021 exact adapter20 and B022 final100 selected by endpoint/hash",
+    "One attempt file x-open and sequential predecessor success required"
+  ],
+  "limits": [
+    "Static review is not live optimizer/runtime or video validation",
+    "Repeat gradient differences are vs_first, not complete pairwise matrix",
+    "Four fixed BA-action vectors do not establish full BA equality",
+    "Finally base checking starts after first successful component build; earlier load failure has no completed current component",
+    "B021 FAIL/NOT_REACHED unchanged"
+  ]
+}

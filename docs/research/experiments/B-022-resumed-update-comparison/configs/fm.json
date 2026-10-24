@@ -1,0 +1,23 @@
+{
+  "model_sha256": "8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118",
+  "noise_hashes": {
+    "train_0": "3f7ef387790b94e33a6e00260402974569a66aec94cd2510daa74c9105db87b5",
+    "train_1": "1927fb8e727926fe2983f0545eb6bf72b30c7eb40465edc921804dc68fb1115f",
+    "train_2": "8a071b67dee62c03bda385ac61931b4a4326104bc462cc53a1ed9559f71cf5a3",
+    "holdout": "4f275fe7705587998ebf5fb96ca15bd587be223190cdebcd1ede8ea1c993b7df"
+  },
+  "noise_file_sha256": "f944397224d9c94862a0b1c21e4952bb03f4eb8093385adfcbe36997f2ca0157",
+  "noise_shape": [
+    16,
+    5,
+    64,
+    112
+  ],
+  "noise_rule": "CPU torch.Generator each fixed tuple seed, torch.randn FP32; independent noise only, not synthetic target",
+  "adapter_init_seed": 20261024,
+  "maximum_updates": 20,
+  "maximum_tail_evaluations": 12,
+  "planned_tail_evaluations": 10,
+  "split_parity_atol": 0.001,
+  "split_parity_rtol": 0.001
+}
