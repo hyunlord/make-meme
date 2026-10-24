@@ -16,3 +16,11 @@ ALG pilot은 종료하고 기본 경로로 채택하지 않는다. B-013 LAB_MOV
 현재: CPU 검증 준비 중. PROBE/S/D NOT_RUN. 영상 품질 NOT_RUN.
 
 평가: [사전 평가](PREREG_EVALUATION.md), [PLAN](PLAN.md).
+
+## CPU 계약 완료 및 실행 코드 고정
+
+10개 CPU 검사 PASS(0.82초). preset atol/rtol2e-5 아래 ref Q/K norm 최대차9.5367e-7, ref-ref logit7.1526e-7; ref 이외 출력 bit-exact이며 cross logit은 변했다. 1307개 state key/shape와16leaf 원본무결성 확인. 전체 package CPU import의 T5 CUDA조회 실패는 보존하며 별도 meta fixture는 full-package/runtime 증거가 아니다. 실제 worker에서 canonical module·class/global SHA와 모든40block×80call을 다시 검증한다.
+
+신규 typed helper2개 오류/경고0, 상속 dynamic adapter3개 typecheck90오류145경고는 NOT_CLEAN으로 공개한다. 억제나 범위밖 리팩터링으로 숨기지 않는다. [CPU 감사](CPU_AUDIT.json), [모델 diff](MODEL_PATCH.diff), [코드 manifest](PREREGISTERED_CODE.json), [입력](PREREGISTERED_INPUTS.json).
+
+독립 읽기 검토는 제한된 실행 GO이며 영상 품질 인증이 아니다. 코드 manifest SHA `1a6827e21c23197fb1aeb0bfc656c933c184ee97618c73fea890071f54db224e`. 원격 고정 확인 후 PROBE→S→D 각최대1회 진행. 현재 GPU NOT_RUN.

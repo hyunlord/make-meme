@@ -1,0 +1,52 @@
+{
+  "status": "CPU_CONTRACT_PASS",
+  "tests_passed": 10,
+  "test_seconds": 0.82,
+  "test_log_sha256": "635bb311dcab44b55c40379f2388953d53ea403a2e60dc0659f7a36ef2b7f531",
+  "numeric": {
+    "q_norm_max_abs": 9.5367431640625e-07,
+    "k_norm_max_abs": 9.5367431640625e-07,
+    "ref_ref_logit_max_abs": 7.152557373046875e-07,
+    "ref_video_logit_max_delta": 2.4068470001220703,
+    "ref_pose_logit_max_delta": 1.8984639644622803,
+    "nonref_bit_exact": true,
+    "rtol": 2e-05,
+    "atol": 2e-05,
+    "frequency_count": 8192,
+    "frequency_dtype": "torch.complex128",
+    "scope": "Fixed synthetic Q/K only; no downstream attention probability claim"
+  },
+  "module_fixture": {
+    "status": "PASS",
+    "scope": "CPU_META_ONLY_MODULE_FIXTURE_NOT_FULL_PACKAGE_IMPORT",
+    "package_initializers_bypassed_in_fixture_only": true,
+    "state_keys": 1307,
+    "parameter_count": 16395544384,
+    "state_shape_dtype_exact": true,
+    "actual_canonical_class_match": true,
+    "actual_forward_globals_match": true,
+    "patched_module_sha256": "33f51bc678bf3b888686f1c707e5275735085069d030da0ba22af98c3051f54b",
+    "parent_cache_sha256": "b7e5c62d8cb3a67e3cca0e104a536cf54c86937fa136f8554dbe55062ba9bf5d",
+    "parent_16_leaf_integrity": "PASS",
+    "cuda_initialized": false
+  },
+  "new_helpers_typecheck": {
+    "filesAnalyzed": 2,
+    "errorCount": 0,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 0.181
+  },
+  "dynamic_adapters_typecheck": {
+    "filesAnalyzed": 3,
+    "errorCount": 90,
+    "warningCount": 145,
+    "informationCount": 0,
+    "timeInSec": 0.604
+  },
+  "legacy_typing_status": "NOT_CLEAN; no broad refactor or suppression",
+  "critical_ruff": "PASS E9,F63,F7,F82",
+  "full_package_cpu_import": "FAILED upstream T5 CUDA default; separate meta fixture is not full-package proof",
+  "actual_GPU_stage_attempts": 0,
+  "red_log_sha256": "bdde940e75d1660148f2e06470e771c779bef5fa25f326d059e363797a90f4df"
+}

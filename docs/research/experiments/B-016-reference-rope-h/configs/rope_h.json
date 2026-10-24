@@ -1,0 +1,16 @@
+{
+  "reference_h_override": 120,
+  "ALG": false,
+  "expected_calls": 80,
+  "steps": 40,
+  "cpu_rtol": 2e-05,
+  "cpu_atol": 2e-05,
+  "cross_logit_min_delta": 0.0001,
+  "trace_calls": [
+    1,
+    2,
+    79,
+    80
+  ],
+  "expected_blocks": 40
+}

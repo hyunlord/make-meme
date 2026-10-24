@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B-016 guidance와 driving 네 셀 비교</title>
+<style>
+:root{--bg:white;--text:#202020;--border:#888;--gap:16px}body{font:16px/1.5 system-ui,sans-serif;color:var(--text);background:var(--bg);max-width:1100px;margin:24px auto;padding:0 var(--gap)}h1{font-size:24px}video,img{display:block;width:100%;height:auto;object-fit:contain}button,input{font:inherit}button{padding:8px;margin-right:8px}button:focus-visible,input:focus-visible{outline:3px solid var(--text)}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:var(--gap) 0}input[type=range]{flex:1;min-width:180px}figure{margin:var(--gap) 0}figcaption{margin-bottom:8px}small{display:block}
+</style>
+<h1>B-016 — SOURCE / Lab reference / CFG MOV H0 / H120</h1>
+<p>24fps · 17프레임 · 0.708333초. 자동 재생·반복 없음. 마지막→처음 이동은 새 재생이며 내부 프레임 변화와 구분합니다.</p>
+<p>생성·인코딩 성공과 품질 수용은 별개입니다. 실제 연속 재생 관찰은 아직 <strong>UNVERIFIED</strong>입니다.</p>
+<figure><figcaption>왼쪽부터: SOURCE / 실제 Lab reference / CFG_MOV_H0 / CFG_MOV_H120. 속도 변경·보간 없음.</figcaption><video id="video" controls preload="metadata" src="source-reference-h0-h120.mp4"></video></figure>
+<div class="controls"><button id="once" type="button">처음부터 한 번 재생</button><button id="pause" type="button">일시 정지</button></div>
+<p>원본 구간 [7,24)의 방향·이벤트 순서에 대응하는지 비교합니다. 전신 자세 전이와 국소 머리 roll을 따로 판정합니다.</p><h2>정확한 PNG 프레임</h2>
+<p>영상 seek 오차 대신 저장된 PNG를 표시합니다. 왼쪽부터 SOURCE / 실제 Lab reference / CFG_MOV_H0 / CFG_MOV_H120 raw 출력입니다. 실제 Lab 사진은 고정 reference입니다. 기존 B013 H0 출력은 재생성하지 않고 재사용합니다.</p>
+<div class="controls"><button id="prev" type="button">이전</button><label for="frame">프레임</label><input id="frame" type="range" min="0" max="16" step="1" value="0"><button id="next" type="button">다음</button><output id="number" for="frame" aria-live="polite">f0 / 16 · t=0.000000초</output></div>
+<img id="still" src="frames/000.png" alt="f0 SOURCE·Lab reference·CFG_MOV_H0·CFG_MOV_H120 비교">
+<small>PNG는 화면에 맞게 축소 표시되지만 프레임마다 피사체를 별도로 확대하거나 위치를 보정하지 않습니다.</small>
+<script>
+const video=document.getElementById('video'), frame=document.getElementById('frame'), still=document.getElementById('still'), number=document.getElementById('number'), prev=document.getElementById('prev'), next=document.getElementById('next');
+function show(value){const i=Math.max(0,Math.min(16,Number(value)));frame.value=String(i);still.src=`frames/${String(i).padStart(3,'0')}.png`;still.alt=`f${i} SOURCE·Lab reference·CFG_MOV_H0·CFG_MOV_H120 비교`;number.value=`f${i} / 16 · t=${(i/24).toFixed(6)}초`;prev.disabled=i===0;next.disabled=i===16;}
+frame.addEventListener('input',()=>show(frame.value));prev.addEventListener('click',()=>show(Number(frame.value)-1));next.addEventListener('click',()=>show(Number(frame.value)+1));
+document.getElementById('once').addEventListener('click',()=>{video.pause();video.currentTime=0;video.playbackRate=1;video.loop=false;video.play().catch(error=>{number.value=`재생 오류: ${error.message}`;});});document.getElementById('pause').addEventListener('click',()=>video.pause());show(0);
+</script></html>

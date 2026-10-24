@@ -1,0 +1,17 @@
+--- pinned/model_scail2.py
++++ isolated/model_scail2.py
+@@ -681,0 +682 @@
++        reference_rope_h_shift: int | None = None,
+@@ -857,0 +859,5 @@
++        from rope_h import resolve_reference_h
++        kwargs["rope_H_shift"]["ref"] = resolve_reference_h(
++            kwargs["rope_H_shift"]["ref"], reference_rope_h_shift,
++            additional_ref_count, replace_flag, rope_h, self.freqs.shape[0])
++
+@@ -867 +873,5 @@
+-        for block in self.blocks:
++        for block_index, block in enumerate(self.blocks):
++            if reference_rope_h_shift is not None:
++                self._b016_observe(block_index, kwargs["rope_T_shift"],
++                    kwargs["rope_H_shift"], kwargs["rope_W_shift"],
++                    ref_length, seq_length, pose_length, rope_h, rope_w, rope_t)
