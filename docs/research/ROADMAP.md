@@ -2,7 +2,9 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**최신: B-015 COMPLETED / 고정 ALG pilot CLOSED.** [결과](experiments/B-015-alg-driving-control/RESULTS.md): 남은 ALG_STILL1회로2×2를 완성했다. 두 STILL은 상대적으로 선명한 착석, 두 MOV는 후반 머리 변화와 얼굴 손상이며 전신FAIL·목표품질NOT_ESTABLISHED·temporalUNVERIFIED다. 추가ALG탐색은 중단한다. 아래 과거 기록은 당시 상태다.
+**최신: B-017 RUNNING / CPU 자료 검토·학습 준비.** [사전 계획](experiments/B-017-paired-animal-data/PLAN.md). 실제 R/D/Y·권한·split과 공식 train interface를 확인한다. 생성·학습0이며 ALG/H120은 기본 채택하지 않는다.
+
+**B-015 당시 요약: COMPLETED / 고정 ALG pilot CLOSED.** [결과](experiments/B-015-alg-driving-control/RESULTS.md): 남은 ALG_STILL1회로2×2를 완성했다. 두 STILL은 상대적으로 선명한 착석, 두 MOV는 후반 머리 변화와 얼굴 손상이며 전신FAIL·목표품질NOT_ESTABLISHED·temporalUNVERIFIED다. 추가ALG탐색은 중단한다. 아래 과거 기록은 당시 상태다.
 
 | 단계 | 질문 / 목표 | 상태 | 다음 단계에 필요한 근거 |
 |---|---|---|---|

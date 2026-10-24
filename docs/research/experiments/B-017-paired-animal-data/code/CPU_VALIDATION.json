@@ -1,0 +1,37 @@
+{
+  "scope": "synthetic validator fixtures only; actual cases NOT_RUN pending preregistration",
+  "red": "Initial pytest collection failed because validate_cases module was absent (expected TDD RED).",
+  "tests": {
+    "command": "python3 -m pytest -q test_validator.py",
+    "passed": 11,
+    "seconds": 1.9
+  },
+  "ruff": {
+    "command": "uvx --offline ruff check .",
+    "status": "PASS",
+    "version": "0.17.2"
+  },
+  "typing": {
+    "command": "uvx --offline basedpyright --project pyrightconfig.json --pythonpath <existing-python-with-pydantic>",
+    "errors": 0,
+    "warnings": 0,
+    "mode": "all",
+    "version": "1.40.2"
+  },
+  "environment": {
+    "python": "3.14.4",
+    "pydantic": "2.12.5",
+    "downloads": 0,
+    "gpu_operations": 0
+  },
+  "files": {
+    "README.md": "a04323c0f5d95f32a70f64a5253db9adec3d8461012daf92c8e5ac5e1bf9fedd",
+    "case_schema.py": "c6fcbb471e9f06bce9cdfe663d214f2127791e5595d982e338a5a5bd65ecd88c",
+    "media_check.py": "5accdb6566f062b81a60645b6d7cff90377b68797a5382ffbb25ea077e7a0b8c",
+    "pyrightconfig.json": "3e8382edc10d9fd5d1b0d8b343f508379fc39787f1fb97b743902af74161f65f",
+    "schema.json": "db8d9d8bb4c3e2bd845fcb48783e7330ad4c3d421a015692571a6436b38ae46a",
+    "template.json": "8ab57541cd33a8ec41ca9391e671362a9abeefc4f66b7d454f8939f1b2165b59",
+    "test_validator.py": "2af5631d2494cc6c79e061850542f6c5ab3b0d877cbab0db80b448b7bedf5300",
+    "validate_cases.py": "80ce27b7a201e2c5e93a7a1e0f74d2ef3e3a218dc57ab3133131a2dedf6d2b68"
+  }
+}

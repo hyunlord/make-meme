@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "sample_id": "fill-private-case",
+      "pair_type": "SELF_RECON_SMOKE",
+      "R": null,
+      "D": null,
+      "Y": null,
+      "masks": {
+        "R": null,
+        "D": null
+      },
+      "identity_evidence": {
+        "status": "UNKNOWN",
+        "basis": ""
+      },
+      "motion_correspondence": {
+        "status": "UNKNOWN",
+        "basis": ""
+      },
+      "reference_pose_evidence": {
+        "status": "UNKNOWN",
+        "basis": ""
+      },
+      "rights": {
+        "research": "UNKNOWN",
+        "training": "UNKNOWN",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN",
+        "permission_id": ""
+      },
+      "origin_group": "source-group",
+      "split": "DEVELOPMENT",
+      "mode": "ANIMATION",
+      "caption": "Describe actual target; missing assets remain null",
+      "motion_id": "",
+      "reference_pose": "",
+      "target_pose": "",
+      "scene_id": "",
+      "event_times": []
+    }
+  ]
+}

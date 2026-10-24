@@ -1,0 +1,378 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "format": "path",
+          "title": "Path",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "IMAGE",
+            "VIDEO"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "maximum": 4096,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "maximum": 4096,
+          "title": "Height",
+          "type": "integer"
+        },
+        "frames": {
+          "exclusiveMinimum": 0,
+          "maximum": 240,
+          "title": "Frames",
+          "type": "integer"
+        },
+        "fps": {
+          "exclusiveMinimum": 0,
+          "maximum": 120,
+          "title": "Fps",
+          "type": "number"
+        },
+        "timestamps": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Timestamps",
+          "type": "array"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "session_id": {
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "identity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Identity Id"
+        },
+        "source_fps": {
+          "exclusiveMinimum": 0,
+          "maximum": 120,
+          "title": "Source Fps",
+          "type": "number"
+        },
+        "frame_indices": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Frame Indices",
+          "type": "array"
+        },
+        "origin": {
+          "default": "UNKNOWN",
+          "enum": [
+            "REAL",
+            "GENERATED",
+            "UNKNOWN"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "parent_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "kind",
+        "width",
+        "height",
+        "frames",
+        "fps",
+        "timestamps",
+        "source_id",
+        "session_id",
+        "source_fps",
+        "frame_indices"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Case": {
+      "additionalProperties": false,
+      "properties": {
+        "sample_id": {
+          "pattern": "^[A-Za-z0-9_.-]+$",
+          "title": "Sample Id",
+          "type": "string"
+        },
+        "pair_type": {
+          "enum": [
+            "SELF_RECON_SMOKE",
+            "SAME_ID_POSE_VARIATION",
+            "CROSS_ID_MOTION_PAIR"
+          ],
+          "title": "Pair Type",
+          "type": "string"
+        },
+        "R": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "D": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "Y": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "masks": {
+          "$ref": "#/$defs/Masks"
+        },
+        "identity_evidence": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "motion_correspondence": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "reference_pose_evidence": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "rights": {
+          "$ref": "#/$defs/Rights"
+        },
+        "origin_group": {
+          "title": "Origin Group",
+          "type": "string"
+        },
+        "split": {
+          "enum": [
+            "DEVELOPMENT",
+            "TRAIN",
+            "VALIDATION",
+            "TEST"
+          ],
+          "title": "Split",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "ANIMATION",
+            "REPLACEMENT"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "caption": {
+          "title": "Caption",
+          "type": "string"
+        },
+        "motion_id": {
+          "default": "",
+          "title": "Motion Id",
+          "type": "string"
+        },
+        "reference_pose": {
+          "default": "",
+          "title": "Reference Pose",
+          "type": "string"
+        },
+        "target_pose": {
+          "default": "",
+          "title": "Target Pose",
+          "type": "string"
+        },
+        "scene_id": {
+          "default": "",
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "event_times": {
+          "default": [],
+          "items": {
+            "type": "number"
+          },
+          "title": "Event Times",
+          "type": "array"
+        }
+      },
+      "required": [
+        "sample_id",
+        "pair_type",
+        "origin_group",
+        "split",
+        "mode",
+        "caption"
+      ],
+      "title": "Case",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "default": "UNKNOWN",
+          "enum": [
+            "CONFIRMED",
+            "UNKNOWN",
+            "CONTRADICTED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "basis": {
+          "default": "",
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "title": "Evidence",
+      "type": "object"
+    },
+    "Masks": {
+      "additionalProperties": false,
+      "properties": {
+        "R": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "D": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "Masks",
+      "type": "object"
+    },
+    "Rights": {
+      "additionalProperties": false,
+      "properties": {
+        "research": {
+          "default": "UNKNOWN",
+          "enum": [
+            "ALLOWED",
+            "UNKNOWN",
+            "DENIED"
+          ],
+          "title": "Research",
+          "type": "string"
+        },
+        "training": {
+          "default": "UNKNOWN",
+          "enum": [
+            "ALLOWED",
+            "UNKNOWN",
+            "DENIED"
+          ],
+          "title": "Training",
+          "type": "string"
+        },
+        "redistribution": {
+          "default": "UNKNOWN",
+          "enum": [
+            "ALLOWED",
+            "UNKNOWN",
+            "DENIED"
+          ],
+          "title": "Redistribution",
+          "type": "string"
+        },
+        "commercial": {
+          "default": "UNKNOWN",
+          "enum": [
+            "ALLOWED",
+            "UNKNOWN",
+            "DENIED"
+          ],
+          "title": "Commercial",
+          "type": "string"
+        },
+        "permission_id": {
+          "default": "",
+          "title": "Permission Id",
+          "type": "string"
+        }
+      },
+      "title": "Rights",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/Case"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "title": "Cases",
+      "type": "array"
+    }
+  },
+  "required": [
+    "cases"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}
