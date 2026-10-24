@@ -268,3 +268,7 @@ P0·PROBE/S/D각1·40step88forward·finite final latent·17f24fps MP4를 확보�
 **COMPLETED / 실행·ref-H 단일 개입 PASS / 전신 FAIL / 품질 개선 NOT_ESTABLISHED / temporal UNVERIFIED.** P0·PROBE/S/D각1·40step80forward, 실제 canonical patch와40blocks×80회 위치검사, 원본16leaf 보존을 확인했다. finite final latent와17f24fps MP4를 확보했지만 H120도 착석·지지 앞발이며 후기 머리/얼굴 손상이 남았다. 일부 차이를 원본 roll·실제 개체 동시 개선으로 올리지 않는다. S1057.032초·최소가용52.605GiB·swap/OOM0. [RESULTS](experiments/B-016-reference-rope-h/RESULTS.md).
 
 ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 하나는 동물 identity/reference 자세 분리를 학습할 허가된 paired 데이터의 타당성 감사다. 다른 개체를 Lab 정답으로 쓰지 않으며 이번에는 데이터 수집·학습·추가 생성 NOT_RUN이다.
+
+## B-017 착수 (2026-10-24)
+
+**RUNNING / 생성·학습0.** ALG/H120을 기본 경로로 채택하지 않고, 허용된 실제 자료로 R/D/Y 학습 예제를 구성할 수 있는지 조사한다. 시작 HEAD `ffe0369682eb2b0c3a903c44a2f23d5ff91b2299`, [PLAN](experiments/B-017-paired-animal-data/PLAN.md), [선정 규칙](experiments/B-017-paired-animal-data/SELECTION_RULES.md). SELF_RECON_SMOKE·SAME_ID_POSE_VARIATION·실제 CROSS_ID_MOTION_PAIR와 권한 상태를 별도 판정한다. 기존 source 개발구간을 독립test로 바꾸지 않으며 다른 개체나 생성실패를 Lab target으로 승격하지 않는다. 3시간CPU중심, 최대8case; 다음 학습은 자동 실행하지 않는다.
