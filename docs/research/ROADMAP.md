@@ -258,3 +258,7 @@ source-only 후보3개 중 f7~23을 고정했다. 동일reference/text/noise의 
 ## B-015 종료 (2026-10-24)
 
 P0·PROBE/S/D각1·40step88forward·finite final latent·17f24fps MP4를 확보했다. 실제4변경/12보존, 새STILL parent sidecar와기존MOV필터값동일, 원본보존을검증했다. 네셀모두착석으로전신FAIL이며두MOV의후반얼굴손상을두STILL의안정성으로뒤집지않는다. 고정ALGpilot은CLOSED이며기본값승격/추가강도/seed탐색없음. [결과](experiments/B-015-alg-driving-control/RESULTS.md). 다음가설하나는animation을유지한reference RoPE H offset만의통제개입으로, 자세전용제거가아닌위치관계변화의검증이다. 아직구현/실행NOT_RUN이며별도결정이필요하다.
+
+## B-016 착수 (2026-10-24)
+
+**RUNNING / GPU NOT_RUN.** 고정 ALG pilot을 종료하고 기본 CFG로 복귀한다. 원격 `6ef151b090d6c839e99d84a3547e7671f128e5ac`의 [PLAN](experiments/B-016-reference-rope-h/PLAN.md)에 따라 기존 LAB_MOV 캐시16leaf와 모든 입력·sampler를 보존한 채 animation reference RoPE H만120으로 지정한다. 격리 코드/CPU fixed-QK 계약/실제 import를 먼저 검증하며 기존 H0 결과를 재사용한다. P0·PROBE/S/D각최대1·40step80forward·3시간·retry/학습0. 이 hybrid가 학습분포 내라는 주장이나 replacement 전체 재현은 하지 않는다. [진행](experiments/B-016-reference-rope-h/RUNNING.md).

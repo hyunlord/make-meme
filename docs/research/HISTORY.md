@@ -396,3 +396,7 @@ MOV는 PROBE/S/D 각1회로 실제40step·80forward·finite final latent·17f24f
 실행전고정a2847634d45d6860ea6c0d7d9c42d7dc18781b3f 이후 ALG_STILL만1회생성했다. P0·PROBE/S/D각1·재시도0·실제40step88forward·finite final latent·17f24fps MP4. 실제cache4변경/12bit-exact, STILL-bound sidecar와기존필터값일치, 종료149hash보존을확인했다. S guard1264.928초·최소가용46.226GiB·swap/OOM0, high4674는별도기록했다.
 
 전체17장검토에서두STILL은상대적으로선명한착석,두MOV는후반머리변화/얼굴·귀손상. 전신FAIL·개체UNCERTAIN·목표개선NOT_ESTABLISHED·temporalUNVERIFIED. [RESULTS](experiments/B-015-alg-driving-control/RESULTS.md), [학습](lessons/B-015-guidance-driving-interaction.md). 현재ALGpilot을닫고추가강도/스케줄/seed탐색을하지않는다. 다음가설은animation을유지한reference RoPE H offset단독개입이며코드상분리가능하지만미검증혼합규약이다. 구현/추론NOT_RUN. 이전착수기록과B014실패는보존한다.
+
+## B-016 착수 (2026-10-24)
+
+**RUNNING / GPU NOT_RUN.** 고정 ALG pilot을 종료하고 기본 CFG로 복귀한다. 원격 `6ef151b090d6c839e99d84a3547e7671f128e5ac`의 [PLAN](experiments/B-016-reference-rope-h/PLAN.md)에 따라 기존 LAB_MOV 캐시16leaf와 모든 입력·sampler를 보존한 채 animation reference RoPE H만120으로 지정한다. 격리 코드/CPU fixed-QK 계약/실제 import를 먼저 검증하며 기존 H0 결과를 재사용한다. P0·PROBE/S/D각최대1·40step80forward·3시간·retry/학습0. 이 hybrid가 학습분포 내라는 주장이나 replacement 전체 재현은 하지 않는다. [진행](experiments/B-016-reference-rope-h/RUNNING.md).
