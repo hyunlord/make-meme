@@ -11,3 +11,6 @@ B023의 원본보존 과제FAIL을 유지하면서 비객체 reference RGB만128
 평가고정: 전체17장+local0/8/16,896×512·30fps SOURCE/B023/B024 비교; 원래/회색reference 별도표시. 침실누수·임의배경·장면보존·사족자세·머리방향/순서·형태·실제개체/체형·encoder비용을분리한다. 연속실제시청없으면temporalUNVERIFIED다.
 
 초기Spark상태: B024기존실행없음,이전worker종료,기존Comfy서비스만GPU사용,MemAvailable96,261,824,512bytes,swap0. 이것은시작관측이며전구간안전보장은아니다.
+
+## Reference worker completed
+Original reference and driving latent decoded once each. Root and independent reviewer viewed seated-bedroom reference and standing-natural-motion driving; no concrete pipeline defect identified. Original VAE/CLIP repeat max_abs and RMS were0, observed rather than required byte-equality. Derived cache changes only4reference leaves;12leaves and device/container contracts preserved. Encoder worker ended and resources recovered. Authorized single PROBE/S/D proceeds. Temporal quality remains UNVERIFIED.

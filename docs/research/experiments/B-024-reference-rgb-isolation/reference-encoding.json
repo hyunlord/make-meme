@@ -1,0 +1,67 @@
+{
+  "status": "CONDITIONS_READY",
+  "original_encoder_comparison": {
+    "VAE_original_vs_parent": {
+      "shape": [
+        16,
+        1,
+        64,
+        112
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 0.0,
+      "rms": 0.0,
+      "cached_rms": 0.7805147767066956,
+      "reencoded_sha256": "5fa2f985c0a4188d856ca6725694283eb93aa54732e59b85a18fcd398e878e12",
+      "cached_sha256": "5fa2f985c0a4188d856ca6725694283eb93aa54732e59b85a18fcd398e878e12",
+      "allclose_1e3_diagnostic_only": true,
+      "tolerance_role": "descriptive functional check, not byte replay acceptance gate"
+    },
+    "CLIP_original_vs_parent": {
+      "shape": [
+        1,
+        257,
+        1280
+      ],
+      "dtype": "torch.float16",
+      "max_abs": 0.0,
+      "rms": 0.0,
+      "cached_rms": 0.4417739510536194,
+      "reencoded_sha256": "ec959988117d6ef21926905bc960960683ec2a33d439fa72ffb1f9efd9fb2d09",
+      "cached_sha256": "ec959988117d6ef21926905bc960960683ec2a33d439fa72ffb1f9efd9fb2d09",
+      "allclose_1e3_diagnostic_only": true,
+      "tolerance_role": "descriptive functional check, not byte replay acceptance gate"
+    }
+  },
+  "counts": {
+    "vae_decode_reference": 1,
+    "vae_decode_driving": 1,
+    "vae_encode_original": 1,
+    "vae_encode_neutral": 1,
+    "clip_original": 1,
+    "clip_neutral": 1
+  },
+  "changed_leaves": [
+    "t2",
+    "t3",
+    "t8",
+    "t9"
+  ],
+  "identical_leaves": [
+    "t0",
+    "t1",
+    "t10",
+    "t11",
+    "t12",
+    "t13",
+    "t14",
+    "t15",
+    "t4",
+    "t5",
+    "t6",
+    "t7"
+  ],
+  "structure_and_devices_unchanged": true,
+  "scope": "same reference repeatability, no T5/DiT construction",
+  "concrete_pipeline_defect": "NONE_IDENTIFIED_BY_NUMERICAL_CHECKS; reconstruction visual review separate"
+}

@@ -1,0 +1,11 @@
+{
+  "experiment": "B-024",
+  "case": "real",
+  "hashes": {
+    "conditions.safetensors": "1c8fc00620527f1fcddb7f380cd35ed70865ec4218420a85b7f6c21797496080",
+    "conditions.json": "f00819ab27418c05d602a824f2900170ef38cfb432cb3bc950fbeb1b114139dd",
+    "initial_noise.pt": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918"
+  },
+  "producer_receipt_sha256": "2b7a166bd6b410b0451a6abbef1c6a592ef9a4fa66c4cc71b64f7c5afdb790bb",
+  "code_sha256": "930569655cc647c5e092bf03254131386586abc97c49f4f7daaf8dfeb43175c4"
+}

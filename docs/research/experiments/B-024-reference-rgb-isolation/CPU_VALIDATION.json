@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "pytest": {
+    "passed": 4,
+    "seconds": 0.65
+  },
+  "compileall": "PASS",
+  "gpu_workers_started": 0,
+  "linter": "NOT_RUN existing tool unavailable; no package installation",
+  "typing": "NOT_CLEAN inherited dynamic runner annotations; no unrelated refactor",
+  "fixture_scope": "exact existing foreground preservation, only reference config changes, sixteen parent leaves and official dimensions, exact sampler extraction"
+}
