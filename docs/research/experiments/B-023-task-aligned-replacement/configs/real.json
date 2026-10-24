@@ -1,0 +1,21 @@
+{
+  "name": "real",
+  "frames": 17,
+  "fps": 30,
+  "height": 512,
+  "width": 896,
+  "seed": 20261022,
+  "steps": 40,
+  "solver": "unipc",
+  "shift": 3.0,
+  "guide_scale": 5.0,
+  "segment_overlap": 5,
+  "adapter": null,
+  "negative_prompt": "",
+  "prompt": "A black Labrador retriever with a broad chest, sturdy body and thick legs, matching the reference dog, stands naturally on all four legs on a light tiled floor in a sunlit room. It gently turns its head toward the left side of the image while its body stays mostly in place and its tail moves. Natural realistic motion and a stable viewpoint.",
+  "precision": "mixed BF16 with FP32 normalization/time/head islands",
+  "reference": "inputs/clip/reference.png",
+  "reference_mask": "inputs/clip/reference-mask-black.png",
+  "driver": "inputs/clip/driver-30fps.mp4",
+  "driver_mask": "inputs/clip/mask-30fps.mp4"
+}

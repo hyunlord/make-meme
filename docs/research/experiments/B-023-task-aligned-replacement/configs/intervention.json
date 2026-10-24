@@ -1,0 +1,24 @@
+{
+  "experiment": "B-023",
+  "plan_revision": "20261025-B022-review-single-natural-replacement",
+  "case": "NATURAL_LAB_REPLACEMENT",
+  "reference_semantic_background": "BLACK",
+  "reference_subject": "RED_UNCHANGED",
+  "driving_semantics": "RED_WHITE_UNCHANGED",
+  "replace_flag_both_cfg": true,
+  "adapter": null,
+  "ALG": false,
+  "manual_rope_override": false,
+  "source_frames_inclusive": [
+    126,
+    142
+  ],
+  "source_fps": 30,
+  "sampler_attempts_max": 1,
+  "decode_attempts_max": 1,
+  "probe_attempts_max": 1,
+  "P_executions": 0,
+  "prefix_executions": 0,
+  "optimizer_updates": 0,
+  "deadline_utc": "2026-10-24T19:54:00Z"
+}

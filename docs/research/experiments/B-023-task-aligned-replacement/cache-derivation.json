@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "changed_tensor_leaves": [
+    "root.arg_c.ref_masks[0]",
+    "root.arg_null.ref_masks[0]"
+  ],
+  "identical_tensor_leaves": [
+    "root.noise",
+    "root.arg_c.context[0]",
+    "root.arg_c.clip_fea",
+    "root.arg_c.ref_latents[0]",
+    "root.arg_c.pose_latents[0]",
+    "root.arg_c.driving_masks[0]",
+    "root.arg_null.context[0]",
+    "root.arg_null.clip_fea",
+    "root.arg_null.ref_latents[0]",
+    "root.arg_null.pose_latents[0]",
+    "root.arg_null.driving_masks[0]",
+    "root.generator_state",
+    "root.timesteps",
+    "root.sigmas"
+  ],
+  "changed_scalars": [
+    "arg_c.replace_flag",
+    "arg_null.replace_flag"
+  ],
+  "original_colors": {
+    "(np.uint8(255), np.uint8(0), np.uint8(0))": 37209,
+    "(np.uint8(255), np.uint8(255), np.uint8(255))": 421543
+  },
+  "red_pixels": 37209,
+  "white_to_black_pixels": 421543,
+  "red_support_exact": true,
+  "old_helper_prefix_exact": true,
+  "prefix_shape": [
+    28,
+    1,
+    64,
+    112
+  ],
+  "parent_cache_unchanged": true,
+  "P": 0,
+  "provenance": {
+    "experiment": "B-023",
+    "parent_experiment": "B-020",
+    "parent_cache_sha256": "c5db9c9460f71f4c37c124db7b163221f65f9446b656c2f73a818dce3fcaa4dd",
+    "parent_metadata_sha256": "e1c7bd8256e04d05f88d1283b2217777f792b29cdefc0edd08bc4a528a8bcf77",
+    "parent_receipt_sha256": "c56c2c6481499e203f2acf58bf126afae57935cfec8079f10e2beb376e898e60",
+    "builder_sha256": "be5a694f25a50b0b7eaa9055e0a0f33d843dee5218683da93f644557f5026edf",
+    "helper_sha256": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+    "mask_source_sha256": "692b19a4935bf1b04f111584346c53b9ba1ca8ba6fd698af144217c620322b00",
+    "mask_target_sha256": "c9749f6f1060d3e7e00e793a103fbc4ec26cbfdd6f2a5d28e7c0df180129e1de",
+    "P_executions": 0,
+    "CPU_helper_reconstruction": "old prefix exact; new prefix via pinned helper"
+  }
+}

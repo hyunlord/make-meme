@@ -1,0 +1,10 @@
+{
+  "configs/real.json": "582d0f6cfbf2fb0ad321c3ee540d92f1f053047e549b5b006c246de6ba47c3ad",
+  "configs/active_case.json": "d8f43ae41cab491f1b83ca8c6d7261076a2a767cc66cf9cd21f8bea7e5f16f8d",
+  "configs/expected_preprocessed.json": "f00762473df80b6b30e24b2661e96a3b6e1d6c09873529d1d2b4c291deef6b01",
+  "inputs/clip/reference.png": "2c4ecf243f1c33b5e7118741c38c9c7abfe4775437feaeeb202cdbd09856ed42",
+  "inputs/clip/driver-30fps.mp4": "da98aed9a77b632425266a3b58881a774794af1d94cab09ae992fed0c853cd62",
+  "inputs/clip/mask-30fps.mp4": "a9d28780960faef01df3ac216610ff76eb55c0974b5c9bffe61272d8a1c71e5e",
+  "inputs/clip/target-30fps.mp4": "da98aed9a77b632425266a3b58881a774794af1d94cab09ae992fed0c853cd62",
+  "inputs/clip/reference-mask-black.png": "c9749f6f1060d3e7e00e793a103fbc4ec26cbfdd6f2a5d28e7c0df180129e1de"
+}
