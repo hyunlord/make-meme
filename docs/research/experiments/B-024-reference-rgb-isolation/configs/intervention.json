@@ -1,0 +1,33 @@
+{
+  "experiment": "B-024",
+  "reference_rgb_outside_RED_support": [
+    128,
+    128,
+    128
+  ],
+  "inside_support": "PIXEL_EXACT",
+  "semantic_mask": "B023_UNCHANGED",
+  "mode": "REPLACEMENT",
+  "new_encoder_worker_max": 1,
+  "original_reference_encode_sets_max": 1,
+  "neutral_reference_encode_sets_max": 1,
+  "existing_reference_decode_max": 1,
+  "existing_driving_decode_max": 1,
+  "T5_instantiations": 0,
+  "DiT_in_encoder_worker": 0,
+  "sampler_max": 1,
+  "decode_max": 1,
+  "probe_max": 1,
+  "training": 0,
+  "prefix": 0,
+  "retries": 0,
+  "expected_changed_leaves": [
+    "t2",
+    "t3",
+    "t8",
+    "t9"
+  ],
+  "identical_leaves_count": 12,
+  "original_reencode_numeric_check": "record max/rms/shape/dtype/finite and diagnostic allclose atol=rtol1e-3; not strict byte replay gate",
+  "deadline_utc": "2026-10-24T21:07:00Z"
+}
