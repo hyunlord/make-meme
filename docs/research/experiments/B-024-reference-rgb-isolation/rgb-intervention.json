@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "shape": [
+    512,
+    896,
+    3
+  ],
+  "support_pixels": 37209,
+  "outside_pixels": 421543,
+  "foreground_rgb_exact": true,
+  "outside_rgb": [
+    128,
+    128,
+    128
+  ],
+  "mask_unchanged": true,
+  "original_rgb_sha256": "2c4ecf243f1c33b5e7118741c38c9c7abfe4775437feaeeb202cdbd09856ed42",
+  "new_rgb_sha256": "e58c7558b0228d9de975bd2bf8b60df40f9a18b130c30b9602f422033e545680",
+  "semantic_mask_sha256": "c9749f6f1060d3e7e00e793a103fbc4ec26cbfdd6f2a5d28e7c0df180129e1de"
+}

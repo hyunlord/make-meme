@@ -1,0 +1,55 @@
+{
+  "source": "actual first block kwargs, no RoPE override",
+  "rows": [
+    {
+      "forward": 1,
+      "rope_T_shift": {
+        "additional_ref": 0,
+        "ref": 0,
+        "pose": 0,
+        "video": 0
+      },
+      "rope_H_shift": {
+        "ref": 120,
+        "additional_ref": 120,
+        "pose": 0,
+        "video": 0
+      },
+      "rope_W_shift": {
+        "ref": 0,
+        "additional_ref": 0,
+        "pose": 120,
+        "video": 0
+      },
+      "rope_ref_T": {
+        "ref": 1,
+        "additional_ref": 0
+      }
+    },
+    {
+      "forward": 2,
+      "rope_T_shift": {
+        "additional_ref": 0,
+        "ref": 0,
+        "pose": 0,
+        "video": 0
+      },
+      "rope_H_shift": {
+        "ref": 120,
+        "additional_ref": 120,
+        "pose": 0,
+        "video": 0
+      },
+      "rope_W_shift": {
+        "ref": 0,
+        "additional_ref": 0,
+        "pose": 120,
+        "video": 0
+      },
+      "rope_ref_T": {
+        "ref": 1,
+        "additional_ref": 0
+      }
+    }
+  ]
+}

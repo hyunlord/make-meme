@@ -1,0 +1,20 @@
+{
+  "rows": [
+    {
+      "branch": "arg_c",
+      "ref_and_clip_same_objects_as_verified_restored_cache": true,
+      "reference_sha256": "c3bd8cb2e4a4be6d91f361e26addebe8ba44d581511198eb0f3f339469d8e65a",
+      "clip_sha256": "4d5612e8f89353987bc8a0647ba032052d972dc8b4d6400d98c332783486bc93",
+      "additional_forward": 0,
+      "inspection_tensor_copy": 0
+    },
+    {
+      "branch": "arg_null",
+      "ref_and_clip_same_objects_as_verified_restored_cache": true,
+      "reference_sha256": "c3bd8cb2e4a4be6d91f361e26addebe8ba44d581511198eb0f3f339469d8e65a",
+      "clip_sha256": "4d5612e8f89353987bc8a0647ba032052d972dc8b4d6400d98c332783486bc93",
+      "additional_forward": 0,
+      "inspection_tensor_copy": 0
+    }
+  ]
+}

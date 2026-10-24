@@ -499,3 +499,11 @@ restart20의18개tensor와 optimizer/RNG/cursor를 복원하고 추가80update�
 ## 2026-10-25 B-024 착수: 참조 RGB의 배경·padding 분리
 
 [B024 PLAN](experiments/B-024-reference-rgb-isolation/PLAN.md)에 따라 B023정식replacement과제FAIL을보존하고, 같은Lab의reference에서기존REDsupport밖RGB만128로바꾸는한정비교를착수한다. 원본보존객체편집의병목을조건경로에서좁히며VAE/CLIP두경로재계산,semanticmask/모드/noise불변을검증한다. 현재CPU준비/GPU NOT_RUN, 연결확인최대30분·전체3시간·sampler최대1이다. 배경제거는자세제거가아니며새학습/모델/합성은없다.
+
+### B-024 조건 연결 확인 및 실행 진입
+
+기존reference/driving latent를각1회복원해착석침실과사족자연동작의역할을직접확인했다. 원본VAE/CLIP재인코딩max/RMS0,새회색reference의4leaf변경/12보존을확인했다. 구체적pipeline결함은발견하지못했으나모든잠재결함을배제한것은아니다. 신규referenceworker1회종료후PROBE와단일S를진행하며첫실제CFG에서새reference객체전달을확인했다. 결과품질은아직판정하지않는다.
+
+## 2026-10-25 B-024 종료: 참조 비객체 RGB 중립화와 원본 보존 개선
+
+[RESULTS](experiments/B-024-reference-rgb-isolation/RESULTS.md): 기존support안RGB를exact보존하고밖만128로바꿔VAE/CLIP4leaf를재계산했다.12leaf/noise/semanticmask/replacement계약불변,REF/PROBE/S/D각1·40/80·finallatent/MP4완료다. 원본/B023/B024전체17장정적검토에서침실·세로구획대신원본에가까운사족자세·타일장면·후반고개방향이관측됐다. 실제raw→PNG17개계보를추가확인해source파일대체를배제했지만모델의source-copy가능성은남는다. 따라서reference개체치환/cross-ID/일반화는미입증,temporalUNVERIFIED다. 기존B023/B021실패를소급수정하지않는다. 다음병목하나는짧은cross-ID과제에서reference외형반영을source-copy와구별하는것이며추가실행/예약은없다.

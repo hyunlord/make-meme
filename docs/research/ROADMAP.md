@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-25. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**현재: B-024 RUNNING / GPU NOT_RUN.** [계획](experiments/B-024-reference-rgb-isolation/PLAN.md). 정식replacement와같은입력을유지하고reference비객체RGB만중립화해VAE/CLIP배경누수를한번검사한다. B023기술PASS/원본보존FAIL을보존한다. 연결확인은30분으로한정하고구체적결함은중단,원인UNKNOWN만으로무한감사하지않는다.
+**현재: B-024 COMPLETED / 기술 PASS / 정적 자세·장면 보존 개선 / reference 교체 효과 미입증.** [계획](experiments/B-024-reference-rgb-isolation/PLAN.md). 정식replacement와같은입력을유지하고reference비객체RGB만중립화해VAE/CLIP배경누수를한번검사한다. B023기술PASS/원본보존FAIL을보존한다. 연결확인과조건복원에서구체적결함을발견하지못했고,참조RGB중립화뒤사족자세·원본장면·후반고개방향이개선됐다. 같은개체/source-copy혼동과temporalUNVERIFIED는남는다. [결과](experiments/B-024-reference-rgb-isolation/RESULTS.md).
 
 **B-017 당시 요약: COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 
