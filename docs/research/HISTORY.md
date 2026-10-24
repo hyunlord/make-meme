@@ -414,3 +414,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-017 착수 (2026-10-24)
 
 **RUNNING / 생성·학습0.** ALG/H120을 기본 경로로 채택하지 않고, 허용된 실제 자료로 R/D/Y 학습 예제를 구성할 수 있는지 조사한다. 시작 HEAD `ffe0369682eb2b0c3a903c44a2f23d5ff91b2299`, [PLAN](experiments/B-017-paired-animal-data/PLAN.md), [선정 규칙](experiments/B-017-paired-animal-data/SELECTION_RULES.md). SELF_RECON_SMOKE·SAME_ID_POSE_VARIATION·실제 CROSS_ID_MOTION_PAIR와 권한 상태를 별도 판정한다. 기존 source 개발구간을 독립test로 바꾸지 않으며 다른 개체나 생성실패를 Lab target으로 승격하지 않는다. 3시간CPU중심, 최대8case; 다음 학습은 자동 실행하지 않는다.
+
+## B-017 종료 (2026-10-24)
+
+**COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** 등록자료12asset에서 source-file 검토case2개와 실제LabY가없는후보1개를구성했다. 실제CPU14media역할decode·shape·fps·PTS·복사hash통과, 두sourcecase D=Y동일, 독립test0. self파일구조는있지만 원본진위/학습권한UNKNOWN으로training-ready0; f0/f7참조다양성NOT_ESTABLISHED; 실제cross-IDpair0이다. [RESULTS](experiments/B-017-paired-animal-data/RESULTS.md), [학습해설](lessons/B-017-paired-data-and-flow-training.md). 공식Wan/SAT경로의Y·R·D·first_frame/history/loss·genericLoRA와실제recipe차이를확인했다. 생성·모델load·VAEencode·optimizer0. 다음한작업은권한있는실제Lab자연동작영상과다른자세reference/촬영session확보이며, 추가학습·생성은실행하지않는다. ALG/H120은기본경로로채택하지않는다.

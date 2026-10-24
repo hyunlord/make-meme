@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**최신: B-017 RUNNING / CPU 자료 검토·학습 준비.** [사전 계획](experiments/B-017-paired-animal-data/PLAN.md). 실제 R/D/Y·권한·split과 공식 train interface를 확인한다. 생성·학습0이며 ALG/H120은 기본 채택하지 않는다.
+**최신: B-017 COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 
 **B-015 당시 요약: COMPLETED / 고정 ALG pilot CLOSED.** [결과](experiments/B-015-alg-driving-control/RESULTS.md): 남은 ALG_STILL1회로2×2를 완성했다. 두 STILL은 상대적으로 선명한 착석, 두 MOV는 후반 머리 변화와 얼굴 손상이며 전신FAIL·목표품질NOT_ESTABLISHED·temporalUNVERIFIED다. 추가ALG탐색은 중단한다. 아래 과거 기록은 당시 상태다.
 
@@ -274,3 +274,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-017 착수 (2026-10-24)
 
 **RUNNING / 생성·학습0.** ALG/H120을 기본 경로로 채택하지 않고, 허용된 실제 자료로 R/D/Y 학습 예제를 구성할 수 있는지 조사한다. 시작 HEAD `ffe0369682eb2b0c3a903c44a2f23d5ff91b2299`, [PLAN](experiments/B-017-paired-animal-data/PLAN.md), [선정 규칙](experiments/B-017-paired-animal-data/SELECTION_RULES.md). SELF_RECON_SMOKE·SAME_ID_POSE_VARIATION·실제 CROSS_ID_MOTION_PAIR와 권한 상태를 별도 판정한다. 기존 source 개발구간을 독립test로 바꾸지 않으며 다른 개체나 생성실패를 Lab target으로 승격하지 않는다. 3시간CPU중심, 최대8case; 다음 학습은 자동 실행하지 않는다.
+
+## B-017 종료 (2026-10-24)
+
+**COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** 등록자료12asset에서 source-file 검토case2개와 실제LabY가없는후보1개를구성했다. 실제CPU14media역할decode·shape·fps·PTS·복사hash통과, 두sourcecase D=Y동일, 독립test0. self파일구조는있지만 원본진위/학습권한UNKNOWN으로training-ready0; f0/f7참조다양성NOT_ESTABLISHED; 실제cross-IDpair0이다. [RESULTS](experiments/B-017-paired-animal-data/RESULTS.md), [학습해설](lessons/B-017-paired-data-and-flow-training.md). 공식Wan/SAT경로의Y·R·D·first_frame/history/loss·genericLoRA와실제recipe차이를확인했다. 생성·모델load·VAEencode·optimizer0. 다음한작업은권한있는실제Lab자연동작영상과다른자세reference/촬영session확보이며, 추가학습·생성은실행하지않는다. ALG/H120은기본경로로채택하지않는다.

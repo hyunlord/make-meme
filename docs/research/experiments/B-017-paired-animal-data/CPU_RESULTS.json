@@ -1,0 +1,90 @@
+{
+  "execution": "COMPLETED_CPU_ONLY",
+  "code_freeze_commit": "16b1479",
+  "actual_manifest_records": 3,
+  "structural_media_complete": 2,
+  "training_ready": 0,
+  "true_cross_id_motion_pairs": 0,
+  "independent_validation_test": 0,
+  "media_role_checks_passed": 14,
+  "source_video_count": 1,
+  "unique_target_clips": 1,
+  "generation_attempts": 0,
+  "model_loads": 0,
+  "optimizer_updates": 0,
+  "cases": [
+    {
+      "sample_id": "self_f7",
+      "pair_type": "SELF_RECON_SMOKE",
+      "missing_fields": [],
+      "blockers": [
+        "TARGET_ORIGIN_UNKNOWN",
+        "TRAINING_RIGHTS_UNCONFIRMED"
+      ],
+      "structural_media_complete": true,
+      "pair_available": false,
+      "r_y_source_temporal_overlap": true,
+      "d_y_source_temporal_overlap": true,
+      "training_ready": false,
+      "readiness": [
+        "DATA_GAP",
+        "RIGHTS_PENDING"
+      ],
+      "d_equals_y_file": true,
+      "d_equals_y_decoded": true,
+      "r_equals_y_first_decoded": true,
+      "r_equals_y_first_source_lineage": true
+    },
+    {
+      "sample_id": "pose_f0",
+      "pair_type": "SAME_ID_POSE_VARIATION",
+      "missing_fields": [],
+      "blockers": [
+        "POSE_VARIATION_UNCONFIRMED",
+        "TARGET_ORIGIN_UNKNOWN",
+        "TRAINING_RIGHTS_UNCONFIRMED"
+      ],
+      "structural_media_complete": true,
+      "pair_available": false,
+      "r_y_source_temporal_overlap": false,
+      "d_y_source_temporal_overlap": true,
+      "training_ready": false,
+      "readiness": [
+        "DATA_GAP",
+        "RIGHTS_PENDING"
+      ],
+      "d_equals_y_file": true,
+      "d_equals_y_decoded": true,
+      "r_equals_y_first_decoded": false,
+      "r_equals_y_first_source_lineage": false
+    },
+    {
+      "sample_id": "lab_missing_target",
+      "pair_type": "CROSS_ID_MOTION_PAIR",
+      "missing_fields": [
+        "Y",
+        "caption"
+      ],
+      "blockers": [
+        "PAIR_ASSETS_MISSING",
+        "ASSETS_MISSING",
+        "TRAINING_RIGHTS_UNCONFIRMED"
+      ],
+      "structural_media_complete": false,
+      "pair_available": false,
+      "r_y_source_temporal_overlap": null,
+      "d_y_source_temporal_overlap": null,
+      "training_ready": false,
+      "readiness": [
+        "DATA_GAP",
+        "RIGHTS_PENDING"
+      ],
+      "d_equals_y_file": null,
+      "d_equals_y_decoded": null,
+      "r_equals_y_first_decoded": null,
+      "r_equals_y_first_source_lineage": null
+    }
+  ],
+  "split_leakage_flags": [],
+  "interpretation": "No cross-split leakage because all source derivatives remain DEVELOPMENT; this does not create independent validation/test."
+}

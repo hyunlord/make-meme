@@ -1,0 +1,201 @@
+{
+  "status": "BOUNDED_INVENTORY",
+  "asset_records": 12,
+  "actual_Lab_target_videos": 0,
+  "cross_id_motion_pairs": 0,
+  "scope": "Existing registered research/workpack input roots only; source derivatives counted as asset records, not independent identities",
+  "assets": [
+    {
+      "asset_id": "full_source",
+      "sha256": "da33bb95d4e05c49c537f3fdb27b2189fafec2b4f8d1a27e6b14efe034071f6b",
+      "bytes": 7824508,
+      "media_kind": "video",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "UNKNOWN",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "actual_lab_photo",
+      "sha256": "54f8052c7264139a41d2818d5c881abd2442f462b5d02cc7908c1f360f00fadb",
+      "bytes": 507749,
+      "media_kind": "image",
+      "identity_evidence": "user identified Lab photo",
+      "synthetic_origin": "USER_IDENTIFIED_PHOTO",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "target_f7_23",
+      "sha256": "7072f6bf49de44469da36d001a3b297a1f8504e362944765ddc346e6f7caac0d",
+      "bytes": 2585339,
+      "media_kind": "video",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "SOURCE_DERIVATIVE",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "target_mask_f7_23",
+      "sha256": "5597bcae72a4232910f4acde90231717b9110b5b4e80e15e2805700d27a738b4",
+      "bytes": 46949,
+      "media_kind": "video",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "NONLEARNED_MANUAL_MASK",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "reference_f7",
+      "sha256": "62cd190b69892ff3e7b849a63697287d417b4eae8d01d239630fc864b9d530eb",
+      "bytes": 156738,
+      "media_kind": "image",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "SOURCE_DERIVATIVE",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "reference_mask_f7",
+      "sha256": "abd8548f8b7710b2ad0dbe20070ade7a97908b2bafecd6677c92438b80fd1965",
+      "bytes": 4124,
+      "media_kind": "image",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "NONLEARNED_MANUAL_MASK",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "reference_f0",
+      "sha256": "2337f647648b38761ee6b0d8743030b7dfd44e478c6374bff1af7f150139208f",
+      "bytes": 153439,
+      "media_kind": "image",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "SOURCE_DERIVATIVE",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "reference_mask_f0",
+      "sha256": "6133de0c9df99958752554e8327dcdbef92f0c54647b340e4a54346b480a1c25",
+      "bytes": 4036,
+      "media_kind": "image",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "NONLEARNED_MANUAL_MASK",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "prior_f0_16",
+      "sha256": "e08b0f08155ff9da9a0f9322a15fa5adf665b6857ba1c84cc8e5e65e6891fc27",
+      "bytes": 2487365,
+      "media_kind": "video",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "SOURCE_DERIVATIVE",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "prior_mask_f0_16",
+      "sha256": "cd13899eecf7ca29e2063975dbae7fab733fe9667195bfc29c2dae1cade451c2",
+      "bytes": 40485,
+      "media_kind": "video",
+      "identity_evidence": "same-source opening shot continuity; not verified biological identity or real capture",
+      "synthetic_origin": "NONLEARNED_MANUAL_MASK",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "lab_reference_normalized",
+      "sha256": "703884c8e2a657d4294cf4e74efeb463c9cd6e05e1ad582f99d6546b954cfdce",
+      "bytes": 498994,
+      "media_kind": "image",
+      "identity_evidence": "user identified Lab photo",
+      "synthetic_origin": "PHOTO_DERIVATIVE",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    },
+    {
+      "asset_id": "lab_reference_mask",
+      "sha256": "ea54f417f109793210c405d2452152b839fd57f81329811fb650958e830bab9f",
+      "bytes": 5025,
+      "media_kind": "image",
+      "identity_evidence": "user identified Lab photo",
+      "synthetic_origin": "NONLEARNED_MANUAL_MASK",
+      "rights_basis": "user-supplied reference research context; no license instrument found",
+      "permitted_use": {
+        "private_review": "AUTHORIZED_THIS_TASK",
+        "training": "PENDING",
+        "redistribution": "UNKNOWN",
+        "commercial": "UNKNOWN"
+      },
+      "training_ready": false
+    }
+  ]
+}
