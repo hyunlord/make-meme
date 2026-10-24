@@ -1,12 +1,12 @@
 # B 연구 v2 — 원본 장면을 보존하는 참조 이미지·프롬프트 기반 영상 객체 편집
 
-작성: 2026-10-24. 사용자 목표 재정의에 따른 연구 계획. 문서 등록은 GPU 작업·학습·모델 다운로드가 아니다.
+작성: 2026-10-24. 실행 범위 개정: 2026-10-25. 과거 두 생성·밈 입력·ROI 후보는 Git 이력에 보존한다. 현재 실행 계약은 [B-023 개정 계획](experiments/B-023-task-aligned-replacement/PLAN.md)이며, 상위 구성 전체를 구현하는 작업이 아니다.
 
 ## 1. 목적과 범위
 
 입력은 원본 영상 V, 객체별 참조 이미지 집합 R, 편집 지시 P다. 출력 Y는 지시한 객체를 참조의 개체·체형으로 바꾸되 원본의 시간축·카메라·보호 영역과 지정한 동작/이벤트를 유지해야 한다. 목표 하드웨어는 사용자의 단일 DGX Spark다. 대형 서버·유료 영상 생성 서비스가 아닌 로컬 모델로 품질과 자원 효율을 검증한다.
 
-장기 범위는 객체 단위 삽입·치환·합성이지만 첫 과제는 **한 동물의 identity-changing replacement**다. 사람/동물용 모델의 성과를 자동차·제품 등 모든 객체로 일반화하지 않는다. 처음부터 새 동작 발명, 전체 장면 재생성, 2개체15초, 음성 합성까지 동시에 요구하지 않는다. 원본의 동작을 보존하는 편집과 새로운 행동을 추가하는 편집은 별도 과제다.
+장기 범위는 객체 단위 삽입·치환·합성이다. 첫 B-023은 **같은 실제 Lab의 다른 자세 참조를 사용한 정식 replacement 과제 적합성 진단**이다. source-copy와 reference 사용을 구분할 수 없어 identity-changing replacement 검증은 후속 과제로 남긴다. 사람/동물용 모델의 성과를 자동차·제품 등 모든 객체로 일반화하지 않는다. 처음부터 새 동작 발명, 전체 장면 재생성, 2개체15초, 음성 합성까지 동시에 요구하지 않는다. 원본의 동작을 보존하는 편집과 새로운 행동을 추가하는 편집은 별도 과제다.
 
 A(native imagegen-only MCP)는 동결·독립 보존한다. B에는 native imagegen, 외부 생성API, 원격 prompt enhancer, A의 생성물을 넣지 않는다. 개발 에이전트가 코드를 작성하는 것과 최종 로컬 편집 시스템이 실행 중 외부 생성 서비스를 의존하는 것을 구분한다. 기존 입력의 비공개 추론 허용과 학습/공개 배포 권한도 구분한다.
 
@@ -16,7 +16,7 @@ A(native imagegen-only MCP)는 동결·독립 보존한다. B에는 native image
 
 대부분의 기존 품질 실험은 `replace_flag=False`인 animation이었다. 정식 replacement의 전체 입력·마스크·모드 계약과 동일하지 않다. H120만 변경한 B-016도 replacement baseline이 아니다. 따라서 animation 실패만으로 source-preserving editing 전체의 한계를 결론내리지 않는다.
 
-B-022의 20→100 update 비교는 학습량 진단이다. 이미 시작됐다면 다른 작업을 끊거나 동시에 GPU를 쓰지 말고 기존 범위로 종료·보존한다. 아직 실행하지 않았다면 주력 다음 작업은 B-023으로 재우선한다. B-022의 사전 계획·실패 이력을 삭제하거나 완료로 바꾸지 않는다. 새 방향의 성공을 B-022 완료에 종속시키지 않는다.
+B-022는 완료됐다. optimizer/RNG/cursor 재개와 추가80update, matched20/100 영상 확보는 PASS이나 착석·후반 얼굴 손상·잘림이 남아 품질 개선은 NOT_ESTABLISHED다. B-021 FAIL을 보존하며 같은 마지막block Q/V·고정tuple 학습량 확대는 종료한다. 다음은 실제 Lab 자연동작 f126..142의 같은 입력에서 공식 replacement 모드와 의미 마스크를 함께 맞추는 1회 비교다. 원인이 조건 불일치라는 가설은 아직 미검증이다.
 
 ## 3. 편집 계약 — 자연어와 모델 caption을 분리
 
@@ -72,7 +72,7 @@ E는 객체 alpha가 아니라 **어디를 편집 결과로 교체할지 나타�
 
 edit support는 source 객체 영역뿐 아니라 target의 새 실루엣, 지워진 객체가 있던 배경, 경계 전이, 필요한 그림자/반사를 포함할 수 있어야 한다. source가 target보다 작거나 클 때 source mask만 사용하면 잘림·잔상·빈 영역이 생긴다. 앞을 가리는 보호 객체는 원래 순서를 유지한다. target 체형을 원본 silhouette에 비선형 warp로 강제하지 않는다.
 
-객체만 alpha로 덮으면 source 객체가 남아 있거나 가려졌던 배경이 비어 있을 수 있다. clean plate/inpainting 또는 edited-region RGB가 필요한 이유다. 첫 단계에서는 **장면 문맥을 본 edited RGB + 제한된 source 복원**을 baseline으로 삼고, pure foreground-layer 생성은 선택적 장래 아키텍처로 둔다.
+객체만 alpha로 덮으면 source 객체가 남아 있거나 가려졌던 배경이 비어 있을 수 있다. clean plate/inpainting 또는 edited-region RGB가 필요한 이유다. 이번 B-023에서는 **정식 replacement의 raw RGB만** 판정한다. 제한된 source 복원·ROI 합성·pure foreground-layer 생성은 관측된 실패에 따라 선택할 후속 후보이며 이번에는 실행하지 않는다.
 
 ### 4.4 계산량에 대한 정정
 
@@ -94,7 +94,7 @@ C에는 분석·mask 수정·인코딩·모델 로딩·생성·복원·합성·�
 
 | 단계 | 핵심 질문 | 요구 산출물 |
 |---|---|---|
-| R0/B-023 | 정식replacement가 실제 task를 얼마나 수행하는가? | 한개체 짧은self-control+Lab교체, raw와제한합성, 실패포함비교 |
+| R0/B-023 | 정식replacement가 실제 task를 얼마나 수행하는가? | 실제Lab 자연동작의같은개체replacement1회, B020adapter-OFF와raw비교, 합성0 |
 | R1 | 한개체에서 제어·개체·장면을 함께 보존하는가? | 같은개체의 다른ref자세·다른짧은동작, source-copy와작업맞춤baseline 비교 |
 | R2 | 무엇을 작게 바꾸면 joint quality가 올라가는가? | 한가지조건/데이터/학습개입과 제거비교; 준비검사만확장금지 |
 | R3 | 같은품질에 비용을 줄이는가? | native generation 대 실제low-res/ROI+refinement, end-to-end 시간·메모리 |
@@ -107,7 +107,7 @@ C에는 분석·mask 수정·인코딩·모델 로딩·생성·복원·합성·�
 
 단일 GB10/현재128GB 통합메모리 환경을 기본으로 하되 실제 장비의 fresh MemAvailable·disk·CUDA환경을 사용한다. NVIDIA 공식273GB/s 메모리 대역폭이나 FP4 peak를 BF16영상처리량으로 환산하지 않는다. CPU offload는 다른 물리GPU로 보내는 것이 아니며 CPU/GPU 메모리 회계를 중복 합산하지 않는다.
 
-첫 B023은 기존 모델만, 한 worker씩 순차, 신규 full sampler 최대2회·각40step80forward, 학습0·추가다운로드0. 기존72GiB 시작/24GiB headroom·swap0·서비스보호 규칙을 유지한다. 향후 실제 baseline 시간을 기준으로 하루/주간 trial budget을 정하고, 생성0회인 감사에만 연구시간이 누적되지 않게 한다.
+첫 B023은 기존 모델만, 한 worker씩 순차, 신규 full sampler 최대1회·40step80forward, 학습0·추가다운로드0. 기존72GiB 시작/24GiB headroom·swap0·서비스보호 규칙을 유지한다. 향후 실제 baseline 시간을 기준으로 하루/주간 trial budget을 정하고, 생성0회인 감사에만 연구시간이 누적되지 않게 한다.
 
 측정은 CUDA allocated/reserved, OS가용/RSS, cgroup charge/events, 경과시간, sampler NFE, 데이터/캐시 storage를 각각 남긴다. one-block5.816GiB나 현재짧은clip 비용을 전체40block학습·15초로 단순 선형외삽하지 않는다. cold/warm 실행을 구분한다.
 

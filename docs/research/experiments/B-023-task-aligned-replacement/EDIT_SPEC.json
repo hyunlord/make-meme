@@ -1,0 +1,78 @@
+{
+  "experiment_id": "B-023",
+  "human_reviewed": true,
+  "parser": "NOT_IMPLEMENTED",
+  "user_edit_intent": "원본 Lab의 사족으로 서서 고개를 돌리는 동작과 장면을 보존하고 같은 Lab 참조의 얼굴·외형·체형을 반영한다.",
+  "operation": "replace_subject",
+  "source_alias": "B020_NATURAL_LAB",
+  "source_frames": {
+    "first": 126,
+    "last_inclusive": 142,
+    "count": 17,
+    "fps": 30,
+    "pts_seconds": [
+      4.2,
+      4.733333333333333
+    ],
+    "sample_span_seconds": 0.5333333333333333,
+    "encoded_duration_seconds": 0.5666666666666667
+  },
+  "objects": [
+    {
+      "source_track": "single_lab",
+      "reference_alias": "B020_SEATED_LAB",
+      "same_identity": "USER_CONFIRMED",
+      "mask_instance": "RED",
+      "preserve": [
+        "natural_four_leg_stance",
+        "head_turn_direction_order",
+        "motion_timing"
+      ],
+      "allow": [
+        "reference_body_width",
+        "reference_limb_thickness",
+        "necessary_occlusion_shadow_disocclusion"
+      ]
+    }
+  ],
+  "preserve": [
+    "source_scene",
+    "camera",
+    "timebase",
+    "non_target_objects"
+  ],
+  "canvas": {
+    "width": 896,
+    "height": 512,
+    "transform": "B020_ASPECT_FIT_LETTERBOX_UNCHANGED"
+  },
+  "backend_caption": "A black Labrador retriever with a broad chest, sturdy body and thick legs, matching the reference dog, stands naturally on all four legs on a light tiled floor in a sunlit room. It gently turns its head toward the left side of the image while its body stays mostly in place and its tail moves. Natural realistic motion and a stable viewpoint.",
+  "negative_caption": "",
+  "backend": {
+    "replace_flag": true,
+    "reference_mask": "RED_SUPPORT_BLACK_BACKGROUND",
+    "driving_mask": "RED_SUPPORT_WHITE_BACKGROUND",
+    "history": null,
+    "additional_ref": null,
+    "adapter": null,
+    "alg": false,
+    "manual_rope_override": null,
+    "prompt_enhancer": false
+  },
+  "acceptance_limits": [
+    "same_identity_cannot_establish_reference_use_or_cross_identity_editing",
+    "semantic_mask_is_not_alpha",
+    "raw_only_no_compositing",
+    "temporal_unverified_without_continuous_observation"
+  ],
+  "budget": {
+    "sampler_attempts": 1,
+    "decode_attempts": 1,
+    "probe_attempts": 1,
+    "optional_P_attempts": 1,
+    "optimizer_updates": 0,
+    "full_forward_count": 80,
+    "steps": 40,
+    "retry": 0
+  }
+}

@@ -6,11 +6,11 @@
 
 사용자 목표는 **원본 영상 + 객체별 참조 이미지 + 자연어 편집 지시로, 원본의 장면·시간축·지정 동작을 유지하면서 참조 개체를 치환/합성하는 로컬 시스템**이다. 단일 DGX Spark에서 높은 joint quality와 실측 비용 효율을 얻는 연구를 우선한다. generic T2V, reference 장면 animation, 단순 기능 연결과 구분한다.
 
-상위 계획: [B 연구 v2](RESEARCH_V2_SOURCE_PRESERVING_EDITING.md). 결정 이력: [과제 재정의와 B-023](decisions/20261024-task-redefinition-and-B-023.md). 다음 task-aligned baseline: [B-023 공식 replacement](experiments/B-023-task-aligned-replacement/PLAN.md), 현재 PLANNED / NOT_RUN.
+상위 계획: [B 연구 v2](RESEARCH_V2_SOURCE_PRESERVING_EDITING.md). 결정 이력: [과제 재정의와 B-023](decisions/20261024-task-redefinition-and-B-023.md). 다음 task-aligned baseline: [B-023 공식 replacement](experiments/B-023-task-aligned-replacement/PLAN.md), 현재 B-023 사전 입력·코드 검증 중 / GPU NOT_RUN.
 
 아래 초기 전략 중 VACE 중심 문장은 당시 기록이다. 현재 확보한 실행 기반은 SCAIL-2와 단계 분리·조건/latent 보존 경로이며, 첫 새 실험은 학습이나 RGBA 모델 신설 대신 정식 replacement 입력·마스크·caption 계약을 검증한다. subject-only 출력·mask만으로 계산 절감을 보장하지 않는다. 국소 생성/재합성/ROI 효율화는 측정할 설계 후보다.
 
-B-022가 이미 실행 중이면 종료시키지 않고 기존 범위·이력을 보존한다. 미착수라면 새 주력은 B-023이며 B-022는 후순위 학습량 진단이다. 이전 실험의 실패나 완료를 소급 수정하지 않는다. 현재 문서 변경은 GPU 실행·학습·모델 다운로드가 아니다.
+B-022는 실제 완료됐고 품질 개선은 입증되지 않았다. B-021 FAIL과 B-022 기술 PASS/시각 FAIL을 보존하며 같은 학습량 확대를 종료한다. B-023은 같은 실제 Lab 자연동작에서 정식 replacement 계약의 적합성을 한 번 검사한다. EditSpec parser·새 MCP·ROI 합성·복원·효율화·다중 객체는 이번에 구현하지 않는다. 관측 결과로 다음 병목 하나를 선택하며 자동 후속 실행은 하지 않는다.
 
 ## 1. 장기 목표
 

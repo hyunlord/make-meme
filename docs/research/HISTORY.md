@@ -487,3 +487,7 @@ restart20의18개tensor와 optimizer/RNG/cursor를 복원하고 추가80update�
 ## 2026-10-24 UTC / 2026-10-25 KST B-022 종료
 
 [RESULTS](experiments/B-022-resumed-update-comparison/RESULTS.md): 같은B021restart20에서optimizer/RNG/cursor복원후80회추가학습·33비학습forward·3진단backward를완료했다. 고정4tupleloss감소와새reload/OFF·이번base불변PASS다. matched20/100은동일16leaf/noise로각40/80sampler·decode1,17f30fps완료. 두영상모두착석/침실/padding/후반얼굴손상·잘림이남아전신FAIL·품질개선NOT_ESTABLISHED·temporalUNVERIFIED다. B021FAIL/NOT_REACHED는보존한다. 자체worker종료·swap/OOM0,high reclaim이벤트는원시기록유지. 자동증량은하지않는다. 실행중추가된B연구v2/B023문서도보존했으며,다음은이미계획된공식replacement로과제조건불일치가설을검사하는경로하나만제안한다. B023은NOT_RUN이다.
+
+## 2026-10-25 B-023 착수: 원본 보존 편집의 과제 적합성
+
+최신 원격 `fee6896bea73a2cd2a3b5f6c7f5baf062eb505d3`와 B-022 종료를 확인했다. B-023 기존 실행 디렉터리/활성 작업이 없는 상태에서 CPU 입력·계보 검증을 시작했다. B020 실제 Lab f126..142·30fps·896×512·미학습 기준선을 유지하고 ref RED/BLACK + driver RED/WHITE + 공식 replacement를 묶어 비교한다. 과거 밈2case/ROI 후보는 이번 범위가 아니다. 신규 sampler 최대1·decode1, 학습/다운로드/합성0; 미실행 상태에서 코드·EditSpec·조건 차이를 사전 고정한다. 최종 목표는 단일 Spark의 원본 보존 객체 편집이며 이번은 그 첫 제한 기준선이다. 결과에 따라 다음 병목 하나만 선택한다.
