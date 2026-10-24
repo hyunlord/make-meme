@@ -418,3 +418,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-017 종료 (2026-10-24)
 
 **COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** 등록자료12asset에서 source-file 검토case2개와 실제LabY가없는후보1개를구성했다. 실제CPU14media역할decode·shape·fps·PTS·복사hash통과, 두sourcecase D=Y동일, 독립test0. self파일구조는있지만 원본진위/학습권한UNKNOWN으로training-ready0; f0/f7참조다양성NOT_ESTABLISHED; 실제cross-IDpair0이다. [RESULTS](experiments/B-017-paired-animal-data/RESULTS.md), [학습해설](lessons/B-017-paired-data-and-flow-training.md). 공식Wan/SAT경로의Y·R·D·first_frame/history/loss·genericLoRA와실제recipe차이를확인했다. 생성·모델load·VAEencode·optimizer0. 다음한작업은권한있는실제Lab자연동작영상과다른자세reference/촬영session확보이며, 추가학습·생성은실행하지않는다. ALG/H120은기본경로로채택하지않는다.
+
+## B-018 착수 (2026-10-24)
+
+**RUNNING / GPU NOT_RUN.** 원격 `a8885357684904285014ee28ac568f568ee59762`의 계획과 실행 지시를 확인했다. B-017 RIGHTS_PENDING/DATA_GAP는 보존하며 실데이터 확보와 학습 배선 검증을 분리한다. 마지막 self-attention 하나에 synthetic tensor와 Q/V rank4 LoRA를 사용한다. CPU 계약을 먼저 검사하고 공식 FA backward·최대3 update·adapter 저장/재로딩을 GPU worker1회 안에서 확인한다. 전체 모델·영상·개인 미디어 학습은0, 실제 동물 품질은 NOT_RUN이다.
