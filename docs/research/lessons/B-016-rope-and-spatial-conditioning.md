@@ -1,6 +1,6 @@
 # B-016 — RoPE 위치 조건과 reference의 공간 관계
 
-상태: **문헌·고정 코드 확인 완료 / CPU 계약 결과 대기 / 신규 model 실행·출력·영상 검토 NOT_RUN**. [PLAN](../experiments/B-016-reference-rope-h/PLAN.md)에 따라 ALG는 OFF이며, animation에서 reference H offset만 0→120으로 바꾼다. B013의 CFG_MOV_H0는 그대로 재사용한다. 이는 이미지 이동·자세 retargeting·학습된 개체/자세 분리가 아니다.
+상태: **문헌·고정 코드 확인 완료 / CPU 계약 10개 PASS / 실제 40 step/80 forward·17프레임 출력 완료 / 전신 전이 FAIL·시간 품질 UNVERIFIED**. [PLAN](../experiments/B-016-reference-rope-h/PLAN.md)에 따라 ALG는 OFF이며, animation에서 reference H offset만 0→120으로 바꾼다. B013의 CFG_MOV_H0는 그대로 재사용한다. 이는 이미지 이동·자세 retargeting·학습된 개체/자세 분리가 아니다.
 
 ## 1. 직관과 출처
 
@@ -30,7 +30,7 @@ ref-ref s가 같아도 다른 key의 s가 달라지면 분모가 달라진다. �
 
 고정 SCAIL commit은 `78fe19576bb06be96c2375e088574a262a300edb`다. [rope_params와 rope_apply_ref](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L32-L80)는 실수 d=128을 complex64로 보고 `[c−2(c//3),c//3,c//3]`으로 나눈다. 실제 T/H/W는 complex22/21/21, 실수44/42/42차원이다. 각 축의 주파수를 이어 붙여 동일 token의 서로 다른 차원 쌍에 적용한다. 세 축을 영상의 RGB 채널로 해석하면 안 된다.
 
-부모 B013에서 관측된 shape와 이번 동일 입력으로 예상되는 geometry는 다음과 같다. B016 runtime 확인은 별도로 남긴다.
+부모 B013에서 관측된 shape와 이번 동일 입력으로 예상되는 geometry는 다음과 같다. B016은 같은 cache를 재사용했고 실행 receipt와 별도로 연결한다.
 
 | 항목 | shape / token 수 | 의미 |
 |---|---|---|
@@ -58,9 +58,23 @@ CFG는 `v=u+5(c−u)`로 유지한다. 두 text branch는 시각 조건과 H120 
 
 ## 5. 검증 계층과 미관측 경계
 
-CPU fixture는 작은 고정 Q/K의 OFF/0 동일성, reference norm·내부 logit 보존, 다른 token의 RoPE 출력 보존, cross logit 변화와 table 범위를 검사한다. 실제 CPU 수치·runtime resolved offset·block/step coverage·이미지 결과는 receipt 도착 뒤 기록한다. 작은 fixture PASS가 full model 의미 보존이나 생성 품질 PASS는 아니다.
+CPU fixture는 작은 고정 Q/K의 OFF/0 동일성, reference norm·내부 logit 보존, 다른 token의 RoPE 출력 보존, cross logit 변화와 table 범위를 검사한다. [CPU_AUDIT](../experiments/B-016-reference-rope-h/CPU_AUDIT.json)의 실제 10개 검사(0.82초)는 PASS다. 사전 rtol/atol 각각 2e-5에서 Q/K norm 최대 절대 오차는 각각 9.536743e-7, ref-ref logit 오차는 7.152557e-7이었다. ref-video 및 ref-driving 최대 logit 변화는 각각 2.406847, 1.898464이며 non-reference RoPE 출력은 bit-exact다. 이는 고정 synthetic Q/K의 수치 성질이며 실제 attention 확률·다음 층의 불변성 검사가 아니다.
 
-검토 도구는 네 열의 같은 canvas·17장·24fps와 local0/12/14/16을 준비했다. 실제 렌더는 D 완료 전 NOT_RUN이다. 전신 직립/앞발, 국소 roll, 얼굴·체형, source appearance 누수, 배경 변화, 시간 품질을 분리한다. 연속 시청이 없으면 temporal UNVERIFIED이며 정적 이미지로 자동 승격하지 않는다. 이번 문서는 다음 실험이나 offset 탐색을 제안·실행하지 않는다.
+CPU meta-only module fixture에서 1307 state key·16,395,544,384 parameter의 shape/dtype 계약과 부모 cache 16 leaf를 확인했다. 실제 가중치를 적재해 추론한 결과가 아니다. 원래 full-package CPU import는 upstream T5의 CUDA 기본값 때문에 실패했고 별도 fixture에서는 package initializer를 우회했다. 그 실패와 새 helper typecheck 0 errors/0 warnings, dynamic adapter의 90 errors/145 warnings라는 NOT_CLEAN 한계는 위 감사 기록에 보존한다. 전체 package import 성공이나 full model 의미 보존으로 확대하지 않는다.
+
+사전 고정 commit은 `68c5af7ee7eaad07e09769c3547b8ebe0ef7b964`다. 실제 실행은 완료했지만 작은 fixture PASS와 생성 품질 수용은 여전히 별개다.
+
+검토 도구는 네 열의 같은 canvas·17장·24fps와 local0/12/14/16을 준비했다. 실제 D 완료 후 한 번 렌더했고 all17과 사건 프레임을 정적으로 확인했다. 전신 직립/앞발, 국소 roll, 얼굴·체형, source appearance 누수, 배경 변화, 시간 품질을 분리한다. 연속 시청이 없으면 temporal UNVERIFIED이며 정적 이미지로 자동 승격하지 않는다. 이번 문서는 다음 실험이나 offset 탐색을 제안·실행하지 않는다.
+
+## 6. 실제 한 번의 결과
+
+[MEASUREMENTS](../experiments/B-016-reference-rope-h/MEASUREMENTS.json)와 [RUN_LEDGER](../experiments/B-016-reference-rope-h/RUN_LEDGER.json)에 40 step/80 forward, PROBE/S/D 정상 종료가 기록됐다. S guard 1057.032초, sampler loop 965.419초, D guard 16.223초다. raw `[3,17,896,512]`는 finite이며 영상은17장·24fps다. S 최소 시스템 가용 메모리56,483,909,632bytes, CUDA allocated peak36,342,284,288bytes, cgroup peak66,577,825,792bytes는 서로 다른 회계다. high3545회는 reclaim 압력이며 OOM/swap0이다. 이 수치로 순수 속도 개선이나 전체 메모리 상한을 주장하지 않는다.
+
+SOURCE/reference/H0/H120 네 열 전체17장을 직접 정적으로 비교했다. **H120도 앉은 자세·아래로 지지한 앞발을 유지해 전신 전이는 FAIL**이다. 초반부터 머리 각도·프레이밍·침구 노출/색이 H0와 달라졌다. f12–16의 국소 머리 반응은 있으나 위/옆으로 꺾이며 눈·주둥이·귀가 흐려져 원본 roll의 방향·형상 충실도를 수용하지 않는다. H0도 손상되어 H120의 전체 개선 근거가 되지 않는다. 검은 Lab 인상과 실제 개체 동일성은 구분하며 특히 후반 개체는 UNCERTAIN이다. 뚜렷한 밝은 source 털 누수는 관찰하지 않았지만 숨은 뒷다리·접촉·그림자·반사는 판단이 부족하다.
+
+참조 방은 유지되지만 배치/노출이 달라졌다. 이 차이를 replacement 성공이나 자세/개체 분리의 증거로 삼지 않는다. 이번 hybrid가 목표를 달성하지 못했다는 한 사례 결과이며 공간 조건이 무관하거나 학습이 불가능하다는 증명도 아니다.
+
+기존 H0 PNG17장은 바이트 동일 복사했다. 비교 영상은2048×928·17프레임·24fps·0.708333초이며 warp·보간·시간 변경이 없다. 실제 렌더와 UI QA는 각1회다. 브라우저 한 번 재생 종료·슬라이더·CJK·desktop/mobile 배치를 확인했으나 연속 영상 품질을 관찰한 것은 아니므로 **temporal UNVERIFIED**다. 이번 범위에서 추가 실험을 실행하지 않는다.
 
 ## 이해 확인 질문
 

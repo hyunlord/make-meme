@@ -262,3 +262,9 @@ P0·PROBE/S/D각1·40step88forward·finite final latent·17f24fps MP4를 확보�
 ## B-016 착수 (2026-10-24)
 
 **RUNNING / GPU NOT_RUN.** 고정 ALG pilot을 종료하고 기본 CFG로 복귀한다. 원격 `6ef151b090d6c839e99d84a3547e7671f128e5ac`의 [PLAN](experiments/B-016-reference-rope-h/PLAN.md)에 따라 기존 LAB_MOV 캐시16leaf와 모든 입력·sampler를 보존한 채 animation reference RoPE H만120으로 지정한다. 격리 코드/CPU fixed-QK 계약/실제 import를 먼저 검증하며 기존 H0 결과를 재사용한다. P0·PROBE/S/D각최대1·40step80forward·3시간·retry/학습0. 이 hybrid가 학습분포 내라는 주장이나 replacement 전체 재현은 하지 않는다. [진행](experiments/B-016-reference-rope-h/RUNNING.md).
+
+## B-016 종료 (2026-10-24)
+
+**COMPLETED / 실행·ref-H 단일 개입 PASS / 전신 FAIL / 품질 개선 NOT_ESTABLISHED / temporal UNVERIFIED.** P0·PROBE/S/D각1·40step80forward, 실제 canonical patch와40blocks×80회 위치검사, 원본16leaf 보존을 확인했다. finite final latent와17f24fps MP4를 확보했지만 H120도 착석·지지 앞발이며 후기 머리/얼굴 손상이 남았다. 일부 차이를 원본 roll·실제 개체 동시 개선으로 올리지 않는다. S1057.032초·최소가용52.605GiB·swap/OOM0. [RESULTS](experiments/B-016-reference-rope-h/RESULTS.md).
+
+ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 하나는 동물 identity/reference 자세 분리를 학습할 허가된 paired 데이터의 타당성 감사다. 다른 개체를 Lab 정답으로 쓰지 않으며 이번에는 데이터 수집·학습·추가 생성 NOT_RUN이다.

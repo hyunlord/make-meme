@@ -24,3 +24,11 @@ ALG pilot은 종료하고 기본 경로로 채택하지 않는다. B-013 LAB_MOV
 신규 typed helper2개 오류/경고0, 상속 dynamic adapter3개 typecheck90오류145경고는 NOT_CLEAN으로 공개한다. 억제나 범위밖 리팩터링으로 숨기지 않는다. [CPU 감사](CPU_AUDIT.json), [모델 diff](MODEL_PATCH.diff), [코드 manifest](PREREGISTERED_CODE.json), [입력](PREREGISTERED_INPUTS.json).
 
 독립 읽기 검토는 제한된 실행 GO이며 영상 품질 인증이 아니다. 코드 manifest SHA `1a6827e21c23197fb1aeb0bfc656c933c184ee97618c73fea890071f54db224e`. 원격 고정 확인 후 PROBE→S→D 각최대1회 진행. 현재 GPU NOT_RUN.
+
+## PROBE 완료 / S 시작
+
+실행 고정 commit `68c5af7ee7eaad07e09769c3547b8ebe0ef7b964`의 원격 일치를 확인했다. PROBE1은 service_exit/returncode0/inactive/MainPID0로 완료했다. 정상 종료·자원 회복 뒤 fresh S1을 시작했다. P0이며 실제 모델 patch 적용·80forward·final latent·D 결과는 아직 대기다.
+
+## 종료
+
+PROBE/S/D각1회 정상 종료. 실제40step80forward, 모든40block×80회 위치계약, finite final latent와raw,17f24fps MP4를 확보했다. P/재시도/학습0. 정적17장 검토에서 착석과 후기 얼굴 손상은 남아 목표 개선NOT_ESTABLISHED다. [최종 결과](RESULTS.md). 시간품질UNVERIFIED, 추가실행없음. ZIP 검증·공개 동기화는 별도 기록한다.
