@@ -32,3 +32,7 @@ BASE_S1 실제40step/80forward 완료, worker1060.444초. finite final latent의
 ## 실제 FM tail 학습 완료
 
 TRAIN1에서20update와10추가tail평가를 완료했다. 4tuple의 분리경로 parity max_abs0, 기반가중치 불변, freshreload/OFF max_abs0. 실제 FA2 backward3경로 및 frozen-head 입력 gradient를 확인했다. holdout MSE0.0384031795→0.0383795351로 소폭 감소했다. [실제 학습 receipt](TRAINING_SUMMARY.json). loss 감소는 영상/개체/동작 개선의 증거가 아니다. 동일 P/noise/config의 TRAIN_S1에 진입하며 추가update는 없다.
+
+## 종료
+
+TRAIN_S1도40/80·finite final latent 저장/readback을 완료하고 TRAIN_D1에서17frame/30fps를 확인했다. 모든7phase정상종료, 추가GPU작업없음. 정적전체프레임비교상 target전신재현FAIL/품질개선미입증. 최종실측·판정은 RESULTS/MEASUREMENTS에기록했다.

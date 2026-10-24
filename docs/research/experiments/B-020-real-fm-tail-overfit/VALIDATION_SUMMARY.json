@@ -1,0 +1,200 @@
+{
+  "experiment": "B-020",
+  "reviewer": "independent CPU/source verifier",
+  "checked_at_utc": "2026-10-24T12:00:05.553325+00:00",
+  "prefix_sidecar_review": "PASS",
+  "observed_full_positive_forwards": 4,
+  "target_shape": [
+    16,
+    5,
+    64,
+    112
+  ],
+  "h38_shape": [
+    1,
+    12992,
+    5120
+  ],
+  "context_shape": [
+    1,
+    769,
+    5120
+  ],
+  "head_e_shape": [
+    1,
+    5120
+  ],
+  "prefix_tuples": [
+    {
+      "tuple_id": "train_0",
+      "sigma": 0.2,
+      "seed": 2026102401,
+      "file_sha256": "fcc533f001cf9a82dac94bd9aa94fde886908bd09db1b930d15e892836212a81",
+      "sidecar_sha256": "7b6f2bb49bb51179a6384af7ce10e6decb4ae707afc60242b8d0ae74a22bb9f3",
+      "declared_payload_bytes": 299533144,
+      "binding_and_shapes": "PASS",
+      "readback_exact_from_worker": true
+    },
+    {
+      "tuple_id": "train_1",
+      "sigma": 0.5,
+      "seed": 2026102402,
+      "file_sha256": "745acbb6c77aeadb6c040f67bed593c857a9b63ca49c13139848a656962a3323",
+      "sidecar_sha256": "1a18cefd59b732c51069e0a5e88d519fe8f6f7e7e193cef97fb11cce76caa6ba",
+      "declared_payload_bytes": 299533144,
+      "binding_and_shapes": "PASS",
+      "readback_exact_from_worker": true
+    },
+    {
+      "tuple_id": "train_2",
+      "sigma": 0.8,
+      "seed": 2026102403,
+      "file_sha256": "722f168663066058f132575bf0314d07429e8cac86b80a764214e27dea228c67",
+      "sidecar_sha256": "2b78b4fa23ddfde7382e7d38abf9232de55c9ebb7e723ebcbba313077eae0e91",
+      "declared_payload_bytes": 299533144,
+      "binding_and_shapes": "PASS",
+      "readback_exact_from_worker": true
+    },
+    {
+      "tuple_id": "holdout",
+      "sigma": 0.65,
+      "seed": 2026102404,
+      "file_sha256": "533167320621eba87764c0fd7c8a777925eca85c3d81b5485ed0ca5e76472ca7",
+      "sidecar_sha256": "c40ec212bbfb4029b853baacd2fde65431f4c45a3d4f0954c12e4cd0abbd5888",
+      "declared_payload_bytes": 299533144,
+      "binding_and_shapes": "PASS",
+      "readback_exact_from_worker": true
+    }
+  ],
+  "independent_payload_read": {
+    "status": "PASS_BOUNDED_CPU_READ",
+    "host": "Spark",
+    "cuda_visible_devices": "empty",
+    "target_value_sha256": "84379b6cb4315e3d23b727f8ffed72e013bde369080b3ec8a02948364becb54f",
+    "all_four_actual_safetensors_header_shapes": "PASS",
+    "all_four_epsilon_target_zsigma_value_hashes": "PASS",
+    "all_four_target_epsilon_minus_z_exact": "PASS",
+    "all_four_zsigma_mixture_exact": "PASS",
+    "full_299MB_prefix_file_hashes_recomputed": false,
+    "h38_context_values_materialized": false,
+    "reason": "Avoid competing with running model load; bounded headers and small tensors only."
+  },
+  "training": {
+    "status": "PASS",
+    "receipt_sha256": "36cc9cda3f934f3e8ddb2df44b7b44f29387c751a648f69695c395b837f93c34",
+    "updates": 20,
+    "tail_evaluations": 10,
+    "observed_fa_backward_nodes_each": 3,
+    "four_split_parity_max_abs": 0.0,
+    "reload_max_abs": 0.0,
+    "off_max_abs": 0.0,
+    "frozen_base_equality": "worker assertion and terminal receipt; not independently reread base weights",
+    "initial_B_all_zero_and_four_final_adapter_tensors_changed": "independent CPU PASS",
+    "trainable_adapter_numel": 81920,
+    "adapter_dtype": "float32",
+    "adapter_label": "TEST_ONLY/NOT_FOR_INFERENCE",
+    "adapter_file_sha256": "ed1e859f895cb4bb29c27514c283612a0c0494607d5e426d0976688823b62250",
+    "loss_comparison": {
+      "train_0": {
+        "before": 0.1455920785665512,
+        "after": 0.14547254145145416,
+        "relative_reduction_percent": 0.08210413387456696
+      },
+      "train_1": {
+        "before": 0.05071360245347023,
+        "after": 0.05067168548703194,
+        "relative_reduction_percent": 0.08265428683902372
+      },
+      "train_2": {
+        "before": 0.03156200796365738,
+        "after": 0.03149447962641716,
+        "relative_reduction_percent": 0.21395450288833268
+      },
+      "holdout": {
+        "before": 0.03840317949652672,
+        "after": 0.03837953507900238,
+        "relative_reduction_percent": 0.061568906101840425
+      }
+    },
+    "train_worker_terminated": true,
+    "inference_limit": "Small same-clip sigma/noise loss reductions do not establish video quality or generalization.",
+    "inherited_schema_label_limitation": "Top-level TEST_ONLY/NOT_FOR_INFERENCE is inherited B018 schema; B020 provenance labels newly trained adapter PRIVATE_ONE_CLIP_FM_OVERFIT_NOT_PRODUCTION. User explicitly authorized this limited after-video comparison; no production-use approval or old-adapter reuse is inferred."
+  },
+  "sample_pair": {
+    "status": "PASS",
+    "same_16_restored_leaf_records_including_noise_rng_timesteps_sigmas": "EXACT",
+    "condition_file_sha256": "c5db9c9460f71f4c37c124db7b163221f65f9446b656c2f73a818dce3fcaa4dd",
+    "initial_noise_sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950",
+    "same_cfg": "PASS",
+    "variants": [
+      {
+        "variant": "baseline",
+        "adapter_enabled": false,
+        "adapter_sha256": null,
+        "steps": 40,
+        "model_calls": 80,
+        "final_latent_shape": [
+          16,
+          5,
+          64,
+          112
+        ],
+        "raw_shape": [
+          3,
+          17,
+          512,
+          896
+        ],
+        "finite": true,
+        "mp4_probe": {
+          "width": 896,
+          "height": 512,
+          "avg_frame_rate": "30/1",
+          "duration": "0.566667",
+          "nb_frames": "17"
+        },
+        "all_four_artifact_hashes": "PASS"
+      },
+      {
+        "variant": "trained",
+        "adapter_enabled": true,
+        "adapter_sha256": "ed1e859f895cb4bb29c27514c283612a0c0494607d5e426d0976688823b62250",
+        "steps": 40,
+        "model_calls": 80,
+        "final_latent_shape": [
+          16,
+          5,
+          64,
+          112
+        ],
+        "raw_shape": [
+          3,
+          17,
+          512,
+          896
+        ],
+        "finite": true,
+        "mp4_probe": {
+          "width": 896,
+          "height": 512,
+          "avg_frame_rate": "30/1",
+          "duration": "0.566667",
+          "nb_frames": "17"
+        },
+        "all_four_artifact_hashes": "PASS"
+      }
+    ],
+    "all_seven_phase_attempts": 1,
+    "retries": 0,
+    "same_preregistered_code_and_inputs_after_run": "PASS",
+    "owned_units_pid0_inactive": "PASS_FROM_CLEANUP_RECEIPT"
+  },
+  "decode_shape_fps": "PASS: two finite CTHW[3,17,512,896] raw tensors and17f30fps MP4 verified CPU",
+  "visual_quality": "NOT_REVIEWED_BY_THIS_VERIFIER",
+  "limitations": [
+    "Full prefix payload file digests and h38/context value digests rely on worker exact-readback receipts; independent review recomputed target/epsilon/z_sigma tensor hashes and algebra on CPU. Split GPU parity remains pending.",
+    "D=Y self-reconstruction; holdout is same-clip sigma/noise only.",
+    "Checkpoint itself was not reread; current model identity follows preregistered historical SHA plus runtime stat preservation. Cgroup metrics are not a full unified CUDA memory cap."
+  ],
+  "temporal_quality": "UNVERIFIED"
+}

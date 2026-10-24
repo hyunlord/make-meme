@@ -458,3 +458,7 @@ BASE_S1의40step/80forward·final latent 저장을 확인하고 별도VAE decode
 ### B-020 실제 FM 20update·reload 완료
 
 실제Y velocity target을 공식head/unpatchify까지 통과시킨 tail학습20update·10eval을 완료했다. parity/reload/OFF 오차0, base불변이며 고정3train/1sameclipholdout loss는 소폭 감소했다. 이는 학습배선/유한tuple회귀 결과로만 수용한다. 동일조건의 학습후샘플링1회에 진입하며 품질은 아직미검증이다.
+
+## 2026-10-24 B-020 종료: 실제FM 연결 PASS, 품질 개선 미입증
+
+[RESULTS](experiments/B-020-real-fm-tail-overfit/RESULTS.md): 사용자 허용 실제Lab 자연동작17frame/30fps로 P1·prefix4tuple·실제FM tail20update/10eval·전후sampler각40/80·decode각1을 완료했다. parity/reload/OFF max_abs0·base불변, 고정train/holdout MSE는 소폭 감소했다. 그러나 전후 모두 착석 reference 자세·배경과 후반 머리잘림이 남아 target의서있는전신 FAIL/품질개선 NOT_ESTABLISHED, temporal UNVERIFIED다. 모든자체GPUworker종료·재시도0·swap/OOM0, cgroup high이벤트는실측대로보존한다. 다음은같은조건의사전고정100update로 적합량부족 가설을검사하는연구하나만제안하며 이번에는실행하지않는다. D=Y shortcut·동일clip noiseholdout·cross-ID/일반화 NOT_RUN을유지한다.

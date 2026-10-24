@@ -39,3 +39,7 @@ loss 전후, 저장/reload/OFF, 영상 변화, 실제 개체·동작 품질을 �
 ## 후속 상태: 실제 자료 제공, 입력 확정 진행
 
 2026-10-24 사용자가 실제 Lab 영상과 기존 사진의 비공개 연구 학습·평가 사용을 허용하고 실행을 지시했다. 위 DATA_PENDING은 자료 제공 이전의 기록이다. 현재 해당 Lab 자료 게이트는 해소됐으며 입력/코드 계약을 확정 중이다. [추가 입력 계약](INPUT_AMENDMENT.md). GPU는 아직 NOT_RUN이며 기존 제3자 자료 권한 기록은 유지한다.
+
+## 2026-10-24 실제 실행 종료
+
+COMPLETED / FM_TAIL_UPDATE_RELOAD_PASS / 목표전신FAIL / QUALITY_NOT_ESTABLISHED / temporalUNVERIFIED. 새자료로해당DATA_PENDING을해소하고 계획된20update와전후영상각1을수행했다. 과거제3자권한미확인과cross-ID/일반화NOT_RUN은보존한다. 상세 RESULTS참조.

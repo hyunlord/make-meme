@@ -1,0 +1,23 @@
+{
+  "utc": "2026-10-24T11:58:54.733832+00:00",
+  "packages_actual_distribution_metadata": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.2",
+    "flash-attn": "2.8.4",
+    "safetensors": "0.8.0",
+    "pydantic": "2.14.1"
+  },
+  "python": "3.12.3",
+  "architecture": "aarch64",
+  "owned_units": {
+    "make-meme-b020-pipeline.service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "make-meme-b020-watchdog.service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+  },
+  "meminfo": {
+    "MemAvailable": "93851500 kB",
+    "SwapTotal": "0 kB",
+    "SwapFree": "0 kB"
+  },
+  "torch_cuda_imported": false,
+  "protected_service": "same process identity, idle; private receipt contains details"
+}
