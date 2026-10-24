@@ -1,93 +1,87 @@
-# B-023 — 과제에 맞는 공식 replacement 기준선과 원본 보존 합성
+# B-023 — B-022 결과 이후: 동일 자연동작 입력의 공식 replacement pilot
 
-2026-10-24 · parent B-012/B-013/B-020~022 · **PLANNED / NOT_RUN**.
-상위 방향: [B 연구 v2](../../RESEARCH_V2_SOURCE_PRESERVING_EDITING.md).
-사용자가 실행자에게 이 계획의 수행을 지시할 때 아래 범위를 적용한다. 문서 게시만으로 GPU 생성이 실행/승인된 것은 아니다.
+개정 2026-10-25 · **REVISED / PLANNED / NOT_RUN**. 사용자에게 새 수행 지시를 받은 실행자가 아래 한정 범위를 실행한다. 문서 수정은 GPU 실행이 아니다.
 
-## 0. 핵심 질문·변경 이유
+이 문서는 B-022 결과를 검토한 뒤 기존 2026-10-24 후보안을 교체한 것이다. 과거 후보(기존 밈 f7..23의 SELF_REPLACE/LAB_REPLACE 2회 및 ROI 합성)는 Git 이력 `6a359ae85f134ca879a2d521d7fd771b401b5d55`에 보존하며 **이번 실행 범위가 아니다**. 지금은 원본·참조·시간축을 바꾸지 않고 신규 sampler 최대1회로 제한한다.
 
-목표는 source video의 장면·시간축·동작을 유지하며 reference의 개체를 넣는 것이다. 지금까지 animation=False가 아니라 **replace_flag=False인 animation**을 주로 시험했다. B-016 H120 단독 변경도 공식 replacement 전체와 다르다. 따라서 새가중치 학습/추가ALG보다 **공식 replacement 입력·mask·모드 계약을 갖춘 task-aligned baseline**을 먼저 확보한다. 성공을 보장하지 않으며 과거실험도삭제하지않는다.
+상위 목표: [원본 보존 영상 객체 편집](../../RESEARCH_V2_SOURCE_PRESERVING_EDITING.md). 관련 결과: [B-022](../B-022-resumed-update-comparison/RESULTS.md). 선택 이유는 [20261025 결정](../../decisions/20261025-B-022-review-and-B-023-revision.md)에 기록한다.
 
-이번 비교는 animation과replacement의순수한단일변수인과실험이아니다. 작업에맞게모드·마스크·caption·fullscene전처리가함께바뀐다. 과거animation출력은역사맥락이며동일조건대조군이라부르지않는다.
+## 1. 지금 내리는 결정
 
-목표산출물은새로운계획문서만이아니라 raw replacement MP4, source보존composite, 전체프레임비교, 실패유형과전체자원실측이다.
+B-022는 유효한20회 상태에서80회 추가해 총100회 학습·재로딩과 정확히 대응하는 두 영상을 확보했다. 고정tuple loss는 줄었지만 착석·후반 얼굴/귀 손상·머리 잘림은 남았다. 이는 현재 한clip/세fixed tuple/마지막block QV rank4 학습 범위에서20→100의 품질 개선이 입증되지 않았다는 뜻이다. 모든 학습의 실패나 데이터/모델 한계를 확정하지 않는다.
 
-## 1. 범위와 실행 상한
+동일 구성의200/500/1000update 확대와 독립학습 replay/FA 원인 감사는 다음 작업으로 두지 않는다. 기존 adapter와 optimizer는 연구 자산으로 보존하지만 이번 기본 추론에는 적용하지 않는다.
 
-- A와과거B의모델·checkout·미추적파일·실패·예산기록보존. 학습adapter OFF, ALG OFF, 임의Hoverride OFF. 기존정상 SCAIL checkpoint/upstream `78fe19576bb06be96c2375e088574a262a300edb`와분리메모리경로재사용.
-- B-022가실행중이면종료시키지않고동시GPU금지. 미착수라면DEFERRED_BY_TASK_REDEFINITION로계획우선순위를남기고B023부터. B022의기존PLAN/결과를삭제하지않는다.
-- 총작업상한4시간. source/mask/config준비는합계최대60분을목표로하고필요이상감사를늘리지않는다.
-- **신규full sampler최대2회(실패포함)**: SELF_REPLACE1, LAB_REPLACE1. 각40step80forward,decode각1,자동retry/seed탐색0. P인코딩과probe도각조건최대1회. 동일source조건의검증된재사용은허용하지만전체다른reference cache복사는금지.
-- 모델·패키지·데이터다운로드0, 학습0, imagegen/외부생성/remote prompt enhancer0. 새segmentation가중치를설치하지않고이미있는도구/CPU수동support를사용한다.
-- 기존72GiB시작/24GiB시스템headroom·swap0·타서비스보호규칙유지. 실제OS/CUDA/cgroup계측은구분. shutdown/driver/swap변경·타프로세스종료금지.
+## 2. 새로 확인한 입력 계약 차이
 
-## 2. 입력을 원본 장면 기준으로 확정
+B-020 INPUT_AMENDMENT에는 reference와driving 모두 RED 개체/WHITE 배경, replace_flag=False가 기록되어 있다. B-022는 해당 조건을 보존했다. 이번 검토는 그 기록을 확인한 것이고 기존 비공개 마스크 픽셀을 직접 재확인한 것은 아니다. 실행자는 이미 있는 실제 mask 파일/조건 cache로 이 의미를 짧게 확인한다.
 
-이미사용이허용된기존meme source의 f7..23 17장을우선사용한다. B012manifest에서원본파일·SHA·24fps·PTS를확인하고, 실제원본파일에서 직접읽는다. 원본의실촬영/합성여부UNKNOWN은그대로이고이영상으로학습하지않는다.
+고정 SCAIL-2 `78fe19576bb06be96c2375e088574a262a300edb`가 가리키는 SCAIL-Pose submodule은 `519c7f54cb972e7f92684213b7ef6c3e05a8f3b2`다.
+- `NLFPoseExtract/process_animation_aio.py`: reference mask background WHITE, driving writer의기본background BLACK.
+- `NLFPoseExtract/v2_helper.py`: `write_colored_mask_video(..., bg_color=(0,0,0))`가기본.
+- `NLFPoseExtract/process_replacement.py`: reference mask background BLACK, driving mask background WHITE, driving RGB 자체는복사한다. `test_mode`가아닌일반reference 경로는RGB사진의배경을자동으로blackout하지않는다.
+- pinned main README: mask black/white는배경비가시/가시, 색상은개체대응; replacement에는replace_flag와해당mask, prompt는결과영상의설명이다.
 
-v0기본canvas는 **가로896×세로512**다. native 원본전체를aspect-fit/letterbox하여camera와배경을잘라내지않는다. 기존512×288→확대→세로crop 이미지는원본정보를복원하는자료로대체하지않는다. 원본이실제로없으면없다고보고하고다른파일을조용히대체하지않는다. 전체source를보존한다는주장과ROI자료만보존한다는주장을구분한다.
+따라서 B020/022의조합은공식기본animation/replacement전처리어느쪽과도완전히같지않다. **그차이가실패원인이라고확정하지않는다.** 두배경WHITE가항상불법입력이라는뜻도아니다. 올바른과제계약으로생성한결과가필요하다. B009의ref배경변경과B016의H120단독개입은공식replacement전체가아니다.
 
-동일17frame24fps,원본PTS와선형좌표변환·padding을manifest로고정한다. audio는학습조건에넣지않고최종긴영상단계에서적법하게원본timebase로재결합한다.
+## 3. 질문·비교·한계
 
-모든frame에서한개체track를식별한다. 기존mask를재사용하려면원본좌표로의정확한mapping과coverage를확인한다. 없으면제한된CPU mask준비를한다. 발/꼬리/귀경계의모호함은PARTIAL로표시하고가려진관절정답을만들지않는다. 완벽한keypoint평가를생성의선행조건으로요구하지않는다.
+질문: 같은실제Lab사진과같은자연동작원본을사용하고 학습adapter없이공식replacement계약으로바꾸면, 참조착석/침실대신source의사족서기·고개방향·장면을재현하는가?
 
-## 3. 공식 replacement 계약을 확인하고 실제로 사용
+- 새 case: **NATURAL_LAB_REPLACEMENT** 1개.
+- primary historical comparator: **B-020의미학습adapterOFF raw baseline**. B022의20/100은학습된별도맥락이며주요동일모델기준선으로대체하지않는다.
+- CPU source-copy baseline: 모델생성없이원본그대로. 같은개체이므로source만복사해도겉보기성공할수있다는함정을명시한다.
+- 최종 결과는same-identity/different-pose scene-conditioning pilot이다. cross-ID 객체치환,reference가필수로사용됐다는증거,두개체춤,15초,일반화는NOT_RUN이다.
+- 모드와reference배경mask가동시에달라지는**과제계약의묶음비교**다. replace_flag하나의독립인과효과라고부르지않는다. 공식animation새생성/2x2 ablation은이번0회다.
 
-pinned README, generate.py, process_replacement의사용가능한고정소스, wan/scail.py, model_scail2.py를읽어최소차이를확인한다. 설치없는읽기전용소스검토로충분한부분은그렇게한다.
+## 4. 입력과 원본 시간축 고정
 
-- `replace_flag=True`를사용한다. bool을변경한것과공식전체계약을맞춘것을구분한다.
-- 동일target/control region에같은색ID를사용한다. reference의무관한배경은비가시, source에서보존할배경은가시라는의미를공식semantic mask로표현한다. 일반예상은reference=RED subject+BLACK background,driving=RED subject+WHITE visible source background이며 **실제고정preprocessor/예제와검증한뒤확정**한다. 검증과다르면공식근거에맞춰입력amendment를생성전기록한다.
-- semantic mask는alpha매트가아니다. sourceRGB에black mask를곱해서동작정보를지워서는안된다.
-- default replacement의T/H/W는공식모델이설정하게한다. B016의animation T1+H120 hybrid를재사용하지않는다. 실제ref/video/drive 위치계약을작은scalar trace로확인한다.
-- history/additional_ref=None,LoRA/enhancerOFF,기존mixed precision·FlashAttention·UniPC40/shift3/CFG5·negative empty·seed20261022를유지한다. 같은출력shape일때실제initial noise값도공유·검증한다.
-- positive prompt는'교체해라'라는지시가아니라 **교체가완료된source 장면의객체·외형·동작**을서술한다. 사용자의역할지시/EditSpec과backend caption을따로저장한다. 보이지않는wink/kick/품종을지어내지않는다.
+B020에서사용허가된실제Lab source f126..142 inclusive, PTS4.2..4.733333초,17frame30fps,가로896×세로512 aspect-fit을그대로사용한다. duration17/30과표본간격16/30을구분한다. 새crop/upscale/다른영상/과거meme24fps로바꾸지않는다.
 
-기존condition builder의hardcode된False,ref배경색,H/W/fps,모드검사등만좁게수정한다. cache producer/consumer·shape/normalization 검사를삭제하지않고새기대계약으로검증한다. 공식모드가RGB를출력하며RGBA/정답alpha가없다는것도기록한다.
+기존앉은Labreference RGB·RED subject support·driving RGB/support·prompt·negativeempty·seed20261022·UniPC40·shift3·CFG5·history/additional_refNone을유지한다. 기존prompt는이미source바닥에서사족으로서서고개를돌리는결과를서술하므로그대로재사용한다. 새로운촬영·권한감사·정밀관절주석을요구하지않는다.
 
-## 4. 두 case와 실행 순서
+reference semantic mask만 BLACK background + 기존RED support로파생파일을만든다. RGB사진의침실을blackout/삭제/포즈편집하지않는다. 그림속실제배경과letterbox padding도마스크상비가시로표시하되RGB/padding값은그대로둔다. driving은원본RED support+WHITE background를유지한다. 기존binary support/계보를사용하고색공간RGB/BGR·경계보간·유효색을확인한다. JPEG회색경계값을아무임계값으로잘라새실루엣을만들지않는다. 불확실경계는그대로기록한다.
 
-### SELF_REPLACE
+공식mask helper와실제half-downsample/28채널packing순서로새마스크조건을계산한다. 과거safetensors채널을근거없이수동반전하거나기존캐시를덮어쓰지않는다. encoder출력은입력·버전·shape·dtype·해시계보가같으면재사용할수있다. 필요하면새P1회까지만허용한다; targetY/prefix훈련특징은재계산0회.
 
-reference=선정 source f7의동일개체. source와같은개체를다시넣는진단이다. caption도실제source에맞춘다. 이결과가좋아도reference를무시하고source를복사했을수있으므로identity編集성공은아니다. 입력mode·mask·장면보존의기술적baseline으로본다.
+## 5. 공식 replacement 실행 경로
 
-### LAB_REPLACE
+양CFG조건에replace_flag=True를설정하고,공식model이정한T/H/W모드설정을사용한다. B016 Hoverride/ALG callback/학습adapter를활성화하지않는다. 모델이실제로받은flag·mode별offset과active LoRA수가0임을작은스칼라trace로확인한다. 원래체크포인트의vanilla block을사용한다.
 
-reference=기존실제검은Lab사진. source는그대로다. 별도reference semantic mask와caption을사용한다. Lab의넓은가슴·굵은사지등을유지하며원본자세·시간흐름을옮기는목표다. SELF대LAB는reference/text가바뀌는task비교이지순수identity인과분리는아니다.
+SCAIL생성입력은mask와RGB가별도다. semanticmask를alpha로사용하거나sourceRGB에곱해정보를지우지않는다. 추가SAM/pose/depth가중치·remote Gemini enhancer를실행하지않는다. 기존support를재사용해전처리와동일한입력계약을만드는것이지공식SAM성능을검증하는것은아니다.
 
-CPU원본복사영상을무료baseline으로만든다. SELF의품질이나쁘다는이유만으로LAB를생략하지않는다. 입력계약불일치/NaN/안전문제일때만중단한다. SELF_PASS를무한gate로만들지않고2회한도내실제task결과를확보한다.
+고정RGB/T5/CLIP/driving latent/noise/RNG/scheduler는기존B020과비교한다. 예상변경은양CFG의reference mask와replace_flag/그에따른모델위치설정이다. 무조건모든16leaf가일치해야한다거나driving4개가변경돼야한다는옛검사를재사용하지않는다. 최초noise는seed만이아닌실제tensor로일치확인한다. 잘못된입력·NaN·shape/device오류·안전문제는차단하되독립GPU연산의미세한roundoff를파라미터replay실험으로확대하지않는다.
 
-P→PROBE→S→D의기존경로를사용한다. 새로운mode에맞춘cache를생성하고final latent를D전에보존한다. decoder/인코딩실패로sampler재실행금지. weight/hash는검증된기반을보존하며매번65GB전체를읽어야한다고하지않는다.
+## 6. 범위와 종료
 
-## 5. 같은 LAB raw로 source보존 합성 비교 — 추가 sampler0
+전체작업상한3시간,새fullsampler실패포함최대1회(40step80forward),decode최대1회,자동retry0. 새로운GPU worker는기존P/PROBE/S/D순차경로를사용한다. P가불필요하면encoder적재를생략한다. final latent를decode전에원자저장하고D실패로재샘플링하지않는다.
 
-LAB raw를본뒤좋은영역만뽑아붙이는것이아니라 **source만보고사전고정한edit envelope**를사용한다. v0는17장 source subject box의shot-level union에가로/세로각15%문맥margin을더하고canvas안으로clip한고정ROI를기본으로한다. 이는품질최적값이아니라명시적baseline이다. datasetsemanticmask를alpha로바로사용하지않는다.
+학습update0,기존prefix추출0,모델/패키지/데이터다운로드0,외부생성/imagegen0. 기존안전조건(시작72GiB/실행24GiBheadroom,swap0,타서비스보호)과환경을유지한다. 상위scope/cgroup/CUDA회계는별도로측정하고다른작업을종료하지않는다. 이미종료한B022를재개하지않는다.
 
-ROI내부weight1,외곽안쪽8px feather,외부0인edit weight E를만든다. 보호할앞쪽occluder가확인된경우 source관측에근거한보호mask를분리한다. 정확한규칙과수정은생성전고정한다. 복잡한occlusion을임의로정답처리하지않는다.
+이번에는**ROI재합성·matting·얼굴보정·SR·frame interpolation·warp를추가하지않는다**. source를붙여좋아진화면으로모델의raw실패를가리지않기위해서다. 원본보존합성은원모델결과를본뒤필요성이확인되면다음선택지가된다.
 
-`final=(1-E)*source+E*raw_generated`를raw RGB에서수행한다. 별도foreground 추출/shape warp/face복원/추가SR/색보정은첫비교에넣지않는다. E는객체alpha가아닌편집영역이다. ROI안에는기존객체제거·배경복원·새객체·경계가함께필요할수있다.
+## 7. 시각 평가 — loss 대신 실제 편집 목표
 
-target이사전ROI밖으로나오거나source잔상이남으면CROP_SUPPORT_FAILURE로남긴다. 결과를본뒤ROI를늘려더좋아보이게하고동일baseline이라고하지않는다. raw와clipped composite를둘다보존하고후속support개선의증거로삼는다. 합성이객체얼굴/동작실패를해결했다고주장하지않는다.
+SOURCE / REFERENCE / B020_BASE_OFF / B023_REPLACEMENT를분리표기하고 전체17frame·기존local0/8/16·원본속도30fpsviewer를제공한다. B022STEP20/100은선택적인역사맥락으로만표시한다. 재생가능/정적시트와직접연속시청을구분한다.
 
-## 6. 평가·산출물
+평가축:
+1. 사족으로서기와사지배치(두발춤이아님).
+2. 원본의고개방향·순서·타이밍. 단순큰움직임/깜빡임은성공이아님.
+3. 주둥이·눈·귀·목손상과후반잘림,추가reference letterbox복사.
+4. source의타일바닥/창가장면·카메라·비편집물체보존. semanticvisible는pixelhardconstraint가아니므로raw차이를측정한다.
+5. 실제Lab개체·체형과견종유사성을구분. D도같은개체라reference사용/새개체교체증거는미입증.
+6. 실제단계별시간/NFE·CUDA/OS/cgroup메모리와실패포함비용.
 
-SOURCE / reference / SELF raw / LAB raw / LAB composite와17장전체를같은시간축으로제공한다. 예전animation은비교판별도에'다른모드/전처리의역사자료'로표시하며마치동일seed단일개입비교처럼하지않는다.
+source-object영역밖raw오차/분포·고정배경패치의변화를보조로쓰되몸크기/그림자가바뀔수있는경계띠를분리표시한다. rawRGB오차와MP4손실압축차이를혼동하지않는다. source-copy가배경/동작점수를잘받아도editing능력의증거가아니다. 임의similarity임계값·정량gain을만들지않는다.
 
-질문: 원래개체대신실제Lab특징이들어갔나? 원본직립/머리방향·순서를따르나? 원본배경/카메라/다른객체가보존되나? 얼굴/귀/사지·경계/가림/접촉이무너지나? 비용은얼마인가?
+직접연속시청을할수없으면temporal=UNVERIFIED를유지하고사용자가짧게비교하기쉽게한다. staticPASS를temporalPASS로바꾸지않는다. 이한번이잘나와도Kling대체·논문기여라고하지않는다.
 
-source-copy는배경/동작을보존해도identity변경이없으므로taskFAIL. generic검은개와실제Lab의일치를구분한다. reference침실복사,원본개체잔상,거대한체형축소,노출/색변화도기록한다.
+## 8. 연구 해설·다음 판단·이력
 
-source-labeled객체영역밖raw drift,사전E바깥의raw/composite pixel오차,E의전체면적비율,경계띠의차이를따로산출한다. composite의outside-E exact보존은구현특성이지모델기여가아니다. MP4손실압축차이를raw합성오류로혼동하지않는다. 단일source/seed로통계적우월성을주장하지않는다.
+한국어해설은이번과직접연결된두가지: (a) loss의조건분포와실제편집task계약의차이, (b) semanticmask/모드와alpha합성의차이를수식·pinned코드·관측으로설명한다. 새로운전체attention감사나toy학습은반복하지않는다.
 
-사전 local0/12/14/16과모든frame관측, native24fps 단회재생·프레임이동을제공한다. 사람이실제속도로검토한경우만temporal수용을별도기록한다. 도구가영상을재생할수있다는것만으로PASS하지않는다. 논문용독립눈가림평가는후속이며이번에는탐색결과를정직하게남긴다.
+생성/원본장면의의미있는개선이보이면현재sameidentitycopy의한계를적고실제cross-ID후속가설하나를제안한다. 배경만바뀌고자세·얼굴이실패하면부분효과이며motion/identity문제는남는다. 차이가없으면모드불일치단독해결을지지하지않으며1000update/다른offset/새프롬프트탐색으로자동확대하지않는다. 다음구체실험은결과를본뒤정하고이번에는실행하지않는다.
 
-측정: 전체P/로드/S/D/합성/인코딩시간,model NFE,OS가용/RSS/CUDA allocated/reserved/cgroup,mask준비시간,실패포함사용량. 동일fullframe생성뒤합성만했으면생성FLOP절감은0/NOT_ESTABLISHED다.
+착수전CHARTER/ROADMAP/HISTORY와실제B022종료를확인한다. 기존oldB023설정대신본개정안을읽었음을runconfig에남기고입력·코드·조건차이를commit/push한뒤실행한다. HISTORY/ROADMAP에B022학습량pilot종료와B023수정이유·실제상태를기록한다. 종료후RESULTS/INPUT_CONTRACT/조건비교/자원/재현/해설을갱신한다. 기능/실행과typingNOT_CLEAN은구분한다.
 
-## 7. 기록·학습·다음 결정
-
-실행전EditSpec·입력·공식모드확인·mask·caption·edit envelope·예산을고정한다. CHARTER/ROADMAP/HISTORY에새문제정의와B022상태를요약연결한다. 코드·캐시·출력보존은기존규칙대로하고새MCP나거대승인시스템은만들지않는다.
-
-lessons/B-023-task-aligned-editing.md는 animation/replacement차이,semantic mask와alpha/edit support차이,disocclusion/가림,全frame모델과ROI계산량,source-copy trivial해를수식·실제코드·이번출력에연결한다. 핵심이론1~2개를깊게쓰고같은감사문서를다시대량복제하지않는다.
-
-원격에는비민감문서·코드·해시만commit/push후HEAD확인. 개인미디어·caption의private정보·mask·latent·weights·절대경로는비공개로보존. 작업후단일ZIP를실제Spark/Mac /tmp에만들고전송/CRC/manifest/SHA를확인한다. 대형weights·중복archive는제외한다.
-
-두case완료후멈춘다. 정식replacement가품질을개선하면한개체의다른ref/동작으로검증,합성경계만문제면support/가림가설,identity/pose가계속문제면task에맞는데이터/조건학습가설하나를선택한다. 새모델다운로드·추가학습·다른offset·ALG·업스케일·두개체15초는자동시작하지않는다.
+GitHub에는비민감코드·계획·관측요약만넣는다. 개인사진/영상/마스크/좌표/실제경로/latent/adapter/weights는비공개. 단일검토ZIP을실제Spark/Mac /tmp에저장·전송·CRC/manifest/hash확인하며대형가중치·중복훈련prefix는제외한다.
