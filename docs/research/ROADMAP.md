@@ -286,3 +286,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-018 종료 (2026-10-24)
 
 **단일 attention 구성요소의 실제 backward·adapter update·reload PASS.** synthetic 수치검사로 학습 배선을 분리해 검증했으며 동물data/권한은 여전히 미확보다. 전체모델학습·영상품질·개체/자세분리는NOT_RUN, 정적typing은NOT_CLEAN이다. [결과](experiments/B-018-lora-component-smoke/RESULTS.md). 다음 제안은 동일synthetic계약을 마지막transformerblock 전체로 한 단계 확장할 때의 gradient/메모리 검증 계획 하나다. 추가실행은 하지 않으며 ALG/H120 기본미채택과 이전 실패기록을 유지한다.
+
+## B-019 착수 (2026-10-24)
+
+**RUNNING / 전체 block의 수치 배선 검사 준비.** attention 단독 PASS를 실제 영상 학습으로 확대하지 않고 cross-attention·FFN·residual을 포함한 마지막 한 block을 검사한다. 소형 update/reload와 긴 토큰 자원 결과는 별도 판정한다. 이후 component 숫자만 늘리는 자동 실험은 하지 않으며 B-017의 허용 실데이터 부족은 별도 DATA_PENDING이다.

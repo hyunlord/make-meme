@@ -1,0 +1,25 @@
+{
+  "files": {
+    "conditions.safetensors": "95e44ff98505bd67edb2b20d8ab353dd0875a97fec667605a602eef121434a7f",
+    "adapter-initial.json": "b824fcd556403ec821c18dd5ee5f837db2ff668e61c3677c1bb08357b2a66537",
+    "adapter-initial.safetensors": "1a603a234d0806dcfc2738a1aaf380f0ad98baf934d543a73d7dbea307d1a56b",
+    "synthetic-fixture.safetensors": "366f0a96d6ed9f1b2d2563900dcacbadd1ccf24bd1a27db66504a25b341bd98f"
+  },
+  "context": {
+    "shape": [
+      1,
+      769,
+      5120
+    ],
+    "sha256": "ea7dd908da42bd3030f9d8dbec79003754541e2ad23701a9ba8b8b87190b0a21"
+  },
+  "e": {
+    "shape": [
+      1,
+      6,
+      5120
+    ],
+    "sha256": "a00aabed0dac4a4d77747ccaa153ae0ae4c3719c8659356664086ad057453911"
+  },
+  "rule": "CPU Generator20261025 randn context BF16; uniform[-.05,.05] e FP32; gates2,5=1"
+}

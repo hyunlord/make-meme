@@ -1,0 +1,345 @@
+{
+  "selected": {
+    "blocks.39.cross_attn.k.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53306677248,
+        53306697728
+      ]
+    },
+    "blocks.39.cross_attn.k.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        53306697728,
+        53411555328
+      ]
+    },
+    "blocks.39.cross_attn.k_img.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53411555328,
+        53411575808
+      ]
+    },
+    "blocks.39.cross_attn.k_img.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        53411575808,
+        53516433408
+      ]
+    },
+    "blocks.39.cross_attn.norm_k.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53516433408,
+        53516453888
+      ]
+    },
+    "blocks.39.cross_attn.norm_k_img.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53516453888,
+        53516474368
+      ]
+    },
+    "blocks.39.cross_attn.norm_q.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53516474368,
+        53516494848
+      ]
+    },
+    "blocks.39.cross_attn.o.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53516494848,
+        53516515328
+      ]
+    },
+    "blocks.39.cross_attn.o.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        53516515328,
+        53621372928
+      ]
+    },
+    "blocks.39.cross_attn.q.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53621372928,
+        53621393408
+      ]
+    },
+    "blocks.39.cross_attn.q.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        53621393408,
+        53726251008
+      ]
+    },
+    "blocks.39.cross_attn.v.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53726251008,
+        53726271488
+      ]
+    },
+    "blocks.39.cross_attn.v.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        53726271488,
+        53831129088
+      ]
+    },
+    "blocks.39.cross_attn.v_img.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        53831129088,
+        53831149568
+      ]
+    },
+    "blocks.39.cross_attn.v_img.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        53831149568,
+        53936007168
+      ]
+    },
+    "blocks.39.ffn.0.bias": {
+      "dtype": "F32",
+      "shape": [
+        13824
+      ],
+      "data_offsets": [
+        53936007168,
+        53936062464
+      ]
+    },
+    "blocks.39.ffn.0.weight": {
+      "dtype": "F32",
+      "shape": [
+        13824,
+        5120
+      ],
+      "data_offsets": [
+        53936062464,
+        54219177984
+      ]
+    },
+    "blocks.39.ffn.2.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54219177984,
+        54219198464
+      ]
+    },
+    "blocks.39.ffn.2.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        13824
+      ],
+      "data_offsets": [
+        54219198464,
+        54502313984
+      ]
+    },
+    "blocks.39.modulation": {
+      "dtype": "F32",
+      "shape": [
+        1,
+        6,
+        5120
+      ],
+      "data_offsets": [
+        54502313984,
+        54502436864
+      ]
+    },
+    "blocks.39.norm3.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54502436864,
+        54502457344
+      ]
+    },
+    "blocks.39.norm3.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54502457344,
+        54502477824
+      ]
+    },
+    "blocks.39.self_attn.k.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54502477824,
+        54502498304
+      ]
+    },
+    "blocks.39.self_attn.k.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        54502498304,
+        54607355904
+      ]
+    },
+    "blocks.39.self_attn.norm_k.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54607355904,
+        54607376384
+      ]
+    },
+    "blocks.39.self_attn.norm_q.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54607376384,
+        54607396864
+      ]
+    },
+    "blocks.39.self_attn.o.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54607396864,
+        54607417344
+      ]
+    },
+    "blocks.39.self_attn.o.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        54607417344,
+        54712274944
+      ]
+    },
+    "blocks.39.self_attn.q.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54712274944,
+        54712295424
+      ]
+    },
+    "blocks.39.self_attn.q.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        54712295424,
+        54817153024
+      ]
+    },
+    "blocks.39.self_attn.v.bias": {
+      "dtype": "F32",
+      "shape": [
+        5120
+      ],
+      "data_offsets": [
+        54817153024,
+        54817173504
+      ]
+    },
+    "blocks.39.self_attn.v.weight": {
+      "dtype": "F32",
+      "shape": [
+        5120,
+        5120
+      ],
+      "data_offsets": [
+        54817173504,
+        54922031104
+      ]
+    }
+  },
+  "selected_payload_bytes": 419553280,
+  "sources": {
+    "wan/modules/model_scail2.py": "bbcfc38ee8c4dc8e9f31987e617b57af267c46e8bd25ee046f76e7426d6f5d6c",
+    "wan/modules/attention.py": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc"
+  },
+  "checkpoint_prior_SHA": "8b844f026510f0b94d3209d66444b403a089ec179dc149d85513c13b2fa37118",
+  "selected_bytes": 1615353856
+}

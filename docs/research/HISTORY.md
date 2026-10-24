@@ -426,3 +426,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-018 종료 (2026-10-24)
 
 **COMPONENT_BACKWARD_PASS / COMPONENT_UPDATE_RELOAD_PASS.** 사전고정 `2b562188cc0ad30cf822583d53a3d66babbd8e1e` 후 GPU worker1회에서 공식 FA2 backward3회·AdamW3update·attention8forward를 완료했다. Q/V rank4 adapter81,920개만 변경, base 불변·fresh reload·OFF 오차0. 선택10tensor419,553,280bytes만 읽었으며 개인미디어·전체모델·영상sampler0이다. worker7.9725s·CUDApeak297,412,096B·swap/OOM0·자체unit종료 확인. CPU11검사PASS이나 정적typing은helper19warnings/runner20errors135warnings로NOT_CLEAN을 보존한다. [RESULTS](experiments/B-018-lora-component-smoke/RESULTS.md). B-017 RIGHTS_PENDING/DATA_GAP, FULL_MODEL_TRAINING/VIDEO_QUALITY/IDENTITY_POSE_DISENTANGLEMENT NOT_RUN은 그대로다. 다음한연구는같은synthetic계약의마지막transformerblock단위backward/메모리검증계획이며 이번에는 실행하지 않았다.
+
+## B-019 착수 (2026-10-24)
+
+**RUNNING / GPU NOT_RUN.** 시작 HEAD `a930e137e3301fa3b3f748e8e3942a54f492c290`의 [PLAN](experiments/B-019-transformer-block-backward/PLAN.md)에 따라 공식 마지막 block 전체의 frozen cross/FFN/residual 경로를 통과하는 LoRA gradient를 검사한다. B-018 실제 synthetic x/target·initial adapter를 재사용하고 소형3update/8forward 뒤 안전할 때만12992token forward/backward1회·update0을 수행한다. worker1회·16GiBcap·72GiB시작/24GiBheadroom·swap0·2시간이며 자료/권한 부족과 영상학습NOT_RUN은 보존한다.

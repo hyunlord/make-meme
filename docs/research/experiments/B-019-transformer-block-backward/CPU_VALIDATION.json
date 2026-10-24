@@ -1,0 +1,16 @@
+{
+  "status": "CPU_PASS_RUNTIME_NOT_RUN",
+  "pytest": "18 passed in 1.30s",
+  "pytest_log_sha256": "137feb2b428817f6ca7fd017c264fed4037029cb1ac5d1a3357dff8c676db847",
+  "critical_ruff": "PASS",
+  "runner_typecheck": {
+    "filesAnalyzed": 1,
+    "errorCount": 0,
+    "warningCount": 145,
+    "informationCount": 0,
+    "timeInSec": 0.701
+  },
+  "typing_status": "NOT_CLEAN: dynamic upstream/JSON/PyTorch boundary warnings; no suppressions",
+  "source": "CPU exact upstream RoPE AST only; full imported module/FA actual path awaits one approved worker",
+  "gpu_workers": 0
+}
