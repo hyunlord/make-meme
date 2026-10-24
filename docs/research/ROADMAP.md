@@ -310,3 +310,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## 2026-10-24 B-020 종료: 실제FM 연결 PASS, 품질 개선 미입증
 
 [RESULTS](experiments/B-020-real-fm-tail-overfit/RESULTS.md): 사용자 허용 실제Lab 자연동작17frame/30fps로 P1·prefix4tuple·실제FM tail20update/10eval·전후sampler각40/80·decode각1을 완료했다. parity/reload/OFF max_abs0·base불변, 고정train/holdout MSE는 소폭 감소했다. 그러나 전후 모두 착석 reference 자세·배경과 후반 머리잘림이 남아 target의서있는전신 FAIL/품질개선 NOT_ESTABLISHED, temporal UNVERIFIED다. 모든자체GPUworker종료·재시도0·swap/OOM0, cgroup high이벤트는실측대로보존한다. 다음은같은조건의사전고정100update로 적합량부족 가설을검사하는연구하나만제안하며 이번에는실행하지않는다. D=Y shortcut·동일clip noiseholdout·cross-ID/일반화 NOT_RUN을유지한다.
+
+## 2026-10-24 B-021 착수
+
+B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 고정3tuple·초기adapter·optimizer에서20대100update를 비교한다. **RUNNING / 사전검증 중**이며 P/prefix 재계산·새 데이터 감사·rank/lr/layer 탐색은 하지 않는다. 100회 범위 이후 자동 증량 없이 [PLAN](experiments/B-021-fixed-tuple-update-budget/PLAN.md)의 관측에 따라 다음 가설 하나만 고른다.

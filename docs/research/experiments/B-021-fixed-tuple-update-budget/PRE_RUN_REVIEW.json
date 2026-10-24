@@ -1,0 +1,42 @@
+{
+  "status": "PRE_RUN_REVIEW_PASS",
+  "consumer_manifest_sha256": "3c30fca7bc3bf5379ac0eeeb2bb9fd23f3ecff5b17f8479b2ca5f86be090a330",
+  "verification_scope": "Code inspection plus CPU bytes checks and CPU pytest only; no GPU/model forward",
+  "tests": {
+    "command": "CUDA_VISIBLE_DEVICES=empty existing pinned Python -m pytest code/test_budget.py -q",
+    "result": "5 passed in 1.23s",
+    "ast_files": 19,
+    "manifest_files": "all hash matched"
+  },
+  "confirmed": [
+    "Actual B020 initial FP32 A/B payload hash and values independently read; B exactly zero; actual load_adapters and loaded equality in new runner",
+    "Fresh AdamW same parameter order and runtime resolved options versus pinned consumer contract",
+    "Producer B020 code/config/cache/noise/target/geometry lineage checks preserved; consumer separately bound",
+    "Four fixed tuple evaluations at 0/20/50/100; replay all four adapter matrices and four losses before update21; fixed atol1e-7 rtol1e-5",
+    "Safe restart safetensors+JSON stores adapter optimizer moments/step/options CPU/CUDA RNG tuple cursor at0/20/50/100; actual readback validates tensor identity/options/order/cardinality",
+    "100train forward/backward and18eval planned; sample endpoint100 only40steps80forward; P0/prefix0",
+    "Frozen base/head checks; head input gradient preserved; fresh reload and adapter OFF use inherited tolerance",
+    "Consumer serializer scope corrected without altering old B020 artifacts; sampler numerical source and helper unchanged",
+    "TRAIN16GiB cap;72GiB start24GiB headroom swap0; own systemd and deadline preserved"
+  ],
+  "resolved_findings": [
+    "Removed post-loop deletion of already-deleted pred/target which would have failed after100updates",
+    "Step0 delta now uses actual cached prediction output rather than forced zero",
+    "Added prior final20 payload binding and complete optimizer/adapter checkpoint roundtrip checks",
+    "Final budget is in consumer.json100/18/hard20; fm.json restored to producer bytes because input hash contract includes it"
+  ],
+  "limits": [
+    "Actual GPU run NOT_RUN at review; no quality claim",
+    "Full65GB checkpoint hash reused from historical verified provenance, not independently recomputed",
+    "Static typing retains NOT_CLEAN; no suppressions or unrelated refactor",
+    "CPU checkpoint fixture is not evidence of actual GPU optimizer state or full training outcome"
+  ],
+  "amendments": [
+    {
+      "previous_manifest": "e960797250c7d77e358903b3f6a866b616bc5010b50b6732cb81aba6467bc84e",
+      "reason": "CPU pre-worker validation exposed fm.json as producer input-hash member; restore producer fm bytes and express new budget only in consumer.json",
+      "new_manifest": "3c30fca7bc3bf5379ac0eeeb2bb9fd23f3ecff5b17f8479b2ca5f86be090a330",
+      "verification": "cmp producer/consumer fm byte identical; all current manifest local hashes exact; phase_train asserts consumer updates100 eval18/hard20; no gate deleted; GPU not started"
+    }
+  ]
+}

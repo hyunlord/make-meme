@@ -462,3 +462,7 @@ BASE_S1의40step/80forward·final latent 저장을 확인하고 별도VAE decode
 ## 2026-10-24 B-020 종료: 실제FM 연결 PASS, 품질 개선 미입증
 
 [RESULTS](experiments/B-020-real-fm-tail-overfit/RESULTS.md): 사용자 허용 실제Lab 자연동작17frame/30fps로 P1·prefix4tuple·실제FM tail20update/10eval·전후sampler각40/80·decode각1을 완료했다. parity/reload/OFF max_abs0·base불변, 고정train/holdout MSE는 소폭 감소했다. 그러나 전후 모두 착석 reference 자세·배경과 후반 머리잘림이 남아 target의서있는전신 FAIL/품질개선 NOT_ESTABLISHED, temporal UNVERIFIED다. 모든자체GPUworker종료·재시도0·swap/OOM0, cgroup high이벤트는실측대로보존한다. 다음은같은조건의사전고정100update로 적합량부족 가설을검사하는연구하나만제안하며 이번에는실행하지않는다. D=Y shortcut·동일clip noiseholdout·cross-ID/일반화 NOT_RUN을유지한다.
+
+## 2026-10-24 B-021 착수: 고정 FM 문제의 update 예산 비교
+
+**RUNNING / GPU NOT_RUN.** 시작 원격 `5cde7b21d269234917ac5a0ddc30c21494fff69e`의 [PLAN](experiments/B-021-fixed-tuple-update-budget/PLAN.md)을 사용자 지시에 따라 실행한다. B-020 실제 initial adapter와 producer 캐시를 보존·재사용하고 fresh AdamW로0→100을 한 번 학습한다. 20회 replay를 증량 전에 검사하며, 기술 검증 통과 시 고정100endpoint 영상만 한 번 생성한다. 학습량 부족을 원인으로 미리 확정하지 않고, 실제3tuple 적합·sameclip holdout·CFG rollout·영상품질을 구분한다. [실행 기록](experiments/B-021-fixed-tuple-update-budget/RUNNING.md).
