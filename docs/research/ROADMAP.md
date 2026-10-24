@@ -2,7 +2,7 @@
 
 현재 상태 갱신: 2026-10-24. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**현재: B-022 CPU 사전검증 / GPU NOT_RUN.** B-021의 STOPPED_AT_REPLAY_20과 기존 FAIL을 보존하고 같은20회 checkpoint를 복원하는 비교를 준비한다. [계획](experiments/B-022-resumed-update-comparison/PLAN.md).
+**현재: B-022 추가80update 완료 / matched 영상 비교 진행 중.** B-021의 STOPPED_AT_REPLAY_20과 기존 FAIL을 보존했다. 같은20회 checkpoint의 optimizer/RNG/cursor를 복원했고 고정tuple loss는 감소했다. 영상 품질은 아직 미판정이다. [계획](experiments/B-022-resumed-update-comparison/PLAN.md).
 
 **B-017 당시 요약: COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 

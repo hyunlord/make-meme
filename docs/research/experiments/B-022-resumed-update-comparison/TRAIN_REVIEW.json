@@ -1,0 +1,85 @@
+{
+  "status": "PASS_CPU_ARTIFACT_AND_LOG_REVIEW",
+  "checkpoint_checks": {
+    "20": {
+      "payload_sha256": "5e43183e452b1f16736a37986839059082dc3601d0b2c0649bd597ae58ad3934",
+      "all18_tensor_hashes": true,
+      "adapter_bytes_match": true,
+      "optimizer_steps": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "cursor": 2,
+      "parent20_all_tensor_bytes_equal": true
+    },
+    "50": {
+      "payload_sha256": "61a6d9e5b53663f1b124614e5334e5aeff23df42064e5a36ad23521a619f00b3",
+      "all18_tensor_hashes": true,
+      "adapter_bytes_match": true,
+      "optimizer_steps": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "cursor": 2,
+      "parent20_all_tensor_bytes_equal": null
+    },
+    "100": {
+      "payload_sha256": "adcc6262fe9213ed058f7ea9a99cb711e2b29ffcac0dfcf86af7e3565ff19305",
+      "all18_tensor_hashes": true,
+      "adapter_bytes_match": true,
+      "optimizer_steps": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "cursor": 1,
+      "parent20_all_tensor_bytes_equal": null
+    }
+  },
+  "rows": {
+    "count": 80,
+    "first_update": 21,
+    "first_tuple": "train_2",
+    "last_update": 100,
+    "tuple_order_verified": true
+  },
+  "receipt_counters": {
+    "updates": 100,
+    "additional_updates": 80,
+    "tail_evaluations": 33,
+    "diagnostic_backward": 3
+  },
+  "final_equals100_tensor_values": true,
+  "final_reload": {
+    "passed": true,
+    "max_abs": 0.0,
+    "atol": 0.001,
+    "rtol": 0.001
+  },
+  "final_off": {
+    "passed": true,
+    "max_abs": 0.0,
+    "atol": 0.001,
+    "rtol": 0.001
+  },
+  "base_final": {
+    "status": "PASS",
+    "current_run_only": true,
+    "base_values_unchanged": true,
+    "source_storage_unchanged": true,
+    "completed_updates": 100,
+    "additional_updates": 80,
+    "tail_evaluations": 33,
+    "diagnostic_backward": 3
+  },
+  "limits": [
+    "No extra model forwards/backwards performed by reviewer",
+    "This verifies artifacts and recorded live checks, not video quality",
+    "B021 strict replay FAIL and old final base NOT_REACHED remain unchanged"
+  ]
+}

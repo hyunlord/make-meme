@@ -479,3 +479,7 @@ TRAIN1에서 실제20update/8평가 후 사전adapter replay 기준을 넘겨21�
 ## 2026-10-24 B-022 착수: 저장된 같은20회 상태의 추가 학습
 
 [PLAN](experiments/B-022-resumed-update-comparison/PLAN.md)을 사용자 승인 범위에서 실행한다. B-021의 엄격한 독립 replay FAIL을 보존하고, 이번 질문은 유효한 동일 checkpoint에서 추가80update의 효과다. adapter뿐 아니라 AdamW/RNG/cursor를 복원하고 제한된 velocity/gradient 진단 후 matched20/100 영상 비교를 수행한다. 현재 CPU 사전검증 중, GPU NOT_RUN이며 실제 실행 전 코드/config를 고정한다.
+
+### B-022 동일checkpoint 재개 학습 완료
+
+restart20의18개tensor와 optimizer/RNG/cursor를 복원하고 추가80update를 완료했다.20/50/100 고정tuple 평가loss는 감소했으며 fresh reload/OFF·이번 실행 기반값 불변은PASS다. 진단3backward에서 prediction은 같고 gradient에는 작은 차이가 있었으나 FA2 단독 원인은UNKNOWN이다. 비학습tail forward33회로상한내이며 영상pair는진행중이다. B-021의FAIL과미도달검사는보존한다.
