@@ -1,0 +1,666 @@
+{
+  "classification": "SYNTHETIC_BLOCK_CONTRACT_TEST",
+  "status": {
+    "small": "SMALL_BLOCK_UPDATE_RELOAD_PASS",
+    "long": "LONG_BLOCK_BACKWARD_PASS"
+  },
+  "counts": {
+    "gpu_workers": 1,
+    "block_forwards_attempted": 9,
+    "block_forwards_completed": 9,
+    "backwards_attempted": 4,
+    "backwards_completed": 4,
+    "optimizer_updates": 3,
+    "long_optimizer_updates": 0,
+    "retries": 0,
+    "fa_backward_nodes_per_training_graph": 3,
+    "fa_forward_kernel_calls_expected_from_pinned_source": 27,
+    "fa_forward_kernel_call_count_measured": null
+  },
+  "parameter_counts": {
+    "frozen_base": 403838464,
+    "trainable_adapter": 81920
+  },
+  "selected_stored_bytes": 1615353856,
+  "dtypes": {
+    "stored": "FP32",
+    "runtime_Linear": "BF16",
+    "runtime_norm_and_modulation": "original FP32",
+    "adapter": "FP32",
+    "optimizer_state": [
+      "torch.float32"
+    ]
+  },
+  "elapsed_seconds": {
+    "guard": 36.35095930099487,
+    "worker_systemd_service": 35.64,
+    "worker_cpu_time": 35.424,
+    "small_load_update_reload_including_checks": 24.289921393967234,
+    "long_including_hashes_checks": 6.802780729020014,
+    "updates": [
+      2.2516560709336773,
+      2.161300367093645,
+      2.1708093530032784
+    ]
+  },
+  "small": {
+    "losses": [
+      7.107974052429199,
+      7.107662200927734,
+      7.106311321258545
+    ],
+    "zero_error_max": 0.0,
+    "reload_error_max": 0.0,
+    "off_error_max": 0.0,
+    "cuda_peak_allocated": 976793088,
+    "cuda_peak_reserved": 1004535808,
+    "updates": [
+      {
+        "update": 1,
+        "fa_backward_nodes": 3,
+        "branch_gradients": {
+          "ffn": {
+            "input_norm": 0.32981568574905396,
+            "input_finite": true,
+            "output_norm": 0.012468380853533745,
+            "output_finite": true
+          },
+          "cross_attn": {
+            "input_norm": 0.021912673488259315,
+            "input_finite": true,
+            "output_norm": 0.26195287704467773,
+            "output_finite": true
+          },
+          "self_attn": {
+            "input_norm": 0.7730225324630737,
+            "input_finite": true,
+            "output_norm": 0.2630142271518707,
+            "output_finite": true
+          }
+        },
+        "input_gradient_norm": 0.82421875,
+        "context_gradient_norm": 0.07080078125,
+        "loss": 7.107974052429199,
+        "gradients": {
+          "q.A": {
+            "present": true,
+            "finite": true,
+            "norm": 0.0,
+            "dtype": "torch.float32"
+          },
+          "q.B": {
+            "present": true,
+            "finite": true,
+            "norm": 0.14484712481498718,
+            "dtype": "torch.float32"
+          },
+          "v.A": {
+            "present": true,
+            "finite": true,
+            "norm": 0.0,
+            "dtype": "torch.float32"
+          },
+          "v.B": {
+            "present": true,
+            "finite": true,
+            "norm": 0.23983179032802582,
+            "dtype": "torch.float32"
+          }
+        },
+        "adapter_delta_norms": [
+          0.0,
+          0.014308572746813297,
+          0.0,
+          0.014308781363070011
+        ],
+        "step_seconds": 2.2516560709336773,
+        "context_partitions": {
+          "image_norm": 0.0045407903380692005,
+          "text_norm": 0.07061910629272461
+        },
+        "optimizer_state_dtypes": [
+          "torch.float32"
+        ],
+        "elapsed_seconds": 11.728620192967355,
+        "unix_time_ns": 1792831833166753462,
+        "cuda_allocated": 906602496,
+        "cuda_reserved": 1002438656,
+        "cuda_peak_allocated": 976137728,
+        "cuda_peak_reserved": 1002438656,
+        "VmHWM_bytes": 3862130688,
+        "VmRSS_bytes": 3721502720,
+        "RssAnon_bytes": 1666785280,
+        "RssFile_bytes": 2003922944,
+        "MemAvailable_bytes": 92253642752,
+        "SwapTotal_bytes": 0,
+        "SwapFree_bytes": 0,
+        "cgroup_memory.current": 1734275072,
+        "cgroup_memory.peak": 1875755008
+      },
+      {
+        "update": 2,
+        "fa_backward_nodes": 3,
+        "branch_gradients": {
+          "ffn": {
+            "input_norm": 0.32981377840042114,
+            "input_finite": true,
+            "output_norm": 0.012468229047954082,
+            "output_finite": true
+          },
+          "cross_attn": {
+            "input_norm": 0.02191208116710186,
+            "input_finite": true,
+            "output_norm": 0.26194775104522705,
+            "output_finite": true
+          },
+          "self_attn": {
+            "input_norm": 0.7743158936500549,
+            "input_finite": true,
+            "output_norm": 0.26301309466362,
+            "output_finite": true
+          }
+        },
+        "input_gradient_norm": 0.828125,
+        "context_gradient_norm": 0.07080078125,
+        "loss": 7.107662200927734,
+        "gradients": {
+          "q.A": {
+            "present": true,
+            "finite": true,
+            "norm": 0.01901550404727459,
+            "dtype": "torch.float32"
+          },
+          "q.B": {
+            "present": true,
+            "finite": true,
+            "norm": 0.14476633071899414,
+            "dtype": "torch.float32"
+          },
+          "v.A": {
+            "present": true,
+            "finite": true,
+            "norm": 0.12148824334144592,
+            "dtype": "torch.float32"
+          },
+          "v.B": {
+            "present": true,
+            "finite": true,
+            "norm": 0.2398490309715271,
+            "dtype": "torch.float32"
+          }
+        },
+        "adapter_delta_norms": [
+          0.010641203261911869,
+          0.014291809871792793,
+          0.010647357441484928,
+          0.014292731881141663
+        ],
+        "step_seconds": 2.161300367093645,
+        "context_partitions": {
+          "image_norm": 0.0045405239798128605,
+          "text_norm": 0.07061482965946198
+        },
+        "optimizer_state_dtypes": [
+          "torch.float32"
+        ],
+        "elapsed_seconds": 13.907706398982555,
+        "unix_time_ns": 1792831835345839284,
+        "cuda_allocated": 906602496,
+        "cuda_reserved": 1004535808,
+        "cuda_peak_allocated": 976793088,
+        "cuda_peak_reserved": 1004535808,
+        "VmHWM_bytes": 3862392832,
+        "VmRSS_bytes": 3721658368,
+        "RssAnon_bytes": 1666875392,
+        "RssFile_bytes": 2003988480,
+        "MemAvailable_bytes": 92315348992,
+        "SwapTotal_bytes": 0,
+        "SwapFree_bytes": 0,
+        "cgroup_memory.current": 1734852608,
+        "cgroup_memory.peak": 1876066304
+      },
+      {
+        "update": 3,
+        "fa_backward_nodes": 3,
+        "branch_gradients": {
+          "ffn": {
+            "input_norm": 0.3296887278556824,
+            "input_finite": true,
+            "output_norm": 0.012466981075704098,
+            "output_finite": true
+          },
+          "cross_attn": {
+            "input_norm": 0.02190599963068962,
+            "input_finite": true,
+            "output_norm": 0.2618502676486969,
+            "output_finite": true
+          },
+          "self_attn": {
+            "input_norm": 0.7730777859687805,
+            "input_finite": true,
+            "output_norm": 0.26291128993034363,
+            "output_finite": true
+          }
+        },
+        "input_gradient_norm": 0.82421875,
+        "context_gradient_norm": 0.07080078125,
+        "loss": 7.106311321258545,
+        "gradients": {
+          "q.A": {
+            "present": true,
+            "finite": true,
+            "norm": 0.038024213165044785,
+            "dtype": "torch.float32"
+          },
+          "q.B": {
+            "present": true,
+            "finite": true,
+            "norm": 0.16646085679531097,
+            "dtype": "torch.float32"
+          },
+          "v.A": {
+            "present": true,
+            "finite": true,
+            "norm": 0.24282756447792053,
+            "dtype": "torch.float32"
+          },
+          "v.B": {
+            "present": true,
+            "finite": true,
+            "norm": 0.32603541016578674,
+            "dtype": "torch.float32"
+          }
+        },
+        "adapter_delta_norms": [
+          0.011848905123770237,
+          0.013767479918897152,
+          0.011856072582304478,
+          0.012384233996272087
+        ],
+        "step_seconds": 2.1708093530032784,
+        "context_partitions": {
+          "image_norm": 0.004538887646049261,
+          "text_norm": 0.07058096677064896
+        },
+        "optimizer_state_dtypes": [
+          "torch.float32"
+        ],
+        "elapsed_seconds": 16.088231849018484,
+        "unix_time_ns": 1792831837526364350,
+        "cuda_allocated": 906602496,
+        "cuda_reserved": 1004535808,
+        "cuda_peak_allocated": 976793088,
+        "cuda_peak_reserved": 1004535808,
+        "VmHWM_bytes": 3862421504,
+        "VmRSS_bytes": 3721670656,
+        "RssAnon_bytes": 1666887680,
+        "RssFile_bytes": 2003988480,
+        "MemAvailable_bytes": 92337684480,
+        "SwapTotal_bytes": 0,
+        "SwapFree_bytes": 0,
+        "cgroup_memory.current": 1734680576,
+        "cgroup_memory.peak": 1876156416
+      }
+    ]
+  },
+  "long": {
+    "status": "LONG_BLOCK_BACKWARD_PASS",
+    "forwards": 1,
+    "completed_forwards": 1,
+    "backwards": 1,
+    "completed_backwards": 1,
+    "optimizer_updates": 0,
+    "estimated_bytes": 13830425600,
+    "estimate_is_upper_bound": false,
+    "system_available_before": 92586106880,
+    "cuda_before": {
+      "unix_time_ns": 1792831848965939363,
+      "cuda_allocated": 893730304,
+      "cuda_reserved": 901775360,
+      "cuda_peak_allocated": 893730304,
+      "cuda_peak_reserved": 901775360,
+      "VmHWM_bytes": 4003860480,
+      "VmRSS_bytes": 2097795072,
+      "RssAnon_bytes": 1659523072,
+      "RssFile_bytes": 387477504,
+      "MemAvailable_bytes": 92586106880,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1724006400,
+      "cgroup_memory.peak": 2018435072
+    },
+    "x_sha256": "f6a0d551a0ba16f2a68d35496e54ecf264f34713536fc9216884e20fcbe1060b",
+    "target_sha256": "53e8815f5f586140fc934cf01f573f0e56f68dedd0f1692d33cb4a42217491f0",
+    "after_forward": {
+      "unix_time_ns": 1792831852056662243,
+      "cuda_allocated": 4913562624,
+      "cuda_reserved": 6622806016,
+      "cuda_peak_allocated": 5538841600,
+      "cuda_peak_reserved": 6622806016,
+      "VmHWM_bytes": 4003860480,
+      "VmRSS_bytes": 1955434496,
+      "RssAnon_bytes": 1516916736,
+      "RssFile_bytes": 387723264,
+      "MemAvailable_bytes": 86831185920,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1592643584,
+      "cgroup_memory.peak": 2115108864
+    },
+    "fa_backward_nodes": 3,
+    "context_partitions": {
+      "image_norm": 0.00448820972815156,
+      "text_norm": 0.060023725032806396
+    },
+    "branch_gradients": {
+      "ffn": {
+        "input_norm": 0.015255145728588104,
+        "input_finite": true,
+        "output_norm": 0.0006079837330617011,
+        "output_finite": true
+      },
+      "cross_attn": {
+        "input_norm": 0.0012144939973950386,
+        "input_finite": true,
+        "output_norm": 0.014376431703567505,
+        "output_finite": true
+      },
+      "self_attn": {
+        "input_norm": 0.08075306564569473,
+        "input_finite": true,
+        "output_norm": 0.014445227570831776,
+        "output_finite": true
+      }
+    },
+    "base_unchanged": true,
+    "gradient_norms": {
+      "self_attn.q.lora_A": 0.0003939941816497594,
+      "self_attn.q.lora_B": 0.009355629794299603,
+      "self_attn.v.lora_A": 0.07034001499414444,
+      "self_attn.v.lora_B": 0.06509864330291748
+    },
+    "input_gradient_norm": 0.0829872339963913,
+    "adapter_unchanged": true,
+    "after_backward": {
+      "unix_time_ns": 1792831855787244749,
+      "cuda_allocated": 1700686336,
+      "cuda_reserved": 7249854464,
+      "cuda_peak_allocated": 6244993024,
+      "cuda_peak_reserved": 7249854464,
+      "VmHWM_bytes": 4003860480,
+      "VmRSS_bytes": 2099101696,
+      "RssAnon_bytes": 1660399616,
+      "RssFile_bytes": 387907584,
+      "MemAvailable_bytes": 86180302848,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1737531392,
+      "cgroup_memory.peak": 2115108864
+    },
+    "seconds": 6.802780729020014
+  },
+  "resources": {
+    "memory_cap": 17179869184,
+    "memory_high": 15032385536,
+    "sampled_min_system_available": 86151704576,
+    "phase_observed_min_system_available": 86180302848,
+    "sampled_swap_max": 0,
+    "sampled_cgroup_peak": 2115108864,
+    "sampled_cgroup_anon_max": 1950216192,
+    "sampled_cgroup_file_max": 52113408,
+    "cgroup_events_max": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "sampled_process_bytes": {
+      "VmRSS": 4004999168,
+      "VmHWM": 4004999168,
+      "RssAnon": 1950216192,
+      "RssFile": 2003988480
+    },
+    "phase_process_HWM_max": 4003860480,
+    "memory_domains_additive": false
+  },
+  "phase_memory": [
+    {
+      "phase": "loaded",
+      "unix_time_ns": 1792831827418576829,
+      "cuda_allocated": 809907200,
+      "cuda_reserved": 811597824,
+      "cuda_peak_allocated": 809907200,
+      "cuda_peak_reserved": 811597824,
+      "VmHWM_bytes": 2796101632,
+      "VmRSS_bytes": 2655305728,
+      "RssAnon_bytes": 666091520,
+      "RssFile_bytes": 1942880256,
+      "MemAvailable_bytes": 93599408128,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 724639744,
+      "cgroup_memory.peak": 866115584
+    },
+    {
+      "phase": "update1_forward",
+      "unix_time_ns": 1792831830926557866,
+      "cuda_allocated": 905433600,
+      "cuda_reserved": 935329792,
+      "cuda_peak_allocated": 922008576,
+      "cuda_peak_reserved": 935329792,
+      "VmHWM_bytes": 3545694208,
+      "VmRSS_bytes": 3405832192,
+      "RssAnon_bytes": 1367457792,
+      "RssFile_bytes": 1987579904,
+      "MemAvailable_bytes": 92595564544,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1433632768,
+      "cgroup_memory.peak": 1576321024
+    },
+    {
+      "phase": "update1_backward",
+      "unix_time_ns": 1792831830999765138,
+      "cuda_allocated": 905947136,
+      "cuda_reserved": 1002438656,
+      "cuda_peak_allocated": 976137728,
+      "cuda_peak_reserved": 1002438656,
+      "VmHWM_bytes": 3545694208,
+      "VmRSS_bytes": 3535048704,
+      "RssAnon_bytes": 1485905920,
+      "RssFile_bytes": 1998348288,
+      "MemAvailable_bytes": 92407222272,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1553170432,
+      "cgroup_memory.peak": 1576321024
+    },
+    {
+      "phase": "update1_optimizer",
+      "unix_time_ns": 1792831831050891785,
+      "cuda_allocated": 906602496,
+      "cuda_reserved": 1002438656,
+      "cuda_peak_allocated": 976137728,
+      "cuda_peak_reserved": 1002438656,
+      "VmHWM_bytes": 3687387136,
+      "VmRSS_bytes": 3687387136,
+      "RssAnon_bytes": 1632735232,
+      "RssFile_bytes": 2003857408,
+      "MemAvailable_bytes": 92407201792,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1700233216,
+      "cgroup_memory.peak": 1700233216
+    },
+    {
+      "phase": "update2_forward",
+      "unix_time_ns": 1792831833195179766,
+      "cuda_allocated": 939643392,
+      "cuda_reserved": 1002438656,
+      "cuda_peak_allocated": 976137728,
+      "cuda_peak_reserved": 1002438656,
+      "VmHWM_bytes": 3862130688,
+      "VmRSS_bytes": 3721572352,
+      "RssAnon_bytes": 1666789376,
+      "RssFile_bytes": 2003988480,
+      "MemAvailable_bytes": 92253642752,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1733914624,
+      "cgroup_memory.peak": 1875755008
+    },
+    {
+      "phase": "update2_backward",
+      "unix_time_ns": 1792831833204559749,
+      "cuda_allocated": 906602496,
+      "cuda_reserved": 1004535808,
+      "cuda_peak_allocated": 976793088,
+      "cuda_peak_reserved": 1004535808,
+      "VmHWM_bytes": 3862130688,
+      "VmRSS_bytes": 3721576448,
+      "RssAnon_bytes": 1666793472,
+      "RssFile_bytes": 2003988480,
+      "MemAvailable_bytes": 92251303936,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1734176768,
+      "cgroup_memory.peak": 1875755008
+    },
+    {
+      "phase": "update2_optimizer",
+      "unix_time_ns": 1792831833205547875,
+      "cuda_allocated": 906602496,
+      "cuda_reserved": 1004535808,
+      "cuda_peak_allocated": 976793088,
+      "cuda_peak_reserved": 1004535808,
+      "VmHWM_bytes": 3862130688,
+      "VmRSS_bytes": 3721576448,
+      "RssAnon_bytes": 1666793472,
+      "RssFile_bytes": 2003988480,
+      "MemAvailable_bytes": 92251303936,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1734176768,
+      "cgroup_memory.peak": 1875755008
+    },
+    {
+      "phase": "update3_forward",
+      "unix_time_ns": 1792831835366198698,
+      "cuda_allocated": 939643392,
+      "cuda_reserved": 1004535808,
+      "cuda_peak_allocated": 976793088,
+      "cuda_peak_reserved": 1004535808,
+      "VmHWM_bytes": 3862392832,
+      "VmRSS_bytes": 3721658368,
+      "RssAnon_bytes": 1666875392,
+      "RssFile_bytes": 2003988480,
+      "MemAvailable_bytes": 92315348992,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1734488064,
+      "cgroup_memory.peak": 1876066304
+    },
+    {
+      "phase": "update3_backward",
+      "unix_time_ns": 1792831835375116186,
+      "cuda_allocated": 906602496,
+      "cuda_reserved": 1004535808,
+      "cuda_peak_allocated": 976793088,
+      "cuda_peak_reserved": 1004535808,
+      "VmHWM_bytes": 3862392832,
+      "VmRSS_bytes": 3721662464,
+      "RssAnon_bytes": 1666879488,
+      "RssFile_bytes": 2003988480,
+      "MemAvailable_bytes": 92315107328,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1734488064,
+      "cgroup_memory.peak": 1876066304
+    },
+    {
+      "phase": "update3_optimizer",
+      "unix_time_ns": 1792831835376108408,
+      "cuda_allocated": 906602496,
+      "cuda_reserved": 1004535808,
+      "cuda_peak_allocated": 976793088,
+      "cuda_peak_reserved": 1004535808,
+      "VmHWM_bytes": 3862392832,
+      "VmRSS_bytes": 3721662464,
+      "RssAnon_bytes": 1666879488,
+      "RssFile_bytes": 2003988480,
+      "MemAvailable_bytes": 92315107328,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1734488064,
+      "cgroup_memory.peak": 1876066304
+    },
+    {
+      "phase": "fresh_reload_off",
+      "unix_time_ns": 1792831840471504946,
+      "cuda_allocated": 906765824,
+      "cuda_reserved": 973078528,
+      "cuda_peak_allocated": 976793088,
+      "cuda_peak_reserved": 1004535808,
+      "VmHWM_bytes": 3862421504,
+      "VmRSS_bytes": 3721879552,
+      "RssAnon_bytes": 1667096576,
+      "RssFile_bytes": 2003988480,
+      "MemAvailable_bytes": 92492668928,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0,
+      "cgroup_memory.current": 1734631424,
+      "cgroup_memory.peak": 1876348928
+    }
+  ],
+  "preservation": {
+    "code_files_unchanged": 12,
+    "input_files_unchanged": 4,
+    "source_files_unchanged": 2,
+    "selected_payload_rehashed_in_memory_unchanged": true,
+    "checkpoint_stat_unchanged": true,
+    "whole_checkpoint_fresh_hash": "NOT_RUN; prior verified SHA plus current stat and selected payload hashes",
+    "owned_workers_remaining": 0,
+    "protected_service_identity_unchanged": true,
+    "protected_service_queue_idle": true
+  },
+  "output_artifacts": {
+    "adapter-initial.json": {
+      "bytes": 689,
+      "sha256": "6e342e88eaeaf5a3c723053a6484a7caa77ab8c9190889ed0e1ac8043191fe90"
+    },
+    "adapter-final.safetensors": {
+      "bytes": 327984,
+      "sha256": "dff5cab4f07a0f03bb52dff7d22e4cdaa6e16a9a45a08e8786e2b6e9d6b5804b"
+    },
+    "adapter-final.json": {
+      "bytes": 689,
+      "sha256": "34fdad5614a11590c8596bc97362372a0ee0585f8e2e0574b5b2edecc40a254b"
+    },
+    "adapter-initial.safetensors": {
+      "bytes": 327984,
+      "sha256": "1a603a234d0806dcfc2738a1aaf380f0ad98baf934d543a73d7dbea307d1a56b"
+    }
+  },
+  "limitations": [
+    "One synthetic final block, not full-model/FM/video training",
+    "Long has no optimizer and no preceding39blocks",
+    "36 and12992 token fixtures are artificial; no real identity/pose evidence",
+    "Elapsed includes hashes/synchronization/checks; not isolated kernels",
+    "Cgroup/RSS/CPU+GPU unified-memory counters are distinct; not additive",
+    "Existing selected source payload preserved, no65GBposthash"
+  ],
+  "FULL_MODEL_TRAINING": "NOT_RUN",
+  "VIDEO_QUALITY": "NOT_RUN",
+  "IDENTITY_POSE_DISENTANGLEMENT": "NOT_RUN",
+  "prereg_commit": "26c085635c41f77d26bd9f75a5c0976389b7ee3a",
+  "evidence_hashes": {
+    "result.json": "83a4abed54697f5f1034e89446e3c28d56368298603719e3407c1d8f9c073ac4",
+    "small-result.json": "acabc4502ecfdaa2cfec8472f2de7290a93e42af15a7af36173c42d8d1d553ac",
+    "long-result.json": "4c469b73ce9b333d7a58e2fdcae8d2f1a4d758381976e9e6354197d95ae2902d",
+    "updates.json": "572319bc40db5f954ea2f9ffa04f33743e2e4319347e087759c987dce63c9579",
+    "memory-phases.json": "904b8639d6551e2854ca0e6cf313d770b320647b5d94c574737aa4a410b8e262",
+    "postrun-check.json": "82e6c1c1279fc0e5beb1c28ba770de04eb29987bc76687ec9f922913cafdbeee"
+  }
+}

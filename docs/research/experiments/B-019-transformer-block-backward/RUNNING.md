@@ -8,3 +8,7 @@
 - 실데이터·권한 DATA_PENDING과 FULL_MODEL_TRAINING/VIDEO_QUALITY/IDENTITY_POSE_DISENTANGLEMENT NOT_RUN을 유지한다.
 
 공식 `WanAttentionBlock.forward`는 self-attention 뒤 gated residual, image/text cross-attention residual, modulated FFN gated residual 순서다. 최종 loss에서 각 내부 경로로 전달되는 scalar gradient 요약을 검사해 residual 우회와 구별한다. 실제 source를 바꾸거나 frozen 연산을 no_grad로 제거하지 않는다.
+
+## 08:50–08:51UTC 실제 실행 종료
+
+사전 등록26c0856 이후 worker1회. 소형8forward/3backward/3update와 긴1forward/1backward/update0 통과. 작은 결과/adapter를 먼저 저장하고 긴 단계로 진행했다. 재시도·추가worker0. owned unit inactive와 보호 서비스 보존 확인. 결과·실측·해설·포장을 마무리하며 추가 실험은 시작하지 않는다.

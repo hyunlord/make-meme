@@ -290,3 +290,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-019 착수 (2026-10-24)
 
 **RUNNING / 전체 block의 수치 배선 검사 준비.** attention 단독 PASS를 실제 영상 학습으로 확대하지 않고 cross-attention·FFN·residual을 포함한 마지막 한 block을 검사한다. 소형 update/reload와 긴 토큰 자원 결과는 별도 판정한다. 이후 component 숫자만 늘리는 자동 실험은 하지 않으며 B-017의 허용 실데이터 부족은 별도 DATA_PENDING이다.
+
+## 2026-10-24 B-019 종료: 마지막 block의 실제 gradient 경로
+
+[RESULTS](experiments/B-019-transformer-block-backward/RESULTS.md): 소형8forward/3backward/3update·fresh reload/OFF PASS, 긴12,992token 한block1forward/1backward/update0 PASS. FA2실제 backward와 cross/FFN derivative·image/text context gradient를 확인했다. 총worker1·9forward·4backward·3update, 재시도0. 긴CUDA peakallocated5.816GiB는 전체모델 학습 보증이 아니다. B-017실데이터/권한 DATA_PENDING은 유지하며 다음 목표는 권한확인된 실제Lab 자연동작의 동일개체 조건부FM 소형overfit 하나다. 이번에 전체모델/영상/실데이터학습은 NOT_RUN이며 추가component 시리즈나학습은 시작하지 않는다.

@@ -430,3 +430,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## B-019 착수 (2026-10-24)
 
 **RUNNING / GPU NOT_RUN.** 시작 HEAD `a930e137e3301fa3b3f748e8e3942a54f492c290`의 [PLAN](experiments/B-019-transformer-block-backward/PLAN.md)에 따라 공식 마지막 block 전체의 frozen cross/FFN/residual 경로를 통과하는 LoRA gradient를 검사한다. B-018 실제 synthetic x/target·initial adapter를 재사용하고 소형3update/8forward 뒤 안전할 때만12992token forward/backward1회·update0을 수행한다. worker1회·16GiBcap·72GiB시작/24GiBheadroom·swap0·2시간이며 자료/권한 부족과 영상학습NOT_RUN은 보존한다.
+
+## 2026-10-24 B-019 종료: 마지막 block의 실제 gradient 경로
+
+[RESULTS](experiments/B-019-transformer-block-backward/RESULTS.md): 소형8forward/3backward/3update·fresh reload/OFF PASS, 긴12,992token 한block1forward/1backward/update0 PASS. FA2실제 backward와 cross/FFN derivative·image/text context gradient를 확인했다. 총worker1·9forward·4backward·3update, 재시도0. 긴CUDA peakallocated5.816GiB는 전체모델 학습 보증이 아니다. B-017실데이터/권한 DATA_PENDING은 유지하며 다음 목표는 권한확인된 실제Lab 자연동작의 동일개체 조건부FM 소형overfit 하나다. 이번에 전체모델/영상/실데이터학습은 NOT_RUN이며 추가component 시리즈나학습은 시작하지 않는다.
