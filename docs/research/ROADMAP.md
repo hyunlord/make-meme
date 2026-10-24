@@ -294,3 +294,7 @@ ALG는 기본 채택하지 않고 offset sweep도 종료한다. 다음 가설 �
 ## 2026-10-24 B-019 종료: 마지막 block의 실제 gradient 경로
 
 [RESULTS](experiments/B-019-transformer-block-backward/RESULTS.md): 소형8forward/3backward/3update·fresh reload/OFF PASS, 긴12,992token 한block1forward/1backward/update0 PASS. FA2실제 backward와 cross/FFN derivative·image/text context gradient를 확인했다. 총worker1·9forward·4backward·3update, 재시도0. 긴CUDA peakallocated5.816GiB는 전체모델 학습 보증이 아니다. B-017실데이터/권한 DATA_PENDING은 유지하며 다음 목표는 권한확인된 실제Lab 자연동작의 동일개체 조건부FM 소형overfit 하나다. 이번에 전체모델/영상/실데이터학습은 NOT_RUN이며 추가component 시리즈나학습은 시작하지 않는다.
+
+## 2026-10-24 B-020 준비 확인: DATA_PENDING, 실행 미착수
+
+최신 원격 `82d22372693a641aa78eaa7974b0a269dab81665`의 [PLAN](experiments/B-020-real-fm-tail-overfit/PLAN.md)을 확인했다. B-019로 구성요소 smoke는 종료한다. 이번 요청에는 실제 Lab 자연동작 Y/R와 사용 범위가 새로 제공되지 않아 기존 데이터 부족을 유지한다. 같은 권한 감사·synthetic 대체 실험·GPU 실행은0이다. [준비 상태](experiments/B-020-real-fm-tail-overfit/STATUS.md)에 누락자료와 실행 재개 조건을 한 번 기록했다. 실제 자료·실행 지시 이후 입력/시간축·3학습tuple/1동일clip 보조tuple·공식FM/head 계약과 코드를 확정할 때만 착수를 기록한다. 현재 PLANNED / DATA_PENDING / GPU NOT_RUN이며 학습을 시작하지 않았다.
