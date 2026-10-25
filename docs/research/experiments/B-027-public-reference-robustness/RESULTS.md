@@ -39,4 +39,4 @@
 - CPU 계약/미디어/패키지/요약 검사15개PASS, 실제 입력 decode·조건 hash·first-CFG 연결·final 저장·MP4 파일 검증PASS. strict typing NOT_CLEAN과 미설치 lint 도구 NOT_RUN은 남긴다. 이 결과가 시각 품질 PASS를 대신하지 않는다.
 - 원본 배경·source 객체를 그대로 복사하면 겉보기 motion이 맞아도 교체 실패다. 작은 reference와 가림, 단일seed,3paired task, 미확인nativeFPS, 독립 사람 검수 부재를 한계로 유지한다. 기반모델 학습자료와 DAVIS의 중복은 UNKNOWN이다.
 
-전체 비교는 비공개 `review/review.html`, task별 `all17.png`, `local0-8-16.png`, `comparison-preview24.mp4`에서 확인한다. raw후처리 보정은 없다. 최종 전달 검증은 별도 delivery receipt에 남긴다. 다음 제안은 [NEXT_DECISION](NEXT_DECISION.md)의 한 가설뿐이며 설치·추론·학습을 시작하지 않았다.
+전체 비교는 비공개 `review/review.html`, task별 `all17.png`, `local0-8-16.png`, `comparison-preview24.mp4`에서 확인한다. raw후처리 보정은 없다. 최종 양호스트 전달·CRC·해시·추출 검증은 [DELIVERY](DELIVERY.md)에 남겼다. 다음 제안은 [NEXT_DECISION](NEXT_DECISION.md)의 한 가설뿐이며 설치·추론·학습을 시작하지 않았다.

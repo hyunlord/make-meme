@@ -30,8 +30,8 @@
   },
   "completed_service_elapsed_sum_seconds": 6478.621590137482,
   "all_workers_complete": true,
-  "overall_wallclock_seconds": null,
-  "overall_wallclock_note": "Recorded separately by coordinator after review, packaging, transfer and publication. Service elapsed sum is neither GPU kernel time nor end-to-end time.",
+  "overall_wallclock_seconds": 8199.425267,
+  "overall_wallclock_note": "Start through final Mac archive extraction verification; includes data/preparation, idle/sync, execution, visual review, documentation, package and transfer. Final delivery-receipt Git publication follows separately. Not GPU kernel time.",
   "pre_worker_failure_total": 3,
   "memory_accounts_observed": {
     "mem_available_min": 56516194304,
