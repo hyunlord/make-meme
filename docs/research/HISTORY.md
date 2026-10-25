@@ -524,3 +524,7 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 ## 2026-10-25 B-026 availability 종료: REFERENCE_PENDING / GPU 0
 
 [결과](experiments/B-026-reference-pose-sensitivity/RESULTS.md). 시작 원격 `dbcec725cd9e64bc6f83c8b948ece488622d8b0a`와 중복 실행 부재를 확인하고, 허용된 원본 11장 및 기존 manifest만 검토했다. 누운 IG 사진들과 상체를 세운 차량 후보는 있지만 후자는 뒤쪽 몸통·뒷다리 지지가 가려져 자연스러운 사족 기립을 확정할 수 없다. 적합한 같은 IG 원본 영상 계보도 확인되지 않았다. 따라서 P/PROBE/S/D·학습 모두 0회, 새 ZIP 없이 자료 대기한다. 다음 필요 입력은 같은 IG의 실제 사족 기립 원본 한 장이며 추가 검사나 다른 실험은 시작하지 않는다. 이는 참조 자세 적합성의 조건부 진단이며 최종 제품 목표를 기립 참조 필수로 바꾸지 않는다. B-025의 외형 반응과 자세·동작 실패는 그대로 보존한다.
+
+## 2026-10-26 KST B-027 착수: 개인 사례에서 공개 다중 사례로 전환
+
+최신 원격 `88145d9324765b8ca68fabca24dd5d76f6a2ceb0`와 B-027 중복 실행 부재를 확인했다. [PLAN](experiments/B-027-public-reference-robustness/PLAN.md)에 따라 공개 source/target 및 두 reference를 출력 전에 고정한다. 공식 DAVIS TrainVal480p 다운로드와 이용 조건 확인을 시작했고 GPU NOT_RUN이다. 개인사진은 주평가에서 제외하고 B-026 선택적 대기와 과거 실패를 보존한다. 새 모델/패키지/학습0, 공개자료 누적5GiB와 최대6sampler·8시간 상한을 유지한다. 실제 파일 확보와 선정 완료는 후속 입력 기록에서 별도로 확인한다.

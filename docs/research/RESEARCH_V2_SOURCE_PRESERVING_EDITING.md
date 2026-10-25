@@ -1,5 +1,12 @@
 # B 연구 v2 — 원본 장면을 보존하는 참조 이미지·프롬프트 기반 영상 객체 편집
 
+## 2026-10-26 최신 실행 방향 — 공개 다중 사례의 객체 편집
+
+최종 목표는 특정 반려견 전용 모델이 아니라 다양한 대상의 참조 기반 원본 보존 영상 편집이다. 개인 자료는 회귀 사례로 보존하며 전체 연구의 실행 선행조건으로 삼지 않는다. B-026은 OPTIONAL_REFERENCE_DIAGNOSTIC / REFERENCE_PENDING으로 유지하고 새 개인 촬영을 요구하지 않는다.
+
+[B-027](experiments/B-027-public-reference-robustness/PLAN.md)은 공개 DAVIS 자료에서 최대3개 source/target 과제와 같은 target의 두 참조를 고정하는 탐색적 개발 패널이다. SCAIL replacement와 비객체 RGB128을 유지하고 최대6회 실제 출력의 외형·동작·장면·형상·비용을 분리한다. mask-given 평가이며 자동 추적·일반화·논문 benchmark를 입증하지 않는다. 과거 B-023~025의 개선과 실패는 보존하고 다음 방법은 이번 결과를 보고 하나만 선택한다.
+
+
 작성: 2026-10-24. 실행 범위 개정: 2026-10-25. 과거 두 생성·밈 입력·ROI 후보는 Git 이력에 보존한다. 현재 실행 계약은 [B-023 개정 계획](experiments/B-023-task-aligned-replacement/PLAN.md)이며, 상위 구성 전체를 구현하는 작업이 아니다.
 
 ## 1. 목적과 범위

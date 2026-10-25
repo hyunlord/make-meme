@@ -1,8 +1,10 @@
 # B 트랙 로드맵
 
-현재 상태 갱신: 2026-10-25. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
+**현재: B-027 RUNNING / 입력 준비 / GPU NOT_RUN.** 공개 다중 사례에서 reference bundle 두 장을 비교한다. 개인 사진은 회귀 사례이며 B-026의 자료 대기는 전체 연구를 막지 않는다. [사전 계획](experiments/B-027-public-reference-robustness/PLAN.md). 최대6sampler·공개데이터5GiB·8시간, 새모델/학습0.
 
-**현재: B-026 REFERENCE_PENDING / GPU 0.** [availability 결과](experiments/B-026-reference-pose-sensitivity/RESULTS.md). 허용된 기존 원본과 manifest에서 같은 IG의 자연스러운 사족 기립을 확정할 참조를 찾지 못했다. 차량 사진은 상체 기립 후보이나 후반 몸통·뒷다리 지지가 가려져 조건을 확정할 수 없다. 필요한 자료는 같은 IG의 실제 기립 원본 한 장이다. 생성·학습·추가 감사·새 ZIP 없이 대기하며, 최종 자세 비의존 편집 목표와 B-025 실패를 보존한다.
+현재 상태 갱신: 2026-10-26. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
+
+**선택적 보류: B-026 REFERENCE_PENDING / GPU 0.** [availability 결과](experiments/B-026-reference-pose-sensitivity/RESULTS.md). 허용된 기존 원본과 manifest에서 같은 IG의 자연스러운 사족 기립을 확정할 참조를 찾지 못했다. 차량 사진은 상체 기립 후보이나 후반 몸통·뒷다리 지지가 가려져 조건을 확정할 수 없다. 필요한 자료는 같은 IG의 실제 기립 원본 한 장이다. 생성·학습·추가 감사·새 ZIP 없이 대기하며, 최종 자세 비의존 편집 목표와 B-025 실패를 보존한다.
 
 **B-025 당시: COMPLETED / 기술 PASS / 참조 외형 반응 있음 / IG 자세·동작 보존 및 결합 편집 목표 FAIL.** [결과](experiments/B-025-matched-reference-swap/RESULTS.md). 같은 중립 caption·driving·noise의 두 새 출력에서 IG의 색·무늬·얼굴·가는 사지가 반영됐지만 누운 reference 자세도 남았다. source 장면은 부분 보존되나 로프 소실이 있고, 실제 개체 일치 UNCERTAIN·temporal UNVERIFIED다. 다음 가설 하나는 동일 IG의 실제 기립 참조와 비교해 참조 자세 일치가 동작 보존에 미치는 영향을 검증하는 것이다. 추가 생성·수집·학습은 시작하지 않았다.
 
