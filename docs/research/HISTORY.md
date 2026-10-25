@@ -519,3 +519,8 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 ## 2026-10-25 B-025 종료: 참조 외형 반응과 자세 복사 분리
 
 [RESULTS](experiments/B-025-matched-reference-swap/RESULTS.md). 같은 중립 caption/source/noise의 신규 Lab/IG pair를 각40step80forward로 완료했다. Lab은 사족 자세·원본 방·후반 고개 방향을 유지했다. IG는 회갈색/흰가슴·좁은주둥이·가는사지로 바뀌어 단순 recolor 이상의 참조 반응이 있으나 누운 reference 자세도 복사했고 source의 서기와 머리 궤적을 보존하지 못했다. 방 구도는 남지만 바닥 로프가 없어 scene PARTIAL이다. 따라서 기술 PASS, appearance 반응 근거, 결합 편집 목표 FAIL, 실제개체 UNCERTAIN/temporalUNVERIFIED다. B024 개선이나 과거 실패를 소급 변경하지 않는다. 다음 병목은 동일 IG의 실제 서 있는 참조와 비교할 때 목표 자세 일치가 전신 동작 보존을 바꾸는지이며 이번 추가 실행은 없다.
+
+
+## 2026-10-25 B-026 availability 종료: REFERENCE_PENDING / GPU 0
+
+[결과](experiments/B-026-reference-pose-sensitivity/RESULTS.md). 시작 원격 `dbcec725cd9e64bc6f83c8b948ece488622d8b0a`와 중복 실행 부재를 확인하고, 허용된 원본 11장 및 기존 manifest만 검토했다. 누운 IG 사진들과 상체를 세운 차량 후보는 있지만 후자는 뒤쪽 몸통·뒷다리 지지가 가려져 자연스러운 사족 기립을 확정할 수 없다. 적합한 같은 IG 원본 영상 계보도 확인되지 않았다. 따라서 P/PROBE/S/D·학습 모두 0회, 새 ZIP 없이 자료 대기한다. 다음 필요 입력은 같은 IG의 실제 사족 기립 원본 한 장이며 추가 검사나 다른 실험은 시작하지 않는다. 이는 참조 자세 적합성의 조건부 진단이며 최종 제품 목표를 기립 참조 필수로 바꾸지 않는다. B-025의 외형 반응과 자세·동작 실패는 그대로 보존한다.
