@@ -1,0 +1,272 @@
+[
+  {
+    "raw_path": "cases/LAB/artifacts/raw_output.pt",
+    "raw_sha256": "3932714bbc515ca39579c14682249eb32c6653199ad7bf145b6a8130b9c46b15",
+    "shape": [
+      3,
+      17,
+      512,
+      896
+    ],
+    "dtype": "torch.float32",
+    "all17_export_matches_actual_raw": true,
+    "source_file_substitution_detected": false,
+    "note": "Source difference is descriptive pixel evidence, not identity-transfer or perceptual quality acceptance. Independent CPU check; no model call.",
+    "frames": [
+      {
+        "local": 0,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1321540,
+        "source_rgb_abs_error_mean_0_255": 13.073752267020089
+      },
+      {
+        "local": 1,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1335836,
+        "source_rgb_abs_error_mean_0_255": 14.173825218563987
+      },
+      {
+        "local": 2,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1337072,
+        "source_rgb_abs_error_mean_0_255": 14.483067103794642
+      },
+      {
+        "local": 3,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1338002,
+        "source_rgb_abs_error_mean_0_255": 14.876172746930804
+      },
+      {
+        "local": 4,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1337478,
+        "source_rgb_abs_error_mean_0_255": 15.138761974516369
+      },
+      {
+        "local": 5,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1342299,
+        "source_rgb_abs_error_mean_0_255": 15.292025611514138
+      },
+      {
+        "local": 6,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1340238,
+        "source_rgb_abs_error_mean_0_255": 15.301470075334821
+      },
+      {
+        "local": 7,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1340448,
+        "source_rgb_abs_error_mean_0_255": 15.49136715843564
+      },
+      {
+        "local": 8,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1340523,
+        "source_rgb_abs_error_mean_0_255": 15.774146670386905
+      },
+      {
+        "local": 9,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1341082,
+        "source_rgb_abs_error_mean_0_255": 16.105613345191593
+      },
+      {
+        "local": 10,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1337454,
+        "source_rgb_abs_error_mean_0_255": 16.40372067406064
+      },
+      {
+        "local": 11,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1337465,
+        "source_rgb_abs_error_mean_0_255": 16.760926019577752
+      },
+      {
+        "local": 12,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1337436,
+        "source_rgb_abs_error_mean_0_255": 17.12069338843936
+      },
+      {
+        "local": 13,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1341753,
+        "source_rgb_abs_error_mean_0_255": 17.740606398809526
+      },
+      {
+        "local": 14,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1341835,
+        "source_rgb_abs_error_mean_0_255": 18.097886585053942
+      },
+      {
+        "local": 15,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1341576,
+        "source_rgb_abs_error_mean_0_255": 18.272846040271578
+      },
+      {
+        "local": 16,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1341589,
+        "source_rgb_abs_error_mean_0_255": 18.615166800362722
+      }
+    ]
+  },
+  {
+    "raw_path": "cases/IG/artifacts/raw_output.pt",
+    "raw_sha256": "e5fc06054192c73f4fe4adc0e99e4ef32aaff22a5dfafef76b90ab69685a794c",
+    "shape": [
+      3,
+      17,
+      512,
+      896
+    ],
+    "dtype": "torch.float32",
+    "all17_export_matches_actual_raw": true,
+    "source_file_substitution_detected": false,
+    "note": "Source difference is descriptive pixel evidence, not identity-transfer or perceptual quality acceptance. Independent CPU check; no model call.",
+    "frames": [
+      {
+        "local": 0,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1357699,
+        "source_rgb_abs_error_mean_0_255": 35.40630667550223
+      },
+      {
+        "local": 1,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1354242,
+        "source_rgb_abs_error_mean_0_255": 35.78144327799479
+      },
+      {
+        "local": 2,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1351617,
+        "source_rgb_abs_error_mean_0_255": 35.99666995093936
+      },
+      {
+        "local": 3,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1349809,
+        "source_rgb_abs_error_mean_0_255": 36.09482756115141
+      },
+      {
+        "local": 4,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1350266,
+        "source_rgb_abs_error_mean_0_255": 36.292112804594495
+      },
+      {
+        "local": 5,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1350516,
+        "source_rgb_abs_error_mean_0_255": 36.80793180919829
+      },
+      {
+        "local": 6,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1351684,
+        "source_rgb_abs_error_mean_0_255": 37.069117954799104
+      },
+      {
+        "local": 7,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1350931,
+        "source_rgb_abs_error_mean_0_255": 37.31156994047619
+      },
+      {
+        "local": 8,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1350674,
+        "source_rgb_abs_error_mean_0_255": 37.39752487909226
+      },
+      {
+        "local": 9,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1350072,
+        "source_rgb_abs_error_mean_0_255": 37.615254720052086
+      },
+      {
+        "local": 10,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1350496,
+        "source_rgb_abs_error_mean_0_255": 37.783480689639134
+      },
+      {
+        "local": 11,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1350811,
+        "source_rgb_abs_error_mean_0_255": 37.98106820242746
+      },
+      {
+        "local": 12,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1351816,
+        "source_rgb_abs_error_mean_0_255": 37.996975853329616
+      },
+      {
+        "local": 13,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1353730,
+        "source_rgb_abs_error_mean_0_255": 38.24939473470052
+      },
+      {
+        "local": 14,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1355099,
+        "source_rgb_abs_error_mean_0_255": 38.417819068545384
+      },
+      {
+        "local": 15,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1357000,
+        "source_rgb_abs_error_mean_0_255": 38.60369437081473
+      },
+      {
+        "local": 16,
+        "export_equals_actual_raw_quantization": true,
+        "source_pixel_exact": false,
+        "source_differing_values": 1357599,
+        "source_rgb_abs_error_mean_0_255": 38.58293297177269
+      }
+    ]
+  }
+]

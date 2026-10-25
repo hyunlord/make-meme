@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "changed_pair_leaves": [
+    "t10",
+    "t2",
+    "t3",
+    "t4",
+    "t8",
+    "t9"
+  ],
+  "identical_pair_leaves": [
+    "t0",
+    "t1",
+    "t11",
+    "t12",
+    "t13",
+    "t14",
+    "t15",
+    "t5",
+    "t6",
+    "t7"
+  ],
+  "LAB_vs_B024_changed": [
+    "t1"
+  ],
+  "structure_devices_unchanged": true,
+  "counts": {
+    "positive_T5": 1,
+    "negative_T5": 0,
+    "IG_VAE": 1,
+    "IG_CLIP": 1,
+    "LAB_VAE": 0,
+    "LAB_CLIP": 0,
+    "P_full": 0
+  },
+  "case_hashes": {
+    "LAB": "9d825797775caea37324ea0dd3dc67b3e63fffca0ace49cf182d62709c44b0bf",
+    "IG": "32a4c1ca7d0b5453cd34ad464f1046658d7150aab15d39d22000d6d0aba285c5"
+  }
+}

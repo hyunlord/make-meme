@@ -511,3 +511,11 @@ restart20의18개tensor와 optimizer/RNG/cursor를 복원하고 추가80update�
 ## 2026-10-25 B-025 착수: 같은 중립 caption의 참조 교체
 
 B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B025](experiments/B-025-matched-reference-swap/RUNNING.md)는 같은 자연동작·중립 caption·실제 noise에서 Lab/IG 참조 묶음만 달리하는 두 출력을 생성해 원본 보존 객체 편집의 실제 외형 변경 근거를 확인한다. 기존 사용자 원본 IG와 기존 support를 찾아 입력을 고정했고 새 모델/주석 확대 없이 CPU 검사를 수행했다. GPU는 사전 코드 공개 고정 이후 순차 각1회이며 현재 NOT_RUN이다. 원래 B024 caption 출력은 새 Lab 대조군으로 대신하지 않는다.
+
+### B-025 실제 조건 준비 완료
+
+공통 positive T5 1회, IG VAE/CLIP 각1회, Lab 특징 재사용으로 ENC가 완료됐다. 실제 pair는 양CFG ref/CLIP/refmask6leaf만 변경되고 나머지10leaf와 device구조가 동일하다. B024와 새Lab의 차이는 positive t1뿐이다. encoder 종료/자원회복 후 신규Lab sampler에 진입한다. 시각결과는 아직 미판정이다.
+
+## 2026-10-25 B-025 종료: 참조 외형 반응과 자세 복사 분리
+
+[RESULTS](experiments/B-025-matched-reference-swap/RESULTS.md). 같은 중립 caption/source/noise의 신규 Lab/IG pair를 각40step80forward로 완료했다. Lab은 사족 자세·원본 방·후반 고개 방향을 유지했다. IG는 회갈색/흰가슴·좁은주둥이·가는사지로 바뀌어 단순 recolor 이상의 참조 반응이 있으나 누운 reference 자세도 복사했고 source의 서기와 머리 궤적을 보존하지 못했다. 방 구도는 남지만 바닥 로프가 없어 scene PARTIAL이다. 따라서 기술 PASS, appearance 반응 근거, 결합 편집 목표 FAIL, 실제개체 UNCERTAIN/temporalUNVERIFIED다. B024 개선이나 과거 실패를 소급 변경하지 않는다. 다음 병목은 동일 IG의 실제 서 있는 참조와 비교할 때 목표 자세 일치가 전신 동작 보존을 바꾸는지이며 이번 추가 실행은 없다.

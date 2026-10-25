@@ -23,3 +23,7 @@ IG의 원본은 4000×3000이고 기록된 aspect-fit 683×512, 좌우 padding10
 ## 평가 경계
 
 전체17장과 local0/8/16, 같은30fps에서 source/두 참조/두 raw 출력을 비교한다. 외형 반영·실제 개체 일치·동작·장면·형태를 따로 판단한다. reference RGB와 mask·자세가 함께 바뀌므로 순수 identity 효과나 encoder별 원인을 주장하지 않는다. 직접 연속시청 없으면 temporal=UNVERIFIED. 이 한 pair 후 종료한다.
+
+## 종료 기록
+
+상단은 실행 전 고정 당시 기록이다. 이후 ENC와 두 PROBE/S/D가 모두 완료됐고 신규 sampler2/2, retry0이다. 최종 상태와 기술/시각 판정은 RESULTS.md 및 MEASUREMENTS.md를 따른다. IG 외형 반응은 있으나 참조 누운 자세로 인해 결합 편집 목표는 FAIL이다. 추가 GPU 작업은 종료했으며 후속 실험을 예약하지 않는다.

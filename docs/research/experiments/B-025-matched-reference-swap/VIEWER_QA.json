@@ -1,0 +1,36 @@
+{
+  "status": "CONTROLS_AND_LINKS_PASS",
+  "checks": {
+    "initial": true,
+    "next": true,
+    "last": true,
+    "previous": true,
+    "loop": true,
+    "links": [
+      "reports/comparison-final/comparison-30fps.mp4",
+      "reports/comparison-final/comparison-30fps.mp4",
+      "reports/comparison-final/comparison-frames/000.png",
+      "reports/comparison-final/comparison-all17.png",
+      "reports/comparison-final/comparison-local0-8-16.png",
+      "reports/comparison-final/comparison-manifest.json",
+      "reports/comparison-final/comparison-reference-lab.png",
+      "reports/comparison-final/comparison-reference-ig.png",
+      "reports/reference-pair-preregistered.png",
+      "reports/REFERENCE_INPUT_PROVENANCE.json"
+    ]
+  },
+  "video_metadata": {
+    "readyState": 4,
+    "duration": 0.566667,
+    "width": 2688,
+    "height": 544,
+    "error": null
+  },
+  "screenshots": [
+    "reports/viewer-check/desktop.png",
+    "reports/viewer-check/mobile.png"
+  ],
+  "continuous_video_viewing": false,
+  "temporal_quality": "UNVERIFIED",
+  "scope": "Local Chrome desktop/mobile layout, controls, links and metadata; no continuous human video review."
+}

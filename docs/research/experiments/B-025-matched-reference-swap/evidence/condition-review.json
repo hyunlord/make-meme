@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "method": "independent stdlib safetensor header/payload SHA and byte comparison; no Torch/model/GPU",
+  "payloads_verified": 48,
+  "changed_pair": [
+    "t10",
+    "t2",
+    "t3",
+    "t4",
+    "t8",
+    "t9"
+  ],
+  "same_pair": [
+    "t0",
+    "t1",
+    "t11",
+    "t12",
+    "t13",
+    "t14",
+    "t15",
+    "t5",
+    "t6",
+    "t7"
+  ],
+  "lab_parent_changed": [
+    "t1"
+  ],
+  "structure_including_devices_exact": true,
+  "all_pair_shapes_dtypes_equal": true,
+  "shared_hashes": {
+    "t0": {
+      "shape": [
+        16,
+        5,
+        64,
+        112
+      ],
+      "dtype": "torch.float32",
+      "sha256": "9d26386e01a5dce6b0dc21e3df26aab79b65a4403e11b6c8fc5a71873dd3c950"
+    },
+    "t1": {
+      "shape": [
+        62,
+        4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "43232ee360f0f3a9400fa1cafa30a5af9b7ac8a465edf958d7e5872a5a5a1aba"
+    },
+    "t7": {
+      "shape": [
+        1,
+        4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "80bcc88e0639938866513588815c83753fee3f9fc5ccafaa92844116dab826c4"
+    },
+    "t13": {
+      "shape": [
+        16
+      ],
+      "dtype": "torch.uint8",
+      "sha256": "1bc7002f0e12eb8f2adeb61a2aa10f3c1c9e57bf241e70ecb64dbac06613c425"
+    },
+    "t14": {
+      "shape": [
+        40
+      ],
+      "dtype": "torch.int64",
+      "sha256": "182ef3905b2f6ea9dfbba8c29bab32bb4f5c58202b69e8ce15c783b2d496469b"
+    },
+    "t15": {
+      "shape": [
+        41
+      ],
+      "dtype": "torch.float32",
+      "sha256": "34fe5f9d03988cb972b219a3a4ea7b9c36ac132d433313d2ac303800ef4e52b7"
+    }
+  }
+}

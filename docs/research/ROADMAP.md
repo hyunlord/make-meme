@@ -2,9 +2,9 @@
 
 현재 상태 갱신: 2026-10-25. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 
-**현재 착수: B-025 입력/CPU 준비 완료, GPU NOT_RUN.** [실행 전 고정](experiments/B-025-matched-reference-swap/RUNNING.md). B024의 원본 보존 개선을 유지하고, 같은 중립 caption·driving·noise에서 실제 Lab/IG 참조 묶음 교체 두 출력을 비교한다. 기존 원본 IG와 support를 재사용하며 신규 학습/설치 없이 각1회만 실행한다. source-copy와 reference 외형 반영을 구분하는 것이 이번 병목이다.
+**현재: B-025 COMPLETED / 기술 PASS / 참조 외형 반응 있음 / IG 자세·동작 보존 및 결합 편집 목표 FAIL.** [결과](experiments/B-025-matched-reference-swap/RESULTS.md). 같은 중립 caption·driving·noise의 두 새 출력에서 IG의 색·무늬·얼굴·가는 사지가 반영됐지만 누운 reference 자세도 남았다. source 장면은 부분 보존되나 로프 소실이 있고, 실제 개체 일치 UNCERTAIN·temporal UNVERIFIED다. 다음 가설 하나는 동일 IG의 실제 기립 참조와 비교해 참조 자세 일치가 동작 보존에 미치는 영향을 검증하는 것이다. 추가 생성·수집·학습은 시작하지 않았다.
 
-**현재: B-024 COMPLETED / 기술 PASS / 정적 자세·장면 보존 개선 / reference 교체 효과 미입증.** [계획](experiments/B-024-reference-rgb-isolation/PLAN.md). 정식replacement와같은입력을유지하고reference비객체RGB만중립화해VAE/CLIP배경누수를한번검사한다. B023기술PASS/원본보존FAIL을보존한다. 연결확인과조건복원에서구체적결함을발견하지못했고,참조RGB중립화뒤사족자세·원본장면·후반고개방향이개선됐다. 같은개체/source-copy혼동과temporalUNVERIFIED는남는다. [결과](experiments/B-024-reference-rgb-isolation/RESULTS.md).
+**B-024 당시: COMPLETED / 기술 PASS / 정적 자세·장면 보존 개선 / reference 교체 효과 미입증.** [계획](experiments/B-024-reference-rgb-isolation/PLAN.md). 정식replacement와같은입력을유지하고reference비객체RGB만중립화해VAE/CLIP배경누수를한번검사한다. B023기술PASS/원본보존FAIL을보존한다. 연결확인과조건복원에서구체적결함을발견하지못했고,참조RGB중립화뒤사족자세·원본장면·후반고개방향이개선됐다. 같은개체/source-copy혼동과temporalUNVERIFIED는남는다. [결과](experiments/B-024-reference-rgb-isolation/RESULTS.md).
 
 **B-017 당시 요약: COMPLETED_CPU_AUDIT / RIGHTS_PENDING / DATA_GAP.** [결과](experiments/B-017-paired-animal-data/RESULTS.md): 검토용 완비case2·Lab미완성후보1, training-ready0·실제cross-IDpair0. 충분한reference자세다양성은미입증이다. 다음은권한있는실제Lab자연동작자료확보하나이며생성·학습0. ALG/H120은기본채택하지않는다.
 
