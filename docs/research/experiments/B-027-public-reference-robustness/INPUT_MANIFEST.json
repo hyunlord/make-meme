@@ -1,0 +1,2717 @@
+{
+  "animal": {
+    "task_manifest": {
+      "task_id": "animal",
+      "prompt": "A dog matching the reference image walks slowly toward the camera across dry grass, lowering its head toward the ground while its legs take alternating steps. The fence and bushes remain in the surrounding garden.",
+      "source_sequence": "dog",
+      "source_track": 1,
+      "source_frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "target_sequence": "dog-gooses",
+      "target_track": 1,
+      "reference_frames": [
+        0,
+        85
+      ],
+      "target_features": [
+        "dark coat contrasting with pale source",
+        "white muzzle/chest accents and feet",
+        "longer dark furry silhouette; fine facial identity unresolved at small scale"
+      ],
+      "source_events": [
+        "local0 to8: head stays low as front paws alternate and body approaches camera",
+        "local8 to16: subject becomes more frontal with continuing steps and raised moving tail"
+      ],
+      "protected": [
+        "fence",
+        "bush at image right",
+        "dry grass outside changed silhouette"
+      ],
+      "limitations": [
+        "R1 crouched/low with legs partly hidden; R2 standing side view in opposite orientation",
+        "small target pixel support and low facial detail; no zoom applied"
+      ],
+      "dataset": "DAVIS-2017-trainval-480p",
+      "mask_given": true,
+      "source_fps": null,
+      "preview_fps": 24,
+      "timebase_assumed": true,
+      "native_timing_claimed": false,
+      "canvas_wh": [
+        896,
+        512
+      ],
+      "selection_sha256": "1cbfa8e3024fb4a314cc5b6b9ad6d0bee06ee92c19bb8297f1be471b1a7d0d6f",
+      "source_records": [
+        {
+          "local": 0,
+          "frame": 0,
+          "hashes": {
+            "rgb_sha256": "8055f6d7600ba9acd7dba5faa6ac3b1487bcfdc3b4c45e4519d2c0953c8f1bb5",
+            "indexed_mask_sha256": "e13cb32b856f4a2baf2b916ed222f982558b8a0e97f3964872e5b27e76623578"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 48468
+        },
+        {
+          "local": 1,
+          "frame": 1,
+          "hashes": {
+            "rgb_sha256": "27b9f8dbae8b0c097765fea081d97caffb4594aca57e5f048017f4d17ea5bf22",
+            "indexed_mask_sha256": "121195802fd94946eee4573c4567be162c39d31c0372e406bb84b986f1713450"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 49491
+        },
+        {
+          "local": 2,
+          "frame": 2,
+          "hashes": {
+            "rgb_sha256": "efcf0a8429dabe5eb586066ef64d4efd35400f2e4892815bb2cc19505996f93d",
+            "indexed_mask_sha256": "58517e47d1bbc00b04c8b5c486a718816d2aa9ed3ac4cce6b232a35e05ba3d70"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 48693
+        },
+        {
+          "local": 3,
+          "frame": 3,
+          "hashes": {
+            "rgb_sha256": "ac1cd030d2b0f44b86ce3ee1a224a3dc8ed3b7336cbc210645fb7f0050439ee5",
+            "indexed_mask_sha256": "a6106cbafa10160cb89773063d594e433e106bb1c89d50ba10f590a57310e848"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 49075
+        },
+        {
+          "local": 4,
+          "frame": 4,
+          "hashes": {
+            "rgb_sha256": "0483656c4fcedb153de6d4c19d12c47a11d1be02c50780ed250c909550cd6c89",
+            "indexed_mask_sha256": "dade5c21d595d482871921a109bedfb7d97a4465ed6aef33f7a3d3b47a8cc153"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 47211
+        },
+        {
+          "local": 5,
+          "frame": 5,
+          "hashes": {
+            "rgb_sha256": "1995d0c2118b5d8a32cb378d8885ccac864ce8fad174a285e39ac562321b6c6c",
+            "indexed_mask_sha256": "a8653ecc24801aa574dac3e3a1cabeacf25b6bf1f7b5eb7f4d205dafa78d9b84"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 45332
+        },
+        {
+          "local": 6,
+          "frame": 6,
+          "hashes": {
+            "rgb_sha256": "9c9662571df069103d0e149513e600ca96c907c9675d10e09be64b8163dc69a4",
+            "indexed_mask_sha256": "b49c89b5d2797168e5b7fdf7ecce4c678631c65dd72812207d8459898473e7cd"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 41458
+        },
+        {
+          "local": 7,
+          "frame": 7,
+          "hashes": {
+            "rgb_sha256": "63dbc44674a47be3ccefad08d4d0c77fb91c4d87231baca90d03590271f96beb",
+            "indexed_mask_sha256": "06cc12de5f42cacd74ead86c8ab3de2d6fa0d02707a44190ffff641238a05640"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 38799
+        },
+        {
+          "local": 8,
+          "frame": 8,
+          "hashes": {
+            "rgb_sha256": "ef30f72fc5c4632f7fb77a72b72dc7295c74eb4d00b9f10b4700834767019f88",
+            "indexed_mask_sha256": "480a6e1cc707694efdd5600ff97d0da51f32701fed1d561371d259f6e093c741"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 37549
+        },
+        {
+          "local": 9,
+          "frame": 9,
+          "hashes": {
+            "rgb_sha256": "70bb4dc5f9e9d0f49d87bbee354d4808c69a62aedf9c783663d615f2c71595cb",
+            "indexed_mask_sha256": "2f50a4dd2b33250b83b24bcda77b4b3c3fe5dbf3918b04063b2831fea366fe95"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 36595
+        },
+        {
+          "local": 10,
+          "frame": 10,
+          "hashes": {
+            "rgb_sha256": "e3b00b345348b73c67b685c0d6d97edd38360ca79e288fa23e76be84f07e7f39",
+            "indexed_mask_sha256": "53195f416a696bcb9d015cc8a7438def2c7dcc6c36afd9ec72e089338ce1e7f7"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 34732
+        },
+        {
+          "local": 11,
+          "frame": 11,
+          "hashes": {
+            "rgb_sha256": "7156a1a1ac6d5d974bd8e611dbbf27ec3b630898c2271531a0628102aeafeaeb",
+            "indexed_mask_sha256": "787b8481783f5538e89d273e39e9d335328eb1d935958838fdc08757d6d02240"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 32200
+        },
+        {
+          "local": 12,
+          "frame": 12,
+          "hashes": {
+            "rgb_sha256": "bc03cb93e2c7b4a784dce92b9dab7cf6a75e35f133944f6dd533195072a1b221",
+            "indexed_mask_sha256": "98f25642ff56644078aa437a75cdc618df9228890df5c52a28e1c54bdb9ea912"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 31757
+        },
+        {
+          "local": 13,
+          "frame": 13,
+          "hashes": {
+            "rgb_sha256": "54f5ba62527678b52c31a344f8115bc89026ab593b9326705a02a20dd5e407b5",
+            "indexed_mask_sha256": "1c0b09ddb5bf4940ed967ff1ef9a8cd270993d6f7446cb85fb0d5362ee5f2105"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 31579
+        },
+        {
+          "local": 14,
+          "frame": 14,
+          "hashes": {
+            "rgb_sha256": "8b473ef1b20d75ab3b35d179c692a16a6721a7cce8695e040348e8d66cdd2834",
+            "indexed_mask_sha256": "ee085c6ee9db1cdab255c1183dda9e9b32e96960ec0df4bbe3cc92fe612bdc2b"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 31000
+        },
+        {
+          "local": 15,
+          "frame": 15,
+          "hashes": {
+            "rgb_sha256": "69a78e891ab5fd2d4833bf9b663c9562ad18ae776ef298bea04c3ed2cb09ff9b",
+            "indexed_mask_sha256": "244b335f77b9005010cb30131e3ec28a65b036ebcfac667398641b1fd00260d4"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 30907
+        },
+        {
+          "local": 16,
+          "frame": 16,
+          "hashes": {
+            "rgb_sha256": "8fce21b18b54ee803ba09fb0b5546c4f00d5b4fb241f00b1ac0972fef0b5ddb9",
+            "indexed_mask_sha256": "c094ef15f785d39305b79c3a1b29a1a5e8dbfcca01e36529eeb171d14b4de6ef"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 30686
+        }
+      ],
+      "target_refs": [
+        {
+          "reference_id": "R1",
+          "frame": 0,
+          "sequence": "dog-gooses",
+          "track": 1,
+          "hashes": {
+            "rgb_sha256": "d54a25e69e7ccd01ce80445331b5b32820af81a267a8d8cef6f7cae5a9f51717",
+            "indexed_mask_sha256": "e2f39f4c5834596614472f6333df281b5b2069713c2d68ccf329cfc8ef8922ae"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "bbox": [
+            270,
+            319,
+            422,
+            365
+          ],
+          "support_area": 4197,
+          "subject_rgb_exact": true,
+          "outside_rgb_constant": 128,
+          "reference_sha256": "7c7a67ac54593c693857c5f526971fb136f7ab7bd51ca35b120a84e999b345c3",
+          "reference_mask_sha256": "c0a5d2637dd0a113b6c28e17452b9da1b188088ea567f0ec41678e8de435fb32"
+        },
+        {
+          "reference_id": "R2",
+          "frame": 85,
+          "sequence": "dog-gooses",
+          "track": 1,
+          "hashes": {
+            "rgb_sha256": "bacc452dc404640eec19e9d7e89e1b7d1d594e203c8f1404e2f35d5044ae7407",
+            "indexed_mask_sha256": "ccb86b7b511e1bb4803276080059f5954b1821853c0a494077abc3ea4d80daa0"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "bbox": [
+            635,
+            318,
+            818,
+            418
+          ],
+          "support_area": 10601,
+          "subject_rgb_exact": true,
+          "outside_rgb_constant": 128,
+          "reference_sha256": "427c1fa20b1fc30b38e36c0c60db220e41808c675fce4424ff628adbf213dced",
+          "reference_mask_sha256": "decb5c1ac5b5b58e93aa470ff1f293c3143858819e8fb3ede6f3175e1d7b8ad0"
+        }
+      ],
+      "videos": {
+        "driver": {
+          "sha256": "922a8473bbdf9a95e534fd37d7a5060b825ec17597364c6244d251af6b1decf1",
+          "frame_count": 17,
+          "preview_fps": 24,
+          "roundtrip_rgb_exact": true
+        },
+        "driver_mask": {
+          "sha256": "478bddd40af7a367ce94ae884d0d71bf645c8ff0eb3afb1bbb4e26a7100b3faf",
+          "frame_count": 17,
+          "preview_fps": 24,
+          "roundtrip_rgb_exact": true
+        }
+      },
+      "rgb_resample": "LANCZOS",
+      "mask_resample": "NEAREST",
+      "source_padding_rgb": [
+        0,
+        0,
+        0
+      ],
+      "source_semantic": "RED selected track / WHITE remainder",
+      "reference_semantic": "RED selected track / BLACK remainder",
+      "reference_background_rgb": [
+        128,
+        128,
+        128
+      ]
+    },
+    "code": {
+      "experiment": "B-027",
+      "deadline_utc": "2026-10-25T23:11:00Z",
+      "files": {
+        "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+        "code/contracts.py": "6c1202e109972fcf82cd975feb9688888218aa66d783cb27ddc3495949382a38",
+        "code/cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+        "code/extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+        "code/freeze_run.py": "557e791bb620157744f3e29eb5ca5e5b4f44b0bcc9645cc85924f384a620d221",
+        "code/media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+        "code/pair_contract.py": "be60bb1c159f15a4924c16c35e865bbd51ad3eff7218e53fb82c634acf53edae",
+        "code/phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+        "code/phase_encode.py": "2cfc868c26de95262f7d8ed53894f7c14a859c3c1ce79c8ae91fcd10b5375032",
+        "code/phase_sample.py": "37b9f7cfc487e86cdfb15a536c9af9c4c265d41cea6681425a3d3482a18e1d3d",
+        "code/prepare_layout.py": "c3f77b05db5d766e886ddcddd067daeacd400dcf1d02ecf390fadda07921747e",
+        "code/run_phase.py": "829218d75edd14c0a016731be37b00089f063387ea952fbe157dc33f682cbbf4",
+        "code/runtime_guard.py": "3f7e375b169e04a0fbba3fa2283b2228ba1dac437414f82ba171678cde9ff2d6",
+        "code/runtime_launch.py": "1f233adaa313f11d1b8f269098b952d6cd31bbca5e3040ee6f2e23b3a47522d5",
+        "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+        "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+        "code/test_contract.py": "61e736b3bac4c266fb1a330227be178c65c0acd9baeb6b4da1cb4087872cf2c6",
+        "configs/R1.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+        "configs/R2.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+        "configs/active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a",
+        "configs/allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+        "configs/pinned_upstream.json": "2daf1170c7e9b1eef4247a53ba4b7cb256cf31a9ed9fe0f43449bcc2efb58363",
+        "task_manifest.json": "5c6139a2ebda3a15205052e06774692abbca6ad087b5dd3ab7cee68da95a28f7",
+        "PREREGISTERED_INPUTS.json": "76dd052d551549e9111058cbcd9f18f6f214efc7e3badceae00284888cdacda3"
+      },
+      "upstream": {
+        "convert_lora.py": "24121ef0b0153a4bbe6a55e4a72c1bca39b2045a3c889e117f94cbab8c5dc7b7",
+        "._cache_scail2_wds.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "convert.py": "0519f688643b0a2c3f13660f196e34280704ddb3e2575aa226e2d2f8f2b4397f",
+        "save_zero_pose_latent.py": "8fb30bfdfeb4b520310f5b39fa4f83c23ae80214899e2caf50bccb131bb9c743",
+        "prompt_enhancer.py": "eac23d93326179e8e558d8c2bdbdde245d28c3efa805e3864c45835236daaf31",
+        "._save_zero_pose_latent.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._prompt_enhancer.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "cache_scail2_wds.py": "1447f44cfa20474b6828d29df30bd19e57ec49a26051cf742082d063fb0bc4b1",
+        "._generate.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._convert_lora.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._convert.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "generate.py": "c6382298335741379aa0c3ad330b318adb743166a048e70b927a647f0e7c9cbc",
+        "wan/__init__.py": "30b2e82fd618560877d5bd576c1035fa9f97a36e7259f20e95ccdac713e7728f",
+        "wan/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/scail.py": "53079bd481178fccc87f0b2f6081938a7dfc086f1ce26d218a98b1db91babd9f",
+        "wan/._scail.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wan/distributed/._util.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/._ulysses.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/xdit_context_parallel.py": "a805a84aca2e41fbcfe1e58806f98f6dd024f3484bfa1f14a7277ed0778d8416",
+        "wan/distributed/sequence_parallel.py": "43b8a0d4842ddc0aaeebc40a6900a210e1233f4899e7e649f8c9bc3221bb6331",
+        "wan/distributed/ulysses.py": "0c9969ec8e99358fb79a224700853f89b52724c8dc2055f91972ace47f04a483",
+        "wan/distributed/._sequence_parallel.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/._xdit_context_parallel.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/fsdp.py": "b787312856a1f4da54648999c143d08c3dfa09be75be78e8c39fd21f55b823dd",
+        "wan/distributed/util.py": "b8925fdbdc0cf4409ba5760d92c66f1e329de40b1dad7f2011a7d37caad97b56",
+        "wan/distributed/._fsdp.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._model.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._t5.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._vae.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/__init__.py": "539b7a7c1ba53246092b46850ab4278fecf94b904f04c52b1506e44d7b87c868",
+        "wan/modules/tokenizers.py": "cf5b189c1ae017326efadab2fc6380ba223fa7a59d0be6464bd264db53c76934",
+        "wan/modules/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/xlm_roberta.py": "7e27d93573b5fb0fef1c9db9205264453bd30dcb1404c38031f24ed9c84b8d4a",
+        "wan/modules/._xlm_roberta.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._model_scail2.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/model.py": "c1572ade3bf7345bd4c00d4a19535788fab62f9c08b5aeb15f6d01f4435bb47a",
+        "wan/modules/attention.py": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc",
+        "wan/modules/._model_scail.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._clip.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/model_scail.py": "83fc26f273407f23351d3cf8142dd2e2fe647a64748d41ae465fad7a988d5836",
+        "wan/modules/vae.py": "d0d6a19a8114005c897c0dd63c2c40186c413cb70fe51f5f3f3783d29490567c",
+        "wan/modules/clip.py": "20cf48d7cd265b1286f8c10bf3bec88beac4437f87bd34919c3388b3d0800d7a",
+        "wan/modules/model_scail2.py": "bbcfc38ee8c4dc8e9f31987e617b57af267c46e8bd25ee046f76e7426d6f5d6c",
+        "wan/modules/t5.py": "a3a23739b4601b66874253112a608fd200f9c455cb374f1c6bebe26d41fcd9b8",
+        "wan/modules/._attention.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._tokenizers.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/qwen_vl_utils.py": "be11ac9808a6d79bb4e99482ea7ae9b2eccd48c2b517845b55f71cf5bb768239",
+        "wan/utils/._qwen_vl_utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._fm_solvers.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/__init__.py": "225f3a18c782ea3776adacdfb4c21bb4ac4d02497c77882545f2c2d619175572",
+        "wan/utils/._lora.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/fm_solvers.py": "b870bdc7253593b75097896b2351e74f747f76d756f58f1b4b0008d6821ae811",
+        "wan/utils/vace_processor.py": "3fc56687d1d6204cc9603625238f20a8453f7d89f38efff11c3353ac7ab83e36",
+        "wan/utils/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._fm_solvers_unipc.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._vace_processor.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/lora.py": "bddf65093f33b709d95c94a0b4c1efa35d974c716631ed2c98571917719984ba",
+        "wan/utils/prompt_extend.py": "a7d81b451377a47413e932d440d573ea010c0d608c8bb668b3af9c01261c0a67",
+        "wan/utils/scail_utils.py": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+        "wan/utils/fm_solvers_unipc.py": "0dec8c7ed17f6f2049275c6848113314da6ccec1c8db5bdc89df43c05c6038d9",
+        "wan/utils/._scail_utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/utils.py": "8e2d85b1c7961233379b9ab38cee153ca8d95358f27cb8bb6dd154e809731c8c",
+        "wan/utils/._prompt_extend.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/__init__.py": "46f53c46afd30c77632abb72541d51a276897213a8451b0ee97f1794782ad6b1",
+        "wan/configs/wan_t2v_1_3B.py": "6976ec4c03f737b69ae17afe13339b32905739205d4c19f16c8b329f9f06e986",
+        "wan/configs/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/wan_i2v_14B.py": "86704d4a08fd3b7e71b8256a001cca4fa8c065abd189c67f9f19eb348606ab88",
+        "wan/configs/._wan_t2v_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._scail_config_1_3B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._scail_config_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._wan_t2v_1_3B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/scail_config_14B.py": "ab0d11d714ed5045e66a0bc97c5a6d5c2bfbb66da84ed671da12721fa988ba96",
+        "wan/configs/._wan_i2v_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/wan_t2v_14B.py": "99aadb67eec94e28c2a02db45c178c07f7488b7e1b3c148aae1e23e908fe580f",
+        "wan/configs/shared_config.py": "a942b6f0a1d1a4ec9a7893c17a6218651ce272953b90d012ce5cdd19d15e45f7",
+        "wan/configs/scail_config_1_3B.py": "f729a3d2b73c3add335989482951a81ee39d23c40048fe9e8a22308e3a2684fe",
+        "wan/configs/._shared_config.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a"
+      },
+      "stage_execution": {
+        "ENC": {
+          "stage": "ENC",
+          "reference_id": "R1",
+          "task_id": "animal",
+          "predecessor": null,
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_D": {
+          "stage": "R1_D",
+          "reference_id": "R1",
+          "task_id": "animal",
+          "predecessor": "R1_S",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_PROBE": {
+          "stage": "R1_PROBE",
+          "reference_id": "R1",
+          "task_id": "animal",
+          "predecessor": "ENC",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_S": {
+          "stage": "R1_S",
+          "reference_id": "R1",
+          "task_id": "animal",
+          "predecessor": "R1_PROBE",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_D": {
+          "stage": "R2_D",
+          "reference_id": "R2",
+          "task_id": "animal",
+          "predecessor": "R2_S",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_PROBE": {
+          "stage": "R2_PROBE",
+          "reference_id": "R2",
+          "task_id": "animal",
+          "predecessor": "R1_D",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_S": {
+          "stage": "R2_S",
+          "reference_id": "R2",
+          "task_id": "animal",
+          "predecessor": "R2_PROBE",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        }
+      },
+      "stage_config_hashes": {
+        "ENC": {
+          "execution.json": "05b9d7980160d5122551b542c6b2c86e053653ae997edc4549e527672abf0804",
+          "input_config_hashes.json": "0ce7d777155f0bde126e091f76d16ee0427926077eacbdda8d3d2ecee89f59b6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "expected_preprocessed.json": "d1e2044906463386f39f1641e0943b432f1e33d4fa3589951569de69971353ae",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_D": {
+          "execution.json": "8c8da7de94bc42c683a9d7960ca7a1454d982279021c329489e39647d366e1ca",
+          "input_config_hashes.json": "0ce7d777155f0bde126e091f76d16ee0427926077eacbdda8d3d2ecee89f59b6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_PROBE": {
+          "execution.json": "f86ff5062df5a1e14023cf4b6b7511cdf82ff3d56258944e389dcf4be40626de",
+          "input_config_hashes.json": "0ce7d777155f0bde126e091f76d16ee0427926077eacbdda8d3d2ecee89f59b6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_S": {
+          "execution.json": "9a5314e4b2e6c73fa4502401445d75fa0fe8aced4f7b74065bcdefd058e189a6",
+          "input_config_hashes.json": "0ce7d777155f0bde126e091f76d16ee0427926077eacbdda8d3d2ecee89f59b6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_D": {
+          "execution.json": "a0ca72c2188064ac7ace3f33f6ac2d9e1b7e947908fa2ae25a607ba39ded7ceb",
+          "input_config_hashes.json": "657dada19c983dfaefff8ea98f4545aecabdd3b6e43b0c563ad86a0d73f2c831",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_PROBE": {
+          "execution.json": "0fec5446a730344a8c64fceaff9f2b9c43a032cf6ae8ec667a65c53668d587da",
+          "input_config_hashes.json": "657dada19c983dfaefff8ea98f4545aecabdd3b6e43b0c563ad86a0d73f2c831",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_S": {
+          "execution.json": "c8a2acaff83698c60033cc8c8fa556c28212894ea55d76d7b344a509509d392e",
+          "input_config_hashes.json": "657dada19c983dfaefff8ea98f4545aecabdd3b6e43b0c563ad86a0d73f2c831",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        }
+      }
+    }
+  },
+  "human": {
+    "task_manifest": {
+      "task_id": "human",
+      "prompt": "A person matching the reference image dances on a paved courtyard in front of seated spectators. The person steps forward, uncrosses the legs and extends one leg while lowering the raised arm. The spectators and surrounding courtyard remain visible.",
+      "source_sequence": "dance-twirl",
+      "source_track": 1,
+      "source_frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "target_sequence": "dance-jump",
+      "target_track": 1,
+      "reference_frames": [
+        0,
+        16
+      ],
+      "target_features": [
+        "white short-sleeve blouse",
+        "light pink flared skirt with contrasting pink hem lines",
+        "dark braided hair rather than source light tied hair"
+      ],
+      "source_events": [
+        "local0 to8: crossed step advances as arm moves away from head",
+        "local8 to16: legs open to wider stance and forward foot extends while arm lowers"
+      ],
+      "protected": [
+        "seated spectators",
+        "stone wall",
+        "paved floor"
+      ],
+      "limitations": [
+        "R1 back/side view; R2 frontal with both arms raised and one leg lifted",
+        "face small and motionblur; same public track not biometric identity proof"
+      ],
+      "dataset": "DAVIS-2017-trainval-480p",
+      "mask_given": true,
+      "source_fps": null,
+      "preview_fps": 24,
+      "timebase_assumed": true,
+      "native_timing_claimed": false,
+      "canvas_wh": [
+        896,
+        512
+      ],
+      "selection_sha256": "1cbfa8e3024fb4a314cc5b6b9ad6d0bee06ee92c19bb8297f1be471b1a7d0d6f",
+      "source_records": [
+        {
+          "local": 0,
+          "frame": 0,
+          "hashes": {
+            "rgb_sha256": "f708e1cfee79cc2e8855095b9e320ba0bb8d97d7887c9b1f7e8987d4c7035d2d",
+            "indexed_mask_sha256": "ee77a2abeda51b7f98702dc918e0de0e8ac39d7a3f180cc4d4df33c2fe1efac7"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 24933
+        },
+        {
+          "local": 1,
+          "frame": 1,
+          "hashes": {
+            "rgb_sha256": "7f58ab17d2bfee82745d70779231236a3ca1fb7262ec7879d6ac93818c2b475c",
+            "indexed_mask_sha256": "5211d3c6d71371be1a4b4d9974d520d36b90bc4709aeddcc0d64a7008ca33fcf"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 25463
+        },
+        {
+          "local": 2,
+          "frame": 2,
+          "hashes": {
+            "rgb_sha256": "af3e21d56058685cd09ba481fc9af223f0f2b607ec74f5050e5f6618a1f36cb7",
+            "indexed_mask_sha256": "8d98e1b2a5377bd26b36151c904026ab990614aab6038133acf08d9b6c02b294"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 26428
+        },
+        {
+          "local": 3,
+          "frame": 3,
+          "hashes": {
+            "rgb_sha256": "90d265af8de2bf373383e2016fb3c69c4b218c146bf753ef136e9079da4437ec",
+            "indexed_mask_sha256": "10ac0c5a32379ce4cccc61f1dd359c00ba5ff133e326a3ca685ebd44dda48a5f"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 27140
+        },
+        {
+          "local": 4,
+          "frame": 4,
+          "hashes": {
+            "rgb_sha256": "0f09e9b0eef0a22d60041dab214647abdabc7acbb7d1cc30d2e0115cf2535ecc",
+            "indexed_mask_sha256": "212518a2cc121e08431c16c79f7d731b0511b48e8f82e399c318d873e99ffc09"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 27665
+        },
+        {
+          "local": 5,
+          "frame": 5,
+          "hashes": {
+            "rgb_sha256": "f9cfc7fd8632cddc2ff73b2803ee439f1856170052491a9a431ad7a2e15bc13c",
+            "indexed_mask_sha256": "c2b92e2a973a472e99a3dff22a88fd2a8dbdcb60aeffa90ab1bf2cc9a60a1ba2"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 27786
+        },
+        {
+          "local": 6,
+          "frame": 6,
+          "hashes": {
+            "rgb_sha256": "8b7d33b9dab0fe47c8eef04805c52ca393c06d665cc8bf1e9ad8a824b9d141f4",
+            "indexed_mask_sha256": "6e0feb898b7e211377f6adfeeea38c76f89ad682a5a40af3afdb78e6ad3c6d52"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 27854
+        },
+        {
+          "local": 7,
+          "frame": 7,
+          "hashes": {
+            "rgb_sha256": "2dadc1cfb5ac4379c6b89e039c9d080f3d4d187d391f37368e2d5a5a15793c22",
+            "indexed_mask_sha256": "5b0f94eaa2e967a5de25b0f35e40180246f1bc24a994515f826f6fdb96224d5b"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 27690
+        },
+        {
+          "local": 8,
+          "frame": 8,
+          "hashes": {
+            "rgb_sha256": "a9e09b4025279508dce4c7816d8fbd2e8a51abb3c519aff12b78a51f4e026a33",
+            "indexed_mask_sha256": "b92fd377ecebcc6cf7c839d4750e5ddf0b30140f91de2c6122607025062bb734"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 29305
+        },
+        {
+          "local": 9,
+          "frame": 9,
+          "hashes": {
+            "rgb_sha256": "dc25a943c32645a9c031b1a370a5d959c9737e23c563d2b5c4b6ec6b2b1e2f73",
+            "indexed_mask_sha256": "b4eec551de56e34f4f89f39dd25a3f09a23db76b885f9cf09836d64146b5eb3a"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 31469
+        },
+        {
+          "local": 10,
+          "frame": 10,
+          "hashes": {
+            "rgb_sha256": "44e997130a5ed7a589e95823df9388adb4b258eed8b986f82bd03e463d4ea2a0",
+            "indexed_mask_sha256": "cc3f95f7799cd90ea8c4084fd1303d7f360f05e5f2575ebe5e43c371a494a980"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 32454
+        },
+        {
+          "local": 11,
+          "frame": 11,
+          "hashes": {
+            "rgb_sha256": "cfede3ecc94763c281cf5826b15c002a6eed34788f3b22338ec41006e5f3cbd3",
+            "indexed_mask_sha256": "1245118dd3fb3f06f7633b02c6bb8b1734012bf62edd4e3d529899097543abd7"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 33521
+        },
+        {
+          "local": 12,
+          "frame": 12,
+          "hashes": {
+            "rgb_sha256": "982e5610d2b247cba40de18a92fa936f1face75efacd3f54b8811e7fac9f4ec3",
+            "indexed_mask_sha256": "9d4195b68c3851e48202859855a6a531a17f66cd4a62a91112f385307b25de68"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 34471
+        },
+        {
+          "local": 13,
+          "frame": 13,
+          "hashes": {
+            "rgb_sha256": "044682469d9f2450680d7de1151343c11418123acc9d93f4dca6a8304e89adbb",
+            "indexed_mask_sha256": "1ec7b19139f5afca517b9a5501c2a43b109f5de8109c1b66bfdf0e93e2c7ae13"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 35087
+        },
+        {
+          "local": 14,
+          "frame": 14,
+          "hashes": {
+            "rgb_sha256": "69160cb8f85eb2cf8c3200cebd646ee606c256f6e011cbdcf460c6cf031469a0",
+            "indexed_mask_sha256": "9202a67d2140c5d3e1476ec48a9651819bb4dd9aa6bc1c14dba259bcf364d342"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 34512
+        },
+        {
+          "local": 15,
+          "frame": 15,
+          "hashes": {
+            "rgb_sha256": "983a4721480499354e001ac7df13ceae334fa357ae68c64bda82659b19acad7d",
+            "indexed_mask_sha256": "d0193cbac2fea3d823ef85ca7540d92642dae6a5f99b157dd8813eef718ab8a0"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 33697
+        },
+        {
+          "local": 16,
+          "frame": 16,
+          "hashes": {
+            "rgb_sha256": "f11046e54cef947cf6fb3e7605a530fcbda3c6f12d4d08f0cfadfd0869a8ed46",
+            "indexed_mask_sha256": "6e7a8b33bd5edfab31c560caeec640996f75fc396f2e132205e0e570e7959500"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 30400
+        }
+      ],
+      "target_refs": [
+        {
+          "reference_id": "R1",
+          "frame": 0,
+          "sequence": "dance-jump",
+          "track": 1,
+          "hashes": {
+            "rgb_sha256": "c4a326f3c7b0d28a2710be927267781ea0f10a70b6e1eaefb0de98dd06a206d8",
+            "indexed_mask_sha256": "ea2fcc8848378baccbf137ccf06090ffbb6b03b2faadef326e9d362cf799f9a7"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "bbox": [
+            299,
+            61,
+            604,
+            390
+          ],
+          "support_area": 36911,
+          "subject_rgb_exact": true,
+          "outside_rgb_constant": 128,
+          "reference_sha256": "c3e423ec64b817acd8965df95f78eadaf8d6a472ce1bf3a7c32d516bc54e06c6",
+          "reference_mask_sha256": "5f17b52a3e47863bd3e74f89549ae9af3fc838db61c86916ba3b23140dadcd75"
+        },
+        {
+          "reference_id": "R2",
+          "frame": 16,
+          "sequence": "dance-jump",
+          "track": 1,
+          "hashes": {
+            "rgb_sha256": "8334fb915e30cee98cf981ca772b686adf0ba7edd7ce4bb097521c57c80af583",
+            "indexed_mask_sha256": "1373989df6c8565691278c27f93342a29c5a771343c233b0ea80abd43afeb617"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "bbox": [
+            361,
+            60,
+            634,
+            449
+          ],
+          "support_area": 37435,
+          "subject_rgb_exact": true,
+          "outside_rgb_constant": 128,
+          "reference_sha256": "20e4bce5cce8f739a4929ec8888860cc2f34eab6e6653026cd24ae391c0f83f4",
+          "reference_mask_sha256": "2bc9a6227393fa2b05ff9f5eb7a0f2def0ab367a30b9854b984d88360afbf89a"
+        }
+      ],
+      "videos": {
+        "driver": {
+          "sha256": "09a602423c68a420316c4df9d25bf883479e7c0e58ddf024e87bdcce9a9c0c64",
+          "frame_count": 17,
+          "preview_fps": 24,
+          "roundtrip_rgb_exact": true
+        },
+        "driver_mask": {
+          "sha256": "e1d3a33edfb044756afdb73112fde16e7ecd84adbb306904e85d3dd9b7bf5dea",
+          "frame_count": 17,
+          "preview_fps": 24,
+          "roundtrip_rgb_exact": true
+        }
+      },
+      "rgb_resample": "LANCZOS",
+      "mask_resample": "NEAREST",
+      "source_padding_rgb": [
+        0,
+        0,
+        0
+      ],
+      "source_semantic": "RED selected track / WHITE remainder",
+      "reference_semantic": "RED selected track / BLACK remainder",
+      "reference_background_rgb": [
+        128,
+        128,
+        128
+      ]
+    },
+    "code": {
+      "experiment": "B-027",
+      "deadline_utc": "2026-10-25T23:11:00Z",
+      "files": {
+        "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+        "code/contracts.py": "6c1202e109972fcf82cd975feb9688888218aa66d783cb27ddc3495949382a38",
+        "code/cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+        "code/extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+        "code/freeze_run.py": "557e791bb620157744f3e29eb5ca5e5b4f44b0bcc9645cc85924f384a620d221",
+        "code/media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+        "code/pair_contract.py": "be60bb1c159f15a4924c16c35e865bbd51ad3eff7218e53fb82c634acf53edae",
+        "code/phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+        "code/phase_encode.py": "2cfc868c26de95262f7d8ed53894f7c14a859c3c1ce79c8ae91fcd10b5375032",
+        "code/phase_sample.py": "37b9f7cfc487e86cdfb15a536c9af9c4c265d41cea6681425a3d3482a18e1d3d",
+        "code/prepare_layout.py": "c3f77b05db5d766e886ddcddd067daeacd400dcf1d02ecf390fadda07921747e",
+        "code/run_phase.py": "829218d75edd14c0a016731be37b00089f063387ea952fbe157dc33f682cbbf4",
+        "code/runtime_guard.py": "3f7e375b169e04a0fbba3fa2283b2228ba1dac437414f82ba171678cde9ff2d6",
+        "code/runtime_launch.py": "1f233adaa313f11d1b8f269098b952d6cd31bbca5e3040ee6f2e23b3a47522d5",
+        "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+        "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+        "code/test_contract.py": "61e736b3bac4c266fb1a330227be178c65c0acd9baeb6b4da1cb4087872cf2c6",
+        "configs/R1.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+        "configs/R2.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+        "configs/active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a",
+        "configs/allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+        "configs/pinned_upstream.json": "2daf1170c7e9b1eef4247a53ba4b7cb256cf31a9ed9fe0f43449bcc2efb58363",
+        "task_manifest.json": "29bb9c8d9c740e0ce50b3570fefe62da9955c5640defd99fe673781f819a86fd",
+        "PREREGISTERED_INPUTS.json": "54b878e7b01ef123a6bd6acc7754c0009802f6925bf07d49183344bf0c3f9cc2"
+      },
+      "upstream": {
+        "convert_lora.py": "24121ef0b0153a4bbe6a55e4a72c1bca39b2045a3c889e117f94cbab8c5dc7b7",
+        "._cache_scail2_wds.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "convert.py": "0519f688643b0a2c3f13660f196e34280704ddb3e2575aa226e2d2f8f2b4397f",
+        "save_zero_pose_latent.py": "8fb30bfdfeb4b520310f5b39fa4f83c23ae80214899e2caf50bccb131bb9c743",
+        "prompt_enhancer.py": "eac23d93326179e8e558d8c2bdbdde245d28c3efa805e3864c45835236daaf31",
+        "._save_zero_pose_latent.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._prompt_enhancer.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "cache_scail2_wds.py": "1447f44cfa20474b6828d29df30bd19e57ec49a26051cf742082d063fb0bc4b1",
+        "._generate.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._convert_lora.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._convert.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "generate.py": "c6382298335741379aa0c3ad330b318adb743166a048e70b927a647f0e7c9cbc",
+        "wan/__init__.py": "30b2e82fd618560877d5bd576c1035fa9f97a36e7259f20e95ccdac713e7728f",
+        "wan/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/scail.py": "53079bd481178fccc87f0b2f6081938a7dfc086f1ce26d218a98b1db91babd9f",
+        "wan/._scail.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wan/distributed/._util.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/._ulysses.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/xdit_context_parallel.py": "a805a84aca2e41fbcfe1e58806f98f6dd024f3484bfa1f14a7277ed0778d8416",
+        "wan/distributed/sequence_parallel.py": "43b8a0d4842ddc0aaeebc40a6900a210e1233f4899e7e649f8c9bc3221bb6331",
+        "wan/distributed/ulysses.py": "0c9969ec8e99358fb79a224700853f89b52724c8dc2055f91972ace47f04a483",
+        "wan/distributed/._sequence_parallel.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/._xdit_context_parallel.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/fsdp.py": "b787312856a1f4da54648999c143d08c3dfa09be75be78e8c39fd21f55b823dd",
+        "wan/distributed/util.py": "b8925fdbdc0cf4409ba5760d92c66f1e329de40b1dad7f2011a7d37caad97b56",
+        "wan/distributed/._fsdp.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._model.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._t5.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._vae.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/__init__.py": "539b7a7c1ba53246092b46850ab4278fecf94b904f04c52b1506e44d7b87c868",
+        "wan/modules/tokenizers.py": "cf5b189c1ae017326efadab2fc6380ba223fa7a59d0be6464bd264db53c76934",
+        "wan/modules/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/xlm_roberta.py": "7e27d93573b5fb0fef1c9db9205264453bd30dcb1404c38031f24ed9c84b8d4a",
+        "wan/modules/._xlm_roberta.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._model_scail2.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/model.py": "c1572ade3bf7345bd4c00d4a19535788fab62f9c08b5aeb15f6d01f4435bb47a",
+        "wan/modules/attention.py": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc",
+        "wan/modules/._model_scail.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._clip.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/model_scail.py": "83fc26f273407f23351d3cf8142dd2e2fe647a64748d41ae465fad7a988d5836",
+        "wan/modules/vae.py": "d0d6a19a8114005c897c0dd63c2c40186c413cb70fe51f5f3f3783d29490567c",
+        "wan/modules/clip.py": "20cf48d7cd265b1286f8c10bf3bec88beac4437f87bd34919c3388b3d0800d7a",
+        "wan/modules/model_scail2.py": "bbcfc38ee8c4dc8e9f31987e617b57af267c46e8bd25ee046f76e7426d6f5d6c",
+        "wan/modules/t5.py": "a3a23739b4601b66874253112a608fd200f9c455cb374f1c6bebe26d41fcd9b8",
+        "wan/modules/._attention.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._tokenizers.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/qwen_vl_utils.py": "be11ac9808a6d79bb4e99482ea7ae9b2eccd48c2b517845b55f71cf5bb768239",
+        "wan/utils/._qwen_vl_utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._fm_solvers.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/__init__.py": "225f3a18c782ea3776adacdfb4c21bb4ac4d02497c77882545f2c2d619175572",
+        "wan/utils/._lora.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/fm_solvers.py": "b870bdc7253593b75097896b2351e74f747f76d756f58f1b4b0008d6821ae811",
+        "wan/utils/vace_processor.py": "3fc56687d1d6204cc9603625238f20a8453f7d89f38efff11c3353ac7ab83e36",
+        "wan/utils/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._fm_solvers_unipc.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._vace_processor.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/lora.py": "bddf65093f33b709d95c94a0b4c1efa35d974c716631ed2c98571917719984ba",
+        "wan/utils/prompt_extend.py": "a7d81b451377a47413e932d440d573ea010c0d608c8bb668b3af9c01261c0a67",
+        "wan/utils/scail_utils.py": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+        "wan/utils/fm_solvers_unipc.py": "0dec8c7ed17f6f2049275c6848113314da6ccec1c8db5bdc89df43c05c6038d9",
+        "wan/utils/._scail_utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/utils.py": "8e2d85b1c7961233379b9ab38cee153ca8d95358f27cb8bb6dd154e809731c8c",
+        "wan/utils/._prompt_extend.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/__init__.py": "46f53c46afd30c77632abb72541d51a276897213a8451b0ee97f1794782ad6b1",
+        "wan/configs/wan_t2v_1_3B.py": "6976ec4c03f737b69ae17afe13339b32905739205d4c19f16c8b329f9f06e986",
+        "wan/configs/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/wan_i2v_14B.py": "86704d4a08fd3b7e71b8256a001cca4fa8c065abd189c67f9f19eb348606ab88",
+        "wan/configs/._wan_t2v_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._scail_config_1_3B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._scail_config_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._wan_t2v_1_3B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/scail_config_14B.py": "ab0d11d714ed5045e66a0bc97c5a6d5c2bfbb66da84ed671da12721fa988ba96",
+        "wan/configs/._wan_i2v_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/wan_t2v_14B.py": "99aadb67eec94e28c2a02db45c178c07f7488b7e1b3c148aae1e23e908fe580f",
+        "wan/configs/shared_config.py": "a942b6f0a1d1a4ec9a7893c17a6218651ce272953b90d012ce5cdd19d15e45f7",
+        "wan/configs/scail_config_1_3B.py": "f729a3d2b73c3add335989482951a81ee39d23c40048fe9e8a22308e3a2684fe",
+        "wan/configs/._shared_config.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a"
+      },
+      "stage_execution": {
+        "ENC": {
+          "stage": "ENC",
+          "reference_id": "R1",
+          "task_id": "human",
+          "predecessor": null,
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_D": {
+          "stage": "R1_D",
+          "reference_id": "R1",
+          "task_id": "human",
+          "predecessor": "R1_S",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_PROBE": {
+          "stage": "R1_PROBE",
+          "reference_id": "R1",
+          "task_id": "human",
+          "predecessor": "ENC",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_S": {
+          "stage": "R1_S",
+          "reference_id": "R1",
+          "task_id": "human",
+          "predecessor": "R1_PROBE",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_D": {
+          "stage": "R2_D",
+          "reference_id": "R2",
+          "task_id": "human",
+          "predecessor": "R2_S",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_PROBE": {
+          "stage": "R2_PROBE",
+          "reference_id": "R2",
+          "task_id": "human",
+          "predecessor": "R1_D",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_S": {
+          "stage": "R2_S",
+          "reference_id": "R2",
+          "task_id": "human",
+          "predecessor": "R2_PROBE",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        }
+      },
+      "stage_config_hashes": {
+        "ENC": {
+          "execution.json": "be824c1e3cc74d28ca38b299040ab55c110b660ac670d3f348d0a5c1c9a45ecc",
+          "input_config_hashes.json": "1bd477cb6a0c50eb5c5ef4cf38e66f76b566e3d73e8e43a504ccd1277fbb51d6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "expected_preprocessed.json": "db7bbdad8d5dee2f1bcaabd54443ee685e757bce384b754c0c1bcae32ad2ddd6",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_D": {
+          "execution.json": "1ec633666eb7803d4c950c6f8b7ed5f558522c9f036581e173a4179aaf32f73a",
+          "input_config_hashes.json": "1bd477cb6a0c50eb5c5ef4cf38e66f76b566e3d73e8e43a504ccd1277fbb51d6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_PROBE": {
+          "execution.json": "a11981e8430a123314790672b6f5fbac3bf72b1836128c51118a0d979fe9a8b6",
+          "input_config_hashes.json": "1bd477cb6a0c50eb5c5ef4cf38e66f76b566e3d73e8e43a504ccd1277fbb51d6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_S": {
+          "execution.json": "35f24cd49651fab362f379d89ab890213b4d50e16aad091590bc2be280371066",
+          "input_config_hashes.json": "1bd477cb6a0c50eb5c5ef4cf38e66f76b566e3d73e8e43a504ccd1277fbb51d6",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_D": {
+          "execution.json": "dfd778f1cd0e855d0f2279122e92c3b65c22bcc5c09fe03ec49c6ab4b48ba84f",
+          "input_config_hashes.json": "43fe6406ae59c5a19c1ee4664336f7ccfe48f68a0d4195da0822cbb8ec56e8d1",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_PROBE": {
+          "execution.json": "e179c00ea5cfe2cb0b041334524a73b1cb39876c2a5b4fa994999233daf28638",
+          "input_config_hashes.json": "43fe6406ae59c5a19c1ee4664336f7ccfe48f68a0d4195da0822cbb8ec56e8d1",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_S": {
+          "execution.json": "eb1ca300b89c5cdcddd410dc63e47656f83ac944ab0492f44d1f23736f0488ff",
+          "input_config_hashes.json": "43fe6406ae59c5a19c1ee4664336f7ccfe48f68a0d4195da0822cbb8ec56e8d1",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        }
+      }
+    }
+  },
+  "vehicle": {
+    "task_manifest": {
+      "task_id": "vehicle",
+      "prompt": "A car matching the reference image drives toward the right around a city roundabout. Its side view gradually turns toward a rear three-quarter view as the camera follows. Buildings, railings, road markings and other vehicles remain in the scene.",
+      "source_sequence": "car-roundabout",
+      "source_track": 1,
+      "source_frames": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "target_sequence": "car-shadow",
+      "target_track": 1,
+      "reference_frames": [
+        0,
+        39
+      ],
+      "target_features": [
+        "light silver tall compact body",
+        "roof rails and tall vertical rear lamps",
+        "tall window and rear-body proportions differing from dark source car"
+      ],
+      "source_events": [
+        "local0 to8: car rolls right while camera follows and background shifts",
+        "local8 to16: rear face becomes more visible as vehicle turns away around curve"
+      ],
+      "protected": [
+        "buildings",
+        "railings/monument",
+        "road signs and other cars"
+      ],
+      "limitations": [
+        "R1 close side view facing left; R2 distant rear-side view",
+        "reference size and illumination change jointly; SCAIL rigid-object domain exploratory"
+      ],
+      "dataset": "DAVIS-2017-trainval-480p",
+      "mask_given": true,
+      "source_fps": null,
+      "preview_fps": 24,
+      "timebase_assumed": true,
+      "native_timing_claimed": false,
+      "canvas_wh": [
+        896,
+        512
+      ],
+      "selection_sha256": "1cbfa8e3024fb4a314cc5b6b9ad6d0bee06ee92c19bb8297f1be471b1a7d0d6f",
+      "source_records": [
+        {
+          "local": 0,
+          "frame": 30,
+          "hashes": {
+            "rgb_sha256": "527cf79b7e7ab37854874e96ce47a86ca0e7c609960c7681d76dc8d29b663941",
+            "indexed_mask_sha256": "6ec35213ffd46324e62d38b3301951e84652cb016f2671b359ea508634e3e211"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 71896
+        },
+        {
+          "local": 1,
+          "frame": 31,
+          "hashes": {
+            "rgb_sha256": "c10826c191faa7b7c0cda4ca69274ce817d26004e835362f2fc510b8b0d85632",
+            "indexed_mask_sha256": "65ffbf26c9138dbd2221d02bab2b0ca53266070f6ce85682b86a7c1473a5c981"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 71749
+        },
+        {
+          "local": 2,
+          "frame": 32,
+          "hashes": {
+            "rgb_sha256": "73e03add3f3f45b2539a7be763f68f6b3911789f96166cd48126e07555ab0e55",
+            "indexed_mask_sha256": "cd92569c48fcf1c8a4e8e434e45f0747ac289d2a4f1ca29d509ad3b8e3e86966"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 71376
+        },
+        {
+          "local": 3,
+          "frame": 33,
+          "hashes": {
+            "rgb_sha256": "9ff13980519b5537353ed7458fa08dfd1c28c2228c91cabc74d6f7851f850261",
+            "indexed_mask_sha256": "b3c1c2e8cf0780dc3f0253a433d5a5d4214f91890e08f105dd36c7529b64c5c6"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 71015
+        },
+        {
+          "local": 4,
+          "frame": 34,
+          "hashes": {
+            "rgb_sha256": "0acaa5106447ba2fdd207f762872b96b827295539332065a72e13064a0812a71",
+            "indexed_mask_sha256": "cb85eaf25974f0b74c287a0c0ce153db8ecc729e1d768db93d91327c27d46881"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 70380
+        },
+        {
+          "local": 5,
+          "frame": 35,
+          "hashes": {
+            "rgb_sha256": "8c0420381407fc9cae11a9a26a449d56209d3c6af3bf0bbf53adb58ec8d2aa3e",
+            "indexed_mask_sha256": "f1a9b0fdf6d42f6e6a2aae8275d9c018d2dc2b9743c3e6d1c11fc7959f624108"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 70069
+        },
+        {
+          "local": 6,
+          "frame": 36,
+          "hashes": {
+            "rgb_sha256": "d809d04722c522f9d95ff12bed8ea6a46de4aaec76aec10ddce3dbc139209da4",
+            "indexed_mask_sha256": "da7f30d40f2176e6638a3f77d4b419c8eea44784bbe324a6328b52b88158e032"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 69704
+        },
+        {
+          "local": 7,
+          "frame": 37,
+          "hashes": {
+            "rgb_sha256": "06bffc7bcb213878a4629a6bd9b62e29d0d33a63a42755debc0316b7561760b0",
+            "indexed_mask_sha256": "a31c6fa5d3c5ba6d0de94f6d7518b7eab94449b8c61d2432f7622fcfbe7d0c86"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 69312
+        },
+        {
+          "local": 8,
+          "frame": 38,
+          "hashes": {
+            "rgb_sha256": "f2b62f3580ea2ae768e04d34e08ae28b120b7f0a09fb80a7e6876d7bb8d95955",
+            "indexed_mask_sha256": "f750197e5ab12b1e3d6eef3670e9120445d41b4f0cb0ada304607b0b053beaec"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 68777
+        },
+        {
+          "local": 9,
+          "frame": 39,
+          "hashes": {
+            "rgb_sha256": "e3568b66890e7b5fcd01fca81f8285783cf3f731ac485a24f2b8890b7f2b2140",
+            "indexed_mask_sha256": "8eb0eaa667145bcd077652a29c8d0e53ce3b623cb7e226caa445c57fe2e559f7"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 68113
+        },
+        {
+          "local": 10,
+          "frame": 40,
+          "hashes": {
+            "rgb_sha256": "49169b9c2804f4f205d3c82274484f9e9fc0674f34f9a324b61315a4047a3c49",
+            "indexed_mask_sha256": "f7e66c355b88e585cabe8c2179e2e12dd88c4bba8fadea6a6d7f574ac61058a6"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 67471
+        },
+        {
+          "local": 11,
+          "frame": 41,
+          "hashes": {
+            "rgb_sha256": "45d360139b0784ff8bab3e5b8716c3dd612aaad546f45d6fa50a778054f39031",
+            "indexed_mask_sha256": "9c557cc8c8b76be5c0ced9d40e8618a32b1aca3eebf134921ed89cda3e7dd8c4"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 66720
+        },
+        {
+          "local": 12,
+          "frame": 42,
+          "hashes": {
+            "rgb_sha256": "53ba6994f050f00339de0c2598c981084729e90db17622d9dbcb5be2238afc57",
+            "indexed_mask_sha256": "f05524684c7c0efdd7962e85dc2d6429243cbe09f5931f54a030a22005d59d8b"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 66062
+        },
+        {
+          "local": 13,
+          "frame": 43,
+          "hashes": {
+            "rgb_sha256": "c793122fc3f023bab20c1b3e480f6b3f7b2c80323a9b1ce10c501f1b66fa4cac",
+            "indexed_mask_sha256": "cc6e8c434716f3be630d56dc6bc030e3e6d1e916e80c5f942dd7c2d9ae648d18"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 65441
+        },
+        {
+          "local": 14,
+          "frame": 44,
+          "hashes": {
+            "rgb_sha256": "d3d9ab85f883ceb6fa9535f6dbbefe19c1ea628fc5634c620b37cc47e2082e99",
+            "indexed_mask_sha256": "5fd39c1af698b3e25314aa27ea15c8f42cdb3eca522c04a2f9676da1e5f8af31"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 64592
+        },
+        {
+          "local": 15,
+          "frame": 45,
+          "hashes": {
+            "rgb_sha256": "c6121d3e1ad484d20c9ad5f8cc4111c3898a5cb40751453364740c96db54d8a7",
+            "indexed_mask_sha256": "0dbda30d965c052377bf200da52d426a5b9acd467d642c2335a5985753bb8425"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 63828
+        },
+        {
+          "local": 16,
+          "frame": 46,
+          "hashes": {
+            "rgb_sha256": "bcd9f7f5965070b80f0a95b28e5b99bf91fce9cef2b795f33a01a8f7f0dc3340",
+            "indexed_mask_sha256": "ef7486c7add243e6e015cfabcee53042cfb840641a7aae13e10c8884aee6b659"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "support_area": 63117
+        }
+      ],
+      "target_refs": [
+        {
+          "reference_id": "R1",
+          "frame": 0,
+          "sequence": "car-shadow",
+          "track": 1,
+          "hashes": {
+            "rgb_sha256": "f9121f3fbdabbba4858e9bbd854faa3068d983f2dc89ff2cac45e65ccd304bdc",
+            "indexed_mask_sha256": "5a044b70e6e73aabf0af78f69902c009940765abb392889874fbd12dc67e4429"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "bbox": [
+            328,
+            96,
+            687,
+            300
+          ],
+          "support_area": 45980,
+          "subject_rgb_exact": true,
+          "outside_rgb_constant": 128,
+          "reference_sha256": "ba12573558d257c4b60adefb6c2863693adc0f872203d46efdbb081fe07c682e",
+          "reference_mask_sha256": "3bd17162f498f83640b617179838e394125cf34c26ed45b03c5a82d2caa1a84f"
+        },
+        {
+          "reference_id": "R2",
+          "frame": 39,
+          "sequence": "car-shadow",
+          "track": 1,
+          "hashes": {
+            "rgb_sha256": "eebcbb6a3bd6ec7f6abc7ea095c932549794deda70b8b54060f5042858306836",
+            "indexed_mask_sha256": "31f066035802eb15ddd831a670fcae9c641d78d428d78f3522595ec3afe84b24"
+          },
+          "geometry": {
+            "source_size": [
+              854,
+              480
+            ],
+            "resized_size": [
+              896,
+              504
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "canvas": [
+              896,
+              512
+            ],
+            "rgb_resample": "LANCZOS",
+            "mask_resample": "NEAREST"
+          },
+          "bbox": [
+            335,
+            180,
+            512,
+            284
+          ],
+          "support_area": 13302,
+          "subject_rgb_exact": true,
+          "outside_rgb_constant": 128,
+          "reference_sha256": "46467a7716f099b34580f9cd498369c0253165c543457a52eee1527a858ed2cd",
+          "reference_mask_sha256": "801179d209b8a1db8f0e95dd9e4c7805d8094a890ee62e5ee5e700bb443ad224"
+        }
+      ],
+      "videos": {
+        "driver": {
+          "sha256": "1eda909e81570047815ee290278f67441a7cecff3ea3e30ba053bc054b966233",
+          "frame_count": 17,
+          "preview_fps": 24,
+          "roundtrip_rgb_exact": true
+        },
+        "driver_mask": {
+          "sha256": "e84759e95658460a67a517ea48b23e21f3a118d284ad52ba058a3a82e375ab22",
+          "frame_count": 17,
+          "preview_fps": 24,
+          "roundtrip_rgb_exact": true
+        }
+      },
+      "rgb_resample": "LANCZOS",
+      "mask_resample": "NEAREST",
+      "source_padding_rgb": [
+        0,
+        0,
+        0
+      ],
+      "source_semantic": "RED selected track / WHITE remainder",
+      "reference_semantic": "RED selected track / BLACK remainder",
+      "reference_background_rgb": [
+        128,
+        128,
+        128
+      ]
+    },
+    "code": {
+      "experiment": "B-027",
+      "deadline_utc": "2026-10-25T23:11:00Z",
+      "files": {
+        "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+        "code/contracts.py": "6c1202e109972fcf82cd975feb9688888218aa66d783cb27ddc3495949382a38",
+        "code/cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+        "code/extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+        "code/freeze_run.py": "557e791bb620157744f3e29eb5ca5e5b4f44b0bcc9645cc85924f384a620d221",
+        "code/media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+        "code/pair_contract.py": "be60bb1c159f15a4924c16c35e865bbd51ad3eff7218e53fb82c634acf53edae",
+        "code/phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+        "code/phase_encode.py": "2cfc868c26de95262f7d8ed53894f7c14a859c3c1ce79c8ae91fcd10b5375032",
+        "code/phase_sample.py": "37b9f7cfc487e86cdfb15a536c9af9c4c265d41cea6681425a3d3482a18e1d3d",
+        "code/prepare_layout.py": "c3f77b05db5d766e886ddcddd067daeacd400dcf1d02ecf390fadda07921747e",
+        "code/run_phase.py": "829218d75edd14c0a016731be37b00089f063387ea952fbe157dc33f682cbbf4",
+        "code/runtime_guard.py": "3f7e375b169e04a0fbba3fa2283b2228ba1dac437414f82ba171678cde9ff2d6",
+        "code/runtime_launch.py": "1f233adaa313f11d1b8f269098b952d6cd31bbca5e3040ee6f2e23b3a47522d5",
+        "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+        "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+        "code/test_contract.py": "61e736b3bac4c266fb1a330227be178c65c0acd9baeb6b4da1cb4087872cf2c6",
+        "configs/R1.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+        "configs/R2.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+        "configs/active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a",
+        "configs/allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+        "configs/pinned_upstream.json": "2daf1170c7e9b1eef4247a53ba4b7cb256cf31a9ed9fe0f43449bcc2efb58363",
+        "task_manifest.json": "15ba09c5164981627e9e950c65d5dd88fb76a101d7a0977a526f08cf723e98af",
+        "PREREGISTERED_INPUTS.json": "f5146800258fb11101b98b4098148c0334bc008bbff54b9100afae4179e702c8"
+      },
+      "upstream": {
+        "convert_lora.py": "24121ef0b0153a4bbe6a55e4a72c1bca39b2045a3c889e117f94cbab8c5dc7b7",
+        "._cache_scail2_wds.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "convert.py": "0519f688643b0a2c3f13660f196e34280704ddb3e2575aa226e2d2f8f2b4397f",
+        "save_zero_pose_latent.py": "8fb30bfdfeb4b520310f5b39fa4f83c23ae80214899e2caf50bccb131bb9c743",
+        "prompt_enhancer.py": "eac23d93326179e8e558d8c2bdbdde245d28c3efa805e3864c45835236daaf31",
+        "._save_zero_pose_latent.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._prompt_enhancer.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "cache_scail2_wds.py": "1447f44cfa20474b6828d29df30bd19e57ec49a26051cf742082d063fb0bc4b1",
+        "._generate.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._convert_lora.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "._convert.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "generate.py": "c6382298335741379aa0c3ad330b318adb743166a048e70b927a647f0e7c9cbc",
+        "wan/__init__.py": "30b2e82fd618560877d5bd576c1035fa9f97a36e7259f20e95ccdac713e7728f",
+        "wan/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/scail.py": "53079bd481178fccc87f0b2f6081938a7dfc086f1ce26d218a98b1db91babd9f",
+        "wan/._scail.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wan/distributed/._util.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/._ulysses.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/xdit_context_parallel.py": "a805a84aca2e41fbcfe1e58806f98f6dd024f3484bfa1f14a7277ed0778d8416",
+        "wan/distributed/sequence_parallel.py": "43b8a0d4842ddc0aaeebc40a6900a210e1233f4899e7e649f8c9bc3221bb6331",
+        "wan/distributed/ulysses.py": "0c9969ec8e99358fb79a224700853f89b52724c8dc2055f91972ace47f04a483",
+        "wan/distributed/._sequence_parallel.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/._xdit_context_parallel.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/distributed/fsdp.py": "b787312856a1f4da54648999c143d08c3dfa09be75be78e8c39fd21f55b823dd",
+        "wan/distributed/util.py": "b8925fdbdc0cf4409ba5760d92c66f1e329de40b1dad7f2011a7d37caad97b56",
+        "wan/distributed/._fsdp.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._model.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._t5.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._vae.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/__init__.py": "539b7a7c1ba53246092b46850ab4278fecf94b904f04c52b1506e44d7b87c868",
+        "wan/modules/tokenizers.py": "cf5b189c1ae017326efadab2fc6380ba223fa7a59d0be6464bd264db53c76934",
+        "wan/modules/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/xlm_roberta.py": "7e27d93573b5fb0fef1c9db9205264453bd30dcb1404c38031f24ed9c84b8d4a",
+        "wan/modules/._xlm_roberta.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._model_scail2.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/model.py": "c1572ade3bf7345bd4c00d4a19535788fab62f9c08b5aeb15f6d01f4435bb47a",
+        "wan/modules/attention.py": "23fe7c6f6e4065242d95e5e188cb2d1a16bd283f05dca7e7e878977158fcfdbc",
+        "wan/modules/._model_scail.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._clip.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/model_scail.py": "83fc26f273407f23351d3cf8142dd2e2fe647a64748d41ae465fad7a988d5836",
+        "wan/modules/vae.py": "d0d6a19a8114005c897c0dd63c2c40186c413cb70fe51f5f3f3783d29490567c",
+        "wan/modules/clip.py": "20cf48d7cd265b1286f8c10bf3bec88beac4437f87bd34919c3388b3d0800d7a",
+        "wan/modules/model_scail2.py": "bbcfc38ee8c4dc8e9f31987e617b57af267c46e8bd25ee046f76e7426d6f5d6c",
+        "wan/modules/t5.py": "a3a23739b4601b66874253112a608fd200f9c455cb374f1c6bebe26d41fcd9b8",
+        "wan/modules/._attention.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/modules/._tokenizers.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/qwen_vl_utils.py": "be11ac9808a6d79bb4e99482ea7ae9b2eccd48c2b517845b55f71cf5bb768239",
+        "wan/utils/._qwen_vl_utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._fm_solvers.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/__init__.py": "225f3a18c782ea3776adacdfb4c21bb4ac4d02497c77882545f2c2d619175572",
+        "wan/utils/._lora.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/fm_solvers.py": "b870bdc7253593b75097896b2351e74f747f76d756f58f1b4b0008d6821ae811",
+        "wan/utils/vace_processor.py": "3fc56687d1d6204cc9603625238f20a8453f7d89f38efff11c3353ac7ab83e36",
+        "wan/utils/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._fm_solvers_unipc.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/._vace_processor.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/lora.py": "bddf65093f33b709d95c94a0b4c1efa35d974c716631ed2c98571917719984ba",
+        "wan/utils/prompt_extend.py": "a7d81b451377a47413e932d440d573ea010c0d608c8bb668b3af9c01261c0a67",
+        "wan/utils/scail_utils.py": "b0eaeb24f0fa840c61acf7fd853ab0531b6285a9016134b841cf9d13498e27a7",
+        "wan/utils/fm_solvers_unipc.py": "0dec8c7ed17f6f2049275c6848113314da6ccec1c8db5bdc89df43c05c6038d9",
+        "wan/utils/._scail_utils.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/utils/utils.py": "8e2d85b1c7961233379b9ab38cee153ca8d95358f27cb8bb6dd154e809731c8c",
+        "wan/utils/._prompt_extend.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/__init__.py": "46f53c46afd30c77632abb72541d51a276897213a8451b0ee97f1794782ad6b1",
+        "wan/configs/wan_t2v_1_3B.py": "6976ec4c03f737b69ae17afe13339b32905739205d4c19f16c8b329f9f06e986",
+        "wan/configs/.___init__.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/wan_i2v_14B.py": "86704d4a08fd3b7e71b8256a001cca4fa8c065abd189c67f9f19eb348606ab88",
+        "wan/configs/._wan_t2v_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._scail_config_1_3B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._scail_config_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/._wan_t2v_1_3B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/scail_config_14B.py": "ab0d11d714ed5045e66a0bc97c5a6d5c2bfbb66da84ed671da12721fa988ba96",
+        "wan/configs/._wan_i2v_14B.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a",
+        "wan/configs/wan_t2v_14B.py": "99aadb67eec94e28c2a02db45c178c07f7488b7e1b3c148aae1e23e908fe580f",
+        "wan/configs/shared_config.py": "a942b6f0a1d1a4ec9a7893c17a6218651ce272953b90d012ce5cdd19d15e45f7",
+        "wan/configs/scail_config_1_3B.py": "f729a3d2b73c3add335989482951a81ee39d23c40048fe9e8a22308e3a2684fe",
+        "wan/configs/._shared_config.py": "d3fc8af3e86ea8bb2eb113bd8d18f4f7d0a83fd6f2fe0951cde733b42255a43a"
+      },
+      "stage_execution": {
+        "ENC": {
+          "stage": "ENC",
+          "reference_id": "R1",
+          "task_id": "vehicle",
+          "predecessor": null,
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_D": {
+          "stage": "R1_D",
+          "reference_id": "R1",
+          "task_id": "vehicle",
+          "predecessor": "R1_S",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_PROBE": {
+          "stage": "R1_PROBE",
+          "reference_id": "R1",
+          "task_id": "vehicle",
+          "predecessor": "ENC",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R1_S": {
+          "stage": "R1_S",
+          "reference_id": "R1",
+          "task_id": "vehicle",
+          "predecessor": "R1_PROBE",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_D": {
+          "stage": "R2_D",
+          "reference_id": "R2",
+          "task_id": "vehicle",
+          "predecessor": "R2_S",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_PROBE": {
+          "stage": "R2_PROBE",
+          "reference_id": "R2",
+          "task_id": "vehicle",
+          "predecessor": "R1_D",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        },
+        "R2_S": {
+          "stage": "R2_S",
+          "reference_id": "R2",
+          "task_id": "vehicle",
+          "predecessor": "R2_PROBE",
+          "adapter_enabled": false,
+          "replace_flag": true,
+          "alg": false,
+          "manual_rope_override": false
+        }
+      },
+      "stage_config_hashes": {
+        "ENC": {
+          "execution.json": "57658ee4312a516d2833dd1ebfba79f56575bdc05e879c963afebc16306b793d",
+          "input_config_hashes.json": "245cded75ab97c803450c095e47211059d8caa8c0bac41042354b6b22ce975c8",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "expected_preprocessed.json": "4f835e798edf8aee48613da83b0b066bf4c4f97aa862199bc018ac38d49ef0ac",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_D": {
+          "execution.json": "98d5478f1556aaa9b074136772d5993e67db7e16c338b223e9e895af1e44d8e0",
+          "input_config_hashes.json": "245cded75ab97c803450c095e47211059d8caa8c0bac41042354b6b22ce975c8",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_PROBE": {
+          "execution.json": "9fb147dafc73e870d78951ad2de35ca78f3bdc31a3d833f979bbfdb90a7a244a",
+          "input_config_hashes.json": "245cded75ab97c803450c095e47211059d8caa8c0bac41042354b6b22ce975c8",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_S": {
+          "execution.json": "a7e7ffdd3f3075b83a8860d168145a6010b4412b4f4df612f2bf6c4eca8ac90c",
+          "input_config_hashes.json": "245cded75ab97c803450c095e47211059d8caa8c0bac41042354b6b22ce975c8",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_D": {
+          "execution.json": "3c4fcec3f741cd8a4f5ec041228e81f2f14c225181b0c87fe2e52e4e0fec314e",
+          "input_config_hashes.json": "f1e1c1c70f1d475c832b3b17f19fcabbd3a6070665422b63535bc94e3bc5050b",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_PROBE": {
+          "execution.json": "7c9d9d431523be760ebb0770d7d533293211af046c9d92229075c15d69140b5b",
+          "input_config_hashes.json": "f1e1c1c70f1d475c832b3b17f19fcabbd3a6070665422b63535bc94e3bc5050b",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_S": {
+          "execution.json": "8d96e522369eb0176689c1f401b7ce04c86c2522804b391cf149d0cc9044a2ad",
+          "input_config_hashes.json": "f1e1c1c70f1d475c832b3b17f19fcabbd3a6070665422b63535bc94e3bc5050b",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        }
+      }
+    }
+  }
+}

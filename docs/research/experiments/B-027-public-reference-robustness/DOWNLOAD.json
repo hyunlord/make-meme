@@ -1,0 +1,18 @@
+{
+  "url": "https://data.vision.ee.ethz.ch/csergi/share/davis/DAVIS-2017-trainval-480p.zip",
+  "bytes": 832766765,
+  "sha256": "e3d0b5b77c3d031b000a19e0e25e3e2cac65d183755601bc2cf066df1a2aa492",
+  "seconds": 124.402632,
+  "crc": "PASS",
+  "sequences_inspected": [
+    "dog",
+    "dog-agility",
+    "dog-gooses",
+    "dance-twirl",
+    "dance-jump",
+    "car-roundabout",
+    "car-shadow"
+  ],
+  "candidate_count": 7,
+  "limit": 12
+}

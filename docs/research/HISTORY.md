@@ -528,3 +528,7 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 ## 2026-10-26 KST B-027 착수: 개인 사례에서 공개 다중 사례로 전환
 
 최신 원격 `88145d9324765b8ca68fabca24dd5d76f6a2ceb0`와 B-027 중복 실행 부재를 확인했다. [PLAN](experiments/B-027-public-reference-robustness/PLAN.md)에 따라 공개 source/target 및 두 reference를 출력 전에 고정한다. 공식 DAVIS TrainVal480p 다운로드와 이용 조건 확인을 시작했고 GPU NOT_RUN이다. 개인사진은 주평가에서 제외하고 B-026 선택적 대기와 과거 실패를 보존한다. 새 모델/패키지/학습0, 공개자료 누적5GiB와 최대6sampler·8시간 상한을 유지한다. 실제 파일 확보와 선정 완료는 후속 입력 기록에서 별도로 확인한다.
+
+### B-027 입력 고정 및 실행 진입
+
+공식 DAVIS480p832766765bytes의 전체ZIP CRC와 로컬SHA를 확인했다.7sequence에서최대12입력묶음을검토해 dog→dog-gooses, dance-twirl→dance-jump, car-roundabout→car-shadow를 고정했다. 원본FPS미확인/preview24fps,각17frame·896×512·mask-given이다. 두참조의자세/시점/크기/가림한계와사전사건을 [CASES](experiments/B-027-public-reference-robustness/CASES.md)에 기록했다. 실제lossless입력검사와CPU계약8개PASS;GPU는사전코드commit후순차실행한다. 개인자료는사용하지않는다.

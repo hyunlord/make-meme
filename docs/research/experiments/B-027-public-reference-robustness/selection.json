@@ -1,0 +1,179 @@
+{
+  "dataset": "DAVIS2017TrainVal480p",
+  "license": "CC-BY-NC-4.0",
+  "mask_given": true,
+  "source_fps": null,
+  "preview_fps": 24,
+  "timebase_assumed": true,
+  "candidate_sequences": [
+    "dog",
+    "dog-agility",
+    "dog-gooses",
+    "dance-twirl",
+    "dance-jump",
+    "car-roundabout",
+    "car-shadow"
+  ],
+  "candidate_sequence_count": 7,
+  "final_input_bundle_count": 9,
+  "rejected_candidates": {
+    "dog-agility": "Strong motion blur, pole occlusion and endpoint crop; rejected before any generation"
+  },
+  "tasks": [
+    {
+      "task_id": "animal",
+      "prompt": "A dog matching the reference image walks slowly toward the camera across dry grass, lowering its head toward the ground while its legs take alternating steps. The fence and bushes remain in the surrounding garden.",
+      "source_sequence": "dog",
+      "source_track": 1,
+      "source_frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "target_sequence": "dog-gooses",
+      "target_track": 1,
+      "reference_frames": [
+        0,
+        85
+      ],
+      "target_features": [
+        "dark coat contrasting with pale source",
+        "white muzzle/chest accents and feet",
+        "longer dark furry silhouette; fine facial identity unresolved at small scale"
+      ],
+      "source_events": [
+        "local0 to8: head stays low as front paws alternate and body approaches camera",
+        "local8 to16: subject becomes more frontal with continuing steps and raised moving tail"
+      ],
+      "protected": [
+        "fence",
+        "bush at image right",
+        "dry grass outside changed silhouette"
+      ],
+      "limitations": [
+        "R1 crouched/low with legs partly hidden; R2 standing side view in opposite orientation",
+        "small target pixel support and low facial detail; no zoom applied"
+      ]
+    },
+    {
+      "task_id": "human",
+      "prompt": "A person matching the reference image dances on a paved courtyard in front of seated spectators. The person steps forward, uncrosses the legs and extends one leg while lowering the raised arm. The spectators and surrounding courtyard remain visible.",
+      "source_sequence": "dance-twirl",
+      "source_track": 1,
+      "source_frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "target_sequence": "dance-jump",
+      "target_track": 1,
+      "reference_frames": [
+        0,
+        16
+      ],
+      "target_features": [
+        "white short-sleeve blouse",
+        "light pink flared skirt with contrasting pink hem lines",
+        "dark braided hair rather than source light tied hair"
+      ],
+      "source_events": [
+        "local0 to8: crossed step advances as arm moves away from head",
+        "local8 to16: legs open to wider stance and forward foot extends while arm lowers"
+      ],
+      "protected": [
+        "seated spectators",
+        "stone wall",
+        "paved floor"
+      ],
+      "limitations": [
+        "R1 back/side view; R2 frontal with both arms raised and one leg lifted",
+        "face small and motionblur; same public track not biometric identity proof",
+        "Public GT excludes foreground shrub occlusion, leaving holes in R2 lower silhouette; no repair"
+      ]
+    },
+    {
+      "task_id": "vehicle",
+      "prompt": "A car matching the reference image drives toward the right around a city roundabout. Its side view gradually turns toward a rear three-quarter view as the camera follows. Buildings, railings, road markings and other vehicles remain in the scene.",
+      "source_sequence": "car-roundabout",
+      "source_track": 1,
+      "source_frames": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "target_sequence": "car-shadow",
+      "target_track": 1,
+      "reference_frames": [
+        0,
+        39
+      ],
+      "target_features": [
+        "light silver tall compact body",
+        "roof rails and tall vertical rear lamps",
+        "tall window and rear-body proportions differing from dark source car"
+      ],
+      "source_events": [
+        "local0 to8: car rolls right while camera follows and background shifts",
+        "local8 to16: rear face becomes more visible as vehicle turns away around curve"
+      ],
+      "protected": [
+        "buildings",
+        "railings/monument",
+        "road signs and other cars"
+      ],
+      "limitations": [
+        "R1 close side view facing left; R2 distant rear-side view",
+        "reference size and illumination change jointly; SCAIL rigid-object domain exploratory"
+      ]
+    }
+  ],
+  "candidate_definition": "input bundle: source17frame window or single target reference",
+  "input_candidates_reviewed": 12,
+  "rejected_input_bundles": [
+    "dog-agility target f0: pole occlusion and blur",
+    "dog-agility target f16: blur and edge crop",
+    "car-roundabout source f0..16: less view change than f30..46"
+  ]
+}
