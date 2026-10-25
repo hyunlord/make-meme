@@ -507,3 +507,7 @@ restart20의18개tensor와 optimizer/RNG/cursor를 복원하고 추가80update�
 ## 2026-10-25 B-024 종료: 참조 비객체 RGB 중립화와 원본 보존 개선
 
 [RESULTS](experiments/B-024-reference-rgb-isolation/RESULTS.md): 기존support안RGB를exact보존하고밖만128로바꿔VAE/CLIP4leaf를재계산했다.12leaf/noise/semanticmask/replacement계약불변,REF/PROBE/S/D각1·40/80·finallatent/MP4완료다. 원본/B023/B024전체17장정적검토에서침실·세로구획대신원본에가까운사족자세·타일장면·후반고개방향이관측됐다. 실제raw→PNG17개계보를추가확인해source파일대체를배제했지만모델의source-copy가능성은남는다. 따라서reference개체치환/cross-ID/일반화는미입증,temporalUNVERIFIED다. 기존B023/B021실패를소급수정하지않는다. 다음병목하나는짧은cross-ID과제에서reference외형반영을source-copy와구별하는것이며추가실행/예약은없다.
+
+## 2026-10-25 B-025 착수: 같은 중립 caption의 참조 교체
+
+B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B025](experiments/B-025-matched-reference-swap/RUNNING.md)는 같은 자연동작·중립 caption·실제 noise에서 Lab/IG 참조 묶음만 달리하는 두 출력을 생성해 원본 보존 객체 편집의 실제 외형 변경 근거를 확인한다. 기존 사용자 원본 IG와 기존 support를 찾아 입력을 고정했고 새 모델/주석 확대 없이 CPU 검사를 수행했다. GPU는 사전 코드 공개 고정 이후 순차 각1회이며 현재 NOT_RUN이다. 원래 B024 caption 출력은 새 Lab 대조군으로 대신하지 않는다.

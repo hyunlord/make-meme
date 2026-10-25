@@ -1,0 +1,18 @@
+{
+  "experiment": "B-025",
+  "cases": ["LAB", "IG"],
+  "reference_scope": "original user-provided photos only; outside support RGB128; RED/BLACK semantics",
+  "mode": "official replacement true",
+  "positive_T5_encodes": 1,
+  "IG_VAE_encodes": 1,
+  "IG_CLIP_encodes": 1,
+  "LAB_VAE_CLIP_encodes": 0,
+  "negative_T5_encodes": 0,
+  "full_P_executions": 0,
+  "per_case_probe_sampler_decode_max": [1,1,1],
+  "steps_per_sampler": 40,
+  "forwards_per_sampler": 80,
+  "retries": 0,
+  "training": 0,
+  "deadline_utc": "2026-10-25T15:10:00Z"
+}
