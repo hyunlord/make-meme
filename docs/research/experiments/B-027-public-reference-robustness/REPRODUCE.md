@@ -8,7 +8,7 @@
 기존 Python 환경에서 설치 없이:
 
 ```sh
-python3 -m pytest docs/research/experiments/B-027-public-reference-robustness/data_code/test_data_prepare.py docs/research/experiments/B-027-public-reference-robustness/code/test_contract.py docs/research/experiments/B-027-public-reference-robustness/media_code/test_build_review.py
+python3 -m pytest docs/research/experiments/B-027-public-reference-robustness/data_code/test_data_prepare.py docs/research/experiments/B-027-public-reference-robustness/code/test_contract.py docs/research/experiments/B-027-public-reference-robustness/media_code/test_build_review.py docs/research/experiments/B-027-public-reference-robustness/media_code/test_package_review.py docs/research/experiments/B-027-public-reference-robustness/reporting_code/test_summary.py
 ```
 
 새 공개 입력은 `data_code/data_prepare.py`가 DAVIS 원본과 instance label을 같은 aspect-fit 좌표로 옮긴다. 실제 clip은 lossless RGB로 저장하고 다시 decode하여 PNG 값과 비교한다. source의 비대상 객체는 driving mask의 WHITE 문맥으로 남는다. 참조는 선택 track RED support 안의 resize된 RGB를 유지하며 밖을128로 바꾼다. GT 마스크 제공 조건이다.

@@ -21,7 +21,7 @@ TEXT = {'.md', '.py', '.json', '.jsonl', '.csv', '.txt', '.log', '.diff', '.sh',
 MEDIA = {'.png', '.jpg', '.jpeg', '.mp4', '.webm', '.svg'}
 DENY = {'weights', 'models', 'upstream', '.venv', 'environment', '.git', '__pycache__',
         '.pytest_cache', '.ruff_cache', 'prefixfeatures', 'prefix_features', 'latent_cache'}
-TENSORS = {'raw_output.pt', 'final_latent.safetensors'}
+TENSORS = {'raw_output.pt', 'final_latent.safetensors', 'initial_noise.pt'}
 
 
 def digest(path: Path) -> str:

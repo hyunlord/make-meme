@@ -1,13 +1,11 @@
-# DAVIS 자료 출처와 사용 범위
+# Public data attribution and scope
 
-공식 TrainVal480p: https://davischallenge.org/davis2017/code.html
+This experiment uses the DAVIS 2017 semi-supervised TrainVal 480p images and instance annotations, obtained from the [official DAVIS download page](https://davischallenge.org/davis2017/code.html). The downloaded archive URL, SHA256 and byte count are recorded in DOWNLOAD.json; exact sequences/tracks/frames are in selection.json and CASES.md.
 
-다운로드·SHA·CRC: [DOWNLOAD.json](DOWNLOAD.json). 실제832766765bytes를 수신했고 ZIP 전체CRC를 확인했다. 데이터 전송0.776GiB로 누적5GiB 이내다. 필요한7sequence만 로컬 추출했다.
+Attribution: Jordi Pont-Tuset, Federico Perazzi, Sergi Caelles, Pablo Arbeláez, Alexander Sorkine-Hornung and Luc Van Gool, *The 2017 DAVIS Challenge on Video Object Segmentation*, arXiv:1704.00675; Federico Perazzi, Jordi Pont-Tuset, Brian McWilliams, Luc Van Gool, Markus Gross and Alexander Sorkine-Hornung, *A Benchmark Dataset and Evaluation Methodology for Video Object Segmentation*, CVPR 2016.
 
-공식 dataset metadata: https://github.com/davisvideochallenge/davisvideochallenge.github.io/blob/30be16ff9d289f6711328c950a19c6288306ade3/index.html#L33-L42
+The official dataset site's [pinned metadata](https://github.com/davisvideochallenge/davisvideochallenge.github.io/blob/30be16ff9d289f6711328c950a19c6288306ade3/index.html#L33-L42) identifies [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). This is a noncommercial research evaluation. Commercial use, unrelated redistribution rights, personality/publicity rights and final system deployment are not established by this experiment. A model/code license is not substituted for the data license.
 
-CC BY-NC4.0: https://creativecommons.org/licenses/by-nc/4.0/
+Changes: selected consecutive frames and target-track references; aspect-fit resize/letterbox; selected GT track mapped to RED with semantic WHITE/BLACK background; reference non-object RGB set to128; model-generated edited videos; preview videos/contact sheets. Ground-truth instance masks are supplied inputs, not predictions. Native FPS was not confirmed, so previews use24fps without a native-time preservation claim.
 
-이번은 비상업 로컬 연구 평가다. 코드 LICENSE를 데이터 권한으로 대체하지 않는다. 상업 이용·제품 재배포 허가를 주장하지 않으며 인물의 다른 권리가 자동 해결되는 것도 아니다. GitHub에는 미디어가 아닌 코드·명세·해시·요약만 공개한다. 비공개 검토 ZIP에도 출처·라이선스·변경(선택/resize/semanticmask/RGB중립화)을 남긴다.
-
-인용: Pont-Tuset et al., The 2017 DAVIS Challenge on Video Object Segmentation, arXiv:1704.00675; Perazzi et al., A Benchmark Dataset and Evaluation Methodology for Video Object Segmentation, CVPR2016.
+Public GitHub contains specifications, hashes and code only. The private review archive contains the selected media and derived results for review, with this attribution and change notice. It excludes the full dataset archive. No personal pet media from earlier experiments is included in B-027.

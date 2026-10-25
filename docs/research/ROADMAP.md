@@ -1,6 +1,6 @@
 # B 트랙 로드맵
 
-**현재: B-027 RUNNING / 입력 준비 / GPU NOT_RUN.** 공개 다중 사례에서 reference bundle 두 장을 비교한다. 개인 사진은 회귀 사례이며 B-026의 자료 대기는 전체 연구를 막지 않는다. [사전 계획](experiments/B-027-public-reference-robustness/PLAN.md). 최대6sampler·공개데이터5GiB·8시간, 새모델/학습0.
+**현재: B-027 RUNNING / 동물·사람4출력 완료 / 차량 pair 진행 중.** 공개 다중 사례에서 reference bundle 두 장을 비교한다. 개인 사진은 회귀 사례이며 B-026의 자료 대기는 전체 연구를 막지 않는다. [사전 계획](experiments/B-027-public-reference-robustness/PLAN.md). 최대6sampler·공개데이터5GiB·8시간, 새모델/학습0.
 
 현재 상태 갱신: 2026-10-26. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 

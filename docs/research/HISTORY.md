@@ -532,3 +532,7 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 ### B-027 입력 고정 및 실행 진입
 
 공식 DAVIS480p832766765bytes의 전체ZIP CRC와 로컬SHA를 확인했다.7sequence에서최대12입력묶음을검토해 dog→dog-gooses, dance-twirl→dance-jump, car-roundabout→car-shadow를 고정했다. 원본FPS미확인/preview24fps,각17frame·896×512·mask-given이다. 두참조의자세/시점/크기/가림한계와사전사건을 [CASES](experiments/B-027-public-reference-robustness/CASES.md)에 기록했다. 실제lossless입력검사와CPU계약8개PASS;GPU는사전코드commit후순차실행한다. 개인자료는사용하지않는다.
+
+### B-027 동물·사람 pair 실제 관측
+
+동물/사람 각2출력을40step80forward와 final latent/17frame decode로 확보했다. 동물 두 참조는 어두운target 대신 옅은source 외형을 남겼고 R1에는 큰 문자 장식이 추가됐다. 사람 두 참조는 흰상의/분홍치마가 반영되지만 팔·얼굴·후반치마 형상 및 서명 모양 추가가 남았다. 기술PASS를 결합 편집 성공으로 올리지 않는다. 각pair6reference leaf만 변경/10보존이며 실제 noise/RNG도 확인했다. 차량 pair는 고정입력 그대로 진행 중이고 추가생성·수정은 없다. 전체정적근거는[VISUAL_REVIEW](experiments/B-027-public-reference-robustness/VISUAL_REVIEW.md)에 남긴다.

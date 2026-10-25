@@ -21,6 +21,7 @@ def test_task_payload_exclusions_and_actual_extraction(tmp_path: Path) -> None:
     put(public, 'code/run.py')
     put(private, 'tasks/animal/inputs/R1/reference.png')
     put(private, 'tasks/animal/cases/R1/artifacts/raw_output.pt')
+    put(private, 'tasks/animal/cases/R1/artifacts/initial_noise.pt')
     put(private, 'tasks/animal/cases/R1/artifacts/final_latent.safetensors')
     put(private, 'tasks/animal/cases/R1/artifacts/final_latent.json')
     put(private, 'tasks/animal/cases/R1/artifacts/output.mp4')
@@ -38,6 +39,7 @@ def test_task_payload_exclusions_and_actual_extraction(tmp_path: Path) -> None:
         names = stream.namelist()
         assert 'private/tasks/animal/cases/R2/reports/failure.json' in names
         assert 'private/tasks/animal/cases/R1/artifacts/final_latent.safetensors' in names
+        assert 'private/tasks/animal/cases/R1/artifacts/initial_noise.pt' in names
         assert not any('base.safetensors' in name or name.endswith('conditions.safetensors') or name.endswith('preprocessed_inputs.pt') or 'DAVIS.zip' in name for name in names)
         manifest = json.loads(stream.read('MANIFEST.json'))
         assert any(row.get('hash_kind') == 'symlink text; target never followed' for row in manifest['omitted'])

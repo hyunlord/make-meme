@@ -8,7 +8,7 @@
 
 기존loader/extract/probe/decode/storage는 B025와 byte-identical이다. 동적기존코드의 strict typing은 NOT_CLEAN, ruff/basedpyright는 기존환경에 없어 NOT_RUN이며 새설치하지 않았다. CPU PASS를 실제GPU/영상품질 PASS로 해석하지 않는다.
 
-현재GPU NOT_RUN; 이 코드·입력 기록의 commit/push 이후 순차 실행한다. 첫출력의 품질만으로 paired대조군을 생략하지 않으며 실제입력/안전오류에는 중단한다. 모든latent는decode전에보존한다.
+사전 고정 시점의 상태는 GPU NOT_RUN이었다. 이 코드·입력 기록의 commit/push 이후 순차 실행하도록 고정했다. 첫출력의 품질만으로 paired대조군을 생략하지 않으며 실제입력/안전오류에는 중단한다. 모든latent는decode전에보존한다.
 
 ## 실행 시작 관측
 
