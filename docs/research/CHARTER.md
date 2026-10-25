@@ -7,6 +7,12 @@
 [B-027](experiments/B-027-public-reference-robustness/PLAN.md)은 공개 DAVIS 자료에서 최대3개 source/target 과제와 같은 target의 두 참조를 고정하는 탐색적 개발 패널이다. SCAIL replacement와 비객체 RGB128을 유지하고 최대6회 실제 출력의 외형·동작·장면·형상·비용을 분리한다. mask-given 평가이며 자동 추적·일반화·논문 benchmark를 입증하지 않는다. 과거 B-023~025의 개선과 실패는 보존하고 다음 방법은 이번 결과를 보고 하나만 선택한다.
 
 
+### B-027 종료 관측
+
+공개3과제×2참조의 실제6출력과 최종latent를 확보했다. 동물은 source 외형 잔존, 사람은 target 의상 반영과 형상 손상, 차량은 부분 외형 반영과 혼합 차체/조건별 그래픽 추가로 결합 편집 품질은 미입증이다. 기술21worker·240step480forward PASS와 시각 판정을 구분하고 temporal UNVERIFIED를 유지한다. [결과](experiments/B-027-public-reference-robustness/RESULTS.md), [다음 한 가설](experiments/B-027-public-reference-robustness/NEXT_DECISION.md). 다음은 원본 문맥과 ID 주입을 분리한 공식 VideoPainter 경로의 한정 비교 제안이며 설치·실행은 NOT_RUN이다.
+
+아래 과거 날짜의 현재/다음 표현은 당시 결정 기록이며 최신 실행 상태는 위 종료 관측을 따른다.
+
 작성: 2026-10-22 · 실행 환경: 사용자가 보유한 DGX Spark를 우선한다.
 
 ## 2026-10-24 최신 방향 — 원본 보존 객체 편집

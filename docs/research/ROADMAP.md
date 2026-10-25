@@ -1,6 +1,6 @@
 # B 트랙 로드맵
 
-**현재: B-027 RUNNING / 동물·사람4출력 완료 / 차량 pair 진행 중.** 공개 다중 사례에서 reference bundle 두 장을 비교한다. 개인 사진은 회귀 사례이며 B-026의 자료 대기는 전체 연구를 막지 않는다. [사전 계획](experiments/B-027-public-reference-robustness/PLAN.md). 최대6sampler·공개데이터5GiB·8시간, 새모델/학습0.
+**현재: B-027 COMPLETED / 기술 PASS / 결합 편집 품질 미입증.** 공개3과제×2참조의 실제6출력과 최종latent를 확보했다. 동물은 source 외형 잔존, 사람은 target 의상 반영과 형상 손상, 차량은 부분 외형 반영과 혼합 차체/조건별 그래픽 추가로 결합 편집 품질은 미입증이다. 기술21worker·240step480forward PASS와 시각 판정을 구분하고 temporal UNVERIFIED를 유지한다. [결과](experiments/B-027-public-reference-robustness/RESULTS.md), [다음 한 가설](experiments/B-027-public-reference-robustness/NEXT_DECISION.md). 다음은 원본 문맥과 ID 주입을 분리한 공식 VideoPainter 경로의 한정 비교 제안이며 설치·실행은 NOT_RUN이다.
 
 현재 상태 갱신: 2026-10-26. 날짜가 아니라 증거를 기준으로 다음 단계로 이동한다.
 

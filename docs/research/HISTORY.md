@@ -536,3 +536,8 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 ### B-027 동물·사람 pair 실제 관측
 
 동물/사람 각2출력을40step80forward와 final latent/17frame decode로 확보했다. 동물 두 참조는 어두운target 대신 옅은source 외형을 남겼고 R1에는 큰 문자 장식이 추가됐다. 사람 두 참조는 흰상의/분홍치마가 반영되지만 팔·얼굴·후반치마 형상 및 서명 모양 추가가 남았다. 기술PASS를 결합 편집 성공으로 올리지 않는다. 각pair6reference leaf만 변경/10보존이며 실제 noise/RNG도 확인했다. 차량 pair는 고정입력 그대로 진행 중이고 추가생성·수정은 없다. 전체정적근거는[VISUAL_REVIEW](experiments/B-027-public-reference-robustness/VISUAL_REVIEW.md)에 남긴다.
+
+
+### B-027 종료: 공개 패널6출력과 실패 유형 확보
+
+공개3과제×2참조의 실제6출력과 최종latent를 확보했다. 동물은 source 외형 잔존, 사람은 target 의상 반영과 형상 손상, 차량은 부분 외형 반영과 혼합 차체/조건별 그래픽 추가로 결합 편집 품질은 미입증이다. 기술21worker·240step480forward PASS와 시각 판정을 구분하고 temporal UNVERIFIED를 유지한다. [결과](experiments/B-027-public-reference-robustness/RESULTS.md), [다음 한 가설](experiments/B-027-public-reference-robustness/NEXT_DECISION.md). 다음은 원본 문맥과 ID 주입을 분리한 공식 VideoPainter 경로의 한정 비교 제안이며 설치·실행은 NOT_RUN이다. 신규 학습/모델/패키지/외부생성0, sampler6/6·재시도0, pre-worker오류3은 별도 보존한다. 공개자료0.776GiB와 mask-given/source_fps미확인 조건을 유지했다. 자체GPU worker는 종료했고 보호 서비스와 swap0를 확인했다. 개인사진 대기·추가 생성으로 자동 전환하지 않는다.

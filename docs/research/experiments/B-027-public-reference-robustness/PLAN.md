@@ -1,5 +1,7 @@
 # B-027 — 공개 다중 사례에서 참조 자세·시점에 대한 편집 강건성 비교
 
+실행 후 안내: 이 문서는 사전 등록 당시 상태를 보존한다. 최신 종료 결과는 [RESULTS](RESULTS.md), 다음 제안은 [NEXT_DECISION](NEXT_DECISION.md)이다. 아래 GPU NOT_RUN은 등록 시점의 기록이다.
+
 작성: 2026-10-25. 상태: **PLANNED / DATA_SELECTION_NOT_RUN / GPU NOT_RUN**.
 기준 연구 HEAD: `84e00dc28691c64cc84ed667b29b2de31f6d688f`.
 이 문서 등록은 자료 다운로드·모델 실행을 의미하지 않는다. 사용자가 실행 담당자에게 수행 지시를 보낼 때 아래 범위를 적용한다.

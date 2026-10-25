@@ -51,13 +51,21 @@
 
 B-027 [`phase_encode.py`](../experiments/B-027-public-reference-robustness/code/phase_encode.py)의 `run`은 공식 `generate`의 첫 sampler 경계에서 `noise, arg_c, arg_null, generator_state, timesteps, sigmas`를 저장한다. R2는 같은 R1 tree를 CPU에서 읽고 양 CFG의 `ref_latents`, `clip_fea`, `ref_masks`만 바꾼다. [`pair_contract.py`](../experiments/B-027-public-reference-robustness/code/pair_contract.py)의 허용 key는 `t2/t3/t4/t8/t9/t10`이며, 모두 반드시 달라야 하는 것은 아니다. 나머지10leaf와 구조/device계약은 보존한다. [`phase_sample.py`](../experiments/B-027-public-reference-robustness/code/phase_sample.py)의 첫 실제 CFG hook은 reference/CLIP/mask가 복원된 cache 객체인지 확인하며 관측용 추가forward를 하지 않는다.
 
-가로896×세로512 canvas의 VAE stride에서 기대하는 reference CTHW는 `[16,1,64,112]`, generated latent는 `[16,5,64,112]`다. 이는 코드 계약이며 새 실행의 실제 관측은 CONDITIONS에서 별도로 기록한다. reference mask는 RGB alpha가 아닌 별도 조건이다. RGB128은 encoder branch OFF가 아니며, 같은 foreground pixel도 주변 문맥 변화에 따라 VAE/CLIP 특징이 달라질 수 있다.
+실제 완료한 실행에서 reference CTHW는 `[16,1,64,112]`, final latent는 `[16,5,64,112]`, raw decode는 `[3,17,512,896]`였다. driving VAE는 `[16,5,32,56]`이며 reference mask는 prefix와 generated 구간을 포함한 `[28,6,64,112]`다. CLIP `[1,257,1280]`은 FP16, reference/driving VAE는 FP32다. 이 값은 [CONDITIONS](../experiments/B-027-public-reference-robustness/CONDITIONS.md)의 실제 cache 관측이며 해상도만 보고 추정한 값이 아니다. reference mask는 RGB alpha가 아닌 별도 조건이다. RGB128은 encoder branch OFF가 아니며, 같은 foreground pixel도 주변 문맥 변화에 따라 VAE/CLIP 특징이 달라질 수 있다.
 
 전처리 원본은854×480 공개프레임이다. 896×512 aspect-fit은 새로운 디테일을 만들지 않는다. 공개GT의가림을 그대로유지하므로 human R2의관목구멍이나 animal의작은support도 조건일부다. 형태의실패를 모델원인으로단정하기전에 이관측한계와구분한다.
 
-### 결과 연결 원칙
+### 실제 결과에서 수식을 읽는 법
 
-결과 기록 전에는 세 패널의 성공·실패를 예측해 채우지 않는다. 각 pair에 외형/동작/장면/형상/temporal/비용을 따로 기록한다. 동물이 잘되고 강체가 실패하더라도 SCAIL의 도메인 적합성과 입력 실패를 먼저 나누며, 3 task를 일반적인 성공률로 부풀리지 않는다. 실제 연속 검수가 없으면 temporal=UNVERIFIED다. GT instance mask 사용은 mask-given이며 자동 선택·추적은 NOT_RUN이다.
+동물 pair는 source의 접근·정면 변화가 남지만 어두운 target 외형 대신 옅은 source 외형이 유지됐다. 위 설명식에서 m의 큰 변화가 맞아 보이는 것과 a가 target에 맞는 것은 다른 조건이다. source-copy는 두 번째 조건을 위반하므로 교체 성공이 아니다.
+
+사람 pair는 흰 상의·분홍 치마라는 target 특징이 나타났으나 팔/치마 배치는 source와 어긋나고 후반 형상이 무너졌다. 이는 참조 조건이 완전히 무시되지는 않았다는 근거이지, 외형과 공간 배치가 분리됐다는 근거가 아니다. reference가 같은 target track이라고 해도 E_VAE는 사진의 위치·자세·가림 정보를 담을 수 있다. 사람 R2의 넓게 펼친 옷과 팔, GT의 관목 가림이 함께 달라져 단독 원인을 분리할 수 없다.
+
+차량 R1에서는 은색·옆 몰딩이 바뀌어도 source형 차체가 남고 비편집 영역에 큰 차량 그래픽이 생겼다. 조건의 영향이 있다는 사실은 지시 준수와 다르다. 특히 semantic mask를 전달한 것과 배경 픽셀을 하드하게 복사·보호하는 것은 같은 연산이 아니다. 본 실행은 RGB diffusion 출력이며 ROI 합성을 하지 않았다. 입력 연결이 맞았다는 runtime 확인만으로 배경 불변을 보장할 수 없다.
+
+차량 R2는 큰 그래픽 없이 밝은 박스형 차체로 바뀌었지만 정확한 target 구조는 미입증이었다. 따라서 R1의 장면 실패가 필연적이라고도, R2의 비교적 깨끗한 장면이 교체 성공이라고도 하지 않는다.
+
+각 pair의 외형/동작/장면/형상/비용은 [RESULTS](../experiments/B-027-public-reference-robustness/RESULTS.md)와 실제 전체17장 검토물에 연결한다. 세 과제의 차이는 모델 도메인과 reference 크기·가림 등이 섞인 결과이며 지원 범위의 일반 통계가 아니다. 실제 연속 검수가 없으므로 temporal=UNVERIFIED다. GT instance mask 사용은 mask-given이며 자동 선택·추적은 NOT_RUN이다.
 
 ## 이해 확인 질문
 

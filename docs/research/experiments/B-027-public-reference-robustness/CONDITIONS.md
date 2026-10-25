@@ -1,6 +1,6 @@
 # B-027 실제 조건 연결
 
-최초 완료 animal pair의 `conditions.json`·`pair-conditions.json`과 실제 S/D receipt를 확인했다. 나머지 과제는 완료 후 같은 표에 추가한다. CPU 코드 검토만으로 runtime PASS를 채우지 않는다.
+세 과제의 `conditions.json`·`pair-conditions.json`과 실제 S/D receipt를 확인했다. CPU 코드 검토만으로 runtime PASS를 채우지 않는다.
 
 | leaf | 의미 | 실제 shape/dtype (animal) | pair 계약 |
 |---|---|---|---|
@@ -24,10 +24,14 @@ Animal actual initial-noise tensor hash는 `9d26386e01a5dce6b0dc21e3df26aab79b65
 |---|---|---|---|
 | animal | t2,t3,t4,t8,t9,t10 | 나머지10개 | pair PASS, R1/R2 S40step80forward와 D17frames 완료 |
 | human | t2,t3,t4,t8,t9,t10 | 나머지10개 | pair PASS, R1/R2 S40step80forward와 D17frames 완료 |
-| vehicle | 미실행 | 미실행 | 미확정 |
+| vehicle | t2,t3,t4,t8,t9,t10 | 나머지10개 | pair PASS, R1/R2 S40step80forward와 D17frames 완료 |
 
 R2 `provenance.preprocessed_inputs`는 R1 공식 경계 포착에서 계승된 값이다. 이를 R2 전처리 실측으로 설명하지 않는다. R2 RGB/mask 파일 hash·실제 encoder output hash·별도 config·parent cache hash가 해당 참조의 직접 근거다. 이 점은 [독립 코드 검토](CONTRACT_REVIEW.md)에도 보존한다.
 
 실제 S의 첫 conditional/negative forward에서 cache의 ref/CLIP/pose/mask 객체 연결과 replacement 모드를 확인했다. 관측 전용 추가 forward·attention dump는 없다. final latent는 초기 noise와 다른 실제40번째 step 이후 상태이며, counters·config·condition hash·code manifest를 묶고 readback_exact를 확인한 후 D에 전달한다. raw decoded output은[3,17,512,896]이다. 이 기술 계약은 target 외형이나 시간 품질 성공을 뜻하지 않는다.
 
 Human positive text는 실제[55,4096]이며 같은pair 안에서 동일하다. Animal의[44,4096]과 다른 것은 과제별 사전caption 차이이며 참조별 변경이 아니다. Human actual noise tensor hash는 위animal과 같고, 각pair의 t0 값으로도 다시 확인했다.
+
+세 과제 모두 encoder당 positive/negative T5 각각1회, driving VAE1회, R1/R2 reference VAE/CLIP각1회다. target Y 재인코딩과 ENC 내 DiT적재는0회다. 실제21worker가 모두 완료됐으며 보호 서비스는 유지되고 자체 GPU worker는 종료됐다.
+
+Vehicle positive text는[53,4096]BF16이며 noise value hash는 위와 같다. 세 과제별 text길이가 다른 것과 같은pair 안의 text불변을 구분한다.

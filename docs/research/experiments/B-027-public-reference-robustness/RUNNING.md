@@ -17,3 +17,7 @@
 ENC는 실제 완료했고 R1 PROBE도 통과했다. 최초 R1_PROBE launcher에 `PROBE`만 전달한 호출은 stage assertion에서 worker attempt 예약·CUDA 전에 거절됐다. 이를 별도 pre-worker 오류로 보존한 뒤 올바른 `R1_PROBE` 인자로 실행했다. sampler나 실제 CUDA 연산의 재시도가 아니다. 실제 S의 사용량은 각 exclusive attempt 및 최종 counter로 별도 확인한다.
 
 선정 기록 해석: 초기 다운로드 receipt의 `candidate_count` 값은 열람 중간 집계였으며 private6/public7로 남아 있다. 최종 생성 전 선정의 정의와 수는 [selection.json](selection.json) 및 CASES의 입력묶음 기준12(선정9+제외3), 열람sequence7이다. 다운로드 receipt의 과거 숫자를 최종 후보12개 집계로 사용하지 않는다. 원본 receipt와 hash는 보존한다.
+
+## 실행 종료
+
+UTC2026-10-25T17:20:27.322Z에 마지막D까지 완료했다.21worker·6sampler240step480forward, final latent6개·raw/MP46개를 보존했다. 자체unit/PID종료, 보호서비스유지,swap0를 확인했다. 시각결론·비용·다음제안은 RESULTS/COSTS/NEXT_DECISION에 별도 기록하며 추가실행은 없다.
