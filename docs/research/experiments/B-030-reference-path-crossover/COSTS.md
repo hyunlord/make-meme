@@ -22,3 +22,7 @@
 Watchdog의 ExecStopPost는 이미 종료·회수된 own pipeline unit에 stop을 요청해 `Unit ... not loaded` 메시지를 남겼다. 각 pipeline의 실제 성공receipt·최종latent·MP4·counter를 확인했으며 이 메시지를 추가실패나 재시도근거로 쓰지 않는다. 공식upstream deprecation FutureWarning도 보존했다.
 
 원시 측정과 출력 SHA256/크기는 [MEASUREMENTS.json](MEASUREMENTS.json)에 공개 경로 없이 기록했다. 전체 raw log/resource trace는 비공개 산출물에 둔다. 기술적 출력 성공과 영상의 외형·동작 성공은 별도 판정이다.
+
+## 종료 시간 상한 미준수
+
+전체 작업 시작08:19:50UTC, 상한11:19:50UTC였다. GPU12stage는09:38:04UTC에 종료했지만 문서화·시각 검토·전달 정리가 이어져11:47:45UTC 확인 시 전체3시간 상한을 이미27분55초 넘겼다. 이는 전체 작업 시간 정책 미준수이며,68.37분 GPU 실행시간을 전체 소요시간으로 보고하지 않는다. 추가 연구·모델 실행은 하지 않고 이미 봉인한 산출물의 전송·검증과 종료 기록만 마무리했다. ZIP의 연구 문서 snapshot은 `33dd9861c53cefee799ad805f6b2eb4a007a7221`이며 이 종료 시간 정정은 후속 공개 기록이다.
