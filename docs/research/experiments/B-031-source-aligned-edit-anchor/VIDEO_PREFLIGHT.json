@@ -1,0 +1,76 @@
+{
+  "status": "CPU_PARENT_AUDIT_PASS",
+  "cuda_initialized": false,
+  "tasks": {
+    "animal": {
+      "status": "PARENT_RECEIPT_PASS",
+      "condition_sha256": "ebdce34b753e6930b582bc32540908914556644442f2cf68f049b3068e3c66e7",
+      "initial_noise_file_sha256": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918",
+      "leaf_count": 16,
+      "shape": [
+        16,
+        5,
+        64,
+        112
+      ],
+      "reference_shape": [
+        16,
+        1,
+        64,
+        112
+      ],
+      "clip_shape": [
+        1,
+        257,
+        1280
+      ]
+    },
+    "human": {
+      "status": "PARENT_RECEIPT_PASS",
+      "condition_sha256": "46d55fbc6b43dbaf7c6c0c41443986f80eecbad9f799a462e94e7894de6a742a",
+      "initial_noise_file_sha256": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918",
+      "leaf_count": 16,
+      "shape": [
+        16,
+        5,
+        64,
+        112
+      ],
+      "reference_shape": [
+        16,
+        1,
+        64,
+        112
+      ],
+      "clip_shape": [
+        1,
+        257,
+        1280
+      ]
+    },
+    "vehicle": {
+      "status": "PARENT_RECEIPT_PASS",
+      "condition_sha256": "fce0e3d03cae0bea801b23afc9a98eab93270275fe26bda97d862fdc48b54dab",
+      "initial_noise_file_sha256": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918",
+      "leaf_count": 16,
+      "shape": [
+        16,
+        5,
+        64,
+        112
+      ],
+      "reference_shape": [
+        16,
+        1,
+        64,
+        112
+      ],
+      "clip_shape": [
+        1,
+        257,
+        1280
+      ]
+    }
+  },
+  "scope": "read-only original B027 R1 receipts; new anchor generation/encode not run"
+}

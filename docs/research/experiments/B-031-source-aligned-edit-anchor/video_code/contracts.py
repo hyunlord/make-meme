@@ -1,0 +1,105 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+# Run using the existing pinned SCAIL environment; do not install dependencies.
+"""Fixed public-data contract and strict receipt verification for each task pair."""
+from dataclasses import dataclass
+from pathlib import Path
+import hashlib
+import json
+
+@dataclass(frozen=True, slots=True)
+class CaseContract:
+    name: str
+    height: int
+    width: int
+    fps: int
+    color: str
+
+    @property
+    def latent_shape(self) -> list[int]:
+        return [16, 5, self.height // 8, self.width // 8]
+
+    @property
+    def decoded_shape(self) -> list[int]:
+        return [3, 17, self.height, self.width]
+
+
+def case_contract(name: str) -> CaseContract:
+    assert name == 'public'
+    return CaseContract('public', 512, 896, 24, 'RED')
+
+
+def active_contract(root: Path) -> CaseContract:
+    return case_contract(json.loads((root/'configs/active_case.json').read_text())['name'])
+
+
+def verify_producer_cache_receipt(root: Path) -> dict:
+    receipt=json.loads((root/'artifacts/conditions_receipt.json').read_text())
+    execution=json.loads((root/'configs/execution.json').read_text())
+    assert receipt['experiment']=='B-027' and receipt['reference_id']==execution['reference_id']
+    assert set(receipt['hashes'])=={'conditions.safetensors','conditions.json','initial_noise.pt'}
+    for filename,digest in receipt['hashes'].items():
+        assert hashlib.sha256((root/'artifacts'/filename).read_bytes()).hexdigest()==digest,filename
+    assert receipt['code_sha256']==hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest()
+    metadata=json.loads((root/'artifacts/conditions.json').read_text())
+    import torch
+    noise=torch.load(root/'artifacts/initial_noise.pt',map_location='cpu',weights_only=True)
+    digest=hashlib.sha256(noise.contiguous().view(torch.uint8).numpy().tobytes()).hexdigest()
+    assert digest==metadata['tensors']['t0']['sha256']==metadata['provenance']['initial_noise_sha256']
+    assert metadata['provenance']['config']==json.loads((root/'configs/public.json').read_text())
+    assert metadata['provenance']['reference_id']==execution['reference_id']
+    experiment=(root/'experiment').resolve()
+    pair=json.loads((experiment/'reports/pair-conditions.json').read_text());assert pair['status']=='PASS'
+    from pair_contract import pair_changes
+    first=json.loads((experiment/'cases/R1/artifacts/conditions.json').read_text())
+    second=json.loads((experiment/'cases/R2/artifacts/conditions.json').read_text())
+    assert first['structure']==second['structure']
+    assert pair_changes(first['tensors'],second['tensors'])==set(pair['changed_pair_leaves'])
+    assert pair['case_hashes'][execution['reference_id']]==metadata['file_sha256']
+    assert (experiment/'cases/R1/artifacts/initial_noise.pt').read_bytes()==(experiment/'cases/R2/artifacts/initial_noise.pt').read_bytes()
+    return receipt
+
+
+
+def verify_parent_receipt(root: Path) -> dict:
+    binding=json.loads((root/'configs/cache_binding.json').read_text())
+    assert binding['producer_experiment']=='B-027' and binding['consumer_experiment']=='B-031'
+    parent=Path(binding['producer_worker'])
+    for name,digest in binding['producer_hashes'].items():
+        assert hashlib.sha256((parent/name).read_bytes()).hexdigest()==digest,name
+    receipt=verify_producer_cache_receipt(parent)
+    original=json.loads((parent/'configs/public.json').read_text())
+    current=json.loads((root/'configs/public.json').read_text())
+    assert {k:v for k,v in original.items() if k not in ('reference','reference_mask')}=={k:v for k,v in current.items() if k not in ('reference','reference_mask')}
+    for key in ('driver','driver_mask'):
+        assert hashlib.sha256((parent/original[key]).read_bytes()).hexdigest()==hashlib.sha256((root/current[key]).read_bytes()).hexdigest()
+    return receipt
+
+
+def verify_cache_receipt(root: Path) -> dict:
+    """Bind the new reference-only encoder output to its immutable B027 parent."""
+    from anchor_contract import changed_reference_leaves
+    parent_receipt=verify_parent_receipt(root)
+    binding=json.loads((root/'configs/cache_binding.json').read_text())
+    parent=Path(binding['producer_worker'])
+    receipt=json.loads((root/'artifacts/conditions_receipt.json').read_text())
+    assert receipt['experiment']=='B-031' and receipt['reference_id']=='R1'
+    assert receipt['code_sha256']==hashlib.sha256((root/'PREREGISTERED_CODE.json').read_bytes()).hexdigest()
+    assert set(receipt['hashes'])=={'conditions.safetensors','conditions.json','initial_noise.pt'}
+    for name,digest in receipt['hashes'].items():
+        assert hashlib.sha256((root/'artifacts'/name).read_bytes()).hexdigest()==digest,name
+    original=json.loads((parent/'artifacts/conditions.json').read_text())
+    derived=json.loads((root/'artifacts/conditions.json').read_text())
+    assert original['structure']==derived['structure']
+    changed=changed_reference_leaves(original['tensors'],derived['tensors'])
+    assert changed==set(receipt['changed_leaves'])
+    assert receipt['hashes']['initial_noise.pt']==parent_receipt['hashes']['initial_noise.pt']
+    provenance=dict(derived['provenance']);anchor=provenance.pop('anchor_derivation')
+    assert provenance==original['provenance']
+    assert anchor['parent_cache_sha256']==original['file_sha256']
+    assert anchor['builder_sha256']==hashlib.sha256((root/'code/phase_reference.py').read_bytes()).hexdigest()
+    assert anchor['reference_rgb_sha256']==hashlib.sha256((root/ json.loads((root/'configs/public.json').read_text())['reference']).read_bytes()).hexdigest()
+    assert anchor['reference_mask_sha256']==hashlib.sha256((root/ json.loads((root/'configs/public.json').read_text())['reference_mask']).read_bytes()).hexdigest()
+    return receipt
