@@ -545,3 +545,9 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 ## 2026-10-26 통합 의뢰 착수: B-028 실측 후 생성 경로 개입 결정
 
 시작 원격 `84b69080c8e4e9da858f784c11f7916b370a9d51`을 확인했다. [전체 수행 의뢰서](work_orders/20261026-B028-to-method-research.md)를 원문 그대로 보존한다. Spark의 B-028 실행 폴더·프로세스·실행 장부 부재를 확인했으므로 기존 B-028 PLAN의 최대6회부터 수행한다. 공개 개발 패널은 그대로이며 개인 촬영을 요구하지 않는다. B-027 실패와 B-026 선택적 보류는 보존한다. B-028 관측 뒤에만 공통 기준선 및 다음 방법/대조 PLAN을 확정한다. 전체8시간, 추가 방법 분기 최대8회 또는 미사용 검증 분기 최대2회 중 하나만 적용하며 재시도·학습·설치0이다. 현재 CPU 준비 / 신규 GPU0, 실제 시작 UTC01:37, 전체 deadline UTC09:37.
+
+## 2026-10-26 B-028 종료와 B-029 사전 선택
+
+B-028 6/6 sampler·6/6 decode, 각40step80forward와 final latent를 확보했다. 전체17장 정적 검토에서 외형 반응과 일부 장식 제거는 늘었으나 vehicle R1/R2는 원본 반대 방향의 큰 참조 자세, R2 새 문자 패널, human R2 회색 가림 형태가 남았다. [RESULTS](experiments/B-028-object-reference-normalization/RESULTS.md). 공동 목표 미충족, temporalUNVERIFIED이며 기술완료와 분리한다.
+
+03:34 UTC 이후 분기A/B-029를 선택했다. 중요한 회귀 때문에 전6case 공통 기준선은 B-027이며 best-of 혼합0이다. [PLAN](experiments/B-029-spatial-image-conditioning/PLAN.md)과 [DECISION](experiments/B-029-spatial-image-conditioning/DECISION.md)에 generated query의 기존 이미지 attention 출력만 평균1 계수로 재가중하는 한 개입을 고정한다. METHOD6와 animalR1/vehicleR1 shifted CONTROL2,encoder0,학습/설치0. 현재 구현/CPU검사이며 새GPU0. 효과와 원인은 결과로 판단하고 추가 sweep을 하지 않는다.

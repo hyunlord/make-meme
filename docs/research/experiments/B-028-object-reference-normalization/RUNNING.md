@@ -5,10 +5,10 @@
 | 과제 | ENC | R1 PROBE/S/D | R2 PROBE/S/D |
 |---|---|---|---|
 | animal | COMPLETED | PASS / COMPLETED / COMPLETED | PASS / COMPLETED / COMPLETED |
-| human | COMPLETED | PASS / RUNNING / NOT_RUN | NOT_RUN |
-| vehicle | NOT_RUN | NOT_RUN | NOT_RUN |
+| human | COMPLETED | PASS / COMPLETED / COMPLETED | PASS / COMPLETED / COMPLETED |
+| vehicle | COMPLETED | PASS / COMPLETED / COMPLETED | PASS / COMPLETED / COMPLETED |
 
-02:22:33 UTC 현재 sampler 실제 시도3/6, decode2/6 완료. animal 두 참조 모두40step80forward·final latent 저장·finite raw·17프레임 MP4 확인을 완료했다. human ENC/PROBE가 완료되고 R1 S를 진행한다. 기존 단계 분리와 guard에 따라 나머지 case를 순차 수행한다. 재시도0.
+03:31:53 UTC 전체 완료. sampler 실제 시도6/6, decode6/6, worker21/21 완료. 각40step80forward·final latent 저장·finite raw·17프레임 MP4를 확인했다. 재시도0. 소유 unit 두 개 inactive와 자원 회복을 확인했다. 더 이상의 B-028 GPU 실행은 하지 않는다. 실제 비용은 [COSTS.md](COSTS.md), 조건 계보는 [CONDITIONS.json](CONDITIONS.json)을 참조한다.
 
 animal의 새 cache는 대응 B-027 cache 각각에 대해 허용6leaf만 변경, 나머지10leaf와 구조·dtype·초기noise 파일이 보존됐다. 새 VAE/CLIP reference 각2회, T5·driving·target·DiT 인코딩0. 기존 cache는 읽기 전용이다.
 

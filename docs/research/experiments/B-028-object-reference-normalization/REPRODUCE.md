@@ -14,3 +14,22 @@ python "$B028_ROOT/code/runtime_launch.py" "$B028_ROOT/tasks/$task/stages/$stage
 ```
 
 실제 실행은 단계별 소유 unit 종료/회복을 확인하며 이어간다. 기존 attempt/result가 있으면 동일 stage를 재실행하지 않는다. source_fps=null/preview24/timebase_assumed=true다. 결과를 원래 초 단위 동작 보존으로 주장하지 않는다.
+
+## 실측 요약 재사용
+
+완료 후 B-027의 기존 CPU reporting 함수 `reporting_code/summarize.py:summarize`를 같은 stage/task 구조에 재사용한다. 반환 객체의 experiment label만 B-028로 표시한다. 이는 GPU runtime이나 과거 결과 변경이 아니다. 예:
+
+```sh
+PYTHONPATH="$B027_REPORTING_CODE" python - "$B028_ROOT" <<'PY'
+import json, sys
+from pathlib import Path
+from summarize import summarize
+root = Path(sys.argv[1])
+report = summarize(root)
+report['experiment'] = 'B-028'
+report['timing_context'] = 'CPU comparison rendering and artifact transfers may overlap; not isolated performance benchmarking'
+(root/'reports/execution_summary.json').write_text(json.dumps(report, indent=2)+'\n')
+PY
+```
+
+메모리 회계는 시스템 available·개별 process RSS·cgroup·CUDA allocator를 따로 읽으며 합산하지 않는다. CPU 비교 시트 렌더와 네트워크 전송이 일부 S 실행과 겹칠 수 있어 비용 차이를 방법 자체의 속도 개선으로 해석하지 않는다.

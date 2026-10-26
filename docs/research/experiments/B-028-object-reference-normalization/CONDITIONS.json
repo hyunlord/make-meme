@@ -1,0 +1,279 @@
+{
+  "experiment": "B-028",
+  "reports": {
+    "animal": {
+      "status": "PASS",
+      "changed_pair_leaves": [
+        "t10",
+        "t2",
+        "t3",
+        "t4",
+        "t8",
+        "t9"
+      ],
+      "identical_pair_leaves": [
+        "t0",
+        "t1",
+        "t11",
+        "t12",
+        "t13",
+        "t14",
+        "t15",
+        "t5",
+        "t6",
+        "t7"
+      ],
+      "structure_devices_unchanged": true,
+      "parent_comparisons": [
+        {
+          "case": "R1",
+          "parent_cache_sha256": "ebdce34b753e6930b582bc32540908914556644442f2cf68f049b3068e3c66e7",
+          "changed": [
+            "t10",
+            "t2",
+            "t3",
+            "t4",
+            "t8",
+            "t9"
+          ],
+          "preserved": [
+            "t0",
+            "t1",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "structure_and_dtype_preserved": true
+        },
+        {
+          "case": "R2",
+          "parent_cache_sha256": "f7e670486e07aa931d834079335055d6fd952c14efe2cfb07f8e651f4d634a1f",
+          "changed": [
+            "t10",
+            "t2",
+            "t3",
+            "t4",
+            "t8",
+            "t9"
+          ],
+          "preserved": [
+            "t0",
+            "t1",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "structure_and_dtype_preserved": true
+        }
+      ],
+      "counts": {
+        "positive_T5": 0,
+        "negative_T5": 0,
+        "driving_VAE": 0,
+        "R1_VAE": 1,
+        "R1_CLIP": 1,
+        "R2_VAE": 1,
+        "R2_CLIP": 1,
+        "target_VAE": 0,
+        "DiT": 0
+      },
+      "case_hashes": {
+        "R1": "703f769c9dfd6fb0695447f3c9d7289ef2094b9533b9d02ac7cb7908d3d7b444",
+        "R2": "9874560f739e38eb50b65085a91a865c486eec05e3feed42477a1597d726bc67"
+      }
+    },
+    "human": {
+      "status": "PASS",
+      "changed_pair_leaves": [
+        "t10",
+        "t2",
+        "t3",
+        "t4",
+        "t8",
+        "t9"
+      ],
+      "identical_pair_leaves": [
+        "t0",
+        "t1",
+        "t11",
+        "t12",
+        "t13",
+        "t14",
+        "t15",
+        "t5",
+        "t6",
+        "t7"
+      ],
+      "structure_devices_unchanged": true,
+      "parent_comparisons": [
+        {
+          "case": "R1",
+          "parent_cache_sha256": "46d55fbc6b43dbaf7c6c0c41443986f80eecbad9f799a462e94e7894de6a742a",
+          "changed": [
+            "t10",
+            "t2",
+            "t3",
+            "t4",
+            "t8",
+            "t9"
+          ],
+          "preserved": [
+            "t0",
+            "t1",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "structure_and_dtype_preserved": true
+        },
+        {
+          "case": "R2",
+          "parent_cache_sha256": "6105a2a53a5f382c74b544efb0db5ee0e9927a9335db5fe29b2bfefa5663b8f6",
+          "changed": [
+            "t10",
+            "t2",
+            "t3",
+            "t4",
+            "t8",
+            "t9"
+          ],
+          "preserved": [
+            "t0",
+            "t1",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "structure_and_dtype_preserved": true
+        }
+      ],
+      "counts": {
+        "positive_T5": 0,
+        "negative_T5": 0,
+        "driving_VAE": 0,
+        "R1_VAE": 1,
+        "R1_CLIP": 1,
+        "R2_VAE": 1,
+        "R2_CLIP": 1,
+        "target_VAE": 0,
+        "DiT": 0
+      },
+      "case_hashes": {
+        "R1": "fd13a2b3cb2f7a856f69a6b4465a6ea7d022baf8aa61dd27473185338ad6503b",
+        "R2": "badcd9d09b2c8dec8d8ace4a388cc7086aa433bf3ceb6d6c57e2884193838c9e"
+      }
+    },
+    "vehicle": {
+      "status": "PASS",
+      "changed_pair_leaves": [
+        "t10",
+        "t2",
+        "t3",
+        "t4",
+        "t8",
+        "t9"
+      ],
+      "identical_pair_leaves": [
+        "t0",
+        "t1",
+        "t11",
+        "t12",
+        "t13",
+        "t14",
+        "t15",
+        "t5",
+        "t6",
+        "t7"
+      ],
+      "structure_devices_unchanged": true,
+      "parent_comparisons": [
+        {
+          "case": "R1",
+          "parent_cache_sha256": "fce0e3d03cae0bea801b23afc9a98eab93270275fe26bda97d862fdc48b54dab",
+          "changed": [
+            "t10",
+            "t2",
+            "t3",
+            "t4",
+            "t8",
+            "t9"
+          ],
+          "preserved": [
+            "t0",
+            "t1",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "structure_and_dtype_preserved": true
+        },
+        {
+          "case": "R2",
+          "parent_cache_sha256": "78b095d6e79b39f8cc2718b822f81c2d52d2a7c4293c06b919aaef1f574b21ac",
+          "changed": [
+            "t10",
+            "t2",
+            "t3",
+            "t4",
+            "t8",
+            "t9"
+          ],
+          "preserved": [
+            "t0",
+            "t1",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "structure_and_dtype_preserved": true
+        }
+      ],
+      "counts": {
+        "positive_T5": 0,
+        "negative_T5": 0,
+        "driving_VAE": 0,
+        "R1_VAE": 1,
+        "R1_CLIP": 1,
+        "R2_VAE": 1,
+        "R2_CLIP": 1,
+        "target_VAE": 0,
+        "DiT": 0
+      },
+      "case_hashes": {
+        "R1": "e54e1e8c7bfa430267250eea302f1ed2c3c624be67359f7f1de226fd9576e8cd",
+        "R2": "882d03f13c7516cb6445f4fc03d32ad46d1c73a4757b51407ef836ad2a758d7a"
+      }
+    }
+  },
+  "interpretation": "Each B028 case is compared against its own B027 parent. Only both CFG branches reference VAE, CLIP and reference mask leaves change; other ten leaves and structure/dtype preserve. Parent caches are not overwritten."
+}
