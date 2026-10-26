@@ -1,6 +1,6 @@
 # B 트랙 로드맵
 
-**현재 B-031 VIDEO_IN_PROGRESS**: 이미지6회는 기술완료, animal/human R1은 참조 자세 복사로 ANCHOR_UNSUITABLE이며 vehicle R1만 source 자세·외형의 정적 적합성을 보여 조건부 영상1회를 진행한다. R2대체·추가생성·학습0. [앵커 관측](experiments/B-031-source-aligned-edit-anchor/ANCHORS.md). B030 PARTIAL/INCONCLUSIVE와 B028/B029 NOT_ADOPTED는 보존한다. 아래 과거 현재/다음 문구는 당시 기록이다.
+**현재 B-031 COMPLETED / 기술 PASS / 결합 편집 목표 FAIL / 일반 기준선 NOT_ADOPTED**: 이미지6개 중 사전 지정 R1의 동물·사람은 부적합으로 영상 생략했고 차량만 영상1회를 완료했다. 차량 외형·거친 회전은 PARTIAL이나 앵커에 없던 하단 차량 그래픽으로 보호 장면 FAIL이다. temporalUNVERIFIED. 다음 한 가설은 영상 생성 중 비대상 원본 문맥 보존이며 미실행이다. [결과](experiments/B-031-source-aligned-edit-anchor/RESULTS.md). B030 PARTIAL/INCONCLUSIVE와 B028/B029 NOT_ADOPTED를 보존한다. 아래 과거 현재/다음 문구는 당시 기록이다.
 
 
 **최신: B-030 COMPLETED / 실행 계약 PASS / 역할 분리 PARTIAL·INCONCLUSIVE.** [결과](experiments/B-030-reference-path-crossover/RESULTS.md). 기존 대각4출력과 신규 교차4셀을 비교했다. 사람의 큰 치마는 VAE+mask R2 행을 따라 반복되지만 세부 형태는 CLIP과 조합에 따라 달랐고, 차량의 큰 추가 그림은Y11에만 나타났다. VAE/CLIP의 pose/identity 역할 분리나 품질 개선은 입증하지 못했다. 다음 검토 표적은 참조 VAE+mask 공간 배치와 source 구조의 경쟁을 외형 전달과 분리하는 가설 하나다. 구체적 gate·zero-out·학습·모델 추가는 미실행이다. B028/B029는 NOT_ADOPTED, temporalUNVERIFIED를 유지한다. 아래 현재 표현은 당시 기록이다.

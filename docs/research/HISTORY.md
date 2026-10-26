@@ -596,3 +596,7 @@ B028/B029 고정 설정의 NOT_ADOPTED와 CONTROL/비용/한계를 유지한다.
 고정2e5e29d 이후 Qwen6회가 각각40step80forward·finite896×512로 완료됐다. 실제원본/참조/A0정적검토에서 animalR1은낮은참조자세, humanR1은뒤·옆모습과펼친치마를따라 ANCHOR_UNSUITABLE로영상생략했다. 두R2를대체하지않는다. VehicleR1은높은은색차체와source우향·위치를함께유지해수동A0support228.29초후영상후보로확정했다. [ANCHORS](experiments/B-031-source-aligned-edit-anchor/ANCHORS.md).
 
 Qwen worker43.315분,480forward,CUDApeak55.933GiB,최소가용25.935GiB,swap0이다. `del/empty_cache`후잔존할당은UNKNOWN으로남기고실제프로세스종료·가용89.79GiB회복을확인했다. 영상입력·예산263ca977원격고정후vehicleR1만ENC→PROBE→S→D를진행한다. 참조6leaf만변경·10leaf보존,새T5/driving인코딩0. 영상품질은아직미관측이며시간품질UNVERIFIED다.
+
+### B-031 종료: 앵커 실패와 영상 보호 장면 실패를 분리
+
+이미지6회와 조건부 차량 영상1회(40step80forward, final latent 및17frame MP4)를 완료했다. 동물/사람 R1은 참조 자세 복사로 영상 NOT_RUN, R2 대체0이다. 차량은 target형 차체와 원본의 거친 회전 흐름을 유지했지만 A0에 없던 큰 차량 그래픽이 도로에 생겨 보호 장면 FAIL·결합 목표 FAIL이다. temporalUNVERIFIED, 일반 기준선 NOT_ADOPTED다. [RESULTS](experiments/B-031-source-aligned-edit-anchor/RESULTS.md), [COSTS](experiments/B-031-source-aligned-edit-anchor/COSTS.md). 다음 한 가설은 영상 생성 중 비대상 원본 문맥 보존이며 제안만 남긴다. 추가 모델·학습·seed·긴 영상은 실행하지 않았다.

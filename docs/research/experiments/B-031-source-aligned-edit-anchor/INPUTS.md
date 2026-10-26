@@ -47,3 +47,11 @@ python -m pytest code/test_prepare_inputs.py -q
 ```
 
 코드는 생성 프롬프트·순서·입력 파일해시를 함께 고정한다. 원본과 신규 입력은 private archive에 보존하고 공개 GitHub에는 코드·해시·관측 요약만 둔다. DAVIS2017 mask-given 개발 패널, CC BY-NC4.0 기록과 미사용 일반화 미입증이라는 B027의 권한·해석 한계를 유지한다. Source FPS는확인되지않아null, preview24fps/timebase_assumed=true이며 실제초단위보존을 주장하지 않는다.
+
+## Vehicle R1 생성 후 실제 support 준비
+
+16:01:30UTC에 시작해16:05:18UTC에 최종 polygon rasterization을 마쳤다(228.29초; 후속 파일전송은 별도). 실제 `vehicle_R1/A0.png`만 보며 수동 polygon을 작성했다. 원본source 또는 target GT mask를 재사용하지 않았다. 초기 draft의 상단 roofline 일부 누락/포함은 실제A0 좌표 grid로 한 번 수정해 최종freeze했고 draft-v1을 비공개로 보존했다. 이는 생성 결과를 보정한 것이 아니라, 생성된 개체 영역을 읽는 수동 annotation이다. 자동mask성능으로 보고하지 않는다.
+
+최종 support76,196px, bbox `[198,184,703,401]`(exclusive)이며 도로의 cast shadow는 제외했다. 창유리와 그 안에 보이는 사람은 차량 실루엣 내부로 유지했다. 얇은 roof rail·뒤 spoiler·차체 하단·타이어 접촉의 약1–3px 경계 불확실성은 남는다. feather·inpaint·새 segmentation·RGB수정은 없다.
+
+`code/manual_anchor_mask.py`가 저장된 polygon을 읽어 내부A0 RGB exact/outside128과 RED/BLACK categorical mask를 만들고 PNG를 다시 읽어 검증했다. 실제mask/poly/preview·초기draft·영수증은 비공개 `video/vehicle/inputs`에 있으며,최종PNG3개의 Spark 전송 후SHA도 일치했다. 이 CPU 검증은 앵커의 편집품질 판정이나 Qwen 프로세스 종료 확인을 대신하지 않는다.

@@ -73,6 +73,10 @@ Human R1의 실제 encoder hook 기록에서 vision `image_grid_thw=[2,3]`, `pix
 
 이미지 worker의 CUDA peak allocated는60,057,443,328bytes, peak reserved는63,206,064,128bytes였다. 샘플링된 시스템 최소 MemAvailable은27,847,270,400bytes, swap 사용은0이었다. `pipeline_released`라는 phase 이름에도 실제 allocated40,917,650,944bytes가 남았다. 따라서 `del`/`empty_cache`만으로 완전 해제를 주장하지 않는다. 남은 참조 원인은 UNKNOWN이며, 실제 프로세스 종료(MainPID0)와 시스템 가용 메모리96,412,590,080bytes 회복을 별도로 확인한 뒤 SCAIL을 시작했다. cgroup/RSS/CUDA/시스템 수치를 합산하지 않는다.
 
+B-031의 R_star는 B-027보다 생성된 외형, source에 맞춘 방향·위치·크기, 수동 support가 함께 달라진다. 차량이 개선되더라도 순수한 pose 하나의 인과효과나 Qwen 모델 자체의 필수성을 입증하는 비교가 아니다. 원래 여섯 입력 중 animal/human R1의 정지 편집 실패와 영상 미실행을 유지한 채 분해형 기준선 전체를 평가한다.
+
+차량 영상은 실제40step·80forward와 finite `[3,17,512,896]` decode,17프레임 MP4 저장을 통과했다. 전체17장 정적 판독에서는 높은 은색 차체와 대략적인 회전 진행이 관측됐지만, A0에는 없던 큰 차량 부품형 그래픽이 좌하단 보호 노면에 나타나 지속됐다. 따라서 정지 앵커 적합성과 영상 보호 장면 성공은 분리되며, 후자는 FAIL이다. 그래픽의 특정 encoder·attention 원인은 이 관측으로 식별할 수 없다. 원본과 정확한 회전량·접지·시간적 안정성은 UNCERTAIN/UNVERIFIED이며 결합 목표 개선은 미입증이다.
+
 ## 이해 확인 질문
 
 1. A0가 target을 잘 닮고 source 첫 자세도 맞으면 영상 전체의 motion 성공을 바로 선언할 수 있는가?

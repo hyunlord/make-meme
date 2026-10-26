@@ -1,6 +1,6 @@
 # B-031 비용과 자원
 
-전체 비용은 이미지 모델 확보·로딩·실패한 앵커·수동 support·영상 전이를 모두 포함한다. 영상 한 건의 sampler 시간만으로 효율 개선을 주장하지 않는다. 아래 Qwen 값은 [실측 JSON](ENV_RUNTIME_SUMMARY.json)이며 SCAIL과 최종 검토·전송 시간은 종료 시 추가한다.
+전체 비용은 이미지 모델 확보·로딩·실패한 앵커·수동 support·영상 전이를 모두 포함한다. 영상 한 건의 sampler 시간만으로 효율 개선을 주장하지 않는다. 아래 Qwen 값은 [실측 JSON](ENV_RUNTIME_SUMMARY.json), SCAIL은 실제 단계 receipt에서 집계했다. 최종 패키징·전송 종료 시각은 DELIVERY 기록에 남긴다.
 
 ## 이미지 모델 확보와 실행
 
@@ -34,4 +34,6 @@ Transformers의 rope_parameters/mrope_section 경고와 이미 종료된 자체 
 
 ## 영상과 전체 wall-clock
 
-작성 시 vehicle R1의 순차 실행 진행 중이다. 최종 실제 실행·메모리·전송 종료값을 이 절에 추가한다. 시작2026-10-26 14:46:41UTC, hard deadline20:46:41UTC, heavy cutoff20:16:41UTC를 유지한다.
+Vehicle R1 ENC9.103초 / PROBE5.079초 / S1003.427초 / D15.197초로 모두 완료했다. 신규 sampler1회·40step80forward·decode1회, 재시도0이다. S CUDA peak allocated33.847GiB, cgroup peak62.019GiB, 최소 시스템 가용50.684GiB, swap0이다. 모든 자체 GPU worker 종료 뒤 가용94,288,988KiB 회복을 확인했다. Qwen과 SCAIL 회계를 합산해 peak라고 부르지 않는다.
+
+이미지 worker와 영상 네 단계의 wall-clock 합은3631.731초(60.529분)다. 다운로드·입력/코드 준비·검토·수동 작업·패키징 비용은 이 합 밖이며, 전체 elapsed는 최종 DELIVERY에서 시작 시각과 종료 시각으로 계산한다. 시작2026-10-26 14:46:41UTC, hard deadline20:46:41UTC, heavy cutoff20:16:41UTC를 유지한다.

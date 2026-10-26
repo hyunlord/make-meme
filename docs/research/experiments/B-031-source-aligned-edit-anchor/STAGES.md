@@ -1,6 +1,6 @@
 # B-031 단계 분리와 영상 전이 계약
 
-상태: **영상 실행 전 준비 / GPU 영상 0**. 이미지 앵커 성공과 영상 성공은 별도 판정이다. 이 문서는 생성 전 고정된 영상 경로이며 실제 실행 여부는 종료 RESULTS/실행 장부를 따른다.
+상태: **vehicle R1 영상 기술 실행 PASS / sampler 1회 / decode 1회**. 이미지 앵커 성공과 영상 성공은 별도 판정이다. 이 문서는 생성 전 고정된 영상 경로이며 실제 실행 여부는 종료 RESULTS/실행 장부를 따른다.
 
 ## 단계와 수명
 
@@ -30,13 +30,13 @@
 
 영상 첫 프레임 overwrite/hard clamp/history 주입은 없다. 조건 참조 A0의 자세가 실제 생성frame0과 같아야 한다는 강제식도 없다. 공식 replacement의 RoPE는 모델이 선택하며 hybrid override를 넣지 않는다.
 
-## 실제 준비 검증
+## 실행 전 준비 검증 (당시 상태 보존)
 
 - 원격 기존 B027 animal/human/vehicle R1 receipt와16leaf·noise를 CPU로 읽고 확인했다. 이 검사에서 `torch.cuda.is_initialized=False`였다.
 - noise `[16,5,64,112]`, reference `[16,1,64,112]`, CLIP `[1,257,1280]`를 기존 metadata에서 확인했다. 새 encoder/forward의 실측이 아니다.
 - CPU4검사: 허용6leaf, 우연히같은mask, 금지driving변경, 금지reference dtype변경. Mac와 기존 Spark Python에서 PASS.
 - Python compile과 shell syntax PASS. ruff/basedpyright 실행파일이 로컬에 없어 타입/린트 전체는 `NOT_RUN/NOT_CLEAN`으로 남긴다. 검사 억제나 새 설치는 하지 않는다.
-- 신규영상·조건인코딩·모델로딩은 이 문서 작성시0이다. fixture 통과는 실제영상 성공을 뜻하지 않는다.
+- 신규영상·조건인코딩·모델로딩은 사전 고정 당시0이었다. fixture 통과는 실제영상 성공을 뜻하지 않는다.
 
 ## 실제 함수
 
@@ -49,3 +49,20 @@
 - vehicle R1: 부모와 별도 에이전트의 정적 검토에서 `SUITABLE_FOR_VIDEO`. 실제 A0의 수동 support를 고정한 후 이 한 과제만 실행 대상으로 준비한다. 이는 독립 인간 평가나 영상 품질 PASS가 아니다.
 
 Qwen 전체 프로세스 종료와 자원 회복, 최종 입력 receipt 및 실행 코드 사전 기록 전에는 ENC/PROBE/S/D를 시작하지 않는다. R2로 대체하지 않는다.
+
+## 실제 실행 결과
+
+사전 실행 고정 commit `263ca977bb50db7f1e7ce49c9b0a89fbbbe3db25` 이후 vehicle만 ENC→PROBE→S→D를 각각 한 번 수행했다. 실제 S counters는40step/80forward이고 final latent를 D 전에 저장했다. D의 raw는 finite `[3,17,512,896]`, MP4는896×512/17frames/24fps/0.708333s다. 이는 기술 출력 PASS이며 시각 품질은 RESULTS의 별도 판정, 시간 품질은 UNVERIFIED다.
+
+| 단계 | guard 측정 경과초 | cgroup peak GiB | CUDA peak allocated GiB | 시스템 최소 MemAvailable GiB |
+|---|---:|---:|---:|---:|
+| ENC |9.103|4.521|2.644|85.365|
+| PROBE |5.079|0.594|0.017|88.777|
+| S |1003.427|62.019|33.847|50.684|
+| D |15.197|2.103|8.908|76.505|
+
+서로 다른 회계이므로 cgroup/CUDA/시스템 수치를 합산하지 않는다. cgroup 수치는1초 관측 중 읽힌 peak이고 CUDA 수치는 phase 관측의 allocator peak다. 모든 단계에서 swap0, guard service_exit/returncode0, worker MainPID0을 확인했다. 마지막 pipeline/watchdog 모두 inactive/MainPID0/Result=success이며 시스템 MemAvailable94,288,988KiB로 회복했다. ExecStopPost의 이미 unload된 unit 메시지는 정상 종료 후의 정리 경고이며 재시도하지 않았다.
+
+조건은 허용6leaf만 변경되고 나머지10leaf·구조·device를 보존했다. 첫 실제 두CFG forward에서 새 R_star reference와 mask/CLIP의 객체·hash를 확인했다. 추가 관측 forward는0이다. reference VAE1/CLIP1/helper1, T5/driving/target/학습0이다.
+
+MP4/raw/final latent·metadata/조건·metadata의6개 파일은 Spark→Mac 전송 후 실제 byte SHA가 모두 같았다. 아카이브 검증은 별도 전달 기록을 따른다.
