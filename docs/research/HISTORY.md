@@ -573,3 +573,8 @@ METHOD R1의40step80forward·finite17frame과 전체 정적 비교를 확보했�
 2026-10-26 UTC06:15:19, METHOD6/CONTROL2 각40step80forward·finite17frame과 final latent를 확보했다. 전체17장 정적검토에서 animal target 교체 실패, human R1 일부 치마 정돈과 R2 형상 실패, vehicle R2 새 그래픽 회귀를 확인했다. animal CONTROL은 더 큰 배지지만 vehicle CONTROL은 METHOD의 큰 장식이 없어 위치 가설의 일관된 유용성은 미입증이다. [RESULTS](experiments/B-029-spatial-image-conditioning/RESULTS.md), [대조](experiments/B-029-spatial-image-conditioning/ABLATIONS.md). 기술 PASS를 품질 PASS로 바꾸지 않으며 temporalUNVERIFIED다.
 
 독립 실행 근거 감사에서8case/24stage·정확한16leaf/noise계보·40×80gate·finallatent/decode·프로세스 종료를 확인했다. B029 encoder/학습/설치/재시도0, 전체 의뢰는미착수B0286+B0298=14회다. 다음 한 가설은 reference VAE joint 경로의 공간 전달 분리이며 미실행 제안이다. 추가seed/강도/학습/새backend를 실행하지 않는다. full/review-lite 검증은 별도 전달 기록에 남긴다.
+
+
+## 2026-10-26 B-030 착수: 참조 경로 교차 진단
+
+B028/B029 고정 설정의 NOT_ADOPTED와 CONTROL/비용/한계를 유지한다. 시작 원격 `230dad2ba9ffe5a02da3b408058e604e7dea757e`에서 [B030 PLAN](experiments/B-030-reference-path-crossover/PLAN.md)을 확인했다. 기존 B027 human/vehicle 대각4출력을 재사용하고 양 CFG clip_fea만 교차한4셀로 조건부 의존을 관측한다. VAE+mask와CLIP을 pose/identity로 미리 분리해 부르지 않는다. 현재 CPU 준비, 신규 sampler0/4·encoder0·학습0; 실제 시각 사전항목·코드·cache 계보를 고정한 뒤 순차 실행한다. 시작08:19:50UTC, deadline11:19:50UTC. 새 gate나 원인 확정이 아닌 다음 방법 표적의 증거를 얻는 범위다.

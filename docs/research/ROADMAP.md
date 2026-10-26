@@ -1,5 +1,7 @@
 # B 트랙 로드맵
 
+**최신 착수: B-030 PREPARING / 신규 sampler 0/4.** [계획](experiments/B-030-reference-path-crossover/PLAN.md). B028/B029는 채택하지 않고 B027 human/vehicle의 VAE+mask 행과 CLIP 열을 교차한다. 기존 대각4출력 재사용, encoder/학습0, 결과에서 조건부 의존과 상호작용을 구분한다. 과거 다음-gate 제안은 자동 실행하지 않는다. 아래 현재 표현은 당시 기록이다.
+
 **현재: B-028·B-029 COMPLETED / 기술 PASS / B-029 고정 방법 NOT_ADOPTED.** B0286출력의 trade-off를 보존하고 B027 공통 기준선과 B029 METHOD6/CONTROL2를 비교했다. 동물 교체 실패·사람 R2 형태 손상·차량 R2 장면 회귀가 남고 vehicle CONTROL의 장면이 오히려 깨끗해 위치 가설의 일관된 이점이 미입증이다. [결과](experiments/B-029-spatial-image-conditioning/RESULTS.md). 다음 가설 하나는 reference VAE joint 경로의 공간 전달 분리이며 [제안만](experiments/B-029-spatial-image-conditioning/NEXT_DECISION.md) 남긴다. 자동 실행/추가 sweep0, temporalUNVERIFIED. 아래 진행 중 표현은 당시 기록이다.
 
 **B-027 종료 당시: 기술 PASS / 결합 편집 품질 미입증.** 공개3과제×2참조의 실제6출력과 최종latent를 확보했다. 동물은 source 외형 잔존, 사람은 target 의상 반영과 형상 손상, 차량은 부분 외형 반영과 혼합 차체/조건별 그래픽 추가로 결합 편집 품질은 미입증이다. 기술21worker·240step480forward PASS와 시각 판정을 구분하고 temporal UNVERIFIED를 유지한다. [결과](experiments/B-027-public-reference-robustness/RESULTS.md), [다음 한 가설](experiments/B-027-public-reference-robustness/NEXT_DECISION.md). 다음은 원본 문맥과 ID 주입을 분리한 공식 VideoPainter 경로의 한정 비교 제안이며 설치·실행은 NOT_RUN이다.
