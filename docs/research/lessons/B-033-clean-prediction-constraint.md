@@ -43,7 +43,15 @@ M은 E의 f0, f1..4, f5..8, f9..12, f13..16 각각의 시간 max, 공간8×8 max
 
 실제 pinned scheduler `step()`은 `convert_model_output` 반환값을 corrector에 먼저 전달한 뒤 같은 값을 `model_outputs[-1]`에 저장한다. UniP predictor는 이 history를 읽는다. 따라서 원래 converter를 한 번 호출한 직후 제약된 값을 반환하는 좁은 override가 두 경로를 함께 바꾼다. `solver_p=None`이 중요하다. 외부 predictor를 지정하면 원래 raw model_output을 받는 우회 경로가 생긴다. [step의 전달 순서](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/utils/fm_solvers_unipc.py#L688-L730).
 
-CFG positive/negative의 model 호출과 결합은 유지한다. observer 때문에 추가 forward를 하지 않으며40step×2branch=80forward다. 변경은 모델 가중치나 attention이 아니라 scheduler가 저장·사용하는 clean prediction이다. 구현은 [clean_constraint.py](../experiments/B-033-clean-prediction-constraint/code/clean_constraint.py)의 `CleanConstraintScheduler.convert_model_output`과 `mix_clean`이며, [phase_sample.py](../experiments/B-033-clean-prediction-constraint/code/phase_sample.py)는 final 저장 직전에40step·80forward·40converter 적용을 확인한다. [phase_vae.py](../experiments/B-033-clean-prediction-constraint/code/phase_vae.py)는 원본 encode, source 복원, 최종 혼합 decode와 별도 STEP decode를 구분한다. 실제 적용 횟수는 [METHOD](../experiments/B-033-clean-prediction-constraint/METHOD.md) 및 [RESULTS](../experiments/B-033-clean-prediction-constraint/RESULTS.md)에 연결한다. 문서 작성 시 아직 실행되지 않은 값은 관측으로 채우지 않는다.
+CFG positive/negative의 model 호출과 결합은 유지한다. observer 때문에 추가 forward를 하지 않으며 40 step × 2 branch = 80 forward다. 변경은 모델 가중치나 attention이 아니라 scheduler가 저장·사용하는 clean prediction이다. 구현은 [clean_constraint.py](../experiments/B-033-clean-prediction-constraint/code/clean_constraint.py)의 `CleanConstraintScheduler.convert_model_output`과 `mix_clean`이며, [phase_sample.py](../experiments/B-033-clean-prediction-constraint/code/phase_sample.py)는 final 저장 직전에 40 step·80 forward·40 converter 적용을 확인한다. [phase_vae.py](../experiments/B-033-clean-prediction-constraint/code/phase_vae.py)는 원본 encode, source 복원, 최종 혼합 decode와 별도 STEP decode를 구분한다. 실제 적용 횟수는 [METHOD](../experiments/B-033-clean-prediction-constraint/METHOD.md) 및 [RESULTS](../experiments/B-033-clean-prediction-constraint/RESULTS.md)에 연결한다. 실제 완료 기록은 아래처럼 코드 검사와 시각 관측을 분리한다.
+
+## 실제 실행과 정적 관측
+
+실제 S는 40 step·80 forward를 완료했다. converter trace는 index 0..39의 40행이며 모두 finite, CPU FP32 `[1,16,5,64,112]`였다. 첫 sigma는 약 0.999666이고 마지막 converter sigma는 약 0.071361이다. 마지막 저장 latent가 곧 sigma=0에서 converter를 한 번 더 호출했다는 뜻은 아니다. 최종 latent는 FP32 `[16,5,64,112]`로 저장·재로딩이 일치했고, 별도 D도 finite `[3,17,512,896]` 출력을 확보했다. 이 사실은 기술 실행 PASS이며 영상 목표 전체의 PASS가 아니다.
+
+전체 17프레임 시트와 사전 고정 local 0/8/16의 같은 crop을 정적으로 확인했다. STEP은 높은 밝은 차체와 큰 창, 후면 노출 증가를 유지하며 source의 낮고 짙은 Mini형 차량으로 명백히 돌아가지는 않았다. 같은 RGB_POST 뒤에도 B-032와 FINAL_LATENT_ONLY의 뒤 바퀴 아래 적색·검정 조각이 STEP에서는 훨씬 작은 옅은 조각으로 줄어 보인다. 따라서 원거리 배경 복사만이 아니라 경계·접촉 주변의 부분 개선 근거가 있다. 그러나 작은 밝은 흔적은 남고 실제 접지·그림자 정확성은 UNCERTAIN이다.
+
+이 정적 관측은 FINAL_LATENT_ONLY 대조군이 필요한 이유를 보여 준다. 최종 혼합만으로 큰 원거리 그래픽은 줄어도 같은 영역의 바퀴 아래 조각은 남았다. STEP의 작은 조각은 다른 sampling 경로에서 나온 결과지만, 한 case·한 seed의 관측으로 일반적인 개선량이나 최적 방법을 확정할 수 없다. 실제 연속 시청은 수행하지 않았으므로 temporal=UNVERIFIED다. E 밖 원본 복원은 여전히 합성식의 성질이며 방법 성능 점수로 세지 않는다.
 
 ## 5. 선행 방법과 이번 비교의 한계
 
@@ -61,6 +69,6 @@ Blended Latent Diffusion은 latent 공간의 국소 이미지 편집을 다루�
 
 ## 별도 해설
 
-1. 비선형 VAE decoder의 latent 혼합·주변 문맥 효과가 섞인다. 마지막 혼합 대조군은 추가40step의 이득이 단순 decode 효과를 넘는지 분리한다.
+1. 비선형 VAE decoder의 latent 혼합·주변 문맥 효과가 섞인다. 마지막 혼합 대조군은 추가 40 step의 이득이 단순 decode 효과를 넘는지 분리한다.
 2. 후단 덮어쓰기는 다음 상태와 과거 prediction history의 관계를 별도로 깨뜨릴 수 있다. converter 반환을 바꾸면 현재 corrector와 저장 history가 같은 제약된 clean estimate를 사용한다. 그래도 원래 solver의 이론 보장이 그대로 이어지는 것은 아니다.
 3. 아니다. latent source 자체가 압축 복원이고 decoder는 주변을 섞는다. pixel exact는 최종 RGB_POST의 E=0 복사에서만 직접 얻으며, 손실 MP4에서는 다시 구분해야 한다.

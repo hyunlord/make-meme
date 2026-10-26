@@ -612,3 +612,11 @@ B031 동물/사람 앵커 자세 실패와 차량 영상의 도로 그래픽 FAI
 ## B-033 착수 — clean prediction 제약 대 마지막 latent 혼합
 
 2026-10-27 사용자 통합 의뢰서를 원문 보존했다. 최신aaf40a9와 실제Spark상태에서 중복B033이없음을확인했다. B032저비용MASK_ASSISTED와기존mask불확실성을유지하고,동일영역에서마지막latent혼합과생성중clean제약을비교한다. 차량context축이며animal/human앞단자세FAIL은미해결이다. [PLAN](experiments/B-033-clean-prediction-constraint/PLAN.md). 신규sampler최대1/encode1/decode3,2시간,학습/설치0. 현재PREPARING이며실행·품질성공은아직아니다.
+
+## 2026-10-27 B-033 종료 — 동일 후합성 이후의 국소 개선 PARTIAL
+
+사전 계획 4eba8318, 코드/입력 고정 d893c618 이후 source encode1·decode3·sampler1을 실행했다. 실제40step/80forward/40finite clean constraints와 final latent 보존·D 완료를 확인했다. 기존 B031 조건/초기noise와 B032 source/target support/E를 보존했다. 저장 PNG의 E0 float 왕복 오차는 별도9eee71bc CPU export 보정으로 명시적 source byte 복사했으며 GPU 코드·mask는 변경하지 않았다.
+
+전체17장 및 고정local0/8/16 정적 비교에서 STEP+동일RGBPOST는 B032/FINALONLY에 남은 바퀴 아래 적색·검정 조각을 작은 밝은 잔여로 줄였다. 높은 은색 target 외형과 거친 회전은 유지되고 뚜렷한 sourceMini 회귀는 미관찰이다. 접촉·그림자는 UNCERTAIN, temporal은 UNVERIFIED이며 완전 성공으로 합치지 않는다. GPU 단계 합1041.763초, S CUDApeak33.832GiB, minMemAvailable52.619GiB/swap0. 새 설치·학습·재시도0, 자체 worker 종료 및 기존 서비스 보존.
+
+B032 저비용 기준선과 B031/과거 실패는 보존한다. 국소 이득의 후속 검증 후보지만 추가17분대 비용으로 기본 채택하지 않는다. 다음 한 가설은 같은 고정 제약이 다른 공개 사례에도 target 회귀 없이 국소 오염을 줄이는가이며 미실행이다. 결과·수식·조건·비용·재현을 [B-033 RESULTS](experiments/B-033-clean-prediction-constraint/RESULTS.md)에 연결한다. 이번 비교 이후 추가 작업을 예약하지 않았다.

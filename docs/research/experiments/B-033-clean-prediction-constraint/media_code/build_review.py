@@ -72,6 +72,7 @@ def main() -> None:
         rows = [(definitions[i][0], definitions[i][3]) for i in indices]
         sheet(rows, destination / f'{name}-all17.jpg', details=False)
         sheet(rows, destination / f'{name}-details.jpg', details=True)
+    shutil.copyfile(b32 / 'delivery/review-payload/supports.jpg', destination / 'frozen-B032-supports.jpg')
     shutil.copyfile(Path(__file__).with_name('viewer.html'), destination / 'review.html')
     (destination / 'MEDIA_MANIFEST.json').write_text(json.dumps({
         'videos': entries, 'video_bytes_modified_by_packaging': False,

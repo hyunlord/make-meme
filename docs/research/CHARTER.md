@@ -1,6 +1,6 @@
 # 연구 방향과 목표
 
-**B-033 PREPARING**: [고정 계획](experiments/B-033-clean-prediction-constraint/PLAN.md)에 따라 B032의 저비용합성과 동일mask를 유지하고 마지막latent혼합 대 생성중clean prediction제약을 비교한다. 차량context문제와 동물/사람의 앵커자세실패를 분리한다. 신규sampler최대1, mask수정/학습/설치0이며 품질효과는 미확인이다.
+**B-033 COMPLETED / 실행 PASS / 국소 개선 PARTIAL / 기본 채택 보류**: 동일 편집 영역의 RGB 후합성 뒤에도 생성 중 clean 제약은 기존 RGB 합성·최종 latent 혼합에 남던 바퀴 아래 색상 조각을 더 작은 밝은 흔적으로 줄였다. 높은 은색 target 외형과 거친 회전은 유지됐지만 접촉·그림자는 UNCERTAIN, temporal은 UNVERIFIED다. 신규 sampler 1회·40step·80forward, GPU 단계 합계 17.36분. B-032의 저비용 기준선과 과거 실패는 보존한다. 다음 검토 가설은 다른 공개 사례에서 같은 고정 제약의 국소 이득과 target 회귀 여부를 확인하는 것 하나이며 자동 실행하지 않는다. [RESULTS](experiments/B-033-clean-prediction-constraint/RESULTS.md).
 
 ## 2026-10-26 통합 의뢰의 현재 상태
 

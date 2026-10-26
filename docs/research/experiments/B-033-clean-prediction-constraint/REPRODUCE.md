@@ -13,3 +13,5 @@ $PINNED_PYTHON $B033_ROOT/code/runtime_launch.py $B033_ROOT/stages/D 600 $PINNED
 ```
 
 이 명령은 같은 run의 재시도를 허용하지 않는다. attempt 파일은 exclusive 생성이다. 공개 스크립트의 날짜 deadline은 이번 승인 실행 전용이며 이를 자동 연장하지 않는다. source encode1/decode1, final-only decode1, sampler1(40step80forward), step decode1이 최대다. 마지막 latent는 decode 이전 lossless CPU 저장물로 보존한다.
+
+GPU 종료 뒤 CPU의 `postcompose_export.py B033_ROOT`를 사용한다. 최초 frozen `postcompose.py`는 실행하지 않았고 보존한다. [CPU export 수정 기록](CPU_EXPORT_AMENDMENT.md)은 E0 저장 PNG의 source byte exact를 보장하기 위한 1-level roundtrip 보정이다. 마스크나 GPU 실행은 바뀌지 않는다. 새 합성 MP4는 PNG에서 파생 인코딩되므로 MP4 decode pixel exact를 주장하지 않는다.
