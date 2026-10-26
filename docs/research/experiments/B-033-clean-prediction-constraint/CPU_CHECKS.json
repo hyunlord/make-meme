@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "count": 4,
+  "actual_pinned_scheduler": true,
+  "scope": "CPU fixtures; no full-model equivalence claim",
+  "checks": [
+    "OFF/M1 trajectory",
+    "M0 actual solver history",
+    "mask temporal and spatial axes",
+    "final-only exact endpoints and input immutability"
+  ]
+}

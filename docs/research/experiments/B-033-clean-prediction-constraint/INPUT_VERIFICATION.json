@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "prior_source_support_target_hashes": "exact B032 freeze",
+  "E_preview_matches_B032": 17,
+  "source_target_core_covered_M_one": 17,
+  "parent_cache_verified": {
+    "conditions.safetensors": "b406d4febacad0f8d88755b6eab0e60bda0c0728a761fa8db1b81974c5f6f5af",
+    "conditions.json": "607a2f75ff344cba2ba68cc425728467b1bfcc8235bcb1e741a74f835771a2c8",
+    "initial_noise.pt": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918"
+  },
+  "parent_final_latent_sha256": "a37224b66fa154e5b90da552359184de374b3b451b97fba9a3edaf2ba908f821",
+  "parent_final_shape": [
+    16,
+    5,
+    64,
+    112
+  ]
+}
