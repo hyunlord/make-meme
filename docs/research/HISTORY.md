@@ -559,3 +559,7 @@ B-028 6/6 sampler·6/6 decode, 각40step80forward와 final latent를 확보했�
 ### B-029 동물 비교의 중간 관측
 
 METHOD2와 CONTROL1의 실제40step80forward·17frame decode를 완료했다. 첫 실제 gate는 start1792/length8960/suffix2240, grid[5,32,56], img_x FP32를 유지했고40block×80호출을 확인했다. 두 METHOD 모두 어두운 target 대신 밝은 source 계열을 남겼다. R1은 BASE/CONTROL의 큰 장식을 더 작은 원형 장식으로 줄였지만 제거하지 못했고, R2는 source의 털·하네스·배치를 더 닮았다. [순차 정적 관측](experiments/B-029-spatial-image-conditioning/VISUAL_OBSERVATIONS.md). 동물 결합 목표는 실패이며 사람·차량은 고정 계획대로 진행 중이다. 위치 제어의 부분 반응을 전체 방법 성공으로 확대하지 않는다.
+
+### B-029 사람 pair 중간 관측
+
+METHOD R1/R2 각40step80forward와17frame 출력을 확보했다. 전체17장 정적 비교에서 R1의 치마 윤곽/테두리는 일부 정돈됐지만 원본 팔·다리 대응과 서명 모양이 남았다. R2는 크게 들린 치마·후기 얼굴/상체 가림과 잘못된 팔 배치가 지속되어 R1 개선이 참조 전반으로 이어지지 않았다. 실제 인물 일치·정확 관절·시간 품질은 미확인이다. 차량의 고정 METHOD2/CONTROL1을 진행하며 코드/설정은 바꾸지 않는다.
