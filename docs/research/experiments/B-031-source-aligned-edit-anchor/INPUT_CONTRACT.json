@@ -1,0 +1,474 @@
+{
+  "experiment": "B-031",
+  "parent": "B-027",
+  "scope": "public DAVIS mask-given development panel",
+  "margin": "10% native GT bbox width and height per side; floor left/top, ceil right/bottom; clip native bounds",
+  "bbox_convention": "xyxy with exclusive right/bottom",
+  "track_id": 1,
+  "source_fps": null,
+  "preview_fps": 24,
+  "timebase_assumed": true,
+  "output_request_wh": [
+    896,
+    512
+  ],
+  "image_seed": 20261026,
+  "image_steps": 40,
+  "true_cfg_scale": 4.0,
+  "guidance_scale": 1.0,
+  "negative_prompt": " ",
+  "image_attempt_limit": 6,
+  "video_preselected_refs": [
+    "animal_R1",
+    "human_R1",
+    "vehicle_R1"
+  ],
+  "video_requires_suitable_anchor": true,
+  "code_sha256": "423034f3f2196d3af8e3fca57b068dcfe4eef47467477a45111b76e01d15f4fe",
+  "cases": [
+    {
+      "case_id": "animal_R1",
+      "task": "animal",
+      "reference_id": "R1",
+      "source_sequence": "dog",
+      "source_frame": 0,
+      "target_sequence": "dog-gooses",
+      "target_frame": 0,
+      "track_id": 1,
+      "image_order": [
+        "image1.png",
+        "image2.png"
+      ],
+      "source_canvas_wh": [
+        896,
+        512
+      ],
+      "target_native_wh": [
+        854,
+        480
+      ],
+      "target_bbox_xyxy_exclusive": [
+        257,
+        300,
+        402,
+        344
+      ],
+      "crop_xyxy_exclusive": [
+        242,
+        295,
+        417,
+        349
+      ],
+      "target_crop_wh": [
+        175,
+        54
+      ],
+      "native_support_area": 3762,
+      "subject_pixel_exact": true,
+      "outside_rgb_constant": [
+        128,
+        128,
+        128
+      ],
+      "pre_pipeline_resize": null,
+      "pipeline_resize": "record runtime separately",
+      "prompt": "Replace the large foreground dog in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve the fence, bushes, and grass. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "files": {
+        "image1.png": {
+          "sha256": "db58899747f6266d2898db476b188568e1ab2c5679b50e83bbc432700083c321",
+          "bytes": 638743
+        },
+        "image2-support.png": {
+          "sha256": "dd5a7ed84773d47ccb0104acca9b6ed561130bf1d500875c562bf55a330f01d0",
+          "bytes": 409
+        },
+        "image2.png": {
+          "sha256": "2475a09ca0eb984058560014a737d2e0dc2584492b01145c827db3bbac67f2e1",
+          "bytes": 6786
+        },
+        "source-native.jpg": {
+          "sha256": "8055f6d7600ba9acd7dba5faa6ac3b1487bcfdc3b4c45e4519d2c0953c8f1bb5",
+          "bytes": 112671
+        },
+        "target-instance-mask.png": {
+          "sha256": "e2f39f4c5834596614472f6333df281b5b2069713c2d68ccf329cfc8ef8922ae",
+          "bytes": 2351
+        },
+        "target-native.jpg": {
+          "sha256": "d54a25e69e7ccd01ce80445331b5b32820af81a267a8d8cef6f7cae5a9f51717",
+          "bytes": 187114
+        }
+      }
+    },
+    {
+      "case_id": "animal_R2",
+      "task": "animal",
+      "reference_id": "R2",
+      "source_sequence": "dog",
+      "source_frame": 0,
+      "target_sequence": "dog-gooses",
+      "target_frame": 85,
+      "track_id": 1,
+      "image_order": [
+        "image1.png",
+        "image2.png"
+      ],
+      "source_canvas_wh": [
+        896,
+        512
+      ],
+      "target_native_wh": [
+        854,
+        480
+      ],
+      "target_bbox_xyxy_exclusive": [
+        605,
+        299,
+        780,
+        394
+      ],
+      "crop_xyxy_exclusive": [
+        587,
+        289,
+        798,
+        404
+      ],
+      "target_crop_wh": [
+        211,
+        115
+      ],
+      "native_support_area": 9619,
+      "subject_pixel_exact": true,
+      "outside_rgb_constant": [
+        128,
+        128,
+        128
+      ],
+      "pre_pipeline_resize": null,
+      "pipeline_resize": "record runtime separately",
+      "prompt": "Replace the large foreground dog in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve the fence, bushes, and grass. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "files": {
+        "image1.png": {
+          "sha256": "db58899747f6266d2898db476b188568e1ab2c5679b50e83bbc432700083c321",
+          "bytes": 638743
+        },
+        "image2-support.png": {
+          "sha256": "415322d550b52332a73865aa0a22e8407cddfaa9530f1298a979da5401ca8698",
+          "bytes": 766
+        },
+        "image2.png": {
+          "sha256": "19ecb95df147f883907f15f0643799932fb0e1190d5ee44839e47f1fe41cfb0e",
+          "bytes": 13696
+        },
+        "source-native.jpg": {
+          "sha256": "8055f6d7600ba9acd7dba5faa6ac3b1487bcfdc3b4c45e4519d2c0953c8f1bb5",
+          "bytes": 112671
+        },
+        "target-instance-mask.png": {
+          "sha256": "ccb86b7b511e1bb4803276080059f5954b1821853c0a494077abc3ea4d80daa0",
+          "bytes": 2863
+        },
+        "target-native.jpg": {
+          "sha256": "bacc452dc404640eec19e9d7e89e1b7d1d594e203c8f1404e2f35d5044ae7407",
+          "bytes": 177016
+        }
+      }
+    },
+    {
+      "case_id": "human_R1",
+      "task": "human",
+      "reference_id": "R1",
+      "source_sequence": "dance-twirl",
+      "source_frame": 0,
+      "target_sequence": "dance-jump",
+      "target_frame": 0,
+      "track_id": 1,
+      "image_order": [
+        "image1.png",
+        "image2.png"
+      ],
+      "source_canvas_wh": [
+        896,
+        512
+      ],
+      "target_native_wh": [
+        854,
+        480
+      ],
+      "target_bbox_xyxy_exclusive": [
+        285,
+        54,
+        576,
+        368
+      ],
+      "crop_xyxy_exclusive": [
+        255,
+        22,
+        606,
+        400
+      ],
+      "target_crop_wh": [
+        351,
+        378
+      ],
+      "native_support_area": 33486,
+      "subject_pixel_exact": true,
+      "outside_rgb_constant": [
+        128,
+        128,
+        128
+      ],
+      "pre_pipeline_resize": null,
+      "pipeline_resize": "record runtime separately",
+      "prompt": "Replace the foreground dancer in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve all other people, the courtyard, walls, and hay bales. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "files": {
+        "image1.png": {
+          "sha256": "0203df17cfe06930b74750a40f5211c35127d24953a3ca19ce28f21e68d377ce",
+          "bytes": 694773
+        },
+        "image2-support.png": {
+          "sha256": "86e12b7bb7f999c98bef332546d0e8a70c3316b80decfaa791ff6e717999c4b9",
+          "bytes": 2128
+        },
+        "image2.png": {
+          "sha256": "36d9a84eada1cd219c2f25bd0c543c0de7cfd41cdae89736d5cda9659754dc4c",
+          "bytes": 60271
+        },
+        "source-native.jpg": {
+          "sha256": "f708e1cfee79cc2e8855095b9e320ba0bb8d97d7887c9b1f7e8987d4c7035d2d",
+          "bytes": 148897
+        },
+        "target-instance-mask.png": {
+          "sha256": "ea2fcc8848378baccbf137ccf06090ffbb6b03b2faadef326e9d362cf799f9a7",
+          "bytes": 3036
+        },
+        "target-native.jpg": {
+          "sha256": "c4a326f3c7b0d28a2710be927267781ea0f10a70b6e1eaefb0de98dd06a206d8",
+          "bytes": 121387
+        }
+      }
+    },
+    {
+      "case_id": "human_R2",
+      "task": "human",
+      "reference_id": "R2",
+      "source_sequence": "dance-twirl",
+      "source_frame": 0,
+      "target_sequence": "dance-jump",
+      "target_frame": 16,
+      "track_id": 1,
+      "image_order": [
+        "image1.png",
+        "image2.png"
+      ],
+      "source_canvas_wh": [
+        896,
+        512
+      ],
+      "target_native_wh": [
+        854,
+        480
+      ],
+      "target_bbox_xyxy_exclusive": [
+        344,
+        53,
+        604,
+        424
+      ],
+      "crop_xyxy_exclusive": [
+        318,
+        15,
+        630,
+        462
+      ],
+      "target_crop_wh": [
+        312,
+        447
+      ],
+      "native_support_area": 33928,
+      "subject_pixel_exact": true,
+      "outside_rgb_constant": [
+        128,
+        128,
+        128
+      ],
+      "pre_pipeline_resize": null,
+      "pipeline_resize": "record runtime separately",
+      "prompt": "Replace the foreground dancer in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve all other people, the courtyard, walls, and hay bales. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "files": {
+        "image1.png": {
+          "sha256": "0203df17cfe06930b74750a40f5211c35127d24953a3ca19ce28f21e68d377ce",
+          "bytes": 694773
+        },
+        "image2-support.png": {
+          "sha256": "be5a274885dbc95ef16ab7f5e0b6b778e04002311db75ddd52bd8c3ac2daddf2",
+          "bytes": 2874
+        },
+        "image2.png": {
+          "sha256": "5687f160f6e7aa674452e33bd5352795337c87fa7e98384180f72d299b9e776c",
+          "bytes": 58910
+        },
+        "source-native.jpg": {
+          "sha256": "f708e1cfee79cc2e8855095b9e320ba0bb8d97d7887c9b1f7e8987d4c7035d2d",
+          "bytes": 148897
+        },
+        "target-instance-mask.png": {
+          "sha256": "1373989df6c8565691278c27f93342a29c5a771343c233b0ea80abd43afeb617",
+          "bytes": 4058
+        },
+        "target-native.jpg": {
+          "sha256": "8334fb915e30cee98cf981ca772b686adf0ba7edd7ce4bb097521c57c80af583",
+          "bytes": 132365
+        }
+      }
+    },
+    {
+      "case_id": "vehicle_R1",
+      "task": "vehicle",
+      "reference_id": "R1",
+      "source_sequence": "car-roundabout",
+      "source_frame": 30,
+      "target_sequence": "car-shadow",
+      "target_frame": 0,
+      "track_id": 1,
+      "image_order": [
+        "image1.png",
+        "image2.png"
+      ],
+      "source_canvas_wh": [
+        896,
+        512
+      ],
+      "target_native_wh": [
+        854,
+        480
+      ],
+      "target_bbox_xyxy_exclusive": [
+        313,
+        88,
+        655,
+        282
+      ],
+      "crop_xyxy_exclusive": [
+        278,
+        68,
+        690,
+        302
+      ],
+      "target_crop_wh": [
+        412,
+        234
+      ],
+      "native_support_area": 41790,
+      "subject_pixel_exact": true,
+      "outside_rgb_constant": [
+        128,
+        128,
+        128
+      ],
+      "pre_pipeline_resize": null,
+      "pipeline_resize": "record runtime separately",
+      "prompt": "Replace the large foreground car in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve all other vehicles, buildings, monument, railings, road, and signs. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "files": {
+        "image1.png": {
+          "sha256": "1b91f0c49853c865225f3e400b0b5afd8c15bc7ca37412639c3d3881e4ae5016",
+          "bytes": 606156
+        },
+        "image2-support.png": {
+          "sha256": "7d93a6b3ada10b77c0d12ed2a8c7ecef1b80d92da10861472a211a466fbc7b91",
+          "bytes": 1221
+        },
+        "image2.png": {
+          "sha256": "e48c9bd394cecc76a10b22aab72df5551f050741cc384a7066d29250ae4c63b8",
+          "bytes": 70914
+        },
+        "source-native.jpg": {
+          "sha256": "527cf79b7e7ab37854874e96ce47a86ca0e7c609960c7681d76dc8d29b663941",
+          "bytes": 123552
+        },
+        "target-instance-mask.png": {
+          "sha256": "5a044b70e6e73aabf0af78f69902c009940765abb392889874fbd12dc67e4429",
+          "bytes": 2449
+        },
+        "target-native.jpg": {
+          "sha256": "f9121f3fbdabbba4858e9bbd854faa3068d983f2dc89ff2cac45e65ccd304bdc",
+          "bytes": 109763
+        }
+      }
+    },
+    {
+      "case_id": "vehicle_R2",
+      "task": "vehicle",
+      "reference_id": "R2",
+      "source_sequence": "car-roundabout",
+      "source_frame": 30,
+      "target_sequence": "car-shadow",
+      "target_frame": 39,
+      "track_id": 1,
+      "image_order": [
+        "image1.png",
+        "image2.png"
+      ],
+      "source_canvas_wh": [
+        896,
+        512
+      ],
+      "target_native_wh": [
+        854,
+        480
+      ],
+      "target_bbox_xyxy_exclusive": [
+        319,
+        168,
+        488,
+        267
+      ],
+      "crop_xyxy_exclusive": [
+        302,
+        158,
+        505,
+        277
+      ],
+      "target_crop_wh": [
+        203,
+        119
+      ],
+      "native_support_area": 12077,
+      "subject_pixel_exact": true,
+      "outside_rgb_constant": [
+        128,
+        128,
+        128
+      ],
+      "pre_pipeline_resize": null,
+      "pipeline_resize": "record runtime separately",
+      "prompt": "Replace the large foreground car in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve all other vehicles, buildings, monument, railings, road, and signs. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "files": {
+        "image1.png": {
+          "sha256": "1b91f0c49853c865225f3e400b0b5afd8c15bc7ca37412639c3d3881e4ae5016",
+          "bytes": 606156
+        },
+        "image2-support.png": {
+          "sha256": "d672e2289a3c17280e52d4d5bd15c469b46499fb991f378a3cd73dcdf04bed5a",
+          "bytes": 599
+        },
+        "image2.png": {
+          "sha256": "5a35f36eb79b6751839bc3e0ec30720c98d522b26b3141a515cc26c22177fc73",
+          "bytes": 24717
+        },
+        "source-native.jpg": {
+          "sha256": "527cf79b7e7ab37854874e96ce47a86ca0e7c609960c7681d76dc8d29b663941",
+          "bytes": 123552
+        },
+        "target-instance-mask.png": {
+          "sha256": "31f066035802eb15ddd831a670fcae9c641d78d428d78f3522595ec3afe84b24",
+          "bytes": 1894
+        },
+        "target-native.jpg": {
+          "sha256": "eebcbb6a3bd6ec7f6abc7ea095c932549794deda70b8b54060f5042858306836",
+          "bytes": 109545
+        }
+      }
+    }
+  ]
+}
