@@ -1,0 +1,22 @@
+{
+  "packages": {
+    "torch": "2.14.0+cu130",
+    "diffusers": "0.41.0",
+    "transformers": "5.20.1",
+    "accelerate": "1.15.0",
+    "huggingface-hub": "1.33.0",
+    "safetensors": "0.8.0",
+    "pydantic": "2.14.1",
+    "numpy": "2.5.2",
+    "pillow": "12.3.0"
+  },
+  "source_sha256": {
+    "pipeline": "9ce666ed3e0029a35e8743e558f23fc8143d888f418d9fe924e05df43d46856f",
+    "transformer": "0bad11901deae69f05aec01fd464e51e38582d455068f2851ee665036179321f",
+    "attention_dispatch": "f25976dbe9d22a1883d94ab8f9cce1f8ea400c070f561025190c226acbcee443"
+  },
+  "pipeline_signature": "(self, image: PIL.Image.Image | numpy.ndarray | torch.Tensor | list[PIL.Image.Image] | list[numpy.ndarray] | list[torch.Tensor] | None = None, prompt: str | list[str] = None, negative_prompt: str | list[str] = None, true_cfg_scale: float = 4.0, height: int | None = None, width: int | None = None, num_inference_steps: int = 50, sigmas: list[float] | None = None, guidance_scale: float | None = None, num_images_per_prompt: int = 1, generator: torch._C.Generator | list[torch._C.Generator] | None = None, latents: torch.Tensor | None = None, prompt_embeds: torch.Tensor | None = None, prompt_embeds_mask: torch.Tensor | None = None, negative_prompt_embeds: torch.Tensor | None = None, negative_prompt_embeds_mask: torch.Tensor | None = None, output_type: str | None = 'pil', return_dict: bool = True, attention_kwargs: dict[str, typing.Any] | None = None, callback_on_step_end: Optional[Callable[[int, int], NoneType]] = None, callback_on_step_end_tensor_inputs: list[str] = ['latents'], max_sequence_length: int = 512) -> diffusers.pipelines.qwenimage.pipeline_output.QwenImagePipelineOutput | tuple",
+  "attention_backend": "native",
+  "reuse_policy": "separate venv plus read-only existing package sites; no package upgrade",
+  "model_revision": "6f3ccc0b56e431dc6a0c2b2039706d7d26f22cb9"
+}

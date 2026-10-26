@@ -9,6 +9,7 @@ import importlib.metadata
 import inspect
 import json
 import sys
+import time
 from pathlib import Path
 from diffusers import QwenImageEditPlusPipeline
 from diffusers.models.transformers import transformer_qwenimage
@@ -17,6 +18,7 @@ from qwen_observe import file_hash
 from qwen_contract import ImageContract
 
 root = Path(sys.argv[1]).resolve()
+verification_started = time.time()
 model = root/'models/qwen-image-edit-2511'
 entries = json.loads((root/'environment/model-tree.json').read_text())
 files = [item for item in entries if item['type']=='file']
@@ -33,7 +35,7 @@ for item in files:
         git_hash = hashlib.sha1(b'blob '+str(len(payload)).encode()+b'\x00'+payload).hexdigest()
         assert git_hash == item['oid'], path.name
     verified.append({'path':item['path'],'bytes':item['size'],'sha256':digest})
-report = {'revision':'6f3ccc0b56e431dc6a0c2b2039706d7d26f22cb9','total_bytes':sum(item['size'] for item in files),'files':verified,'status':'PASS'}
+report = {'revision':'6f3ccc0b56e431dc6a0c2b2039706d7d26f22cb9','total_bytes':sum(item['size'] for item in files),'files':verified,'status':'PASS','verification_started_epoch':verification_started,'verification_finished_epoch':time.time(),'verification_seconds':time.time()-verification_started}
 (root/'environment/model-verification.json').write_text(json.dumps(report,indent=2))
 modules = {'pipeline':inspect.getfile(QwenImageEditPlusPipeline),'transformer':inspect.getfile(transformer_qwenimage),'attention_dispatch':inspect.getfile(attention_dispatch)}
 versions = {name:importlib.metadata.version(name) for name in ['torch','diffusers','transformers','accelerate','huggingface-hub','safetensors','pydantic','numpy','pillow']}

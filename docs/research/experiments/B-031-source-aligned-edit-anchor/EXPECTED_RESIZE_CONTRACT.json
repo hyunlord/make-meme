@@ -1,0 +1,206 @@
+[
+  {
+    "case_id": "animal_R1",
+    "input": "image1.png",
+    "native_wh": [
+      896,
+      512
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "animal_R1",
+    "input": "image2.png",
+    "native_wh": [
+      175,
+      54
+    ],
+    "official_vision_wh": [
+      704,
+      224
+    ],
+    "official_vae_wh": [
+      1856,
+      576
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "animal_R2",
+    "input": "image1.png",
+    "native_wh": [
+      896,
+      512
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "animal_R2",
+    "input": "image2.png",
+    "native_wh": [
+      211,
+      115
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1376,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "human_R1",
+    "input": "image1.png",
+    "native_wh": [
+      896,
+      512
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "human_R1",
+    "input": "image2.png",
+    "native_wh": [
+      351,
+      378
+    ],
+    "official_vision_wh": [
+      384,
+      384
+    ],
+    "official_vae_wh": [
+      992,
+      1056
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "human_R2",
+    "input": "image1.png",
+    "native_wh": [
+      896,
+      512
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "human_R2",
+    "input": "image2.png",
+    "native_wh": [
+      312,
+      447
+    ],
+    "official_vision_wh": [
+      320,
+      448
+    ],
+    "official_vae_wh": [
+      864,
+      1216
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "vehicle_R1",
+    "input": "image1.png",
+    "native_wh": [
+      896,
+      512
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "vehicle_R1",
+    "input": "image2.png",
+    "native_wh": [
+      412,
+      234
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "vehicle_R2",
+    "input": "image1.png",
+    "native_wh": [
+      896,
+      512
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      768
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  },
+  {
+    "case_id": "vehicle_R2",
+    "input": "image2.png",
+    "native_wh": [
+      203,
+      119
+    ],
+    "official_vision_wh": [
+      512,
+      288
+    ],
+    "official_vae_wh": [
+      1344,
+      800
+    ],
+    "evidence": "CPU official dimension function, NOT observed encoder runtime"
+  }
+]
