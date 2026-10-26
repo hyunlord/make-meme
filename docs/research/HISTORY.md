@@ -567,3 +567,9 @@ METHOD R1/R2 각40step80forward와17frame 출력을 확보했다. 전체17장 �
 ### B-029 차량 R1 중간 관측
 
 METHOD R1의40step80forward·finite17frame과 전체 정적 비교를 확보했다. 은색 반응은 있으나 source Mini형 차체를 강하게 남기고, 하단 큰 차량 후면 그래픽이 원본 도로를 가린다. 원본의 큰 오른쪽 이동/후면 노출 변화는 남는다. 기존 베이스보다 결합 목표가 개선됐다고 판정하지 않는다. 차량 R2 및 사전 shifted CONTROL을 같은 설정으로 진행하며 전체종료/채택판정은 대기한다.
+
+### B-029 종료: 고정 공간 가중은 채택하지 않음
+
+2026-10-26 UTC06:15:19, METHOD6/CONTROL2 각40step80forward·finite17frame과 final latent를 확보했다. 전체17장 정적검토에서 animal target 교체 실패, human R1 일부 치마 정돈과 R2 형상 실패, vehicle R2 새 그래픽 회귀를 확인했다. animal CONTROL은 더 큰 배지지만 vehicle CONTROL은 METHOD의 큰 장식이 없어 위치 가설의 일관된 유용성은 미입증이다. [RESULTS](experiments/B-029-spatial-image-conditioning/RESULTS.md), [대조](experiments/B-029-spatial-image-conditioning/ABLATIONS.md). 기술 PASS를 품질 PASS로 바꾸지 않으며 temporalUNVERIFIED다.
+
+독립 실행 근거 감사에서8case/24stage·정확한16leaf/noise계보·40×80gate·finallatent/decode·프로세스 종료를 확인했다. B029 encoder/학습/설치/재시도0, 전체 의뢰는미착수B0286+B0298=14회다. 다음 한 가설은 reference VAE joint 경로의 공간 전달 분리이며 미실행 제안이다. 추가seed/강도/학습/새backend를 실행하지 않는다. full/review-lite 검증은 별도 전달 기록에 남긴다.

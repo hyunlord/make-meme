@@ -1,6 +1,6 @@
 # B-029 방법 — 생성 위치별 이미지 조건 출력 재가중
 
-상태: **실제 실행 중 / 완료 case의 코드 연결 확인 / 전체 효과 판정 대기**. [B-028 결과](../B-028-object-reference-normalization/RESULTS.md)를 검토한 뒤 [DECISION](DECISION.md)에서 분기 A를 선택했다. 공통 기준선은 전 6case의 **B-027**이다. B-028의 외형 반응 개선과 차량 방향·자세 회귀, human R2 형태 결함을 보존하며 case별 좋은 결과를 섞지 않는다.
+상태: **METHOD6+CONTROL2 실행 완료 / 기술 PASS / 고정 설정 NOT_ADOPTED**. [B-028 결과](../B-028-object-reference-normalization/RESULTS.md)를 검토한 뒤 [DECISION](DECISION.md)에서 분기 A를 선택했다. 공통 기준선은 전 6case의 **B-027**이다. B-028의 외형 반응 개선과 차량 방향·자세 회귀, human R2 형태 결함을 보존하며 case별 좋은 결과를 섞지 않는다.
 
 ## 질문과 단일 개입
 
@@ -45,7 +45,7 @@ O=W_o(T+I)+b_o,\qquad O'=W_o(T+g\odot I)+b_o.
 - [`spatial_image_gate.py`](code/spatial_image_gate.py)의 `install(model, support_path, GateConfig(...))`은 `GateInstallation`을 반환한다. `GateMode.METHOD/CONTROL`과 `strength=0.5`, 보고서 경로를 명시한다. block prehook으로 실제 길이/grid를 전달하고 `compile_forward`가 공식 소스의 합산 직전에 image-only 변환을 삽입한다. 공식 소스 SHA를 검사한다.
 - `GateInstallation.report()/assert_complete()/remove()`는 관측 요약, 완료 횟수 검증, 원래 bound forward 복원을 담당한다. OFF/lambda0은 원래 forward를 유지한다. 작은 CPU 계약6개와 기존 계약4개가 통과했다. 전체14B OFF 수치 동등성은 검증하지 않았다.
 - 실제 forward는 generated 시작1,792·길이8,960·driving suffix2,240, grid[5,32,56]을 기록했다. 이미지 출력 dtype은 FP32이며 변경하지 않았다. module/SHA와 case별 계수 통계는 runtime 보고서에 남긴다.
-- 완료된 case마다40step·80forward와40block×80 gate 적용을 확인했다. 미완료 case를 완료로 계산하지 않는다.
+- 전체8case마다40step·80forward와40block×80 gate 적용을 확인했다.
 
 ## 비교와 변하지 않는 입력
 
@@ -59,6 +59,8 @@ OFF 기능, generated 범위, text/bias 불변, 지도와 broadcast, cache/noise
 
 [IP-Adapter §3.2.2](https://arxiv.org/html/2308.06721v1#S3.SS2.SSS2)는 분리된 text/image attention과 이미지 항 scale을 사용한다. [Diffusers 공식 공간 masking](https://huggingface.co/docs/diffusers/using-diffusers/ip_adapter#masking)과 [고정 구현](https://github.com/huggingface/diffusers/blob/v0.35.1/src/diffusers/models/attention_processor.py#L4361-L4395)은 image attention 출력에 공간 mask를 곱하고 projection 전에 더하는 선례다. 따라서 이번은 기존 SCAIL 경로의 한정된 개입 실험이며 공간 가중 자체의 신규성을 주장하지 않는다.
 
+관련 영상 편집의 계약은 별개다. [VideoPainter 고정 `edit.py`](https://github.com/TencentARC/VideoPainter/blob/bbab6cd5cd5cb89f0e2444305c32fd74a010ae0a/infer/edit.py#L421-L483)는 FLUX Fill로 편집한 첫 프레임을 source/mask 기반 영상 조건에 넣는다. 이번처럼 기존 SCAIL의 arbitrary reference 이미지 항만 바꾸는 경로와 같지 않다. 공식 코드의 prompt rewriting 외부 호출도 확인되어, 다른 backend로 옮긴다고 전체 로컬 V/R/P 계약이 자동 충족된다고 가정하지 않는다. 이번에는 해당 backend·첫 프레임 편집·외부 호출을 실행하지 않았다. 원본 문맥과 대상 조건을 분리하는 메커니즘은 비교할 선행 개념이지만, 이 실험의 공간 가중이나 특정 실패 원인을 입증하지 않는다.
+
 참조 VAE 경로와 후속 attention의 정보 확산이 남는다. 대상 부근 강화가 외형보다 참조 자세 복사를 키울 수도 있다. 외형만 좋아지고 원본 동작·장면·형태가 나빠지면 trade-off다. METHOD와 CONTROL이 비슷하면 “대상 위치에 맞춘 배정”이라는 설명은 미입증이다. 지도 겹침은 대조력을 낮춘다.
 
-전체 17장과 local0/8/16, 사전 외형 특징·동작 사건·보호 장면으로 판정한다. 이 3과제는 방법 선정에 사용한 개발 패널이며 6출력·102프레임은 독립 반복이 아니다. 연속 재생 관찰이 없으면 temporal=UNVERIFIED다. 실제 효과와 다음 검증 승격 여부는 결과 작성 단계까지 **PENDING**이다.
+전체 17장과 local0/8/16, 사전 외형 특징·동작 사건·보호 장면으로 판정한다. 이 3과제는 방법 선정에 사용한 개발 패널이며 6출력·102프레임은 독립 반복이 아니다. 연속 재생 관찰이 없으면 temporal=UNVERIFIED다. 실제 결과는 animal 교체 실패, human 참조별 형태 trade-off, vehicle 보호 장면 회귀이며, CONTROL 대비 일관된 이점도 입증하지 못했다. [RESULTS](RESULTS.md)에 따라 이번 고정 설정을 채택하지 않는다. 이는 모든 공간 가중의 일반적 무효를 뜻하지 않는다.

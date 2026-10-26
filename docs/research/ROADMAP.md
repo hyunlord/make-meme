@@ -1,6 +1,6 @@
 # B 트랙 로드맵
 
-**현재: B-028 종료 / B-029 실행 중.** B-029는 고정 METHOD6/CONTROL2 중6case의 출력을 확보했고 차량 잔여2case를 순차 실행 중이다. 동물 교체 실패와 사람 참조별 형태 차이를 보존하며 전체 결과 전 채택을 확정하지 않는다. [진행 관측](experiments/B-029-spatial-image-conditioning/VISUAL_OBSERVATIONS.md).
+**현재: B-028·B-029 COMPLETED / 기술 PASS / B-029 고정 방법 NOT_ADOPTED.** B0286출력의 trade-off를 보존하고 B027 공통 기준선과 B029 METHOD6/CONTROL2를 비교했다. 동물 교체 실패·사람 R2 형태 손상·차량 R2 장면 회귀가 남고 vehicle CONTROL의 장면이 오히려 깨끗해 위치 가설의 일관된 이점이 미입증이다. [결과](experiments/B-029-spatial-image-conditioning/RESULTS.md). 다음 가설 하나는 reference VAE joint 경로의 공간 전달 분리이며 [제안만](experiments/B-029-spatial-image-conditioning/NEXT_DECISION.md) 남긴다. 자동 실행/추가 sweep0, temporalUNVERIFIED. 아래 진행 중 표현은 당시 기록이다.
 
 **B-027 종료 당시: 기술 PASS / 결합 편집 품질 미입증.** 공개3과제×2참조의 실제6출력과 최종latent를 확보했다. 동물은 source 외형 잔존, 사람은 target 의상 반영과 형상 손상, 차량은 부분 외형 반영과 혼합 차체/조건별 그래픽 추가로 결합 편집 품질은 미입증이다. 기술21worker·240step480forward PASS와 시각 판정을 구분하고 temporal UNVERIFIED를 유지한다. [결과](experiments/B-027-public-reference-robustness/RESULTS.md), [다음 한 가설](experiments/B-027-public-reference-robustness/NEXT_DECISION.md). 다음은 원본 문맥과 ID 주입을 분리한 공식 VideoPainter 경로의 한정 비교 제안이며 설치·실행은 NOT_RUN이다.
 
@@ -359,3 +359,7 @@ B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 
 B-028은 기술완료/시각trade-off로 종료했다. 큰 차량 동작 회귀가 있어 B-027을 공통 기준선으로 유지한다. [B-029](experiments/B-029-spatial-image-conditioning/PLAN.md)는 기존 CLIP 이미지 cross-attention 출력의 대상 위치별 전달만 바꾼다. 모든 참조 경로를 분리하거나 pose-free identity를 달성한 것은 아니다. METHOD6/shifted CONTROL2를 한 번 비교하여 두 과제 결합 개선과 나머지 큰 회귀 부재를 확인할 때만 다음 검증 후보로 남긴다. 현재 구현/CPU검사, GPU NOT_RUN이다. B-026 선택적보류·과거학습실패는 그대로며 개인촬영/새모델/추가학습은 자동실행하지 않는다.
 
 B-029 실행 전 고정 완료: 기존16leaf를 보존한5consumer, 실제 지도3개, METHOD6/CONTROL2와40step80forward를 고정했다. CPU 계약은 통과했으며 첫 실제 forward의 경로와 결과 영상은 아직 미실행이다. 이 실행에서 공간 위치 설명과 결합 품질을 확인하고 추가 강도/seed 탐색은 하지 않는다.
+
+## B-029 종료 — 기술 연결과 품질 승격 분리
+
+8/8sampler·8/8decode·재시도0을 완료하고 자체GPU worker를 종료했다. 기존 입력16leaf와40step80forward를 보존한 단일 개입이 실제 출력에 영향을 줬지만 사전 결합 개선 기준은 미충족이다. 이번 고정 설정은 기본 경로에 채택하지 않고, CONTROL을 best-of 대체 방법으로 고르지 않는다. B-028/B-027/B-026 및 과거 학습 실패는 그대로 보존한다.

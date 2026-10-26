@@ -1,6 +1,6 @@
 # B-029 해설 — 이미지 attention 출력의 위치별 재가중
 
-상태: **사전 선택 완료 / 실행·효과 미판정**. [B-028 결과](../experiments/B-028-object-reference-normalization/RESULTS.md)에서 부분 외형 개선과 차량 방향·자세 회귀, human R2 형태 결함을 확인한 뒤 [B-029 결정](../experiments/B-029-spatial-image-conditioning/DECISION.md)으로 분기 A를 선택했다. 전 6case의 공통 기준선은 B-027이다. 아래는 선택한 방법의 원리이며 영상 품질 개선을 미리 주장하지 않는다.
+상태: **METHOD6/CONTROL2 완료 / 기술 PASS / 결합 개선 미입증·고정 설정 미채택**. [B-028 결과](../experiments/B-028-object-reference-normalization/RESULTS.md)에서 부분 외형 개선과 차량 방향·자세 회귀, human R2 형태 결함을 확인한 뒤 [B-029 결정](../experiments/B-029-spatial-image-conditioning/DECISION.md)으로 분기 A를 선택했다. 전 6case의 공통 기준선은 B-027이다. 아래는 선택한 방법의 원리이며 영상 품질 개선을 미리 주장하지 않는다.
 
 ## 1. 직관: 무엇을 어디로 전달하는가
 
@@ -87,11 +87,11 @@ CONTROL은 token 공간 지도를 H/W 절반만큼 cyclic shift한다. 같은 �
 
 - 기존 관측: B-028은 일부 target 외형을 더 반영했지만 차량 두 참조에서 방향·자세가 회귀했고 human R2의 형태 결함이 남았다. 이는 [기존 결과 문서](../experiments/B-028-object-reference-normalization/RESULTS.md)의 정적 검토이며 이 해설 작성자가 독립 반복 평가한 결과가 아니다.
 - 사전 결정: B-027을 공통 기준선으로 두고 이미지 조건 전달 위치의 가설을 한 번 검사한다. 실패 원인이 해당 경로라고 확정한 것은 아니다.
-- 코드/조건 연결: 기존 B027의16leaf/noise 계보를 유지하고 generated 구간의 이미지 항에만 적용했다. 첫 실제 dtype은 FP32이며 각 완료 case의40step/80forward와40×80 gate count를 별도 확인한다. LSP transport는 닫혀 NOT_CLEAN이며 runtime 근거와 혼동하지 않는다.
-- 외형·동작·형태·장면·비용의 변화: **[비교 후 작성]**
-- 핵심 CONTROL과의 차이 및 반례: **[비교 후 작성]**
+- 코드/조건 연결: 기존 B027의16leaf/noise 계보를 유지하고 generated 구간의 이미지 항에만 적용했다. 첫 실제 dtype은 FP32이며 전체8case의40step/80forward와40×80 gate count를 별도 확인한다. LSP transport는 닫혀 NOT_CLEAN이며 runtime 근거와 혼동하지 않는다.
+- 실제 METHOD6 관측: animal 두 참조는 어두운 target 대신 source 계열 외형을 남겼다. human R1 치마 윤곽은 일부 정돈됐으나 R2의 후기 치마/얼굴 가림은 지속됐다. vehicle R1 장식은 제거되지 않았고 R2에는 BASE에 없던 큰 차량/문자 장식이 새로 생겼다. 위치별 이미지 항 변경이 영상에 영향을 준 것과 유용한 결합 편집은 다르다. 자세한 전체17장 근거는 [관측](../experiments/B-029-spatial-image-conditioning/VISUAL_OBSERVATIONS.md)에 있다. 실측 비용은 [COSTS](../experiments/B-029-spatial-image-conditioning/COSTS.md)에서 NFE와 wall-clock을 구분한다.
+- 핵심 CONTROL: animal R1은 METHOD의 배지가 작지만 target 외형은 양쪽 실패다. vehicle R1은 shifted CONTROL에서 큰 차량 장식이 없어 METHOD보다 보호 장면이 깨끗하다. 올바른 source 위치에 계수를 배정한 것이 유용한 개선 원인이라는 설명은 일관되게 지지되지 않았다. 단일seed이므로 통계적 유의성은 주장하지 않는다.
 - temporal: **UNVERIFIED — 실제 연속 재생 관찰 여부를 별도로 기록**
-- 다음 검증으로 넘김/보류/기각: **[결과 후 결정; 자동 후속 실행 없음]**
+- 종료 결정: 두 과제의 결합 개선과 나머지 큰 회귀 부재 기준을 충족하지 못해 이번 고정 설정은 NOT_ADOPTED다. 다음 가설은 변경하지 않았던 reference VAE joint 경로의 공간 전달 분리이며 [제안](../experiments/B-029-spatial-image-conditioning/NEXT_DECISION.md)만 남겼다. 자동 후속 실행은 없다.
 
 ## 7. 이해 확인 질문
 

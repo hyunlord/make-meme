@@ -25,9 +25,17 @@ def write_viewer(root: Path) -> None:
         name = html.escape(folder.name, quote=True)
         manifest = json.loads((folder / 'manifest.json').read_text())
         labels = html.escape(' / '.join(manifest['labels']))
+        task, reference, mode = folder.name.split('-')
+        baseline_name = 'B-027-public-reference-robustness' if (root.parent.parent / 'B-027-public-reference-robustness').exists() else 'B027'
+        originals = [f'<a href="../../{baseline_name}/tasks/{task}/cases/{reference}/artifacts/output.mp4">Original BASE MP4</a>']
+        for kind in ('METHOD', 'CONTROL'):
+            if kind in manifest['raw_sha256']:
+                originals.append(f'<a href="../tasks/{task}/{kind}/cases/{reference}/artifacts/output.mp4">Original {kind} MP4</a>')
+        original_links = ' · '.join(originals)
         sections.append(f'''<section><h2>{name}: {labels}</h2>
 <p>17 frames; source FPS unknown; preview24fps. Temporal quality UNVERIFIED.</p>
 <video controls preload="metadata" src="{name}/comparison-preview24.mp4"></video>
+<p>{original_links}</p>
 <p>No autoplay or forced loop. End-to-start replay is not within-clip motion.</p>
 <div><button class="prev" disabled>Previous frame</button> <button class="next">Next frame</button>
 <label>Local frame <input type="range" min="0" max="16" value="0"><output>0</output></label></div>

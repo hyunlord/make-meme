@@ -17,10 +17,14 @@ CONTROL의 공간 겹침은 support.json에서 실행 전에 공개 요약한다
 | 사전 선택 대조 | METHOD | shifted CONTROL | 판정 범위 |
 |---|---|---|---|
 | animal R1 | 작은 원형 하단 배지, 밝은 source 계열 개체 | 큰 빨강/흰 배지, 밝은 source 계열 개체 | 장면 오염 양상은 다르나 target 외형 교체는 양쪽 FAIL |
-| vehicle R1 | 큰 차량 후면 그래픽, 은색 source Mini형 혼합 차체 | PENDING | CONTROL 출력 후 확정 |
+| vehicle R1 | 큰 차량 후면 그래픽, 은색 source Mini형 혼합 차체 | 큰 하단 장식 없이 은색 source Mini형 혼합 차체 | 보호 장면은 CONTROL이 더 깨끗하나 양쪽 target 교체 미입증 |
 
 animal의 전체17장/local0/8/16에서 배지 차이를 확인했다. METHOD의 장식이 작아 보이는 사실만으로 대상 위치의 identity 전달이 성공했다고 할 수 없다. 정확한 장식 면적이나 동작 오차는 측정하지 않았다. source-like 출력은 motion/scene 보존의 일부 관측일 수 있지만 identity-change 성공은 아니다.
 
-human R1은 BASE보다 의상 형태가 일부 정돈됐으나 R2의 크게 들린 치마·얼굴 가림이 유지됐다. human에는 대조군 예산을 사후 추가하지 않는다. 차량 METHOD의 전체17장도 확보했고 CONTROL은 진행 중이다.
+human R1은 BASE보다 의상 형태가 일부 정돈됐으나 R2의 크게 들린 치마·얼굴 가림이 유지됐다. human에는 대조군 예산을 사후 추가하지 않는다. 차량 METHOD와 CONTROL의 전체17장을 확인했다. CONTROL의 큰 장식 부재는 전 구간에 유지되어 METHOD의 우월성 설명을 지지하지 않는다.
 
 METHOD/BASE/CONTROL의 외형·동작·형태·보호 장면을 분리한다. 임의 joint score·유의성·identity accuracy를 만들지 않는다. METHOD~CONTROL이면 위치 설명은 미입증이다. 외형만 좋아지고 동작/형태가 나빠지면 trade-off다. 실제 연속 시청을 하지 않았으므로 temporal=UNVERIFIED다.
+
+## 최종 대조 해석
+
+두 CONTROL은 같은 방향의 결과를 보이지 않는다. animal은 METHOD의 장식이 더 작지만 target 외형은 양쪽 실패하며, vehicle은 CONTROL의 보호 장면이 더 깨끗하다. 따라서 공간 배정이 출력에 영향을 주었다는 관측과, 올바른 대상 위치 배정이 유용한 편집을 만든다는 주장은 구분해야 한다. 후자는 이번 pair들로 입증되지 않았다. CONTROL을 사후 선택한 새 방법으로 바꾸지 않는다.

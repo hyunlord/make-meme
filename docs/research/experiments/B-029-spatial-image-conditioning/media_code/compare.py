@@ -11,6 +11,8 @@ import json
 import shutil
 import subprocess
 import sys
+import time
+from datetime import datetime, timezone
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
@@ -84,6 +86,8 @@ class Case:
 
 
 def build_case(case: Case) -> Path:
+    started = time.monotonic()
+    started_utc = datetime.now(timezone.utc).isoformat()
     old = case.baseline / 'tasks' / case.task
     new = case.current / 'tasks' / case.task
     raw_old = old / 'cases' / case.reference / 'artifacts/raw_output.pt'
@@ -126,6 +130,9 @@ def build_case(case: Case) -> Path:
         raise ReviewContractError('Comparison video contract mismatch')
     subprocess.run(['ffmpeg', '-v', 'error', '-i', str(video), '-f', 'null', '-'], check=True)
     manifest = {'case': case.name, 'source_fps': None, 'preview_fps': FPS, 'timebase_assumed': True,
+                'review_build_start_utc': started_utc,
+                'review_build_end_utc_before_manifest': datetime.now(timezone.utc).isoformat(),
+                'review_build_seconds_before_manifest': time.monotonic() - started,
                 'temporal': 'UNVERIFIED', 'labels': labels, 'mode': case.mode, 'raw_sha256': {label: digest(path) for label, path in raw_paths.items()},
                 'raw_export': 'clone clamp(-1,1), add1 div2, multiply255, uint8; full canvas unchanged',
                 'source_sha256': [digest(old / 'inputs/source' / f'{i:03d}.png') for i in range(COUNT)],
