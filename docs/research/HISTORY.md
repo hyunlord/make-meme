@@ -604,3 +604,7 @@ Qwen worker43.315분,480forward,CUDApeak55.933GiB,최소가용25.935GiB,swap0이
 ## B-032 착수: 기존 raw의 CPU 원본 보존 합성
 
 B031 동물/사람 앵커 자세 실패와 차량 영상의 도로 그래픽 FAIL을 보존한다. 생성 중 문맥 고정에 앞서 같은 차량 raw의 FIXED_ENVELOPE와 output-mask-assisted 합성 두 개를 만든다. 원본 밖 복사는 합성식의 성질이며 모델 성능으로 주장하지 않는다. 최신 a05b098에서 중복 실행 없음을 확인했고 사용자 승인 범위는 CPU90분·mask30분·GPU/생성/설치0이다. [고정계약](experiments/B-032-source-preserving-composite-baseline/EXECUTION_CONTRACT.md).
+
+### B-032 CPU 비교 종료
+
+사전1754536 뒤 고정 envelope와 output-mask-assisted 합성을 완료했다. source/A0 고정bbox [147,162,754,423), radius11/outer4px를 바꾸지 않았고 float/PNG endpoint exact·입력불변을 확인했다. 큰 도로 그래픽은 크게 줄었으나 FIXED의 긴 strip과 MASK의 뒤 바퀴 아래 조각은 남는다. 주요 차체·거친 회전은 보존, 완전 그래픽 제거FAIL·접촉/얇은경계UNCERTAIN·temporalUNVERIFIED. Agent mask345초/CPU runner3.90초, GPU·생성·설치0. [RESULTS](experiments/B-032-source-preserving-composite-baseline/RESULTS.md). 다음은 편집 내부의 source 문맥 제약 가설 하나이며 자동 실행하지 않는다. B031 원래FAIL은 보존한다.
