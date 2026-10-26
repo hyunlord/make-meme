@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B-028 matched normalization comparison</title><style>
+:root{--bg:#14181d;--surface:#20262e;--text:#f1f4f7;--muted:#bec7d2;--link:#8cc8ff;--s:8px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,sans-serif}main{max-width:1440px;margin:auto;padding:24px}h1{font-size:24px}h2{font-size:20px}section{background:var(--surface);padding:16px;margin:24px 0}video,img{display:block;width:100%;height:auto;margin:16px 0}a{color:var(--link)}button,input{font:inherit;margin:8px 0;max-width:100%}button{padding:8px}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--link)}p{color:var(--muted)}summary{cursor:pointer}label{display:inline-block}input[type=range]{vertical-align:middle}output{margin:8px}@media(max-width:600px){main{padding:12px}section{padding:8px}label{display:block}}
+</style><main><h1>B-028: SOURCE / B027 / B028</h1>
+<p>Labeled development-panel comparison. This is not an independent blind human evaluation. All 17 frames retained. No autoplay, forced loop, interpolation, alignment or restoration. Technical decoding is not human temporal-quality acceptance.</p>
+<!-- TASKS -->
+</main><script>
+for(const section of document.querySelectorAll('section[data-task]')){
+ const slider=section.querySelector('input'),out=section.querySelector('output'),image=section.querySelector('.frame'),prev=section.querySelector('.prev'),next=section.querySelector('.next');
+ function show(value){const i=Math.max(0,Math.min(16,Number(value)));slider.value=i;out.textContent=i;prev.disabled=i===0;next.disabled=i===16;image.src=section.dataset.task+'/frames/'+String(i).padStart(3,'0')+'.png';}
+ slider.addEventListener('input',()=>show(slider.value));prev.addEventListener('click',()=>show(Number(slider.value)-1));next.addEventListener('click',()=>show(Number(slider.value)+1));
+}
+</script></html>
