@@ -1,0 +1,93 @@
+{
+  "experiment": "B-029",
+  "baseline": "B-027 all6 common",
+  "execution_order": [
+    {
+      "task": "animal",
+      "variant": "METHOD",
+      "reference": "R1",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    },
+    {
+      "task": "animal",
+      "variant": "METHOD",
+      "reference": "R2",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    },
+    {
+      "task": "animal",
+      "variant": "CONTROL",
+      "reference": "R1",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    },
+    {
+      "task": "human",
+      "variant": "METHOD",
+      "reference": "R1",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    },
+    {
+      "task": "human",
+      "variant": "METHOD",
+      "reference": "R2",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    },
+    {
+      "task": "vehicle",
+      "variant": "METHOD",
+      "reference": "R1",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    },
+    {
+      "task": "vehicle",
+      "variant": "METHOD",
+      "reference": "R2",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    },
+    {
+      "task": "vehicle",
+      "variant": "CONTROL",
+      "reference": "R1",
+      "max_probe": 1,
+      "max_sampler": 1,
+      "max_decode": 1,
+      "steps": 40,
+      "forwards": 80
+    }
+  ],
+  "max_sampler_including_failures": 8,
+  "max_decode": 8,
+  "retries": 0,
+  "encoder": 0,
+  "training": 0,
+  "downloads": 0,
+  "deadline_utc": "2026-10-26T09:37:00Z"
+}

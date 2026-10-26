@@ -355,3 +355,5 @@ B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 
 ## 2026-10-26 현재: B-029 생성 경로의 공간 전달 가설
 
 B-028은 기술완료/시각trade-off로 종료했다. 큰 차량 동작 회귀가 있어 B-027을 공통 기준선으로 유지한다. [B-029](experiments/B-029-spatial-image-conditioning/PLAN.md)는 기존 CLIP 이미지 cross-attention 출력의 대상 위치별 전달만 바꾼다. 모든 참조 경로를 분리하거나 pose-free identity를 달성한 것은 아니다. METHOD6/shifted CONTROL2를 한 번 비교하여 두 과제 결합 개선과 나머지 큰 회귀 부재를 확인할 때만 다음 검증 후보로 남긴다. 현재 구현/CPU검사, GPU NOT_RUN이다. B-026 선택적보류·과거학습실패는 그대로며 개인촬영/새모델/추가학습은 자동실행하지 않는다.
+
+B-029 실행 전 고정 완료: 기존16leaf를 보존한5consumer, 실제 지도3개, METHOD6/CONTROL2와40step80forward를 고정했다. CPU 계약은 통과했으며 첫 실제 forward의 경로와 결과 영상은 아직 미실행이다. 이 실행에서 공간 위치 설명과 결합 품질을 확인하고 추가 강도/seed 탐색은 하지 않는다.

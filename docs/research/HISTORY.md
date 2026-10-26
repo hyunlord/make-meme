@@ -551,3 +551,7 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 B-028 6/6 sampler·6/6 decode, 각40step80forward와 final latent를 확보했다. 전체17장 정적 검토에서 외형 반응과 일부 장식 제거는 늘었으나 vehicle R1/R2는 원본 반대 방향의 큰 참조 자세, R2 새 문자 패널, human R2 회색 가림 형태가 남았다. [RESULTS](experiments/B-028-object-reference-normalization/RESULTS.md). 공동 목표 미충족, temporalUNVERIFIED이며 기술완료와 분리한다.
 
 03:34 UTC 이후 분기A/B-029를 선택했다. 중요한 회귀 때문에 전6case 공통 기준선은 B-027이며 best-of 혼합0이다. [PLAN](experiments/B-029-spatial-image-conditioning/PLAN.md)과 [DECISION](experiments/B-029-spatial-image-conditioning/DECISION.md)에 generated query의 기존 이미지 attention 출력만 평균1 계수로 재가중하는 한 개입을 고정한다. METHOD6와 animalR1/vehicleR1 shifted CONTROL2,encoder0,학습/설치0. 현재 구현/CPU검사이며 새GPU0. 효과와 원인은 결과로 판단하고 추가 sweep을 하지 않는다.
+
+### B-029 코드·지도 사전 고정
+
+세 과제 support 지도와 두 shifted CONTROL을 실제 CPU에서 생성했다. source support와 시간 묶음·generated token grid[5,32,56]을 확인했고, CONTROL의 soft overlap은0~0.01459로 기록했다. CPU 계약10개와 compile 검사는 통과했으나 LSP transport가 닫혀 정적진단은 NOT_CLEAN이다. 최초 지도 클래스명 오류는 GPU 전에 수정·보존했다. [PREREGISTRATION](experiments/B-029-spatial-image-conditioning/PREREGISTRATION.json)에5consumer와 실제 코드·입력·noise·모델 계보를 고정한다. 이 기록 시점 B-029 GPU0이며 원격 반영 확인 후 고정8case를 순차 실행한다. 소형 검사와 시각 품질을 구분한다.

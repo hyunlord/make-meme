@@ -1,0 +1,10 @@
+{
+  "producer_validator_body_ast_equal": true,
+  "unchanged_core_sha256": {
+    "extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+    "staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+    "cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+    "phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+    "artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5"
+  }
+}
