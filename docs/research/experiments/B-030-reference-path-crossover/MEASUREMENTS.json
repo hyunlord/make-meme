@@ -1,0 +1,273 @@
+{
+  "experiment": "B-030",
+  "precommit": "23408cf5f54938a377ed3356e55216efdf0a1573",
+  "cells": [
+    {
+      "task": "human",
+      "cell": "Y12",
+      "stages": {
+        "PROBE": {
+          "seconds": 8.093661308288574,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 17774592,
+          "CUDA_max_reserved_bytes": 29360128,
+          "system_min_available_bytes": 95301058560,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 957448192,
+          "observed_RSS_max_bytes": 976994304,
+          "cgroup_oom_events_max": 0
+        },
+        "S": {
+          "seconds": 1017.6688296794891,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 36342894592,
+          "CUDA_max_reserved_bytes": 36391878656,
+          "system_min_available_bytes": 57247870976,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 66603556864,
+          "observed_RSS_max_bytes": 66569412608,
+          "cgroup_oom_events_max": 0
+        },
+        "D": {
+          "seconds": 16.21510934829712,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 9565265920,
+          "CUDA_max_reserved_bytes": 12415139840,
+          "system_min_available_bytes": 82135797760,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 2262675456,
+          "observed_RSS_max_bytes": 1702694912,
+          "cgroup_oom_events_max": 0
+        }
+      },
+      "counters": {
+        "model_calls": 80,
+        "completed_steps": 40
+      },
+      "output_hashes": {
+        "output.mp4": {
+          "bytes": 1288024,
+          "sha256": "723925062ca808206de90aa462e2ccf73e575afd32659c5fe24100bb205f231c"
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "9e728449c8c7158af8c2528a01ffec352a24ae91c764ba8e0d6dbe8ff0294244"
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "96ac85f74c5187d234ededfb78ba28883c02536192e79b35658569f7e3d06499"
+        },
+        "final_latent.json": {
+          "bytes": 25208,
+          "sha256": "a6601b0284f6504a6e6df35ae7428a8f2411bedcc9c013ad901f3972c7338feb"
+        }
+      }
+    },
+    {
+      "task": "human",
+      "cell": "Y21",
+      "stages": {
+        "PROBE": {
+          "seconds": 5.068909168243408,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 17774592,
+          "CUDA_max_reserved_bytes": 29360128,
+          "system_min_available_bytes": 95692165120,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 662020096,
+          "observed_RSS_max_bytes": 979963904,
+          "cgroup_oom_events_max": 0
+        },
+        "S": {
+          "seconds": 998.6645998954773,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 36342894592,
+          "CUDA_max_reserved_bytes": 36391878656,
+          "system_min_available_bytes": 56812818432,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 67200196608,
+          "observed_RSS_max_bytes": 84026556416,
+          "cgroup_oom_events_max": 0
+        },
+        "D": {
+          "seconds": 15.240099430084229,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 9565265920,
+          "CUDA_max_reserved_bytes": 12415139840,
+          "system_min_available_bytes": 81898143744,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 2319204352,
+          "observed_RSS_max_bytes": 1603788800,
+          "cgroup_oom_events_max": 0
+        }
+      },
+      "counters": {
+        "model_calls": 80,
+        "completed_steps": 40
+      },
+      "output_hashes": {
+        "output.mp4": {
+          "bytes": 1273793,
+          "sha256": "7312a498b826974f948c7dc354d70005a2fe7898174846d89a231f808552b5bb"
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "8c2e5788abededdeebb5951e11534aecc61e001ccd242ac29cc26c37373b8520"
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "8ce7459f1e76095a7be558ba363b8948e88c394bfa461f4d94206b99d976b31d"
+        },
+        "final_latent.json": {
+          "bytes": 25344,
+          "sha256": "1c8650c3197886ef5d581d07171276e8dfb63d01e1bd44cd788d2244722df5aa"
+        }
+      }
+    },
+    {
+      "task": "vehicle",
+      "cell": "Y12",
+      "stages": {
+        "PROBE": {
+          "seconds": 5.080745220184326,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 17758208,
+          "CUDA_max_reserved_bytes": 29360128,
+          "system_min_available_bytes": 95425994752,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 709857280,
+          "observed_RSS_max_bytes": 883372032,
+          "cgroup_oom_events_max": 0
+        },
+        "S": {
+          "seconds": 1001.0581467151642,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 36342878208,
+          "CUDA_max_reserved_bytes": 36391878656,
+          "system_min_available_bytes": 56877178880,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 64008298496,
+          "observed_RSS_max_bytes": 93760774144,
+          "cgroup_oom_events_max": 0
+        },
+        "D": {
+          "seconds": 15.225501298904419,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 9565265920,
+          "CUDA_max_reserved_bytes": 12415139840,
+          "system_min_available_bytes": 81612779520,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 2323247104,
+          "observed_RSS_max_bytes": 1616338944,
+          "cgroup_oom_events_max": 0
+        }
+      },
+      "counters": {
+        "model_calls": 80,
+        "completed_steps": 40
+      },
+      "output_hashes": {
+        "output.mp4": {
+          "bytes": 1377489,
+          "sha256": "13199dda773cbe3f1b1eaed830049a24e613d27335fa1320e404df9395e06bf6"
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "7ca0e8c5c944238b0e683afc14febc3eacc551d73d454328dddf71caf107bfa6"
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "31816becc0ce3ff366450cae81131711ec2480016bf0d5925da5e514040b9933"
+        },
+        "final_latent.json": {
+          "bytes": 25220,
+          "sha256": "1e8283eebf41aceb0fb1973e23c8299a3eeea954189fed388ea7fd24eb14b59c"
+        }
+      }
+    },
+    {
+      "task": "vehicle",
+      "cell": "Y21",
+      "stages": {
+        "PROBE": {
+          "seconds": 5.066650152206421,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 17758208,
+          "CUDA_max_reserved_bytes": 29360128,
+          "system_min_available_bytes": 95101833216,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 655572992,
+          "observed_RSS_max_bytes": 894644224,
+          "cgroup_oom_events_max": 0
+        },
+        "S": {
+          "seconds": 997.8193521499634,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 36342878208,
+          "CUDA_max_reserved_bytes": 36391878656,
+          "system_min_available_bytes": 57318801408,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 66579636224,
+          "observed_RSS_max_bytes": 94824067072,
+          "cgroup_oom_events_max": 0
+        },
+        "D": {
+          "seconds": 15.228785514831543,
+          "reason": "service_exit",
+          "returncode": 0,
+          "CUDA_peak_allocated_bytes": 9565265920,
+          "CUDA_max_reserved_bytes": 12415139840,
+          "system_min_available_bytes": 82067783680,
+          "swap_max_bytes": 0,
+          "cgroup_peak_bytes": 2321268736,
+          "observed_RSS_max_bytes": 1615335424,
+          "cgroup_oom_events_max": 0
+        }
+      },
+      "counters": {
+        "model_calls": 80,
+        "completed_steps": 40
+      },
+      "output_hashes": {
+        "output.mp4": {
+          "bytes": 1417765,
+          "sha256": "73fde5b1486a61142e51e91877e8db2a1e21b8e57fd4fea768aeaeb12da58d9a"
+        },
+        "raw_output.pt": {
+          "bytes": 93587006,
+          "sha256": "977e0dcafbf382b0c35a9924a1d140f0bfbf60fc5cf99c2790403f1995946951"
+        },
+        "final_latent.safetensors": {
+          "bytes": 2293840,
+          "sha256": "08837e5ee2fefd3ceab95c21e493c3227fc39664d30f406a3ddcb8c9f8802cae"
+        },
+        "final_latent.json": {
+          "bytes": 25356,
+          "sha256": "7ce02db6ad218a648fd0544a06a0477994d8effa957b6de4cea3028374458360"
+        }
+      }
+    }
+  ],
+  "new_sampler_attempts": 4,
+  "new_decoder_attempts": 4,
+  "probe_attempts": 4,
+  "new_encoder_calls": 0,
+  "training_updates": 0,
+  "retry": 0,
+  "new_download_install": 0,
+  "first_stage_utc": "2026-10-26T08:29:42.182615+00:00",
+  "last_stage_utc": "2026-10-26T09:38:04.228458+00:00",
+  "sequential_pipeline_wall_seconds": 4102.045842885971,
+  "sum_stage_seconds": 4100.430389881134
+}

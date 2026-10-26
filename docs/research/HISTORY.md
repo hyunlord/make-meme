@@ -578,3 +578,11 @@ METHOD R1의40step80forward·finite17frame과 전체 정적 비교를 확보했�
 ## 2026-10-26 B-030 착수: 참조 경로 교차 진단
 
 B028/B029 고정 설정의 NOT_ADOPTED와 CONTROL/비용/한계를 유지한다. 시작 원격 `230dad2ba9ffe5a02da3b408058e604e7dea757e`에서 [B030 PLAN](experiments/B-030-reference-path-crossover/PLAN.md)을 확인했다. 기존 B027 human/vehicle 대각4출력을 재사용하고 양 CFG clip_fea만 교차한4셀로 조건부 의존을 관측한다. VAE+mask와CLIP을 pose/identity로 미리 분리해 부르지 않는다. 현재 CPU 준비, 신규 sampler0/4·encoder0·학습0; 실제 시각 사전항목·코드·cache 계보를 고정한 뒤 순차 실행한다. 시작08:19:50UTC, deadline11:19:50UTC. 새 gate나 원인 확정이 아닌 다음 방법 표적의 증거를 얻는 범위다.
+
+### B-030 종료: 행 경향과 조합 의존을 함께 확인
+
+사전 고정 `23408cf5f54938a377ed3356e55216efdf0a1573` 원격 일치 후 신규4셀을 순차 실행했고 UTC09:38:04에 마지막 decode를 완료했다. 각40step80forward·finite final latent·17frame MP4, encoder/학습/설치/재시도0이다. 양 CFG CLIP2leaf만 변경하고14leaf·noise·RNG·scheduler·부모 캐시를 보존했다. 실행68.37분, CUDA peak33.847GiB, 최소 MemAvailable52.911GiB,swap/OOM0. 기술 PASS와 시각 판정을 구분한다.
+
+전체17장 정적 비교에서 human R2 VAE+mask 행의 큰 치마가 두 CLIP 열에서 반복됐지만 원반/세로 접힘·얼굴 가림·수평 파편은 조합에 따라 달랐다. Vehicle 큰 별도 그림은Y11에만 있고 다른3셀에는 없어 단일 경로에 귀속할 수 없으며, 네 셀 모두 source형 차체 비율을 남겼다. [RESULTS](experiments/B-030-reference-path-crossover/RESULTS.md), [행렬 검토](experiments/B-030-reference-path-crossover/MATRIX_REVIEW.md). VAE=pose/CLIP=identity, encoder 단독 원인, 일반화·품질 개선은 미입증이고 temporalUNVERIFIED다.
+
+다음 한 가설은 참조 VAE+mask 묶음의 공간 배치와 source 구조의 경쟁을 외형 전달과 분리할 수 있는지다. 사람의 행 경향은 검토 표적을 좁히는 근거이지 구체적 gate·layer·강도 선택의 증거는 아니다. 추가 zero-out·학습·모델·긴 영상은 실행하지 않고 종료했다. B028/B029 기각과 과거 실패는 보존한다.

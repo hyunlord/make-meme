@@ -58,7 +58,7 @@ Y_{ij}=F_\theta(D,Z_i,C_j,P;\epsilon).
 |---|---|
 | [SCAIL generate, ref encode](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L292) | reference RGB를 VAE에 넣어 `ref_latent` 생성 |
 | [driving와 mask, arg_c/arg_null](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/scail.py#L438-L511) | driving VAE, reference prefix mask, 두 CFG의 같은 시각 조건 구성 |
-| [WanSCAILModel.forward](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L720-L794) | reference+generated를 시간축으로 합쳐 patch embedding; semantic mask embedding을 더함; driving embedding을 token 뒤에 붙임; CLIP을 별도 context 앞에 연결 |
+| [SCAIL2Model.forward](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L720-L794) | reference+generated를 시간축으로 합쳐 patch embedding; semantic mask embedding을 더함; driving embedding을 token 뒤에 붙임; CLIP을 별도 context 앞에 연결 |
 | [WanI2VCrossAttention.forward](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L348-L375) | 같은 query에서 image와 text의 K/V attention을 각각 계산하고 두 출력을 더한 뒤 output projection |
 | [head와 unpatchify](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L868-L899) | reference token을 제외한 generated 구간만 다시 영상 latent로 변환 |
 | [B-027 phase_sample.run](../experiments/B-027-public-reference-robustness/code/phase_sample.py) | 복원 cache 객체가 실제 두 CFG forward에 전달되는지 확인;40step80forward 뒤 final latent 저장 |
@@ -88,7 +88,9 @@ T=\operatorname{Attn}(Q,W_K^TP,W_V^TP),\quad O=W_O(T+I)+b_O
 
 ## 6. 관측을 해석하는 기준과 현재 상태
 
-**현재 문서 작성 단계: 새 교차 출력의 관측 결론은 아직 기록하지 않았다.** 최종 실행 후 RESULTS/MATRIX_REVIEW의 실제 비교를 이 절에 연결한다. 모델 경로 설명만으로 예상 결과를 채우지 않는다.
+**실제4셀 실행 후 관측:** [RESULTS](../experiments/B-030-reference-path-crossover/RESULTS.md)와 [MATRIX_REVIEW](../experiments/B-030-reference-path-crossover/MATRIX_REVIEW.md)에 전체17장 정적 비교를 기록했다. 사람은 같은 CLIP의 두 비교에서 R2 VAE+mask 행의 치마 규모·높이가 더 컸다. 그러나 Y21의 원반형과 Y22의 세로 접힘은 다르고 Y12에는 수평 상체 파편이 있어 역할의 완전한 분리는 아니다. 차량의 별도 큰 그래픽은 Y11에만 나타나 두 단일 경로 중 하나로 귀속할 수 없다. 네 차량 모두 source형 비율이 남았다.
+
+이 결과는 앞의 조건부 차이가 다른 조건 수준에 의존할 수 있다는 실제 예다. 그래픽의 이진 유무를 설명용으로만 q라고 두면 q11=1, q12=q21=q22=0이므로 대각 조합 특이성이 보인다. 이 값은 identity/motion 점수나 통계적 상호작용 추정치가 아니다. 사람의 행 경향도 mask와 VAE를 분리하지 못하며, 교차 손상은 학습분포 밖 조합 가능성과 함께 해석해야 한다. 같은 초기 noise가 이후 전체 latent 궤적까지 같게 만드는 것은 아니다.
 
 행을 따라 치마/가림 또는 차체 배치가 반복되면 해당 입력·seed에서 VAE+mask 묶음과의 조건부 의존 근거다. mask·시점·가림도 함께 바뀌므로 VAE 단독, 공간 좌표, 모든 layer의 원인을 식별하지 못한다. 열을 따라 장식이나 외형이 반복돼도 CLIP이 identity만 표현한다는 증거는 아니다.
 
