@@ -37,7 +37,7 @@ SOURCE / 기존 B031 RAW / FIXED_ENVELOPE / MASK_ASSISTED 전체17장과 local0/
 
 원본 복사만으로 원거리 장면과 그래픽의 대부분을 값싸게 복원할 수 있다는 한 사례의 근거다. 그러나 오염이 target 근처 edit core 안에 겹치면 단순 합성은 그대로 보존한다. 다음 한 가설은 **target/접촉 주변의 편집 내부에서도 source 문맥을 반영하는 생성 중 알려진 영역 제약이 잔여 그래픽과 경계를 줄일 수 있는가**이다. 후속 방법은 RAW뿐 아니라 이번 저비용 MASK_ASSISTED와 노동비용까지 비교해야 한다. 이번에는 구현·샘플링하지 않았다. 차량 한 사례를 일반 편집 성공으로 확대하지 않는다.
 
-작은 ZIP은 기존SOURCE/RAW영상을 변경 없이 포함하고 새 합성영상2개·support·전체시트·확대·viewer·재현을 포함한다. 큰raw/latent/weights는 제외한다. 실제 검증은 DELIVERY에 별도 기록한다.
+작은 ZIP은 기존SOURCE/RAW영상을 변경 없이 포함하고 새 합성영상2개·support·전체시트·확대·viewer·재현을 포함한다. 큰raw/latent/weights는 제외한다. 실제 검증은 [DELIVERY](DELIVERY.md)에 별도 기록한다.
 
 ## 검토 도구의 한계
 
