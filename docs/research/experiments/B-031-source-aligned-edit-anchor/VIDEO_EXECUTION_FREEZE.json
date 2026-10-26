@@ -1,0 +1,182 @@
+{
+  "experiment": "B-031",
+  "task": "vehicle",
+  "reference": "R1",
+  "state": "CPU_FROZEN_GPU_NOT_RUN",
+  "code_freeze_sha256": "86d5163ebe83ccebfc35124d90b3506b6185a6c4ed668afd0c28cf48085ad32a",
+  "input_hashes": {
+    "reference.png": "1a2e58413d9005a79fb856f950e8e3a84850998699fdd341677bf32e2ce66fd6",
+    "reference-mask.png": "97ac574c14601d3e16b6224b1de6d653cd9565e1301fc627c5569daa50c2f62e"
+  },
+  "A0_sha256": "f413bf6a86e02ade3ba0d8d0fce46c860b362860ae2afe28528307926c85d90f",
+  "parent_experiment": "B-027",
+  "parent_R1_cache_sha256": "fce0e3d03cae0bea801b23afc9a98eab93270275fe26bda97d862fdc48b54dab",
+  "initial_noise_sha256": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918",
+  "code_hashes": {
+    "code/anchor_contract.py": "417607c3eeff4e6026d9a04491517cb551fefd65e61dfb0ea6e8319b916840af",
+    "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+    "code/contracts.py": "547cffc15a13b76ee51677eb7f46495d24131431ce879bbbde05a940b440d75f",
+    "code/cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+    "code/extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+    "code/freeze_run.py": "0948cae9fa7e4be68365d30f79c7c7434ef8641c7f38a6c24c494dcc5460b442",
+    "code/media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+    "code/pair_contract.py": "be60bb1c159f15a4924c16c35e865bbd51ad3eff7218e53fb82c634acf53edae",
+    "code/phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+    "code/phase_reference.py": "dcffd4981e746cdc07c698cedde16c3336ac548c7a78ef297f7cd9a4f38dc260",
+    "code/phase_sample.py": "66c343c12bdec5f0b01403ef3f2a39807ec5e16cfc1c3aedfbc007aa37375860",
+    "code/prepare_video.py": "bb66585af69fc09e3e24d80425df5b7e8197106aa57e5203608983d65b787a00",
+    "code/run_phase.py": "902687563d51913daf052e5ee0460a63b67367a354e581263b13a9088f60b912",
+    "code/run_video.sh": "7898495d3d20322c655fe093f23b71fca97c9984e7620348d029189024ec05b2",
+    "code/runtime_guard.py": "4d6134c9f28e29f69c64d55d0e52ad5c8104070be4fd27ca8b4debc4cc97424e",
+    "code/runtime_launch.py": "cd59f87ed1a275fede776c9b2cb8f7dc58fc792209c8b8f754e15288ce2a4810",
+    "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+    "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+    "code/test_anchor_contract.py": "f0b87edddc5d1864566918080e291878636519bd60361bd492311eea065ac15a"
+  },
+  "stage_config_hashes": {
+    "ENC": {
+      "cache_binding.json": "64050b364ea8bca02a1162bfb17356539de982af5cc31d758f29fc314b59d61f",
+      "execution.json": "5b1432481ad2d9305ec4f20141a55877968857eba55cbd61953564a7bfcfd045",
+      "input_config_hashes.json": "26604156c786d65ff7aff7a61003344fbca2109178dbe302b8de804fca269631",
+      "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+      "anchor_suitability.json": "909c354d67d2a77d3d5bc99b6a2d94f35f912b1bbb5915bcb3446aa53783b4b8",
+      "public.json": "2fcc8bd84bf7e1c7ed905d347182f9711b50939c7fcbf9d38ea49280db747ee8",
+      "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+    },
+    "R1_D": {
+      "cache_binding.json": "64050b364ea8bca02a1162bfb17356539de982af5cc31d758f29fc314b59d61f",
+      "execution.json": "2b8a95496b4ffae0c64164bc73bde61873a62dc035898bca5f08ceca2d0a3e30",
+      "input_config_hashes.json": "26604156c786d65ff7aff7a61003344fbca2109178dbe302b8de804fca269631",
+      "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+      "anchor_suitability.json": "909c354d67d2a77d3d5bc99b6a2d94f35f912b1bbb5915bcb3446aa53783b4b8",
+      "public.json": "2fcc8bd84bf7e1c7ed905d347182f9711b50939c7fcbf9d38ea49280db747ee8",
+      "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+    },
+    "R1_PROBE": {
+      "cache_binding.json": "64050b364ea8bca02a1162bfb17356539de982af5cc31d758f29fc314b59d61f",
+      "execution.json": "71e36edc4d033bbaf1d6be967fa790bfec4c65c194cc1be50b03f3250c33da19",
+      "input_config_hashes.json": "26604156c786d65ff7aff7a61003344fbca2109178dbe302b8de804fca269631",
+      "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+      "anchor_suitability.json": "909c354d67d2a77d3d5bc99b6a2d94f35f912b1bbb5915bcb3446aa53783b4b8",
+      "public.json": "2fcc8bd84bf7e1c7ed905d347182f9711b50939c7fcbf9d38ea49280db747ee8",
+      "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+    },
+    "R1_S": {
+      "cache_binding.json": "64050b364ea8bca02a1162bfb17356539de982af5cc31d758f29fc314b59d61f",
+      "execution.json": "7f1672f779c1075e0d7095a2a9df268360ad1de63db005928748e6f479b10454",
+      "input_config_hashes.json": "26604156c786d65ff7aff7a61003344fbca2109178dbe302b8de804fca269631",
+      "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+      "anchor_suitability.json": "909c354d67d2a77d3d5bc99b6a2d94f35f912b1bbb5915bcb3446aa53783b4b8",
+      "public.json": "2fcc8bd84bf7e1c7ed905d347182f9711b50939c7fcbf9d38ea49280db747ee8",
+      "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+    }
+  },
+  "execution": {
+    "ENC": {
+      "stage": "ENC",
+      "reference_id": "R1",
+      "task_id": "vehicle",
+      "predecessor": null,
+      "adapter_enabled": false,
+      "replace_flag": true,
+      "alg": false,
+      "manual_rope_override": false,
+      "b029_gate": false,
+      "parent_experiment": "B-027"
+    },
+    "R1_D": {
+      "stage": "R1_D",
+      "reference_id": "R1",
+      "task_id": "vehicle",
+      "predecessor": "R1_S",
+      "adapter_enabled": false,
+      "replace_flag": true,
+      "alg": false,
+      "manual_rope_override": false,
+      "b029_gate": false,
+      "parent_experiment": "B-027"
+    },
+    "R1_PROBE": {
+      "stage": "R1_PROBE",
+      "reference_id": "R1",
+      "task_id": "vehicle",
+      "predecessor": "ENC",
+      "adapter_enabled": false,
+      "replace_flag": true,
+      "alg": false,
+      "manual_rope_override": false,
+      "b029_gate": false,
+      "parent_experiment": "B-027"
+    },
+    "R1_S": {
+      "stage": "R1_S",
+      "reference_id": "R1",
+      "task_id": "vehicle",
+      "predecessor": "R1_PROBE",
+      "adapter_enabled": false,
+      "replace_flag": true,
+      "alg": false,
+      "manual_rope_override": false,
+      "b029_gate": false,
+      "parent_experiment": "B-027"
+    }
+  },
+  "budget": {
+    "reference_VAE": 1,
+    "reference_CLIP": 1,
+    "probe": 1,
+    "full_sampler": 1,
+    "steps": 40,
+    "forwards": 80,
+    "decode": 1,
+    "retry": 0
+  },
+  "expected_change_leaves": [
+    "t2",
+    "t3",
+    "t4",
+    "t8",
+    "t9",
+    "t10"
+  ],
+  "invariant_leaves": [
+    "t0",
+    "t1",
+    "t5",
+    "t6",
+    "t7",
+    "t11",
+    "t12",
+    "t13",
+    "t14",
+    "t15"
+  ],
+  "qwen_exit": {
+    "completed_images": 6,
+    "steps_each": 40,
+    "forwards_each": 80,
+    "pipeline_MainPID": 0,
+    "watchdog_MainPID": 0,
+    "pipeline_state": "inactive",
+    "watchdog_state": "inactive",
+    "Result": "success",
+    "guard_reason": "service_exit",
+    "returncode": 0,
+    "finished_epoch": 1793030794.245,
+    "MemAvailable_KiB": 94144952,
+    "swap_used": 0
+  },
+  "skip": {
+    "animal": "ANCHOR_UNSUITABLE",
+    "human": "ANCHOR_UNSUITABLE"
+  },
+  "deadline_utc": "2026-10-26T20:16:41Z",
+  "timebase": {
+    "source_fps": null,
+    "preview_fps": 24,
+    "timebase_assumed": true,
+    "frames": 17,
+    "width": 896,
+    "height": 512
+  }
+}

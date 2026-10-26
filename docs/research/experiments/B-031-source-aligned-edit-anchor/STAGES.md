@@ -41,3 +41,11 @@
 ## 실제 함수
 
 `video_code/prepare_video.py`는 적합성/모델종료 receipt, RGB128/RED-BLACK, 기존 driving bytes와 부모계보를 고정한다. `phase_reference.py`는 한 reference를 VAE/CLIP/semantic mask에 넣는다. `anchor_contract.py`와 `contracts.py`가10leaf불변·부모receipt·구조/device를 확인한다. `phase_sample.py`의 첫 실제 두 CFG forward hook은 동일복원객체와조건hash만 기록하며 추가forward는0이다. `extract.py`/`staged_loader.py`/`phase_decode.py`는 B030의 기존 실행경로를 보존했다.
+
+## R1 실제 정적 검토 후 영상 대상 고정
+
+- animal R1: `ANCHOR_UNSUITABLE`. 누운 참조 자세가 남고 source의 보행 다리·꼬리 배치가 충분히 보존되지 않아 영상은 `NOT_RUN`이다.
+- human R1: `ANCHOR_UNSUITABLE`. 뒤를 향한 팔 전방 배치가 복사되어 source의 정면·머리 뒤 팔·교차 스텝과 달라 영상은 `NOT_RUN`이다.
+- vehicle R1: 부모와 별도 에이전트의 정적 검토에서 `SUITABLE_FOR_VIDEO`. 실제 A0의 수동 support를 고정한 후 이 한 과제만 실행 대상으로 준비한다. 이는 독립 인간 평가나 영상 품질 PASS가 아니다.
+
+Qwen 전체 프로세스 종료와 자원 회복, 최종 입력 receipt 및 실행 코드 사전 기록 전에는 ENC/PROBE/S/D를 시작하지 않는다. R2로 대체하지 않는다.
