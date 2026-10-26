@@ -1,6 +1,6 @@
 # B-029 방법 — 생성 위치별 이미지 조건 출력 재가중
 
-상태: **사전 선택 완료 / 실제 실행·효과는 미판정**. [B-028 결과](../B-028-object-reference-normalization/RESULTS.md)를 검토한 뒤 [DECISION](DECISION.md)에서 분기 A를 선택했다. 공통 기준선은 전 6case의 **B-027**이다. B-028의 외형 반응 개선과 차량 방향·자세 회귀, human R2 형태 결함을 보존하며 case별 좋은 결과를 섞지 않는다.
+상태: **실제 실행 중 / 완료 case의 코드 연결 확인 / 전체 효과 판정 대기**. [B-028 결과](../B-028-object-reference-normalization/RESULTS.md)를 검토한 뒤 [DECISION](DECISION.md)에서 분기 A를 선택했다. 공통 기준선은 전 6case의 **B-027**이다. B-028의 외형 반응 개선과 차량 방향·자세 회귀, human R2 형태 결함을 보존하며 case별 좋은 결과를 섞지 않는다.
 
 ## 질문과 단일 개입
 
@@ -39,13 +39,13 @@ O=W_o(T+I)+b_o,\qquad O'=W_o(T+g\odot I)+b_o.
 
 `img_x:[B,L,C]`에 gate `[1,L,1]`를 broadcast한다. 게이트는 실제 연산의 dtype/device를 유지해야 한다. 예시 latent `[16,5,64,112]`, patch `(1,2,2)`라면 generated grid `[5,32,56]`, reference 1,792 / generated 8,960 / driving 2,240 token을 예상하지만 **실제 metadata 검사로 확인할 값**이며 모든 입력의 상수가 아니다.
 
-실험 API는 구현 담당과 아래처럼 고정했다. 파일의 최종 코드 해시와 CPU 검사 결과는 실행 전 기록에 연결하며, 현재 문서의 공식 소스 분석과 향후 실제 GPU 관측을 구분한다.
+실험 API와 코드/지도 해시는 [PREREGISTRATION](PREREGISTRATION.json)에 사전 고정했다. 공식 소스 분석과 실제 GPU 관측을 구분한다.
 
 - [`build_support_maps.py`](code/build_support_maps.py)의 `support_map`과 CLI는 source support에서 위 순서로 지도 E를 만든다.
 - [`spatial_image_gate.py`](code/spatial_image_gate.py)의 `install(model, support_path, GateConfig(...))`은 `GateInstallation`을 반환한다. `GateMode.METHOD/CONTROL`과 `strength=0.5`, 보고서 경로를 명시한다. block prehook으로 실제 길이/grid를 전달하고 `compile_forward`가 공식 소스의 합산 직전에 image-only 변환을 삽입한다. 공식 소스 SHA를 검사한다.
-- `GateInstallation.report()/assert_complete()/remove()`는 관측 요약, 완료 횟수 검증, 원래 bound forward 복원을 담당한다. OFF/lambda0은 원래 forward를 유지한다. API 명세 고정과 CPU 검사 성공은 별개이며 **최종 검사 결과는 아직 미기록**이다.
-- 첫 실제 forward의 module/SHA, runtime token 범위, gate 통계: **실행 후 기록**.
-- 40step·80forward와 block별 적용 횟수: **실행 후 기록**.
+- `GateInstallation.report()/assert_complete()/remove()`는 관측 요약, 완료 횟수 검증, 원래 bound forward 복원을 담당한다. OFF/lambda0은 원래 forward를 유지한다. 작은 CPU 계약6개와 기존 계약4개가 통과했다. 전체14B OFF 수치 동등성은 검증하지 않았다.
+- 실제 forward는 generated 시작1,792·길이8,960·driving suffix2,240, grid[5,32,56]을 기록했다. 이미지 출력 dtype은 FP32이며 변경하지 않았다. module/SHA와 case별 계수 통계는 runtime 보고서에 남긴다.
+- 완료된 case마다40step·80forward와40block×80 gate 적용을 확인했다. 미완료 case를 완료로 계산하지 않는다.
 
 ## 비교와 변하지 않는 입력
 

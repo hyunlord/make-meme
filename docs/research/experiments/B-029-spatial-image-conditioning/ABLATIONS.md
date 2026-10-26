@@ -1,6 +1,6 @@
 # 사전 대조 설계와 판정 경계
 
-생성 전 고정. 결과 칸은 아직 미실행이다. 동일3과제 개발 패널, 단일seed이며 프레임을 독립 반복으로 세지 않는다.
+아래 설계는 생성 전에 고정했다. 결과는 완료된 출력부터 구분해 기록한다. 동일3과제 개발 패널, 단일seed이며 프레임을 독립 반복으로 세지 않는다.
 
 | 비교 | 바뀌는 것 | 유지하는 것 | 검사하는 설명 |
 |---|---|---|---|
@@ -12,6 +12,15 @@ CONTROL의 공간 겹침은 support.json에서 실행 전에 공개 요약한다
 
 기존 B028은 기준선 선택에 사용한 역사 비교다. METHOD 결과를 본 뒤 B027/B028을 case별로 교체하지 않는다. 기준선의 문제와 방법의 문제를 모두 보존한다.
 
-## 결과 기록 예정
+## 순차 결과와 해석
 
-METHOD/BASE/CONTROL의 외형·동작·형태·보호 장면 항목별 개선/동일/악화와 근거 프레임을 실제 출력 후 기록한다. 임의 joint score·유의성·identity accuracy는 만들지 않는다. METHOD~CONTROL이면 공간 위치 설명은 미입증이다. 외형만 좋아지고 동작/형태가 나빠지면 trade-off이며 성공으로 합치지 않는다. 현재 새 sampler0, temporal=UNVERIFIED다.
+| 사전 선택 대조 | METHOD | shifted CONTROL | 판정 범위 |
+|---|---|---|---|
+| animal R1 | 작은 원형 하단 배지, 밝은 source 계열 개체 | 큰 빨강/흰 배지, 밝은 source 계열 개체 | 장면 오염 양상은 다르나 target 외형 교체는 양쪽 FAIL |
+| vehicle R1 | 큰 차량 후면 그래픽, 은색 source Mini형 혼합 차체 | PENDING | CONTROL 출력 후 확정 |
+
+animal의 전체17장/local0/8/16에서 배지 차이를 확인했다. METHOD의 장식이 작아 보이는 사실만으로 대상 위치의 identity 전달이 성공했다고 할 수 없다. 정확한 장식 면적이나 동작 오차는 측정하지 않았다. source-like 출력은 motion/scene 보존의 일부 관측일 수 있지만 identity-change 성공은 아니다.
+
+human R1은 BASE보다 의상 형태가 일부 정돈됐으나 R2의 크게 들린 치마·얼굴 가림이 유지됐다. human에는 대조군 예산을 사후 추가하지 않는다. 차량 METHOD의 전체17장도 확보했고 CONTROL은 진행 중이다.
+
+METHOD/BASE/CONTROL의 외형·동작·형태·보호 장면을 분리한다. 임의 joint score·유의성·identity accuracy를 만들지 않는다. METHOD~CONTROL이면 위치 설명은 미입증이다. 외형만 좋아지고 동작/형태가 나빠지면 trade-off다. 실제 연속 시청을 하지 않았으므로 temporal=UNVERIFIED다.

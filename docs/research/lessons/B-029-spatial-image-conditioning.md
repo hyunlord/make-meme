@@ -48,7 +48,7 @@ attention의 head를 합친 `img_x`는 `[B,L,C]`, 전체 gate는 `[1,L,1]`이다
  j_0\le j<j_0+\texttt{seq_length}.
 \]
 
-예를 들어 latent `[16,5,64,112]`, patch `(1,2,2)`이면 generated grid `[5,32,56]`와 generated 8,960 token을 예상한다. 이는 **설명용 기대 shape**이며 이번 실행에서 측정한 값이 아니다. 실제 grid와 `[t,h,w]` flatten 순서를 읽어 지도를 맞춰야 한다.
+예를 들어 latent `[16,5,64,112]`, patch `(1,2,2)`이면 generated grid `[5,32,56]`와 generated 8,960 token을 예상한다. 이번 실제 forward에서도 grid `[5,32,56]`, generated 시작1,792·길이8,960·driving suffix2,240을 관측했다. 이 값은 해당 공개 패널의 runtime 값이며 모든 입력에 통하는 상수가 아니다. 실제 grid와 `[t,h,w]` flatten 순서를 읽어 지도를 맞춘다.
 
 17개 source mask를 latent 시간축으로 대응시키는 첫 프레임+4개씩의 시간 합집합은 관측용 공간 배정의 근사다. VAE는 학습된 시공간 convolution 등을 사용하므로 이 규칙을 정확한 receptive field라고 부를 수 없다. 이번에는 시간 합집합 → clip 전체 bbox 긴 변의 10%를 올림한 반경의 정사각 dilation → 7×7 zero-padded 평균 필터 → `[0,1]` 제한 → area resize 순서를 사전 고정했다. 이 연산도 target의 실제 새 실루엣 정답을 만들지는 않는다. 결과를 본 뒤 수치나 순서를 조절하지 않는다.
 
@@ -63,9 +63,9 @@ attention의 head를 합친 `img_x`는 `[B,L,C]`, 전체 gate는 `[1,L,1]`이다
 | [token/context 구성, L741–823](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L741-L823) | reference VAE와 generated를 결합; CLIP은 `img_emb` 후 text와 context 구성 | 입력·가중치·token 순서 불변, 이미지 출력 경로만 변경 |
 | [`unpatchify`, L870–899](https://github.com/zai-org/SCAIL-2/blob/78fe19576bb06be96c2375e088574a262a300edb/wan/modules/model_scail2.py#L870-L899) | generated offset에 해당하는 출력을 복원 | 게이트의 범위와 실제 출력 범위 대조 |
 
-**reference VAE 경로는 그대로 남는다.** 참조 latent가 joint self-attention에 참여하며, 이후 layer는 공간 사이 정보를 다시 섞는다. CLIP 이미지 항의 공간 재가중은 reference OFF, 배경 완전 차단, identity-only 표현과 다르다. 위 설명은 공식 코드 읽기 근거이며 새 runtime 관측은 아니다.
+**reference VAE 경로는 그대로 남는다.** 참조 latent가 joint self-attention에 참여하며, 이후 layer는 공간 사이 정보를 다시 섞는다. CLIP 이미지 항의 공간 재가중은 reference OFF, 배경 완전 차단, identity-only 표현과 다르다. 경로 설명은 공식 코드에 근거하며, 이번 runtime에서 기록한 generated 범위·적용 횟수와 별도로 구분한다. 이미지 항의 실제 dtype은 FP32였고 그대로 유지했다.
 
-이번 실험의 함수 연결은 [`support_map`](../experiments/B-029-spatial-image-conditioning/code/build_support_maps.py) → [`install(..., GateConfig(...))`](../experiments/B-029-spatial-image-conditioning/code/spatial_image_gate.py) → block prehook의 길이/grid 전달 → `compile_forward`의 합산 직전 image-only 변환이다. `GateInstallation.report()/assert_complete()`로 첫 호출의 범위·통계와 최종 적용 횟수를 남긴다. 이는 구현 담당과 고정한 API 명세이며 최종 소형 검사·GPU 적용 성공은 별도 실행 기록으로 확인해야 한다. 소스 SHA나 실제 token 범위가 다르면 이름만 같은 함수라고 간주해 계속 진행하지 않는다.
+이번 실험의 함수 연결은 [`support_map`](../experiments/B-029-spatial-image-conditioning/code/build_support_maps.py) → [`install(..., GateConfig(...))`](../experiments/B-029-spatial-image-conditioning/code/spatial_image_gate.py) → block prehook의 길이/grid 전달 → `compile_forward`의 합산 직전 image-only 변환이다. `GateInstallation.report()/assert_complete()`로 첫 호출의 범위·통계와 최종 적용 횟수를 남긴다. 작은 CPU 계약6개와 기존 계약4개를 통과했고, 완료된 실제 실행은40block×80 gate 적용을 기록했다. CPU fixture는 전체14B OFF 수치 동등성 검증이 아니며 코드 적용 성공도 영상 품질 성공이 아니다. 소스 SHA나 실제 token 범위가 다르면 이름만 같은 함수라고 간주해 계속 진행하지 않는다.
 
 ## 5. 대조와 반례: 어떤 주장을 반박할 수 있는가
 
@@ -87,7 +87,7 @@ CONTROL은 token 공간 지도를 H/W 절반만큼 cyclic shift한다. 같은 �
 
 - 기존 관측: B-028은 일부 target 외형을 더 반영했지만 차량 두 참조에서 방향·자세가 회귀했고 human R2의 형태 결함이 남았다. 이는 [기존 결과 문서](../experiments/B-028-object-reference-normalization/RESULTS.md)의 정적 검토이며 이 해설 작성자가 독립 반복 평가한 결과가 아니다.
 - 사전 결정: B-027을 공통 기준선으로 두고 이미지 조건 전달 위치의 가설을 한 번 검사한다. 실패 원인이 해당 경로라고 확정한 것은 아니다.
-- 코드/조건 연결의 실제 검증: **[구현과 실행 후 작성]**
+- 코드/조건 연결: 기존 B027의16leaf/noise 계보를 유지하고 generated 구간의 이미지 항에만 적용했다. 첫 실제 dtype은 FP32이며 각 완료 case의40step/80forward와40×80 gate count를 별도 확인한다. LSP transport는 닫혀 NOT_CLEAN이며 runtime 근거와 혼동하지 않는다.
 - 외형·동작·형태·장면·비용의 변화: **[비교 후 작성]**
 - 핵심 CONTROL과의 차이 및 반례: **[비교 후 작성]**
 - temporal: **UNVERIFIED — 실제 연속 재생 관찰 여부를 별도로 기록**

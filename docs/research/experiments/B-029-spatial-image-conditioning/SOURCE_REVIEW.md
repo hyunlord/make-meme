@@ -7,3 +7,7 @@
 LSP 도구는 네 파일 요청에서 `Transport closed`를 반환했다. 따라서 LSP 정적 진단은 `UNAVAILABLE / NOT_CLEAN`이며 compile·CPU 계약 검사와 구분한다. 환경 재설치·경고 억제·전체 타입 리팩터링은 하지 않았다.
 
 실제 지도 생성, CPU 계약 결과, 사전 고정 해시와 첫 forward의 범위/통계, 최종40×80 gate count는 각각 별도 실행 근거로 기록한다.
+
+## 진행 중 문서 대조
+
+읽기 전용 별도 agent가 전체 의뢰서와 METHOD·한국어 lesson·RESULTS·ABLATIONS를 대조했다. B027 전6case 공통 기준선, 합산/projection 전 image-only 변경, 남는 reference VAE 경로, 계수 평균과 특징 보존의 차이, generated 외 직접계수1, 실제 FP32, 단일seed 개발 패널 및8회/40step/80forward 상한에 실질 모순을 발견하지 못했다. 이는 시각 관측의 독립 재판독이나 최종 산출물 검증이 아니다. 당시 미완료 칸과 사전 상태 문구는 종료 기록에서 갱신한다.
