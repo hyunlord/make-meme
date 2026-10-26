@@ -1,5 +1,7 @@
 # 연구 방향과 목표
 
+**B-033 PREPARING**: [고정 계획](experiments/B-033-clean-prediction-constraint/PLAN.md)에 따라 B032의 저비용합성과 동일mask를 유지하고 마지막latent혼합 대 생성중clean prediction제약을 비교한다. 차량context문제와 동물/사람의 앵커자세실패를 분리한다. 신규sampler최대1, mask수정/학습/설치0이며 품질효과는 미확인이다.
+
 ## 2026-10-26 통합 의뢰의 현재 상태
 
 공개 개발 패널을 유지한 채 B-028의 객체 중심 참조 정규화를 먼저 실행하고, 실제 남은 실패를 본 뒤 생성 메커니즘 개입 하나와 음성 대조를 선택한다. [전체 의뢰서](work_orders/20261026-B028-to-method-research.md)가 이번 상한과 분기를 정의한다. B-028은6출력 완료했으며 외형 일부 개선과 차량 동작/사람 형태 회귀를 확인했다. 공통 기준선은 B-027로 고정하고 [B-029](experiments/B-029-spatial-image-conditioning/PLAN.md)의 이미지 cross-attention 위치 재가중과 공간 음성 대조를 사전 고정했다. B-029는 METHOD6/CONTROL2의 실제40step80forward·17프레임을 모두 확보했다. 동물 교체 실패·사람 참조별 형태 차이·차량 장면 회귀와 CONTROL의 비일관적 결과로 고정 설정을 채택하지 않는다. [결과](experiments/B-029-spatial-image-conditioning/RESULTS.md). 기술 실행과 실제 결합 품질을 구분하고 다음 가설은 별도 승인 전 실행하지 않는다. 개인 사진 확보·학습량 증대·새 모델 설치를 진행 조건으로 삼지 않는다. 아래 기존 종료 관측과 제안은 당시 기록이며 새 방법의 성공 근거가 아니다.

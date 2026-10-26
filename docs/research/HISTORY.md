@@ -608,3 +608,7 @@ B031 동물/사람 앵커 자세 실패와 차량 영상의 도로 그래픽 FAI
 ### B-032 CPU 비교 종료
 
 사전1754536 뒤 고정 envelope와 output-mask-assisted 합성을 완료했다. source/A0 고정bbox [147,162,754,423), radius11/outer4px를 바꾸지 않았고 float/PNG endpoint exact·입력불변을 확인했다. 큰 도로 그래픽은 크게 줄었으나 FIXED의 긴 strip과 MASK의 뒤 바퀴 아래 조각은 남는다. 주요 차체·거친 회전은 보존, 완전 그래픽 제거FAIL·접촉/얇은경계UNCERTAIN·temporalUNVERIFIED. Agent mask345초/CPU runner3.90초, GPU·생성·설치0. [RESULTS](experiments/B-032-source-preserving-composite-baseline/RESULTS.md). 다음은 편집 내부의 source 문맥 제약 가설 하나이며 자동 실행하지 않는다. B031 원래FAIL은 보존한다.
+
+## B-033 착수 — clean prediction 제약 대 마지막 latent 혼합
+
+2026-10-27 사용자 통합 의뢰서를 원문 보존했다. 최신aaf40a9와 실제Spark상태에서 중복B033이없음을확인했다. B032저비용MASK_ASSISTED와기존mask불확실성을유지하고,동일영역에서마지막latent혼합과생성중clean제약을비교한다. 차량context축이며animal/human앞단자세FAIL은미해결이다. [PLAN](experiments/B-033-clean-prediction-constraint/PLAN.md). 신규sampler최대1/encode1/decode3,2시간,학습/설치0. 현재PREPARING이며실행·품질성공은아직아니다.
