@@ -541,3 +541,7 @@ B024의 정적 자세·장면 개선과 source-copy 혼동을 보존한다. [B02
 ### B-027 종료: 공개 패널6출력과 실패 유형 확보
 
 공개3과제×2참조의 실제6출력과 최종latent를 확보했다. 동물은 source 외형 잔존, 사람은 target 의상 반영과 형상 손상, 차량은 부분 외형 반영과 혼합 차체/조건별 그래픽 추가로 결합 편집 품질은 미입증이다. 기술21worker·240step480forward PASS와 시각 판정을 구분하고 temporal UNVERIFIED를 유지한다. [결과](experiments/B-027-public-reference-robustness/RESULTS.md), [다음 한 가설](experiments/B-027-public-reference-robustness/NEXT_DECISION.md). 다음은 원본 문맥과 ID 주입을 분리한 공식 VideoPainter 경로의 한정 비교 제안이며 설치·실행은 NOT_RUN이다. 신규 학습/모델/패키지/외부생성0, sampler6/6·재시도0, pre-worker오류3은 별도 보존한다. 공개자료0.776GiB와 mask-given/source_fps미확인 조건을 유지했다. 자체GPU worker는 종료했고 보호 서비스와 swap0를 확인했다. 개인사진 대기·추가 생성으로 자동 전환하지 않는다.
+
+## 2026-10-26 통합 의뢰 착수: B-028 실측 후 생성 경로 개입 결정
+
+시작 원격 `84b69080c8e4e9da858f784c11f7916b370a9d51`을 확인했다. [전체 수행 의뢰서](work_orders/20261026-B028-to-method-research.md)를 원문 그대로 보존한다. Spark의 B-028 실행 폴더·프로세스·실행 장부 부재를 확인했으므로 기존 B-028 PLAN의 최대6회부터 수행한다. 공개 개발 패널은 그대로이며 개인 촬영을 요구하지 않는다. B-027 실패와 B-026 선택적 보류는 보존한다. B-028 관측 뒤에만 공통 기준선 및 다음 방법/대조 PLAN을 확정한다. 전체8시간, 추가 방법 분기 최대8회 또는 미사용 검증 분기 최대2회 중 하나만 적용하며 재시도·학습·설치0이다. 현재 CPU 준비 / 신규 GPU0, 실제 시작 UTC01:37, 전체 deadline UTC09:37.

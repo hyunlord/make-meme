@@ -347,3 +347,7 @@ B-020의 실제FM 배선 PASS와 품질개선 미입증을 보존하며, 같은 
 ## 2026-10-25 B-024 착수: 참조 RGB의 배경·padding 분리
 
 [B024 PLAN](experiments/B-024-reference-rgb-isolation/PLAN.md)에 따라 B023정식replacement과제FAIL을보존하고, 같은Lab의reference에서기존REDsupport밖RGB만128로바꾸는한정비교를착수한다. 원본보존객체편집의병목을조건경로에서좁히며VAE/CLIP두경로재계산,semanticmask/모드/noise불변을검증한다. 현재CPU준비/GPU NOT_RUN, 연결확인최대30분·전체3시간·sampler최대1이다. 배경제거는자세제거가아니며새학습/모델/합성은없다.
+
+## 2026-10-26 최신 실행 우선순위
+
+**B-028 CPU 준비 / 후속 방법 미선정.** [통합 의뢰서](work_orders/20261026-B028-to-method-research.md)에 따라 기존 공개 패널의 객체 중심 참조 정규화를 한 번 수행하고 실제 결과로 다음 분기를 정한다. 과거 VideoPainter 제안은 그대로 역사 보존하며 임의 reference를 받는 drop-in backend라고 가정하지 않는다. 남은 실패가 있다면 기존 생성 경로의 개입 하나와 공간 음성 대조를 비교한다. 모든 목표가 충족되면 새 모듈 대신 제한된 미사용 입력 검증으로 분기한다. B-028 결과 전에 방법 효능·원인을 확정하지 않는다.
