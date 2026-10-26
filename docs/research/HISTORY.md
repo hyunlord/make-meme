@@ -555,3 +555,7 @@ B-028 6/6 sampler·6/6 decode, 각40step80forward와 final latent를 확보했�
 ### B-029 코드·지도 사전 고정
 
 세 과제 support 지도와 두 shifted CONTROL을 실제 CPU에서 생성했다. source support와 시간 묶음·generated token grid[5,32,56]을 확인했고, CONTROL의 soft overlap은0~0.01459로 기록했다. CPU 계약10개와 compile 검사는 통과했으나 LSP transport가 닫혀 정적진단은 NOT_CLEAN이다. 최초 지도 클래스명 오류는 GPU 전에 수정·보존했다. [PREREGISTRATION](experiments/B-029-spatial-image-conditioning/PREREGISTRATION.json)에5consumer와 실제 코드·입력·noise·모델 계보를 고정한다. 이 기록 시점 B-029 GPU0이며 원격 반영 확인 후 고정8case를 순차 실행한다. 소형 검사와 시각 품질을 구분한다.
+
+### B-029 동물 비교의 중간 관측
+
+METHOD2와 CONTROL1의 실제40step80forward·17frame decode를 완료했다. 첫 실제 gate는 start1792/length8960/suffix2240, grid[5,32,56], img_x FP32를 유지했고40block×80호출을 확인했다. 두 METHOD 모두 어두운 target 대신 밝은 source 계열을 남겼다. R1은 BASE/CONTROL의 큰 장식을 더 작은 원형 장식으로 줄였지만 제거하지 못했고, R2는 source의 털·하네스·배치를 더 닮았다. [순차 정적 관측](experiments/B-029-spatial-image-conditioning/VISUAL_OBSERVATIONS.md). 동물 결합 목표는 실패이며 사람·차량은 고정 계획대로 진행 중이다. 위치 제어의 부분 반응을 전체 방법 성공으로 확대하지 않는다.
