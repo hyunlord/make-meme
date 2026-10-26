@@ -37,3 +37,5 @@ Transformers의 rope_parameters/mrope_section 경고와 이미 종료된 자체 
 Vehicle R1 ENC9.103초 / PROBE5.079초 / S1003.427초 / D15.197초로 모두 완료했다. 신규 sampler1회·40step80forward·decode1회, 재시도0이다. S CUDA peak allocated33.847GiB, cgroup peak62.019GiB, 최소 시스템 가용50.684GiB, swap0이다. 모든 자체 GPU worker 종료 뒤 가용94,288,988KiB 회복을 확인했다. Qwen과 SCAIL 회계를 합산해 peak라고 부르지 않는다.
 
 이미지 worker와 영상 네 단계의 wall-clock 합은3631.731초(60.529분)다. 다운로드·입력/코드 준비·검토·수동 작업·패키징 비용은 이 합 밖이며, 전체 elapsed는 최종 DELIVERY에서 시작 시각과 종료 시각으로 계산한다. 시작2026-10-26 14:46:41UTC, hard deadline20:46:41UTC, heavy cutoff20:16:41UTC를 유지한다.
+
+최종 양 호스트 ZIP 검증까지 전체110.74분(6644.35초)이 걸렸다. 이는 다운로드·준비·검토·패키징·전송을 포함하며 [DELIVERY](DELIVERY.md)의 실제 UTC 경계에서 계산했다. 이후 전달 영수증 Git 동기화는 별도 마감 작업이다.
