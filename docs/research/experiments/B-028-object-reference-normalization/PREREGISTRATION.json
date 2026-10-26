@@ -1,0 +1,514 @@
+{
+  "experiment": "B-028",
+  "tasks": [
+    {
+      "task": "animal",
+      "preregistered_code_sha256": "59504275d4f21f4c9e4110512c3dc19bd131e5ff8f49e92ca489a14a379db663",
+      "files": {
+        "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+        "code/contracts.py": "6eab6b9a8903ef57cdbc84e41f321c99364b09eb80c30483eaac11559c92f7d4",
+        "code/cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+        "code/extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+        "code/freeze_run.py": "a69195208b54a4f04d62adec8de6e1a3659a94002f75faa9ea1b59e2cb811ba8",
+        "code/media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+        "code/normalize.py": "dbb55d72dadfa99ad15b0c77e06b1606d6804badc6021988adca580bcfe7f251",
+        "code/pair_contract.py": "be60bb1c159f15a4924c16c35e865bbd51ad3eff7218e53fb82c634acf53edae",
+        "code/phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+        "code/phase_encode.py": "1b4ecbf913b89c9c963cfee266d9d3e2d944dc9ff46ae4371f063054373fc6cb",
+        "code/phase_sample.py": "494fa0a892eb15a8e51dd7e211ab3be96e657db0a8123d70d7ee0a602835a13e",
+        "code/prepare_inputs.py": "a5ac58af8d4640e7a40b58878daa08c7cc9019fd9270c396744a5a9c6cae0515",
+        "code/prepare_layout.py": "ba4b648400609c534f3efda00655283033cca575fda53ccdf6a039d0d7a82964",
+        "code/run_phase.py": "dc8100e693db705b0253be62300782eed7fb0bf54bc47fd5cdec2dcc5d242cdf",
+        "code/runtime_guard.py": "5292528dfd3f1f15fd4b0b71c3938f74cbdd577f3cc62c1f888a646089c1b3d0",
+        "code/runtime_launch.py": "913de3db2bf8f92fff1d9e0155021543a86f08e2a5ed8ba344138ac3f98faca3",
+        "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+        "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+        "code/test_contract.py": "61e736b3bac4c266fb1a330227be178c65c0acd9baeb6b4da1cb4087872cf2c6",
+        "code/test_normalize.py": "ae203b8ec4b112740680bb15e36c61b53b0de2b4d20b2d3a4d0acb11b254f943",
+        "configs/R1.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+        "configs/R2.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+        "configs/active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a",
+        "configs/allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+        "configs/pinned_upstream.json": "2daf1170c7e9b1eef4247a53ba4b7cb256cf31a9ed9fe0f43449bcc2efb58363",
+        "task_manifest.json": "b27deb37eac2ddf48be30c5f87941d04fa1469577c507330d2cf095bbe8c9714",
+        "PREREGISTERED_INPUTS.json": "5c3ed583da0b90854352e406487daf359e3d371c488fd8e6fa78badd51a5c921"
+      },
+      "stage_config_hashes": {
+        "ENC": {
+          "execution.json": "05b9d7980160d5122551b542c6b2c86e053653ae997edc4549e527672abf0804",
+          "input_config_hashes.json": "4cadb1abbff4c85665184f959c02d66a17d68b8ba93acf87e284e9f314911424",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "expected_preprocessed.json": "8a3fa708d5e6b7f018ac4272fb813cfdb9b70ac09fb082653995bb5295df3612",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_D": {
+          "execution.json": "8c8da7de94bc42c683a9d7960ca7a1454d982279021c329489e39647d366e1ca",
+          "input_config_hashes.json": "4cadb1abbff4c85665184f959c02d66a17d68b8ba93acf87e284e9f314911424",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_PROBE": {
+          "execution.json": "f86ff5062df5a1e14023cf4b6b7511cdf82ff3d56258944e389dcf4be40626de",
+          "input_config_hashes.json": "4cadb1abbff4c85665184f959c02d66a17d68b8ba93acf87e284e9f314911424",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_S": {
+          "execution.json": "9a5314e4b2e6c73fa4502401445d75fa0fe8aced4f7b74065bcdefd058e189a6",
+          "input_config_hashes.json": "4cadb1abbff4c85665184f959c02d66a17d68b8ba93acf87e284e9f314911424",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "61350718f0bcb2a7cebecb223987f44755fa2c19db945ced4bcee0efc2aa02ba",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_D": {
+          "execution.json": "a0ca72c2188064ac7ace3f33f6ac2d9e1b7e947908fa2ae25a607ba39ded7ceb",
+          "input_config_hashes.json": "8f3a60987bc07736192d8e05f4454d875cd2960aec9b0599a95b5b84e66452d3",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_PROBE": {
+          "execution.json": "0fec5446a730344a8c64fceaff9f2b9c43a032cf6ae8ec667a65c53668d587da",
+          "input_config_hashes.json": "8f3a60987bc07736192d8e05f4454d875cd2960aec9b0599a95b5b84e66452d3",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_S": {
+          "execution.json": "c8a2acaff83698c60033cc8c8fa556c28212894ea55d76d7b344a509509d392e",
+          "input_config_hashes.json": "8f3a60987bc07736192d8e05f4454d875cd2960aec9b0599a95b5b84e66452d3",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "8fe655acb1f68ebd915075461e34bf53db2e73840a23c81f56301b35f6fb9d49",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        }
+      },
+      "deadline_utc": "2026-10-26T05:37:00Z",
+      "normalization": [
+        {
+          "case": "R1",
+          "bbox": [
+            270,
+            319,
+            422,
+            365
+          ],
+          "scale": 4.715789473684211,
+          "inverse_affine": [
+            0.2120535714285714,
+            0.0,
+            251.0,
+            0.0,
+            0.2120535714285714,
+            287.7142857142857
+          ],
+          "input_bbox": [
+            270,
+            319,
+            422,
+            365
+          ],
+          "output_bbox": [
+            90,
+            148,
+            806,
+            364
+          ],
+          "input_area": 4197,
+          "output_area": 93221,
+          "old_rgb_sha256": "7c7a67ac54593c693857c5f526971fb136f7ab7bd51ca35b120a84e999b345c3",
+          "old_mask_sha256": "c0a5d2637dd0a113b6c28e17452b9da1b188088ea567f0ec41678e8de435fb32",
+          "new_rgb_sha256": "8d26cdb54a7c8cfcd54373ec85c42a450c3fc91a760949c30555ca248653083e",
+          "new_mask_sha256": "2d9e029ba20044d860b4996c85a23c75177b6b1c5032423d5876cae7b447f518",
+          "pixel_coordinate": "Pillow affine inverse maps destination pixel centers in pixel-edge coordinate system",
+          "rgb_resampling": "bicubic",
+          "support_resampling": "nearest",
+          "outside_rgb": 128
+        },
+        {
+          "case": "R2",
+          "bbox": [
+            635,
+            318,
+            818,
+            418
+          ],
+          "scale": 3.916939890710383,
+          "inverse_affine": [
+            0.25530133928571425,
+            0.0,
+            612.125,
+            0.0,
+            0.25530133928571425,
+            302.64285714285717
+          ],
+          "input_bbox": [
+            635,
+            318,
+            818,
+            418
+          ],
+          "output_bbox": [
+            90,
+            60,
+            806,
+            452
+          ],
+          "input_area": 10601,
+          "output_area": 162677,
+          "old_rgb_sha256": "427c1fa20b1fc30b38e36c0c60db220e41808c675fce4424ff628adbf213dced",
+          "old_mask_sha256": "decb5c1ac5b5b58e93aa470ff1f293c3143858819e8fb3ede6f3175e1d7b8ad0",
+          "new_rgb_sha256": "b87b7fc99a8a7d82288e0b1504e62914542dc160fdf1db518ac61c1e5424469b",
+          "new_mask_sha256": "8146df1a297bee52dd7f34221e9345b4c08cad32c7a2d96859c91cec8e54bbb0",
+          "pixel_coordinate": "Pillow affine inverse maps destination pixel centers in pixel-edge coordinate system",
+          "rgb_resampling": "bicubic",
+          "support_resampling": "nearest",
+          "outside_rgb": 128
+        }
+      ]
+    },
+    {
+      "task": "human",
+      "preregistered_code_sha256": "82a6fffda05dee48d4cc988d13e00f9437f1969c01f98a9cccc6a5364fe35c1c",
+      "files": {
+        "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+        "code/contracts.py": "6eab6b9a8903ef57cdbc84e41f321c99364b09eb80c30483eaac11559c92f7d4",
+        "code/cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+        "code/extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+        "code/freeze_run.py": "a69195208b54a4f04d62adec8de6e1a3659a94002f75faa9ea1b59e2cb811ba8",
+        "code/media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+        "code/normalize.py": "dbb55d72dadfa99ad15b0c77e06b1606d6804badc6021988adca580bcfe7f251",
+        "code/pair_contract.py": "be60bb1c159f15a4924c16c35e865bbd51ad3eff7218e53fb82c634acf53edae",
+        "code/phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+        "code/phase_encode.py": "1b4ecbf913b89c9c963cfee266d9d3e2d944dc9ff46ae4371f063054373fc6cb",
+        "code/phase_sample.py": "494fa0a892eb15a8e51dd7e211ab3be96e657db0a8123d70d7ee0a602835a13e",
+        "code/prepare_inputs.py": "a5ac58af8d4640e7a40b58878daa08c7cc9019fd9270c396744a5a9c6cae0515",
+        "code/prepare_layout.py": "ba4b648400609c534f3efda00655283033cca575fda53ccdf6a039d0d7a82964",
+        "code/run_phase.py": "dc8100e693db705b0253be62300782eed7fb0bf54bc47fd5cdec2dcc5d242cdf",
+        "code/runtime_guard.py": "5292528dfd3f1f15fd4b0b71c3938f74cbdd577f3cc62c1f888a646089c1b3d0",
+        "code/runtime_launch.py": "913de3db2bf8f92fff1d9e0155021543a86f08e2a5ed8ba344138ac3f98faca3",
+        "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+        "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+        "code/test_contract.py": "61e736b3bac4c266fb1a330227be178c65c0acd9baeb6b4da1cb4087872cf2c6",
+        "code/test_normalize.py": "ae203b8ec4b112740680bb15e36c61b53b0de2b4d20b2d3a4d0acb11b254f943",
+        "configs/R1.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+        "configs/R2.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+        "configs/active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a",
+        "configs/allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+        "configs/pinned_upstream.json": "2daf1170c7e9b1eef4247a53ba4b7cb256cf31a9ed9fe0f43449bcc2efb58363",
+        "task_manifest.json": "3baaac4a48b8a8402769922218b12f66a127a915b343c4c5d6efb1cd2bef3362",
+        "PREREGISTERED_INPUTS.json": "73d1e314dd5b939ce91632ae010dc3820355b5237af67d37ca03e36fc9a30f36"
+      },
+      "stage_config_hashes": {
+        "ENC": {
+          "execution.json": "be824c1e3cc74d28ca38b299040ab55c110b660ac670d3f348d0a5c1c9a45ecc",
+          "input_config_hashes.json": "5d1e6e6ff69e7a6de911a1b016e02c64bf68100973bda53e56c495591238e487",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "expected_preprocessed.json": "1b41337a2458189d1169c1b79210098bfd8a235d138b082a7a7976918cf5929f",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_D": {
+          "execution.json": "1ec633666eb7803d4c950c6f8b7ed5f558522c9f036581e173a4179aaf32f73a",
+          "input_config_hashes.json": "5d1e6e6ff69e7a6de911a1b016e02c64bf68100973bda53e56c495591238e487",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_PROBE": {
+          "execution.json": "a11981e8430a123314790672b6f5fbac3bf72b1836128c51118a0d979fe9a8b6",
+          "input_config_hashes.json": "5d1e6e6ff69e7a6de911a1b016e02c64bf68100973bda53e56c495591238e487",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_S": {
+          "execution.json": "35f24cd49651fab362f379d89ab890213b4d50e16aad091590bc2be280371066",
+          "input_config_hashes.json": "5d1e6e6ff69e7a6de911a1b016e02c64bf68100973bda53e56c495591238e487",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "dcd0e4d6c7ba671cac8c5f6f92348a4fee9ba6e8222df3adf014a7c8a08e9194",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_D": {
+          "execution.json": "dfd778f1cd0e855d0f2279122e92c3b65c22bcc5c09fe03ec49c6ab4b48ba84f",
+          "input_config_hashes.json": "8e95a0281696da51668e4f1ab38fb6504b35eb007fc2170da2a0f1e0785216ee",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_PROBE": {
+          "execution.json": "e179c00ea5cfe2cb0b041334524a73b1cb39876c2a5b4fa994999233daf28638",
+          "input_config_hashes.json": "8e95a0281696da51668e4f1ab38fb6504b35eb007fc2170da2a0f1e0785216ee",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_S": {
+          "execution.json": "eb1ca300b89c5cdcddd410dc63e47656f83ac944ab0492f44d1f23736f0488ff",
+          "input_config_hashes.json": "8e95a0281696da51668e4f1ab38fb6504b35eb007fc2170da2a0f1e0785216ee",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "ac23addcbce9bd24dc74166b3d92cae5df86f9e33a21a6744049095e488abdd8",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        }
+      },
+      "deadline_utc": "2026-10-26T05:37:00Z",
+      "normalization": [
+        {
+          "case": "R1",
+          "bbox": [
+            299,
+            61,
+            604,
+            390
+          ],
+          "scale": 1.244984802431611,
+          "inverse_affine": [
+            0.80322265625,
+            0.0,
+            91.65625,
+            0.0,
+            0.80322265625,
+            19.875
+          ],
+          "input_bbox": [
+            299,
+            61,
+            604,
+            390
+          ],
+          "output_bbox": [
+            258,
+            51,
+            638,
+            461
+          ],
+          "input_area": 36911,
+          "output_area": 57191,
+          "old_rgb_sha256": "c3e423ec64b817acd8965df95f78eadaf8d6a472ce1bf3a7c32d516bc54e06c6",
+          "old_mask_sha256": "5f17b52a3e47863bd3e74f89549ae9af3fc838db61c86916ba3b23140dadcd75",
+          "new_rgb_sha256": "8811e81cbb16fcbd4734371e32e3497bf125746c85d0e65ee361a54b7c484104",
+          "new_mask_sha256": "0d4b4746aaff7ec1bafa5ae45ead48dcc63d0ed86f0cdbb2500b184b08d68ce0",
+          "pixel_coordinate": "Pillow affine inverse maps destination pixel centers in pixel-edge coordinate system",
+          "rgb_resampling": "bicubic",
+          "support_resampling": "nearest",
+          "outside_rgb": 128
+        },
+        {
+          "case": "R2",
+          "bbox": [
+            361,
+            60,
+            634,
+            449
+          ],
+          "scale": 1.0529562982005143,
+          "inverse_affine": [
+            0.9497070312499999,
+            0.0,
+            72.03125000000006,
+            0.0,
+            0.9497070312499999,
+            11.375000000000028
+          ],
+          "input_bbox": [
+            361,
+            60,
+            634,
+            449
+          ],
+          "output_bbox": [
+            304,
+            51,
+            592,
+            461
+          ],
+          "input_area": 37435,
+          "output_area": 41538,
+          "old_rgb_sha256": "20e4bce5cce8f739a4929ec8888860cc2f34eab6e6653026cd24ae391c0f83f4",
+          "old_mask_sha256": "2bc9a6227393fa2b05ff9f5eb7a0f2def0ab367a30b9854b984d88360afbf89a",
+          "new_rgb_sha256": "a1f9e12c4ba13eaa3d619c9ee4f7192f3c7a662238eb71e57f11a30d4f1424fe",
+          "new_mask_sha256": "adc94f570871b57c684e3709373197b3e531779d88230ecce3aa1bb5d17a47a0",
+          "pixel_coordinate": "Pillow affine inverse maps destination pixel centers in pixel-edge coordinate system",
+          "rgb_resampling": "bicubic",
+          "support_resampling": "nearest",
+          "outside_rgb": 128
+        }
+      ]
+    },
+    {
+      "task": "vehicle",
+      "preregistered_code_sha256": "f77b938c3927bb789e108d01331dc8d3e51200cf4ca5dd3396cdfaa8e8e2aac5",
+      "files": {
+        "code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+        "code/contracts.py": "6eab6b9a8903ef57cdbc84e41f321c99364b09eb80c30483eaac11559c92f7d4",
+        "code/cuda_probe.py": "e44359b26635727790894698dfb08d87aa4b1a11decb88c31cab1d3d8f021afe",
+        "code/extract.py": "a3aa01f7bab5a44c4c7cc9c2e0088bcdab131bb1ded22d12d2248eb47171f345",
+        "code/freeze_run.py": "a69195208b54a4f04d62adec8de6e1a3659a94002f75faa9ea1b59e2cb811ba8",
+        "code/media.py": "e4f02580bd4611b554338174306232cfee62ec2e97173cd20fbd5ab0a171f105",
+        "code/normalize.py": "dbb55d72dadfa99ad15b0c77e06b1606d6804badc6021988adca580bcfe7f251",
+        "code/pair_contract.py": "be60bb1c159f15a4924c16c35e865bbd51ad3eff7218e53fb82c634acf53edae",
+        "code/phase_decode.py": "00e31b25b91fb94a4724e7eb7383dae8f074b56dd520f01fd07fb140aff873a5",
+        "code/phase_encode.py": "1b4ecbf913b89c9c963cfee266d9d3e2d944dc9ff46ae4371f063054373fc6cb",
+        "code/phase_sample.py": "494fa0a892eb15a8e51dd7e211ab3be96e657db0a8123d70d7ee0a602835a13e",
+        "code/prepare_inputs.py": "a5ac58af8d4640e7a40b58878daa08c7cc9019fd9270c396744a5a9c6cae0515",
+        "code/prepare_layout.py": "ba4b648400609c534f3efda00655283033cca575fda53ccdf6a039d0d7a82964",
+        "code/run_phase.py": "dc8100e693db705b0253be62300782eed7fb0bf54bc47fd5cdec2dcc5d242cdf",
+        "code/runtime_guard.py": "5292528dfd3f1f15fd4b0b71c3938f74cbdd577f3cc62c1f888a646089c1b3d0",
+        "code/runtime_launch.py": "913de3db2bf8f92fff1d9e0155021543a86f08e2a5ed8ba344138ac3f98faca3",
+        "code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+        "code/staged_loader.py": "63db4df57de32a6c5316c20575bb5ed9b2c851af8aa2b2c8959814cbc3277cf8",
+        "code/test_contract.py": "61e736b3bac4c266fb1a330227be178c65c0acd9baeb6b4da1cb4087872cf2c6",
+        "code/test_normalize.py": "ae203b8ec4b112740680bb15e36c61b53b0de2b4d20b2d3a4d0acb11b254f943",
+        "configs/R1.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+        "configs/R2.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+        "configs/active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a",
+        "configs/allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+        "configs/pinned_upstream.json": "2daf1170c7e9b1eef4247a53ba4b7cb256cf31a9ed9fe0f43449bcc2efb58363",
+        "task_manifest.json": "f3e0cd7854cacd6903993e7560ed39b8bc0b10b48b6042e983d3ff82257d4c85",
+        "PREREGISTERED_INPUTS.json": "0004b0bcd4348c1235d3bbb7a631e99dcee3c2714f6540f509872787ce6cc559"
+      },
+      "stage_config_hashes": {
+        "ENC": {
+          "execution.json": "57658ee4312a516d2833dd1ebfba79f56575bdc05e879c963afebc16306b793d",
+          "input_config_hashes.json": "ac984ef4c42aad00572a2f0b857312c1edbdb34d3a2d7b003a636d1eaa81db87",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "expected_preprocessed.json": "b80c18611a179fc91f4f829fd228e9e11c14ac69f263f037623540bc7544182b",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_D": {
+          "execution.json": "98d5478f1556aaa9b074136772d5993e67db7e16c338b223e9e895af1e44d8e0",
+          "input_config_hashes.json": "ac984ef4c42aad00572a2f0b857312c1edbdb34d3a2d7b003a636d1eaa81db87",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_PROBE": {
+          "execution.json": "9fb147dafc73e870d78951ad2de35ca78f3bdc31a3d833f979bbfdb90a7a244a",
+          "input_config_hashes.json": "ac984ef4c42aad00572a2f0b857312c1edbdb34d3a2d7b003a636d1eaa81db87",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R1_S": {
+          "execution.json": "a7e7ffdd3f3075b83a8860d168145a6010b4412b4f4df612f2bf6c4eca8ac90c",
+          "input_config_hashes.json": "ac984ef4c42aad00572a2f0b857312c1edbdb34d3a2d7b003a636d1eaa81db87",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "e5609cf6c09ba2e98e23d5149d7e92b92f3e476b299f024cfb4199ecb5c2076b",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_D": {
+          "execution.json": "3c4fcec3f741cd8a4f5ec041228e81f2f14c225181b0c87fe2e52e4e0fec314e",
+          "input_config_hashes.json": "4ad641b85b89ad438eb84cdf66d8b50e6d9d43f108336e41203bcddcacab70c4",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_PROBE": {
+          "execution.json": "7c9d9d431523be760ebb0770d7d533293211af046c9d92229075c15d69140b5b",
+          "input_config_hashes.json": "4ad641b85b89ad438eb84cdf66d8b50e6d9d43f108336e41203bcddcacab70c4",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        },
+        "R2_S": {
+          "execution.json": "8d96e522369eb0176689c1f401b7ce04c86c2522804b391cf149d0cc9044a2ad",
+          "input_config_hashes.json": "4ad641b85b89ad438eb84cdf66d8b50e6d9d43f108336e41203bcddcacab70c4",
+          "allowed_gpu_processes.json": "aee98772465e3fb7465a69be6ba0c341e998201516b386543a3b636a7b7b2d24",
+          "public.json": "da19b8405543ef42e963a08b3e83a9d96d0d540037518bca6e282c88ad6bdb35",
+          "active_case.json": "5097f6f39d0f66567bfbb3a19d57ea9fe69550c51998750914e1b99a5d1b5a5a"
+        }
+      },
+      "deadline_utc": "2026-10-26T05:37:00Z",
+      "normalization": [
+        {
+          "case": "R1",
+          "bbox": [
+            328,
+            96,
+            687,
+            300
+          ],
+          "scale": 1.996657381615599,
+          "inverse_affine": [
+            0.5008370535714285,
+            0.0,
+            283.125,
+            0.0,
+            0.5008370535714285,
+            69.7857142857143
+          ],
+          "input_bbox": [
+            328,
+            96,
+            687,
+            300
+          ],
+          "output_bbox": [
+            90,
+            52,
+            806,
+            460
+          ],
+          "input_area": 45980,
+          "output_area": 183470,
+          "old_rgb_sha256": "ba12573558d257c4b60adefb6c2863693adc0f872203d46efdbb081fe07c682e",
+          "old_mask_sha256": "3bd17162f498f83640b617179838e394125cf34c26ed45b03c5a82d2caa1a84f",
+          "new_rgb_sha256": "d44c400f617682649aad9dc81d55fa0c22e5bdb8f85ccf8b11e56c7501a2bb59",
+          "new_mask_sha256": "ab4a1dfa8c19709bb5b57c22f38a374faaea20152cc1fb622427f00e86a41e10",
+          "pixel_coordinate": "Pillow affine inverse maps destination pixel centers in pixel-edge coordinate system",
+          "rgb_resampling": "bicubic",
+          "support_resampling": "nearest",
+          "outside_rgb": 128
+        },
+        {
+          "case": "R2",
+          "bbox": [
+            335,
+            180,
+            512,
+            284
+          ],
+          "scale": 3.9384615384615387,
+          "inverse_affine": [
+            0.25390625,
+            0.0,
+            309.75,
+            0.0,
+            0.25390625,
+            167.0
+          ],
+          "input_bbox": [
+            335,
+            180,
+            512,
+            284
+          ],
+          "output_bbox": [
+            99,
+            51,
+            797,
+            461
+          ],
+          "input_area": 13302,
+          "output_area": 206433,
+          "old_rgb_sha256": "46467a7716f099b34580f9cd498369c0253165c543457a52eee1527a858ed2cd",
+          "old_mask_sha256": "801179d209b8a1db8f0e95dd9e4c7805d8094a890ee62e5ee5e700bb443ad224",
+          "new_rgb_sha256": "5f27427a1a7788e822f4eb15bb5b6027078cd0ae65f65ab20cafdb75801379fe",
+          "new_mask_sha256": "48a577ffa701d469cae7bbd01bc69f33dd1d8706b7123309ccfddf6fed7f51a2",
+          "pixel_coordinate": "Pillow affine inverse maps destination pixel centers in pixel-edge coordinate system",
+          "rgb_resampling": "bicubic",
+          "support_resampling": "nearest",
+          "outside_rgb": 128
+        }
+      ]
+    }
+  ],
+  "sampler_cap": 6,
+  "updates": 0,
+  "new_downloads": 0,
+  "CPU_tests": "3 new + 4 inherited PASS",
+  "GPU_before_freeze": 0
+}
