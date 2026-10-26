@@ -1,0 +1,236 @@
+{
+  "scope": "Qwen anchor stage only; technical completion does not imply visual suitability",
+  "image_attempts": 6,
+  "image_completed": 6,
+  "total_transformer_forwards": 480,
+  "cases": [
+    {
+      "case_id": "animal_R1",
+      "status": "COMPLETED",
+      "pipeline_elapsed_seconds": 389.97993564605713,
+      "completed_steps": 40,
+      "transformer_forwards": 80,
+      "raw_finite": true,
+      "raw_shape": [
+        512,
+        896,
+        3
+      ],
+      "png_sha256": "aee4cfcd2cc8397198354b23ceb96297dabcbfac1164abc56379c89e75257ad1",
+      "final_packed_latent": {
+        "shape": [
+          1,
+          1792,
+          64
+        ],
+        "dtype": "torch.bfloat16",
+        "tensor_sha256": "44551bfd29fe5f2d9909530767db9194b1d15df6a202efda51b1f9878b915e39",
+        "file_sha256": "0d5c5611d77ef6f8d4df134a3057e04a0fe4b26e034bb8b44cc5a01157329a06"
+      }
+    },
+    {
+      "case_id": "animal_R2",
+      "status": "COMPLETED",
+      "pipeline_elapsed_seconds": 382.75045442581177,
+      "completed_steps": 40,
+      "transformer_forwards": 80,
+      "raw_finite": true,
+      "raw_shape": [
+        512,
+        896,
+        3
+      ],
+      "png_sha256": "0d902509df66b3934ac88779a123521e14c0295a9ee1bcfb47a79acff4906801",
+      "final_packed_latent": {
+        "shape": [
+          1,
+          1792,
+          64
+        ],
+        "dtype": "torch.bfloat16",
+        "tensor_sha256": "1c1372a7922c187b0193d610c3fe42da1cc1f17c772db9ad63ca4f8f1216e111",
+        "file_sha256": "8f0dce04c75a64ffb83f10aca609c8aaa298bef57ccba4b12fdb663d7deb5603"
+      }
+    },
+    {
+      "case_id": "human_R1",
+      "status": "COMPLETED",
+      "pipeline_elapsed_seconds": 383.0841407775879,
+      "completed_steps": 40,
+      "transformer_forwards": 80,
+      "raw_finite": true,
+      "raw_shape": [
+        512,
+        896,
+        3
+      ],
+      "png_sha256": "1c70d50f1ca063f079a345846f4c057c7e7a657ec4ebf4c7197706ed77f5cb34",
+      "final_packed_latent": {
+        "shape": [
+          1,
+          1792,
+          64
+        ],
+        "dtype": "torch.bfloat16",
+        "tensor_sha256": "c865ddcc1e8fc64214f0821a86e441379d5a6d0786a025074f4e8c5aa49a1ebd",
+        "file_sha256": "56f8ce04e5eac6717b7c07d50fb87284ab5a50156d4d3dd577e16e262cd1646f"
+      }
+    },
+    {
+      "case_id": "human_R2",
+      "status": "COMPLETED",
+      "pipeline_elapsed_seconds": 381.9178261756897,
+      "completed_steps": 40,
+      "transformer_forwards": 80,
+      "raw_finite": true,
+      "raw_shape": [
+        512,
+        896,
+        3
+      ],
+      "png_sha256": "10ca8cf01432d158db6333eb581b1816e628eb8fdf98ab40f24b092d000f2ddb",
+      "final_packed_latent": {
+        "shape": [
+          1,
+          1792,
+          64
+        ],
+        "dtype": "torch.bfloat16",
+        "tensor_sha256": "102bfec65ca1c164d6a9a87da45df67d5561c4e19a39d8c1aefaccaec3792ae3",
+        "file_sha256": "d525a452e0240fd0ac49b75e39b64555a3fed23048f8ba6f9bb16d24cc4f716a"
+      }
+    },
+    {
+      "case_id": "vehicle_R1",
+      "status": "COMPLETED",
+      "pipeline_elapsed_seconds": 379.33976340293884,
+      "completed_steps": 40,
+      "transformer_forwards": 80,
+      "raw_finite": true,
+      "raw_shape": [
+        512,
+        896,
+        3
+      ],
+      "png_sha256": "f413bf6a86e02ade3ba0d8d0fce46c860b362860ae2afe28528307926c85d90f",
+      "final_packed_latent": {
+        "shape": [
+          1,
+          1792,
+          64
+        ],
+        "dtype": "torch.bfloat16",
+        "tensor_sha256": "ddeca97c2cb7adfd875553cc064dee809553f50cafc604f8e629ab2d738f6bcf",
+        "file_sha256": "db435c6962d04581aaf9cd49c31bbbf4eae0d2a8dbbbc5d70cd80bb2f94e54e0"
+      }
+    },
+    {
+      "case_id": "vehicle_R2",
+      "status": "COMPLETED",
+      "pipeline_elapsed_seconds": 387.20022225379944,
+      "completed_steps": 40,
+      "transformer_forwards": 80,
+      "raw_finite": true,
+      "raw_shape": [
+        512,
+        896,
+        3
+      ],
+      "png_sha256": "42ae5c79fea43ea5fdc11a3b4996dabd655aad8f4f6e25ebe56382d09d9933e1",
+      "final_packed_latent": {
+        "shape": [
+          1,
+          1792,
+          64
+        ],
+        "dtype": "torch.bfloat16",
+        "tensor_sha256": "6334be7b2440cc6c1268bc6cf6e7f4f9b2b49d0633e699c48b1cf3cefa65417d",
+        "file_sha256": "a46b672348bdc4d8309d75562d6cd167b78822189e01b1e0dd217cf838888220"
+      }
+    }
+  ],
+  "worker_wall_seconds": 2598.924619913101,
+  "pipeline_calls_total_seconds": 2304.2723426818848,
+  "load_cpu_seconds": 1.07895827293396,
+  "cuda_module_move_seconds": {
+    "text_encoder": 78.26861023902893,
+    "vae": 1.2826449871063232,
+    "transformer": 206.22324395179749
+  },
+  "parameter_bytes_by_module": {
+    "text_encoder": {
+      "class": "Qwen2_5_VLForConditionalGeneration",
+      "parameter_bytes": 16584333312,
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0"
+    },
+    "vae": {
+      "class": "AutoencoderKLQwenImage",
+      "parameter_bytes": 253785062,
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0"
+    },
+    "transformer": {
+      "class": "QwenImageTransformer2DModel",
+      "parameter_bytes": 40860802176,
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0"
+    }
+  },
+  "system": {
+    "initial_available_bytes": 96584073216,
+    "sampled_min_available_bytes": 27847270400,
+    "max_sampled_swap_used_bytes": 0,
+    "exit_available_bytes": 96412590080
+  },
+  "cuda": {
+    "peak_allocated_bytes": 60057443328,
+    "peak_reserved_bytes": 63206064128,
+    "released_phase": {
+      "allocated": 40917650944,
+      "reserved": 41123053568,
+      "peak_allocated": 60057443328,
+      "peak_reserved": 63206064128
+    },
+    "post_del_empty_cache_note": "Runtime phase name pipeline_released is only a label: substantial CUDA allocation remained. Retained reference cause UNKNOWN; complete process exit and system recovery separately verified."
+  },
+  "cgroup": {
+    "cap_bytes": 68719476736,
+    "peak_bytes": 10915954688,
+    "events_max": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    }
+  },
+  "process_rss_sampled_max_bytes": {
+    "VmHWM": 11111141376,
+    "VmRSS": 10952196096,
+    "RssAnon": 10604445696,
+    "RssFile": 493547520
+  },
+  "accounting_note": "System, CUDA allocator, process RSS, cgroup counters are distinct accounting views and must not be added. Minimum available is sampled, not a continuous physical peak. Post-step40 to saved-output includes decoding and file writes, not isolated decoder timing.",
+  "guard_reason": "service_exit",
+  "returncode": 0,
+  "final_service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+  "own_units": {
+    "make-meme-b031-qwen-pipeline.service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "make-meme-b031-qwen-watchdog.service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "make-meme-b031-download-http.service": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "make-meme-b031-download.service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+  },
+  "exit_receipt_epoch": 1793030869.3472192,
+  "warnings": [
+    "Transformers rope_parameters/mrope_section compatibility warnings preserved; actual6\u00d740step execution completed, not proof of semantic equivalence to another Transformers version.",
+    "ExecStopPost stop reported own already-collected pipeline unit not loaded; watchdog result success, all own MainPID0."
+  ],
+  "new_package_installs": 0,
+  "new_models": 1,
+  "training_updates": 0,
+  "retries": 0,
+  "external_generation_calls": 0,
+  "temporal_quality": "NOT_APPLICABLE_IMAGE_STAGE"
+}

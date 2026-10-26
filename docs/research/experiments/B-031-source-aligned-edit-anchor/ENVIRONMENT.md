@@ -28,4 +28,14 @@ UTC14:49:35에 pinned official snapshot 다운로드를 시작했다. Xet 경로
 
 다운로드 전용 신규4GiB cap을 한 번8GiB로 조정했지만 write 진전이 없어 해당 자체 unit만 종료했다. 이것은 GPU72/24GiB 가드 변경이 아니다. 같은 원격revision을 regular HTTP로 받는 한 번의 transport fallback을 선택했다. 기존 incomplete13,211,501,446bytes를 보존했다. 현재 hub는 unique temporary file을 사용해 partial 재개를 지원하지 않으므로 재개했다고 하지 않는다. 최종파일53.756GiB+보존partial12.304GiB는약66.06GiB이며70GiB 파일payload상한 안이다. 실제 네트워크 재전송량은 완전히 계측하지 못했으므로 UNKNOWN이다. 새 모델이나 이미지 재시도는 아니다.
 
-최종 다운로드·hash 결과와 실제 memory/time은 실행 후 환경receipt와COSTS에 추가한다. 이 문서는 환경 설치 성공을 앵커 품질 또는 영상 성공으로 판정하지 않는다.
+공식35파일57,720,463,453bytes의 전량 hash 검증은68.883초에 PASS했다. 보존된 incomplete와 작은 metadata를 포함한 실제 모델 디렉터리 파일 합은70,931,975,386bytes이다. `MODEL_VERIFICATION.json`, `ENVIRONMENT_LOCK.json`, `IMAGE_EXECUTION_FREEZE.md`에 사전 고정 근거를 남겼다. 이 문서는 다운로드·CPU 계약 성공을 앵커 품질 또는 영상 성공으로 판정하지 않는다. 실제 로딩·생성 memory/time은 실행 후 별도로 기록한다.
+
+## 실제 이미지 실행
+
+고정6개 호출 모두40step·80forward·유한 raw 출력으로 완료됐다. Qwen worker 전체2598.925초, 실제 pipeline 호출 합2304.272초였다. CPU 로딩1.079초 이후 CUDA 이동은 text encoder78.269초, VAE1.283초, transformer206.223초였다. 이 시간에는 후속 SCAIL·수동 mask·검토·패키징 비용이 포함되지 않는다.
+
+`ENV_RUNTIME_SUMMARY.json`은 시스템 가용·CUDA allocator·RSS·cgroup을 분리한다. 최소 표본 MemAvailable27,847,270,400bytes, CUDA peak allocated60,057,443,328bytes/reserved63,206,064,128bytes였다. swap과 cgroup OOM/high/max 이벤트는0이었다. 서로 다른 회계를 더해 총사용량이라고 하지 않는다.
+
+`del pipeline`과 `empty_cache` 뒤 이름이 `pipeline_released`인 관측점에서도 CUDA allocated40,917,650,944bytes가 남았다. 따라서 그 이름 자체를 완전 해제로 해석하지 않는다. 남은 참조의 정확한 원인은 이번에 확정하지 않았다. **실제 worker와 watchdog 종료(MainPID0/inactive/returncode0)** 뒤에는 MemAvailable96,412,590,080bytes가 관측됐고 GPU에는 기존 서비스만 남았다. 후속 SCAIL은 이 프로세스 종료·회복 확인 후에만 실행한다.
+
+기존 Transformers의 rope_parameters/mrope_section 경고와 own unit이 이미 수거된 뒤 ExecStopPost stop에서 나온 not-loaded 경고를 보존했다. 실제6개 생성 완료를 다른 라이브러리 버전과의 의미적 동등성 증명으로 확대하지 않는다. 앵커 적합성 판정은 별도 시각 검토다.

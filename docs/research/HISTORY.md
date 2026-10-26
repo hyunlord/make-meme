@@ -590,3 +590,9 @@ B028/B029 고정 설정의 NOT_ADOPTED와 CONTROL/비용/한계를 유지한다.
 ## B-031 착수 — 원본 자세 정렬 앵커의 분해형 기준선 (2026-10-26)
 
 사용자 승인으로 [B-031](experiments/B-031-source-aligned-edit-anchor/PLAN.md)을 실행한다. B030 PARTIAL/INCONCLUSIVE와 B028/B029 NOT_ADOPTED는 보존한다. encoder역할단정이나새gate대신 로컬Qwen이미지편집기로target외형+source첫자세를먼저만들고 적합한R1만기존SCAIL로전파한다. 개인추가사진요구없음. 상태PREPARING; 이미지최대6·조건부영상최대3·학습0,6시간에전송포함. [실행계약](experiments/B-031-source-aligned-edit-anchor/EXECUTION_CONTRACT.md). 원격9ca7606과실제Spark작업을확인해중복B031이없었고 기존환경은보존한다.
+
+### B-031 이미지 단계 종료와 차량 한정 전이 착수
+
+고정2e5e29d 이후 Qwen6회가 각각40step80forward·finite896×512로 완료됐다. 실제원본/참조/A0정적검토에서 animalR1은낮은참조자세, humanR1은뒤·옆모습과펼친치마를따라 ANCHOR_UNSUITABLE로영상생략했다. 두R2를대체하지않는다. VehicleR1은높은은색차체와source우향·위치를함께유지해수동A0support228.29초후영상후보로확정했다. [ANCHORS](experiments/B-031-source-aligned-edit-anchor/ANCHORS.md).
+
+Qwen worker43.315분,480forward,CUDApeak55.933GiB,최소가용25.935GiB,swap0이다. `del/empty_cache`후잔존할당은UNKNOWN으로남기고실제프로세스종료·가용89.79GiB회복을확인했다. 영상입력·예산263ca977원격고정후vehicleR1만ENC→PROBE→S→D를진행한다. 참조6leaf만변경·10leaf보존,새T5/driving인코딩0. 영상품질은아직미관측이며시간품질UNVERIFIED다.
