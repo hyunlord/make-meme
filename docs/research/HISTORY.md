@@ -586,3 +586,7 @@ B028/B029 고정 설정의 NOT_ADOPTED와 CONTROL/비용/한계를 유지한다.
 전체17장 정적 비교에서 human R2 VAE+mask 행의 큰 치마가 두 CLIP 열에서 반복됐지만 원반/세로 접힘·얼굴 가림·수평 파편은 조합에 따라 달랐다. Vehicle 큰 별도 그림은Y11에만 있고 다른3셀에는 없어 단일 경로에 귀속할 수 없으며, 네 셀 모두 source형 차체 비율을 남겼다. [RESULTS](experiments/B-030-reference-path-crossover/RESULTS.md), [행렬 검토](experiments/B-030-reference-path-crossover/MATRIX_REVIEW.md). VAE=pose/CLIP=identity, encoder 단독 원인, 일반화·품질 개선은 미입증이고 temporalUNVERIFIED다.
 
 다음 한 가설은 참조 VAE+mask 묶음의 공간 배치와 source 구조의 경쟁을 외형 전달과 분리할 수 있는지다. 사람의 행 경향은 검토 표적을 좁히는 근거이지 구체적 gate·layer·강도 선택의 증거는 아니다. 추가 zero-out·학습·모델·긴 영상은 실행하지 않고 종료했다. B028/B029 기각과 과거 실패는 보존한다.
+
+## B-031 착수 — 원본 자세 정렬 앵커의 분해형 기준선 (2026-10-26)
+
+사용자 승인으로 [B-031](experiments/B-031-source-aligned-edit-anchor/PLAN.md)을 실행한다. B030 PARTIAL/INCONCLUSIVE와 B028/B029 NOT_ADOPTED는 보존한다. encoder역할단정이나새gate대신 로컬Qwen이미지편집기로target외형+source첫자세를먼저만들고 적합한R1만기존SCAIL로전파한다. 개인추가사진요구없음. 상태PREPARING; 이미지최대6·조건부영상최대3·학습0,6시간에전송포함. [실행계약](experiments/B-031-source-aligned-edit-anchor/EXECUTION_CONTRACT.md). 원격9ca7606과실제Spark작업을확인해중복B031이없었고 기존환경은보존한다.

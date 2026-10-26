@@ -1,5 +1,8 @@
 # B 트랙 로드맵
 
+**현재 B-031 PREPARING**: B030의 제한된 조건 의존을 역할 분리로 확대하지 않고, source 첫 자세에 맞춘 로컬 생성 앵커→기존 SCAIL의 분해형 기준선을 검증한다. 이미지 최대6, 사전 R1 적합성에 따른 영상 최대3, 학습0. [실행 계약](experiments/B-031-source-aligned-edit-anchor/EXECUTION_CONTRACT.md). 생성 앵커는 GT가 아니며 후속 단계의 성공은 별도 판단한다. 아래 과거 현재/다음 문구는 당시 기록이다.
+
+
 **최신: B-030 COMPLETED / 실행 계약 PASS / 역할 분리 PARTIAL·INCONCLUSIVE.** [결과](experiments/B-030-reference-path-crossover/RESULTS.md). 기존 대각4출력과 신규 교차4셀을 비교했다. 사람의 큰 치마는 VAE+mask R2 행을 따라 반복되지만 세부 형태는 CLIP과 조합에 따라 달랐고, 차량의 큰 추가 그림은Y11에만 나타났다. VAE/CLIP의 pose/identity 역할 분리나 품질 개선은 입증하지 못했다. 다음 검토 표적은 참조 VAE+mask 공간 배치와 source 구조의 경쟁을 외형 전달과 분리하는 가설 하나다. 구체적 gate·zero-out·학습·모델 추가는 미실행이다. B028/B029는 NOT_ADOPTED, temporalUNVERIFIED를 유지한다. 아래 현재 표현은 당시 기록이다.
 
 **현재: B-028·B-029 COMPLETED / 기술 PASS / B-029 고정 방법 NOT_ADOPTED.** B0286출력의 trade-off를 보존하고 B027 공통 기준선과 B029 METHOD6/CONTROL2를 비교했다. 동물 교체 실패·사람 R2 형태 손상·차량 R2 장면 회귀가 남고 vehicle CONTROL의 장면이 오히려 깨끗해 위치 가설의 일관된 이점이 미입증이다. [결과](experiments/B-029-spatial-image-conditioning/RESULTS.md). 다음 가설 하나는 reference VAE joint 경로의 공간 전달 분리이며 [제안만](experiments/B-029-spatial-image-conditioning/NEXT_DECISION.md) 남긴다. 자동 실행/추가 sweep0, temporalUNVERIFIED. 아래 진행 중 표현은 당시 기록이다.
