@@ -600,3 +600,7 @@ Qwen worker43.315분,480forward,CUDApeak55.933GiB,최소가용25.935GiB,swap0이
 ### B-031 종료: 앵커 실패와 영상 보호 장면 실패를 분리
 
 이미지6회와 조건부 차량 영상1회(40step80forward, final latent 및17frame MP4)를 완료했다. 동물/사람 R1은 참조 자세 복사로 영상 NOT_RUN, R2 대체0이다. 차량은 target형 차체와 원본의 거친 회전 흐름을 유지했지만 A0에 없던 큰 차량 그래픽이 도로에 생겨 보호 장면 FAIL·결합 목표 FAIL이다. temporalUNVERIFIED, 일반 기준선 NOT_ADOPTED다. [RESULTS](experiments/B-031-source-aligned-edit-anchor/RESULTS.md), [COSTS](experiments/B-031-source-aligned-edit-anchor/COSTS.md). 다음 한 가설은 영상 생성 중 비대상 원본 문맥 보존이며 제안만 남긴다. 추가 모델·학습·seed·긴 영상은 실행하지 않았다.
+
+## B-032 착수: 기존 raw의 CPU 원본 보존 합성
+
+B031 동물/사람 앵커 자세 실패와 차량 영상의 도로 그래픽 FAIL을 보존한다. 생성 중 문맥 고정에 앞서 같은 차량 raw의 FIXED_ENVELOPE와 output-mask-assisted 합성 두 개를 만든다. 원본 밖 복사는 합성식의 성질이며 모델 성능으로 주장하지 않는다. 최신 a05b098에서 중복 실행 없음을 확인했고 사용자 승인 범위는 CPU90분·mask30분·GPU/생성/설치0이다. [고정계약](experiments/B-032-source-preserving-composite-baseline/EXECUTION_CONTRACT.md).

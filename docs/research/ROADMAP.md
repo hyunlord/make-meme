@@ -1,5 +1,7 @@
 # B 트랙 로드맵
 
+**현재 B-032 PREPARING / CPU 전용**: 같은 B031 차량 raw를 고정 envelope와 출력 mask-assisted 영역으로 원본과 합성한다. 새 생성 없이 도로 그래픽·경계·그림자·수동 비용을 분리한다. B031 결합FAIL과 animal/human 앵커실패는 보존하며 생성 중 제약은 후속 미실행이다. [PLAN](experiments/B-032-source-preserving-composite-baseline/PLAN.md).
+
 **현재 B-031 COMPLETED / 기술 PASS / 결합 편집 목표 FAIL / 일반 기준선 NOT_ADOPTED**: 이미지6개 중 사전 지정 R1의 동물·사람은 부적합으로 영상 생략했고 차량만 영상1회를 완료했다. 차량 외형·거친 회전은 PARTIAL이나 앵커에 없던 하단 차량 그래픽으로 보호 장면 FAIL이다. temporalUNVERIFIED. 다음 한 가설은 영상 생성 중 비대상 원본 문맥 보존이며 미실행이다. [결과](experiments/B-031-source-aligned-edit-anchor/RESULTS.md). B030 PARTIAL/INCONCLUSIVE와 B028/B029 NOT_ADOPTED를 보존한다. 아래 과거 현재/다음 문구는 당시 기록이다.
 
 
