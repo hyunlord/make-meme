@@ -1,0 +1,19 @@
+{
+  "files": {
+    "code/artifact.py": "b15e7bb02ab229efa53338f320b95a001bfec3aea4e086f26bae59b4d79579cd",
+    "code/launch.py": "60b51784a58dc38e1a9e9e6d4fab2cae7724e813cbee5541f79d63d8739aacef",
+    "code/safety.py": "914c19f9d39300c8bf3b247085229f682f248e7921156a3d9db845cba9e54490",
+    "code/supervisor.py": "c1517bd33717457a9b294c3f681c236b50eef532ec4485e803dfa4464e073328",
+    "code/test_safety.py": "3dcd6b31f5b9891a4493be97673ac076068d077df01c7e2436dddad16b0ce792",
+    "code/worker.py": "fc20bfecdc766755478a5d924124f77e44777eca4d323f990195ba22f9991059",
+    "config.json": "e52a3e3a4b586e23042ce82e5bb3d8c4714adb35aaa2f879dcc7dcdbe5032187"
+  },
+  "external_files": {
+    "B-034-fixed-method-transfer-validation/video_code/artifacts.py": "44ed0df2b6ab66e4786ca59541bcd989877e799cc3550c21666049a6718de1c5",
+    "B-034-fixed-method-transfer-validation/video_code/runtime_observe.py": "be1d6bbc7714b93361d853ebb82c7398fc87359b63918d759bdf5f16de24915f",
+    "B-007E-scail-forward/upstream/wan/modules/vae.py": "d0d6a19a8114005c897c0dd63c2c40186c413cb70fe51f5f3f3783d29490567c",
+    "B-007E-scail-forward/upstream/wan/configs/scail_config_14B.py": "ab0d11d714ed5045e66a0bc97c5a6d5c2bfbb66da84ed671da12721fa988ba96",
+    "B-007E-scail-forward/upstream/wan/configs/__init__.py": "46f53c46afd30c77632abb72541d51a276897213a8451b0ee97f1794782ad6b1"
+  },
+  "private_config_hash_note": "Actual local config contains protected process identity and root mapping; file hash retained, private content excluded."
+}
