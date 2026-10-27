@@ -626,3 +626,7 @@ B032 저비용 기준선과 B031/과거 실패는 보존한다. 국소 이득의
 시작 원격 d401b018과 실제 Spark의 중복 실행 부재를 확인했다. [전체 의뢰서](work_orders/20261027-B034-fixed-method-transfer-validation.md)는 제공 파일과 SHA256이 일치한다. B033 국소 PARTIAL/기본 채택 보류와 B032 저비용 기준선, B031 앵커/장면 실패를 보존한다. 새 source/target 두 조합을 생성 전에 고정하고 같은 clean_constraint와 support 규칙으로 BASE+RGB_POST, FINAL_ONLY+동일POST, STEP+동일POST를 비교한다. 기존 차량 잔여 제거를 위한 튜닝은 하지 않는다.
 
 현재 입력/코드 준비이며 신규 이미지0/2·sampler0/4다. 새 모델/패키지/학습0, 앵커 부적합 시 해당 영상 NOT_RUN으로 남기고 사례를 대체하지 않는다. [PLAN](experiments/B-034-fixed-method-transfer-validation/PLAN.md), [결정](experiments/B-034-fixed-method-transfer-validation/DECISION.md). 실제 output-assisted 주석과 두-pass 비용, 방법의 국소 이득 및 target 회귀를 분리한다.
+
+### B-034 앵커 단계 종료와 조건부 범위 축소
+
+사전 입력 94c3341 이후 고정 두 이미지 모두40step/80forward로 생성했다. 차량은 source 전면 접근 배치와 어두운 클래식 외형을 유지해 ELIGIBLE, 인물은 source 측면 보행 대신 큰 뒷모습으로 바뀌어 ANCHOR_UNSUITABLE이다. 인물 영상은 전부 NOT_RUN이며 추가 사진/과제로 대체하지 않는다. Qwen 정상 종료·메모리 회복 후 9b821a7에 고정한 차량 영상 경로만 진행한다. 이 범위 축소는 방법 성능에 따른 선별이 아니라 사전 앵커 적합성 규칙이며, 인물 앞단 실패도 전체 시스템 결과에 포함한다. [ANCHORS](experiments/B-034-fixed-method-transfer-validation/ANCHORS.md).

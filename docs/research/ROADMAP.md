@@ -1,6 +1,6 @@
 # B 트랙 로드맵
 
-**B-034 PREPARING / GPU NOT_RUN**: B033 방법을 바꾸지 않고 새 공개 강체/비강체 두 입력을 생성 전에 고정한다. BASE+RGB_POST, 최종 latent 혼합+동일POST, 생성 중 clean 제약+동일POST를 비교하며 앵커 부적합은 영상 NOT_RUN으로 보존한다. 기존 차량의 잔여를 위한 튜닝이 아니라 국소 이득/target 회귀/무효의 한정 전이 검증이다. 두-pass와 수동 support 비용을 포함하고 일반화·자동 기본 채택은 주장하지 않는다. [계획](experiments/B-034-fixed-method-transfer-validation/PLAN.md). 아래 B033 및 과거 판정은 그대로다.
+**B-034 RUNNING / 이미지2회 완료 / 인물 영상 NOT_RUN**: 고정한 새 차량·인물 입력에서 Qwen 앵커를 각각 한 번 생성했다. 차량은 전면 배치와 target형 외형을 유지해 영상 비교에 진입한다. 인물은 target 의상은 반영했지만 source 측면 보행을 큰 뒷모습으로 바꿔 ANCHOR_UNSUITABLE이며 다른 사례로 대체하지 않는다. 차량의 BASE+RGB_POST, 최종 latent 혼합+동일POST, 생성 중 clean 제약+동일POST를 같은 B033 규칙으로 비교 중이다. 방법 이득은 아직 미판정이다. 두-pass와 수동 support 비용을 포함하며 일반화·자동 기본 채택은 주장하지 않는다. [계획](experiments/B-034-fixed-method-transfer-validation/PLAN.md), [실제 앵커](experiments/B-034-fixed-method-transfer-validation/ANCHORS.md). 아래 B033 및 과거 판정은 그대로다.
 
 **B-033 COMPLETED / 실행 PASS / 국소 개선 PARTIAL / 기본 채택 보류**: 동일 편집 영역의 RGB 후합성 뒤에도 생성 중 clean 제약은 기존 RGB 합성·최종 latent 혼합에 남던 바퀴 아래 색상 조각을 더 작은 밝은 흔적으로 줄였다. 높은 은색 target 외형과 거친 회전은 유지됐지만 접촉·그림자는 UNCERTAIN, temporal은 UNVERIFIED다. 신규 sampler 1회·40step·80forward, GPU 단계 합계 17.36분. B-032의 저비용 기준선과 과거 실패는 보존한다. 다음 검토 가설은 다른 공개 사례에서 같은 고정 제약의 국소 이득과 target 회귀 여부를 확인하는 것 하나이며 자동 실행하지 않는다. [RESULTS](experiments/B-033-clean-prediction-constraint/RESULTS.md).
 

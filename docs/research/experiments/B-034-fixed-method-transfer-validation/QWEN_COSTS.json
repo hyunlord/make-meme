@@ -1,0 +1,42 @@
+{
+  "stage": "QWEN",
+  "cases": [
+    {
+      "case": "rigid_R1",
+      "status": "COMPLETED",
+      "seconds": 390.5249135494232,
+      "steps": 40,
+      "forwards": 80,
+      "png_sha256": "950247acc11d0f78cb2daf4cd6b3f896c17ecab1fe4ff2fd409ef23e43194222"
+    },
+    {
+      "case": "nonrigid_R1",
+      "status": "COMPLETED",
+      "seconds": 398.567458152771,
+      "steps": 40,
+      "forwards": 80,
+      "png_sha256": "d4446edbb52ed40e1d2d5408dc886f71044589e5a8319a488b7b494aea493d01"
+    }
+  ],
+  "guard_reason": "service_exit",
+  "returncode": 0,
+  "system_min_available_GiB": 26.064395904541016,
+  "swap_peak": 0,
+  "cgroup_peak_GiB": 16.428604125976562,
+  "cuda_peak_allocated_GiB": 55.912203788757324,
+  "model_downloads": 0,
+  "installations": 0,
+  "samplers": 0,
+  "phase_durations_seconds": {
+    "load_cpu": 1.5994601249694824,
+    "text_encoder_cuda": 81.67790412902832,
+    "vae_cuda": 1.327512502670288,
+    "transformer_cuda": 185.52908492088318
+  },
+  "rss_peak_GiB": 2.0385894775390625,
+  "phase_span_seconds": 1060.9586064815521,
+  "process_final_state": "MainPID=0; inactive; Result=success",
+  "nonrigid_video": "NOT_RUN_ANCHOR_UNSUITABLE",
+  "guarded_worker_seconds": 1065.5071544647217,
+  "cold_load_seconds": 270.13396167755127
+}
