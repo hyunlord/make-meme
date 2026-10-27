@@ -40,3 +40,7 @@ CPU fixture는 부모환경 없음·과거 경로·validator 미초기화·범�
 다음 한 작업은 기존 승인 Spark 연결이 복구된 상태에서 이번 공통 preflight를 실제 Python/동일입력으로 실행하고, fresh safety가 통과할 때 남은 STEP/decode를 수행하는 것이다. 이번 세션에서 재접속 루프·GPU 예약·새 실험을 시작하지 않는다.
 
 [계획](PLAN.md), [실행 계약 해설](LESSON_KO.md), [비용](COSTS.md), [재현](REPRODUCE.md), [전달](DELIVERY.md). 기존 비교자료는 [CONT01 DELIVERY](../continuation/DELIVERY.md)를 따른다.
+
+## 검증 도구 한계
+
+부모는 새 코드6파일의 CPU_REPORT SHA와 Python AST 구문을 확인하고 Mac CPU24개를 재실행했다. 현재 Mac PATH에 ruff/basedpyright가 없어 lint/typecheck는 NOT_RUN_TOOL_UNAVAILABLE이다. 이를 type-clean으로 보고하지 않는다. 자체 SSH 연결은 timeout 후 종료됐고 이번 작업의 로컬 worker/supervisor는 실행하지 않았다. 원격 현재 프로세스 상태는 접속불가로 미확인이다.
