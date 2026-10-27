@@ -1,0 +1,31 @@
+{
+  "worker_guard_seconds": 14.96235966682434,
+  "phase_wall_seconds": 13.449993244023062,
+  "cuda_peak_allocated_GiB": 8.908348083496094,
+  "cuda_reserved_peak_GiB": 11.5625,
+  "min_observed_MemAvailable_GiB": 76.52595901489258,
+  "swap_peak": 0,
+  "cgroup_peak_GiB": 1.7690963745117188,
+  "decode_seconds": 6.645093679428101,
+  "vae_load_seconds": 0.3792388439178467,
+  "guard_reason": "UNKNOWN_GPU_PID",
+  "decode": "PASS",
+  "new_sampler": 0,
+  "new_encoder": 0,
+  "new_training": 0,
+  "decode_count": 1,
+  "cpu_raw_png_seconds": 1.9723303318023682,
+  "mp4_encode_and_verify_seconds": 0.4301798343658447,
+  "raw_dtype": "torch.float32",
+  "raw_bytes": 93587006,
+  "raw_shape": [
+    3,
+    17,
+    512,
+    896
+  ],
+  "raw_sha256": "40b77732233b2cc8d9c33e52894fbce98722155bd8e31c39fd76f245c50ca421",
+  "mp4_sha256": "6eb86ed892498618f2f066b401391d712786821cc6902f321d0a583aec791410",
+  "output_17_frame_ffmpeg_decode": "PASS",
+  "guard_state": "NOT_CLEAN"
+}

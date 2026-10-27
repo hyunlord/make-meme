@@ -640,3 +640,13 @@ B032 저비용 기준선과 B031/과거 실패는 보존한다. 국소 이득의
 ### 2026-10-27 B-034 RECOVERY_01 착수
 
 저장된 BASE final latent만 소비하는 VAE-only 복구를 별도 승인 범위로 시작한다. 기존 BLOCKED_AT_BASE_TEARDOWN/other_service_work와 비강체 ANCHOR_UNSUITABLE은 보존한다. 과거 원인 확인과 현재 자원 안전을 분리하고 전역 predecessor 검사는 변경하지 않는다. 최대1decode·600초 worker, 총60분이며 새 sampler/encoder/학습/설치/재시도0이다. [복구 계획](experiments/B-034-fixed-method-transfer-validation/recovery/RECOVERY_PLAN.md). 현재 PREPARING이며 방법 비교는 NOT_RUN이다.
+
+### B-034 RECOVERY_01 실행 종료 — decode PASS / 종료 감시 NOT_CLEAN
+
+사전 계획 a4ffd286와 실행 코드 ac5aceef 이후 저장된 BASE final latent를 exact hash/FP32 shape·finite·40/80 계보로 검증했다. 새 live safety CLEAR에서 WanVAE만 1회 적재·decode해 finite `[3,17,512,896]` raw·PNG17장·24fps MP4를 확보했다. 신규 이미지/encoder/sampler/학습/설치/재시도0이다.
+
+종료 시 queue0/0이지만 빈 cgroup와 GPU PID 관측 차이로 UNKNOWN_GPU_PID가 기록됐다. 같은 표본의 systemd MainPID와 GPU PID는 같았으며 최종 관측은 허용 서비스만 남고 자체 unit inactive였다. decode PASS와 종료 감시 NOT_CLEAN을 함께 보존하고 기존 other_service_work/과거 UNKNOWN을 소급 변경하지 않는다. 실제 decode6.645초·supervisor14.962초, CUDApeak8.908GiB·최소MemAvailable76.526GiB·swap0이다. [복구 결과](experiments/B-034-fixed-method-transfer-validation/recovery/RECOVERY_RESULTS.md).
+
+차량 출력의 외형/동작/장면 검토는 복구 보고서에 분리하며 CONTROL/STEP 방법 비교는 계속 NOT_RUN이다. 비강체 ANCHOR_UNSUITABLE·B033 PARTIAL과 기존 B034 중단은 그대로다. 추가 생성·예약은 하지 않는다.
+
+RECOVERY_01 정적 검토에서는 전17장 BASE가 target/A0의 클래식 노출 바퀴 차량을 유지하지 못하고 현대적인 닫힌 SUV/왜건형으로 돌아갔다. 원본의 거친 접근과 도로·산 배치는 대략 유지되지만 target 외형 FAIL, 세부 장면/접촉 UNCERTAIN, temporal UNVERIFIED다. 큰 별도 도로 그래픽은 이번 배열에서 미관찰이며 이를 전체 교체 성공으로 올리지 않는다. STEP 효과는 여전히 NOT_RUN이다.

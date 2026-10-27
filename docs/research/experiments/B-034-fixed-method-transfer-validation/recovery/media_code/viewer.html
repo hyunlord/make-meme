@@ -7,7 +7,7 @@
 <p class="note">새 sampler 없이 저장된 BASE latent를 한 번 디코딩한 결과입니다. 이전 종료 가드와 비강체 앵커 실패는 보존합니다. FINAL/STEP 및 후합성은 이번 복구에서 NOT_RUN이며 B-033 방법 검증 완료가 아닙니다.</p>
 <p class="note">17프레임 · source_fps=null · preview24fps · timebase_assumed=true. 실제 원본 초 단위 시간축은 미확인입니다. temporal=<strong>UNVERIFIED</strong>. loop·autoplay OFF이며 끝→처음은 구간 내부 동작이 아닙니다.</p>
 <p class="note">기존 MP4는 변경하지 않았습니다. SOURCE 재생은 색상 호환성 검증을 거친 PNG 기반 파생 미리보기이며, 원래 driver MP4는 기존 B034 full에 보존합니다. 재생 버튼 작동은 사람이 연속 시청했다는 뜻이 아닙니다.</p>
-<nav><a href="research/RECOVERY_RESULTS.md">결과</a><a href="research/RECOVERY_PLAN.md">과제별 판정</a><a href="research/COSTS.md">비용</a><a href="research/REPRODUCE.md">재현</a><a href="MEDIA_MANIFEST.json">미디어·해시</a></nav>
+<nav><a href="source-base-comparison.mp4">SOURCE 왼쪽 / BASE 오른쪽 비교 MP4</a><a href="research/RECOVERY_RESULTS.md">결과</a><a href="research/RECOVERY_PLAN.md">복구 계획</a><a href="research/COSTS.md">비용</a><a href="research/REPRODUCE.md">재현</a><a href="MEDIA_MANIFEST.json">미디어·해시</a></nav>
 <div id="cases"></div></main><script>
 'use strict';
 const data=__REVIEW_DATA__;
@@ -24,7 +24,7 @@ for(const item of data.cases){
  const message=text('p','재생 확인과 시간 품질 판정은 다릅니다.');message.className='note';message.setAttribute('role','status');section.append(message);
  if(item.source_preview_is_new_encode)section.append(text('p','SOURCE 재생은 색상 호환성을 위해 원본 PNG로 새로 인코딩한 yuv420p 미리보기입니다. 원래 driver MP4는 변경하지 않고 full에 보존합니다. 원본 증거는 RGB 프레임/시트입니다.'));
  const grid=document.createElement('div');grid.className='grid';const videos=[];
- for(const asset of item.videos){const f=document.createElement('figure'),v=document.createElement('video'),a=document.createElement('a');v.src=asset.path;v.controls=true;v.preload='metadata';v.playsInline=true;v.setAttribute('aria-label',asset.label);a.href=asset.path;a.textContent=asset.derived_preview?'PNG에서 만든 호환 미리보기 MP4 열기':'기존 MP4 열기';v.addEventListener('error',()=>message.textContent=asset.label+' 재생 오류: RGB 시트나 호환 플레이어를 사용하세요.');f.append(text('figcaption',asset.label),v,a);grid.append(f);videos.push(v)}section.append(grid);
+ for(const asset of item.videos){const f=document.createElement('figure'),v=document.createElement('video'),a=document.createElement('a');v.src=asset.path;v.controls=true;v.preload='metadata';v.playsInline=true;v.setAttribute('aria-label',asset.label);a.href=asset.path;a.textContent=asset.derived_preview?'PNG에서 만든 호환 미리보기 MP4 열기':'MP4 열기';v.addEventListener('error',()=>message.textContent=asset.label+' 재생 오류: RGB 시트나 호환 플레이어를 사용하세요.');f.append(text('figcaption',asset.label),v,a);grid.append(f);videos.push(v)}section.append(grid);
  const seek=()=>{position.textContent='local '+slider.value+' / 16';for(const v of videos){v.pause();v.currentTime=Number(slider.value)/24}};
  slider.oninput=seek;prev.onclick=()=>{slider.value=String(Math.max(0,Number(slider.value)-1));seek()};next.onclick=()=>{slider.value=String(Math.min(16,Number(slider.value)+1));seek()};
  play.onclick=()=>{slider.value='0';position.textContent='local 0 / 16';for(const v of videos){v.currentTime=0;v.play().catch(()=>message.textContent='브라우저 재생 차단: 개별 controls를 사용하세요.')}};pause.onclick=()=>videos.forEach(v=>v.pause());

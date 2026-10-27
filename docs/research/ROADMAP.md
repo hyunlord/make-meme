@@ -378,3 +378,9 @@ B-029 실행 전 고정 완료: 기존16leaf를 보존한5consumer, 실제 지�
 ### 2026-10-27 B-034 RECOVERY_01
 
 기존 BASE latent의 무결성과 새 live safety를 검증해 VAE-only decode 최대1회를 시도한다. 새 가설/BASE 재생성이 아니며 기존 중단 기록을 소급 수정하지 않는다. CONTROL/STEP와 고정 방법 비교는 NOT_RUN으로 유지한다. [계획](experiments/B-034-fixed-method-transfer-validation/recovery/RECOVERY_PLAN.md).
+
+### B-034 RECOVERY_01 종료
+
+저장된 BASE를 새 sampler 없이 VAE decode1회로 복구했다. 기술 decode PASS와 종료 guard UNKNOWN_GPU_PID / NOT_CLEAN을 분리한다. 기존 과거 원인 UNKNOWN·비강체 앵커 실패와 B034 방법 비교 NOT_RUN을 유지한다. [복구 결과](experiments/B-034-fixed-method-transfer-validation/recovery/RECOVERY_RESULTS.md). CONTROL/STEP은 자동으로 이어가지 않는다.
+
+복구 BASE는 target 클래식 외형을 유지하지 못했다(FAIL). 거친 접근/장면 배치의 부분 보존과 구분한다. 이 관측만으로 미실행 STEP을 기각·채택하지 않으며 이번 복구 범위에서 종료한다.
