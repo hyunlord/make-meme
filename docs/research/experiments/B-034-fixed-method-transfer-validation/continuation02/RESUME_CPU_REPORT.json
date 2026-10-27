@@ -1,0 +1,72 @@
+{
+  "status": "ACTUAL_SPARK_CPU_PASS_HEAVY_BLOCKED_LIVE_SAFETY",
+  "python_environment": "existing B-007E environment, unchanged",
+  "rows": [
+    {
+      "stage": "STEP_S",
+      "parent_environment": "missing",
+      "returncode": 0,
+      "files_verified": 47,
+      "current_stage_absolute_report_verified": true,
+      "writable_probe_removed": true,
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false
+    },
+    {
+      "stage": "STEP_S",
+      "parent_environment": "stale",
+      "returncode": 0,
+      "files_verified": 47,
+      "current_stage_absolute_report_verified": true,
+      "writable_probe_removed": true,
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false
+    },
+    {
+      "stage": "STEP_D",
+      "parent_environment": "missing",
+      "returncode": 0,
+      "files_verified": 47,
+      "current_stage_absolute_report_verified": true,
+      "writable_probe_removed": true,
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false
+    },
+    {
+      "stage": "STEP_D",
+      "parent_environment": "stale",
+      "returncode": 0,
+      "files_verified": 47,
+      "current_stage_absolute_report_verified": true,
+      "writable_probe_removed": true,
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false
+    }
+  ],
+  "cpu_tests": 24,
+  "cpu_tests_status": "PASS",
+  "loader_reports_created": false,
+  "worker_attempts_created": false,
+  "stage_freezes": {
+    "STEP_S": "09d7adfafca81ba640c333f36f13933e09ef1dbc2fca4b697852c3180e31018f",
+    "STEP_D": "adc347ab50fb5550d1c9fa9add1b648c98f9c7bd71fbeca800d310f24bfae078"
+  },
+  "guard_byte_identical": {
+    "safety.py": true,
+    "supervisor.py": true
+  },
+  "new_code_sha256": {
+    "bootstrap.py": "1ca84c1037deedc7a88bfe9c465d497d54efd55982248ff207fef02310684a81",
+    "worker.py": "dc668575cf5ab5d3af12aae187ea00985b07f1cd2cc50afcf943e2c7094a74ae",
+    "supervisor.py": "0fe8820e9f780dd80f02085eabbd07b8ec428366331657f0d20a87fa6f459729",
+    "test_safety.py": "f0db039bdb77cbef84735e12c219f24e745c63586c5766925b0b960047bbc350",
+    "prepare_resume.py": "b5eb45ffd5e8d83917fe6b0b7bb387bfea1bcc052240fc1eb7fb85e781027411",
+    "test_bootstrap.py": "a18b18c5c3986d0330348de100211074859276865effb5c3d575ece254243548",
+    "safety.py": "8240f3df56cdd458feab3b88dbf10c72fc1ba9520f839618f66321e9fd5a33f8"
+  },
+  "preparation_error_preserved": "First rsync failed because new remote parent directory did not exist; mkdir of only new continuation path fixed CPU preparation; no worker/model attempt occurred."
+}

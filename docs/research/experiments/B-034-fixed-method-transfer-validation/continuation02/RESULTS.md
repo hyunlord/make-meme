@@ -44,3 +44,7 @@ CPU fixture는 부모환경 없음·과거 경로·validator 미초기화·범�
 ## 검증 도구 한계
 
 부모는 새 코드6파일의 CPU_REPORT SHA와 Python AST 구문을 확인하고 Mac CPU24개를 재실행했다. 현재 Mac PATH에 ruff/basedpyright가 없어 lint/typecheck는 NOT_RUN_TOOL_UNAVAILABLE이다. 이를 type-clean으로 보고하지 않는다. 자체 SSH 연결은 timeout 후 종료됐고 이번 작업의 로컬 worker/supervisor는 실행하지 않았다. 원격 현재 프로세스 상태는 접속불가로 미확인이다.
+
+## 사용자 재지시 후 현재 상태
+
+12:03:47UTC 연결 회복 뒤의 별도 재개 결과는 [RESUME_RESULTS](RESUME_RESULTS.md)를 따른다. 위 BLOCKED_SSH는 당시 이력으로 그대로 보존한다. 재개에서는 실제 Spark preflight가 통과했으나 현재 보호서비스/큐 안전 조건이 실패해 GPU0으로 중단했다.

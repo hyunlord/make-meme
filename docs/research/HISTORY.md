@@ -668,3 +668,11 @@ RECOVERY_01의 decode PASS/종료 NOT_CLEAN 및 BASE target 외형 FAIL을 보�
 ### B-034 CONTINUATION_02 종료 — 로컬 수정 / BLOCKED_SSH
 
 공통 bootstrap과 실제 worker preflight를 구현하고 Mac CPU24개를 통과했다. 기존 safety/supervisor는 byte동일이다. 그러나 승인 Spark SSH2회가 timeout으로 실패해 실제 Python preflight·현재중복상태·live safety는 확인하지 못했다. 새로운 loading/sampler/forward/step/decode0이며 원격worker를 만들지 않았다. STEP 시각 비교는 미완료이고 BASEtargetFAIL/CONTROL추가이득미관찰/과거실패를 유지한다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/RESULTS.md). 연결회복 뒤 동일코드·동일입력의 실제preflight가 다음 전제다. 자동예약 없음.
+
+### B-034 CONTINUATION_02 재개 — 연결 회복 확인
+
+사용자 재지시 후12:03:47UTC 승인 SSH 연결이 성공했다. 이전 BLOCKED_SSH/GPU0 기록을 보존하고 아직 소비하지 않은 STEP1/decode1 예산만 같은입력으로 재개한다. 현재원격중복·실제Python preflight·fresh safety를 별도 확인하며 성공 전GPU를 시작하지 않는다. [재개 amendment](experiments/B-034-fixed-method-transfer-validation/continuation02/RESUME_01.md).
+
+### CONTINUATION_02 재개 차단 — 현재 live safety 불충족
+
+SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID가 없으며8190큐 연결이 거부됐다. 기존guard 실제 OBSERVATION_FAILED(queue error+allowed_identity_mismatch)를 보존하고 allowlist/서비스/가드를 변경하지 않았다. 새heavy/sampler/decode0, STEP효과미평가다. 이전SSHtimeout 원인을 사후확정하지 않는다. [재개 결과](experiments/B-034-fixed-method-transfer-validation/continuation02/RESUME_RESULTS.md).

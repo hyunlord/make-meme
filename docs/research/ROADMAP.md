@@ -400,3 +400,11 @@ CONTROL_FINAL_ONLY와 정상 종료 관측은 완료했다. 동일 후합성 뒤
 ### B-034 CONTINUATION_02 실제 상태
 
 loader 환경 초기화의 로컬 CPU 검증은 완료했으나 Spark 접속 timeout으로 BLOCKED_SSH다. 새 GPU 실행0, STEP효과 미평가, 기본채택 근거없음. 다음 우선순위는 연결복구 후 실제Python preflight/fresh safety를 통과한 동일STEP 완료이며 새로운 연구방법 탐색이 아니다. [RESULTS](experiments/B-034-fixed-method-transfer-validation/continuation02/RESULTS.md).
+
+### CONTINUATION_02 재개 상태
+
+SSH 연결이 회복되어 기존 수정의 실제 Spark preflight와 안전 확인을 재개한다. 과거 BLOCKED 기록과 targetFAIL은 유지하며 새방법/예산확대 없이 미완료STEP만 대상으로 한다. [RESUME_01](experiments/B-034-fixed-method-transfer-validation/continuation02/RESUME_01.md).
+
+### CONTINUATION_02 재개 실제 차단
+
+현재 장애는SSH가 아니라 보호서비스identity와queue 관측의 불충족이다. GPUempty/메모리충분만으로가드를통과시키지않고새GPU0으로중단한다. 원래서비스/큐의정상운영과신원계약확인이 남은STEP의전제이며방법탐색으로확대하지않는다. [RESUME_RESULTS](experiments/B-034-fixed-method-transfer-validation/continuation02/RESUME_RESULTS.md).

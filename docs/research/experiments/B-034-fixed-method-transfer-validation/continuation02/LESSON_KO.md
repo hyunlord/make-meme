@@ -29,3 +29,7 @@ E는 RGB edit support, M은 시간그룹/공간max/guard로 얻은 latent영역�
 ## 이번 관측
 
 Mac의 공통 bootstrap/worker entrypoint fixture는24개를 통과했지만 Spark 접속이 실패했다. 따라서 `환경 함수의 로컬 기능 검증`과 `실제 호스트의 실행계약·안전 검증`을 구분한다. 새 solver/latent/영상 관측이 없어 위 생성수학의 효과는 이번 작업으로 판정할 수 없다. 기존 결과를 다시 평가한 것처럼 작성하지 않는다.
+
+## 연결 회복 뒤 실제 호스트 검사
+
+재개에서 같은 Spark Python/worker의4개 환경 조합 preflight와 CPU24검사가 통과했다. 다만 현재 큐서비스 관측과 기존 보호서비스 신원 검증은 실패했다. `C_runtime_env`와 `C_live_safety`가 다른 논리 조건이라는 실제 예다. 전자는 PASS여도 후자가 거짓이면 GPU를 실행하지 않는다. 이것은 clean-prediction 방법의 효과 평가가 아니다.
