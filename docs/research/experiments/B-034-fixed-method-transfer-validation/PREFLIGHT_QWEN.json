@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "cases": [
+    "rigid_R1",
+    "nonrigid_R1"
+  ],
+  "model_revision": "6f3ccc0b56e431dc6a0c2b2039706d7d26f22cb9",
+  "freeze_sha256": "3c528c5da413f544c0c9e2ba2b4707dd47fce528df58c3409166ebf30bd19ff1",
+  "contract_sha256": "9bd46ff1719ac98ed72f3cc3fb4d2165ab56ba91fd28f694a10ffa13d878c1ae",
+  "GPU_operations": 0,
+  "code_hashes": {
+    "qwen_contract.py": "4f5fed476bea7d5bb56476d3b1aba391962e7cbb3485886024c1a505990f09f0",
+    "qwen_freeze.py": "9f4f463d08946b53789007bfd5b8c9cc754826452fc86911fd0e006c0457a262",
+    "qwen_guard.py": "2ef1008dbddfe5a30e3ba074ea50eb36d68540b8de7d8ad10feb6158c7f894b6",
+    "qwen_launch.py": "4697af8e1190a7924f6d566f4c1a60d032989b02fa8b21d3c5938ed87d7873a4",
+    "qwen_observe.py": "b950b46a56c55e666d152d25b558eb6a93cf80cb7911481ffc2887fe60a658cc",
+    "qwen_runner.py": "f42d32aa1f0700bc83704a570e121145ce990cdad0f8b0273555236b69d9c036",
+    "qwen_seal.py": "edb4e48adeb59564fc1276b5b2541c657524b2640f0a163ed9920d45f330b529"
+  },
+  "settings": {
+    "steps": 40,
+    "seed": 20261026,
+    "true_cfg_scale": 4.0,
+    "guidance_scale": 1.0,
+    "negative": " ",
+    "size": [
+      896,
+      512
+    ],
+    "attempt_limit": 2
+  },
+  "installation": 0,
+  "download": 0,
+  "earlier_preflight": "missing output_request_wh metadata corrected before any GPU attempt"
+}

@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "case_count": 2,
+  "checks": [
+    {
+      "case_id": "rigid_R1",
+      "frames": 17,
+      "canvas_wh": [
+        896,
+        512
+      ],
+      "source_mask_exact": true,
+      "target_subject_exact": true,
+      "outside128": true,
+      "target_track": 3,
+      "videos_roundtrip_exact": true
+    },
+    {
+      "case_id": "nonrigid_R1",
+      "frames": 17,
+      "canvas_wh": [
+        896,
+        512
+      ],
+      "source_mask_exact": true,
+      "target_subject_exact": true,
+      "outside128": true,
+      "target_track": 1,
+      "videos_roundtrip_exact": true
+    }
+  ],
+  "gpu_calls": 0,
+  "new_download_bytes": 0,
+  "actual_generation": false,
+  "limitations": [
+    "Mask given; no independent human ground truth",
+    "Unknown original FPS; preview24",
+    "No generated anchor assessed in this receipt"
+  ]
+}

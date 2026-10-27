@@ -620,3 +620,9 @@ B031 동물/사람 앵커 자세 실패와 차량 영상의 도로 그래픽 FAI
 전체17장 및 고정local0/8/16 정적 비교에서 STEP+동일RGBPOST는 B032/FINALONLY에 남은 바퀴 아래 적색·검정 조각을 작은 밝은 잔여로 줄였다. 높은 은색 target 외형과 거친 회전은 유지되고 뚜렷한 sourceMini 회귀는 미관찰이다. 접촉·그림자는 UNCERTAIN, temporal은 UNVERIFIED이며 완전 성공으로 합치지 않는다. GPU 단계 합1041.763초, S CUDApeak33.832GiB, minMemAvailable52.619GiB/swap0. 새 설치·학습·재시도0, 자체 worker 종료 및 기존 서비스 보존.
 
 B032 저비용 기준선과 B031/과거 실패는 보존한다. 국소 이득의 후속 검증 후보지만 추가17분대 비용으로 기본 채택하지 않는다. 다음 한 가설은 같은 고정 제약이 다른 공개 사례에도 target 회귀 없이 국소 오염을 줄이는가이며 미실행이다. 결과·수식·조건·비용·재현을 [B-033 RESULTS](experiments/B-033-clean-prediction-constraint/RESULTS.md)에 연결한다. 이번 비교 이후 추가 작업을 예약하지 않았다.
+
+## 2026-10-27 B-034 착수 — 고정 방법의 새 공개 두 과제 검증
+
+시작 원격 d401b018과 실제 Spark의 중복 실행 부재를 확인했다. [전체 의뢰서](work_orders/20261027-B034-fixed-method-transfer-validation.md)는 제공 파일과 SHA256이 일치한다. B033 국소 PARTIAL/기본 채택 보류와 B032 저비용 기준선, B031 앵커/장면 실패를 보존한다. 새 source/target 두 조합을 생성 전에 고정하고 같은 clean_constraint와 support 규칙으로 BASE+RGB_POST, FINAL_ONLY+동일POST, STEP+동일POST를 비교한다. 기존 차량 잔여 제거를 위한 튜닝은 하지 않는다.
+
+현재 입력/코드 준비이며 신규 이미지0/2·sampler0/4다. 새 모델/패키지/학습0, 앵커 부적합 시 해당 영상 NOT_RUN으로 남기고 사례를 대체하지 않는다. [PLAN](experiments/B-034-fixed-method-transfer-validation/PLAN.md), [결정](experiments/B-034-fixed-method-transfer-validation/DECISION.md). 실제 output-assisted 주석과 두-pass 비용, 방법의 국소 이득 및 target 회귀를 분리한다.

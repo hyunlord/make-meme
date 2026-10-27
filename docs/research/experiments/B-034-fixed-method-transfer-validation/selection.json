@@ -1,0 +1,124 @@
+{
+  "experiment": "B-034",
+  "status": "FROZEN_BEFORE_GENERATION",
+  "selection_basis": "source and target inputs only; parent visual approval before any image generation",
+  "reviewed_sequences": [
+    "car-turn",
+    "classic-car",
+    "libby",
+    "lady-running",
+    "walking",
+    "hike",
+    "dogs-jump",
+    "dogs-scale"
+  ],
+  "candidate_bundle_count": 5,
+  "reviewed_bundles": [
+    {
+      "source": "car-turn",
+      "target": "classic-car",
+      "decision": "SELECTED",
+      "source_track": 1,
+      "target_track": 3
+    },
+    {
+      "source": "libby",
+      "target": "lady-running",
+      "decision": "REJECTED_CATEGORY_MISMATCH",
+      "reason": "Actual libby frames show a dog, not a person; no inference performed."
+    },
+    {
+      "source": "walking",
+      "target": "lady-running",
+      "decision": "REJECTED_INPUT_FRAMING",
+      "reason": "Foreground person is cropped at torso and a second person overlaps; full-body hike preferred before generation."
+    },
+    {
+      "source": "libby",
+      "target": "dogs-jump",
+      "decision": "NOT_SELECTED",
+      "reason": "Fence/post occlusion in source; multi-dog target ambiguity; no mask preparation or generation."
+    },
+    {
+      "source": "hike",
+      "target": "lady-running",
+      "decision": "SELECTED",
+      "source_track": 1,
+      "target_track": 1
+    }
+  ],
+  "additional_sequence_context": [
+    "dogs-scale (foreground hand, scale and body occlusion; no generation candidate promoted)"
+  ],
+  "previous_generated_sequences": [
+    "dog",
+    "dog-gooses",
+    "dance-twirl",
+    "dance-jump",
+    "car-roundabout",
+    "car-shadow"
+  ],
+  "new_download_bytes": 0,
+  "cases": [
+    {
+      "case_id": "rigid_R1",
+      "source": "car-turn",
+      "target": "classic-car",
+      "source_track": 1,
+      "target_track": 3,
+      "source_frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "target_frame": 0,
+      "caption": "A car matching the reference image approaches along a curved mountain road. It grows larger and moves toward the left side of the image as it follows the bend. The mountains, meadow, trees, roadside posts and road remain in place.",
+      "prompt": "Replace the car on the road in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve the mountain, meadow, trees, roadside posts, and road. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "negative": ""
+    },
+    {
+      "case_id": "nonrigid_R1",
+      "source": "hike",
+      "target": "lady-running",
+      "source_track": 1,
+      "target_track": 1,
+      "source_frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "target_frame": 0,
+      "caption": "A person matching the reference image walks toward the right along a rocky mountain path. The legs alternate steps while the body stays upright. The rocky slope, path and distant mountains remain visible.",
+      "prompt": "Replace the person walking on the mountain path in Image1 with the target shown in Image2. Keep the selected object's pose, facing direction, location within the scene, and the camera view from Image1. Allow the target's natural body proportions. Preserve the rocky mountain slope, path, and surrounding landscape. Use Image2 for the target's visible appearance, not its pose or background. Do not leave the original selected object, duplicate the object, or add new text, logos, graphics, or decorations. Return the complete edited Image1 scene.",
+      "negative": ""
+    }
+  ]
+}
