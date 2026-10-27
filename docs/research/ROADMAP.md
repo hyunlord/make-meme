@@ -418,3 +418,7 @@ SSH 연결이 회복되어 기존 수정의 실제 Spark preflight와 안전 확
 ### 운영 계약 갱신과 남은 STEP
 
 재부팅/서비스정지 상태를 논리적 보호서비스와 runtimeinstance로 분리한다. 사용자가 승인한 stopped_allowed는 관리자·프로세스·listener·GPU·전환없음이 함께 확인된 경우만 적용한다. 연구방법변경이 아니며 품질결론은 새STEP실물전까지미평가다. [amendment](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/PLAN.md).
+
+### 최신 상태: B-034 한정 서비스 부재 정책 / 외부 GPU 차단
+
+OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 서비스 부재 관측과 별개로 시작 직전 외부GPU 작업이 발견돼 STEP은 미실행이다. BASE targetFAIL·CONTROL추가이득미관찰·STEP INCONCLUSIVE, 기본채택 근거없음을 유지한다. 남은 고정 비교를 자동재시도하거나 새방법 탐색으로 확대하지 않는다. [실측과 종료](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/RESULTS.md).

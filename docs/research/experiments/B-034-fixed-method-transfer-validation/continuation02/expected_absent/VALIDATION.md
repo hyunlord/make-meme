@@ -9,3 +9,7 @@ Spark의 실제 worker --preflight-only는 기존 Python으로 실행하며 torc
 Mac py_compile 및 whitespace 검사는 통과했다. ruff/basedpyright는 설치되어 있지 않아 NOT_RUN이며 새 패키지를 설치하지 않는다. 저장소 전체 타입 정리나 경고 억제를 수행하지 않았다. 기존24 fixture는 보존하며 새 검사 수에 포함하지 않는다.
 
 시간차 관측은 완전한 원자적 독점이 아니다. 비차단 연구 잠금은 이 실행 경로의 중복을 막는 범위이며 다른 프로그램을 통제하지 않는다. 서비스·외부GPU가 새로 나타나면 자체 worker를 중단하는 감시를 유지한다.
+
+## 실제 시작 관측
+
+최종 focused CPU13개와 Spark S/D preflight는 PASS했다. 실제 supervisor 첫 표본은 서비스 EXPECTED_ABSENT_OBSERVED였으나 외부GPU1개로 UNKNOWN_GPU_PID/반환2다. worker 미생성, own unit inactive/not-found. GPU 연산과 영상 품질은 NOT_RUN이며 runtime 서비스 재등장 검사는 fixture 범위다.
