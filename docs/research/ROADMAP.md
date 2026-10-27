@@ -408,3 +408,7 @@ SSH 연결이 회복되어 기존 수정의 실제 Spark preflight와 안전 확
 ### CONTINUATION_02 재개 실제 차단
 
 현재 장애는SSH가 아니라 보호서비스identity와queue 관측의 불충족이다. GPUempty/메모리충분만으로가드를통과시키지않고새GPU0으로중단한다. 원래서비스/큐의정상운영과신원계약확인이 남은STEP의전제이며방법탐색으로확대하지않는다. [RESUME_RESULTS](experiments/B-034-fixed-method-transfer-validation/continuation02/RESUME_RESULTS.md).
+
+### 운영 계약 갱신과 남은 STEP
+
+재부팅/서비스정지 상태를 논리적 보호서비스와 runtimeinstance로 분리한다. 사용자가 승인한 stopped_allowed는 관리자·프로세스·listener·GPU·전환없음이 함께 확인된 경우만 적용한다. 연구방법변경이 아니며 품질결론은 새STEP실물전까지미평가다. [amendment](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/PLAN.md).

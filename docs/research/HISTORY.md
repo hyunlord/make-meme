@@ -676,3 +676,7 @@ RECOVERY_01의 decode PASS/종료 NOT_CLEAN 및 BASE target 외형 FAIL을 보�
 ### CONTINUATION_02 재개 차단 — 현재 live safety 불충족
 
 SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID가 없으며8190큐 연결이 거부됐다. 기존guard 실제 OBSERVATION_FAILED(queue error+allowed_identity_mismatch)를 보존하고 allowlist/서비스/가드를 변경하지 않았다. 새heavy/sampler/decode0, STEP효과미평가다. 이전SSHtimeout 원인을 사후확정하지 않는다. [재개 결과](experiments/B-034-fixed-method-transfer-validation/continuation02/RESUME_RESULTS.md).
+
+### CONTINUATION_02 보호 서비스 상태 계약 amendment 착수
+
+사용자가 별도 의뢰서로 선택적 보호 서비스의 확인된 정상 중지를 허용하는 운영 계약 변경을 승인했다. 관리주체·논리identity·역할을 먼저 읽기 확인하고, ACTIVE_IDLE/STOPPED_CONFIRMED/UNKNOWN을 구분한다. 과거 PID 부재를 조용히 허용하거나 큐 오류를0으로 바꾸지 않는다. 기존방법·가드수치·자체종료신원은 유지하며 미사용STEP1/D1만조건부진행한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/PLAN.md).
