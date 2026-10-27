@@ -1,5 +1,7 @@
 # B 트랙 로드맵
 
+**2026-10-28 KST 착수: B-034 한정 부재 기대 정책.** 사용자가 이번 attempt의 관리자 중지 증명 전제를 OPTIONAL_EXPECTED_ABSENT로 대체했다. 현재 흔적 부재와 실행 중 충돌 감시를 함께 요구하며 과거 정상 종료를 선언하지 않는다. 미사용 STEP1/D1만 같은 입력·방법으로 진행하고 이전 BLOCKED/품질 판정은 보존한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/PLAN.md).
+
 **최신 재확인: SERVICE_RESUME_02 / BLOCKED_MANAGER_STATE_UNVERIFIED / GPU0.** 2026-10-27 14:34 UTC 세 표본에서 이전 외부 GPU 작업은 사라졌고 메모리·swap 조건은 충족했다. 정상 중지·전환 상태의 관리 근거가 없어 STEP은 미실행이다. 새 정책 활성화·서비스 조작·추가 fixture는 없으며 기존 결과와 미사용 예산을 보존한다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/recheck02/RESULTS.md). 아래 외부 GPU 차단은 당시 관측이다.
 
 **2026-10-27 최신 운영 상태: B-034 CONTINUATION_02 / UNKNOWN_OR_CONFLICT / 신규 GPU0.** 큐는 선택적 보호 대상이나 정상 중지·전환 상태를 입증할 관리자 근거가 확인되지 않았고, 세 표본 모두 외부 GPU 작업이 있었다. 서비스와 가드는 변경하지 않았다. BASE target FAIL·CONTROL 추가 이득 미관찰·STEP 미실행을 유지하며 방법 기본 채택은 보류다. 다음 재개의 전제는 권위 있는 서비스 상태 확인과 외부 GPU 충돌 부재다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/RESULTS.md). 아래 과거 상태는 당시 기록으로 보존한다.

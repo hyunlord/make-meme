@@ -1,0 +1,69 @@
+{
+  "focused_tests": 13,
+  "focused_tests_status": "PASS",
+  "prior24": "PRESERVED_NOT_RERUN",
+  "initial_red": "policy module absent (expected); intermediate copied bootstrap fixture lacked new required policy (2 errors), not relaxed",
+  "runtime_code_changed": "isolated copies only",
+  "private_path_fix": "service deployment root supplied via private CLI argument; refreshed freeze and actual Spark preflight after fix",
+  "code": {
+    "bootstrap.py": "1ca84c1037deedc7a88bfe9c465d497d54efd55982248ff207fef02310684a81",
+    "worker.py": "49a1a9ea8ad06a0b22e8c8c195a37268fbf9d7e645f1a333d6e98181945206d4",
+    "supervisor.py": "ad2b4394a658dafa55a7716b0265dedba2328da381bd8713d630ac5b1cc94574",
+    "policy.py": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620",
+    "prepare_resume.py": "f2b84167424b8da1d2ba029aa754706cf9f46d54f864213274adccc7a5b21432",
+    "safety.py": "472eb3152cd88ddc8cf8a9b62f131e78630ecff3c686854eed12cea7cc05b4f8",
+    "test_policy.py": "efdbc090ba85b5b7bd87d71478994dc6e7f22e8087347fa547c4fa072a9ee14c"
+  },
+  "stages": {
+    "STEP_S": {
+      "freeze_sha256": "66046db3bb9fce092a34e498b5169d103eb64037e7ab245a97bf73309c77d2ee",
+      "frozen_files": 48,
+      "method_input_hashes": {
+        "clean_constraint.py": "7c24c3c14d39e07ea77f01fd45ffe13c051e1c7ef14be77f8329348ed120aebb",
+        "mask_latent.safetensors": "faf6e317a383a59bf50a42627c340a5d243cc1f85bab8c41a4b50a1196b64bab",
+        "conditions.safetensors": "44744a365ed0c2813e52790619dcb7fae51d55950d4ff2b348714ced9deb5b8e",
+        "source_latent.safetensors": "2f9a30ee5604dad9e76da205b6dba96226a7c86e745f501c5ded88249f1a0af0",
+        "initial_noise.pt": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918"
+      },
+      "policy_sha256": "1bea3a12d2ed7a0249be05fa0c3b0f94d09bd832e0a332f131d7d8295df17a53",
+      "policy_mode": "OPTIONAL_EXPECTED_ABSENT",
+      "historical_allowed_snapshot_preserved": true,
+      "heavy_deadline_utc": "2026-10-27T17:28:44Z",
+      "preflight_status": "PASS",
+      "torch_imported": false,
+      "loader_report_created": false,
+      "live_decision": "CLEAR",
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "service_status": "EXPECTED_ABSENT_OBSERVED",
+      "duplicate_research_worker_pids": []
+    },
+    "STEP_D": {
+      "freeze_sha256": "32980b26d0ee50b2d20306d91b5a07455dba40e12ecbdd3aa1c3609ee842a1aa",
+      "frozen_files": 48,
+      "method_input_hashes": {
+        "clean_constraint.py": "7c24c3c14d39e07ea77f01fd45ffe13c051e1c7ef14be77f8329348ed120aebb",
+        "mask_latent.safetensors": "faf6e317a383a59bf50a42627c340a5d243cc1f85bab8c41a4b50a1196b64bab",
+        "conditions.safetensors": "44744a365ed0c2813e52790619dcb7fae51d55950d4ff2b348714ced9deb5b8e",
+        "source_latent.safetensors": "2f9a30ee5604dad9e76da205b6dba96226a7c86e745f501c5ded88249f1a0af0",
+        "initial_noise.pt": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918"
+      },
+      "policy_sha256": "f58d4e4ceb300153ea14098bd3f7c45f149b4012548472164bd7fae52dd601ed",
+      "policy_mode": "OPTIONAL_EXPECTED_ABSENT",
+      "historical_allowed_snapshot_preserved": true,
+      "heavy_deadline_utc": "2026-10-27T17:28:44Z",
+      "preflight_status": "PASS",
+      "torch_imported": false,
+      "loader_report_created": false,
+      "live_decision": "CLEAR",
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "service_status": "EXPECTED_ABSENT_OBSERVED",
+      "duplicate_research_worker_pids": []
+    }
+  },
+  "new_model_attempts": 0,
+  "typecheck": "NOT_RUN_TOOL_UNAVAILABLE_NO_INSTALL",
+  "lint": "NOT_RUN_TOOL_UNAVAILABLE_NO_INSTALL",
+  "orphan_worker_check": "Exact worker.py argv with known experiment stage path, excluding current preflight PID; starts block on any matches."
+}

@@ -688,3 +688,7 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### CONTINUATION_02 SERVICE_RESUME_02 — 외부 GPU 해소 / 관리자 상태 미확인 유지
 
 사용자의 재지시 후14:34:45/47/49UTC 새 표본은 GPU0·MemAvailable 약100.06GiB·swap사용0이었다. 과거 외부GPU 차단을 현재로 재사용하지 않는다. 기존 수동 launcher의 정상 중지·전환 상태 인터페이스는 확인되지 않아 BLOCKED_MANAGER_STATE_UNVERIFIED로 종료했다. 코드·정책·서비스 변경과 새 GPU0, CONT02 STEP예산 미사용이며 이전 실패/품질 판정을 보존한다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/recheck02/RESULTS.md).
+
+### 2026-10-28 KST B-034 CONTINUATION_02 한정 정책 승인 착수
+
+사용자가 이번 attempt에 한해 관리자 정상 중지 증명 전제를 OPTIONAL_EXPECTED_ABSENT로 명시적으로 대체했다. 과거 정상 종료로 재분류하지 않으며 기존 BLOCKED/UNKNOWN과 사용 장부를 보존한다. 현재 서비스 흔적·listener·외부GPU·중복worker 부재, 메모리/swap 및 실행 중 감시를 요구한다. 모델·방법·E/M·BASE/CONTROL은 그대로이며 미사용 STEP1/D1만 조건부 실행한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/PLAN.md).

@@ -1,0 +1,31 @@
+# 승인된 실행 전제와 관측, 그리고 생성 방법의 분리
+
+## 직관과 가정
+
+관리자 상태를 증명하지 못했다는 과거 사실과, 이번 한정 실행에서 서비스를 사용하지 않겠다는 사용자의 운영 승인은 서로 다른 정보다. 이번 정책은 과거 사실을 고치는 대신 승인된 실행 전제를 설정한다. 서비스가 미래에 절대로 시작되지 않는다는 증명이 아니므로 실행 중 관측과 자체 worker 중단 경로가 필요하다.
+
+## 논리와 실제 경로
+
+허용 조건을 `A ∧ O ∧ M ∧ L`로 쓴다. A는 attempt 전용 승인, O는 관련 프로세스/자식/listener/외부GPU 부재와 정상 관측, M은 시작72GiB·실행24GiB headroom 및 swap사용0, L은 중복 방지와 자체 worker 생애주기 검증이다. 어느 항의 관측 실패도 True로 바꾸지 않는다.
+
+정책 이름 OPTIONAL_EXPECTED_ABSENT와 관측 결과 EXPECTED_ABSENT_OBSERVED를 분리한다. queue 연결 거부가 나와도 counts는 null이다. A와 O가 모두 충족된 정확한 연결 거부만 이 한정 실행의 차단 조건에서 제외한다. timeout·권한 오류·listener와의 모순은 같은 예외가 아니다. 작은 연구 잠금은 외부 프로그램까지 통제하는 장비 독점 장치가 아니다.
+
+worker preflight와 supervisor는 같은 정책 설정을 사용해야 한다. preflight만 통과시키면 실제 실행에서 다른 계약을 적용하는 오류가 남는다. 기존 loader 초기화와 모델 계산에는 이 운영 정책을 섞지 않는다. 실제 검사·실행 결과는 RESULTS와 코드에 연결하며, 정책 이름 자체를 실행 성공으로 보지 않는다.
+
+## 생성 비교는 같은 수학을 유지한다
+
+기존 B033 방법은 scheduler의 clean prediction에 `z_clean' = M z_clean + (1-M) z_source`를 적용한다. M=1은 자유 편집, M=0은 원본 제약이다. FINAL_LATENT_ONLY는 sampler가 끝난 뒤 같은 식을 한 번 적용하며, STEP은40회의 clean 변환에 적용하므로 다음 noisy state와 history도 달라질 수 있다. 두 방식 모두 실제 target 외형을 source 쪽으로 되돌릴 위험이 있다.
+
+최종 비교에는 같은 `Y=(1-E)V+EG` 후합성을 적용한다. E=0의 source exact는 합성식의 성질이다. 원거리 배경이 복원됐다는 사실만으로 STEP의 추가 이득이라고 할 수 없고, 같은 후합성 뒤 편집 내부·경계·접촉에서 두 대조군보다 나아졌는지를 봐야 한다. 이 사례의 E/M은 잘못된 BASE SUV support에서 정해져 클래식 target의 정답 영역이 아니다.
+
+## 이해 확인 질문
+
+1. EXPECTED_ABSENT_OBSERVED가 과거 정상 종료를 증명하지 않는 이유는?
+2. queue counts=null인 채 조건부 시작이 가능해도 이를0으로 기록하면 안 되는 이유는?
+3. STEP의 도로가 깨끗해졌지만 클래식 target이 없으면 어떤 판정이 필요한가?
+
+## 별도 해설
+
+1. 이번 승인 아래 현재 흔적 부재를 관측한 것이며 과거 lifecycle 증거와 미래 독점을 확보한 것이 아니다.
+2. 예외 허용은 정책 판단이고0은 측정값이다. 연결 거부에서는 실제 큐 수를 측정하지 않았다.
+3. 보호 장면의 부분 개선과 target 외형 FAIL, 결합 목표 FAIL을 함께 기록한다. BASE부터 없던 target을 유지한 것을 non-regression PASS로 계산하지 않는다.
