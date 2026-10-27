@@ -2,6 +2,8 @@
 
 상태 PREPARING / 생성 전 등록. 작성 2026-10-27. 시작 원격 `d401b0180168bd3db4b554ba127f1395c80c9c78`. 사용자 실행 지시와 [전체 의뢰서](../../work_orders/20261027-B034-fixed-method-transfer-validation.md)가 범위를 정의한다. 원문의 PROPOSED는 문서 작성 당시 상태다. Spark 실제 조회에서 중복 B034 실행/산출물이 없고 기존 서비스만 있음을 확인했다.
 
+종료 갱신: **BLOCKED_AT_BASE_TEARDOWN**. 아래는 사전 계획으로 보존한다. 이미지2회, 차량 ENC/BASE각1회를 실행했고 final latent를 저장했지만 종료 가드로 decode/STEP은 미실행이다. 인물은 ANCHOR_UNSUITABLE로 영상 미실행이다. [RESULTS](RESULTS.md).
+
 ## 질문과 고정 방법
 
 B033의 국소 PARTIAL을 보존하고 새 강체/비강체 입력에서 같은 규칙이 target 외형·source 동작을 훼손하지 않으면서 두 대조군보다 편집 내부/경계를 개선하는지 확인한다. B032는 저비용 기준선, B031 결합 FAIL은 그대로다. 새 강도·스케줄·마스크 탐색은 하지 않는다.

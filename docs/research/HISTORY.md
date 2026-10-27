@@ -630,3 +630,9 @@ B032 저비용 기준선과 B031/과거 실패는 보존한다. 국소 이득의
 ### B-034 앵커 단계 종료와 조건부 범위 축소
 
 사전 입력 94c3341 이후 고정 두 이미지 모두40step/80forward로 생성했다. 차량은 source 전면 접근 배치와 어두운 클래식 외형을 유지해 ELIGIBLE, 인물은 source 측면 보행 대신 큰 뒷모습으로 바뀌어 ANCHOR_UNSUITABLE이다. 인물 영상은 전부 NOT_RUN이며 추가 사진/과제로 대체하지 않는다. Qwen 정상 종료·메모리 회복 후 9b821a7에 고정한 차량 영상 경로만 진행한다. 이 범위 축소는 방법 성능에 따른 선별이 아니라 사전 앵커 적합성 규칙이며, 인물 앞단 실패도 전체 시스템 결과에 포함한다. [ANCHORS](experiments/B-034-fixed-method-transfer-validation/ANCHORS.md).
+
+### B-034 종료 — BASE latent 보존 / downstream BLOCKED
+
+차량 ENC1과 BASE sampler1은 실제40step/80forward 및 finite FP32 final latent 저장을 완료했다. 종료 watchdog의 reason은 `other_service_work`, returncode0/MainPID0이다. 마지막 cgroup.procs가 빈 종료 시점이지만 발동 GPU PID/queue 응답은 기록되지 않아 원인 UNKNOWN으로 남겼다. 이후 자원 회복·허용 서비스만 남은 사실은 과거 이유를 무효화하지 않는다. predecessor gate를 완화하지 않고 BASE_D/CONTROL/STEP은 모두 NOT_RUN, sampler 재시도0이다.
+
+이번 실제 이미지2/조건1/sampler1/영상decode0/학습0. GPU worker wall 합35.65분이며 주석·검토·패키징은 별도다. 인물 앞단 실패와 차량의 비교 미실행을 모두 보존하므로 B033 국소 개선의 전이·회귀는 판단하지 못했다. source MP4의 Chrome 색상 오류는 원본 불변의 PNG 기반 새 preview로 분리했고 temporalUNVERIFIED다. 자체 worker는 종료했다. 다음은 저장된 BASE latent를 활용한 제한된 decode 가능 여부 하나로 남기며, 이번에 가드 수정·추가 생성·후속 예약을 하지 않는다. [RESULTS](experiments/B-034-fixed-method-transfer-validation/RESULTS.md), [COSTS](experiments/B-034-fixed-method-transfer-validation/COSTS.md), [LATENT_REUSE](experiments/B-034-fixed-method-transfer-validation/LATENT_REUSE.md).
