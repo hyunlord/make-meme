@@ -384,3 +384,7 @@ B-029 실행 전 고정 완료: 기존16leaf를 보존한5consumer, 실제 지�
 저장된 BASE를 새 sampler 없이 VAE decode1회로 복구했다. 기술 decode PASS와 종료 guard UNKNOWN_GPU_PID / NOT_CLEAN을 분리한다. 기존 과거 원인 UNKNOWN·비강체 앵커 실패와 B034 방법 비교 NOT_RUN을 유지한다. [복구 결과](experiments/B-034-fixed-method-transfer-validation/recovery/RECOVERY_RESULTS.md). CONTROL/STEP은 자동으로 이어가지 않는다.
 
 복구 BASE는 target 클래식 외형을 유지하지 못했다(FAIL). 거친 접근/장면 배치의 부분 보존과 구분한다. 이 관측만으로 미실행 STEP을 기각·채택하지 않으며 이번 복구 범위에서 종료한다.
+
+### B-034 CONTINUATION_01 — 남은 고정 비교
+
+사용자 별도 승인으로 종료 신원을 보완하고 같은 차량의 FINAL_ONLY/STEP을 마무리한다. 기존 BASE target FAIL을 유지하며 scene/context 이득과 외형 전파 실패를 분리한다. [사전 amendment](experiments/B-034-fixed-method-transfer-validation/continuation/PLAN_AMENDMENT.md). 기존 복구 실패·비강체 미실행은 소급 변경하지 않는다. 추가 방법/사례/학습 탐색은 범위 밖이다.

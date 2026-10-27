@@ -650,3 +650,7 @@ B032 저비용 기준선과 B031/과거 실패는 보존한다. 국소 이득의
 차량 출력의 외형/동작/장면 검토는 복구 보고서에 분리하며 CONTROL/STEP 방법 비교는 계속 NOT_RUN이다. 비강체 ANCHOR_UNSUITABLE·B033 PARTIAL과 기존 B034 중단은 그대로다. 추가 생성·예약은 하지 않는다.
 
 RECOVERY_01 정적 검토에서는 전17장 BASE가 target/A0의 클래식 노출 바퀴 차량을 유지하지 못하고 현대적인 닫힌 SUV/왜건형으로 돌아갔다. 원본의 거친 접근과 도로·산 배치는 대략 유지되지만 target 외형 FAIL, 세부 장면/접촉 UNCERTAIN, temporal UNVERIFIED다. 큰 별도 도로 그래픽은 이번 배열에서 미관찰이며 이를 전체 교체 성공으로 올리지 않는다. STEP 효과는 여전히 NOT_RUN이다.
+
+### 2026-10-27 B-034 CONTINUATION_01 착수
+
+RECOVERY_01의 decode PASS/종료 NOT_CLEAN 및 BASE target 외형 FAIL을 보존한다. 최신 원격00da734에서 사용자 승인된 종료 신원 최소 보완과 남은 CONTROL/STEP 비교를 시작한다. 동일 프로세스의 정상 종료만 bounded 관측하며 기존 queue/PID/memory 보호와 전역 predecessor는 유지한다. 같은 source·BASE에서 고정한 E/M으로 FINAL_ONLY decode1 및 STEP sampler1/decode1만 허용한다. BASE 재생성/재decode·encoder·학습0이다. [실행 amendment](experiments/B-034-fixed-method-transfer-validation/continuation/PLAN_AMENDMENT.md). 현재 PREPARING이며 영상 비교 성공은 미실행이다.
