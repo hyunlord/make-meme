@@ -13,3 +13,5 @@ STEP은 tiny CUDA와 CPU staged weights 적재까지 실행됐다. 34.765 s의 `
 새 VAE decode 1회, BASE/source decode 0회, encoder 0회, 새 이미지 0회, 학습 0회, 설치 0회. CUDA allocator·cgroup·RSS·MemAvailable은 중복/서로 다른 회계이므로 합산하지 않는다. cgroup의 file cache를 GPU tensor 메모리라고 해석하지 않는다.
 
 원시 수치·출력 해시와 phase 목록은 [MEASUREMENTS.json](MEASUREMENTS.json)에 남긴다. CPU support/합성/전송 비용은 별도 산출물 기록과 합쳐 전체 비용으로 검토해야 한다. 실제 연속 재생 품질 검수는 수행하지 않았으며 temporal=UNVERIFIED다.
+
+CPU support/후합성/패키징 및 Spark→Mac 전송117.785초의 실제 비용과 양 호스트 검증은 [DELIVERY](DELIVERY.md)에 기록했다. 준비·문서 작업을 포함한 전체 wall의 개별 구간은 모두 계측하지 않았으므로 위 실행 비용의 합을 전체 비용으로 주장하지 않는다.
