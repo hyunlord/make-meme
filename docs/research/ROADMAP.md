@@ -374,3 +374,7 @@ B-029 실행 전 고정 완료: 기존16leaf를 보존한5consumer, 실제 지�
 ## B-029 종료 — 기술 연결과 품질 승격 분리
 
 8/8sampler·8/8decode·재시도0을 완료하고 자체GPU worker를 종료했다. 기존 입력16leaf와40step80forward를 보존한 단일 개입이 실제 출력에 영향을 줬지만 사전 결합 개선 기준은 미충족이다. 이번 고정 설정은 기본 경로에 채택하지 않고, CONTROL을 best-of 대체 방법으로 고르지 않는다. B-028/B-027/B-026 및 과거 학습 실패는 그대로 보존한다.
+
+### 2026-10-27 B-034 RECOVERY_01
+
+기존 BASE latent의 무결성과 새 live safety를 검증해 VAE-only decode 최대1회를 시도한다. 새 가설/BASE 재생성이 아니며 기존 중단 기록을 소급 수정하지 않는다. CONTROL/STEP와 고정 방법 비교는 NOT_RUN으로 유지한다. [계획](experiments/B-034-fixed-method-transfer-validation/recovery/RECOVERY_PLAN.md).
