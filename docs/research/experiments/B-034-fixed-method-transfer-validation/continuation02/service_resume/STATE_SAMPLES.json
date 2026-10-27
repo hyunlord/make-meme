@@ -1,0 +1,57 @@
+{
+  "classification": "UNKNOWN_OR_CONFLICT",
+  "blockers": [
+    "MANAGER_STATE_UNVERIFIED",
+    "EXTERNAL_GPU_PROCESS_PRESENT"
+  ],
+  "optional_dependency_role": "CONFIRMED_SAFETY_OBSERVER_ONLY",
+  "stopped_confirmed": false,
+  "samples": [
+    {
+      "utc": "2026-10-27T12:48:46.045298+00:00",
+      "same_boot_across_samples": true,
+      "listener_8190_present": false,
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "queue_error": "CONNECTION_REFUSED",
+      "external_gpu_process_count": 1,
+      "external_gpu_alias": "EXTERNAL_GPU_1",
+      "user_manager_jobs": 0,
+      "system_manager_jobs": 0,
+      "service_manager_state": "UNVERIFIED"
+    },
+    {
+      "utc": "2026-10-27T12:48:48.086716+00:00",
+      "same_boot_across_samples": true,
+      "listener_8190_present": false,
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "queue_error": "CONNECTION_REFUSED",
+      "external_gpu_process_count": 1,
+      "external_gpu_alias": "EXTERNAL_GPU_1",
+      "user_manager_jobs": 0,
+      "system_manager_jobs": 0,
+      "service_manager_state": "UNVERIFIED"
+    },
+    {
+      "utc": "2026-10-27T12:48:50.127413+00:00",
+      "same_boot_across_samples": true,
+      "listener_8190_present": false,
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "queue_error": "CONNECTION_REFUSED",
+      "external_gpu_process_count": 1,
+      "external_gpu_alias": "EXTERNAL_GPU_1",
+      "user_manager_jobs": 0,
+      "system_manager_jobs": 0,
+      "service_manager_state": "UNVERIFIED"
+    }
+  ],
+  "code_changed": false,
+  "new_gpu_worker": 0,
+  "heavy_attempt": 0,
+  "sampler": 0,
+  "decode": 0,
+  "new_cpu_fixture_runs": 0,
+  "private_receipt_sha256": "95245f9d5edfecf2283b9291f118ce87e677cfb9d871f214e1a76d3e8e1c340f"
+}

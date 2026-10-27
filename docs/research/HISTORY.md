@@ -680,3 +680,7 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### CONTINUATION_02 보호 서비스 상태 계약 amendment 착수
 
 사용자가 별도 의뢰서로 선택적 보호 서비스의 확인된 정상 중지를 허용하는 운영 계약 변경을 승인했다. 관리주체·논리identity·역할을 먼저 읽기 확인하고, ACTIVE_IDLE/STOPPED_CONFIRMED/UNKNOWN을 구분한다. 과거 PID 부재를 조용히 허용하거나 큐 오류를0으로 바꾸지 않는다. 기존방법·가드수치·자체종료신원은 유지하며 미사용STEP1/D1만조건부진행한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/PLAN.md).
+
+### CONTINUATION_02 서비스 상태 확인 종료 — UNKNOWN_OR_CONFLICT / GPU0
+
+큐는 선택된 생성 경로의 필수 의존성이 아닌 보호 대상임을 확인했다. 수동 launcher는 확인했지만 현재 정상 중지·전환 부재의 관리자 상태는 미확인이다. 12:48:46/48/50UTC 세 표본 모두 별도 GPU 작업이 있어 독립적으로 차단했다. 정책 활성화·allowlist 변경·서비스 조작·새 GPU/fixture 실행0이며 미사용 STEP 예산과 모든 과거 실패를 보존한다. STEP 추가 이득 및 방법 채택 근거는 여전히 미평가다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/RESULTS.md). 자동 재개/예약 없음.

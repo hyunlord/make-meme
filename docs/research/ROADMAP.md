@@ -1,5 +1,7 @@
 # B 트랙 로드맵
 
+**2026-10-27 최신 운영 상태: B-034 CONTINUATION_02 / UNKNOWN_OR_CONFLICT / 신규 GPU0.** 큐는 선택적 보호 대상이나 정상 중지·전환 상태를 입증할 관리자 근거가 확인되지 않았고, 세 표본 모두 외부 GPU 작업이 있었다. 서비스와 가드는 변경하지 않았다. BASE target FAIL·CONTROL 추가 이득 미관찰·STEP 미실행을 유지하며 방법 기본 채택은 보류다. 다음 재개의 전제는 권위 있는 서비스 상태 확인과 외부 GPU 충돌 부재다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/RESULTS.md). 아래 과거 상태는 당시 기록으로 보존한다.
+
 **B-034 BLOCKED_AT_BASE_TEARDOWN / 방법 비교 NOT_RUN**: 새 공개 두 입력의 이미지2회는 완료했다. 차량은 적합해 BASE40step/80forward와 final latent까지 확보했지만 watchdog `other_service_work`의 발동 원인을 확정하지 못해 decode/STEP을 중단했다. 인물은 source 측면 보행을 큰 뒷모습으로 바꿔 ANCHOR_UNSUITABLE이며 사례를 대체하지 않았다. B033 고정 방법의 새 입력 추가 이득·회귀는 미평가, 기본 채택 보류다. 다음 한 작업은 저장된 BASE latent의 제한된 decode 가능 여부이며 별도 실행 판단을 남긴다. [RESULTS](experiments/B-034-fixed-method-transfer-validation/RESULTS.md), [가드 관측](experiments/B-034-fixed-method-transfer-validation/GUARD_EVENT.md). 아래 B033 및 과거 판정은 그대로다.
 
 **B-033 COMPLETED / 실행 PASS / 국소 개선 PARTIAL / 기본 채택 보류**: 동일 편집 영역의 RGB 후합성 뒤에도 생성 중 clean 제약은 기존 RGB 합성·최종 latent 혼합에 남던 바퀴 아래 색상 조각을 더 작은 밝은 흔적으로 줄였다. 높은 은색 target 외형과 거친 회전은 유지됐지만 접촉·그림자는 UNCERTAIN, temporal은 UNVERIFIED다. 신규 sampler 1회·40step·80forward, GPU 단계 합계 17.36분. B-032의 저비용 기준선과 과거 실패는 보존한다. 다음 검토 가설은 다른 공개 사례에서 같은 고정 제약의 국소 이득과 target 회귀 여부를 확인하는 것 하나이며 자동 실행하지 않는다. [RESULTS](experiments/B-033-clean-prediction-constraint/RESULTS.md).
