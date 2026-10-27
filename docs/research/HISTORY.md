@@ -654,3 +654,9 @@ RECOVERY_01 정적 검토에서는 전17장 BASE가 target/A0의 클래식 노�
 ### 2026-10-27 B-034 CONTINUATION_01 착수
 
 RECOVERY_01의 decode PASS/종료 NOT_CLEAN 및 BASE target 외형 FAIL을 보존한다. 최신 원격00da734에서 사용자 승인된 종료 신원 최소 보완과 남은 CONTROL/STEP 비교를 시작한다. 동일 프로세스의 정상 종료만 bounded 관측하며 기존 queue/PID/memory 보호와 전역 predecessor는 유지한다. 같은 source·BASE에서 고정한 E/M으로 FINAL_ONLY decode1 및 STEP sampler1/decode1만 허용한다. BASE 재생성/재decode·encoder·학습0이다. [실행 amendment](experiments/B-034-fixed-method-transfer-validation/continuation/PLAN_AMENDMENT.md). 현재 PREPARING이며 영상 비교 성공은 미실행이다.
+
+### B-034 CONTINUATION_01 종료 — CONTROL 완료 / STEP loader 연결 오류 중단
+
+사전9652805/8b65e8a 뒤 종료 신원 보완과 고정 S/T/E/M을 사용했다. CONTROL_FINAL_ONLY decode1은 finite raw·17프레임·MP4 및 정상 종료 receipt/fresh safety를 통과했다. STEP은 신규 wrapper가 기존 B007E_LOADER_REPORT 환경변수를 빠뜨려 CPU staged weight 적재 뒤 첫 forward 전에 KeyError로 실패했다. 실패 포함 시도1회를 소비했으며 실제 모델forward/step/constraint0, STEP final latent 없음·decode NOT_RUN이다. 수정 재시도하지 않았다. 기존 가드 실패 이유와 비강체 실패는 모두 보존한다.
+
+전체17장 및 local0/8/16 정적 비교에서 동일 RGB_POST 뒤 FINAL_ONLY의 SUV형 외형·하부 검은 조각·우측 도로 경계는 BASE와 대체로 남아 뚜렷한 추가 이득을 보지 못했다. target FAIL·temporal UNVERIFIED다. STEP 효과는 운영 연결 오류 때문에 INCONCLUSIVE/출력 NOT_RUN이며 방법 자체 FAIL로 바꾸지 않는다. 기본 채택 근거는 미확보다. 다음 하나는 같은 저장 입력/영역에서 loader 환경 계약을 복원·사전검증한 한정 STEP 완료이며 별도 승인 전 실행하지 않는다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation/RESULTS.md).

@@ -1,0 +1,1 @@
+B034 CONTINUATION_01 CPU support, exact E postcomposition, and review packaging only. Existing BASE raw is external/read-only and excluded from compact/full duplication. New FINAL/STEP raw and final latents belong to full. No GPU work in media code. Viewer technical QA is distinct from temporal quality; UNVERIFIED remains.

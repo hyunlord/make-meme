@@ -1,0 +1,198 @@
+{
+  "CONTROL_D": {
+    "supervisor_seconds": 14.640493869781494,
+    "status": "COMPLETE",
+    "returncode": 0,
+    "guard_reason": "COMPLETE",
+    "final_safety_decision": "CLEAR",
+    "normal_exit_recorded": true,
+    "phases": [
+      {
+        "phase": "vae_load_start",
+        "elapsed_seconds": 2.8582190229790285,
+        "cuda_allocated": 0,
+        "cuda_reserved": 0,
+        "cuda_peak_allocated": 0
+      },
+      {
+        "phase": "vae_load_complete",
+        "elapsed_seconds": 3.2155125529970974,
+        "cuda_allocated": 530316288,
+        "cuda_reserved": 534773760,
+        "cuda_peak_allocated": 530316288
+      },
+      {
+        "phase": "decode_start",
+        "elapsed_seconds": 3.2321684840135276,
+        "cuda_allocated": 530316288,
+        "cuda_reserved": 534773760,
+        "cuda_peak_allocated": 530316288
+      },
+      {
+        "phase": "decode_complete",
+        "elapsed_seconds": 9.862470088060945,
+        "cuda_allocated": 623901696,
+        "cuda_reserved": 12415139840,
+        "cuda_peak_allocated": 9565265920
+      },
+      {
+        "phase": "raw_and_png_saved",
+        "elapsed_seconds": 11.603584634023719,
+        "cuda_allocated": 530316288,
+        "cuda_reserved": 12415139840,
+        "cuda_peak_allocated": 9565265920
+      },
+      {
+        "phase": "mp4_verified",
+        "elapsed_seconds": 11.911241200985387,
+        "cuda_allocated": 530316288,
+        "cuda_reserved": 12415139840,
+        "cuda_peak_allocated": 9565265920
+      },
+      {
+        "phase": "worker_complete",
+        "elapsed_seconds": 11.931190605042502,
+        "cuda_allocated": 530316288,
+        "cuda_reserved": 12415139840,
+        "cuda_peak_allocated": 9565265920
+      }
+    ],
+    "min_mem_available_gib": 76.33848190307617,
+    "max_swap_bytes": 0,
+    "cgroup_peak_bytes": 1771421696,
+    "max_cuda_allocated_bytes": 9565265920,
+    "artifacts": {
+      "outputs/raw_output.pt": {
+        "bytes": 93587006,
+        "sha256": "1b9367c85a9c800b877f556010f3d498aa1e86de4ffa7b4ac68d22592d784328"
+      },
+      "outputs/output.mp4": {
+        "bytes": 345426,
+        "sha256": "af2d5730048294728cdc58f93dfb19d5968e9ca1faa25a4c33f5229bb98e12af"
+      },
+      "artifacts/final_latent.safetensors": {
+        "bytes": 2293840,
+        "sha256": "7ca523dc5551309db0e594afbd9c41f1ec174e029b54a00526107d1a3a2ed513"
+      }
+    },
+    "unit_final": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainPID": "0",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "STEP_S": {
+    "supervisor_seconds": 40.4789879322052,
+    "status": "NOT_CLEAN",
+    "returncode": 1,
+    "guard_reason": "COMPLETE",
+    "final_safety_decision": "UNIT_EXIT_NOT_VERIFIED",
+    "normal_exit_recorded": false,
+    "phases": [
+      {
+        "phase": "before_official_import",
+        "elapsed_seconds": 2.1263730640057474,
+        "cuda_allocated": 0,
+        "cuda_reserved": 0,
+        "cuda_peak_allocated": 0
+      },
+      {
+        "phase": "after_official_import",
+        "elapsed_seconds": 2.1418262149672955,
+        "cuda_allocated": 0,
+        "cuda_reserved": 0,
+        "cuda_peak_allocated": 0
+      },
+      {
+        "phase": "tiny_copy_start",
+        "elapsed_seconds": 2.1572525500087067,
+        "cuda_allocated": 0,
+        "cuda_reserved": 0,
+        "cuda_peak_allocated": 0
+      },
+      {
+        "phase": "tiny_copy_end",
+        "elapsed_seconds": 2.3523033149540424,
+        "cuda_allocated": 512,
+        "cuda_reserved": 2097152,
+        "cuda_peak_allocated": 512
+      },
+      {
+        "phase": "tiny_kernel_start",
+        "elapsed_seconds": 2.36701930698473,
+        "cuda_allocated": 512,
+        "cuda_reserved": 2097152,
+        "cuda_peak_allocated": 512
+      },
+      {
+        "phase": "tiny_kernel_complete",
+        "elapsed_seconds": 2.3879145309329033,
+        "cuda_allocated": 512,
+        "cuda_reserved": 2097152,
+        "cuda_peak_allocated": 512
+      },
+      {
+        "phase": "dit_load_start",
+        "elapsed_seconds": 2.412379198940471,
+        "cuda_allocated": 512,
+        "cuda_reserved": 2097152,
+        "cuda_peak_allocated": 512
+      },
+      {
+        "phase": "dit_meta_init_start",
+        "elapsed_seconds": 2.4160605650395155,
+        "cuda_allocated": 512,
+        "cuda_reserved": 2097152,
+        "cuda_peak_allocated": 512
+      },
+      {
+        "phase": "dit_meta_init_done",
+        "elapsed_seconds": 2.472305465955287,
+        "cuda_allocated": 512,
+        "cuda_reserved": 2097152,
+        "cuda_peak_allocated": 512
+      },
+      {
+        "phase": "dit_staged_weights_done",
+        "elapsed_seconds": 37.17731855798047,
+        "cuda_allocated": 512,
+        "cuda_reserved": 2097152,
+        "cuda_peak_allocated": 512
+      }
+    ],
+    "min_mem_available_gib": 58.98725509643555,
+    "max_swap_bytes": 0,
+    "cgroup_peak_bytes": 66578448384,
+    "max_cuda_allocated_bytes": 512,
+    "artifacts": {},
+    "unit_final": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainPID": "OWN_WORKER",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "REGISTERED_INVOCATION"
+    }
+  },
+  "counts": {
+    "control_vae_decode": 1,
+    "step_stage_attempts": 1,
+    "step_model_forward": 0,
+    "step_scheduler_updates": 0,
+    "step_vae_decode": 0,
+    "new_image": 0,
+    "source_base_decode": 0,
+    "encoder": 0,
+    "training": 0,
+    "retry": 0
+  }
+}

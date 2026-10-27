@@ -47,3 +47,7 @@ PID는 재사용될 수 있는 숫자다. 관측 신원은 `(boot identity, PID,
 3. 같은 PID가 systemd MainPID와 일치하지만 proc가 사라졌다면 왜 바로 자체 종료로 허용할 수 없는가?
 
 해설은 [ANSWERS](ANSWERS_KO.md)에 분리한다.
+
+## 이번 실제 관측과 실패의 위치
+
+FINAL_ONLY는 실제 decode를 끝냈다. 원거리 raw 배경 변화는 있었지만 동일 E 후합성 뒤 SUV 외형과 바퀴 아래/우측 경계 조각의 뚜렷한 개선은 관찰하지 못했다. STEP은 loader 보고서 경로 환경변수 누락으로 첫 forward 전에 실패했다. 따라서 반복 clean 제약의 이번 효과를 수식만으로 추정하거나 실패한 것으로 판정할 수 없다. CPU fixture는 종료 정책/혼합 endpoint의 검사였고 전체 loader 실행 계약을 모두 검증한 것은 아니었다. 이 검증 공백과 실행 오류를 보존한다.

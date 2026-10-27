@@ -388,3 +388,7 @@ B-029 실행 전 고정 완료: 기존16leaf를 보존한5consumer, 실제 지�
 ### B-034 CONTINUATION_01 — 남은 고정 비교
 
 사용자 별도 승인으로 종료 신원을 보완하고 같은 차량의 FINAL_ONLY/STEP을 마무리한다. 기존 BASE target FAIL을 유지하며 scene/context 이득과 외형 전파 실패를 분리한다. [사전 amendment](experiments/B-034-fixed-method-transfer-validation/continuation/PLAN_AMENDMENT.md). 기존 복구 실패·비강체 미실행은 소급 변경하지 않는다. 추가 방법/사례/학습 탐색은 범위 밖이다.
+
+### B-034 CONTINUATION_01 실제 종료 상태
+
+CONTROL_FINAL_ONLY와 정상 종료 관측은 완료했다. 동일 후합성 뒤 국소 추가 이득은 미관찰이고 target 외형 FAIL은 유지된다. STEP은 새 wrapper의 loader report 환경변수 누락으로 첫 forward 전에 실패하여 방법 비교는 미완료다. B033 방법의 기본 채택은 계속 보류하며 운영 오류를 방법 효과의 반증으로 사용하지 않는다. 다음 우선순위 하나는 동일 입력/고정 영역의 남은 STEP을 기존 환경 계약대로 완료하는 것이며, 별도 지시 전 재실행·새 연구는 없다. [RESULTS](experiments/B-034-fixed-method-transfer-validation/continuation/RESULTS.md).
