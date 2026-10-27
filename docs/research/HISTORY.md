@@ -660,3 +660,11 @@ RECOVERY_01의 decode PASS/종료 NOT_CLEAN 및 BASE target 외형 FAIL을 보�
 사전9652805/8b65e8a 뒤 종료 신원 보완과 고정 S/T/E/M을 사용했다. CONTROL_FINAL_ONLY decode1은 finite raw·17프레임·MP4 및 정상 종료 receipt/fresh safety를 통과했다. STEP은 신규 wrapper가 기존 B007E_LOADER_REPORT 환경변수를 빠뜨려 CPU staged weight 적재 뒤 첫 forward 전에 KeyError로 실패했다. 실패 포함 시도1회를 소비했으며 실제 모델forward/step/constraint0, STEP final latent 없음·decode NOT_RUN이다. 수정 재시도하지 않았다. 기존 가드 실패 이유와 비강체 실패는 모두 보존한다.
 
 전체17장 및 local0/8/16 정적 비교에서 동일 RGB_POST 뒤 FINAL_ONLY의 SUV형 외형·하부 검은 조각·우측 도로 경계는 BASE와 대체로 남아 뚜렷한 추가 이득을 보지 못했다. target FAIL·temporal UNVERIFIED다. STEP 효과는 운영 연결 오류 때문에 INCONCLUSIVE/출력 NOT_RUN이며 방법 자체 FAIL로 바꾸지 않는다. 기본 채택 근거는 미확보다. 다음 하나는 같은 저장 입력/영역에서 loader 환경 계약을 복원·사전검증한 한정 STEP 완료이며 별도 승인 전 실행하지 않는다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation/RESULTS.md).
+
+### 2026-10-27 B-034 CONTINUATION_02 착수
+
+기준62df7de의 모든 실패/품질 판정을 보존하고 사용자 승인된 남은 STEP만 복구한다. 실제 worker와 preflight의 공통 환경 초기화로 loader report 경로를 모델 접근 전에 확인한다. CONT01의 정상 종료 guard와 B033 수식·동일 E/M·대조군은 변경하지 않는다. 새 STEP loading/sampler1·decode1, BASE/CONTROL/encoder0이며 CPU검사와 fresh safety 뒤에만 실행한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/PLAN.md). 현재 PREPARING, 실제 STEP 효과는 아직 미평가다.
+
+### B-034 CONTINUATION_02 종료 — 로컬 수정 / BLOCKED_SSH
+
+공통 bootstrap과 실제 worker preflight를 구현하고 Mac CPU24개를 통과했다. 기존 safety/supervisor는 byte동일이다. 그러나 승인 Spark SSH2회가 timeout으로 실패해 실제 Python preflight·현재중복상태·live safety는 확인하지 못했다. 새로운 loading/sampler/forward/step/decode0이며 원격worker를 만들지 않았다. STEP 시각 비교는 미완료이고 BASEtargetFAIL/CONTROL추가이득미관찰/과거실패를 유지한다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/RESULTS.md). 연결회복 뒤 동일코드·동일입력의 실제preflight가 다음 전제다. 자동예약 없음.

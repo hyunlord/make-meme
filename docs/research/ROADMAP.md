@@ -392,3 +392,11 @@ B-029 실행 전 고정 완료: 기존16leaf를 보존한5consumer, 실제 지�
 ### B-034 CONTINUATION_01 실제 종료 상태
 
 CONTROL_FINAL_ONLY와 정상 종료 관측은 완료했다. 동일 후합성 뒤 국소 추가 이득은 미관찰이고 target 외형 FAIL은 유지된다. STEP은 새 wrapper의 loader report 환경변수 누락으로 첫 forward 전에 실패하여 방법 비교는 미완료다. B033 방법의 기본 채택은 계속 보류하며 운영 오류를 방법 효과의 반증으로 사용하지 않는다. 다음 우선순위 하나는 동일 입력/고정 영역의 남은 STEP을 기존 환경 계약대로 완료하는 것이며, 별도 지시 전 재실행·새 연구는 없다. [RESULTS](experiments/B-034-fixed-method-transfer-validation/continuation/RESULTS.md).
+
+### B-034 CONTINUATION_02 — 실행 계약 복구와 남은 비교
+
+새 방법 탐색 대신 같은 입력/영역의 미완료 STEP을 명시적 loader 환경 계약으로 복구한다. BASE targetFAIL/FINAL_ONLY 추가이득미관찰/CONT01 첫forward전실패는 보존한다. CPU preflight 뒤 새 안전 상태를 확인하여 승인된1회만 실행하고, 두 대조군 대비 국소이득과 외형실패 해소를 분리한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/PLAN.md). 기본채택은 아직 근거없음이다.
+
+### B-034 CONTINUATION_02 실제 상태
+
+loader 환경 초기화의 로컬 CPU 검증은 완료했으나 Spark 접속 timeout으로 BLOCKED_SSH다. 새 GPU 실행0, STEP효과 미평가, 기본채택 근거없음. 다음 우선순위는 연결복구 후 실제Python preflight/fresh safety를 통과한 동일STEP 완료이며 새로운 연구방법 탐색이 아니다. [RESULTS](experiments/B-034-fixed-method-transfer-validation/continuation02/RESULTS.md).

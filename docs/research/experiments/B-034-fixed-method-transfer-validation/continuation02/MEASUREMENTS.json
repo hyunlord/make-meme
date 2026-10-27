@@ -1,0 +1,16 @@
+{
+  "status": "BLOCKED_SSH",
+  "started_utc": "2026-10-27T09:39:00Z",
+  "observed_utc": "2026-10-27T09:44:31.869706+00:00",
+  "new_model_loads": 0,
+  "new_sampler_attempts": 0,
+  "model_forwards": 0,
+  "scheduler_steps": 0,
+  "constraint_calls": 0,
+  "new_vae_decodes": 0,
+  "gpu_memory": "NOT_MEASURED",
+  "spark_live_safety": "NOT_OBSERVED",
+  "remote_transfer": "NOT_RUN",
+  "local_cpu_tests": 24,
+  "ssh_attempts": 2
+}

@@ -1,0 +1,46 @@
+{
+  "status": "LOCAL_CPU_PASS_REMOTE_NOT_RUN",
+  "local_tests": {
+    "bootstrap": 10,
+    "inherited_guard": 14,
+    "total": 24,
+    "result": "PASS"
+  },
+  "initial_fixture_failures": {
+    "count": 3,
+    "reason": "Mac temporary directory /var resolves to /private/var; expected test fixture root normalized with resolve, production validator unchanged"
+  },
+  "guard_byte_identity": {
+    "safety.py": true,
+    "supervisor.py": true,
+    "test_safety.py": true
+  },
+  "entrypoint_preflight": {
+    "same_function_as_real_worker": true,
+    "torch_imported": false,
+    "wan_imported": false,
+    "loader_report_created": false,
+    "worker_attempt_created": false
+  },
+  "remote": {
+    "status": "BLOCKED_SSH",
+    "connection_attempts": 2,
+    "second_connect_timeout_seconds": 10,
+    "error": "ssh: connect to established Spark alias port 22: Operation timed out",
+    "spark_python_preflight": "NOT_RUN",
+    "live_safety": "NOT_RUN",
+    "duplicate_check": "NOT_RUN",
+    "runtime_layout_and_freeze": "NOT_RUN"
+  },
+  "new_heavy_attempts": 0,
+  "new_decodes": 0,
+  "new_sampler": 0,
+  "files": {
+    "bootstrap.py": "1ca84c1037deedc7a88bfe9c465d497d54efd55982248ff207fef02310684a81",
+    "worker.py": "dc668575cf5ab5d3af12aae187ea00985b07f1cd2cc50afcf943e2c7094a74ae",
+    "supervisor.py": "0fe8820e9f780dd80f02085eabbd07b8ec428366331657f0d20a87fa6f459729",
+    "test_safety.py": "f0db039bdb77cbef84735e12c219f24e745c63586c5766925b0b960047bbc350",
+    "test_bootstrap.py": "a18b18c5c3986d0330348de100211074859276865effb5c3d575ece254243548",
+    "safety.py": "8240f3df56cdd458feab3b88dbf10c72fc1ba9520f839618f66321e9fd5a33f8"
+  }
+}
