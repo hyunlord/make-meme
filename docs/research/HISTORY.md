@@ -684,3 +684,7 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### CONTINUATION_02 서비스 상태 확인 종료 — UNKNOWN_OR_CONFLICT / GPU0
 
 큐는 선택된 생성 경로의 필수 의존성이 아닌 보호 대상임을 확인했다. 수동 launcher는 확인했지만 현재 정상 중지·전환 부재의 관리자 상태는 미확인이다. 12:48:46/48/50UTC 세 표본 모두 별도 GPU 작업이 있어 독립적으로 차단했다. 정책 활성화·allowlist 변경·서비스 조작·새 GPU/fixture 실행0이며 미사용 STEP 예산과 모든 과거 실패를 보존한다. STEP 추가 이득 및 방법 채택 근거는 여전히 미평가다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/RESULTS.md). 자동 재개/예약 없음.
+
+### CONTINUATION_02 SERVICE_RESUME_02 — 외부 GPU 해소 / 관리자 상태 미확인 유지
+
+사용자의 재지시 후14:34:45/47/49UTC 새 표본은 GPU0·MemAvailable 약100.06GiB·swap사용0이었다. 과거 외부GPU 차단을 현재로 재사용하지 않는다. 기존 수동 launcher의 정상 중지·전환 상태 인터페이스는 확인되지 않아 BLOCKED_MANAGER_STATE_UNVERIFIED로 종료했다. 코드·정책·서비스 변경과 새 GPU0, CONT02 STEP예산 미사용이며 이전 실패/품질 판정을 보존한다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/service_resume/recheck02/RESULTS.md).

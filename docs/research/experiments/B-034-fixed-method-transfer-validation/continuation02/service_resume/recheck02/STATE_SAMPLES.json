@@ -1,0 +1,80 @@
+{
+  "status": "BLOCKED_MANAGER_STATE_UNVERIFIED",
+  "logical_launch_mechanism": "manual setsid/nohup shell -> CLI -> subprocess",
+  "optional_dependency_role": "safety observer only (previous selected-code evidence reused)",
+  "normal_stopped_status_interface": "NOT_IDENTIFIED",
+  "definition_hashes": {
+    "start_comfy.sh": "89e3451512e8873cb0161ec57ea0d1515d4fdd721c393d73e7f8ab510a387fbf",
+    "cli.py": "c703541ac656cbf8edd3779c3d04a45aad0dc0353a3a3198d49d366d30cd1fd8",
+    "installer.py": "b7ffe55bf20e66c24dbf6136168b99bd3f9db0565f7daa2b77919c4a9534ae63"
+  },
+  "samples": [
+    {
+      "utc": "2026-10-27T14:34:45.307686+00:00",
+      "gpu_process_count": 0,
+      "listener_8190": false,
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "queue_error": "CONNECTION_REFUSED",
+      "system_jobs": 0,
+      "user_jobs": 0,
+      "mem_available_GiB": 100.06621932983398,
+      "swap_used_bytes": 0,
+      "manager_state": "UNVERIFIED"
+    },
+    {
+      "utc": "2026-10-27T14:34:47.353088+00:00",
+      "gpu_process_count": 0,
+      "listener_8190": false,
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "queue_error": "CONNECTION_REFUSED",
+      "system_jobs": 0,
+      "user_jobs": 0,
+      "mem_available_GiB": 100.07304000854492,
+      "swap_used_bytes": 0,
+      "manager_state": "UNVERIFIED"
+    },
+    {
+      "utc": "2026-10-27T14:34:49.405161+00:00",
+      "gpu_process_count": 0,
+      "listener_8190": false,
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "queue_error": "CONNECTION_REFUSED",
+      "system_jobs": 0,
+      "user_jobs": 0,
+      "mem_available_GiB": 100.05871963500977,
+      "swap_used_bytes": 0,
+      "manager_state": "UNVERIFIED"
+    }
+  ],
+  "old_external_gpu_blocker_current": false,
+  "cont02_existing_attempt_artifact_count": 0,
+  "new_gpu_workers": 0,
+  "model_load_attempts": 0,
+  "samplers": 0,
+  "decode": 0,
+  "service_operations": 0,
+  "code_changes": 0,
+  "new_fixture_runs": 0,
+  "receipt_sha256": "5b080c3e6f5682070ad878e07bcb627262af9adc92ec87bb000226b24cf187b6",
+  "limits": [
+    "Relevant name/definition search is bounded, not proof that no manager exists anywhere.",
+    "Port refusal and process absence are not authoritative stopped state.",
+    "Unchanged hashes establish launch-code continuity, not current lifecycle authority."
+  ],
+  "logical_service": {
+    "launch_mechanism": "manual setsid/nohup shell -> CLI -> subprocess",
+    "optional_dependency_role": "safety observer only (previous selected-code evidence reused)",
+    "manager_state_interface": "UNVERIFIED",
+    "stopped_allowed": "NOT_ACTIVATED"
+  },
+  "runtime": {
+    "status": "UNVERIFIED",
+    "absence_does_not_establish_normal_stop": true,
+    "gpu_empty_all_three_samples": true,
+    "queue_status": "UNAVAILABLE",
+    "queue_counts": null
+  }
+}
