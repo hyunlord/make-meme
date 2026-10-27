@@ -32,3 +32,7 @@ B033 clean_constraint.py, 공식 CFG/UniPC40/shift3/CFG5/80forward, 실제 noise
 새 sampler 최대1, decode 최대2, 이미지/encoder/학습/설치/다운로드/재시도0. 72GiB 시작/24GiB 실행 headroom/swap0 유지. GPU 순차, 타 서비스 종료0. 실패는 보존하고 downstream 중단한다. 마지막30분은 문서/보존/전달이며 추가 실험을 예약하지 않는다.
 
 compact는 입력·영상·support·보고서·재현, full은 신규 raw/latent를 추가한다. BASE FP32 raw와 기존 전체 ZIP을 중복 포장하지 않는다. 실제 CRC/추출/payload hash/양 호스트 전송 동일성을 확인하고 미실행은 명시한다.
+
+### 실행 전 운영 세부 보완
+
+기존 transient unit을 읽으면 inactive 이후 ExecMainPID/InvocationID 등 종료 메타데이터가 회수되어0/빈 값이 될 수 있음을 확인했다. 종료 정보가 없다는 이유로 허용하지 않는다. 새 unit에만 `RemainAfterExit=yes`를 사용해 정상 종료의 unit/invocation·ExecMainPID·exit code를 기록할 때까지 메타데이터를 유지한다. 정확한 자체 신원과 정상 종료 증거, GPU 미분류0 및 queue/memory 안전이 확인된 경우에만 완료된 자체 unit을 stop하고 fresh safety와 inactive를 확인한다. 그동안 다음 GPU 단계는 시작하지 않는다. GPU에 남은 PID의 proc가 없어 불확실하다면 메타데이터만으로 허용하지 않고 기존 bounded 관측/중단 규칙을 따른다. 이는 unit 종료 관측 수명의 변경이며 생성 수식이나 가드 임계값 변경이 아니다.

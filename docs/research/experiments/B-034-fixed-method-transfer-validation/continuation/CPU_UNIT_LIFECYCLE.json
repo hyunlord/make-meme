@@ -1,0 +1,37 @@
+{
+  "cpu_only": true,
+  "command": "/bin/sleep 2",
+  "live": {
+    "MainPID": "OWN_CPU_WORKER",
+    "Result": "success",
+    "ExecMainPID": "OWN_CPU_WORKER",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ActiveState": "active",
+    "SubState": "running",
+    "InvocationID": "SAME_INVOCATION"
+  },
+  "exited": {
+    "MainPID": "0",
+    "Result": "success",
+    "ExecMainPID": "OWN_CPU_WORKER",
+    "ExecMainCode": "1",
+    "ExecMainStatus": "0",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "InvocationID": "SAME_INVOCATION"
+  },
+  "final": {
+    "MainPID": "0",
+    "Result": "success",
+    "ExecMainPID": "0",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "InvocationID": ""
+  },
+  "returncode": 0,
+  "gpu_operations": 0,
+  "interpretation": "CPU-only systemd lifecycle retention verification; not a reproduction or proof of historical GPU termination cause."
+}

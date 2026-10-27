@@ -1,0 +1,19 @@
+{
+  "files": {
+    "worker.py": "7deee79a82de9d01a6ef67730cd4a8508175088a7de47241f4157021de4f7d9a",
+    "artifact.py": "b15e7bb02ab229efa53338f320b95a001bfec3aea4e086f26bae59b4d79579cd",
+    "supervisor.py": "0fe8820e9f780dd80f02085eabbd07b8ec428366331657f0d20a87fa6f459729",
+    "test_safety.py": "f0db039bdb77cbef84735e12c219f24e745c63586c5766925b0b960047bbc350",
+    "prepare_runtime.py": "ec4d5b7b6797c95c82ba4a8104490aaa82fad24a5adfd10cc208143d43b5913f",
+    "safety.py": "8240f3df56cdd458feab3b88dbf10c72fc1ba9520f839618f66321e9fd5a33f8"
+  },
+  "cpu_policy_tests": 14,
+  "clean_constraint_sha256": "7c24c3c14d39e07ea77f01fd45ffe13c051e1c7ef14be77f8329348ed120aebb",
+  "stage_freeze_sha256": {
+    "CONTROL_D": "ef7fdf227c710b7175afbc202551dedede0997ba51a83791460f02d10f675417",
+    "STEP_S": "6806403d88635bc53f644a3d90feea18d7663138b7a95bcc48b48613cd724be3",
+    "STEP_D": "7f207b433721989eff682de4a42c4bfd059663355bd872f0d3f3a646602cb860"
+  },
+  "deadline_utc": "2026-10-27T09:46:43Z",
+  "hard_deadline_utc": "2026-10-27T10:16:43Z"
+}

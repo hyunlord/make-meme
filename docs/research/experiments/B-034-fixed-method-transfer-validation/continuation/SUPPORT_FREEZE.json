@@ -1,0 +1,66 @@
+{
+  "source_target_core_coverage": true,
+  "radius": 4,
+  "feather": 4,
+  "H_empty": true,
+  "temporal_groups": [
+    [
+      0
+    ],
+    [
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      5,
+      6,
+      7,
+      8
+    ],
+    [
+      9,
+      10,
+      11,
+      12
+    ],
+    [
+      13,
+      14,
+      15,
+      16
+    ]
+  ],
+  "M_shape": [
+    1,
+    1,
+    5,
+    64,
+    112
+  ],
+  "M_mean": 0.05708695948123932,
+  "E_shape": [
+    17,
+    512,
+    896
+  ],
+  "source_code_sha256": {
+    "compositor.py": "be24bb0da25453aa4d9194ef148d976a472b3db5e03bdd0d010b98dd4c98c68d",
+    "clean_constraint.py": "7c24c3c14d39e07ea77f01fd45ffe13c051e1c7ef14be77f8329348ed120aebb",
+    "prepare_support.py": "670a8019b0bfceef9b27155f13ae01911628cc2ec2e5070e9cb3b26151675f09"
+  },
+  "method": "B033 unchanged; existing latent_mask function extracted without Wan/scheduler import",
+  "T_status": "MASK_PARTIAL; actual wrong BASE SUV, not intended classic-target ground truth",
+  "post_step_adjustment_allowed": false,
+  "frozen_utc": "2026-10-27T07:20:59.781307+00:00",
+  "annotation_started_utc": "2026-10-27T07:16:50Z",
+  "BASE_raw_sha256": "40b77732233b2cc8d9c33e52894fbce98722155bd8e31c39fd76f245c50ca421",
+  "source_masks_exact_original": true,
+  "mask_freeze_sha256": "3fb5ad5396fd696354259eeb94f1f247ecf31706d92aaeba7e58e055e95478de",
+  "E_sha256": "7b7cd662438bbd76029561627cbd86a481400c397ddba0fcb65f59442bf27f9e",
+  "M_sha256": "faf6e317a383a59bf50a42627c340a5d243cc1f85bab8c41a4b50a1196b64bab",
+  "annotation_seconds": 249.78,
+  "crop_policy": "Two fixed detail crops before CONTROL/STEP; they do not cover every source-union edge. Full-frame all17 remains mandatory for outer seams.",
+  "source_bbox_long_side_px": 178
+}

@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "base": {
+    "status": "VALIDATED",
+    "file_sha256": "687197642b668543d771a14ce8a78fcfa5e58dee91f526ffead26a92448f4d40",
+    "bytes": 2293840,
+    "tensor_sha256": "3a0d6aacca1fe4342ba28b3ea1a12a5a0a2c7d83221226ae896c5cd1f0d322ad",
+    "shape": [
+      16,
+      5,
+      64,
+      112
+    ],
+    "dtype": "torch.float32",
+    "finite": true,
+    "sidecar_sha256": "d0402a0297c01e553d3145f59aa2296f3b53717583bbde657ebfcce08d802344",
+    "condition_sha256": "44744a365ed0c2813e52790619dcb7fae51d55950d4ff2b348714ced9deb5b8e",
+    "model_provenance_sha256": "414c00ffeb90162a0323e0790117c4b0bdd9c5c9a1e8d0d5f7be52e4a6f8d2f0",
+    "parent_guard_reason": "other_service_work",
+    "not_initial_noise": true,
+    "generated_only": true
+  },
+  "control_shape": [
+    16,
+    5,
+    64,
+    112
+  ],
+  "finite": true,
+  "E0_source_exact": true,
+  "E1_base_exact": true,
+  "cuda_initialized_after_official_import": true,
+  "fixture_tensor_device": "cpu",
+  "explicit_cuda_operations": 0,
+  "clean_constraint_sha256": "7c24c3c14d39e07ea77f01fd45ffe13c051e1c7ef14be77f8329348ed120aebb",
+  "stage_freeze_sha256": {
+    "CONTROL_D": "ef7fdf227c710b7175afbc202551dedede0997ba51a83791460f02d10f675417",
+    "STEP_S": "6806403d88635bc53f644a3d90feea18d7663138b7a95bcc48b48613cd724be3",
+    "STEP_D": "7f207b433721989eff682de4a42c4bfd059663355bd872f0d3f3a646602cb860"
+  },
+  "prior_cpu_inspection_errors": [
+    "ImportError nonexistent verify_cache helper in inspection command",
+    "assert CUDA remains uninitialized failed after official imports; no tensor CUDA operation performed"
+  ],
+  "cpu_policy_tests": 14
+}
