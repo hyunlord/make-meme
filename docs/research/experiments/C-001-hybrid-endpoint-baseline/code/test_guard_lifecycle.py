@@ -11,7 +11,7 @@ import supervisor
 
 
 class LifecycleTests(unittest.TestCase):
-    def replay(self, child_completed_at_exit=False, memory_error=False):
+    def replay(self, child_completed_at_exit=False, memory_error=False, exit_mismatch=False):
         temporary=tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         root=Path(temporary.name)
@@ -31,7 +31,8 @@ class LifecycleTests(unittest.TestCase):
                     'queue_counts':None,'unclassified_pids':[],'identities':{},
                     'system_memory':{'monotonic':float(state['samples']*2),'page_size':4096,
                                      'available':80*2**30,'swap_total':2**30,'swap_free':2**30-262144,
-                                     'swap':262144,'pswpin':0,'pswpout':0,'psi_full_total':0,'errors':[]}}
+                                     'swap':262144,'pswpin':0,'pswpout':0,
+                                     'psi_full_total':2000000 if memory_error and state['units']>=1 else 0,'errors':[]}}
         def unit(*args):
             state['units']+=1
             active=not state['stopped']
@@ -39,7 +40,7 @@ class LifecycleTests(unittest.TestCase):
             return {'MainPID':'101' if running else '0','ExecMainPID':'101' if active else '0',
                     'ActiveState':'active' if active else 'inactive','SubState':'running' if running else ('exited' if active else 'dead'),
                     'Result':'success','ExecMainCode':'0' if running else '1','ExecMainStatus':'0',
-                    'InvocationID':'invocation' if active else '', 'ControlGroup':'/mock' if running else ''}
+                    'InvocationID':('wrong-invocation' if exit_mismatch and not running else 'invocation') if active else '', 'ControlGroup':'/mock' if running else ''}
         def run(command,**kwargs):
             state['stopped']=True
             return MagicMock(returncode=0)
@@ -56,19 +57,12 @@ class LifecycleTests(unittest.TestCase):
         real_exists=Path.exists
         def exists(path):
             return True if str(path).startswith('/sys/fs/cgroup/mock/') else real_exists(path)
-        original_inspect=supervisor.MemoryBudget.inspect
-        def inspect(budget,system,cgroup,cg_state,**kwargs):
-            verdict=original_inspect(budget,system,cgroup,cg_state,**kwargs)
-            if memory_error and cg_state=='REMOVED':
-                verdict['decision']='SYSTEM_PSI_FULL_PRESSURE'
-            return verdict
         with patch.object(sys,'argv',['supervisor',str(root)]),patch.object(supervisor,'load_policy',return_value={}), \
              patch.object(supervisor,'observe',side_effect=observe),patch.object(supervisor,'unit_state',side_effect=unit), \
              patch.object(supervisor,'identity',return_value=registered),patch.object(supervisor,'collect_cgroup',return_value=cg), \
              patch.object(supervisor.subprocess,'check_output',return_value=''),patch.object(supervisor.subprocess,'Popen',return_value=child), \
              patch.object(supervisor.subprocess,'run',side_effect=run),patch.object(supervisor.time,'sleep'), \
-             patch.object(Path,'read_text',read),patch.object(Path,'exists',exists), \
-             patch.object(supervisor.MemoryBudget,'inspect',inspect):
+             patch.object(Path,'read_text',read),patch.object(Path,'exists',exists):
             result=supervisor.main()
         return result,json.loads((root/'reports/supervisor-result.json').read_text())
 
@@ -87,6 +81,12 @@ class LifecycleTests(unittest.TestCase):
         result,receipt=self.replay(memory_error=True)
         self.assertEqual(result,2)
         self.assertEqual(receipt['guard_reason'],'SYSTEM_PSI_FULL_PRESSURE')
+        self.assertFalse(receipt['normal_exit_recorded'])
+
+    def test_removed_cgroup_with_wrong_invocation_is_not_verified(self):
+        result,receipt=self.replay(exit_mismatch=True)
+        self.assertEqual(result,2)
+        self.assertEqual(receipt['guard_reason'],'OBSERVATION_FAILED')
         self.assertFalse(receipt['normal_exit_recorded'])
 
 

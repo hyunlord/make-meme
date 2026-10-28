@@ -1,0 +1,41 @@
+{
+  "status": "VERIFIED",
+  "verified_at_utc": "2026-10-28T11:57:33Z",
+  "archive": "C001-review-20261028.zip",
+  "archive_bytes": 113767365,
+  "archive_mib": 108.49701404571533,
+  "archive_sha256": "f22322d84e8cecb85558215a765ee15bb3ff1f64e0d58f17ba6d2aa5e09b3237",
+  "payload_file_count": 243,
+  "Mac": {
+    "crc": "PASS",
+    "actual_extraction_payload_sha256": "PASS",
+    "viewer_exists": true
+  },
+  "Spark": {
+    "host": "Spark",
+    "archive_sha256": "f22322d84e8cecb85558215a765ee15bb3ff1f64e0d58f17ba6d2aa5e09b3237",
+    "archive_bytes": 113767365,
+    "crc": "PASS",
+    "extracted_payload_sha256": "PASS",
+    "files": 243,
+    "viewer_exists": true
+  },
+  "cross_host_archive_sha256_equal": true,
+  "transfer": "Mac /tmp -> Spark /tmp; remote verification receipt copied back to Mac",
+  "storage_scope": "Private review ZIP and actual extraction exist in both hosts /tmp; no personal home paths published",
+  "target_size_mib": 100,
+  "size_limit_status": "Target exceeded by 8.50 MiB to preserve all original source/generated review frames; unnecessary full QA screenshots excluded",
+  "generated_mp4_bytes": "Preserved from actual generation; browser QA checked matching hashes",
+  "derived_encodings": [
+    "source16fps preview",
+    "SAM overlay16fps preview",
+    "JPEG contact/zoom/endpoint sheets"
+  ],
+  "raw_latent_scope": "Excluded from compact; full output raw and final latent retained and separately hashed on Spark",
+  "full_payload_manifest_files": 220,
+  "full_payload_manifest_bytes": 207497916,
+  "full_archive_created": false,
+  "verification_scope": "CRC/extraction/transfer cover compact payload only; no claim that excluded raw tensors were transferred",
+  "code_prereg_commit": "c117861",
+  "final_remote_sha": "Recorded by git remote readback after publication; omitted here to avoid self-referential commit hash"
+}

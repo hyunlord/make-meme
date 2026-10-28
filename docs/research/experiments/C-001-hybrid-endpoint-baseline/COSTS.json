@@ -1,0 +1,101 @@
+{
+  "status": "GENERATION_COMPLETE",
+  "native_imagegen": {
+    "base_calls": 4,
+    "repair_calls": 0,
+    "observed_tool_wall_seconds_approx": 78.0,
+    "image_model_id": null,
+    "image_model_id_status": "UNKNOWN_TOOL_NOT_EXPOSED",
+    "billing_amount": null,
+    "billing_status": "UNKNOWN_TOOL_NOT_EXPOSED",
+    "external_api_calls": 0
+  },
+  "cpu_route_attempts": {
+    "total": 4,
+    "complete": 3,
+    "failed": 1,
+    "failure": "CPU target exit0 but supervisor exit verification ordering; preserved NOT_CLEAN receipt",
+    "mechanical_fixes": 1
+  },
+  "sam": {
+    "heavy_runs": 1,
+    "source_clips": 2,
+    "source_frames": 66,
+    "anchor_images": 4,
+    "analysis_seconds": 38.479305267333984,
+    "guarded_seconds_approx": 41.38,
+    "fallback": false,
+    "peak_observed_cgroup_gib": 6.205,
+    "minimum_observed_memavailable_gib": 104.704
+  },
+  "video": {
+    "base_budget": 2,
+    "mechanical_recovery_budget": 1,
+    "started_base_runs": 2,
+    "completed_base_runs": 2,
+    "mechanical_recovery_runs": 0,
+    "total_scheduler_steps": 100,
+    "total_observed_model_fn_calls": 200,
+    "runs": {
+      "case_rigid": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 291.69952199399995,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "source_middle_rgb_conditioning": false
+      },
+      "case_nonrigid": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 292.9065588569938,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "source_middle_rgb_conditioning": false
+      }
+    }
+  },
+  "new_weights_download_bytes": 0,
+  "new_media_download_bytes": 0,
+  "new_packages_installed": 0,
+  "training_runs": 0,
+  "upscale_runs": 0,
+  "quality_retries": 0,
+  "human_quality_reviews": 0,
+  "agent_work": {
+    "activities": [
+      "input selection and fixed transforms",
+      "four native anchor prompts and visual inspection",
+      "CPU exit observation correction and verification",
+      "SAM role assignment and spot inspection",
+      "bounded video execution and evidence preparation"
+    ],
+    "exact_active_labor_seconds": null,
+    "status": "Not separately instrumented; whole task wall clock recorded"
+  },
+  "cpu_regression_checks": {
+    "c001": 10,
+    "existing_memory_and_integration": 21
+  },
+  "wall_clock": {
+    "started_at_utc": "2026-10-28T11:13:32Z",
+    "verified_delivery_at_utc": "2026-10-28T11:57:33Z",
+    "seconds_through_verified_delivery": 2641,
+    "maximum_seconds": 14400,
+    "reserved_final_delivery_seconds": 1200
+  },
+  "graft": {
+    "parent_reported_saved_tokens": 20442,
+    "scope": "Tool-reported estimate for parent lookup; not model billing or total token usage"
+  }
+}

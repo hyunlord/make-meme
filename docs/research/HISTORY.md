@@ -719,3 +719,9 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### 2026-10-28 C001 착수
 
 독립C트랙에서공개차량/동물양끝앵커nativeimagegen+기존VACE1.3B영상을한정실행한다. A/B와B034운영보류는보존한다. [계획](experiments/C-001-hybrid-endpoint-baseline/PLAN.md).
+
+### 2026-10-28 C-001 종료 — 실제 앵커4·영상2 / 외형 부분 유지·동작 한계
+
+운영: prereg4ea7753→실행 코드/앵커c117861 후 실제 SAM 분석과 두 VACE1.3B firstlastframe 영상을 완료했다. 각33프레임·50step·100model_fn call, latent readback exact, heavy 복구0. CPU 최초 종료 관측 실패는 보존했고 C 전용 supervisor 두 줄 순서 수정 후 실제 CPU/후속 heavy 종료를 확인했다. A/B 코드·실패·UNKNOWN·B-034 운영 보류는 불변이다.
+
+과학: 대체 차량/검정·흰 개 외형 특징은 중간에 유지됐으나 정확한 개체 동일성은 PARTIAL이다. 차량은 큰 회전 순서만 부분 보존, 개는 중간 행동 phase가 달라 MOTION_FAIL이다. 보호 배경은 PARTIAL, temporal=UNVERIFIED다. SAM은 실제70개 입력을 분석했지만 생성 조건으로 사용하지 않았다. 검토용 hybrid 첫 기준선으로 보존하고 추가 실험은 시작하지 않는다. [결과](experiments/C-001-hybrid-endpoint-baseline/RESULTS.md) · [전달 검증](experiments/C-001-hybrid-endpoint-baseline/DELIVERY.json).

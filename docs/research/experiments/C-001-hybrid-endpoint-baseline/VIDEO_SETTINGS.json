@@ -1,0 +1,48 @@
+{
+  "case_rigid": {
+    "helper_sha256": "dd622057ce57078c0afdac2ad89d9698f1fd28867c4db8379efabbe2dc861053",
+    "prompt": "A silver tall SUV with roof rails and dark windows drives right along the road and turns, its rear becoming more visible. Preserve the fixed camera, building, railing and parked red foreground car. Natural realistic continuous motion and consistent vehicle identity.",
+    "frames": 33,
+    "width": 832,
+    "height": 480,
+    "seed": 20261028,
+    "steps": 50,
+    "guidance": 5,
+    "sigma_shift": 5,
+    "preview_fps": 16,
+    "dtype": "bfloat16",
+    "attention": "torch SDPA (flash/sage disabled)",
+    "vae_tiled": true,
+    "rand_device": "cpu",
+    "vace_reference_image": null,
+    "source_middle_rgb_conditioning": false,
+    "sam_conditioning": false,
+    "endpoints": [
+      0,
+      32
+    ]
+  },
+  "case_nonrigid": {
+    "helper_sha256": "dd622057ce57078c0afdac2ad89d9698f1fd28867c4db8379efabbe2dc861053",
+    "prompt": "A black dog with a white snout and white chest lowers its head and steps forward toward the camera on grass. Preserve the fence, shrub, grass and fixed camera. Natural realistic continuous quadruped motion and consistent dog identity.",
+    "frames": 33,
+    "width": 832,
+    "height": 480,
+    "seed": 20261028,
+    "steps": 50,
+    "guidance": 5,
+    "sigma_shift": 5,
+    "preview_fps": 16,
+    "dtype": "bfloat16",
+    "attention": "torch SDPA (flash/sage disabled)",
+    "vae_tiled": true,
+    "rand_device": "cpu",
+    "vace_reference_image": null,
+    "source_middle_rgb_conditioning": false,
+    "sam_conditioning": false,
+    "endpoints": [
+      0,
+      32
+    ]
+  }
+}

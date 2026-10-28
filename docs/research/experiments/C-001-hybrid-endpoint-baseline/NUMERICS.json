@@ -1,0 +1,202 @@
+{
+  "endpoint_diagnostics": {
+    "case_rigid": {
+      "start": {
+        "mean_absolute_rgb_8bit": 7.648606300354004,
+        "pixel_exact": false,
+        "output_frame_sha256": "49cc92d7b5c0d40984fd98d9bdd298e25d94b0776c8a8eba336d8b14623ed4d7"
+      },
+      "end": {
+        "mean_absolute_rgb_8bit": 14.989675521850586,
+        "pixel_exact": false,
+        "output_frame_sha256": "577b82835ea8a1e4df7ccb72352c1af46a57d880ee9b64ab8754232d1553ab03"
+      }
+    },
+    "interpretation": "Full-frame L1 diagnostic only; no identity-quality score and no ground-truth edited video.",
+    "case_nonrigid": {
+      "start": {
+        "mean_absolute_rgb_8bit": 5.551329612731934,
+        "pixel_exact": false,
+        "output_frame_sha256": "3f1709406f581259c80a381fcda5920312e30e682aa3a5482e70b5addf8876ab"
+      },
+      "end": {
+        "mean_absolute_rgb_8bit": 17.541845321655273,
+        "pixel_exact": false,
+        "output_frame_sha256": "e31e127e6564ace4e93d6145a65bdfa1b2bb2d0481311fbd18fd6ffa7645b60b"
+      }
+    }
+  },
+  "runs": {
+    "sam-analysis-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_error_count": 0,
+      "elapsed_seconds": 41.38307070732117,
+      "observations": 40,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "minimum_memavailable_bytes": 112425422848,
+      "peak_observed_cgroup_current_bytes": 6662180864,
+      "maximum_cgroup_swap_current_bytes": 0,
+      "observed_cgroup_swap_max_values": [
+        0
+      ],
+      "system_swap_min_bytes": 1040384,
+      "system_swap_max_bytes": 1040384,
+      "host_page_sizes": [
+        4096
+      ],
+      "maximum_high_event_count": 0,
+      "maximum_oom_count": 0,
+      "maximum_oom_kill_count": 0,
+      "memory_decisions": [
+        "CLEAR"
+      ],
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+      "maximum_swap_growth_bytes": 0,
+      "maximum_swapout_bytes_10s": 0,
+      "maximum_psi_full_ratio_10s": 0.0
+    },
+    "case_rigid-video-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_error_count": 0,
+      "elapsed_seconds": 297.609237909317,
+      "observations": 277,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "minimum_memavailable_bytes": 94798819328,
+      "peak_observed_cgroup_current_bytes": 8434573312,
+      "maximum_cgroup_swap_current_bytes": 0,
+      "observed_cgroup_swap_max_values": [
+        0
+      ],
+      "system_swap_min_bytes": 1040384,
+      "system_swap_max_bytes": 1040384,
+      "host_page_sizes": [
+        4096
+      ],
+      "maximum_high_event_count": 0,
+      "maximum_oom_count": 0,
+      "maximum_oom_kill_count": 0,
+      "memory_decisions": [
+        "CLEAR"
+      ],
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+      "maximum_swap_growth_bytes": 0,
+      "maximum_swapout_bytes_10s": 0,
+      "maximum_psi_full_ratio_10s": 1e-07,
+      "generation": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 291.69952199399995,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "source_middle_rgb_conditioning": false
+      },
+      "latent": {
+        "shape": [
+          1,
+          16,
+          9,
+          60,
+          104
+        ],
+        "dtype": "torch.bfloat16",
+        "readback_exact": true
+      }
+    },
+    "case_nonrigid-video-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_error_count": 0,
+      "elapsed_seconds": 298.6040954589844,
+      "observations": 277,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "minimum_memavailable_bytes": 94819704832,
+      "peak_observed_cgroup_current_bytes": 9797730304,
+      "maximum_cgroup_swap_current_bytes": 0,
+      "observed_cgroup_swap_max_values": [
+        0
+      ],
+      "system_swap_min_bytes": 1040384,
+      "system_swap_max_bytes": 1040384,
+      "host_page_sizes": [
+        4096
+      ],
+      "maximum_high_event_count": 0,
+      "maximum_oom_count": 0,
+      "maximum_oom_kill_count": 0,
+      "memory_decisions": [
+        "CLEAR"
+      ],
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+      "maximum_swap_growth_bytes": 0,
+      "maximum_swapout_bytes_10s": 0,
+      "maximum_psi_full_ratio_10s": 3e-07,
+      "generation": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 292.9065588569938,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "source_middle_rgb_conditioning": false
+      },
+      "latent": {
+        "shape": [
+          1,
+          16,
+          9,
+          60,
+          104
+        ],
+        "dtype": "torch.bfloat16",
+        "readback_exact": true
+      }
+    }
+  },
+  "preserved_raw_and_latent": {
+    "outputs/case_nonrigid/final_latent.pt": {
+      "bytes": 1798796,
+      "sha256": "7b956d5ed6035966ac2e4c2ad9b0ccc7c8b0a4908f5f56c587b7dfaf7faf521c"
+    },
+    "outputs/case_nonrigid/raw_output.pt": {
+      "bytes": 79074942,
+      "sha256": "b8b638c7422bba01423fe4daf3ba74893961fe24985e8d3d0e5e013e3444e2d7"
+    },
+    "outputs/case_rigid/final_latent.pt": {
+      "bytes": 1798796,
+      "sha256": "2fc5a9f16df5113f6a6594bbb6f0829f37a48f468b58c9f7237ac3c2d738e4ca"
+    },
+    "outputs/case_rigid/raw_output.pt": {
+      "bytes": 79074942,
+      "sha256": "a468a91b40ed7d844d97f0994e6e8ac474ae2f2239e665c405e3fbcd770d8a88"
+    }
+  }
+}
