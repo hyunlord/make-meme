@@ -422,3 +422,7 @@ SSH 연결이 회복되어 기존 수정의 실제 Spark preflight와 안전 확
 ### 최신 상태: B-034 한정 서비스 부재 정책 / 외부 GPU 차단
 
 OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 서비스 부재 관측과 별개로 시작 직전 외부GPU 작업이 발견돼 STEP은 미실행이다. BASE targetFAIL·CONTROL추가이득미관찰·STEP INCONCLUSIVE, 기본채택 근거없음을 유지한다. 남은 고정 비교를 자동재시도하거나 새방법 탐색으로 확대하지 않는다. [실측과 종료](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/RESULTS.md).
+
+### B-034 잔여 비교 재개 — 정책 변경 없음
+
+기존 점유 프로세스의 부재를 한 번 확인한 뒤 동일 운영/연구 계약으로 남은STEP만 조건부재개한다. 이전외부GPU차단·BASE외형FAIL·CONTROL추가이득미관찰은 보존한다. 실제새출력전 효과를 판정하지 않는다. [고정 재개](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/PLAN.md).

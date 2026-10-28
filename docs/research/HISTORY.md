@@ -696,3 +696,7 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### B-034 EXPECTED_ABSENT_01 종료 — 외부 GPU 시작 차단
 
 한정 정책 CPU13개와 실제 preflight를 통과하고 efd801ad에 사전 고정했다. 16:22:26UTC 실제 시작 첫 표본에서 서비스는 EXPECTED_ABSENT_OBSERVED였지만 외부GPU1개로 UNKNOWN_GPU_PID가 발생했다. MemAvailable88.50GiB/swap0, supervisor반환2, worker·모델적재·sampler·decode0이다. 관리자 증명 부재를 재조사한 결과가 아니며 실제 외부 작업 보호에 따른 종료다. 기존 실패·targetFAIL·STEP미평가를 보존하고 자동재개하지 않는다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/RESULTS.md).
+
+### B-034 EXPECTED_ABSENT_02 — 점유 작업 종료 확인 후 고정 계약 재개
+
+사용자 지시에 따른01:56:54UTC 단일 읽기 확인에서 과거 차단 프로세스는 같은boot의/proc에 없었다. 과거작업의 정상종료 원인이나 프로젝트는 미확정이다. loader·정책·guard 구현과 모든방법/입력을 고정하고 이번재개만 새root/deadline에 명시 승인한다. 시작직전 기존3표본과 live safety를 통과할 때만 미사용STEP1/D1을 사용한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/PLAN.md).

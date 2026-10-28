@@ -1,0 +1,98 @@
+{
+  "resume_id": "EXPECTED_ABSENT_02",
+  "configuration_only": true,
+  "new_gpu_attempts": 0,
+  "code_equality": {
+    "policy.py": {
+      "old": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620",
+      "new": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620"
+    },
+    "prepare_resume.py": {
+      "old": "f2b84167424b8da1d2ba029aa754706cf9f46d54f864213274adccc7a5b21432",
+      "new": "f2b84167424b8da1d2ba029aa754706cf9f46d54f864213274adccc7a5b21432"
+    },
+    "worker.py": {
+      "old": "49a1a9ea8ad06a0b22e8c8c195a37268fbf9d7e645f1a333d6e98181945206d4",
+      "new": "49a1a9ea8ad06a0b22e8c8c195a37268fbf9d7e645f1a333d6e98181945206d4"
+    },
+    "supervisor.py": {
+      "old": "ad2b4394a658dafa55a7716b0265dedba2328da381bd8713d630ac5b1cc94574",
+      "new": "ad2b4394a658dafa55a7716b0265dedba2328da381bd8713d630ac5b1cc94574"
+    },
+    "test_policy.py": {
+      "old": "efdbc090ba85b5b7bd87d71478994dc6e7f22e8087347fa547c4fa072a9ee14c",
+      "new": "efdbc090ba85b5b7bd87d71478994dc6e7f22e8087347fa547c4fa072a9ee14c"
+    },
+    "bootstrap.py": {
+      "old": "1ca84c1037deedc7a88bfe9c465d497d54efd55982248ff207fef02310684a81",
+      "new": "1ca84c1037deedc7a88bfe9c465d497d54efd55982248ff207fef02310684a81"
+    },
+    "safety.py": {
+      "old": "472eb3152cd88ddc8cf8a9b62f131e78630ecff3c686854eed12cea7cc05b4f8",
+      "new": "472eb3152cd88ddc8cf8a9b62f131e78630ecff3c686854eed12cea7cc05b4f8"
+    }
+  },
+  "stages": {
+    "STEP_S": {
+      "freeze_sha256": "cce1df5ab21669fcc5dbaea4ecfaccf94780d3ed666641fbe6b491b656b19a49",
+      "policy_sha256": "c1bccd8619c0bae0a908cec52984277f8812f1665b2c21d797f6d415300b80c1",
+      "fixed_policy_implementation_id": "B034_CONT02_EXPECTED_ABSENT_01",
+      "actual_resume_attempt_id": "EXPECTED_ABSENT_02",
+      "deadline_utc": "2026-10-28T03:10:00Z",
+      "policy_mode": "OPTIONAL_EXPECTED_ABSENT",
+      "historical_allowlist_value_equal": true,
+      "preflight": "PASS",
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false,
+      "files_verified": 48,
+      "live_decision": "CLEAR",
+      "service_status": "EXPECTED_ABSENT_OBSERVED",
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "mem_available_GiB": 99.7840690612793,
+      "swap_used": 0,
+      "external_gpu_count": 0,
+      "research_worker_count": 0,
+      "method_inputs": {
+        "clean_constraint.py": "7c24c3c14d39e07ea77f01fd45ffe13c051e1c7ef14be77f8329348ed120aebb",
+        "mask_latent.safetensors": "faf6e317a383a59bf50a42627c340a5d243cc1f85bab8c41a4b50a1196b64bab",
+        "conditions.safetensors": "44744a365ed0c2813e52790619dcb7fae51d55950d4ff2b348714ced9deb5b8e",
+        "initial_noise.pt": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918",
+        "source_latent.safetensors": "2f9a30ee5604dad9e76da205b6dba96226a7c86e745f501c5ded88249f1a0af0"
+      }
+    },
+    "STEP_D": {
+      "freeze_sha256": "b9287849d174fbe757eeecf999c4ca0f71cd31076c77d93d1f7ce357f16b32f1",
+      "policy_sha256": "d2bf23f6e89f2b89e30899cc4f50683c00e96ad6d80a1e35af4847a13c93ee6e",
+      "fixed_policy_implementation_id": "B034_CONT02_EXPECTED_ABSENT_01",
+      "actual_resume_attempt_id": "EXPECTED_ABSENT_02",
+      "deadline_utc": "2026-10-28T03:10:00Z",
+      "policy_mode": "OPTIONAL_EXPECTED_ABSENT",
+      "historical_allowlist_value_equal": true,
+      "preflight": "PASS",
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false,
+      "files_verified": 48,
+      "live_decision": "CLEAR",
+      "service_status": "EXPECTED_ABSENT_OBSERVED",
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "mem_available_GiB": 99.75640106201172,
+      "swap_used": 0,
+      "external_gpu_count": 0,
+      "research_worker_count": 0,
+      "method_inputs": {
+        "clean_constraint.py": "7c24c3c14d39e07ea77f01fd45ffe13c051e1c7ef14be77f8329348ed120aebb",
+        "mask_latent.safetensors": "faf6e317a383a59bf50a42627c340a5d243cc1f85bab8c41a4b50a1196b64bab",
+        "conditions.safetensors": "44744a365ed0c2813e52790619dcb7fae51d55950d4ff2b348714ced9deb5b8e",
+        "initial_noise.pt": "a620658ef44e9ba10990b2ffe5ee6fd1ad8246d4aee9fd11075a5bcb5ff14918",
+        "source_latent.safetensors": "2f9a30ee5604dad9e76da205b6dba96226a7c86e745f501c5ded88249f1a0af0"
+      }
+    }
+  },
+  "tests": "Prior13/24 preserved; no repeat",
+  "old_process_check": "Parent performed one targeted check; not repeated by runtime lane",
+  "note": "Literal policy attempt_id remains fixed implementation identifier required by byte-identical guard. New resume_attempt_id plus stage root/unit/deadline and current explicit authorization scope this invocation."
+}
