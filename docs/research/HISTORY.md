@@ -725,3 +725,7 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 운영: prereg4ea7753→실행 코드/앵커c117861 후 실제 SAM 분석과 두 VACE1.3B firstlastframe 영상을 완료했다. 각33프레임·50step·100model_fn call, latent readback exact, heavy 복구0. CPU 최초 종료 관측 실패는 보존했고 C 전용 supervisor 두 줄 순서 수정 후 실제 CPU/후속 heavy 종료를 확인했다. A/B 코드·실패·UNKNOWN·B-034 운영 보류는 불변이다.
 
 과학: 대체 차량/검정·흰 개 외형 특징은 중간에 유지됐으나 정확한 개체 동일성은 PARTIAL이다. 차량은 큰 회전 순서만 부분 보존, 개는 중간 행동 phase가 달라 MOTION_FAIL이다. 보호 배경은 PARTIAL, temporal=UNVERIFIED다. SAM은 실제70개 입력을 분석했지만 생성 조건으로 사용하지 않았다. 검토용 hybrid 첫 기준선으로 보존하고 추가 실험은 시작하지 않는다. [결과](experiments/C-001-hybrid-endpoint-baseline/RESULTS.md) · [전달 검증](experiments/C-001-hybrid-endpoint-baseline/DELIVERY.json).
+
+### 2026-10-29 C-002 착수 — 기존 앵커와 SAM 시간 윤곽 조건
+
+C-001의4앵커·2ENDPOINT를보존하고source선택SAMmask의공식3px외곽선을MOV/STILL중간RGB로연결한다. 차량MOV/STILL→개MOV/STILL의신규4셀,같은seed/모델/G/caption,추가imagegen/SAM0이다. 실제첫noise/context해시와조건변경을확인한뒤외형회귀·동작·장면을나눠평가한다. C-001 PARTIAL/UNVERIFIED와A/B보류는불변이다. [계획](experiments/C-002-sam-layout-conditioning/PLAN.md).
