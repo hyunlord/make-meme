@@ -1,0 +1,71 @@
+{
+  "case_id": "case_rigid",
+  "operation": "replace_subject",
+  "source": {
+    "asset_id": "DAVIS:car-roundabout",
+    "source_frames": [
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62
+    ],
+    "source_fps": null,
+    "model_frame_count": 33,
+    "preview_fps": 16,
+    "timebase_assumed": true
+  },
+  "target": {
+    "reference_asset_id": "DAVIS:car-shadow:00000",
+    "role_id": "edited_subject"
+  },
+  "preserve": [
+    "motion_direction_and_event_order",
+    "camera_and_scene_layout",
+    "unedited_objects"
+  ],
+  "allow": [
+    "target_shape_and_silhouette_change",
+    "necessary_disocclusion_and_contact_adjustment"
+  ],
+  "anchors": [
+    {
+      "model_index": 0,
+      "role": "start"
+    },
+    {
+      "model_index": 32,
+      "role": "end"
+    }
+  ],
+  "sam_conditioning": false,
+  "source_middle_rgb_conditioning": false
+}

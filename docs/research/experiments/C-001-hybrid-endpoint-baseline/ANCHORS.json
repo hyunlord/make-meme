@@ -1,0 +1,153 @@
+{
+  "native_calls": [
+    {
+      "call_index": 1,
+      "timestamp": "2026-10-28T11:17:37.465Z",
+      "prompt": "Image 1 is the full source frame to edit. Image 2 is the appearance reference ONLY. Replace the single large dark gray Mini car centered in Image 1 with the silver tall compact five-door car in Image 2: silver body, high boxy cabin, black roof rails, narrow vertical rear lights, small silver wheels. Keep Image1's side-on right-facing driving phase, ground placement and approximate occupied area, camera and entire unedited street scene, monument, buildings, railings, background cars. Preserve target natural proportions rather than stretch to Mini silhouette. Do not copy reference's left-facing pose or background. One full-frame edited photograph matching source composition/aspect ratio, no comparison sheet, no added text/logos/extra vehicles. Keep existing background objects and source framing.",
+      "backend": "native image_gen.imagegen",
+      "image_model": "UNKNOWN (tool does not expose model ID)",
+      "case": "case_rigid",
+      "endpoint": "start",
+      "successful": true,
+      "observed_tool_wall_seconds_approx": 20.2
+    },
+    {
+      "call_index": 2,
+      "timestamp": "2026-10-28T11:18:37.177Z",
+      "prompt": "Image1 is the whole source frame to edit. Image2 specifies replacement dog's appearance only: black long-haired border-collie type dog, white muzzle and chest, white lower paws and bushy black tail. Replace only the large cream dog in Image1 with that black-and-white dog. Use Image1 for head lowered sniffing the ground, walking action phase, facing down-right toward camera, placement, camera and scene. Retain target's natural proportions rather than stretch to cream dog's silhouette. Do not copy Image2's left-facing pose or green background. Keep Image1's dry patchy grass, fence and right shrubs unchanged; no extra animals, text or graphics. One full-frame edited photograph with source composition/aspect ratio. Natural realistic coat and contact shadow.",
+      "backend": "native image_gen.imagegen",
+      "image_model": "UNKNOWN (tool does not expose model ID)",
+      "case": "case_nonrigid",
+      "endpoint": "start",
+      "successful": true,
+      "observed_tool_wall_seconds_approx": 19.9
+    },
+    {
+      "call_index": 3,
+      "timestamp": "2026-10-28T11:19:17.330Z",
+      "prompt": "Image1 is the FINAL source frame to edit. Image2 is target appearance; Image3 is accepted START edited frame for appearance consistency ONLY. Replace ONLY the central dark gray Mini with the SAME silver tall compact five-door car from Images2/3, roof rails, tall windows, silver wheels and vertical red taillights. Use Image1 final rear-three-quarter view, moving away toward right, exact action phase, position, perspective and framing. Do NOT copy Image3's side-on start pose or large start size. Preserve buildings, railings, street, parked cars, especially the partial red foreground car at right, unchanged. Natural target proportions and ground contact. One full-frame photograph matching source aspect ratio, no added text, logos, graphics or extra subjects.",
+      "backend": "native image_gen.imagegen",
+      "image_model": "UNKNOWN (tool does not expose model ID)",
+      "case": "case_rigid",
+      "endpoint": "end",
+      "successful": true,
+      "observed_tool_wall_seconds_approx": 19.3
+    },
+    {
+      "call_index": 4,
+      "timestamp": "2026-10-28T11:19:57.711Z",
+      "prompt": "Image1 is FINAL source frame to edit, Image2 target dog appearance, Image3 accepted START edited frame appearance consistency ONLY. Replace only cream dog Image1 with same black long-haired border-collie type dog as2/3, white muzzle/chest/lower paws, bushy tail. Use Image1 final action phase: dog approaching camera, head/nose lowered toward lower-left foreground, front-facing/three-quarter, body extends upward behind head. Match Image1 position, scale, pose and camera; do not copy Image3 start pose. Preserve dry grass, right shrubs, all unedited scene and framing. Natural target body proportions/contact. One full-frame photograph at source aspect ratio, no extra animals/text/graphics. Maintain dog's marking pattern from start anchor.",
+      "backend": "native image_gen.imagegen",
+      "image_model": "UNKNOWN (tool does not expose model ID)",
+      "case": "case_nonrigid",
+      "endpoint": "end",
+      "successful": true,
+      "observed_tool_wall_seconds_approx": 18.6
+    }
+  ],
+  "base_calls_used": 4,
+  "repair_calls_used": 0,
+  "api_calls": 0,
+  "normalization": [
+    {
+      "case": "case_rigid",
+      "endpoint": "start",
+      "original_size": [
+        1652,
+        952
+      ],
+      "model_size": [
+        832,
+        480
+      ],
+      "resized_size": [
+        832,
+        479
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "transform": "uniform aspect fit LANCZOS, black padding, no crop",
+      "original_sha256": "bb781ade44a87fdb80d045508403e003335a9495111598a8d9aa4faca191cfcf",
+      "model_sha256": "c2123b67e8c69fcd47401a6cae96ef57eaa46c1bcb13fc58562d3cf90a3fbc8e"
+    },
+    {
+      "case": "case_rigid",
+      "endpoint": "end",
+      "original_size": [
+        1652,
+        952
+      ],
+      "model_size": [
+        832,
+        480
+      ],
+      "resized_size": [
+        832,
+        479
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "transform": "uniform aspect fit LANCZOS, black padding, no crop",
+      "original_sha256": "69e8b191ee8a5dbcde1fe72b7738ca5e5df0087f5571b6b60626910cc36e46b7",
+      "model_sha256": "3838de7b93f418c6c1c74c535bd088637169e6f9494e4ed6fef8afa876569a1a"
+    },
+    {
+      "case": "case_nonrigid",
+      "endpoint": "start",
+      "original_size": [
+        1652,
+        952
+      ],
+      "model_size": [
+        832,
+        480
+      ],
+      "resized_size": [
+        832,
+        479
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "transform": "uniform aspect fit LANCZOS, black padding, no crop",
+      "original_sha256": "03d314985782203c82624b716e50cb1318011af6def47d352b3e3ccf90d2883f",
+      "model_sha256": "33461102dabf856d363c04f2ccd59fd120758f290b5030b402fb88b571500d2c"
+    },
+    {
+      "case": "case_nonrigid",
+      "endpoint": "end",
+      "original_size": [
+        1652,
+        952
+      ],
+      "model_size": [
+        832,
+        480
+      ],
+      "resized_size": [
+        832,
+        479
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "transform": "uniform aspect fit LANCZOS, black padding, no crop",
+      "original_sha256": "4388fefe81492bc6534be1672c0f978de03c7c3679f8df6ff2afbdd836e4f2b6",
+      "model_sha256": "28c7bcf5d9cbbba246d3e530831dadb69007a2546c10342a4491c34b0257476d"
+    }
+  ],
+  "visual_verdict": "ANCHOR_PAIR_PARTIAL",
+  "limitations": [
+    "Rigid target identity and viewpoint broadly consistent; background fine detail changed.",
+    "Nonrigid black-white identity broadly consistent; end pose/action phase differs from source; low-resolution reference limits identity confidence.",
+    "No temporal claim from endpoint pair alone."
+  ],
+  "orchestrator_model": "gpt-6-astra",
+  "orchestrator_model_provenance": "Observed active agent model; not the image tool model."
+}

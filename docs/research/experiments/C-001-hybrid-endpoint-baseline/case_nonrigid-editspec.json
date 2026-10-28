@@ -1,0 +1,71 @@
+{
+  "case_id": "case_nonrigid",
+  "operation": "replace_subject",
+  "source": {
+    "asset_id": "DAVIS:dog",
+    "source_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32
+    ],
+    "source_fps": null,
+    "model_frame_count": 33,
+    "preview_fps": 16,
+    "timebase_assumed": true
+  },
+  "target": {
+    "reference_asset_id": "DAVIS:dog-gooses:00085",
+    "role_id": "edited_subject"
+  },
+  "preserve": [
+    "motion_direction_and_event_order",
+    "camera_and_scene_layout",
+    "unedited_objects"
+  ],
+  "allow": [
+    "target_shape_and_silhouette_change",
+    "necessary_disocclusion_and_contact_adjustment"
+  ],
+  "anchors": [
+    {
+      "model_index": 0,
+      "role": "start"
+    },
+    {
+      "model_index": 32,
+      "role": "end"
+    }
+  ],
+  "sam_conditioning": false,
+  "source_middle_rgb_conditioning": false
+}
