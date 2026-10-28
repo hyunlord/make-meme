@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "cpu_tests": 21,
+  "hosts": [
+    "Mac",
+    "Spark"
+  ],
+  "syntax": "PASS",
+  "ruff": "NOT_RUN_UNAVAILABLE",
+  "basedpyright": "NOT_RUN_UNAVAILABLE",
+  "new_packages": 0,
+  "preflight": {
+    "STEP_S": {
+      "status": "PASS",
+      "files_verified": 50,
+      "loader_path_validated": true,
+      "writable_probe_removed": true,
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false,
+      "memory": {
+        "monotonic": 58188.492112001,
+        "errors": [],
+        "page_size": 4096,
+        "available": 106178760704,
+        "swap_total": 17179865088,
+        "swap_free": 17179607040,
+        "swap": 258048,
+        "pswpin": 0,
+        "pswpout": 1,
+        "psi_full_total": 21052515
+      },
+      "service_status": "EXPECTED_ABSENT_OBSERVED",
+      "queue_counts": null,
+      "gpu_count": 0
+    },
+    "STEP_D": {
+      "status": "PASS",
+      "files_verified": 50,
+      "loader_path_validated": true,
+      "writable_probe_removed": true,
+      "torch_imported": false,
+      "model_imported": false,
+      "loader_report_created": false,
+      "memory": {
+        "monotonic": 58189.668021318,
+        "errors": [],
+        "page_size": 4096,
+        "available": 106175008768,
+        "swap_total": 17179865088,
+        "swap_free": 17179607040,
+        "swap": 258048,
+        "pswpin": 0,
+        "pswpout": 1,
+        "psi_full_total": 21052515
+      },
+      "service_status": "EXPECTED_ABSENT_OBSERVED",
+      "queue_counts": null,
+      "gpu_count": 0
+    }
+  },
+  "historical_failures_preserved": true,
+  "new_authorization": {
+    "heavy_max": 1,
+    "sampler_max": 1,
+    "steps": 40,
+    "forwards": 80,
+    "constraints": 40,
+    "decode_max": 1,
+    "retries": 0
+  },
+  "code_sha256": {
+    "bootstrap.py": "1ca84c1037deedc7a88bfe9c465d497d54efd55982248ff207fef02310684a81",
+    "worker.py": "4b607fb4729e82907768c51fb614c53202e8461b26dea6c85142b8c5ed65e5af",
+    "memory.py": "48116169170f0216cd2f6d863abc3d7818ecd1d01d2ae8cf1dbc2d35eef5c6e7",
+    "supervisor.py": "402ead43faf5be7e2193fb6b139fa46c3d57679ed297c9f879773b5e108e7db8",
+    "policy.py": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620",
+    "test_memory.py": "2ce1b039cbd32dbae97702ca6ecf4feec7fedd0505eecee5184eee099da381b6",
+    "test_integration.py": "622820546777e9c6101cc8bee4ab9734cc0863fe84a905b2f1ccd1e5d5052b39",
+    "safety.py": "d3364ccf96322321354419c074e28da0e5477789886f48088d8d32a7ebb5f4ac",
+    "prepare.py": "2e5e21b663d1eaffcee62785d5fe56bcb45e721c71d15273c6478fb84dc84096"
+  },
+  "preflight_invocation_correction": "Initial CPU-only invocation used service venv path and observer matched its own parent command; no service listener or GPU. Reused the already-existing B034 research venv; both preflights passed. No policy relaxation, process operation, model import, or heavy attempt occurred."
+}

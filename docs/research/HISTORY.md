@@ -704,3 +704,8 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### EXPECTED_ABSENT_02 종료 — 시작 통과 / system swap 가드 중단
 
 2d5339b 사전고정 뒤 기존3표본을 통과해 heavy/sampler시도1회를 사용했다. CPU staged load 뒤 dit_to_device_start에서 system swap256KiB가 관측되어 기존가드가 자체worker를 중단했다. 당시MemAvailable약63.87GiB로24GiB위반은 아니다. 실제forward/step/constraint0, final없음, decode0이며 정상종료PASS로 바꾸지 않는다. STEP영상/추가이득은미평가, 기존BASEtargetFAIL·CONTROL미개선·과거실패를보존한다. 원인귀속UNKNOWN, 재시도/정책변경없음. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/RESULTS.md).
+
+
+### 2026-10-28 B-034 MEMORY_BUDGET_01 사전 고정
+
+사용자의 새 heavy1/decode1 승인으로 전역swap=0을 이번 한정 메모리 예산으로 대체한다. 이전 SYSTEM_SWAP 중단·원인UNKNOWN·사용량은 불변이다. CPU21개와 양 stage 실제 bootstrap/preflight 통과,50개 freeze 및 loader 쓰기경로 확인. 안정된258048bytes는경고이며 새 시작10초와 자체cgroup 보호 뒤에만실행한다. 운영수정 성공은품질성과가아니다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/memory_budget/PLAN.md).

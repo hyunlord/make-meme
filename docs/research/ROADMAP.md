@@ -430,3 +430,8 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 ### B-034 이번 범위 종료 — STEP 시도 소진 / 비교 미완료
 
 고정정책의 시작조건은 통과했지만 system swap0 위반으로STEP이첫forward전에중단됐다. 승인된heavy/sampler1회는소진됐고decode0이다. 새로운STEP시각근거가없어방법판정INCONCLUSIVE/기본채택근거없음, BASE외형FAIL과CONTROL추가이득미관찰을유지한다. 가드완화·재시도·추가실험예약없이종료한다. [실제장부](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/RESULTS.md).
+
+
+### 2026-10-28 B-034 MEMORY_BUDGET_01 사전 고정
+
+사용자의 새 heavy1/decode1 승인으로 전역swap=0을 이번 한정 메모리 예산으로 대체한다. 이전 SYSTEM_SWAP 중단·원인UNKNOWN·사용량은 불변이다. CPU21개와 양 stage 실제 bootstrap/preflight 통과,50개 freeze 및 loader 쓰기경로 확인. 안정된258048bytes는경고이며 새 시작10초와 자체cgroup 보호 뒤에만실행한다. 운영수정 성공은품질성과가아니다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/memory_budget/PLAN.md).
