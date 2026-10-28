@@ -700,3 +700,7 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### B-034 EXPECTED_ABSENT_02 — 점유 작업 종료 확인 후 고정 계약 재개
 
 사용자 지시에 따른01:56:54UTC 단일 읽기 확인에서 과거 차단 프로세스는 같은boot의/proc에 없었다. 과거작업의 정상종료 원인이나 프로젝트는 미확정이다. loader·정책·guard 구현과 모든방법/입력을 고정하고 이번재개만 새root/deadline에 명시 승인한다. 시작직전 기존3표본과 live safety를 통과할 때만 미사용STEP1/D1을 사용한다. [계획](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/PLAN.md).
+
+### EXPECTED_ABSENT_02 종료 — 시작 통과 / system swap 가드 중단
+
+2d5339b 사전고정 뒤 기존3표본을 통과해 heavy/sampler시도1회를 사용했다. CPU staged load 뒤 dit_to_device_start에서 system swap256KiB가 관측되어 기존가드가 자체worker를 중단했다. 당시MemAvailable약63.87GiB로24GiB위반은 아니다. 실제forward/step/constraint0, final없음, decode0이며 정상종료PASS로 바꾸지 않는다. STEP영상/추가이득은미평가, 기존BASEtargetFAIL·CONTROL미개선·과거실패를보존한다. 원인귀속UNKNOWN, 재시도/정책변경없음. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/RESULTS.md).

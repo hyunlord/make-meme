@@ -426,3 +426,7 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 ### B-034 잔여 비교 재개 — 정책 변경 없음
 
 기존 점유 프로세스의 부재를 한 번 확인한 뒤 동일 운영/연구 계약으로 남은STEP만 조건부재개한다. 이전외부GPU차단·BASE외형FAIL·CONTROL추가이득미관찰은 보존한다. 실제새출력전 효과를 판정하지 않는다. [고정 재개](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/PLAN.md).
+
+### B-034 이번 범위 종료 — STEP 시도 소진 / 비교 미완료
+
+고정정책의 시작조건은 통과했지만 system swap0 위반으로STEP이첫forward전에중단됐다. 승인된heavy/sampler1회는소진됐고decode0이다. 새로운STEP시각근거가없어방법판정INCONCLUSIVE/기본채택근거없음, BASE외형FAIL과CONTROL추가이득미관찰을유지한다. 가드완화·재시도·추가실험예약없이종료한다. [실제장부](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/resume02/RESULTS.md).
