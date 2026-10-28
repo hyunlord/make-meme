@@ -1,0 +1,2336 @@
+{
+  "dataset": "DAVIS2017trainval480p",
+  "new_download_bytes": 0,
+  "cases": [
+    {
+      "case_id": "case_rigid",
+      "operation": "replace_subject",
+      "source_sequence": "car-roundabout",
+      "source_frames": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "target_sequence": "car-shadow",
+      "target_frame": 0,
+      "target_track": 1,
+      "source_track": 1,
+      "reference_crop": [
+        279,
+        54,
+        689,
+        316
+      ],
+      "reference_sha256": "f9121f3fbdabbba4858e9bbd854faa3068d983f2dc89ff2cac45e65ccd304bdc",
+      "reference_mask_sha256": "5a044b70e6e73aabf0af78f69902c009940765abb392889874fbd12dc67e4429",
+      "source_fps": null,
+      "timebase_assumed": true,
+      "preview_fps": 16,
+      "model_frame_count": 33,
+      "canvas": [
+        832,
+        480
+      ],
+      "sample_span_seconds_assumed": 2,
+      "file_duration_seconds": 2.0625,
+      "rgb_resample": "LANCZOS",
+      "mask_resample": "NEAREST",
+      "anchors": [
+        {
+          "model_index": 0,
+          "role": "start"
+        },
+        {
+          "model_index": 32,
+          "role": "end"
+        }
+      ],
+      "records": [
+        {
+          "model_index": 0,
+          "source_index": 30,
+          "source_rgb_sha256": "527cf79b7e7ab37854874e96ce47a86ca0e7c609960c7681d76dc8d29b663941",
+          "source_gt_sha256": "6ec35213ffd46324e62d38b3301951e84652cb016f2671b359ea508634e3e211",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            187,
+            178,
+            653,
+            364
+          ],
+          "center": [
+            403.43624832572175,
+            269.3906595445963
+          ],
+          "area": 61967,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 1,
+          "source_index": 31,
+          "source_rgb_sha256": "c10826c191faa7b7c0cda4ca69274ce817d26004e835362f2fc510b8b0d85632",
+          "source_gt_sha256": "65ffbf26c9138dbd2221d02bab2b0ca53266070f6ce85682b86a7c1473a5c981",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            188,
+            178,
+            652,
+            365
+          ],
+          "center": [
+            403.1757305260434,
+            270.08114620223483
+          ],
+          "area": 61839,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 2,
+          "source_index": 32,
+          "source_rgb_sha256": "73e03add3f3f45b2539a7be763f68f6b3911789f96166cd48126e07555ab0e55",
+          "source_gt_sha256": "cd92569c48fcf1c8a4e8e434e45f0747ac289d2a4f1ca29d509ad3b8e3e86966",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            188,
+            179,
+            651,
+            365
+          ],
+          "center": [
+            402.7583628620656,
+            270.55953967686355
+          ],
+          "area": 61522,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 3,
+          "source_index": 33,
+          "source_rgb_sha256": "9ff13980519b5537353ed7458fa08dfd1c28c2228c91cabc74d6f7851f850261",
+          "source_gt_sha256": "b3c1c2e8cf0780dc3f0253a433d5a5d4214f91890e08f105dd36c7529b64c5c6",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            189,
+            180,
+            650,
+            366
+          ],
+          "center": [
+            402.3625334726667,
+            271.56415322317287
+          ],
+          "area": 61244,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 4,
+          "source_index": 34,
+          "source_rgb_sha256": "0acaa5106447ba2fdd207f762872b96b827295539332065a72e13064a0812a71",
+          "source_gt_sha256": "cb85eaf25974f0b74c287a0c0ce153db8ecc729e1d768db93d91327c27d46881",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            190,
+            181,
+            649,
+            366
+          ],
+          "center": [
+            402.4702481924933,
+            271.83922660122863
+          ],
+          "area": 60719,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 5,
+          "source_index": 35,
+          "source_rgb_sha256": "8c0420381407fc9cae11a9a26a449d56209d3c6af3bf0bbf53adb58ec8d2aa3e",
+          "source_gt_sha256": "f1a9b0fdf6d42f6e6a2aae8275d9c018d2dc2b9743c3e6d1c11fc7959f624108",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            192,
+            181,
+            649,
+            366
+          ],
+          "center": [
+            403.4239339160376,
+            271.6948914051119
+          ],
+          "area": 60408,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 6,
+          "source_index": 36,
+          "source_rgb_sha256": "d809d04722c522f9d95ff12bed8ea6a46de4aaec76aec10ddce3dbc139209da4",
+          "source_gt_sha256": "da7f30d40f2176e6638a3f77d4b419c8eea44784bbe324a6328b52b88158e032",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            193,
+            182,
+            649,
+            366
+          ],
+          "center": [
+            404.14153062752735,
+            271.87149917627676
+          ],
+          "area": 60093,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 7,
+          "source_index": 37,
+          "source_rgb_sha256": "06bffc7bcb213878a4629a6bd9b62e29d0d33a63a42755debc0316b7561760b0",
+          "source_gt_sha256": "a31c6fa5d3c5ba6d0de94f6d7518b7eab94449b8c61d2432f7622fcfbe7d0c86",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            195,
+            182,
+            648,
+            367
+          ],
+          "center": [
+            404.2840302974568,
+            272.6720283578845
+          ],
+          "area": 59807,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 8,
+          "source_index": 38,
+          "source_rgb_sha256": "f2b62f3580ea2ae768e04d34e08ae28b120b7f0a09fb80a7e6876d7bb8d95955",
+          "source_gt_sha256": "f750197e5ab12b1e3d6eef3670e9120445d41b4f0cb0ada304607b0b053beaec",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            197,
+            182,
+            647,
+            367
+          ],
+          "center": [
+            404.8144932910795,
+            273.07834940327695
+          ],
+          "area": 59324,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 9,
+          "source_index": 39,
+          "source_rgb_sha256": "e3568b66890e7b5fcd01fca81f8285783cf3f731ac485a24f2b8890b7f2b2140",
+          "source_gt_sha256": "8eb0eaa667145bcd077652a29c8d0e53ce3b623cb7e226caa445c57fe2e559f7",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            199,
+            184,
+            647,
+            368
+          ],
+          "center": [
+            406.40899652801414,
+            273.8736639662332
+          ],
+          "area": 58756,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 10,
+          "source_index": 40,
+          "source_rgb_sha256": "49169b9c2804f4f205d3c82274484f9e9fc0674f34f9a324b61315a4047a3c49",
+          "source_gt_sha256": "f7e66c355b88e585cabe8c2179e2e12dd88c4bba8fadea6a6d7f574ac61058a6",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            202,
+            185,
+            648,
+            368
+          ],
+          "center": [
+            408.05119917476145,
+            274.8727241468237
+          ],
+          "area": 58165,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 11,
+          "source_index": 41,
+          "source_rgb_sha256": "45d360139b0784ff8bab3e5b8716c3dd612aaad546f45d6fa50a778054f39031",
+          "source_gt_sha256": "9c557cc8c8b76be5c0ced9d40e8618a32b1aca3eebf134921ed89cda3e7dd8c4",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            204,
+            186,
+            647,
+            368
+          ],
+          "center": [
+            408.92646419692994,
+            275.15326043495645
+          ],
+          "area": 57523,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 12,
+          "source_index": 42,
+          "source_rgb_sha256": "53ba6994f050f00339de0c2598c981084729e90db17622d9dbcb5be2238afc57",
+          "source_gt_sha256": "f05524684c7c0efdd7962e85dc2d6429243cbe09f5931f54a030a22005d59d8b",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            206,
+            186,
+            645,
+            368
+          ],
+          "center": [
+            409.45604395604397,
+            275.43722571358353
+          ],
+          "area": 56966,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 13,
+          "source_index": 43,
+          "source_rgb_sha256": "c793122fc3f023bab20c1b3e480f6b3f7b2c80323a9b1ce10c501f1b66fa4cac",
+          "source_gt_sha256": "cc6e8c434716f3be630d56dc6bc030e3e6d1e916e80c5f942dd7c2d9ae648d18",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            208,
+            187,
+            644,
+            368
+          ],
+          "center": [
+            409.9442801225625,
+            275.76934521173905
+          ],
+          "area": 56461,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 14,
+          "source_index": 44,
+          "source_rgb_sha256": "d3d9ab85f883ceb6fa9535f6dbbefe19c1ea628fc5634c620b37cc47e2082e99",
+          "source_gt_sha256": "5fd39c1af698b3e25314aa27ea15c8f42cdb3eca522c04a2f9676da1e5f8af31",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            210,
+            188,
+            643,
+            368
+          ],
+          "center": [
+            410.84595506424523,
+            275.8814873304142
+          ],
+          "area": 55724,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 15,
+          "source_index": 45,
+          "source_rgb_sha256": "c6121d3e1ad484d20c9ad5f8cc4111c3898a5cb40751453364740c96db54d8a7",
+          "source_gt_sha256": "0dbda30d965c052377bf200da52d426a5b9acd467d642c2335a5985753bb8425",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            212,
+            188,
+            641,
+            367
+          ],
+          "center": [
+            411.17435375756145,
+            275.5707460625988
+          ],
+          "area": 55049,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 16,
+          "source_index": 46,
+          "source_rgb_sha256": "bcd9f7f5965070b80f0a95b28e5b99bf91fce9cef2b795f33a01a8f7f0dc3340",
+          "source_gt_sha256": "ef7486c7add243e6e015cfabcee53042cfb840641a7aae13e10c8884aee6b659",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            214,
+            188,
+            639,
+            367
+          ],
+          "center": [
+            410.94213205432123,
+            275.88573423746254
+          ],
+          "area": 54417,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 17,
+          "source_index": 47,
+          "source_rgb_sha256": "48cc048802cc43a6e95376b87e822d5b955a7d3127febb80833d6a01b6492a54",
+          "source_gt_sha256": "b6027cd1610b49da40cf83fcb5c350e103439fb74cb3b2db91978e1abca4d6f6",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            215,
+            189,
+            636,
+            367
+          ],
+          "center": [
+            410.12725914861835,
+            276.2391150112024
+          ],
+          "area": 53560,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 18,
+          "source_index": 48,
+          "source_rgb_sha256": "582008bf57a8106d90c794bd31d9cecbd7e7ca495ab110d8894a3665b0884047",
+          "source_gt_sha256": "6d62e18ee523bb3f9c01975d14f12aece5b5a44e2e44182c51a2ba12b49e20e7",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            216,
+            190,
+            632,
+            367
+          ],
+          "center": [
+            409.05123303745484,
+            276.66830062266973
+          ],
+          "area": 52837,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 19,
+          "source_index": 49,
+          "source_rgb_sha256": "1a0e0083e700a67b265992c7455dde264723617780300e85bae291f270806713",
+          "source_gt_sha256": "1b26d43affd7d6e0bd9a345edbd64d25081ec534d9f8e1a6cc2a5e7b44b79f63",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            217,
+            192,
+            628,
+            368
+          ],
+          "center": [
+            407.8078106964217,
+            277.6321854559446
+          ],
+          "area": 51980,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 20,
+          "source_index": 50,
+          "source_rgb_sha256": "373a2bca447d26e4de4017b46809e6452ac84dc4ceea539b8ff7ab4e39410a50",
+          "source_gt_sha256": "2f3918266d361a24f58bdc6c3a22e235d3f2d2cab71e233eb56cd4d7ed5a45ed",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            218,
+            192,
+            625,
+            367
+          ],
+          "center": [
+            406.64327439526403,
+            277.06731485474575
+          ],
+          "area": 51014,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 21,
+          "source_index": 51,
+          "source_rgb_sha256": "499767cd5dad5df9a48417554ffaaf3de606e41c1d11e9d2399d30a33cc96339",
+          "source_gt_sha256": "30350128342aade18f35a9ce645193e8267e6cbaa5bb82b1631dfbce423eeaf3",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            219,
+            192,
+            622,
+            365
+          ],
+          "center": [
+            405.55522601962616,
+            276.2236111387567
+          ],
+          "area": 50239,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 22,
+          "source_index": 52,
+          "source_rgb_sha256": "0a113134965567d1ec1fceeda3e9e2520bbf2ff0bb312ab14ec1ed5ab253d00e",
+          "source_gt_sha256": "1b1fa699c674e9051e3329300c35448601bdac6252dc40581df85c6ee8e646f4",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            220,
+            192,
+            617,
+            365
+          ],
+          "center": [
+            404.31691237436553,
+            275.98641024085424
+          ],
+          "area": 49449,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 23,
+          "source_index": 53,
+          "source_rgb_sha256": "0f9a4a41ac9a54588eb5a78f98c0800e1027f0b27c5698b52ea56c0dd4de6dff",
+          "source_gt_sha256": "d243fc6ada44115ab8a112ee47b107429e5482f8fa54aee8bee78c46d17347f7",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            221,
+            193,
+            612,
+            364
+          ],
+          "center": [
+            402.13842087875787,
+            276.04094400396434
+          ],
+          "area": 48432,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 24,
+          "source_index": 54,
+          "source_rgb_sha256": "79ded88a220c73eb08ea9bedd6fab481272bea8ff55b4d20189c28c3d247e67d",
+          "source_gt_sha256": "307dd116359749aca130be4a4ef4a66360d1b07622c2647798332f423efbb5fa",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            220,
+            194,
+            606,
+            364
+          ],
+          "center": [
+            399.30254918084637,
+            276.3095283277458
+          ],
+          "area": 47427,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 25,
+          "source_index": 55,
+          "source_rgb_sha256": "f6a61a08b48544987ae3a1488b06b20fc284db7fcaeb091bf09da565bd5ead21",
+          "source_gt_sha256": "870312526fb1da94f443212fddb3e7470c777fbc903e45fac1ca8838e9e551de",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            220,
+            194,
+            600,
+            363
+          ],
+          "center": [
+            396.4696138539314,
+            276.0658276863504
+          ],
+          "area": 46485,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 26,
+          "source_index": 56,
+          "source_rgb_sha256": "19daa1d89c797f30612191c9e812022b567546b45f39f55a2c3956b710985af1",
+          "source_gt_sha256": "4147a87c0376072916d97d9ca5c7ec7e26badae4d2109abd2b1fc03295fb5411",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            222,
+            195,
+            595,
+            363
+          ],
+          "center": [
+            395.1078003291278,
+            276.6403730115195
+          ],
+          "area": 45575,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 27,
+          "source_index": 57,
+          "source_rgb_sha256": "86610eea329772124dc611129e29aedc401f1173aa99d4973823ca1cbbb24e6c",
+          "source_gt_sha256": "c3692ce915950746b38206c2a5382bf54343946d9a9a8f3072b96b4322cbb446",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            224,
+            197,
+            591,
+            363
+          ],
+          "center": [
+            394.6993882966761,
+            277.23930643637834
+          ],
+          "area": 44466,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 28,
+          "source_index": 58,
+          "source_rgb_sha256": "57dbbe63dba4be3a3bd4d15d7c178b68243e9633fc614be68de79e946f142582",
+          "source_gt_sha256": "b3ae3fb1583bd440d5ef94cd3cb1bacabf65055490a8f0c205c019438efac987",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            226,
+            198,
+            587,
+            362
+          ],
+          "center": [
+            394.0573457754896,
+            277.50599889675465
+          ],
+          "area": 43508,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 29,
+          "source_index": 59,
+          "source_rgb_sha256": "ae103559ac894da75cc26dbd0f2fb2b1d124638c8d264356fbf709007e614eab",
+          "source_gt_sha256": "a7a0df1baf018b039e6b48e9f5d8fbda208c1341bac9a9669d5887601480959b",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            228,
+            199,
+            584,
+            362
+          ],
+          "center": [
+            393.4770027055641,
+            278.05749911775087
+          ],
+          "area": 42505,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 30,
+          "source_index": 60,
+          "source_rgb_sha256": "b42f18f462d3d21cf24f7bb73627ee0a72a3002e4e5bfeef68b8a66435200925",
+          "source_gt_sha256": "92785f523486d67a88eb3c2b93c317020e805692be518439ef7b59ace05d84ec",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            231,
+            200,
+            580,
+            362
+          ],
+          "center": [
+            393.1864946340287,
+            278.0742312793923
+          ],
+          "area": 41465,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 31,
+          "source_index": 61,
+          "source_rgb_sha256": "813d8a6f236604428ed4c2f5ff2b0a851e2a31d2d3f31c66046d882d635d1a7a",
+          "source_gt_sha256": "7350be3e681dbdfb0e2f1c3d8d3cd1cac9d5e480ff94c1a445a3d5deeb8951fc",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            234,
+            200,
+            576,
+            360
+          ],
+          "center": [
+            392.8524959184683,
+            277.47298768119526
+          ],
+          "area": 40426,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 32,
+          "source_index": 62,
+          "source_rgb_sha256": "e181a18a1a044dccf90025c4edd8d7878a5a5e84526ba073b850f5ba3d356d48",
+          "source_gt_sha256": "0aa9155f093bf37de5d3fe1318571a4a57158e3259356e902366f45c55403bd7",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            235,
+            199,
+            571,
+            358
+          ],
+          "center": [
+            391.3236614502752,
+            276.4197631065006
+          ],
+          "area": 39427,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        }
+      ]
+    },
+    {
+      "case_id": "case_nonrigid",
+      "operation": "replace_subject",
+      "source_sequence": "dog",
+      "source_frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "target_sequence": "dog-gooses",
+      "target_frame": 85,
+      "target_track": 1,
+      "source_track": 1,
+      "reference_crop": [
+        587,
+        281,
+        798,
+        412
+      ],
+      "reference_sha256": "bacc452dc404640eec19e9d7e89e1b7d1d594e203c8f1404e2f35d5044ae7407",
+      "reference_mask_sha256": "ccb86b7b511e1bb4803276080059f5954b1821853c0a494077abc3ea4d80daa0",
+      "source_fps": null,
+      "timebase_assumed": true,
+      "preview_fps": 16,
+      "model_frame_count": 33,
+      "canvas": [
+        832,
+        480
+      ],
+      "sample_span_seconds_assumed": 2,
+      "file_duration_seconds": 2.0625,
+      "rgb_resample": "LANCZOS",
+      "mask_resample": "NEAREST",
+      "anchors": [
+        {
+          "model_index": 0,
+          "role": "start"
+        },
+        {
+          "model_index": 32,
+          "role": "end"
+        }
+      ],
+      "records": [
+        {
+          "model_index": 0,
+          "source_index": 0,
+          "source_rgb_sha256": "8055f6d7600ba9acd7dba5faa6ac3b1487bcfdc3b4c45e4519d2c0953c8f1bb5",
+          "source_gt_sha256": "e13cb32b856f4a2baf2b916ed222f982558b8a0e97f3964872e5b27e76623578",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            147,
+            17,
+            499,
+            303
+          ],
+          "center": [
+            325.1307325717844,
+            165.24661733362072
+          ],
+          "area": 41757,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 1,
+          "source_index": 1,
+          "source_rgb_sha256": "27b9f8dbae8b0c097765fea081d97caffb4594aca57e5f048017f4d17ea5bf22",
+          "source_gt_sha256": "121195802fd94946eee4573c4567be162c39d31c0372e406bb84b986f1713450",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            140,
+            6,
+            500,
+            304
+          ],
+          "center": [
+            326.2896674640026,
+            156.76828009943247
+          ],
+          "area": 42642,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 2,
+          "source_index": 2,
+          "source_rgb_sha256": "efcf0a8429dabe5eb586066ef64d4efd35400f2e4892815bb2cc19505996f93d",
+          "source_gt_sha256": "58517e47d1bbc00b04c8b5c486a718816d2aa9ed3ac4cce6b232a35e05ba3d70",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            137,
+            15,
+            491,
+            317
+          ],
+          "center": [
+            327.9028506053961,
+            160.8234340737916
+          ],
+          "area": 41956,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 3,
+          "source_index": 3,
+          "source_rgb_sha256": "ac1cd030d2b0f44b86ce3ee1a224a3dc8ed3b7336cbc210645fb7f0050439ee5",
+          "source_gt_sha256": "a6106cbafa10160cb89773063d594e433e106bb1c89d50ba10f590a57310e848",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            139,
+            41,
+            480,
+            335
+          ],
+          "center": [
+            323.35638599810784,
+            172.96851939451278
+          ],
+          "area": 42280,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 4,
+          "source_index": 4,
+          "source_rgb_sha256": "0483656c4fcedb153de6d4c19d12c47a11d1be02c50780ed250c909550cd6c89",
+          "source_gt_sha256": "dade5c21d595d482871921a109bedfb7d97a4465ed6aef33f7a3d3b47a8cc153",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            136,
+            63,
+            467,
+            342
+          ],
+          "center": [
+            315.45724815724816,
+            185.1968796068796
+          ],
+          "area": 40700,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 5,
+          "source_index": 5,
+          "source_rgb_sha256": "1995d0c2118b5d8a32cb378d8885ccac864ce8fad174a285e39ac562321b6c6c",
+          "source_gt_sha256": "a8653ecc24801aa574dac3e3a1cabeacf25b6bf1f7b5eb7f4d205dafa78d9b84",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            131,
+            77,
+            459,
+            349
+          ],
+          "center": [
+            308.26888202089344,
+            195.32877831983856
+          ],
+          "area": 39151,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 6,
+          "source_index": 6,
+          "source_rgb_sha256": "9c9662571df069103d0e149513e600ca96c907c9675d10e09be64b8163dc69a4",
+          "source_gt_sha256": "b49c89b5d2797168e5b7fdf7ecce4c678631c65dd72812207d8459898473e7cd",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            128,
+            84,
+            451,
+            351
+          ],
+          "center": [
+            307.1395602551192,
+            200.7620566185521
+          ],
+          "area": 35748,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 7,
+          "source_index": 7,
+          "source_rgb_sha256": "63dbc44674a47be3ccefad08d4d0c77fb91c4d87231baca90d03590271f96beb",
+          "source_gt_sha256": "06cc12de5f42cacd74ead86c8ab3de2d6fa0d02707a44190ffff641238a05640",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            127,
+            88,
+            444,
+            349
+          ],
+          "center": [
+            308.9385034747184,
+            201.54696860771628
+          ],
+          "area": 33384,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 8,
+          "source_index": 8,
+          "source_rgb_sha256": "ef30f72fc5c4632f7fb77a72b72dc7295c74eb4d00b9f10b4700834767019f88",
+          "source_gt_sha256": "480a6e1cc707694efdd5600ff97d0da51f32701fed1d561371d259f6e093c741",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            159,
+            77,
+            435,
+            349
+          ],
+          "center": [
+            309.1888349664616,
+            203.8012735309573
+          ],
+          "area": 32351,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 9,
+          "source_index": 9,
+          "source_rgb_sha256": "70bb4dc5f9e9d0f49d87bbee354d4808c69a62aedf9c783663d615f2c71595cb",
+          "source_gt_sha256": "2f50a4dd2b33250b83b24bcda77b4b3c3fe5dbf3918b04063b2831fea366fe95",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            183,
+            71,
+            429,
+            353
+          ],
+          "center": [
+            310.72814397773277,
+            210.12980769230768
+          ],
+          "area": 31616,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 10,
+          "source_index": 10,
+          "source_rgb_sha256": "e3b00b345348b73c67b685c0d6d97edd38360ca79e288fa23e76be84f07e7f39",
+          "source_gt_sha256": "53195f416a696bcb9d015cc8a7438def2c7dcc6c36afd9ec72e089338ce1e7f7",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            199,
+            69,
+            424,
+            359
+          ],
+          "center": [
+            313.2526045144918,
+            216.21600774676105
+          ],
+          "area": 29948,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 11,
+          "source_index": 11,
+          "source_rgb_sha256": "7156a1a1ac6d5d974bd8e611dbbf27ec3b630898c2271531a0628102aeafeaeb",
+          "source_gt_sha256": "787b8481783f5538e89d273e39e9d335328eb1d935958838fdc08757d6d02240",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            217,
+            65,
+            420,
+            362
+          ],
+          "center": [
+            315.016814286743,
+            218.09580903002808
+          ],
+          "area": 27774,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 12,
+          "source_index": 12,
+          "source_rgb_sha256": "bc03cb93e2c7b4a784dce92b9dab7cf6a75e35f133944f6dd533195072a1b221",
+          "source_gt_sha256": "98f25642ff56644078aa437a75cdc618df9228890df5c52a28e1c54bdb9ea912",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            227,
+            57,
+            417,
+            358
+          ],
+          "center": [
+            317.51870150783196,
+            216.21376811594203
+          ],
+          "area": 27324,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 13,
+          "source_index": 13,
+          "source_rgb_sha256": "54f5ba62527678b52c31a344f8115bc89026ab593b9326705a02a20dd5e407b5",
+          "source_gt_sha256": "1c0b09ddb5bf4940ed967ff1ef9a8cd270993d6f7446cb85fb0d5362ee5f2105",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            242,
+            41,
+            420,
+            353
+          ],
+          "center": [
+            327.9449878649702,
+            214.50003677281754
+          ],
+          "area": 27194,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 14,
+          "source_index": 14,
+          "source_rgb_sha256": "8b473ef1b20d75ab3b35d179c692a16a6721a7cce8695e040348e8d66cdd2834",
+          "source_gt_sha256": "ee085c6ee9db1cdab255c1183dda9e9b32e96960ec0df4bbe3cc92fe612bdc2b",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            257,
+            41,
+            430,
+            365
+          ],
+          "center": [
+            346.40262704887357,
+            219.2332909213382
+          ],
+          "area": 26722,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 15,
+          "source_index": 15,
+          "source_rgb_sha256": "69a78e891ab5fd2d4833bf9b663c9562ad18ae776ef298bea04c3ed2cb09ff9b",
+          "source_gt_sha256": "244b335f77b9005010cb30131e3ec28a65b036ebcfac667398641b1fd00260d4",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            274,
+            46,
+            442,
+            373
+          ],
+          "center": [
+            363.6223237011529,
+            223.01841593052853
+          ],
+          "area": 26716,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 16,
+          "source_index": 16,
+          "source_rgb_sha256": "8fce21b18b54ee803ba09fb0b5546c4f00d5b4fb241f00b1ac0972fef0b5ddb9",
+          "source_gt_sha256": "c094ef15f785d39305b79c3a1b29a1a5e8dbfcca01e36529eeb171d14b4de6ef",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            290,
+            56,
+            451,
+            386
+          ],
+          "center": [
+            377.36062843081584,
+            222.315956842703
+          ],
+          "area": 26415,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 17,
+          "source_index": 17,
+          "source_rgb_sha256": "21bb6757da36964f4c518201004ffc9b39b31be5476941d70ec9329bec71d0fb",
+          "source_gt_sha256": "ba4405e7c5a3686283020fe0cb95e97259a85d51fbaa38ab40a9d6224c4d9707",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            301,
+            66,
+            457,
+            390
+          ],
+          "center": [
+            385.218945487042,
+            220.4902070300864
+          ],
+          "area": 26856,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 18,
+          "source_index": 18,
+          "source_rgb_sha256": "39e3f1a98f2228a7f3b7bf10af4e56964159a840f3f7c3361c689a941e248636",
+          "source_gt_sha256": "8b8c30beef533c6570c67eacd991b1efb0ee136da34493ee4fa5a362959d6ad1",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            312,
+            71,
+            460,
+            385
+          ],
+          "center": [
+            391.11270710113513,
+            218.2169648433195
+          ],
+          "area": 27221,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 19,
+          "source_index": 19,
+          "source_rgb_sha256": "f3d92a36d32839792681289f966b22e223b2f206690c9759a0ccc06863422b6e",
+          "source_gt_sha256": "992bc01a5c238126ad1015f4df67386430d4e1c9dbe366d50c4fee8506b53562",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            321,
+            74,
+            462,
+            381
+          ],
+          "center": [
+            396.6809978372735,
+            218.14177045268104
+          ],
+          "area": 26818,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 20,
+          "source_index": 20,
+          "source_rgb_sha256": "be2c75498ff29e8e16e64d39e52adb9bb5b1f0bedc1ecc2f46570de0107dca53",
+          "source_gt_sha256": "2274697da40bde048082fb80ee361fc4aa6aca65e1e85e55a8a382dea8edbcea",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            335,
+            65,
+            467,
+            372
+          ],
+          "center": [
+            401.5651315789474,
+            215.31203560371517
+          ],
+          "area": 25840,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 21,
+          "source_index": 21,
+          "source_rgb_sha256": "b5870750b6ce2c01026a6e99a842d16b899be7958478acb00a7e6849b3b686da",
+          "source_gt_sha256": "99c85014b6cfe5b272b907c29ec4f9c66889b3d29fa5d905a679f250d15d8fc7",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            334,
+            47,
+            466,
+            360
+          ],
+          "center": [
+            400.4443262546062,
+            202.40420924666643
+          ],
+          "area": 26323,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 22,
+          "source_index": 22,
+          "source_rgb_sha256": "17978c5b4f88fe723ffa3ece165a26b36d707c40a68026ff74839a11e9145e19",
+          "source_gt_sha256": "ae0af08337689c2f09a8db3550ffbba402196addf848f23dbeb5d12b809ace82",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            325,
+            29,
+            463,
+            350
+          ],
+          "center": [
+            393.9632879918093,
+            191.14757934766712
+          ],
+          "area": 27348,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 23,
+          "source_index": 23,
+          "source_rgb_sha256": "83258c954ab73f958f9960871190d6cc741809e78993b94e1dd98f9d3b4fb338",
+          "source_gt_sha256": "e30e6e9e9ba6022bee39ad20c2d2128fbf75077dedadfbb350d181579d888879",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            312,
+            14,
+            454,
+            342
+          ],
+          "center": [
+            381.57137915528034,
+            184.6634957971566
+          ],
+          "area": 28909,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 24,
+          "source_index": 24,
+          "source_rgb_sha256": "42b61b3ff97dde8795c3125dc9a2e4516cccc90050d9d60eb38b98c8997adae0",
+          "source_gt_sha256": "687b13d0a255dbb0e252b451d78e4ef313d29a794ed195d25a4ead8895bdd2f3",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            294,
+            6,
+            438,
+            329
+          ],
+          "center": [
+            363.8155008449584,
+            172.00901288975777
+          ],
+          "area": 30179,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 25,
+          "source_index": 25,
+          "source_rgb_sha256": "4fef4ddaaa60627cc70d20ac3b3cbccd895860052fbe40b24dfaf14be46278a9",
+          "source_gt_sha256": "15776481737ba0f49b4024e554958144729c675b9a3e62a2fc8bbb680c572d5e",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            281,
+            6,
+            427,
+            315
+          ],
+          "center": [
+            351.7813482007096,
+            160.00969758405137
+          ],
+          "area": 29595,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 26,
+          "source_index": 26,
+          "source_rgb_sha256": "2fae2847068bd50a73d56064286342b66a47cc6e9c9f208bf5c7e24f4c1c5272",
+          "source_gt_sha256": "024347310bce3621607ab558fc4c5d0064f11d2c5de95be70030336b2e557bf8",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            277,
+            6,
+            425,
+            306
+          ],
+          "center": [
+            348.3020836795055,
+            153.06310857066896
+          ],
+          "area": 30091,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 27,
+          "source_index": 27,
+          "source_rgb_sha256": "298bd94102ab0585684c64eae08a2b1d847bf3e0a2d09cfc0f36360102a05055",
+          "source_gt_sha256": "5bd03a0c966d9315a80d871109f85eb07b443bef54084f26a3075a78dd444136",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            276,
+            6,
+            429,
+            313
+          ],
+          "center": [
+            350.05836538767204,
+            154.64758241408907
+          ],
+          "area": 31457,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 28,
+          "source_index": 28,
+          "source_rgb_sha256": "f4ab7f9e967fd34df94c1a55d12390c4572b2f0c5b01b8c8ce07fa9d1e3faf5c",
+          "source_gt_sha256": "1f415b9ad186eec41a05307c849e0b8b5bd98b871fad50259246dd9563855cd9",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            263,
+            6,
+            431,
+            325
+          ],
+          "center": [
+            349.26089168733705,
+            159.74635883737201
+          ],
+          "area": 31446,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 29,
+          "source_index": 29,
+          "source_rgb_sha256": "8e22d83fee77abdc71351ca17ee7d222a4b530b74f550ff00753eddfbc0c978d",
+          "source_gt_sha256": "6d9dcd188b503a5755f12754eba461f912684f298dddf1513bda4ec18e9f47bf",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            249,
+            6,
+            427,
+            334
+          ],
+          "center": [
+            342.516991590816,
+            162.33835154798274
+          ],
+          "area": 31751,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 30,
+          "source_index": 30,
+          "source_rgb_sha256": "185b1ab00dbce23b19a794e3f68837f3657420ad2a023178428bb9a47a91500c",
+          "source_gt_sha256": "7a96e6171d090f776cd2613df4080ca70bceef3fc73c141e316d170b3e91b09e",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            242,
+            18,
+            424,
+            334
+          ],
+          "center": [
+            333.0950703117627,
+            166.64721426998457
+          ],
+          "area": 31787,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 31,
+          "source_index": 31,
+          "source_rgb_sha256": "b7ea4b68f5e3242f4b6422bd3b1bb1f7aa4788ce324a1e22b1e31463fda673ad",
+          "source_gt_sha256": "0fddbcc69c12e0f2481657eac10c8be502ac1f837382aee9f96272cc24223382",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            226,
+            30,
+            420,
+            333
+          ],
+          "center": [
+            322.88805714107485,
+            169.16630797542186
+          ],
+          "area": 32061,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        },
+        {
+          "model_index": 32,
+          "source_index": 32,
+          "source_rgb_sha256": "03b6e843d2dbe3dd44d6ad3f3172e301eea158b848b6f9e9dca880d3df891196",
+          "source_gt_sha256": "7533700eea2bd292f5e059e00632421e159285c5597ad895740a407a43a3e140",
+          "source_size": [
+            854,
+            480
+          ],
+          "resized_size": [
+            832,
+            468
+          ],
+          "offset": [
+            0,
+            6
+          ],
+          "bbox": [
+            210,
+            34,
+            413,
+            332
+          ],
+          "center": [
+            311.94383614201814,
+            167.93241448514004
+          ],
+          "area": 33883,
+          "visible": true,
+          "role_id": "edited_subject",
+          "analysis_origin": "DAVIS_GT_MASK_GIVEN",
+          "sam_conditioning": false
+        }
+      ]
+    }
+  ]
+}

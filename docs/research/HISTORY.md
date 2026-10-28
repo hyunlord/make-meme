@@ -714,3 +714,8 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### B-034 MEMORY_BUDGET_01 종료 — 시작 통과 / 실행 경로 계약 오류
 
 공통memory정책CPU21개·양stage실제preflight와10.2548초시작관측은통과했다. 안정swap258048bytes는경고로보존됐으나,실행자가stage상대경로를전달하여systemdPython이worker파일을열지못하고반환2/NOT_CLEAN으로종료했다. 모델load/sampler/forward/constraint/decode0,새latent/raw/영상없음이다. 계약오류발생시종료조건에따라재실행하지않았다. 운영정책검사성과와heavy검증미완료를분리하며연구품질성과없음·비교미완료/운영보류다. 과거실패·UNKNOWN·소진기록과BASEtargetFAIL/CONTROL미개선/temporalUNVERIFIED는불변이다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/memory_budget/RESULTS.md). 추가자동실행권한/예약없음.
+
+
+### 2026-10-28 C001 착수
+
+독립C트랙에서공개차량/동물양끝앵커nativeimagegen+기존VACE1.3B영상을한정실행한다. A/B와B034운영보류는보존한다. [계획](experiments/C-001-hybrid-endpoint-baseline/PLAN.md).
