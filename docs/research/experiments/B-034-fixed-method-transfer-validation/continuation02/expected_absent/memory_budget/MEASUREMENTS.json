@@ -1,0 +1,103 @@
+{
+  "status": "BLOCKED_EXECUTION_CONTRACT_ERROR",
+  "comparison": "INCOMPLETE",
+  "method_effect": "INCONCLUSIVE",
+  "preregistration_commit": "12e1eb5",
+  "baseline_commit": "ac954015987d7df5d4bf822c852cb8bce065fc9a",
+  "historical_attempts_preserved": true,
+  "new_authorization": {
+    "heavy_max": 1,
+    "decode_max": 1,
+    "automatic_retries": 0
+  },
+  "actual_usage": {
+    "supervisor_invocations": 1,
+    "systemd_python_launches": 1,
+    "worker_entry_attempts": 0,
+    "model_load_attempts": 0,
+    "sampler_attempts": 0,
+    "completed_steps": 0,
+    "forwards": 0,
+    "clean_constraint_calls": 0,
+    "vae_decodes": 0,
+    "final_latent": false,
+    "new_raw": false,
+    "new_video": false,
+    "base_or_control_regeneration": 0,
+    "source_reference_encoders": 0,
+    "image_generations": 0,
+    "training": 0,
+    "new_packages_models_downloads": 0,
+    "automatic_retries": 0
+  },
+  "startup": {
+    "startup_count": 6,
+    "startup_seconds": 10.254808088997379,
+    "startup_decisions": [
+      "START_OBSERVATION_INCOMPLETE",
+      "START_OBSERVATION_INCOMPLETE",
+      "START_OBSERVATION_INCOMPLETE",
+      "START_OBSERVATION_INCOMPLETE",
+      "START_OBSERVATION_INCOMPLETE",
+      "CLEAR"
+    ],
+    "startup_memory_last": {
+      "decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "errors": [],
+      "metrics": {
+        "s0": 258048,
+        "swap_growth": 0,
+        "window_seconds": 10.254808088997379,
+        "swapout_bytes_10s": 0,
+        "psi_full_ratio_10s": 0.0
+      }
+    }
+  },
+  "resource_summary": {
+    "min_available_bytes": 106179239936,
+    "min_available_GiB": 98.88712310791016,
+    "system_swap_bytes": 258048,
+    "swap_growth_bytes": 0,
+    "pswpout_delta": 0,
+    "psi_full_stall_delta": 0,
+    "host_page_size_bytes": 4096,
+    "runtime_cgroup_measurement": "NOT_OBSERVED_WORKER_ENTRY_FAILED",
+    "memoryswapmax_requested": 0,
+    "actual_worker_swap_contract_verified": false,
+    "global_swap_origin": "UNKNOWN"
+  },
+  "exit": {
+    "worker_returncode": 2,
+    "supervisor_status": "NOT_CLEAN",
+    "guard_reason": "COMPLETE",
+    "guard_reason_interpretation": "Child ended; not successful worker completion",
+    "normal_exit_recorded": false,
+    "unit_active_state": "failed",
+    "unit_substate": "failed",
+    "main_pid_zero": true,
+    "final_memory_verdict": "OBSERVATION_FAILED",
+    "final_memory_error": "cgroup:REMOVED:exit_not_verified",
+    "final_worker_memory": null,
+    "final_gpu_count": 0,
+    "service": "EXPECTED_ABSENT_OBSERVED",
+    "queue_counts": null
+  },
+  "error": "Relative stage root was passed to the existing supervisor; systemd resolved worker path under its user default working directory and Python exited2 before worker.py entry. Operator invocation error; no model OOM/CUDA classification.",
+  "timing": {
+    "start_utc": "2026-10-28T04:01:18.264104+00:00",
+    "finish_utc": "2026-10-28T04:01:29.731435+00:00",
+    "supervisor_seconds": 11.467331409454346
+  },
+  "research": {
+    "base_target": "FAIL_PRESERVED",
+    "final_latent_only_additional_benefit": "NOT_OBSERVED_PRESERVED",
+    "step_target": "NOT_RUN",
+    "step_additional_benefit": "INCONCLUSIVE",
+    "temporal": "UNVERIFIED",
+    "default_adoption": "NO_EVIDENCE_NOT_ADOPTED"
+  },
+  "decision": "Stop this authorization without retry or new recovery experiment; no automatic continuation reserved."
+}
