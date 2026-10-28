@@ -1,0 +1,459 @@
+{
+  "cells": {
+    "case_rigid/layout_mov": {
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 288.8652880459995,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": true,
+        "condition_mode": "layout_mov",
+        "source_middle_rgb_conditioning": false
+      },
+      "first_model_input": {
+        "latents": {
+          "shape": [
+            1,
+            16,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+          "finite": true,
+          "minimum": -4.75,
+          "maximum": 5.0
+        },
+        "vace_context": {
+          "shape": [
+            1,
+            96,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "24e2bf90324e7822a5a9f3cef3d98a41fb15072243fb8368da3620c776d6edb9",
+          "finite": true,
+          "minimum": -4.09375,
+          "maximum": 4.09375
+        },
+        "vace_mask_context": {
+          "shape": [
+            1,
+            64,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "08fd5340f8509a7e040eeebf216129ac72a02abd90014dcbe8bc5dd29faf8b00",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "vace_mask_temporal_means": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "vace_scale": 1.0,
+        "condition_mode": "layout_mov",
+        "observed_before_original_call": true,
+        "additional_forward_calls": 0
+      },
+      "guard": {
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_error_count": 0,
+        "elapsed_seconds": 295.1069450378418,
+        "observations": 273,
+        "final_decision": "CLEAR",
+        "final_cgroup_state": "REMOVED",
+        "minimum_memavailable_bytes": 94589018112,
+        "peak_observed_cgroup_current_bytes": 11229765632,
+        "maximum_cgroup_swap_current_bytes": 0,
+        "observed_cgroup_swap_max_values": [
+          0
+        ],
+        "system_swap_min_bytes": 1040384,
+        "system_swap_max_bytes": 1040384,
+        "host_page_sizes": [
+          4096
+        ],
+        "maximum_high_event_count": 0,
+        "maximum_oom_count": 0,
+        "maximum_oom_kill_count": 0,
+        "memory_decisions": [
+          "CLEAR"
+        ],
+        "warnings": [
+          "GLOBAL_SWAP_WARNING"
+        ],
+        "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+        "maximum_swap_growth_bytes": 0,
+        "maximum_swapout_bytes_10s": 0,
+        "maximum_psi_full_ratio_10s": 4e-07
+      }
+    },
+    "case_rigid/layout_still": {
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 290.8445187440084,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": true,
+        "condition_mode": "layout_still",
+        "source_middle_rgb_conditioning": false
+      },
+      "first_model_input": {
+        "latents": {
+          "shape": [
+            1,
+            16,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+          "finite": true,
+          "minimum": -4.75,
+          "maximum": 5.0
+        },
+        "vace_context": {
+          "shape": [
+            1,
+            96,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "d93d2094c3b7a52dc43dbaa36196b9a1f6bc4425cc7b181a6af34f3a801c06d4",
+          "finite": true,
+          "minimum": -3.59375,
+          "maximum": 4.21875
+        },
+        "vace_mask_context": {
+          "shape": [
+            1,
+            64,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "08fd5340f8509a7e040eeebf216129ac72a02abd90014dcbe8bc5dd29faf8b00",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "vace_mask_temporal_means": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "vace_scale": 1.0,
+        "condition_mode": "layout_still",
+        "observed_before_original_call": true,
+        "additional_forward_calls": 0
+      },
+      "guard": {
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_error_count": 0,
+        "elapsed_seconds": 296.98259115219116,
+        "observations": 275,
+        "final_decision": "CLEAR",
+        "final_cgroup_state": "REMOVED",
+        "minimum_memavailable_bytes": 94681120768,
+        "peak_observed_cgroup_current_bytes": 11229618176,
+        "maximum_cgroup_swap_current_bytes": 0,
+        "observed_cgroup_swap_max_values": [
+          0
+        ],
+        "system_swap_min_bytes": 1040384,
+        "system_swap_max_bytes": 1040384,
+        "host_page_sizes": [
+          4096
+        ],
+        "maximum_high_event_count": 0,
+        "maximum_oom_count": 0,
+        "maximum_oom_kill_count": 0,
+        "memory_decisions": [
+          "CLEAR"
+        ],
+        "warnings": [
+          "GLOBAL_SWAP_WARNING"
+        ],
+        "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+        "maximum_swap_growth_bytes": 0,
+        "maximum_swapout_bytes_10s": 0,
+        "maximum_psi_full_ratio_10s": 1e-07
+      }
+    },
+    "case_nonrigid/layout_mov": {
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 292.67374278599164,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": true,
+        "condition_mode": "layout_mov",
+        "source_middle_rgb_conditioning": false
+      },
+      "first_model_input": {
+        "latents": {
+          "shape": [
+            1,
+            16,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+          "finite": true,
+          "minimum": -4.75,
+          "maximum": 5.0
+        },
+        "vace_context": {
+          "shape": [
+            1,
+            96,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "0032ba1acb4614ae76556b1547352978b19eb573105d0128e5ba72df4c981e52",
+          "finite": true,
+          "minimum": -4.40625,
+          "maximum": 5.03125
+        },
+        "vace_mask_context": {
+          "shape": [
+            1,
+            64,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "08fd5340f8509a7e040eeebf216129ac72a02abd90014dcbe8bc5dd29faf8b00",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "vace_mask_temporal_means": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "vace_scale": 1.0,
+        "condition_mode": "layout_mov",
+        "observed_before_original_call": true,
+        "additional_forward_calls": 0
+      },
+      "guard": {
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_error_count": 0,
+        "elapsed_seconds": 298.8311061859131,
+        "observations": 277,
+        "final_decision": "CLEAR",
+        "final_cgroup_state": "REMOVED",
+        "minimum_memavailable_bytes": 94665125888,
+        "peak_observed_cgroup_current_bytes": 11230531584,
+        "maximum_cgroup_swap_current_bytes": 0,
+        "observed_cgroup_swap_max_values": [
+          0
+        ],
+        "system_swap_min_bytes": 1040384,
+        "system_swap_max_bytes": 1040384,
+        "host_page_sizes": [
+          4096
+        ],
+        "maximum_high_event_count": 0,
+        "maximum_oom_count": 0,
+        "maximum_oom_kill_count": 0,
+        "memory_decisions": [
+          "CLEAR"
+        ],
+        "warnings": [
+          "GLOBAL_SWAP_WARNING"
+        ],
+        "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+        "maximum_swap_growth_bytes": 0,
+        "maximum_swapout_bytes_10s": 0,
+        "maximum_psi_full_ratio_10s": 1e-07
+      }
+    },
+    "case_nonrigid/layout_still": {
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 292.15905978600495,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": true,
+        "condition_mode": "layout_still",
+        "source_middle_rgb_conditioning": false
+      },
+      "first_model_input": {
+        "latents": {
+          "shape": [
+            1,
+            16,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+          "finite": true,
+          "minimum": -4.75,
+          "maximum": 5.0
+        },
+        "vace_context": {
+          "shape": [
+            1,
+            96,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "bfe6388d7fc9ee09a9b6b191368ca79ed38405ca53691108f3e8baf8ca2af8c3",
+          "finite": true,
+          "minimum": -3.765625,
+          "maximum": 3.96875
+        },
+        "vace_mask_context": {
+          "shape": [
+            1,
+            64,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "08fd5340f8509a7e040eeebf216129ac72a02abd90014dcbe8bc5dd29faf8b00",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "vace_mask_temporal_means": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "vace_scale": 1.0,
+        "condition_mode": "layout_still",
+        "observed_before_original_call": true,
+        "additional_forward_calls": 0
+      },
+      "guard": {
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_error_count": 0,
+        "elapsed_seconds": 298.1891248226166,
+        "observations": 277,
+        "final_decision": "CLEAR",
+        "final_cgroup_state": "REMOVED",
+        "minimum_memavailable_bytes": 94829375488,
+        "peak_observed_cgroup_current_bytes": 11228741632,
+        "maximum_cgroup_swap_current_bytes": 0,
+        "observed_cgroup_swap_max_values": [
+          0
+        ],
+        "system_swap_min_bytes": 1040384,
+        "system_swap_max_bytes": 1040384,
+        "host_page_sizes": [
+          4096
+        ],
+        "maximum_high_event_count": 0,
+        "maximum_oom_count": 0,
+        "maximum_oom_kill_count": 0,
+        "memory_decisions": [
+          "CLEAR"
+        ],
+        "warnings": [
+          "GLOBAL_SWAP_WARNING"
+        ],
+        "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+        "maximum_swap_growth_bytes": 0,
+        "maximum_swapout_bytes_10s": 0,
+        "maximum_psi_full_ratio_10s": 3e-07
+      }
+    }
+  },
+  "paired_checks": {
+    "case_rigid": {
+      "actual_initial_noise_equal": true,
+      "actual_context_different": true,
+      "actual_mask64_equal": true,
+      "historical_endpoint_noise_bitwise_verified": false
+    },
+    "case_nonrigid": {
+      "actual_initial_noise_equal": true,
+      "actual_context_different": true,
+      "actual_mask64_equal": true,
+      "historical_endpoint_noise_bitwise_verified": false
+    }
+  },
+  "quality_inference_from_hash": false
+}

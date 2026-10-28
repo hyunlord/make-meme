@@ -6,4 +6,4 @@ C는 외부 native imagegen의 양끝 앵커와 DGX Spark의 로컬 영상 생�
 
 의뢰: [C001](work_orders/C-001-work-order.md). 다음 모듈은 실제 첫 결과를 사용자와 검토한 뒤 설계한다.
 
-C-002는C-001의앵커와ENDPOINT를그대로쓰고,기존SAMsource윤곽을중간RGB조건으로실제연결하는MOV/STILL대조다. source체형도함께들어가는제한된구조표현이며새로운체형전이신경망이나순수motion분리는아니다. [의뢰서](work_orders/C002_SAM_LAYOUT_CONDITIONING_WORK_ORDER_KO.md).
+C-002는 C-001 앵커와 ENDPOINT를 그대로 쓰고 기존 SAM source 윤곽을 중간 RGB 조건에 실제 연결한 MOV/STILL 대조다. Source 체형도 함께 들어가는 제한된 구조 표현이며 새로운 체형 전이 신경망이나 순수 motion 분리는 아니다. 실제 네 영상은 완료됐고 차량 TRADE_OFF / 개 COARSE_CONTROL_ONLY로 기본 채택하지 않았다. [의뢰서](work_orders/C002_SAM_LAYOUT_CONDITIONING_WORK_ORDER_KO.md) · [결과](experiments/C-002-sam-layout-conditioning/RESULTS.md).

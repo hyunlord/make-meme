@@ -1,0 +1,63 @@
+{
+  "status": "DELIVERED",
+  "archive_name": "C002-review-20261029.zip",
+  "archive_bytes": 92429707,
+  "archive_sha256": "a5b8498bf5a126362668b7767e82d0a5afef27b9864953ecdee8f328f27fd5d3",
+  "mac_and_spark_archive_location": "/tmp/C002-review-20261029.zip",
+  "mac_and_spark_extracted_viewer": "/tmp/C002-review-20261029/index.html",
+  "mac": {
+    "crc": "PASS",
+    "actual_extraction": "PASS",
+    "payload_hash": "PASS",
+    "payload_size": "PASS",
+    "files": 986,
+    "manifest_entries": 985
+  },
+  "spark": {
+    "host": "Spark",
+    "archive_bytes": 92429707,
+    "archive_sha256": "a5b8498bf5a126362668b7767e82d0a5afef27b9864953ecdee8f328f27fd5d3",
+    "crc": "PASS",
+    "actual_extraction": "PASS",
+    "payload_hash": "PASS",
+    "payload_size": "PASS",
+    "files": 986,
+    "manifest_entries": 985,
+    "transfer_byte_match": "PASS"
+  },
+  "compact_scope": "Source/reference/anchors; reused ENDPOINT2 and new generated4 original MP4 bytes; condition/SAM previews; lossy all33 JPEG views/crops/sheets; reports and code. No raw, latent, weights, or lossless all-frame PNG payload.",
+  "full_scope": {
+    "host": "Spark",
+    "separate_private_retention": true,
+    "files": 444,
+    "bytes": 417465309,
+    "manifest_sha256": "7e6f29412f2aecc9a0a77c2a1afc4a4abeaf9bb29087e00ca724d920174714c6",
+    "new_raw_tensors": 4,
+    "new_final_latents": 4,
+    "lossless_output_frames": 132,
+    "full_transferred_to_mac": false
+  },
+  "viewer_qa": {
+    "videos_decode_and_play": 14,
+    "same_index_sliders": "PASS",
+    "javascript_errors": 0,
+    "viewports": [
+      1280,
+      768,
+      375
+    ],
+    "temporal_quality": "UNVERIFIED"
+  },
+  "cpu_verification": {
+    "spark_existing_environment": "PASS",
+    "actual_systemd_routes_complete": 4,
+    "actual_systemd_route_failures": 0,
+    "mac_system_python_repeat": "UNAVAILABLE: cv2 not installed; no package installed; use existing Spark environment"
+  },
+  "generation_finished_utc": "2026-10-28T16:14:27.138155+00:00",
+  "recorded_utc": "2026-10-28T16:21:34.317929+00:00",
+  "process_scope": "All four own guarded workers recorded normal exit, cleanup errors0, final CLEAR and cgroup REMOVED. No other services/processes started or stopped.",
+  "delivery_receipt_external_to_archive": true,
+  "reason": "Archive hash cannot include its own final receipt. Commit publication receipt is also external.",
+  "extra_gpu_after_four_cells": 0
+}

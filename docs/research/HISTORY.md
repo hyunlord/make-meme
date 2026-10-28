@@ -729,3 +729,9 @@ SSH는 회복됐으나 현재 boot가 이전과 다르고 사전고정 보호PID
 ### 2026-10-29 C-002 착수 — 기존 앵커와 SAM 시간 윤곽 조건
 
 C-001의4앵커·2ENDPOINT를보존하고source선택SAMmask의공식3px외곽선을MOV/STILL중간RGB로연결한다. 차량MOV/STILL→개MOV/STILL의신규4셀,같은seed/모델/G/caption,추가imagegen/SAM0이다. 실제첫noise/context해시와조건변경을확인한뒤외형회귀·동작·장면을나눠평가한다. C-001 PARTIAL/UNVERIFIED와A/B보류는불변이다. [계획](experiments/C-002-sam-layout-conditioning/PLAN.md).
+
+### 2026-10-29 C-002 종료 — 실제 조건 전달 / 거친 제어와 장면 상충
+
+같은 네 앵커와 기존 두 ENDPOINT를 보존한 채 차량 MOV/STILL → 개 MOV/STILL의 네 영상을 생성했다. 각50step/100call/33frames, 총 실행1164.54초, 복구·추가 imagegen/SAM·다운로드0이다. 실제 초기 noise와 mask64는 같고 context는 달랐다. 기존 guard는 변경하지 않았으며 네 heavy 정상 종료/자원 회수를 확인했다.
+
+과학적 결과는 차량 TRADE_OFF, 개 COARSE_CONTROL_ONLY다. 개의 거친 접근은 개선됐지만 내부 자세/접촉은 불확실하고, 차량은 빨간 전경 차량의 조기 등장과 표지판 소실 등 장면 손상이 남았다. 기본 채택하지 않으며 temporal=UNVERIFIED다. 다음 후보는 객체 내부 대응 하나이며 추가 연구는 시작하지 않았다. C-001 PARTIAL/UNVERIFIED와 A/B 실패·보류는 소급 변경하지 않는다. [결과](experiments/C-002-sam-layout-conditioning/RESULTS.md) · [전달](experiments/C-002-sam-layout-conditioning/DELIVERY.json).

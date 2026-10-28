@@ -1,0 +1,43 @@
+{
+  "status": "COMPLETE",
+  "new_heavy_budget": 5,
+  "planned_base_cells": 4,
+  "mechanical_recovery_budget": 1,
+  "new_sampler_runs_started": 4,
+  "completed_cells": 4,
+  "quality_retries": 0,
+  "vae_only_recoveries": 0,
+  "new_imagegen_calls": 0,
+  "new_sam_inference_calls": 0,
+  "reused_sam_masks": 66,
+  "reused_native_anchors": 4,
+  "reused_endpoint_videos": 2,
+  "new_download_bytes": 0,
+  "new_installs": 0,
+  "training_runs": 0,
+  "cpu_systemd_routes": {
+    "attempts": 4,
+    "complete": 4,
+    "failures": 0
+  },
+  "graft_parent_reported_saved_tokens_estimate": 11637,
+  "task_start_utc": "2026-10-28T15:43:00Z",
+  "heavy_cutoff_utc": "2026-10-28T18:23:00Z",
+  "task_deadline_utc": "2026-10-28T18:43:00Z",
+  "mechanical_recovery_used": 0,
+  "total_scheduler_steps": 200,
+  "total_model_fn_calls": 400,
+  "new_video_frames": 132,
+  "inference_seconds_by_cell": {
+    "case_rigid/layout_mov": 288.8652880459995,
+    "case_rigid/layout_still": 290.8445187440084,
+    "case_nonrigid/layout_mov": 292.67374278599164,
+    "case_nonrigid/layout_still": 292.15905978600495
+  },
+  "total_inference_seconds": 1164.5426093620044,
+  "total_guarded_seconds": 1189.1097671985626,
+  "new_paid_generation_calls": 0,
+  "currency_cost": "UNKNOWN; no external paid generation invoked",
+  "temporal_review": "UNVERIFIED",
+  "scope": "Four new cells only; C001 generation costs not counted again."
+}
