@@ -1,42 +1,295 @@
 {
-  "status": "BLOCKED_SAFETY",
-  "reason": "START_SWAPOUT_OBSERVED",
-  "extraction_heavy_attempts": 0,
-  "completed_extraction_passes": 0,
-  "video_heavy_attempts": 0,
-  "video_completed": 0,
-  "video_recovery_used": 0,
-  "first_cpu": "MODULE_IMPORT_ERROR_BEFORE_MODEL",
-  "second_cpu": "START_SWAPOUT_OBSERVED_BEFORE_WORKER",
-  "start_seconds": 10.238937197980704,
-  "memory": {
-    "monotonic": 156307.71901553,
-    "errors": [],
-    "page_size": 4096,
-    "available": 121690972160,
-    "swap_total": 17179865088,
-    "swap_free": 17178058752,
-    "swap": 1806336,
-    "pswpin": 0,
-    "pswpout": 128,
-    "psi_full_total": 21661413
+  "status": "COMPLETE",
+  "quality_verdict": "NO_ESTABLISHED_GAIN",
+  "temporal": "UNVERIFIED",
+  "historical_stop_preserved": {
+    "status": "BLOCKED_SAFETY",
+    "reason": "START_SWAPOUT_OBSERVED",
+    "extraction_heavy_attempts": 0,
+    "completed_extraction_passes": 0,
+    "video_heavy_attempts": 0,
+    "video_completed": 0,
+    "video_recovery_used": 0,
+    "first_cpu": "MODULE_IMPORT_ERROR_BEFORE_MODEL",
+    "second_cpu": "START_SWAPOUT_OBSERVED_BEFORE_WORKER",
+    "start_seconds": 10.238937197980704,
+    "memory": {
+      "monotonic": 156307.71901553,
+      "errors": [],
+      "page_size": 4096,
+      "available": 121690972160,
+      "swap_total": 17179865088,
+      "swap_free": 17178058752,
+      "swap": 1806336,
+      "pswpin": 0,
+      "pswpout": 128,
+      "psi_full_total": 21661413
+    },
+    "metrics": {
+      "s0": 1548288,
+      "swap_growth": 258048,
+      "window_seconds": 10.238937197980704,
+      "swapout_bytes_10s": 4096,
+      "psi_full_ratio_10s": 0.0037203
+    },
+    "source_attribution": "UNKNOWN",
+    "automatic_retry": false,
+    "policy_changed": false,
+    "checked_at": 1793258220.116916,
+    "own_active_units_count": 0,
+    "external_gpu_count_at_final_read": 0,
+    "peak_global_swap_bytes": 1810432,
+    "peak_swap_growth_bytes": 262144,
+    "first_cpu_supervisor_status": "NOT_CLEAN",
+    "first_cpu_guard_reason": "OBSERVATION_FAILED",
+    "first_cpu_memory_error": "REMOVED:exit_not_verified"
   },
-  "metrics": {
-    "s0": 1548288,
-    "swap_growth": 258048,
-    "window_seconds": 10.238937197980704,
-    "swapout_bytes_10s": 4096,
-    "psi_full_ratio_10s": 0.0037203
+  "current_code_commit": "1adcd2e7a6ed74c25553790e2da2d066a9bd6637",
+  "cells": {
+    "internal_dynamic": {
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 307.52220277499873,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": true,
+        "condition_mode": "internal_dynamic",
+        "source_middle_rgb_conditioning": false
+      },
+      "first_model_input": {
+        "latents": {
+          "shape": [
+            1,
+            16,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+          "finite": true,
+          "minimum": -4.75,
+          "maximum": 5.0
+        },
+        "vace_context": {
+          "shape": [
+            1,
+            96,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "a90d90f93af9c6fb230ee94c12f038e9b60010fabd795661221fb937870c6e4a",
+          "finite": true,
+          "minimum": -4.375,
+          "maximum": 4.875
+        },
+        "vace_mask_context": {
+          "shape": [
+            1,
+            64,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "08fd5340f8509a7e040eeebf216129ac72a02abd90014dcbe8bc5dd29faf8b00",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "vace_mask_temporal_means": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "vace_scale": 1.0,
+        "condition_mode": "internal_dynamic",
+        "observed_before_original_call": true,
+        "additional_forward_calls": 0
+      },
+      "latent": {
+        "shape": [
+          1,
+          16,
+          9,
+          60,
+          104
+        ],
+        "dtype": "torch.bfloat16",
+        "readback_exact": true
+      },
+      "guard": {
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_error_count": 0,
+        "elapsed_seconds": 313.4514694213867,
+        "observations": 291,
+        "final_decision": "CLEAR",
+        "final_cgroup_state": "REMOVED",
+        "minimum_memavailable_bytes": 95191855104,
+        "peak_observed_cgroup_current_bytes": 29110702080,
+        "maximum_cgroup_swap_current_bytes": 0,
+        "observed_cgroup_swap_max_values": [
+          0
+        ],
+        "system_swap_min_bytes": 1806336,
+        "system_swap_max_bytes": 1806336,
+        "host_page_sizes": [
+          4096
+        ],
+        "maximum_high_event_count": 0,
+        "maximum_oom_count": 0,
+        "maximum_oom_kill_count": 0,
+        "memory_decisions": [
+          "CLEAR"
+        ],
+        "warnings": [
+          "GLOBAL_SWAP_WARNING"
+        ],
+        "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+        "maximum_psi_full_ratio_10s": 2e-07,
+        "maximum_swap_growth_bytes": 0,
+        "maximum_swapout_bytes_10s": 0
+      }
+    },
+    "internal_hold": {
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 294.190214044007,
+        "model_fn_calls": 100,
+        "scheduler_steps": 50,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": true,
+        "condition_mode": "internal_hold",
+        "source_middle_rgb_conditioning": false
+      },
+      "first_model_input": {
+        "latents": {
+          "shape": [
+            1,
+            16,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+          "finite": true,
+          "minimum": -4.75,
+          "maximum": 5.0
+        },
+        "vace_context": {
+          "shape": [
+            1,
+            96,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "aac2b01fbef2a2226219846c5dfd66fd55c63ab404be96034de0a3de34ec6874",
+          "finite": true,
+          "minimum": -4.40625,
+          "maximum": 5.03125
+        },
+        "vace_mask_context": {
+          "shape": [
+            1,
+            64,
+            9,
+            60,
+            104
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "08fd5340f8509a7e040eeebf216129ac72a02abd90014dcbe8bc5dd29faf8b00",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "vace_mask_temporal_means": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "vace_scale": 1.0,
+        "condition_mode": "internal_hold",
+        "observed_before_original_call": true,
+        "additional_forward_calls": 0
+      },
+      "latent": {
+        "shape": [
+          1,
+          16,
+          9,
+          60,
+          104
+        ],
+        "dtype": "torch.bfloat16",
+        "readback_exact": true
+      },
+      "guard": {
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_error_count": 0,
+        "elapsed_seconds": 300.2082495689392,
+        "observations": 279,
+        "final_decision": "CLEAR",
+        "final_cgroup_state": "REMOVED",
+        "minimum_memavailable_bytes": 94974709760,
+        "peak_observed_cgroup_current_bytes": 10864451584,
+        "maximum_cgroup_swap_current_bytes": 0,
+        "observed_cgroup_swap_max_values": [
+          0
+        ],
+        "system_swap_min_bytes": 1806336,
+        "system_swap_max_bytes": 1806336,
+        "host_page_sizes": [
+          4096
+        ],
+        "maximum_high_event_count": 0,
+        "maximum_oom_count": 0,
+        "maximum_oom_kill_count": 0,
+        "memory_decisions": [
+          "CLEAR"
+        ],
+        "warnings": [
+          "GLOBAL_SWAP_WARNING"
+        ],
+        "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+        "maximum_psi_full_ratio_10s": 4e-07,
+        "maximum_swap_growth_bytes": 0,
+        "maximum_swapout_bytes_10s": 0
+      }
+    }
   },
-  "source_attribution": "UNKNOWN",
-  "automatic_retry": false,
-  "policy_changed": false,
-  "checked_at": 1793258220.116916,
-  "own_active_units_count": 0,
-  "external_gpu_count_at_final_read": 0,
-  "peak_global_swap_bytes": 1810432,
-  "peak_swap_growth_bytes": 262144,
-  "first_cpu_supervisor_status": "NOT_CLEAN",
-  "first_cpu_guard_reason": "OBSERVATION_FAILED",
-  "first_cpu_memory_error": "REMOVED:exit_not_verified"
+  "paired_noise_equal": true,
+  "noise_equals_C002": true,
+  "mask64_equals_C002": true
 }

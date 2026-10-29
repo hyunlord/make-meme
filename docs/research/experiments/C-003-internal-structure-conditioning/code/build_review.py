@@ -92,7 +92,7 @@ def build(c001: Path, c002: Path, c003: Path, out: Path) -> None:
     for label,paths in groups:
         assert len(paths)==33
         slug=label.lower().replace(' ','-')
-        for kind,box in [('full',None),('subject',crop),('head',[190,60,470,330]),('legs',[180,210,480,470])]:
+        for kind,box in [('full',None),('subject',crop),('head',[180,100,500,430]),('legs',[180,210,480,470])]:
             urls=[]
             for i,path in enumerate(paths):
                 target=root/f'{slug}-{kind}'/f'{i:03d}.jpg';jpg(path,target,box);urls.append(f'{CASE}/{slug}-{kind}/{i:03d}.jpg')
@@ -104,7 +104,7 @@ def build(c001: Path, c002: Path, c003: Path, out: Path) -> None:
             with Image.open(path) as im:canvas.paste(im.convert('RGB').resize((416,240)),((i%6)*416,(i//6)*270+25))
             draw.text(((i%6)*416+5,(i//6)*270+3),f'{label} {i}',fill='white')
         canvas.save(root/(label.lower().replace(' ','-')+'-all33.jpg'),quality=92)
-    sheet(groups,root,'fixed-sheet.jpg');sheet(groups[:4],root,'fixed-head-sheet.jpg',[190,60,470,330]);sheet(groups[:4],root,'fixed-legs-sheet.jpg',[180,210,480,470])
+    sheet(groups,root,'fixed-sheet.jpg');sheet(groups[:4],root,'fixed-head-sheet.jpg',[180,100,500,430]);sheet(groups[:4],root,'fixed-legs-sheet.jpg',[180,210,480,470])
     global INDICES
     INDICES=[8,16,28,29,30,31,32];sheet(groups[:4],root,'critical-sheet.jpg');INDICES=list(range(0,33,4))
     compare=[root/f'{x}.mp4' for x in ('source','outline-only','internal_dynamic','internal_hold')]
@@ -116,7 +116,7 @@ def build(c001: Path, c002: Path, c003: Path, out: Path) -> None:
     body=f'''<h1>C-003 · Internal structure comparison</h1><p>Core comparison: C002 OUTLINE_ONLY, INTERNAL_DYNAMIC, INTERNAL_HOLD. Same source index, anchors, dynamic outline and generation mask. DYNAMIC changes internal structure over time; HOLD transports the initial normalized structure with the current bbox and clips it to the current interior. It is not motion-off.</p><p>Source FPS unknown. Preview16fps is assumed: file duration2.0625s; endpoint sample interval2.0s. Temporal quality: UNVERIFIED. Browser playback and static sheets do not establish perceptual temporal quality.</p><p>Source-derived lines include shape, fur and texture, not joint ground truth. Thin parts removed by the fixed4px interior band may be NOT_REPRESENTED. Frames29–32 conflict with the crouched end anchor. Same crop/index throughout, no warp or time alignment. Visible screen-left/right paws are not anatomical labels; contact remains uncertain.</p><p>{reports}</p><div class="grid">{anchors}</div><section><h2>Generated results and source</h2><button data-play>Play all from frame0 · 16fps</button><button data-pause>Pause all</button><p role="status"></p><div class="grid">{cards}</div><details><summary>Derived side-by-side comparison MP4</summary>{fig(CASE+'/comparison-derived.mp4','New derived comparison encode · original generated MP4s retained separately',True)}</details><h2>Actual model inputs and structural evidence</h2><div class="grid">{condition_cards}</div><h2>Same-index review · <output>0</output>/32</h2><label>Frame index<input type="range" min="0" max="32" value="0" aria-label="Frame index"></label><label>View <select aria-label="Crop view"><option value="full">Full frame</option><option value="subject">Frozen C001 subject crop</option><option value="head">Fixed head region</option><option value="legs">Fixed leg region</option></select></label><p>JPEGs and enlarged crops are review derivatives. Crops use the same fixed screen coordinates for every method/frame; they are not tracked or aligned.</p><div class="grid">{slider}</div><details><summary>Fixed0/4/8/12/16/20/24/28/32 and critical8/16/28/29–32 sheets</summary>{fig(CASE+'/fixed-sheet.jpg','Fixed full-frame comparison')}{fig(CASE+'/fixed-head-sheet.jpg','Fixed head region')}{fig(CASE+'/fixed-legs-sheet.jpg','Fixed leg region')}{fig(CASE+'/critical-sheet.jpg','Critical indices including all29–32')}</details></section>'''
     script=JS.replace("x.src=JSON.parse(x.dataset.frames)[i]", "{x.src=JSON.parse(x.dataset.frames)[i];x.parentElement.href=x.src;}")
     (out/'index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C003 internal structure comparison</title><style>'+STYLE+'</style></head><body><main>'+body+'</main><script>'+script+'</script></body></html>')
-    (out/'review-summary.json').write_text(json.dumps({'case':CASE,'outputs':records,'temporal':'UNVERIFIED','fixed_crop':crop,'head_crop':[190,60,470,330],'legs_crop':[180,210,480,470],'derived_comparison_mp4':True},indent=2))
+    (out/'review-summary.json').write_text(json.dumps({'case':CASE,'outputs':records,'temporal':'UNVERIFIED','fixed_crop':crop,'head_crop':[180,100,500,430],'legs_crop':[180,210,480,470],'derived_comparison_mp4':True},indent=2))
     print(json.dumps({'files':sum(p.is_file() for p in out.rglob('*')),'outputs':records}))
 
 

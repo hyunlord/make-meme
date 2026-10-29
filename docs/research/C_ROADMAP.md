@@ -11,3 +11,7 @@ C-001의 PIPELINE_COMPLETE와 차량 MOTION_PARTIAL / 개 MOTION_FAIL / IDENTITY
 ## C-003 운영상 보류
 
 사용자 승인으로 개 한 사례의 공식 scribble 내부 시간정보 DYNAMIC/HOLD 두 조건을 구현했다. 실제 시작 guard가 START_SWAPOUT_OBSERVED로 차단하여 추출/영상0으로 종료했다. **INCONCLUSIVE/BLOCKED_SAFETY**, 내부 동작 효과·외형 손해 미평가다. 전역 발생 주체UNKNOWN이며 가드정책을 바꾸거나 자동재시도하지 않았다. 다음 구조 선택을 뒷받침할 새 생성 근거는 없다. 기존 C-002 두 판정과 C-001/A/B 이력은 그대로다. [C-003 결과](experiments/C-003-internal-structure-conditioning/RESULTS.md).
+
+## C-003 명시적 amendment 이후 완료 (2026-10-29)
+
+기존 시작 swap-out>0 추가 분기만 승인대로 제거하고 나머지 보호를 유지했다. 공식 FP32 scribble33장1pass와 DYNAMIC/HOLD 영상2개(각50step/100call)를 실제 완료했다. 동일 noise/G와 실제 context 전달을 확인했지만 내부 진행 이득은 NO_ESTABLISHED_GAIN, 국소 배경 손상이 관측되어 기본 채택하지 않는다. temporal=UNVERIFIED. 이전 안전 보류와 A/B·C001/C002 판정은 보존한다. 다음 후보는 가시성·신뢰도를 포함한 시간별 내부 대응이며 추가 실행은 사용자 검토 뒤 결정한다. [실제 결과](experiments/C-003-internal-structure-conditioning/RESULTS.md).

@@ -747,3 +747,7 @@ C-002 개 MOV를 재사용하고 같은 동적 외곽선에 시점별 공식 scr
 ### C-003 한정 재개 승인 — 시작 추가 swap-out veto만 제거
 
 사용자가 별도 amendment로 기존 미사용 범위의 재개를 승인했다. 과거 START_SWAPOUT_OBSERVED/NOT_CLEAN/UNKNOWN 기록은 그대로 두고 C003 실행 사본의 memory.py에서 시작시 swapout>0 추가차단 두 줄만 제거했다. 나머지 guard와 수치/외부작업/신원/10초관측은 불변이다. 실제 private6표본을 새정책으로 replay한 결과와 synthetic 중요한차단을 구분해 기록하고 fd1d734에 공개했다. Fresh CPU경로 COMPLETE 뒤 공식 FP3233장 추출1pass와 고정CPU조건 변환을 완료했다. 영상은 동결 조건·사전관측표를 따라 DYNAMIC/HOLD 두 셀만 진행한다. [재개](experiments/C-003-internal-structure-conditioning/RESUME.md).
+
+## C-003 명시적 amendment 이후 완료 (2026-10-29)
+
+기존 시작 swap-out>0 추가 분기만 승인대로 제거하고 나머지 보호를 유지했다. 공식 FP32 scribble33장1pass와 DYNAMIC/HOLD 영상2개(각50step/100call)를 실제 완료했다. 동일 noise/G와 실제 context 전달을 확인했지만 내부 진행 이득은 NO_ESTABLISHED_GAIN, 국소 배경 손상이 관측되어 기본 채택하지 않는다. temporal=UNVERIFIED. 이전 안전 보류와 A/B·C001/C002 판정은 보존한다. 다음 후보는 가시성·신뢰도를 포함한 시간별 내부 대응이며 추가 실행은 사용자 검토 뒤 결정한다. [실제 결과](experiments/C-003-internal-structure-conditioning/RESULTS.md).

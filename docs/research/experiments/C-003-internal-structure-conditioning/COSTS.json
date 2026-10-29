@@ -1,49 +1,90 @@
 {
-  "status": "BLOCKED_SAFETY",
-  "extraction": {
-    "completed_passes": 0,
-    "heavy_attempts": 0,
-    "runtime_seconds": null
+  "status": "COMPLETE",
+  "historical_stop_costs": {
+    "status": "BLOCKED_SAFETY",
+    "extraction": {
+      "completed_passes": 0,
+      "heavy_attempts": 0,
+      "runtime_seconds": null
+    },
+    "video": {
+      "heavy_attempts": 0,
+      "completed": 0,
+      "scheduler_steps": 0,
+      "model_fn_calls": 0,
+      "mechanical_heavy_reserve_used": 0,
+      "vae_only_recovery": 0,
+      "quality_retries": 0
+    },
+    "cpu_routes": {
+      "attempted": 2,
+      "first": "IMPORT_FAILURE_BEFORE_MODEL",
+      "second": "START_SWAPOUT_OBSERVED_BEFORE_WORKER",
+      "mechanical_import_fix": 1,
+      "first_supervisor_status": "NOT_CLEAN",
+      "first_guard_reason": "OBSERVATION_FAILED",
+      "first_memory_error": "REMOVED:exit_not_verified",
+      "first_worker_returncode": 1,
+      "first_guarded_worker_elapsed_seconds": 2.2216451168060303,
+      "second_start_observation_seconds": 10.238937197980704
+    },
+    "download": {
+      "files": 1,
+      "bytes": 17173511,
+      "limit_bytes": 67108864,
+      "kind": "official scribble weight"
+    },
+    "annotation_review_minutes_approx": 5,
+    "imagegen": 0,
+    "sam_reinference": 0,
+    "training": 0,
+    "new_packages": 0,
+    "new_video_models": 0,
+    "paid_api_calls": 0,
+    "monetary_cost": null,
+    "monetary_cost_note": "Local electricity and agent subscription allocation not measured; no paid generation API.",
+    "preparation_seconds": null,
+    "condition_conversion_seconds": null,
+    "condition_conversion_status": "NOT_RUN",
+    "review_seconds": null,
+    "timing_note": "Preparation and viewer review stages were not separately timed; do not infer durations from image count."
   },
+  "extraction": {
+    "completed_passes": 1,
+    "heavy_attempts": 1,
+    "frames": 33,
+    "runtime_seconds": 2.716827969008591
+  },
+  "condition_conversion_seconds": 1.9356357799842954,
   "video": {
-    "heavy_attempts": 0,
-    "completed": 0,
-    "scheduler_steps": 0,
-    "model_fn_calls": 0,
+    "heavy_attempts": 2,
+    "completed": 2,
+    "scheduler_steps": 100,
+    "model_fn_calls": 200,
+    "frames": 66,
+    "runtime_seconds": 601.7124168190057,
+    "per_cell_seconds": {
+      "internal_dynamic": 307.52220277499873,
+      "internal_hold": 294.190214044007
+    },
     "mechanical_heavy_reserve_used": 0,
     "vae_only_recovery": 0,
     "quality_retries": 0
   },
-  "cpu_routes": {
-    "attempted": 2,
-    "first": "IMPORT_FAILURE_BEFORE_MODEL",
-    "second": "START_SWAPOUT_OBSERVED_BEFORE_WORKER",
-    "mechanical_import_fix": 1,
-    "first_supervisor_status": "NOT_CLEAN",
-    "first_guard_reason": "OBSERVATION_FAILED",
-    "first_memory_error": "REMOVED:exit_not_verified",
-    "first_worker_returncode": 1,
-    "first_guarded_worker_elapsed_seconds": 2.2216451168060303,
-    "second_start_observation_seconds": 10.238937197980704
-  },
-  "download": {
-    "files": 1,
-    "bytes": 17173511,
-    "limit_bytes": 67108864,
-    "kind": "official scribble weight"
-  },
-  "annotation_review_minutes_approx": 5,
+  "resume_cpu_routes_completed": 3,
+  "download_total_files": 1,
+  "download_total_bytes": 17173511,
+  "resume_downloads": 0,
   "imagegen": 0,
   "sam_reinference": 0,
   "training": 0,
   "new_packages": 0,
-  "new_video_models": 0,
   "paid_api_calls": 0,
   "monetary_cost": null,
-  "monetary_cost_note": "Local electricity and agent subscription allocation not measured; no paid generation API.",
   "preparation_seconds": null,
-  "condition_conversion_seconds": null,
-  "condition_conversion_status": "NOT_RUN",
+  "annotation_review_minutes_approx": 5,
   "review_seconds": null,
-  "timing_note": "Preparation and viewer review stages were not separately timed; do not infer durations from image count."
+  "timing_note": "Only separately timed stages reported; local electricity/subscription allocation and untimed review not estimated.",
+  "review_viewer_build_seconds": 9.351053,
+  "viewer_automated_qa_seconds": 6.024621
 }

@@ -7,3 +7,5 @@
 실제 strict state_dict load와 key/shape는 extraction receipt에 남긴다. weights_only=True, FP32, eval, requires_grad=False, inference_mode, dropout 비활성, input RGB/255, sigmoid×255 clip uint8, 공식 경로의 무반전 출력이다. 추출 결과의 polarity는 생성 전에 실제 확인한다. Full-frame832×480 source33을 한 번 처리하며 SAM crop을 먼저 적용하지 않는다. 구조 추출기 종료/회수 뒤에 VACE를 실행한다.
 
 첫 실제 CPU systemd 경로는 runpy가 script directory를 import path에 넣지 않아 sibling module import에서 실패했다. 모델 load/추출0으로 보존하고, extraction script 자신의 절대 directory를 sys.path에 추가하는 최소 수정 후 같은 경로를 다시 검사한다. 가드/정책은 변경하지 않았다.
+
+승인 재개 후 strict load/FP32 실제 추출33장1pass를 완료했다(2.716827969초). 실제 얼굴 눈·코·귀 선이 어둡고 배경이 밝아 무반전을 유지했다. Source전체에서 나온 배경선은 I밖에서 제거했다. 구조선은 관절만이 아니며 몸통/발 내부는 희박하다. 실제 key/shape 전체는 private extraction receipt, 공개요약은 EXTRACTION.json이다.
