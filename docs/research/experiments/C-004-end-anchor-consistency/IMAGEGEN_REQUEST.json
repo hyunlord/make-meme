@@ -1,0 +1,26 @@
+{
+  "status": "PREREGISTERED",
+  "call_budget": 1,
+  "candidate_budget": 1,
+  "backend": "native image_gen.imagegen",
+  "inputs": [
+    {
+      "index": 1,
+      "role": "source local32 edit target",
+      "file_sha256": "06d576904dd98ab2eda485abc1dab75c2acf8384b7567b66730fd6e17d784a25"
+    },
+    {
+      "index": 2,
+      "role": "same C001 reference crop appearance",
+      "file_sha256": "456036f1a2cf3629505d13820e4b8fefd2946681119e36cf0cec4b72a02ee0d9"
+    },
+    {
+      "index": 3,
+      "role": "C001 raw start anchor appearance consistency",
+      "file_sha256": "03d314985782203c82624b716e50cb1318011af6def47d352b3e3ccf90d2883f"
+    }
+  ],
+  "prompt": "첫 번째 이미지를 편집해 주세요. 단일 장면의 사진 한 장, 원본과 같은 가로 종횡비를 유지해 주세요.\n첫 번째 이미지의 주대상 크림색 개만 두 번째 참조와 세 번째 시작 앵커의 같은 검정·흰색 개 외형으로 교체해 주세요. 검정 긴 털, 흰 주둥이·이마의 좁은 흰 무늬·가슴·아래 발의 디자인을 세 번째와 일관되게 유지하되 자연스러운 target 체형을 허용합니다.\nImage1은 마지막 순간의 자세·방향·위치·카메라·배경 기준입니다. Image2는 외형 참조, Image3은 같은 개체 디자인의 일관성 참조일 뿐입니다. Image2/3의 자세나 배경을 복사하지 마세요.\nImage1의 실제 낮은 머리 상태를 보존하세요: 몸통은 화면 위쪽 뒤로 이어지고, 머리와 코는 몸통보다 화면 왼쪽 아래에 있으며, 코 아래 가까이에 보이는 화면 왼쪽 앞발이 더 앞으로, 화면 오른쪽의 보이는 앞발은 더 뒤쪽 위에 있습니다. 이 보이는 부위의 상대 위치·몸통 높이와 기울기·다리 겹침을 유지하세요. 추상적으로 똑바로 선 자세로 바꾸지 말고, 원본보다 머리·앞몸통을 더 내려 웅크리거나 앉거나 눕게 만들지 마세요. 가려진 발·관절을 억지로 드러내지 마세요. 실제 접촉 상태를 새로 강조하지 마세요.\n대상의 화면 내 위치·크기와 행동 단계를 유지하세요. 원본 잔디·수풀·주변 구조와 객체·카메라·프레이밍을 유지하세요. 원본에 보이지 않는 울타리나 다른 물체를 추가하지 마세요. 새 문자·장식·동물·중복 신체·프레임·설명·비교 콜라주 없이 사진 한 장만 출력하세요.",
+  "old_end_excluded": true,
+  "input_evidence": "C001 private native-call-records confirms reference/crop.png and start-original.png were used"
+}
