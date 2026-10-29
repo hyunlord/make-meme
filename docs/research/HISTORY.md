@@ -743,3 +743,7 @@ C-002 개 MOV를 재사용하고 같은 동적 외곽선에 시점별 공식 scr
 운영: 첫 실제 CPU worker는 sibling import 오류로 NOT_CLEAN/OBSERVATION_FAILED였고 이를 최소 수정했다. 다음 시작 관측10.2389초에서 pswpout1page=4096B가 발생해 기존 guard가 START_SWAPOUT_OBSERVED로 차단했다. 새 worker 시작 전이며 추출heavy0/pass0, 영상heavy0/step0/forward0이다. 전역 발생 주체UNKNOWN, OOM/CUDA결함 재분류 없음, 가드완화/안전재시도/타작업종료0이다.
 
 과학: 새 구조선·조건·영상이 없어 내부 동작 이득/외형회귀 미평가, INCONCLUSIVE/BLOCKED_SAFETY, temporalUNVERIFIED다. CPU 준비를 연구 성과로 세지 않는다. C-001/C-002/A/B 판정은 보존하고 자동재개/다음모듈을 시작하지 않는다. [결과](experiments/C-003-internal-structure-conditioning/RESULTS.md) · [전달](experiments/C-003-internal-structure-conditioning/DELIVERY.json).
+
+### C-003 한정 재개 승인 — 시작 추가 swap-out veto만 제거
+
+사용자가 별도 amendment로 기존 미사용 범위의 재개를 승인했다. 과거 START_SWAPOUT_OBSERVED/NOT_CLEAN/UNKNOWN 기록은 그대로 두고 C003 실행 사본의 memory.py에서 시작시 swapout>0 추가차단 두 줄만 제거했다. 나머지 guard와 수치/외부작업/신원/10초관측은 불변이다. 실제 private6표본을 새정책으로 replay한 결과와 synthetic 중요한차단을 구분해 기록하고 fd1d734에 공개했다. Fresh CPU경로 COMPLETE 뒤 공식 FP3233장 추출1pass와 고정CPU조건 변환을 완료했다. 영상은 동결 조건·사전관측표를 따라 DYNAMIC/HOLD 두 셀만 진행한다. [재개](experiments/C-003-internal-structure-conditioning/RESUME.md).

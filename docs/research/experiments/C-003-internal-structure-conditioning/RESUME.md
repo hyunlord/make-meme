@@ -11,3 +11,9 @@ C003/code/guard는 C001 동결 guard의 새 실행 사본이다. memory.py의 `e
 연구방법/조건/관측표는 불변, 기존weight재사용/재다운로드0. 완료추출1pass→프로세스회수→조건검사→DYNAMIC→HOLD순이다. 영상heavy2+기계적예비1, latent이후VAE복구1한도와 품질재시도0을 유지한다. 첫 작업소요약20분을 포함해 총3시간을 넘기지 않도록 이번 GPU 실행deadline을 재개시각+2시간으로 보수적으로 잡고 그 뒤20분을 전달에 남긴다. 자원/외부작업 중단은 자동재시도하지 않는다.
 
 CPU extraction 경로는 sibling 절대 import bootstrap을 유지하면서 모델 클래스 import를 cpu_only return 뒤로 옮겼다. CPU receipt에서 model_imported=false와 cuda_initialized=false를 확인한다. 이는 모델 연산 변경이 아니다.
+
+## 실제 추출과 입력 동결
+
+재개 CPU 경로는 COMPLETE/CLEAR, cuda_initialized=false/model_imported=false였다. 그 뒤 한 번의 공식 FP32 extraction이33장/2.716827969초로 완료됐고 strict load/weights_only/keyshape를 기록했다. guard COMPLETE/CLEAR와 프로세스 종료 후 CPU 조건 변환을1.935635780초 수행했다. 재다운로드0이다.
+
+실제 J16과 조건8/16 관측에서 검정/회색 선·밝은 배경을 확인해 공식 출력 무반전을 고정했다. 얼굴 눈/주둥이/귀·목 경계는 보이며 몸통/발 내부는 희박하고 얇은 부분은 제외된다. 구조선은 관절GT가 아니다. I밖은33장 모두 기존L과pixel-exact, 중간31장의 D/H차이는487,891pixels다. 이 유효성은 품질이득 증거가 아니다. 실제 입력계보/hash는 CONDITIONS.json에 동결한다.
