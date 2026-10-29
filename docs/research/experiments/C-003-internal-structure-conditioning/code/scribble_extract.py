@@ -9,7 +9,6 @@ import numpy as np
 import torch
 from PIL import Image
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from scribble_model import ContourInference
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,8 +33,9 @@ def run(config: Config, cpu_only: bool) -> None:
     assert weight.is_absolute() and weight.stat().st_size == 17173511
     assert sha(weight) == 'c686ced2a666b4850b4bb6ccf0748031c3eda9f822de73a34b8979970d90f0c6'
     if cpu_only:
-        print(json.dumps({'status':'CPU_PASS','source_count':33,'cuda_initialized':torch.cuda.is_initialized()}))
+        print(json.dumps({'status':'CPU_PASS','source_count':33,'cuda_initialized':torch.cuda.is_initialized(),'model_imported':'scribble_model' in sys.modules}))
         return
+    from scribble_model import ContourInference
     output = Path(config.output)
     assert output.is_absolute()
     output.mkdir(parents=True, exist_ok=False)

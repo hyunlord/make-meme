@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "synthetic": {
+    "synthetic_small_swapout": "CLEAR",
+    "synthetic_window_incomplete": "START_OBSERVATION_INCOMPLETE",
+    "synthetic_growth": "START_SWAP_BUDGET",
+    "synthetic_runtime_growth": "GLOBAL_SWAP_GROWTH",
+    "synthetic_swapout": "SWAPOUT_PRESSURE",
+    "synthetic_psi": "SYSTEM_PSI_FULL_PRESSURE",
+    "synthetic_headroom": "START_HEADROOM_NOT_MET",
+    "synthetic_observation": "OBSERVATION_FAILED",
+    "synthetic_counter_regression": "OBSERVATION_FAILED",
+    "synthetic_worker_swap": "WORKER_SWAP_CONTRACT",
+    "synthetic_worker_oom": "WORKER_OOM",
+    "synthetic_worker_contract": "WORKER_SWAP_CONTRACT",
+    "synthetic_external_gpu_both_paths": "UNKNOWN_GPU_PID"
+  },
+  "private_archived_replay": {
+    "samples": 6,
+    "source_sha256": "6c93c4e48c7bcb3d7169a7f56797180fdce6b73bf74a7cb5b652704bbdf8c3d4",
+    "old_recorded_decision": "START_SWAPOUT_OBSERVED",
+    "new_policy_replay": {
+      "decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "errors": [],
+      "metrics": {
+        "s0": 1548288,
+        "swap_growth": 258048,
+        "window_seconds": 10.238937197980704,
+        "swapout_bytes_10s": 4096,
+        "psi_full_ratio_10s": 0.0037203
+      }
+    },
+    "historical_reclassification": false
+  },
+  "memory_module_sha256": "a361c666fb82e4ed56c43868a2e97130ee77737153de4f8983ca8a9b86c8f688"
+}
