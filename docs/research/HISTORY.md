@@ -751,3 +751,7 @@ C-002 개 MOV를 재사용하고 같은 동적 외곽선에 시점별 공식 scr
 ## C-003 명시적 amendment 이후 완료 (2026-10-29)
 
 기존 시작 swap-out>0 추가 분기만 승인대로 제거하고 나머지 보호를 유지했다. 공식 FP32 scribble33장1pass와 DYNAMIC/HOLD 영상2개(각50step/100call)를 실제 완료했다. 동일 noise/G와 실제 context 전달을 확인했지만 내부 진행 이득은 NO_ESTABLISHED_GAIN, 국소 배경 손상이 관측되어 기본 채택하지 않는다. temporal=UNVERIFIED. 이전 안전 보류와 A/B·C001/C002 판정은 보존한다. 다음 후보는 가시성·신뢰도를 포함한 시간별 내부 대응이며 추가 실행은 사용자 검토 뒤 결정한다. [실제 결과](experiments/C-003-internal-structure-conditioning/RESULTS.md).
+
+## C-004 종료 앵커 진단 완료 (2026-10-30)
+
+Native1회로 끝 앵커를 부분 교정(PARTIAL_BUT_USABLE)하고, C002 동적 윤곽·시작·모델을 유지한 새 영상1개(50step/100call)를 완료했다. 실제 RGB32만 변경·noise/G 동일을 확인했으나 영상은 NO_ESTABLISHED_GAIN이다. 얼굴 방향/높이 변화와 국소 배경 손상은 있으나 중간 머리·발 진행이나29–31 종료 전환 개선은 미입증이다. 약한 앵커 교정으로 원인을 단정하지 않으며 temporal=UNVERIFIED, 기본 채택하지 않는다. 기존 이력은 보존하고 추가 앵커 튜닝을 종료한다. 다음 논의는 부위 ID·시간 대응·가시성·신뢰도의 실제 생성 연결이며 자동 실행하지 않는다. [결과](experiments/C-004-end-anchor-consistency/RESULTS.md).

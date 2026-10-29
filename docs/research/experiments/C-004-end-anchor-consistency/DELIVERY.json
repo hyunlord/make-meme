@@ -1,0 +1,33 @@
+{
+  "status": "VERIFIED_COMPLETE",
+  "anchor_verdict": "PARTIAL_BUT_USABLE",
+  "video_verdict": "NO_ESTABLISHED_GAIN",
+  "temporal": "UNVERIFIED",
+  "archive_basename": "C004-review-20261030.zip",
+  "viewer_relative": "C004-review-20261030/index.html",
+  "locations": "Spark and Mac /tmp",
+  "archive_bytes": 47134838,
+  "archive_sha256": "a1de653d9cdb6e468e647f9acd40c582c9e00f43221ffb35417d6b5d0a881c20",
+  "payload_files": 567,
+  "manifest_entries": 566,
+  "crc_both_hosts": "PASS",
+  "actual_extraction_both_hosts": "PASS",
+  "manifest_size_hash_both_hosts": "PASS",
+  "transfer_archive_and_payload_bytes_match": "PASS",
+  "viewer_qa": "Chromium1280/768/375; all33 slider, fixed crops,5videos play/pause/decode PASS; temporal perceptual quality UNVERIFIED",
+  "original_mp4_bytes": "SOURCE/C002 BASE_END/C004 CORRECTED_END byte-exact; comparison/input previews/JPEG sheets are new derivatives",
+  "full_retained_separately": {
+    "files": 164,
+    "bytes": 111190049,
+    "manifest_sha256": "72e1b53d853c0f20f2dc09f6f2c08de6f60b753cc8828f2b41c1fe3f0e99796f",
+    "raw_tensors": 1,
+    "final_latents": 1,
+    "lossless_output_frames": 33,
+    "note": "New anchors/output/conditions/config/stage receipts on existing private Spark path; prior full/weights not duplicated; native call receipt separately retained"
+  },
+  "own_active_units_at_final_read": 0,
+  "gpu_process_rows_at_final_read": 0,
+  "other_processes_started_or_stopped": 0,
+  "automatic_followup": false,
+  "receipt_location": "External to immutable archive to avoid self hash; archive excludes DELIVERY.json"
+}

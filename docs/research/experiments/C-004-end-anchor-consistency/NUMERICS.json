@@ -1,0 +1,141 @@
+{
+  "status": "COMPLETE",
+  "pre_video_commit": "e5d41df79bd149cb61d12f56e2228efc5f589eff",
+  "result": {
+    "status": "COMPLETE",
+    "elapsed_seconds": 289.7517438370269,
+    "model_fn_calls": 100,
+    "scheduler_steps": 50,
+    "frames": 33,
+    "fps": 16,
+    "file_duration_seconds": 2.0625,
+    "endpoint_interval_seconds": 2.0,
+    "endpoint_overwrite": false,
+    "sam_conditioning": true,
+    "condition_mode": "layout_mov",
+    "source_middle_rgb_conditioning": false
+  },
+  "first_model_input": {
+    "latents": {
+      "shape": [
+        1,
+        16,
+        9,
+        60,
+        104
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+      "finite": true,
+      "minimum": -4.75,
+      "maximum": 5.0
+    },
+    "vace_context": {
+      "shape": [
+        1,
+        96,
+        9,
+        60,
+        104
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "2470645cbdb2fba97e4a0bdcd2e10be81169167ff2e24e1f1f6a463da437fe97",
+      "finite": true,
+      "minimum": -4.40625,
+      "maximum": 5.03125
+    },
+    "vace_mask_context": {
+      "shape": [
+        1,
+        64,
+        9,
+        60,
+        104
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "08fd5340f8509a7e040eeebf216129ac72a02abd90014dcbe8bc5dd29faf8b00",
+      "finite": true,
+      "minimum": 1.0,
+      "maximum": 1.0
+    },
+    "vace_mask_temporal_means": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "vace_scale": 1.0,
+    "condition_mode": "layout_mov",
+    "observed_before_original_call": true,
+    "additional_forward_calls": 0
+  },
+  "latent": {
+    "shape": [
+      1,
+      16,
+      9,
+      60,
+      104
+    ],
+    "dtype": "torch.bfloat16",
+    "readback_exact": true
+  },
+  "guard": {
+    "status": "COMPLETE",
+    "guard_reason": "COMPLETE",
+    "worker_returncode": 0,
+    "normal_exit_recorded": true,
+    "cleanup_error_count": 0,
+    "elapsed_seconds": 295.29918599128723,
+    "observations": 274,
+    "final_decision": "CLEAR",
+    "final_cgroup_state": "REMOVED",
+    "minimum_memavailable_bytes": 95026089984,
+    "peak_observed_cgroup_current_bytes": 11229724672,
+    "maximum_cgroup_swap_current_bytes": 0,
+    "observed_cgroup_swap_max_values": [
+      0
+    ],
+    "system_swap_min_bytes": 1806336,
+    "system_swap_max_bytes": 1806336,
+    "host_page_sizes": [
+      4096
+    ],
+    "maximum_high_event_count": 0,
+    "maximum_oom_count": 0,
+    "maximum_oom_kill_count": 0,
+    "memory_decisions": [
+      "CLEAR"
+    ],
+    "warnings": [
+      "GLOBAL_SWAP_WARNING"
+    ],
+    "scope": "Observed samples; cgroup current is not a claim of complete CUDA allocation accounting.",
+    "maximum_psi_full_ratio_10s": 0.0,
+    "maximum_swap_growth_bytes": 0,
+    "maximum_swapout_bytes_10s": 0
+  },
+  "noise_equal_C002": true,
+  "mask64_equal_C002": true,
+  "effective_config_changed_keys": [
+    "end_anchor",
+    "output"
+  ],
+  "actual_input_changed_indices": [
+    32
+  ],
+  "reactive_logical_input_equal": true,
+  "inactive_logical_input_changed_indices": [
+    32
+  ],
+  "endpoint_fullframe_L1_uint8_diagnostic": {
+    "BASE_END": 18.65638855502137,
+    "CORRECTED_END": 16.986376535790598
+  },
+  "L1_scope": "Whole-screen RGB diagnostic, not identity/motion score; anchors differ."
+}

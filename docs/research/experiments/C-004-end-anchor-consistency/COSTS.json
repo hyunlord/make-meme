@@ -1,0 +1,59 @@
+{
+  "native_imagegen": {
+    "actual_calls": 1,
+    "candidates": 1,
+    "elapsed_seconds": 17.101,
+    "quality_retries": 0,
+    "model_id": "UNKNOWN",
+    "billing": "UNKNOWN"
+  },
+  "video": {
+    "status": "COMPLETE",
+    "heavy_attempts": 1,
+    "normal_completed": 1,
+    "scheduler_steps": 50,
+    "model_fn_calls": 100,
+    "decode_calls": 1,
+    "elapsed_seconds": 289.7517438370269,
+    "mechanical_reserve_used": 0,
+    "vae_only_recovery": 0,
+    "quality_retries": 0
+  },
+  "pre_model_setup_errors": [
+    {
+      "kind": "MISSING_REPORTS_DIRECTORY",
+      "worker_started": false,
+      "heavy": false
+    },
+    {
+      "kind": "MISSING_UNCHANGED_WORKER_ADAPTER_COPY",
+      "raw_status": "NOT_CLEAN",
+      "raw_final": "OBSERVATION_FAILED",
+      "raw_cgroup_error": "REMOVED:exit_not_verified",
+      "worker_returncode": 2,
+      "heavy": false,
+      "raw_guard_reason": "COMPLETE"
+    },
+    {
+      "kind": "OWN_FAILED_UNIT_NAME_ALREADY_LOADED",
+      "worker_started": false,
+      "heavy": false,
+      "fix": "fresh unique CPU unit name; no service reset/termination",
+      "raw_status": "NOT_CLEAN",
+      "raw_guard_reason": "COMPLETE",
+      "worker_returncode": 1
+    }
+  ],
+  "cpu_routes_success": 1,
+  "sam_reinference": 0,
+  "scribble_extraction": 0,
+  "training": 0,
+  "new_packages": 0,
+  "downloads": 0,
+  "paid_api_calls": 0,
+  "manual_review_seconds": null,
+  "monetary_cost": null,
+  "timing_note": "Untimed manual review and electricity/subscription allocations not invented.",
+  "viewer_build_seconds": 5.216016,
+  "viewer_automated_qa_seconds": 5.077379
+}
