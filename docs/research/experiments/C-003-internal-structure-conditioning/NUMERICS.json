@@ -1,0 +1,42 @@
+{
+  "status": "BLOCKED_SAFETY",
+  "reason": "START_SWAPOUT_OBSERVED",
+  "extraction_heavy_attempts": 0,
+  "completed_extraction_passes": 0,
+  "video_heavy_attempts": 0,
+  "video_completed": 0,
+  "video_recovery_used": 0,
+  "first_cpu": "MODULE_IMPORT_ERROR_BEFORE_MODEL",
+  "second_cpu": "START_SWAPOUT_OBSERVED_BEFORE_WORKER",
+  "start_seconds": 10.238937197980704,
+  "memory": {
+    "monotonic": 156307.71901553,
+    "errors": [],
+    "page_size": 4096,
+    "available": 121690972160,
+    "swap_total": 17179865088,
+    "swap_free": 17178058752,
+    "swap": 1806336,
+    "pswpin": 0,
+    "pswpout": 128,
+    "psi_full_total": 21661413
+  },
+  "metrics": {
+    "s0": 1548288,
+    "swap_growth": 258048,
+    "window_seconds": 10.238937197980704,
+    "swapout_bytes_10s": 4096,
+    "psi_full_ratio_10s": 0.0037203
+  },
+  "source_attribution": "UNKNOWN",
+  "automatic_retry": false,
+  "policy_changed": false,
+  "checked_at": 1793258220.116916,
+  "own_active_units_count": 0,
+  "external_gpu_count_at_final_read": 0,
+  "peak_global_swap_bytes": 1810432,
+  "peak_swap_growth_bytes": 262144,
+  "first_cpu_supervisor_status": "NOT_CLEAN",
+  "first_cpu_guard_reason": "OBSERVATION_FAILED",
+  "first_cpu_memory_error": "REMOVED:exit_not_verified"
+}

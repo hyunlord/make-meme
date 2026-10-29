@@ -1,0 +1,31 @@
+{
+  "status": "VERIFIED_BLOCKED_REVIEW",
+  "research_status": "BLOCKED_SAFETY",
+  "new_videos": 0,
+  "new_scribble_conditions": 0,
+  "archive_basename": "C003-review-20261029.zip",
+  "viewer_relative": "C003-review-20261029/index.html",
+  "locations": "Spark and Mac /tmp",
+  "archive_bytes": 38726691,
+  "archive_sha256": "b712618ede8a90b7d4b584380e34126d0a3de891046e44a84cb868408643f831",
+  "payload_files": 563,
+  "manifest_entries": 562,
+  "crc_both_hosts": "PASS",
+  "actual_extraction_both_hosts": "PASS",
+  "manifest_size_sha256_both_hosts": "PASS",
+  "transfer_archive_and_payload_bytes_match": "PASS",
+  "viewer_qa": "Chromium1280/768/375; images/slider/crops/4existingvideos play+decode PASS; temporalqualityUNVERIFIED",
+  "contents": "Existing source/reference/anchors/C002 OUTLINE_ONLY; clearly labelled existing condition/analysis previews; blocked report/code; no fabricated C003 outputs",
+  "original_mp4_bytes": "source and C002 baseline preserved; preview derivatives labelled",
+  "full_retained_separately": {
+    "files": 29,
+    "bytes": 113268,
+    "manifest_sha256": "4f9cd7a751b2e8de53e6c2b1a1651c07599505fbd8ba87f3489eb232fed588f0",
+    "new_raw_latent_frames": 0,
+    "note": "Private guards/configs/code/receipts only; downloaded annotator weight separately retained, no repeated C001/C002 full"
+  },
+  "receipt_location": "External to archive to avoid self-referential hashes",
+  "own_active_units_at_final_read": 0,
+  "other_processes_started_or_stopped": 0,
+  "automatic_resume": false
+}

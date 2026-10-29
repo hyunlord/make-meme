@@ -1,0 +1,49 @@
+{
+  "status": "NOT_MATERIALIZED_GUARD_BLOCKED",
+  "parent_commit": "853ee952795246648b3a6e46d37d5dead03abef3",
+  "case": "case_nonrigid",
+  "source_frames": 33,
+  "size": [
+    832,
+    480
+  ],
+  "anchors": [
+    0,
+    32
+  ],
+  "source_fps": null,
+  "preview_fps": 16,
+  "timebase_assumed": true,
+  "conditions": [
+    "OUTLINE_ONLY_REUSE",
+    "INTERNAL_DYNAMIC_NOT_RUN",
+    "INTERNAL_HOLD_NOT_RUN"
+  ],
+  "render": {
+    "interior_distance_gt_px": 4,
+    "edt": "DIST_L2 DIST_MASK_PRECISE",
+    "normalization_size": [
+      256,
+      256
+    ],
+    "grayscale_sampling": "INTER_LINEAR",
+    "mask_sampling": "INTER_NEAREST_EXACT",
+    "outside_interior": "pixel-exact existing C002 layout",
+    "polarity": "official no inversion planned; actual extraction NOT_RUN"
+  },
+  "video": {
+    "steps": 50,
+    "cfg": 5,
+    "sigma_shift": 5,
+    "seed": 20261028,
+    "rand_device": "cpu",
+    "vace_scale": 1.0,
+    "reference": null,
+    "g": "0 at0/32;255 at1..31"
+  },
+  "actual_new_condition_hashes": null,
+  "actual_new_noise_hashes": null,
+  "actual_new_context_hashes": null,
+  "c002_expected_noise_sha256": "cf71cc3501ff09f876a384a20e9aedea41fb7eaaf956e5da52e8f777c9fbf9ba",
+  "lineage": "Reuse C001 INPUTS/ANCHORS and C002 CONDITIONS; no replacement"
+}
