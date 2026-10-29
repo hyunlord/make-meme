@@ -8,6 +8,7 @@ import time
 import numpy as np
 import torch
 from PIL import Image
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from scribble_model import ContourInference
 
 
