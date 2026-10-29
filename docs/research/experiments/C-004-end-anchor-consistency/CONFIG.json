@@ -1,0 +1,13 @@
+{
+  "upstream": "${C002_FIXED_UPSTREAM}",
+  "weights": "${C002_FIXED_WEIGHTS}",
+  "tokenizer": "${C002_FIXED_TOKENIZER}",
+  "helper": "${C002_FIXED_HELPER}",
+  "helper_sha256": "dd622057ce57078c0afdac2ad89d9698f1fd28867c4db8379efabbe2dc861053",
+  "start_anchor": "${C002_FIXED_START_ANCHOR}",
+  "end_anchor": "${C004_ROOT}/anchors/end.png",
+  "output": "${C004_ROOT}/outputs/corrected_end",
+  "prompt": "A black dog with a white snout and white chest lowers its head and steps forward toward the camera on grass. Preserve the fence, shrub, grass and fixed camera. Natural realistic continuous quadruped motion and consistent dog identity.",
+  "condition_mode": "layout_mov",
+  "layout_dir": "${C002_FIXED_LAYOUT_DIR}"
+}

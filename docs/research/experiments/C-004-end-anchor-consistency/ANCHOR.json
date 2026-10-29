@@ -1,0 +1,34 @@
+{
+  "status": "PARTIAL_BUT_USABLE",
+  "native_calls": 1,
+  "candidates": 1,
+  "quality_retries": 0,
+  "tool": "native image_gen.imagegen",
+  "model_id": "UNKNOWN",
+  "billing": "UNKNOWN",
+  "observed_tool_seconds": 17.101,
+  "normalization": {
+    "original_size": [
+      1652,
+      952
+    ],
+    "model_size": [
+      832,
+      480
+    ],
+    "resized_size": [
+      832,
+      479
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "transform": "uniform aspect fit LANCZOS, black padding, no crop",
+    "original_sha256": "974ae9d25d451a7e6f5635c81b181c82a8cf09af2d757d71fc7825fd3b1bb5e9",
+    "model_sha256": "d7b64f36d41fd57784157a7969b8530be4bfbfea7c5fe19d0168a9b4a3703773"
+  },
+  "review_before_video": true,
+  "observation": "Face/muzzle modestly lifted and more visible versus old end; broad torso/paw relationship remains. Source already low-headed. No large posture correction claim. New near paw also higher, face more frontal, fine marking/background textures changed; single black-white dog and framing retained.",
+  "decision": "Proceed single comparison with partial manipulation; no second candidate."
+}
