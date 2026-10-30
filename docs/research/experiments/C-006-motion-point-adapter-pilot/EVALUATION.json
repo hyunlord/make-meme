@@ -1,0 +1,44 @@
+{
+  "protocol": {
+    "review": "same-index static review of all33 plus fixed0/4/8/12/16/20/24/28/32",
+    "reviewers": "Codex execution agent and parent agent in the same session, not independent human raters",
+    "temporal": "UNVERIFIED",
+    "motion_measurement": "MOTION_MEASUREMENT_LIMITED",
+    "trajectory_rmse": null,
+    "reason": "duplicate contours/blur and occlusions prevent reliable source-output surface correspondences; no inferred joint/contact GT",
+    "blinded": false
+  },
+  "cases": {
+    "horsejump-low": {
+      "scope": "heldout self reconstruction",
+      "quality": "NO_ESTABLISHED_GAIN",
+      "joint_quality_vs_base": "clear appearance and protected-scene regression",
+      "motion": "approach/jump/rightward progression remains coarse in all conditions; no demonstrated visible leg-event gain for ON over BASE/NULL",
+      "appearance_scene": "BASE has color fragments and altered jump structures; ON and NULL have widespread red patches from t1, dominant at4..28, and horse/rider ghosting and duplicate boundaries through29..32",
+      "on_vs_null": "both regress severely; small differences do not establish useful trajectory response",
+      "surface_correspondence": "AMBIGUOUS/MISSING where blurred or duplicated; not silently dropped",
+      "contact": "UNCERTAIN"
+    },
+    "lucia": {
+      "scope": "heldout self reconstruction",
+      "quality": "NO_ESTABLISHED_GAIN",
+      "joint_quality_vs_base": "clear appearance and protected-scene regression",
+      "motion": "all conditions retain coarse rightward walking and broad stride alternation, with no established ON gain over BASE/NULL at fixed8/16/24",
+      "appearance_scene": "ON and NULL show warm orange/red scene cast, pink pavement and ghosted/faint head/back contours at approximately3..29; BASE better preserves green scene but also changes white footwear to dark shoe-like shapes and distorts bench",
+      "on_vs_null": "very similar cast/ghosting, no demonstrated useful trajectory gain",
+      "surface_correspondence": "AMBIGUOUS where foot blur and ghosting prevent reliable same-surface matching",
+      "contact": "UNCERTAIN"
+    },
+    "cross-id-dog": {
+      "scope": "exploratory HEAD_ONLY cross-ID, three nose/eye proxies",
+      "quality": "NO_ESTABLISHED_GAIN",
+      "joint_quality_vs_base": "face recognizability and scene color regression",
+      "motion": "black/white appearance and coarse approach remain partly visible, but ON does not demonstrate more accurate nose/eye progression than BASE",
+      "appearance_scene": "ON/NULL at approximately2..32 show green-gray face ghosting/block fragments and red grass cast; source cream identity return is not established",
+      "on_vs_null": "NULL has stronger local face/surrounding fragments around16..28 than ON, insufficient to establish ON motion gain over BASE",
+      "limitations": "source24 motion blur, original low endpoint pose conflict, manual points/bboxes, no leg conditioning",
+      "surface_correspondence": "AMBIGUOUS/MISSING where face fragmentation prevents reliable correspondence",
+      "leg_contact": "OUT_OF_SCOPE"
+    }
+  }
+}

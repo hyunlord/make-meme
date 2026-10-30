@@ -1,0 +1,69 @@
+{
+  "status": "DELIVERED",
+  "execution_status": "COMPLETE",
+  "quality_status": "NO_ESTABLISHED_GAIN",
+  "default_adoption": false,
+  "training_updates": 256,
+  "new_generated_videos": 9,
+  "compact": {
+    "mac_zip": "/tmp/C006-review-20261030.zip",
+    "spark_zip": "/tmp/C006-review-20261030.zip",
+    "bytes": 83732549,
+    "sha256": "b189fd2020b95493a8ac97ef1aeb50b40e53b8ed0c7571f2c1ca45fddb88d9fd",
+    "zip_members": 674,
+    "payload_manifest_files": 673,
+    "mac_crc": "PASS",
+    "spark_crc": "PASS",
+    "mac_actual_extraction": "PASS",
+    "spark_actual_extraction": "PASS",
+    "both_payload_sizes_hashes": "PASS",
+    "two_host_bytes_equal": true,
+    "mac_viewer": "/tmp/C006-review-20261030/index.html",
+    "mac_extracted_viewer": "/tmp/C006-review-extracted-mac-20261030/index.html",
+    "spark_extracted_viewer": "/tmp/C006-review-extracted-spark-20261030/index.html",
+    "receipts": [
+      "/tmp/C006-mac-verification.json",
+      "/tmp/C006-spark-verification.json"
+    ]
+  },
+  "private_full": {
+    "files": 1079,
+    "bytes": 437201309,
+    "manifest_sha256": "43535f71733794e5bf2f11c5fec1ddbda86defc5a4e5efcec1f37dfd84310101",
+    "both_hosts_payload_sizes_hashes": "PASS",
+    "scope": "New raw/latent/lossless outputs, caches, checkpoints, tracks, provenance and primary code; existing weights and old full archives not duplicated"
+  },
+  "termination": {
+    "verified_at_utc": "2026-10-30T05:24:22.377978+00:00",
+    "full_manifest_file_sizes": "PASS",
+    "full_manifest_sha256_match_both_hosts": "PASS",
+    "full_files": 1079,
+    "full_bytes": 437201309,
+    "full_manifest_sha256": "43535f71733794e5bf2f11c5fec1ddbda86defc5a4e5efcec1f37dfd84310101",
+    "own_active_unit_count": 0,
+    "gpu_process_rows_count": 0,
+    "other_processes_terminated": 0,
+    "sampler_normal_completed": 9,
+    "sampler_heavy_attempts": 9,
+    "sampler_reserve_used": 0,
+    "vae_recovery": 0,
+    "quality_retries": 0,
+    "historical_failures_preserved": [
+      "cache-heavy NOT_CLEAN/OBSERVATION_FAILED",
+      "train-heavy NOT_CLEAN/OBSERVATION_FAILED"
+    ],
+    "note": "Current units stopped and all9 sampler normal exits confirmed separately; historical exit_not_verified is not rewritten."
+  },
+  "artifact_transformations": {
+    "all_nine_generated_mp4_bytes_preserved": true,
+    "preview_mp4_and_jpeg_sheets": "New review derivatives, not model inputs or original output tensors",
+    "whole_job_reencoding_zero_claim": false
+  },
+  "verification_mechanical_note": "Initial full manifest included seven local-only derived audit PNGs and remote verification reported a missing file. Initial manifest preserved; final declared raw scope excludes these review derivatives and both-host size/hash verification passed. No GPU retry.",
+  "temporal": "UNVERIFIED",
+  "viewer_qa": "Chromium 1280/768/375, slider/zoom/playback/navigation and decode checks passed; not continuous perceptual quality review",
+  "work_started_utc": "2026-10-30T04:01:19+00:00",
+  "delivery_verified_utc": "2026-10-30T05:30:27.679194+00:00",
+  "elapsed_seconds_through_verified_delivery": 5348.679194,
+  "publication": "Final commit SHA is recorded after committing; not self-referenced in this file"
+}

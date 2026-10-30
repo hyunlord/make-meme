@@ -1,0 +1,1620 @@
+{
+  "training": {
+    "status": "TRAIN_COMPLETE",
+    "training_forwards": 256,
+    "backwards": 256,
+    "updates": 256,
+    "validation_forwards": 18,
+    "diagnostic_forwards": 5,
+    "checkpoint": "checkpoint-256.pt",
+    "checkpoint_readback": {
+      "readback_exact": true,
+      "optimizer_readback_exact": true,
+      "completed_updates": 256
+    },
+    "gradient_connected": true,
+    "base_versions_and_samples_unchanged": true,
+    "reloaded_prediction_max_abs": 0.0,
+    "initial": {
+      "native_bypass_max_abs": 0.0,
+      "native_zero_max_abs": 0.0,
+      "atol": 0.001,
+      "rtol": 0.001,
+      "late_block_and_head_input_gradient_norms": {
+        "block_26": 0.017209777608513832,
+        "block_27": 0.010196858085691929,
+        "block_28": 0.008112724870443344,
+        "block_29": 0.007101880386471748,
+        "head": 0.005464122164994478
+      }
+    },
+    "active_seconds": 255.99940896697808,
+    "elapsed_seconds": 258.60689334600465,
+    "final_adapter": {
+      "mlp.0.weight": {
+        "shape": [
+          192,
+          303
+        ],
+        "dtype": "torch.float32",
+        "sha256": "c58223d65d3b49cd492649e8c55b4e4db6e13774043194c9c578e2ad7fb9e803",
+        "finite": true
+      },
+      "mlp.0.bias": {
+        "shape": [
+          192
+        ],
+        "dtype": "torch.float32",
+        "sha256": "d73371f1fc0a9ca538b6b46cd145cfaa46d655f5746e92755b52a3b5de88aa62",
+        "finite": true
+      },
+      "mlp.2.weight": {
+        "shape": [
+          192,
+          192
+        ],
+        "dtype": "torch.float32",
+        "sha256": "17b9aed99ae7b0ce7c5459a7a594a54b19b1d25df5a14c6e31059b7eb71f9c3f",
+        "finite": true
+      },
+      "mlp.2.bias": {
+        "shape": [
+          192
+        ],
+        "dtype": "torch.float32",
+        "sha256": "bc4cfe756399cd9cb48923983f6ccf29b5c7c60801ec3a25203e1c15b17b4a46",
+        "finite": true
+      },
+      "projections.0.weight": {
+        "shape": [
+          1536,
+          192
+        ],
+        "dtype": "torch.float32",
+        "sha256": "a2b28ae36370f82f696c6ecbd6ef43d0d77202a5e2be91e7cd50751888bf9e7f",
+        "finite": true
+      },
+      "projections.1.weight": {
+        "shape": [
+          1536,
+          192
+        ],
+        "dtype": "torch.float32",
+        "sha256": "b353e73a0dea3053c45a2af4861ef8db30ec16305326de122cb148e80a2367fd",
+        "finite": true
+      },
+      "projections.2.weight": {
+        "shape": [
+          1536,
+          192
+        ],
+        "dtype": "torch.float32",
+        "sha256": "2957ef1f3d4d47230765946c4df178a21a85c2bb5ca38ab8b8b0ae36bb2dd975",
+        "finite": true
+      },
+      "projections.3.weight": {
+        "shape": [
+          1536,
+          192
+        ],
+        "dtype": "torch.float32",
+        "sha256": "13c9a798f6eb522fa61d7cd8ec08ab1f685645048f116a7e4b5a2c7eda651a8f",
+        "finite": true
+      }
+    }
+  },
+  "sampling": {
+    "horsejump-low": {
+      "same_noise_context_mask_and_condition": true,
+      "on_null_context_different": true,
+      "modes": {
+        "BASE": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "14126a8a1c2c4f2cb5127fb929f8830ef9fa9f86c979c5770ffe133e039bea53",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.8125
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": null,
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.84828635398299,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": false,
+            "mask_given_conditioning": true,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "BASE"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "523de72a2530b445dd55a381600e32a79527b507c113d41ac782eae86640c599",
+          "generated_mp4_sha256": "50478c842b58df10e0e490e04e0ea51bd13ce24bc8314ffb42305bd9b0e00e07"
+        },
+        "ON": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "14126a8a1c2c4f2cb5127fb929f8830ef9fa9f86c979c5770ffe133e039bea53",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.8125
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": {
+            "mode": "ON",
+            "motion_context": {
+              "shape": [
+                1,
+                3510,
+                192
+              ],
+              "dtype": "torch.float32",
+              "sha256": "c132ea1168425d978f6ea12997852a1cf2b951fc4c0b6666b546539f4fa08160",
+              "finite": true,
+              "minimum": -0.27843984961509705,
+              "maximum": 1.9376184940338135
+            },
+            "positions": {
+              "shape": [
+                33,
+                16,
+                2
+              ],
+              "dtype": "torch.float32",
+              "sha256": "030e27bfbfb1ca577ccc5fee811a3b4e1cc5fcf8a76691298d8dd3e105270b84",
+              "finite": true,
+              "minimum": 0.05324573069810867,
+              "maximum": 0.797783613204956
+            },
+            "valid": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "visible": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "af4ec69e2c99f4e1c78c1be739fc5510f967a648a4f44da8bb1dd2a256ae2f8d",
+              "finite": true,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "endpoint_patches": {
+              "shape": [
+                16,
+                2,
+                144
+              ],
+              "dtype": "torch.float32",
+              "sha256": "e63358ba54814fbc89cdff465dc0c31a290fc364a8b5d4a519c81d3cbe890d7c",
+              "finite": true,
+              "minimum": -1.548441767692566,
+              "maximum": 1.6234852075576782
+            },
+            "source_motion_available": true,
+            "adapter_checkpoint_sha256": "adfbf7b689c5c4349779d00fa78c4fac017f65f77321263451d16b0fcd593480",
+            "additional_forward_calls": 0
+          },
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.32861205699737,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": false,
+            "mask_given_conditioning": true,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "ON"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "523de72a2530b445dd55a381600e32a79527b507c113d41ac782eae86640c599",
+          "generated_mp4_sha256": "d73da95910a712b89098e5155c216cb859d1bde37b493554b83ca11ab0aca923"
+        },
+        "NULL": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "14126a8a1c2c4f2cb5127fb929f8830ef9fa9f86c979c5770ffe133e039bea53",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.8125
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": {
+            "mode": "NULL",
+            "motion_context": {
+              "shape": [
+                1,
+                3510,
+                192
+              ],
+              "dtype": "torch.float32",
+              "sha256": "bbaa956ee723ff081ffddff1ea6e300e115517222d0d8aa05eb4776326eb25eb",
+              "finite": true,
+              "minimum": -0.27841633558273315,
+              "maximum": 1.8902838230133057
+            },
+            "positions": {
+              "shape": [
+                33,
+                16,
+                2
+              ],
+              "dtype": "torch.float32",
+              "sha256": "2d388aa96f9a1fb6d8b60ec473a838be16d5131aef0264d1e6d7164a53f568b8",
+              "finite": true,
+              "minimum": 0.1742788404226303,
+              "maximum": 0.7854166626930237
+            },
+            "valid": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "visible": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "endpoint_patches": {
+              "shape": [
+                16,
+                2,
+                144
+              ],
+              "dtype": "torch.float32",
+              "sha256": "e63358ba54814fbc89cdff465dc0c31a290fc364a8b5d4a519c81d3cbe890d7c",
+              "finite": true,
+              "minimum": -1.548441767692566,
+              "maximum": 1.6234852075576782
+            },
+            "source_motion_available": false,
+            "adapter_checkpoint_sha256": "adfbf7b689c5c4349779d00fa78c4fac017f65f77321263451d16b0fcd593480",
+            "additional_forward_calls": 0
+          },
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 89.43588719001855,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": false,
+            "mask_given_conditioning": true,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "NULL"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "523de72a2530b445dd55a381600e32a79527b507c113d41ac782eae86640c599",
+          "generated_mp4_sha256": "eaeca4f20843e7b4e490e15b5d64edef490a98f81e76d9487f59348a28384f02"
+        }
+      }
+    },
+    "lucia": {
+      "same_noise_context_mask_and_condition": true,
+      "on_null_context_different": true,
+      "modes": {
+        "BASE": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "b422448a34c563bd35eb668d88c787f94a7fde7d0c31a04bc59e9b70323d65bd",
+              "finite": true,
+              "minimum": -4.0625,
+              "maximum": 4.5
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": null,
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.56794168599299,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": false,
+            "mask_given_conditioning": true,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "BASE"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "5470ac0b9cceb91024967911f7fbb58559df8a8a3512e6f95e8c1212c4006d03",
+          "generated_mp4_sha256": "f81a74686a9d81beb267131bad34b9238f51ce3a68c0bde39c604f8625570513"
+        },
+        "ON": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "b422448a34c563bd35eb668d88c787f94a7fde7d0c31a04bc59e9b70323d65bd",
+              "finite": true,
+              "minimum": -4.0625,
+              "maximum": 4.5
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": {
+            "mode": "ON",
+            "motion_context": {
+              "shape": [
+                1,
+                3510,
+                192
+              ],
+              "dtype": "torch.float32",
+              "sha256": "8d9cb815af5bbc491c353294297a8b5248dae914cdb56de3cf1861411ffa0836",
+              "finite": true,
+              "minimum": -0.2776625454425812,
+              "maximum": 1.394445776939392
+            },
+            "positions": {
+              "shape": [
+                33,
+                16,
+                2
+              ],
+              "dtype": "torch.float32",
+              "sha256": "ab2baf2a5684bdf0fe31f11c18a0f55e7b5915a12631e9d2898711806e7ae2f8",
+              "finite": true,
+              "minimum": 0.028221718966960907,
+              "maximum": 0.9308167099952698
+            },
+            "valid": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "3a1c14b407f349de5e6c614aaf8a6b00c3ea8b00a10d07d2f96f7a0a819d007a",
+              "finite": true,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "visible": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "db5a3d022faddb30a240c8fd0f679b738e1c118d4152c7fcdec519849137f123",
+              "finite": true,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "endpoint_patches": {
+              "shape": [
+                16,
+                2,
+                144
+              ],
+              "dtype": "torch.float32",
+              "sha256": "dbcf4697594992e4801c214a0cd51a8498b35282985570047f1ff236b00368f3",
+              "finite": true,
+              "minimum": -1.631317138671875,
+              "maximum": 1.4819337129592896
+            },
+            "source_motion_available": true,
+            "adapter_checkpoint_sha256": "adfbf7b689c5c4349779d00fa78c4fac017f65f77321263451d16b0fcd593480",
+            "additional_forward_calls": 0
+          },
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.80910200098879,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": false,
+            "mask_given_conditioning": true,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "ON"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "5470ac0b9cceb91024967911f7fbb58559df8a8a3512e6f95e8c1212c4006d03",
+          "generated_mp4_sha256": "2804a498023aa725422d2a35bef7681ab8c37ad1ee36929f946ad3790267004b"
+        },
+        "NULL": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "b422448a34c563bd35eb668d88c787f94a7fde7d0c31a04bc59e9b70323d65bd",
+              "finite": true,
+              "minimum": -4.0625,
+              "maximum": 4.5
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": {
+            "mode": "NULL",
+            "motion_context": {
+              "shape": [
+                1,
+                3510,
+                192
+              ],
+              "dtype": "torch.float32",
+              "sha256": "0de464d0c61be1853ac805f4cdb2ed28e1ab154fad334b2981e2cf4f2807d162",
+              "finite": true,
+              "minimum": -0.2678903043270111,
+              "maximum": 1.0764760971069336
+            },
+            "positions": {
+              "shape": [
+                33,
+                16,
+                2
+              ],
+              "dtype": "torch.float32",
+              "sha256": "dd91f83e59cc554da02da9ea275fc3c605612ab3cad7445aac6dcabdd9bbd78b",
+              "finite": true,
+              "minimum": 0.0,
+              "maximum": 0.768750011920929
+            },
+            "valid": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "3a1c14b407f349de5e6c614aaf8a6b00c3ea8b00a10d07d2f96f7a0a819d007a",
+              "finite": true,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "visible": {
+              "shape": [
+                33,
+                16
+              ],
+              "dtype": "torch.bool",
+              "sha256": "3a1c14b407f349de5e6c614aaf8a6b00c3ea8b00a10d07d2f96f7a0a819d007a",
+              "finite": true,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "endpoint_patches": {
+              "shape": [
+                16,
+                2,
+                144
+              ],
+              "dtype": "torch.float32",
+              "sha256": "dbcf4697594992e4801c214a0cd51a8498b35282985570047f1ff236b00368f3",
+              "finite": true,
+              "minimum": -1.631317138671875,
+              "maximum": 1.4819337129592896
+            },
+            "source_motion_available": false,
+            "adapter_checkpoint_sha256": "adfbf7b689c5c4349779d00fa78c4fac017f65f77321263451d16b0fcd593480",
+            "additional_forward_calls": 0
+          },
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.67928091500653,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": false,
+            "mask_given_conditioning": true,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "NULL"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "5470ac0b9cceb91024967911f7fbb58559df8a8a3512e6f95e8c1212c4006d03",
+          "generated_mp4_sha256": "c87115ffc7d64bdcda5a645fea159a102c40000448ea0313eb38f00d2385cdca"
+        }
+      }
+    },
+    "cross-id-dog": {
+      "same_noise_context_mask_and_condition": true,
+      "on_null_context_different": true,
+      "modes": {
+        "BASE": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "b973f3cd1e062c08065bf2f37664df551ede3d1029cab5e831d52a75922f4533",
+              "finite": true,
+              "minimum": -3.96875,
+              "maximum": 4.625
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": null,
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.51202227998874,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": true,
+            "mask_given_conditioning": false,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "BASE"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "54fc66d77f0481cfac58ab16040460dd03a4d0cee1bfb53fe6e890382ac17361",
+          "generated_mp4_sha256": "c247f2f3ce195efd93757fb823f8c9fdd09ed3a9343558589796f7b3ecbd351a"
+        },
+        "ON": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "b973f3cd1e062c08065bf2f37664df551ede3d1029cab5e831d52a75922f4533",
+              "finite": true,
+              "minimum": -3.96875,
+              "maximum": 4.625
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": {
+            "mode": "ON",
+            "motion_context": {
+              "shape": [
+                1,
+                3510,
+                192
+              ],
+              "dtype": "torch.float32",
+              "sha256": "aa77b8ed6869fc486a0837f95e19ad1b24593498d8953a2d02b156c65db9eca4",
+              "finite": true,
+              "minimum": -0.2782665193080902,
+              "maximum": 1.413826584815979
+            },
+            "positions": {
+              "shape": [
+                33,
+                3,
+                2
+              ],
+              "dtype": "torch.float32",
+              "sha256": "54f5ad808d60fe90d544e01a97a534bb0cb977fbd3f7721712ab6b45404cbf35",
+              "finite": true,
+              "minimum": 0.29266828298568726,
+              "maximum": 0.6994685530662537
+            },
+            "valid": {
+              "shape": [
+                33,
+                3
+              ],
+              "dtype": "torch.bool",
+              "sha256": "754b58164ca4660ee2d2ad3b87d97a9f086b1f6dca6621808cdcc8db87741de0",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "visible": {
+              "shape": [
+                33,
+                3
+              ],
+              "dtype": "torch.bool",
+              "sha256": "754b58164ca4660ee2d2ad3b87d97a9f086b1f6dca6621808cdcc8db87741de0",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "endpoint_patches": {
+              "shape": [
+                3,
+                2,
+                144
+              ],
+              "dtype": "torch.float32",
+              "sha256": "5315617c075037d1ab843e673641f272f943cf30b733bbba8482fe3e74acbc1d",
+              "finite": true,
+              "minimum": -1.1964154243469238,
+              "maximum": 1.239668369293213
+            },
+            "source_motion_available": true,
+            "adapter_checkpoint_sha256": "adfbf7b689c5c4349779d00fa78c4fac017f65f77321263451d16b0fcd593480",
+            "additional_forward_calls": 0
+          },
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.45099013199797,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": true,
+            "mask_given_conditioning": false,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "ON"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "54fc66d77f0481cfac58ab16040460dd03a4d0cee1bfb53fe6e890382ac17361",
+          "generated_mp4_sha256": "94eb856cf090f9d0cb3fb9c2176017aa346ac5154ae554073fb9ac3660f0953d"
+        },
+        "NULL": {
+          "first_model_input": {
+            "latents": {
+              "shape": [
+                1,
+                16,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+              "finite": true,
+              "minimum": -4.75,
+              "maximum": 4.46875
+            },
+            "vace_context": {
+              "shape": [
+                1,
+                96,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "b973f3cd1e062c08065bf2f37664df551ede3d1029cab5e831d52a75922f4533",
+              "finite": true,
+              "minimum": -3.96875,
+              "maximum": 4.625
+            },
+            "vace_mask_context": {
+              "shape": [
+                1,
+                64,
+                9,
+                30,
+                52
+              ],
+              "dtype": "torch.bfloat16",
+              "sha256": "076c7890e38b829d200629677559e75e88bb76ce7e8777aaefab29364a8dbd90",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "vace_mask_temporal_means": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "vace_scale": 1.0,
+            "condition_mode": "layout_mov",
+            "observed_before_original_call": true,
+            "additional_forward_calls": 0
+          },
+          "point_model_input": {
+            "mode": "NULL",
+            "motion_context": {
+              "shape": [
+                1,
+                3510,
+                192
+              ],
+              "dtype": "torch.float32",
+              "sha256": "1c94e77aefc24092f0b1b1aca3b73e2eb22a5cc6f0b1f3deb7716548047af5ca",
+              "finite": true,
+              "minimum": -0.27831751108169556,
+              "maximum": 1.3817710876464844
+            },
+            "positions": {
+              "shape": [
+                33,
+                3,
+                2
+              ],
+              "dtype": "torch.float32",
+              "sha256": "5c9318b658be36b7858abd0773efd49c4f4f372a2f0914acb9be23e7b528e1a2",
+              "finite": true,
+              "minimum": 0.29266828298568726,
+              "maximum": 0.6239583492279053
+            },
+            "valid": {
+              "shape": [
+                33,
+                3
+              ],
+              "dtype": "torch.bool",
+              "sha256": "754b58164ca4660ee2d2ad3b87d97a9f086b1f6dca6621808cdcc8db87741de0",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "visible": {
+              "shape": [
+                33,
+                3
+              ],
+              "dtype": "torch.bool",
+              "sha256": "754b58164ca4660ee2d2ad3b87d97a9f086b1f6dca6621808cdcc8db87741de0",
+              "finite": true,
+              "minimum": 1.0,
+              "maximum": 1.0
+            },
+            "endpoint_patches": {
+              "shape": [
+                3,
+                2,
+                144
+              ],
+              "dtype": "torch.float32",
+              "sha256": "5315617c075037d1ab843e673641f272f943cf30b733bbba8482fe3e74acbc1d",
+              "finite": true,
+              "minimum": -1.1964154243469238,
+              "maximum": 1.239668369293213
+            },
+            "source_motion_available": false,
+            "adapter_checkpoint_sha256": "adfbf7b689c5c4349779d00fa78c4fac017f65f77321263451d16b0fcd593480",
+            "additional_forward_calls": 0
+          },
+          "result": {
+            "status": "COMPLETE",
+            "elapsed_seconds": 88.83541772901663,
+            "model_fn_calls": 100,
+            "scheduler_steps": 50,
+            "frames": 33,
+            "fps": 16,
+            "file_duration_seconds": 2.0625,
+            "endpoint_interval_seconds": 2.0,
+            "endpoint_overwrite": false,
+            "sam_conditioning": true,
+            "mask_given_conditioning": false,
+            "condition_mode": "layout_mov",
+            "source_middle_rgb_conditioning": false,
+            "adapter_mode": "NULL"
+          },
+          "latent": {
+            "shape": [
+              1,
+              16,
+              9,
+              30,
+              52
+            ],
+            "dtype": "torch.bfloat16",
+            "readback_exact": true
+          },
+          "condition_summary_sha256": "54fc66d77f0481cfac58ab16040460dd03a4d0cee1bfb53fe6e890382ac17361",
+          "generated_mp4_sha256": "2c56448bc7e0f4f38c7ca14d56a02174997f0793fa53d5793aaaf3aca69d6070"
+        }
+      }
+    }
+  },
+  "primary_generation_code_commit": "af3017778e6eea485af0daddca41d0ebf457e092",
+  "cross_generation_code_commit": "c90f602febfd378295131f0ef304c0d165023e20",
+  "interpretation": "Tensor equality/difference proves input observation only, not useful motion control.",
+  "guard_summaries": {
+    "cache-heavy": {
+      "status": "NOT_CLEAN",
+      "guard_reason": "OBSERVATION_FAILED",
+      "normal_exit_recorded": false,
+      "worker_returncode": 1,
+      "cleanup_errors": [],
+      "final_decision": "OBSERVATION_FAILED",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [
+        "cgroup:REMOVED:exit_not_verified"
+      ],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 24.513916730880737,
+      "sampled_worker_current_max_bytes": 22014210048,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 105835474944
+    },
+    "cache-v2-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 46.54474902153015,
+      "sampled_worker_current_max_bytes": 10844479488,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 106135363584
+    },
+    "cross-cache-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 12.905432224273682,
+      "sampled_worker_current_max_bytes": 10677592064,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 105857753088
+    },
+    "cross-id-dog-base-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.21063232421875,
+      "sampled_worker_current_max_bytes": 11421618176,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 101271105536
+    },
+    "cross-id-dog-null-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.16695046424866,
+      "sampled_worker_current_max_bytes": 11536355328,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 100927905792
+    },
+    "cross-id-dog-on-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.32110118865967,
+      "sampled_worker_current_max_bytes": 10543321088,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 101072416768
+    },
+    "cross-tracker-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 4.336207151412964,
+      "sampled_worker_current_max_bytes": 1383550976,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 115765989376
+    },
+    "horsejump-low-base-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.12586569786072,
+      "sampled_worker_current_max_bytes": 9960349696,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 101156274176
+    },
+    "horsejump-low-null-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 95.28628945350647,
+      "sampled_worker_current_max_bytes": 11238686720,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 100893691904
+    },
+    "horsejump-low-on-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.29516887664795,
+      "sampled_worker_current_max_bytes": 11226865664,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 100913225728
+    },
+    "lucia-base-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.00186729431152,
+      "sampled_worker_current_max_bytes": 10954690560,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 101198807040
+    },
+    "lucia-null-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.20547032356262,
+      "sampled_worker_current_max_bytes": 10786426880,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 100990611456
+    },
+    "lucia-on-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 94.35668921470642,
+      "sampled_worker_current_max_bytes": 11396993024,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 100956184576
+    },
+    "tracker-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 9.864215850830078,
+      "sampled_worker_current_max_bytes": 1654902784,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 115573047296
+    },
+    "train-heavy": {
+      "status": "NOT_CLEAN",
+      "guard_reason": "OBSERVATION_FAILED",
+      "normal_exit_recorded": false,
+      "worker_returncode": 1,
+      "cleanup_errors": [],
+      "final_decision": "OBSERVATION_FAILED",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [
+        "cgroup:REMOVED:exit_not_verified"
+      ],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 9.646820783615112,
+      "sampled_worker_current_max_bytes": 8375853056,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 115768131584
+    },
+    "train-v2-heavy": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "worker_returncode": 0,
+      "cleanup_errors": [],
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "final_memory_errors": [],
+      "final_owned_count": 0,
+      "final_gpu_count": 0,
+      "elapsed_supervisor_seconds": 264.18807005882263,
+      "sampled_worker_current_max_bytes": 2543566848,
+      "sampled_worker_swap_max_bytes": 0,
+      "sampled_oom_max": 0,
+      "sampled_oom_kill_max": 0,
+      "system_memavailable_sample_min_bytes": 112449232896
+    }
+  }
+}

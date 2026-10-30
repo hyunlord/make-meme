@@ -1,0 +1,124 @@
+{
+  "as_of_utc": "2026-10-30T05:14:24.229383+00:00",
+  "started_at": "2026-10-30T04:01:19Z",
+  "wall_seconds_to_report": 4385.229383,
+  "training": {
+    "updates": 256,
+    "trainable_parameters": 1275072,
+    "active_seconds": 255.99940896697808,
+    "worker_internal_elapsed_seconds": 258.60689334600465,
+    "forwards": 256,
+    "backwards": 256,
+    "validation_forwards": 18,
+    "diagnostic_forwards": 5,
+    "balanced_clip_counts": {
+      "boat": 32,
+      "dance-twirl": 32,
+      "cows": 32,
+      "bmx-bumps": 32,
+      "blackswan": 32,
+      "bear": 32,
+      "bus": 32,
+      "camel": 32
+    },
+    "null_updates": 62,
+    "negative_text_updates": 24,
+    "unique_grid_indices": 232,
+    "cuda_peak_allocated_bytes": 4881228800,
+    "cuda_peak_reserved_bytes": 6339690496,
+    "trained_checkpoint_resume_executed": false,
+    "mechanical_step0_resume_executed": true,
+    "cuda_peak_scope": "Maximum of per-update reset windows; excludes model loader, pre-update context setup and validation. Not a whole-training process peak."
+  },
+  "video": {
+    "normal_completed": 9,
+    "primary": 6,
+    "cross_id": 3,
+    "heavy_attempts": 9,
+    "heavy_cap": 10,
+    "mechanical_reserve_used": 0,
+    "quality_retries": 0,
+    "steps": 450,
+    "model_fn_calls": 900,
+    "decoded_frames": 297,
+    "seconds_by_cell": {
+      "horsejump-low/BASE": 88.84828635398299,
+      "horsejump-low/ON": 88.32861205699737,
+      "horsejump-low/NULL": 89.43588719001855,
+      "lucia/BASE": 88.56794168599299,
+      "lucia/ON": 88.80910200098879,
+      "lucia/NULL": 88.67928091500653,
+      "cross-id-dog/BASE": 88.51202227998874,
+      "cross-id-dog/ON": 88.45099013199797,
+      "cross-id-dog/NULL": 88.83541772901663
+    },
+    "total_worker_internal_seconds": 798.4675403439905,
+    "vae_only_recovery": 0,
+    "cuda_peak_bytes": null,
+    "cuda_peak_note": "Per-video CUDA peak timer was not instrumented; sampled cgroup current is separately recorded, not a true peak."
+  },
+  "auxiliary": {
+    "tracker_primary_passes": 12,
+    "tracker_primary_seconds": 7.382201534986962,
+    "tracker_cross_passes": 1,
+    "tracker_cross_seconds": 1.361375237989705,
+    "primary_cache_completed_clips": 12,
+    "primary_cache_seconds": 41.7017301430169,
+    "primary_cache_successful_vae_encoder_calls": 58,
+    "prior_failed_cache_vae_encoder_calls": 4,
+    "cross_cache_seconds": 7.702987546013901,
+    "cross_cache_vae_encoder_calls": 4,
+    "annotation_review_seconds": null,
+    "annotation_reason": "Manual source/track/correspondence review was performed without a separate elapsed timer.",
+    "primary_cache_time_scope": "Worker internal result timer41.701730143s; distinct from service45.403s and supervisor46.544749s."
+  },
+  "mechanical_failures": {
+    "cache": {
+      "kind": "CPU_CUDA_GRID_DEVICE_MISMATCH",
+      "raw_guard_status": "NOT_CLEAN",
+      "guard_reason": "OBSERVATION_FAILED",
+      "final_error": "cgroup:REMOVED:exit_not_verified",
+      "completed_clips": 0,
+      "vae_encoder_calls": 4,
+      "retry_authority": "same-task mechanical recovery, no safety threshold violation"
+    },
+    "train": {
+      "kind": "OVERRESTRICTIVE_REQUIRE_VAE_EMBEDDING_ASSERT",
+      "updates": 0,
+      "backwards": 0,
+      "completed_validation_forwards": 0,
+      "raw_guard_status": "NOT_CLEAN",
+      "guard_reason": "OBSERVATION_FAILED",
+      "recovered_checkpoint_step": 0,
+      "elapsed_service_seconds": 9.005
+    }
+  },
+  "downloads": {
+    "repository": "facebook/cotracker3",
+    "revision": "bf55ea50d4390e1820a267f131cd6587240fb2c5",
+    "file": "scaled_offline.pth",
+    "bytes": 101890938,
+    "sha256": "2670d4562ed69326dda775a26e54883925cd11b6fc9b24cb7aa9f8078bce7834",
+    "download_seconds": null,
+    "time_note": "curl completed in approximately4s per progress; exact elapsed timer not recorded",
+    "source_code_bytes": 138544,
+    "new_media_download_bytes": 0,
+    "new_packages": 0
+  },
+  "imagegen_calls": 0,
+  "new_packages": 0,
+  "new_backbones": 0,
+  "backbone_weight_updates": 0,
+  "api_generation_calls": 0,
+  "billing": {
+    "paid_generation_services": 0,
+    "local_electricity_cost": null,
+    "note": "No measured electricity tariff/energy receipt."
+  },
+  "measurement_limits": {
+    "host_rss_peak_bytes": null,
+    "cgroup_true_peak_bytes": null,
+    "note": "No exact host RSS or memory.peak receipt was collected. Sample maxima are separate from true peaks.",
+    "sampled_memory_evidence": "NUMERICS.json guard_summaries: per-stage sampled worker current maximum and system MemAvailable minimum, not true peaks."
+  }
+}
