@@ -1,0 +1,92 @@
+[
+  {
+    "cfg": 1,
+    "sampler_step": 0,
+    "on_minus_base_latent_rms": 0.0,
+    "on_minus_base_latent_norm": 0.0,
+    "base_latent_rms": 0.9989138841629028,
+    "on_latent_rms": 0.9989138841629028,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 1,
+    "sampler_step": 25,
+    "on_minus_base_latent_rms": 0.06950030475854874,
+    "on_minus_base_latent_norm": 32.93955993652344,
+    "base_latent_rms": 0.8423939943313599,
+    "on_latent_rms": 0.8466928601264954,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 1,
+    "sampler_step": 40,
+    "on_minus_base_latent_rms": 0.22551101446151733,
+    "on_minus_base_latent_norm": 106.88291931152344,
+    "base_latent_rms": 0.6670822501182556,
+    "on_latent_rms": 0.6824801564216614,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 1,
+    "sampler_step": 47,
+    "on_minus_base_latent_rms": 0.41617557406425476,
+    "on_minus_base_latent_norm": 197.25326538085938,
+    "base_latent_rms": 0.6781849265098572,
+    "on_latent_rms": 0.7089881896972656,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 1,
+    "sampler_step": 49,
+    "on_minus_base_latent_rms": 0.5090423226356506,
+    "on_minus_base_latent_norm": 241.27035522460938,
+    "base_latent_rms": 0.7622101306915283,
+    "on_latent_rms": 0.7974001169204712,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 5,
+    "sampler_step": 0,
+    "on_minus_base_latent_rms": 0.0,
+    "on_minus_base_latent_norm": 0.0,
+    "base_latent_rms": 0.9989138841629028,
+    "on_latent_rms": 0.9989138841629028,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 5,
+    "sampler_step": 25,
+    "on_minus_base_latent_rms": 0.07567358016967773,
+    "on_minus_base_latent_norm": 35.86479568481445,
+    "base_latent_rms": 0.8420388102531433,
+    "on_latent_rms": 0.8461207747459412,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 5,
+    "sampler_step": 40,
+    "on_minus_base_latent_rms": 0.2403475046157837,
+    "on_minus_base_latent_norm": 113.91511535644531,
+    "base_latent_rms": 0.6595213413238525,
+    "on_latent_rms": 0.6780201196670532,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 5,
+    "sampler_step": 47,
+    "on_minus_base_latent_rms": 0.4383423328399658,
+    "on_minus_base_latent_norm": 207.76107788085938,
+    "base_latent_rms": 0.6544229984283447,
+    "on_latent_rms": 0.6998499035835266,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  },
+  {
+    "cfg": 5,
+    "sampler_step": 49,
+    "on_minus_base_latent_rms": 0.5351607203483582,
+    "on_minus_base_latent_norm": 253.6497802734375,
+    "base_latent_rms": 0.7315326929092407,
+    "on_latent_rms": 0.787419319152832,
+    "interpretation": "different trajectories; not same-state adapter prediction delta"
+  }
+]

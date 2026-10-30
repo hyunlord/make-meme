@@ -453,3 +453,8 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 과학적 판정은 세 사례 모두 NO_ESTABLISHED_GAIN이다. ON/NULL에서 색 번짐·잔상·외형 및 보호 장면 회귀가 발생했고 실제 궤적의 추가 이득은 미입증이다. 고정 validation loss 감소와 CFG sampling 품질이 달랐다. 기본 채택하지 않으며 temporal=UNVERIFIED, 정밀 표면점 측정은 제한된다. 다음 논의는 one-step FM 오차 감소와 실제 sampling의 기존 예측 보존·안정성 사이의 간극 하나다. 원인을 단정하거나 추가 학습·scale/seed 탐색을 자동 시작하지 않는다.
 
 운영: 기존 guard를 유지했다. cache device 불일치와 학습 전 과도한 assert의 두 기계적 실패는 raw NOT_CLEAN/OBSERVATION_FAILED와 사용량을 보존하고 승인 범위에서 복구했다. 최종 sampler 9회, 영상 품질 재시도·VAE-only 복구·imagegen·backbone 학습은 0회다. C-005의 14B 안전 중단과 모든 A/B/C의 과거 판정은 불변이다. [결과](experiments/C-006-motion-point-adapter-pilot/RESULTS.md) · [해설](experiments/C-006-motion-point-adapter-pilot/LESSON_KO.md) · [전달](experiments/C-006-motion-point-adapter-pilot/DELIVERY.json).
+
+
+## C-007 동결 adapter CFG 진단 완료 (2026-10-30)
+
+기존 checkpoint를 동결하고 validation 두 영상160 one-step, elephant BASE/ON×CFG1/5 영상4개, 실제 경로40 replay를 완료했다. CFG1에서도 ON의 색 번짐/중복 윤곽 회귀가 확인되어 CFG5만의 문제는 아니다. 낮은 sigma 분기 오차 증가와 ON/NULL 공유 효과가 관측됐지만 cache와 생성의 VACE context 불일치가 발견되어 teacher-forced→rollout 원인 연결은 제한한다. Native/bypass/zero 및 실제 replay는 검증 범위에서 bit-exact다. 품질 이득은 없고 temporal=UNVERIFIED, 기존 판정과 가드는 보존했다. 다음 하나는 cache↔generation 조건 경로 일치 문제의 별도 규명/검증이며 이번에 수리·학습·scale 탐색을 시작하지 않는다. [결과](experiments/C-007-frozen-adapter-cfg-diagnostics/RESULTS.md) · [해설](experiments/C-007-frozen-adapter-cfg-diagnostics/LESSON_KO.md).

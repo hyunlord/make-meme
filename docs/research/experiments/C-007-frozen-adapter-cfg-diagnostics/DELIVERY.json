@@ -1,0 +1,52 @@
+{
+  "status": "DELIVERED",
+  "verified_at_utc": "2026-10-30T10:39:28.212156+00:00",
+  "work_elapsed_seconds_at_delivery": 1945.212156,
+  "compact": {
+    "filename": "C007-review-20261030.zip",
+    "mac_tmp": "/tmp/C007-review-20261030.zip",
+    "spark_tmp": "/tmp/C007-review-20261030.zip",
+    "bytes": 22244250,
+    "sha256": "fc0fdb7015cb9b7bb77199d8049d8f9887cfcc204287b9b91aa4507d0d973a19",
+    "files": 258,
+    "payload_manifest_files": 257,
+    "mac_crc": "PASS",
+    "spark_crc": "PASS",
+    "mac_actual_extraction": "PASS",
+    "spark_actual_extraction": "PASS",
+    "manifest_sizes_both": "PASS",
+    "transfer_same_bytes": "PASS",
+    "generated_mp4_original_bytes": "PASS",
+    "generated_mp4_count": 4,
+    "derivatives": "source/layout previews and JPEG sheets are new derivatives; generated MP4 unchanged",
+    "self_reference_policy": "Archive contains explicit preclosure DELIVERY protocol; final receipts are external sidecars/public final DELIVERY.json to avoid a recursive archive hash"
+  },
+  "full": {
+    "duplicated_parent_checkpoints_or_cache": false,
+    "private_both_hosts": true,
+    "files": 480,
+    "bytes": 176558071,
+    "manifest_sha256": "946b4e089bc9a8ac4580426fad38be8a0d5d4c5b2cf46656d9ce9886c65f6917",
+    "actual_file_size_and_hash_verification_both_hosts": "PASS",
+    "includes": "new raw/final latents/PNG frames/20 saved latent states and predictions/condition sidecars/actual scalar receipts"
+  },
+  "cleanup": {
+    "own_active_unit_count": 0,
+    "gpu_process_rows_count": 0,
+    "other_processes_terminated": 0,
+    "all_six_heavy_phases_normal_exit": true
+  },
+  "viewer_qa": {
+    "widths": [
+      1280,
+      768,
+      375
+    ],
+    "actual_browser_screenshots_reviewed": true,
+    "slider_zoom_playback_links": "PASS",
+    "temporal": "UNVERIFIED"
+  },
+  "execution_prereg_commit": "e61ca14ace07cd78e221a08842c94b71cf5adad5",
+  "publication": "Final commit identified by the Git commit containing this receipt; remote SHA separately verified in final handoff",
+  "further_gpu_work": 0
+}

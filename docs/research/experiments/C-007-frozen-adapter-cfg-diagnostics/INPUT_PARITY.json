@@ -1,0 +1,137 @@
+{
+  "logical_rgb_masks_same": true,
+  "initial_noise_same": true,
+  "actual_vace_context_same": true,
+  "mask64_same": true,
+  "cache_vs_actual_context": {
+    "BASE_1": {
+      "positive": {
+        "exact": true,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 0.0,
+        "rms": 0.0
+      },
+      "negative": {
+        "status": "NOT_CALLED_CFG1"
+      },
+      "vace_context": {
+        "exact": false,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 6.421875,
+        "rms": 0.7668061852455139
+      }
+    },
+    "ON_1": {
+      "positive": {
+        "exact": true,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 0.0,
+        "rms": 0.0
+      },
+      "negative": {
+        "status": "NOT_CALLED_CFG1"
+      },
+      "vace_context": {
+        "exact": false,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 6.421875,
+        "rms": 0.7668061852455139
+      }
+    },
+    "BASE_5": {
+      "positive": {
+        "exact": true,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 0.0,
+        "rms": 0.0
+      },
+      "negative": {
+        "exact": true,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 0.0,
+        "rms": 0.0
+      },
+      "vace_context": {
+        "exact": false,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 6.421875,
+        "rms": 0.7668061852455139
+      }
+    },
+    "ON_5": {
+      "positive": {
+        "exact": true,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 0.0,
+        "rms": 0.0
+      },
+      "negative": {
+        "exact": true,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 0.0,
+        "rms": 0.0
+      },
+      "vace_context": {
+        "exact": false,
+        "actual_dtype": "torch.bfloat16",
+        "cache_dtype": "torch.bfloat16",
+        "max_abs": 6.421875,
+        "rms": 0.7668061852455139
+      }
+    }
+  },
+  "training_vs_model_timesteps": [
+    {
+      "target_sigma": 0.95,
+      "index": 208,
+      "sigma": 0.9500959515571594,
+      "timestep": 950.095947265625,
+      "model_timestep_bf16": 952.0,
+      "provenance": "derived from actual recorded grid and executed timestep BF16 cast; no additional model call"
+    },
+    {
+      "target_sigma": 0.75,
+      "index": 625,
+      "sigma": 0.7500000596046448,
+      "timestep": 750.0000610351562,
+      "model_timestep_bf16": 752.0,
+      "provenance": "derived from actual recorded grid and executed timestep BF16 cast; no additional model call"
+    },
+    {
+      "target_sigma": 0.5,
+      "index": 833,
+      "sigma": 0.5005995631217957,
+      "timestep": 500.59954833984375,
+      "model_timestep_bf16": 500.0,
+      "provenance": "derived from actual recorded grid and executed timestep BF16 cast; no additional model call"
+    },
+    {
+      "target_sigma": 0.2,
+      "index": 952,
+      "sigma": 0.20134228467941284,
+      "timestep": 201.34228515625,
+      "model_timestep_bf16": 201.0,
+      "provenance": "derived from actual recorded grid and executed timestep BF16 cast; no additional model call"
+    },
+    {
+      "target_sigma": 0.05,
+      "index": 990,
+      "sigma": 0.04807692766189575,
+      "timestep": 48.076927185058594,
+      "model_timestep_bf16": 48.0,
+      "provenance": "derived from actual recorded grid and executed timestep BF16 cast; no additional model call"
+    }
+  ],
+  "trace_bytes": 67454794,
+  "extra_model_calls": 0,
+  "cuda_initialized": false
+}

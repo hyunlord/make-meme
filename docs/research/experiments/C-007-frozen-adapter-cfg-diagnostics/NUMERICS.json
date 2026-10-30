@@ -1,0 +1,123 @@
+{
+  "memory_samples": {
+    "probes": {
+      "system_memavailable_min_sampled_bytes": 112570904576,
+      "worker_cgroup_current_max_sampled_bytes": 9513410560,
+      "observation_count": 131,
+      "scope": "discrete supervisor samples; not true process peaks",
+      "worker_elapsed_seconds": 134.50198949198239,
+      "supervisor_elapsed_seconds": 139.337553024292
+    },
+    "BASE_1": {
+      "system_memavailable_min_sampled_bytes": 100832731136,
+      "worker_cgroup_current_max_sampled_bytes": 22515163136,
+      "observation_count": 62,
+      "scope": "discrete supervisor samples; not true process peaks",
+      "worker_elapsed_seconds": 59.61290213200846,
+      "supervisor_elapsed_seconds": 64.99095225334167
+    },
+    "ON_1": {
+      "system_memavailable_min_sampled_bytes": 100780548096,
+      "worker_cgroup_current_max_sampled_bytes": 11274375168,
+      "observation_count": 53,
+      "scope": "discrete supervisor samples; not true process peaks",
+      "worker_elapsed_seconds": 50.30584326799726,
+      "supervisor_elapsed_seconds": 55.73864507675171
+    },
+    "BASE_5": {
+      "system_memavailable_min_sampled_bytes": 101141348352,
+      "worker_cgroup_current_max_sampled_bytes": 9982828544,
+      "observation_count": 90,
+      "scope": "discrete supervisor samples; not true process peaks",
+      "worker_elapsed_seconds": 89.8323251780239,
+      "supervisor_elapsed_seconds": 95.2287449836731
+    },
+    "ON_5": {
+      "system_memavailable_min_sampled_bytes": 100974399488,
+      "worker_cgroup_current_max_sampled_bytes": 10600497152,
+      "observation_count": 90,
+      "scope": "discrete supervisor samples; not true process peaks",
+      "worker_elapsed_seconds": 89.41465338200214,
+      "supervisor_elapsed_seconds": 95.01349353790283
+    },
+    "replay": {
+      "system_memavailable_min_sampled_bytes": 112808931328,
+      "worker_cgroup_current_max_sampled_bytes": 2337947648,
+      "observation_count": 39,
+      "scope": "discrete supervisor samples; not true process peaks",
+      "worker_elapsed_seconds": 35.39041675699991,
+      "supervisor_elapsed_seconds": 40.86361312866211
+    }
+  },
+  "guards": {
+    "probes": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "worker_returncode": 0,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "owned_processes_final_count": 0,
+      "gpu_processes_final_count": 0
+    },
+    "BASE_1": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "worker_returncode": 0,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "owned_processes_final_count": 0,
+      "gpu_processes_final_count": 0
+    },
+    "ON_1": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "worker_returncode": 0,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "owned_processes_final_count": 0,
+      "gpu_processes_final_count": 0
+    },
+    "BASE_5": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "worker_returncode": 0,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "owned_processes_final_count": 0,
+      "gpu_processes_final_count": 0
+    },
+    "ON_5": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "worker_returncode": 0,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "owned_processes_final_count": 0,
+      "gpu_processes_final_count": 0
+    },
+    "replay": {
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "worker_returncode": 0,
+      "final_decision": "CLEAR",
+      "final_cgroup_state": "REMOVED",
+      "owned_processes_final_count": 0,
+      "gpu_processes_final_count": 0
+    }
+  },
+  "input_parity": "INPUT_PARITY.json",
+  "same_state_replay": "ROLLOUT_PROBES.jsonl",
+  "trajectory_difference": "TRAJECTORY_DIFFERENCES.json"
+}
