@@ -46,6 +46,7 @@ class Config(BaseModel):
     sigma_shift: Literal[5.0] = 5.0
     fps: Literal[16] = 16
     adapter_mode: Literal["BASE", "ON", "NULL"] = "BASE"
+    mask_origin: Literal["dataset", "sam_existing"] = "dataset"
     cache_file: Path
     point_exclusions: Path
     adapter_checkpoint: Path | None = None
@@ -256,7 +257,7 @@ def main() -> None:
     subprocess.run(['ffmpeg','-v','error','-i',str(config.output/'generated.mp4'),'-f','null','-'],check=True)
     atomic_json(config.output/'result.json',{'status':'COMPLETE','elapsed_seconds':time.monotonic()-started,
         **counts,'frames':33,'fps':16,'file_duration_seconds':33/16,'endpoint_interval_seconds':32/16,
-        'endpoint_overwrite':False,'sam_conditioning':False,'mask_given_conditioning':True,'condition_mode':config.condition_mode,'source_middle_rgb_conditioning':False,'adapter_mode':config.adapter_mode})
+        'endpoint_overwrite':False,'sam_conditioning':config.mask_origin == 'sam_existing','mask_given_conditioning':config.mask_origin == 'dataset','condition_mode':config.condition_mode,'source_middle_rgb_conditioning':False,'adapter_mode':config.adapter_mode})
 
 
 if __name__=='__main__':
