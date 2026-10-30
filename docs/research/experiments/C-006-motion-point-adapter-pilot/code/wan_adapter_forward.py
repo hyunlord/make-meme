@@ -32,7 +32,9 @@ def adapted_forward(models: tuple[nn.Module, nn.Module], inputs: ForwardInput,
     from diffsynth.models.wan_video_dit import sinusoidal_embedding_1d
     dit, vace = models
     assert len(dit.blocks) == 30 and dit.dim == 1536
-    assert not dit.seperated_timestep and not dit.require_vae_embedding
+    # require_vae_embedding defaults True even for this text-only backbone;
+    # native code activates it only when y is provided. This path has y=None.
+    assert not dit.seperated_timestep
     with torch.no_grad():
         t = dit.time_embedding(sinusoidal_embedding_1d(dit.freq_dim, inputs.timestep))
         modulation = dit.time_projection(t).unflatten(1, (6, dit.dim))

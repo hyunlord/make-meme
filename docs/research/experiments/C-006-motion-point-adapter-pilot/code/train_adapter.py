@@ -52,6 +52,20 @@ def main() -> None:
     cursor = 0
     counts = {'training_forwards': 0, 'backwards': 0, 'updates': 0, 'validation_forwards': 0, 'diagnostic_forwards': 0}
     cache = {name: load_cache(config.cache_root / f'{name}.pt', config.point_exclusions) for name in train + validation}
+    resumed_active_seconds = 0.0
+    if config.adapter_checkpoint is not None:
+        resumed = torch.load(config.adapter_checkpoint, map_location='cpu', weights_only=True)
+        adapter.load_state_dict(resumed['adapter'], strict=True)
+        optimizer.load_state_dict(resumed['optimizer'])
+        generator.set_state(resumed['generator_state'])
+        order, cursor = resumed['order'], resumed['cursor']
+        counts = resumed['counts'].copy()
+        torch.set_rng_state(resumed['cpu_rng'])
+        torch.cuda.set_rng_state_all(resumed['cuda_rng'])
+        resumed_active_seconds = resumed['active_seconds']
+        assert counts['updates'] == resumed['completed_updates']
+        atomic_json(config.output / 'resume.json', {'completed_updates': counts['updates'],
+                    'optimizer_rng_cursor_restored': True, 'source': config.adapter_checkpoint.name})
 
     def checkpoint_state(step: int) -> dict:
         return {'completed_updates': step, 'order': order, 'cursor': cursor,
@@ -79,11 +93,11 @@ def main() -> None:
                     rows.append({'clip': name, 'grid_index': index, 'sigma': float(pipe.scheduler.sigmas[index]), 'loss': float(loss)})
         atomic_json(config.output / f'validation-{step:03d}.json', rows)
 
-    active_start = time.monotonic()
-    save_checkpoint(config.output / 'checkpoint-000.pt', adapter, optimizer, checkpoint_state(0))
-    evaluate(0)
+    active_start = time.monotonic()-resumed_active_seconds
+    save_checkpoint(config.output / f"checkpoint-{counts['updates']:03d}.pt", adapter, optimizer, checkpoint_state(counts['updates']))
+    evaluate(counts['updates'])
     first_diagnostic = None
-    for step in range(1, config.max_updates+1):
+    for step in range(counts['updates']+1, config.max_updates+1):
         if time.monotonic()-active_start >= config.train_seconds or time.time() >= config.deadline_epoch-600:
             break
         tick = time.monotonic()
