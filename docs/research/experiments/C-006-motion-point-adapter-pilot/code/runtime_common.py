@@ -28,6 +28,7 @@ class RuntimeConfig(BaseModel):
     clip_id: str | None = None
     mode: Literal['BASE', 'ON', 'NULL'] = 'BASE'
     adapter_checkpoint: Path | None = None
+    point_exclusions: Path | None = None
     seed: int = 20261028
     train_seed: int = 20261030
     max_updates: int = 256

@@ -1,0 +1,82 @@
+{
+  "model": "Wan2.1-VACE-1.3B",
+  "model_revision": "574e6a744642ce3bee319afc31496b88bde8aac4",
+  "shape": [
+    416,
+    240,
+    33
+  ],
+  "latent_shape": [
+    1,
+    16,
+    9,
+    30,
+    52
+  ],
+  "tokens": [
+    9,
+    15,
+    26
+  ],
+  "adapter_width": 192,
+  "adapter_parameters": 1275072,
+  "injection_before_blocks": [
+    26,
+    27,
+    28,
+    29
+  ],
+  "base_dtype": "BF16",
+  "adapter_master_dtype": "FP32",
+  "optimizer": "AdamW",
+  "lr": 0.0001,
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "weight_decay": 0.01,
+  "grad_clip_norm": 1.0,
+  "batch": 1,
+  "max_updates": 256,
+  "active_seconds_max": 9000,
+  "train_seed": 20261030,
+  "data_seed": 20261030,
+  "inference_seed": 20261028,
+  "training_grid": {
+    "scheduler": "FlowMatchScheduler(Wan)",
+    "steps": 1000,
+    "shift": 5,
+    "extra_weight": 1
+  },
+  "loss": "object area mean MSE + background area mean MSE; both weights1",
+  "loss_mask": "adaptive_avg_pool3d binary dataset mask to9x30x52",
+  "null_probability": 0.25,
+  "negative_text_probability": 0.1,
+  "text_drop_implementation": "Replace positive caption with the exact inference negative embedding (not zero tensor)",
+  "negative_prompt": "blurry, distorted, deformed, watermark",
+  "checkpoints": [
+    0,
+    128,
+    256
+  ],
+  "final_checkpoint_selection": "last completed update, never selected by validation/test result",
+  "validation_grid_indices": [
+    200,
+    500,
+    800
+  ],
+  "validation_noise_seed": "20261031 + validation_clip_index*1000 + grid_index",
+  "replay_tolerance": {
+    "atol": 0.001,
+    "rtol": 0.001
+  },
+  "point_exclusions_sha256": "606b2b76c49f6edef96eff48b89965237deb762bc7d8e0c75d71ad2beb276972",
+  "kernel_bbox": "same endpoint-linearly-interpolated bbox widths for ON/NULL",
+  "kernel_fraction": 0.08,
+  "kernel_min_token_width": 1,
+  "kernel_cutoff_sigma": 3,
+  "temporal_groups": "0 then1..4,5..8,...29..32; mean per-frame spatial splats",
+  "attention": "SDPA",
+  "late_checkpointing": "nonreentrant",
+  "automatic_quality_retries": 0
+}

@@ -4,6 +4,7 @@
 # ///
 """Safe restart state and point conditioning from frozen cache, existing Python."""
 from pathlib import Path
+import json
 import torch
 from torch import Tensor
 from point_adapter import PointAnchorAdapter
@@ -16,10 +17,23 @@ def condition_from_cache(cache: dict) -> PointCondition:
         'patches', 'anchor_valid', 'positions', 'visible', 'valid', 'box_wh')}).to('cuda')
 
 
+def load_cache(path: Path, exclusions_path: Path) -> dict:
+    """Apply separately reviewed whole-track exclusions without modifying raw cache/NPZ."""
+    cache = torch.load(path, map_location='cpu', weights_only=True)
+    exclusions = json.loads(exclusions_path.read_text())['clips'][cache['sequence']]['excluded_point_ids']
+    cache['valid'] = cache['valid'].clone()
+    cache['anchor_valid'] = cache['anchor_valid'].clone()
+    cache['patches'] = cache['patches'].clone()
+    cache['valid'][:, exclusions] = False
+    cache['anchor_valid'][:, exclusions] = False
+    cache['patches'][exclusions] = 0
+    return cache
+
+
 def balanced_loss(prediction: Tensor, target: Tensor, mask: Tensor) -> Tensor:
     error = (prediction.float() - target.float()).square().mean(dim=1, keepdim=True)
     assert mask.sum() > 0 and (1-mask).sum() > 0
-    return .5*((error*mask).sum()/mask.sum() + (error*(1-mask)).sum()/(1-mask).sum())
+    return (error*mask).sum()/mask.sum() + (error*(1-mask)).sum()/(1-mask).sum()
 
 
 def save_checkpoint(path: Path, adapter: PointAnchorAdapter,
@@ -36,6 +50,10 @@ def save_checkpoint(path: Path, adapter: PointAnchorAdapter,
     restored = torch.load(path, map_location='cpu', weights_only=True)
     assert restored['completed_updates'] == state['completed_updates']
     assert torch.equal(restored['cpu_rng'], payload['cpu_rng'])
+    assert all(torch.equal(a, b) for a, b in zip(restored['cuda_rng'], payload['cuda_rng']))
+    for key in ('order', 'cursor', 'config'):
+        assert restored[key] == payload[key]
+    assert torch.equal(restored['generator_state'], payload['generator_state'])
     assert all(torch.equal(restored['adapter'][key], value) for key, value in payload['adapter'].items())
     fresh = PointAnchorAdapter()
     fresh.load_state_dict(restored['adapter'], strict=True)
@@ -45,5 +63,6 @@ def save_checkpoint(path: Path, adapter: PointAnchorAdapter,
         for key, value in original_state.items():
             if isinstance(value, Tensor):
                 assert torch.equal(saved_state[key].cpu(), value.cpu())
+    torch.set_rng_state(payload['cpu_rng'])
     return {'readback_exact': True, 'optimizer_readback_exact': True,
             'completed_updates': state['completed_updates']}
