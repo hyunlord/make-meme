@@ -185,7 +185,9 @@ def main() -> None:
         checkpoint = torch.load(config.adapter_checkpoint, map_location='cpu', weights_only=True)
         adapter = PointAnchorAdapter().to('cuda').eval()
         adapter.load_state_dict(checkpoint['adapter'], strict=True)
-        point_condition = condition_from_cache(load_cache(config.cache_file, config.point_exclusions))
+        point_cache = load_cache(config.cache_file, config.point_exclusions)
+        assert 'clean_latent' not in point_cache, 'Inference must not receive a clean target latent'
+        point_condition = condition_from_cache(point_cache)
         if config.adapter_mode == 'NULL':
             point_condition = make_null(point_condition)
         adapter_state = (adapter, point_condition)
