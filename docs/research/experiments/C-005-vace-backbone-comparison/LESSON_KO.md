@@ -20,7 +20,7 @@ BF16 가중치 bytes는 전체 peak가 아니다. 저장 F32/BF16, meta 초기�
 
 ## 결과와 반례
 
-실제 두 출력의 관측은 완료 후 [RESULTS](RESULTS.md)에 연결한다. 큰 모델도 target을 잘 그리면서 source 움직임을 놓치거나, 더 자연스러운 새 배경을 만들어 보호 장면을 해칠 수 있다. 둘 다 결합 목표 성공이 아니다. 같은 noise·context hash도 품질 개선의 증거가 아니다.
+실제 실행은 첫 적재의 PSI 보호 중단으로 끝났고 새 출력은0개다. 따라서 이번 결과는 모델 품질 차이의 증거가 아니라 운영 계약에 따른 미완료다. [RESULTS](RESULTS.md)의 runtime noise/context 미관측과 CPU 입력 동일성을 구분해야 한다. 큰 모델도 target을 잘 그리면서 source 움직임을 놓치거나, 더 자연스러운 새 배경을 만들어 보호 장면을 해칠 수 있다. 둘 다 결합 목표 성공이 아니다. 같은 noise·context hash도 품질 개선의 증거가 아니다.
 
 ## 이해 확인
 

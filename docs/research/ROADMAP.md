@@ -440,3 +440,7 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 ### B-034 MEMORY_BUDGET_01 종료 — 시작 통과 / 실행 경로 계약 오류
 
 공통memory정책CPU21개·양stage실제preflight와10.2548초시작관측은통과했다. 안정swap258048bytes는경고로보존됐으나,실행자가stage상대경로를전달하여systemdPython이worker파일을열지못하고반환2/NOT_CLEAN으로종료했다. 모델load/sampler/forward/constraint/decode0,새latent/raw/영상없음이다. 계약오류발생시종료조건에따라재실행하지않았다. 운영정책검사성과와heavy검증미완료를분리하며연구품질성과없음·비교미완료/운영보류다. 과거실패·UNKNOWN·소진기록과BASEtargetFAIL/CONTROL미개선/temporalUNVERIFIED는불변이다. [결과](experiments/B-034-fixed-method-transfer-validation/continuation02/expected_absent/memory_budget/RESULTS.md). 추가자동실행권한/예약없음.
+
+## C-005 공식14B 비교 — 첫 적재 안전 중단 (2026-10-30)
+
+동일 C-002 앵커/동적 윤곽으로 공식 VACE14B 차량→개 비교를 사전 고정했다. 공식7shards/hash와 CPU/meta1331key/shape, 동일 X/G/텍스트 및 두 CPU route를 확인했으나 차량 첫 적재에서 시스템 PSI full10초비율14.08681%로 기존 가드가 중단했다. Heavy1소진, forward/step/새영상0, 개/예비/설정변경 미실행이다. Raw NOT_CLEAN 및 종료 cgroup 관측 실패를 보존하며 원인UNKNOWN, OOM 재분류 없음이다. 품질 INCONCLUSIVE/비교미완료,14B 채택 근거 없음, 기존1.3B는 실행 가능한 기준선으로 유지한다. 과거 판정을 바꾸거나 자동재개하지 않는다. [실제 결과](experiments/C-005-vace-backbone-comparison/RESULTS.md).

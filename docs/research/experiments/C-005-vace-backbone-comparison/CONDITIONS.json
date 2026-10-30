@@ -207,5 +207,10 @@
     "vace_scale": 1.0,
     "adapter": false,
     "reference": null
-  }
+  },
+  "actual_14b_noise": "NOT_OBSERVED",
+  "actual_14b_context": "NOT_OBSERVED",
+  "actual_14b_mask64": "NOT_OBSERVED",
+  "actual_14b_scheduler": "NOT_REACHED",
+  "runtime_comparison": "INCOMPLETE; logical input equivalence passed, runtime equivalence not established"
 }

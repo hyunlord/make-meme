@@ -755,3 +755,7 @@ C-002 개 MOV를 재사용하고 같은 동적 외곽선에 시점별 공식 scr
 ## C-004 종료 앵커 진단 완료 (2026-10-30)
 
 Native1회로 끝 앵커를 부분 교정(PARTIAL_BUT_USABLE)하고, C002 동적 윤곽·시작·모델을 유지한 새 영상1개(50step/100call)를 완료했다. 실제 RGB32만 변경·noise/G 동일을 확인했으나 영상은 NO_ESTABLISHED_GAIN이다. 얼굴 방향/높이 변화와 국소 배경 손상은 있으나 중간 머리·발 진행이나29–31 종료 전환 개선은 미입증이다. 약한 앵커 교정으로 원인을 단정하지 않으며 temporal=UNVERIFIED, 기본 채택하지 않는다. 기존 이력은 보존하고 추가 앵커 튜닝을 종료한다. 다음 논의는 부위 ID·시간 대응·가시성·신뢰도의 실제 생성 연결이며 자동 실행하지 않는다. [결과](experiments/C-004-end-anchor-consistency/RESULTS.md).
+
+## C-005 공식14B 비교 — 첫 적재 안전 중단 (2026-10-30)
+
+동일 C-002 앵커/동적 윤곽으로 공식 VACE14B 차량→개 비교를 사전 고정했다. 공식7shards/hash와 CPU/meta1331key/shape, 동일 X/G/텍스트 및 두 CPU route를 확인했으나 차량 첫 적재에서 시스템 PSI full10초비율14.08681%로 기존 가드가 중단했다. Heavy1소진, forward/step/새영상0, 개/예비/설정변경 미실행이다. Raw NOT_CLEAN 및 종료 cgroup 관측 실패를 보존하며 원인UNKNOWN, OOM 재분류 없음이다. 품질 INCONCLUSIVE/비교미완료,14B 채택 근거 없음, 기존1.3B는 실행 가능한 기준선으로 유지한다. 과거 판정을 바꾸거나 자동재개하지 않는다. [실제 결과](experiments/C-005-vace-backbone-comparison/RESULTS.md).

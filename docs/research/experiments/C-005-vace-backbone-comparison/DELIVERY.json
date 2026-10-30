@@ -1,0 +1,64 @@
+{
+  "status": "DELIVERED_OPERATIONAL_STOP",
+  "execution_status": "BLOCKED_RESOURCE",
+  "quality_status": "INCONCLUSIVE",
+  "new_generated_videos": 0,
+  "existing_1_3b_baselines": 2,
+  "compact": {
+    "mac_zip": "/tmp/C005-review-20261030.zip",
+    "spark_zip": "/tmp/C005-review-20261030.zip",
+    "bytes": 67615166,
+    "sha256": "ac07b39ec35f9aec757ade07bce8d7348cf39e0b55336824a0cc60bab012dd27",
+    "zip_members": 844,
+    "payload_manifest_files": 843,
+    "mac_crc": "PASS",
+    "spark_crc": "PASS",
+    "mac_actual_extraction": "PASS",
+    "spark_actual_extraction": "PASS",
+    "both_payload_sizes_hashes": "PASS",
+    "two_host_bytes_equal": true,
+    "mac_viewer": "/tmp/C005-review-20261030/index.html",
+    "spark_extracted_viewer": "/tmp/C005-review-extracted-20261030/index.html",
+    "receipts": [
+      "/tmp/C005-review-20261030.verification.json",
+      "/tmp/C005-spark-verification.json"
+    ]
+  },
+  "private_full": {
+    "files": 119,
+    "bytes": 1719649,
+    "manifest_sha256": "6ece033cde595bbda87e1cb229b59f2b36719d7e6bbba4672af572d8a515a22d",
+    "scope": "First-attempt conditions/masks, config/code and raw guard evidence; no raw video or latent exists; weights remain separately stored and are not packaged"
+  },
+  "termination": {
+    "execution_status": "BLOCKED_RESOURCE",
+    "quality_status": "INCONCLUSIVE",
+    "video_heavy_attempts": 1,
+    "model_fn_calls": 0,
+    "scheduler_steps": 0,
+    "video_completed": 0,
+    "mechanical_reserve_used": 0,
+    "vae_recovery": 0,
+    "quality_retries": 0,
+    "own_active_units_count": 0,
+    "gpu_process_rows_count": 0,
+    "raw_supervisor_status": "NOT_CLEAN",
+    "normal_exit_verified": false,
+    "other_processes_terminated": 0,
+    "full_files": 119,
+    "full_bytes": 1719649,
+    "full_manifest_sha256": "6ece033cde595bbda87e1cb229b59f2b36719d7e6bbba4672af572d8a515a22d"
+  },
+  "artifact_transformations": {
+    "existing_source_and_generated_mp4_bytes_preserved": true,
+    "new_comparison_mp4_and_jpeg_sheets": "review derivatives",
+    "model_input_previews": "C002 historical input; not14B generated results",
+    "whole_job_reencoding_zero_claim": false
+  },
+  "verification_mechanical_note": "First remote verification command ran before transfer helper arrived and failed with missing script; after transfer completion the same CPU archive verification passed. No generation retry.",
+  "temporal": "UNVERIFIED",
+  "work_started_utc": "2026-10-30T00:58:20Z",
+  "delivery_verified_utc": "2026-10-30T01:32:11.618824+00:00",
+  "elapsed_seconds_through_verified_delivery": 2031.618917,
+  "publication": "Final commit SHA is recorded after committing; not self-referenced in this file"
+}

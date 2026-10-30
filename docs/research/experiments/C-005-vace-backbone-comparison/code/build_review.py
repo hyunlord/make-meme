@@ -42,24 +42,27 @@ def sheet(groups,root,name,crop=None):
 def preview(paths,destination):
     subprocess.run(['ffmpeg','-v','error','-framerate','16','-i',str(paths),'-c:v','libx264','-crf','18','-pix_fmt','yuv420p',str(destination)],check=True)
 
-def build(c001: Path, c002: Path, c005: Path, out: Path) -> None:
+def build(c001: Path, c002: Path, c005: Path, out: Path, blocked: bool = False) -> None:
     """Compare two cases using existing anchors and original generated MP4 bytes."""
     out.mkdir(parents=True,exist_ok=False);sections=[];records={}
     for case in ('case_rigid','case_nonrigid'):
         root=out/case;root.mkdir();src=c001/'inputs'/case
         base=c002/'video'/case/'layout_mov';large=c005/'video'/case
-        assert (large/'generated.mp4').is_file(),f'Actual14B output required: {case}'
+        if not blocked:assert (large/'generated.mp4').is_file(),f'Actual14B output required: {case}'
         cropmeta=json.loads((c001/'review-final'/case/'evaluation-crop.json').read_text());crop=cropmeta['bbox_xyxy']
         (root/'evaluation-crop.json').write_text(json.dumps(cropmeta,indent=2))
-        groups=[('SOURCE',sorted((src/'source').glob('*.png'))),('VACE_1.3B RESULT',sorted((base/'frames').glob('*.png'))),('VACE_14B RESULT',sorted((large/'frames').glob('*.png')))]
-        cards=''
+        groups=[('SOURCE',sorted((src/'source').glob('*.png'))),('VACE_1.3B RESULT',sorted((base/'frames').glob('*.png')))]
+        if not blocked:groups.append(('VACE_14B RESULT',sorted((large/'frames').glob('*.png'))))
+        cards='<p><strong>14B: NO GENERATED OUTPUT.</strong> Vehicle loading stopped at SYSTEM_PSI_FULL_PRESSURE before forward; dog was not started. Cause attribution UNKNOWN. No retry or quality conclusion.</p>' if blocked else ''
         for name,path,label in [('source',src/'source.mp4','SOURCE'),('vace-1.3b',base/'generated.mp4','VACE1.3B · C002 generated result'),('vace-14b',large/'generated.mp4','VACE14B · C005 generated result')]:
+            if blocked and name=='vace-14b':continue
             copy(path,root/f'{name}.mp4');cards+=fig(f'{case}/{name}.mp4',label+' · original MP4 bytes',True)
         anchors=''
         for name,path in [('target-reference',src/'reference/full.png'),('target-reference-crop',src/'reference/crop.png'),('start-anchor',c001/'anchors'/case/'start.png'),('end-anchor',c001/'anchors'/case/'end.png')]:
             copy(path,root/f'{name}.png');anchors+=fig(f'{case}/{name}.png',name.upper()+' · original C001 input')
-        conditions=sorted((large/'condition').glob('*.png'));assert len(conditions)==33
-        preview(large/'condition/%03d.png',root/'condition-preview.mp4');groups.append(('ACTUAL MODEL INPUT',conditions))
+        condition_root=base if blocked else large
+        conditions=sorted((condition_root/'condition').glob('*.png'));assert len(conditions)==33
+        preview(condition_root/'condition/%03d.png',root/'condition-preview.mp4');groups.append(('ACTUAL MODEL INPUT',conditions))
         slider='';boxes=[('full',None),('subject',crop)]
         boxes += [('head',[180,100,500,430]),('legs',[180,210,480,470])] if case=='case_nonrigid' else [('wheels',[160,240,680,430]),('scene',[0,0,832,480])]
         for label,paths in groups:
@@ -83,16 +86,18 @@ def build(c001: Path, c002: Path, c005: Path, out: Path) -> None:
         if case=='case_nonrigid':
             sheet(groups[:3],root,'fixed-head-sheet.jpg',[180,100,500,430]);sheet(groups[:3],root,'fixed-legs-sheet.jpg',[180,210,480,470])
         cmd=['ffmpeg','-v','error','-n']
-        for name in ('source','vace-1.3b','vace-14b'):cmd+=['-i',str(root/f'{name}.mp4')]
-        cmd+=['-filter_complex','hstack=inputs=3','-c:v','libx264','-crf','18','-pix_fmt','yuv420p',str(root/'comparison-derived.mp4')];subprocess.run(cmd,check=True)
-        for name in ('result.json','condition.json','latent.json','first-model-input.json'):copy(large/name,root/'evidence'/name)
+        for name in (('source','vace-1.3b') if blocked else ('source','vace-1.3b','vace-14b')):cmd+=['-i',str(root/f'{name}.mp4')]
+        cmd+=['-filter_complex',('hstack=inputs=2' if blocked else 'hstack=inputs=3'),'-c:v','libx264','-crf','18','-pix_fmt','yuv420p',str(root/'comparison-derived.mp4')];subprocess.run(cmd,check=True)
+        if not blocked:
+            for name in ('result.json','condition.json','latent.json','first-model-input.json'):copy(large/name,root/'evidence'/name)
         options=''.join(f'<option value="{kind}">{kind}</option>' for kind,_ in boxes)
         sections.append(f'''<section><h2>{case}</h2><div class="grid">{anchors}</div><h3>Source and actual generated results</h3><button data-play>Play all from frame0 · 16fps</button><button data-pause>Pause all</button><p role="status"></p><div class="grid">{cards}</div><details><summary>Common dynamic layout / actual model input and derived comparison</summary>{fig(case+'/condition-preview.mp4','Actual RGB model input · derived preview; no C003 scribble or C004 anchor',True)}{fig(case+'/comparison-derived.mp4','Derived side-by-side encode · original MP4s retained separately',True)}</details><h3>Same index · <output>0</output>/32</h3><label>Frame<input type="range" min="0" max="32" value="0" aria-label="{case} frame"></label><label>Fixed view <select aria-label="{case} crop">{options}</select></label><p>Full33 indices. Identical fixed crop for every output/frame; no time alignment or spatial warp.</p><div class="grid">{slider}</div><details><summary>Fixed9 / subject / critical8,16,28,29–32 sheets</summary>{fig(case+'/fixed-sheet.jpg','Fixed9 full frame')}{fig(case+'/fixed-subject-sheet.jpg','Fixed9 subject')}{fig(case+'/critical-sheet.jpg','Critical same-index comparison')}</details></section>''')
-        records[case]={'vace_1.3b':'REUSED_C002','vace_14b':'COMPLETE'}
+        records[case]={'vace_1.3b':'REUSED_C002','vace_14b':('NO_OUTPUT_SAFETY_STOP' if case=='case_rigid' else 'NOT_RUN') if blocked else 'COMPLETE'}
     reports=' '.join(f'<a href="reports/{name}">{name}</a>' for name in ('RESULTS.md','BACKEND_COMPARISON.md','LESSON_KO.md','COSTS.json','REPRODUCE.md'))
     intro=f'''<h1>C-005 · VACE backbone comparison</h1><p>Same original C001 anchors and C002 dynamic SAM layouts; existing1.3B results compared with new14B results. Two public checkpoints, two development cases, one seed. This is not a pure parameter-count causal experiment or a general ranking.</p><p>Source FPS unknown; assumed preview16fps. File duration2.0625s and endpoint sample interval2.0s differ. Temporal quality: UNVERIFIED. Browser playback/file decoding and static sheets do not establish perceptual temporal quality.</p><p>Compare appearance, coarse motion, internal events and protected scene separately. The original dog end-anchor/source pose conflict remains. No C004 corrected anchor or C003 internal lines. New JPEG sheets/crops and comparison/condition MP4s are review derivatives; generated MP4s retain original bytes.</p><p>{reports}</p>'''
+    if blocked:intro='<h1>C-005 · Operational safety stop</h1><p><strong>No14B generated video or quality comparison.</strong> First vehicle model loading stopped at SYSTEM_PSI_FULL_PRESSURE before any forward; dog NOT_RUN. Cause attribution UNKNOWN. No automatic retry or guard relaxation. Existing1.3B/source/anchors and C002 model-input previews below are historical evidence, not14B outputs.</p>'+intro.replace('Same original C001 anchors and C002 dynamic SAM layouts; existing1.3B results compared with new14B results.', 'Original C001 anchors and C002 dynamic SAM layouts are preserved. Only existing1.3B results are available.')
     script=JS.replace('x.src=JSON.parse(x.dataset.frames)[i]','{x.src=JSON.parse(x.dataset.frames)[i];x.parentElement.href=x.src;}')
     (out/'index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C005 VACE backbone comparison</title><style>'+STYLE+'</style></head><body><main>'+intro+''.join(sections)+'</main><script>'+script+'</script></body></html>')
     (out/'review-summary.json').write_text(json.dumps({'outputs':records,'temporal':'UNVERIFIED','derived_comparison_mp4':True},indent=2));print(json.dumps({'files':sum(p.is_file() for p in out.rglob('*')),'outputs':records}))
 
-if __name__=='__main__':build(*(Path(x).resolve() for x in sys.argv[1:5]))
+if __name__=='__main__':build(*(Path(x).resolve() for x in sys.argv[1:5]),blocked='--blocked' in sys.argv[5:])

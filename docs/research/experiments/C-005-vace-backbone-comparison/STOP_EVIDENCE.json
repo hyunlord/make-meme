@@ -1,0 +1,83 @@
+{
+  "status": "NOT_CLEAN",
+  "guard_reason": "SYSTEM_PSI_FULL_PRESSURE",
+  "worker_returncode": 0,
+  "normal_exit_recorded": false,
+  "cleanup_errors": [],
+  "supervisor_worker_window_seconds": 6.844072341918945,
+  "stop": {
+    "system_memory": {
+      "monotonic": 221531.341294554,
+      "errors": [],
+      "page_size": 4096,
+      "available": 117401010176,
+      "swap_total": 17179865088,
+      "swap_free": 17178058752,
+      "swap": 1806336,
+      "pswpin": 0,
+      "pswpout": 128,
+      "psi_full_total": 23159456
+    },
+    "memory_verdict": {
+      "decision": "SYSTEM_PSI_FULL_PRESSURE",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "errors": [],
+      "metrics": {
+        "s0": 1806336,
+        "swap_growth": 0,
+        "window_seconds": 10.582371365017025,
+        "swapout_bytes_10s": 0,
+        "psi_full_ratio_10s": 0.1408681,
+        "cgroup_high_events": 0,
+        "cgroup_oom": 0,
+        "cgroup_oom_kill": 0
+      }
+    },
+    "worker_memory": {
+      "errors": [],
+      "pressure": "some avg10=11.95 avg60=2.15 avg300=0.45 total=1561042\nfull avg10=11.95 avg60=2.15 avg300=0.45 total=1561042\n",
+      "current": 4609273856,
+      "high": 66571993088,
+      "max": 68719476736,
+      "events": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "swap_current": 0,
+      "swap_max": 0,
+      "swap_events": {
+        "high": 0,
+        "max": 0,
+        "fail": 0
+      }
+    }
+  },
+  "final": {
+    "decision": "SYSTEM_PSI_FULL_PRESSURE",
+    "memory_verdict": {
+      "decision": "OBSERVATION_FAILED",
+      "warnings": [],
+      "errors": [
+        "cgroup:REMOVED:exit_not_verified"
+      ],
+      "metrics": {}
+    },
+    "cgroup_state": "REMOVED",
+    "owned_count": 0,
+    "gpu_count": 0,
+    "systemd_state": {
+      "Result": "success",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    }
+  },
+  "cause_attribution": "UNKNOWN",
+  "model_oom_reclassification": false,
+  "retry": false
+}
