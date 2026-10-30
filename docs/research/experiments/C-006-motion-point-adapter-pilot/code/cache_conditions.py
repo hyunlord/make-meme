@@ -68,7 +68,8 @@ def main() -> None:
                 valid = torch.from_numpy(tracks['valid'])
                 anchor_valid = torch.from_numpy(tracks['anchor_valid'])
                 bbox = torch.from_numpy(tracks['bbox']).float()
-            patches = sample_anchor_patches(endpoints, positions[[0, 32]].to('cuda'), anchor_valid.to('cuda'))
+            # Native tiled VAE returns CPU latents; patch extraction is a CPU operation.
+            patches = sample_anchor_patches(endpoints.detach().cpu(), positions[[0, 32]], anchor_valid)
             box_wh = (bbox[:, 2:] - bbox[:, :2]) / torch.tensor([416., 240.])
             tau = torch.linspace(0, 1, 33)[:, None]
             box_wh = (1-tau)*box_wh[0] + tau*box_wh[-1]
