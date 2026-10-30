@@ -22,11 +22,11 @@ C-001의 원본 네 앵커, C-002 실제 layout33장과 두 prompt/negative를 �
 
 ## 결과를 보기 전 평가
 
-차량: 은색 높은 차체/루프레일/창/후미등, 원본 Mini 회귀, 우측 이동·후면 노출 순서, 크기·위치, 바퀴·접촉, 빨간 전경차와 파란 표지판/배경 보호를 분리한다. C-002는 빨간 전경차가 약8부터 일찍 나타나며 source16의 파란 표지판 누락, source보다 이른 후면 노출이 있었다.
+차량: 은색 높은 차체/루프레일/창/후미등, 원본 Mini 회귀, 우측 이동·후면 노출 순서, 크기·위치, 바퀴·접촉, 빨간 전경차와 파란 표지판/배경 보호를 분리한다. C-002 기록의 약8 진입은 이번 직접 재검토에서 그림자/전경 변화와 빨간 차체를 구분한다(8/10 그림자,12 빨간 차체, source 약23–24 차체). 또한 source16의 파란 표지판 누락, source보다 이른 후면 노출이 있었다.
 
 개: 검정/흰 target 외형, 크림색 source 회귀, 접근·머리 높이/방향, 보이는 앞발 배치·겹침, 울타리/풀/잔디, 형태·그림자를 분리한다. C-002는 거친 접근만 개선했고 내부 동작·접촉은 불확실하다. 29–32 원본/종료 앵커 충돌을 별도 표시한다.
 
-전체33장, 고정0/4/8/12/16/20/24/28/32 및 개29–32를 같은 인덱스로 검토한다. 축별 BETTER/SIMILAR/WORSE/UNCERTAIN, 종합 JOINT_GAIN/APPEARANCE_ONLY/MOTION_TRADEOFF/NO_ESTABLISHED_GAIN/WORSE/INCONCLUSIVE를 사용한다. 실제 연속 지각 검수가 없으면 temporal=UNVERIFIED다. 이미지 hash/실행 PASS는 품질 증거가 아니다. 두 사례·한seed 한계를 유지한다.
+전체33장, 고정0/4/8/12/16/20/24/28/32 및 개29–32를 같은 인덱스로 검토한다. 축별 BETTER/SIMILAR/WORSE/UNCERTAIN, 종합 OBSERVED_JOINT_GAIN/APPEARANCE_GAIN_ONLY/MOTION_GAIN_WITH_TRADEOFF/NO_ESTABLISHED_GAIN/WORSE/INCONCLUSIVE를 사용한다. 실제 연속 지각 검수가 없으면 temporal=UNVERIFIED다. 이미지 hash/실행 PASS는 품질 증거가 아니다. 두 사례·한seed 한계를 유지한다.
 
 ## 보존과 종료
 

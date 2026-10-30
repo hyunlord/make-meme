@@ -1,0 +1,21 @@
+{
+  "status": "PRE_INFERENCE",
+  "download_payload_bytes": 63252305152,
+  "small_metadata_bytes": 205316,
+  "bounded_header_probe_bytes": null,
+  "download_and_hash_wall_seconds": 862.2509048020002,
+  "heavy_attempts": 0,
+  "completed_videos": 0,
+  "imagegen_calls": 0,
+  "sam_calls": 0,
+  "training_steps": 0,
+  "new_packages": 0,
+  "quality_retries": 0,
+  "limits": {
+    "heavy_attempts": 3,
+    "normal_videos": 2,
+    "vae_only_recovery": 1
+  },
+  "manual_review_seconds": null,
+  "manual_review_timing": "not separately timed"
+}

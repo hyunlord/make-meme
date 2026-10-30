@@ -1,0 +1,423 @@
+{
+  "repository": "Wan-AI/Wan2.1-VACE-14B",
+  "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+  "shards": [
+    {
+      "rfilename": "diffusion_pytorch_model-00001-of-00007.safetensors",
+      "blobId": "4e98dcc6ea45886cff3c6ce13399a479a0342b36",
+      "size": 9887603256,
+      "lfs": {
+        "sha256": "569d54a07279b89f8281421fccf27ee2459ea853ce6845d3536b8664b0070078",
+        "size": 9887603256,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "diffusion_pytorch_model-00002-of-00007.safetensors",
+      "blobId": "b3d3bcaf17ed1c22c9193df6c9b6d9f42ccd25b7",
+      "size": 9839059648,
+      "lfs": {
+        "sha256": "b17ff172f262b4da91c31e8c46d3b7707f62cecfff6e18dd0072ab29eb350e46",
+        "size": 9839059648,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "diffusion_pytorch_model-00003-of-00007.safetensors",
+      "blobId": "fa49666ab20e42bcb2ea4fa0331bf1567b4c5fad",
+      "size": 9839059744,
+      "lfs": {
+        "sha256": "741fd1508cd0288f0bb0f4fb3df6734da521d5ff23746170c848564a367e2cea",
+        "size": 9839059744,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "diffusion_pytorch_model-00004-of-00007.safetensors",
+      "blobId": "2d6201c88be2bb768e893bcd9967e9afb05de5db",
+      "size": 9839059744,
+      "lfs": {
+        "sha256": "47b08ba289b127fc64979bc877ee07e1c87aeb8eb8cd47bcfd112682847981ba",
+        "size": 9839059744,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "diffusion_pytorch_model-00005-of-00007.safetensors",
+      "blobId": "6ab8b809df36f25a9d68c091eb9714d439551a9f",
+      "size": 9839059744,
+      "lfs": {
+        "sha256": "29e35f4cf0e3a61f4726c960f1babf71d65677a8c99fe704257d665c9498ee88",
+        "size": 9839059744,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "diffusion_pytorch_model-00006-of-00007.safetensors",
+      "blobId": "aeb16bce66d8a06ee028cb8c78cb3cd623316d4e",
+      "size": 7910235256,
+      "lfs": {
+        "sha256": "91ac087a40b814331e87f5f015af11ba999275d48d2af49591b6bf7727d3c146",
+        "size": 7910235256,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "diffusion_pytorch_model-00007-of-00007.safetensors",
+      "blobId": "762120cad29713586a9f307fd254dbb2e406659a",
+      "size": 6098227760,
+      "lfs": {
+        "sha256": "d2c107015cdef963cb8f9b7006330e7d7355ca648d90af32bcf80ed76d8eba1f",
+        "size": 6098227760,
+        "pointerSize": 135
+      }
+    }
+  ],
+  "tensor_keys": 1331,
+  "index_metadata": {
+    "total_size": 69350371584
+  },
+  "shard_bytes": 63252305152,
+  "shard_gib": 58.908299684524536,
+  "metadata_files": [
+    {
+      "name": "config.json",
+      "bytes": 325,
+      "sha256": "d6849262681b36135eebefb7af1e2ad37a6d060583d982467ee9529c1ee880a3"
+    },
+    {
+      "name": "hf-model.json",
+      "bytes": 6628,
+      "sha256": "e25d32f86c608dde1331738a9a58c7dc2a446f17e9c18af7d40bd5929e23b304"
+    },
+    {
+      "name": "diffusion_pytorch_model.safetensors.index.json",
+      "bytes": 118655,
+      "sha256": "4d1dd04253872e71f0b22017c94c3ddd6a787b8497e2f45c871bbacab96eecd3"
+    },
+    {
+      "name": "LICENSE.txt",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "name": "google/umt5-xxl/tokenizer_config.json",
+      "bytes": 61728,
+      "sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05"
+    },
+    {
+      "name": "google/umt5-xxl/special_tokens_map.json",
+      "bytes": 6623,
+      "sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d"
+    }
+  ],
+  "shared_components": [
+    {
+      "file": "models_t5_umt5-xxl-enc-bf16.pth",
+      "official_14b_bytes": 11361920418,
+      "official_14b_sha256": "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+      "matches_c001_verified_hash": true,
+      "evidence": "C-001 BACKEND_CONTRACT.md verified-host table; current stats retained privately",
+      "new_download_bytes": 0
+    },
+    {
+      "file": "Wan2.1_VAE.pth",
+      "official_14b_bytes": 507609880,
+      "official_14b_sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+      "matches_c001_verified_hash": true,
+      "evidence": "C-001 BACKEND_CONTRACT.md verified-host table; current stats retained privately",
+      "new_download_bytes": 0
+    },
+    {
+      "file": "google/umt5-xxl/spiece.model",
+      "official_14b_bytes": 4548313,
+      "official_14b_sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458",
+      "matches_c001_verified_hash": true,
+      "evidence": "C-001 BACKEND_CONTRACT.md verified-host table; current stats retained privately",
+      "new_download_bytes": 0
+    },
+    {
+      "file": "google/umt5-xxl/tokenizer.json",
+      "official_14b_bytes": 16837417,
+      "official_14b_sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b",
+      "matches_c001_verified_hash": true,
+      "evidence": "C-001 BACKEND_CONTRACT.md verified-host table; current stats retained privately",
+      "new_download_bytes": 0
+    },
+    {
+      "file": "google/umt5-xxl/tokenizer_config.json",
+      "official_14b_bytes": 61728,
+      "official_14b_sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05",
+      "matches_c001_verified_hash": true,
+      "evidence": "C-001 BACKEND_CONTRACT.md verified-host table; current stats retained privately",
+      "new_download_bytes": 0
+    },
+    {
+      "file": "google/umt5-xxl/special_tokens_map.json",
+      "official_14b_bytes": 6623,
+      "official_14b_sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d",
+      "matches_c001_verified_hash": true,
+      "evidence": "C-001 BACKEND_CONTRACT.md verified-host table; current stats retained privately",
+      "new_download_bytes": 0
+    }
+  ],
+  "download_status": "COMPLETE",
+  "actual_large_file_sha256_status": "ALL_MATCH_OFFICIAL_LFS",
+  "config_sha256": "d6849262681b36135eebefb7af1e2ad37a6d060583d982467ee9529c1ee880a3",
+  "index_sha256": "4d1dd04253872e71f0b22017c94c3ddd6a787b8497e2f45c871bbacab96eecd3",
+  "meta_keyshape_validation": {
+    "status": "PASS",
+    "cuda_initialized": false,
+    "records": [
+      {
+        "model": "wan_video_dit",
+        "config": {
+          "has_image_input": false,
+          "patch_size": [
+            1,
+            2,
+            2
+          ],
+          "in_dim": 16,
+          "dim": 5120,
+          "ffn_dim": 13824,
+          "freq_dim": 256,
+          "text_dim": 4096,
+          "out_dim": 16,
+          "num_heads": 40,
+          "num_layers": 40,
+          "eps": 1e-06
+        },
+        "keys": 1095,
+        "missing": [],
+        "unexpected": [],
+        "wrong_shapes": {},
+        "largest_parameters": [
+          [
+            "time_projection.1.weight",
+            157286400,
+            [
+              30720,
+              5120
+            ]
+          ],
+          [
+            "blocks.0.ffn.0.weight",
+            70778880,
+            [
+              13824,
+              5120
+            ]
+          ],
+          [
+            "blocks.0.ffn.2.weight",
+            70778880,
+            [
+              5120,
+              13824
+            ]
+          ]
+        ],
+        "largest_possible_block_wrappers": [
+          [
+            "blocks.0",
+            351394304
+          ],
+          [
+            "blocks.1",
+            351394304
+          ],
+          [
+            "blocks.2",
+            351394304
+          ]
+        ],
+        "pass_equality": true
+      },
+      {
+        "model": "wan_video_vace",
+        "config": {
+          "vace_layers": [
+            0,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            35
+          ],
+          "vace_in_dim": 96,
+          "patch_size": [
+            1,
+            2,
+            2
+          ],
+          "has_image_input": false,
+          "dim": 5120,
+          "num_heads": 40,
+          "ffn_dim": 13824,
+          "eps": 1e-06
+        },
+        "keys": 236,
+        "missing": [],
+        "unexpected": [],
+        "wrong_shapes": {},
+        "largest_parameters": [
+          [
+            "vace_blocks.0.ffn.0.weight",
+            70778880,
+            [
+              13824,
+              5120
+            ]
+          ],
+          [
+            "vace_blocks.0.ffn.2.weight",
+            70778880,
+            [
+              5120,
+              13824
+            ]
+          ],
+          [
+            "vace_blocks.1.ffn.0.weight",
+            70778880,
+            [
+              13824,
+              5120
+            ]
+          ]
+        ],
+        "largest_possible_block_wrappers": [
+          [
+            "vace_blocks.0",
+            403833344
+          ],
+          [
+            "vace_blocks.1",
+            377613824
+          ],
+          [
+            "vace_blocks.2",
+            377613824
+          ]
+        ],
+        "pass_equality": true
+      }
+    ]
+  },
+  "runtime_source": {
+    "actual_git_head": null,
+    "git_metadata": "Absent in existing source snapshot; do not equate recorded revision to verified git HEAD",
+    "recorded_revision": "f39d731a3e318d25b725eb3389cfddb184619842",
+    "files": {
+      "diffsynth/core/loader/model.py": "ceb8e30cab462ecc58871dfa7f1e12d11f570dc77e5ba24b4a24c01392e6a77b",
+      "diffsynth/core/loader/config.py": "a2b3359e22ff5d24322f30e16de6612e3e31c451cb42ca28a04f50489d5f8b0a",
+      "diffsynth/core/vram/disk_map.py": "ace2366ced7db958f2c3f26590640ed963cc91cd5bf99832868c098bfb51cdd6",
+      "diffsynth/core/vram/layers.py": "2b5725a68c6cc6b8cf0f1fe5adf2ca089e4fc81922474bd63e1786eb6be433a4",
+      "diffsynth/pipelines/wan_video.py": "e3ab58df6db88987661813f92bca601de1397aa6a2986f2a9dda6e2771183bcc",
+      "diffsynth/models/wan_video_dit.py": "68d35cffc5b12ac3942f15eafa5fc30f692d8ea099f5aad516ad82b866a97f6e",
+      "diffsynth/models/wan_video_vace.py": "c662f1d0361e4786afb99f569ce58e3c92d0e0d2e304aa7a510bebf8208b7088",
+      "diffsynth/core/loader/file.py": "c9205ec09afef861ba238b7bd31323ae28765d701d6ef8b4cd4ebc3f730ef41e"
+    }
+  },
+  "download_receipt": {
+    "status": "COMPLETE",
+    "repository": "Wan-AI/Wan2.1-VACE-14B",
+    "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+    "elapsed_seconds": 862.2509048020002,
+    "files": [
+      {
+        "file": "diffusion_pytorch_model-00001-of-00007.safetensors",
+        "returncode": 0,
+        "transfer_seconds": 400.38520068701473,
+        "initial_partial_bytes": 0,
+        "new_transfer_bytes": 9887603256,
+        "bytes": 9887603256,
+        "sha256": "569d54a07279b89f8281421fccf27ee2459ea853ce6845d3536b8664b0070078",
+        "remote_lfs_sha256": "569d54a07279b89f8281421fccf27ee2459ea853ce6845d3536b8664b0070078",
+        "hash_seconds": 4.850140321999788,
+        "reused": false
+      },
+      {
+        "file": "diffusion_pytorch_model-00002-of-00007.safetensors",
+        "returncode": 0,
+        "transfer_seconds": 367.2647600430064,
+        "initial_partial_bytes": 0,
+        "new_transfer_bytes": 9839059648,
+        "bytes": 9839059648,
+        "sha256": "b17ff172f262b4da91c31e8c46d3b7707f62cecfff6e18dd0072ab29eb350e46",
+        "remote_lfs_sha256": "b17ff172f262b4da91c31e8c46d3b7707f62cecfff6e18dd0072ab29eb350e46",
+        "hash_seconds": 4.9353381840046495,
+        "reused": false
+      },
+      {
+        "file": "diffusion_pytorch_model-00003-of-00007.safetensors",
+        "returncode": 0,
+        "transfer_seconds": 365.2290928500006,
+        "initial_partial_bytes": 0,
+        "new_transfer_bytes": 9839059744,
+        "bytes": 9839059744,
+        "sha256": "741fd1508cd0288f0bb0f4fb3df6734da521d5ff23746170c848564a367e2cea",
+        "remote_lfs_sha256": "741fd1508cd0288f0bb0f4fb3df6734da521d5ff23746170c848564a367e2cea",
+        "hash_seconds": 4.99361190199852,
+        "reused": false
+      },
+      {
+        "file": "diffusion_pytorch_model-00004-of-00007.safetensors",
+        "returncode": 0,
+        "transfer_seconds": 367.13716370100155,
+        "initial_partial_bytes": 0,
+        "new_transfer_bytes": 9839059744,
+        "bytes": 9839059744,
+        "sha256": "47b08ba289b127fc64979bc877ee07e1c87aeb8eb8cd47bcfd112682847981ba",
+        "remote_lfs_sha256": "47b08ba289b127fc64979bc877ee07e1c87aeb8eb8cd47bcfd112682847981ba",
+        "hash_seconds": 4.629373100004159,
+        "reused": false
+      },
+      {
+        "file": "diffusion_pytorch_model-00005-of-00007.safetensors",
+        "returncode": 0,
+        "transfer_seconds": 430.5762464599975,
+        "initial_partial_bytes": 0,
+        "new_transfer_bytes": 9839059744,
+        "bytes": 9839059744,
+        "sha256": "29e35f4cf0e3a61f4726c960f1babf71d65677a8c99fe704257d665c9498ee88",
+        "remote_lfs_sha256": "29e35f4cf0e3a61f4726c960f1babf71d65677a8c99fe704257d665c9498ee88",
+        "hash_seconds": 4.6387375890044495,
+        "reused": false
+      },
+      {
+        "file": "diffusion_pytorch_model-00006-of-00007.safetensors",
+        "returncode": 0,
+        "transfer_seconds": 298.0899861000071,
+        "initial_partial_bytes": 0,
+        "new_transfer_bytes": 7910235256,
+        "bytes": 7910235256,
+        "sha256": "91ac087a40b814331e87f5f015af11ba999275d48d2af49591b6bf7727d3c146",
+        "remote_lfs_sha256": "91ac087a40b814331e87f5f015af11ba999275d48d2af49591b6bf7727d3c146",
+        "hash_seconds": 3.690929482021602,
+        "reused": false
+      },
+      {
+        "file": "diffusion_pytorch_model-00007-of-00007.safetensors",
+        "returncode": 0,
+        "transfer_seconds": 152.22785836202092,
+        "initial_partial_bytes": 0,
+        "new_transfer_bytes": 6098227760,
+        "bytes": 6098227760,
+        "sha256": "d2c107015cdef963cb8f9b7006330e7d7355ca648d90af32bcf80ed76d8eba1f",
+        "remote_lfs_sha256": "d2c107015cdef963cb8f9b7006330e7d7355ca648d90af32bcf80ed76d8eba1f",
+        "hash_seconds": 3.004221362993121,
+        "reused": false
+      }
+    ],
+    "new_transfer_bytes": 63252305152,
+    "hash_policy": "one streamed SHA256 per newly completed shard; future reuse reads receipt and size",
+    "parallel_downloads": 3,
+    "model_loads": 0
+  },
+  "small_metadata_download_bytes": 205316,
+  "http_range_audit_bytes": "separate bounded headers; not included in shard payload bytes"
+}
