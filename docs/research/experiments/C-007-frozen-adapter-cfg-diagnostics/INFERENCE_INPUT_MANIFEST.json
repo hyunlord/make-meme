@@ -1,0 +1,131 @@
+{
+  "checkpoints": {
+    "0": {
+      "name": "checkpoint-000.pt",
+      "sha256": "8456ca9e7cc678958e19f0eee3f2c55f53ba8612acaf4efe3a54eb29817cba47"
+    },
+    "128": {
+      "name": "checkpoint-128.pt",
+      "sha256": "964c3920c85954310099259834a683b13178c3b13ef2bed4c889cfedb0e45626"
+    },
+    "256": {
+      "name": "checkpoint-256.pt",
+      "sha256": "adfbf7b689c5c4349779d00fa78c4fac017f65f77321263451d16b0fcd593480"
+    }
+  },
+  "validation": [
+    "elephant",
+    "goat"
+  ],
+  "video_sequence": "elephant",
+  "probe_grid": [
+    {
+      "target_sigma": 0.95,
+      "index": 208,
+      "sigma": 0.9500959515571594,
+      "timestep": 950.095947265625
+    },
+    {
+      "target_sigma": 0.75,
+      "index": 625,
+      "sigma": 0.7500000596046448,
+      "timestep": 750.0000610351562
+    },
+    {
+      "target_sigma": 0.5,
+      "index": 833,
+      "sigma": 0.5005995631217957,
+      "timestep": 500.59954833984375
+    },
+    {
+      "target_sigma": 0.2,
+      "index": 952,
+      "sigma": 0.20134228467941284,
+      "timestep": 201.34228515625
+    },
+    {
+      "target_sigma": 0.05,
+      "index": 990,
+      "sigma": 0.04807692766189575,
+      "timestep": 48.076927185058594
+    }
+  ],
+  "probe_seeds": {
+    "elephant": 20261101,
+    "goat": 20261102
+  },
+  "inference_seed": 20261028,
+  "sidecars": [
+    {
+      "sequence": "elephant",
+      "source_cache_sha256": "1a327ce552a087184204b7430d1d797c723f47d3ddcf856c46a795a823a5ddf5",
+      "sidecar_sha256": "158e0f81401f979b331e8ef50e9536b549800109e7374e1c835b707a96ec6ff9",
+      "whitelist": [
+        "sequence",
+        "split",
+        "prompt",
+        "patches",
+        "anchor_valid",
+        "positions",
+        "visible",
+        "valid",
+        "box_wh"
+      ],
+      "exclusions_applied": true,
+      "excluded_keys": [
+        "clean_latent",
+        "context",
+        "loss_mask",
+        "negative_context",
+        "vace_context"
+      ]
+    },
+    {
+      "sequence": "goat",
+      "source_cache_sha256": "561bf2212b2013d6b13a7cd19dfccd616889b9e919ce65ff2df4a6c9f6aa2f13",
+      "sidecar_sha256": "fb6573eee187d330b825842bf98d8b6d072f350e45d83f4c03ac2056a7d9b59d",
+      "whitelist": [
+        "sequence",
+        "split",
+        "prompt",
+        "patches",
+        "anchor_valid",
+        "positions",
+        "visible",
+        "valid",
+        "box_wh"
+      ],
+      "exclusions_applied": true,
+      "excluded_keys": [
+        "clean_latent",
+        "context",
+        "loss_mask",
+        "negative_context",
+        "vace_context"
+      ]
+    }
+  ],
+  "cuda_initialized": false,
+  "point_exclusions_sha256": "606b2b76c49f6edef96eff48b89965237deb762bc7d8e0c75d71ad2beb276972",
+  "parent_code": {
+    "test_point_adapter.py": "f878a77c4e6218b017c94f1337282e50d1f7b8bfc9588c5d2c9f992b0ef74e1d",
+    "track_points.py": "43ccf2251a010e97a429db1d075532411cd086e1b0b92bc646c8b9cc177ca539",
+    "point_adapter.py": "d0ba6a81c3eb195685bd4bc83c480c5904ab9d29416d95ce4671b2b661a25fd4",
+    "cache_conditions.py": "efe0ba318f8943d5a970d699708fa960049e04e9a488d9a9a3694642d3b72910",
+    "cross_cache.py": "c8421c723a92591fc1264f339c93efbb8e7cd69e30f79d2a1ede2467d8378c74",
+    "data_prepare.py": "e35cee4ca3936e5779158414c48563c426dd9aa8bd342393b3292377a6b88655",
+    "training_state.py": "911dbd9f3015332a592e659d109e64e208af63743aeb7a4a2d9c64c825770ef1",
+    "generate_video.py": "146e948facc3f5aead45640fa932522be65a7cc4c2cc6f919ff20f1198f18cb1",
+    "train_adapter.py": "25e51ef2eef4bfccc52cacc053ac37cdf009874c8ee8e9e942d216fa54939792",
+    "cross_track.py": "f01df70824c1d48fccabd0e70dd7cc545eeca3feab9929ff726641f507214035",
+    "runtime_common.py": "0974669cec97c84646016a1b1aa5022363697af7a1f6d33d9e0cef07538139b1",
+    "wan_adapter_forward.py": "c0afa6cf1e4afdabda2b8b41f9d295c6a4313230e5eaf42ed244989eed86bb30",
+    "point_features.py": "22bbb7b8ebbdfb961633a4e6dfae3775a8292a496d1738c25e6b840220ca6c58"
+  },
+  "installed_sources": {
+    "diffsynth/pipelines/wan_video.py": "e3ab58df6db88987661813f92bca601de1397aa6a2986f2a9dda6e2771183bcc",
+    "diffsynth/models/wan_video_dit.py": "68d35cffc5b12ac3942f15eafa5fc30f692d8ea099f5aad516ad82b866a97f6e",
+    "diffsynth/models/wan_video_vace.py": "c662f1d0361e4786afb99f569ce58e3c92d0e0d2e304aa7a510bebf8208b7088",
+    "diffsynth/diffusion/flow_match.py": "43abe34773144e7f3ce660d40bf5f3ee25fe5538cbc7654c3992b9e40a761486"
+  }
+}
