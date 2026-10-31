@@ -1,0 +1,29 @@
+{
+  "cause": "C-006 cache_conditions.py / cross_cache.py generation mask Image.new('RGB', size, 255) == (255,0,0)",
+  "labels": "DIRECTLY_VERIFIED | SAME_PATH_INFERRED | REBUILD_REQUIRED | UNKNOWN",
+  "artifacts": [
+    {"item": "C-006 cache-v2 vace_context, validation elephant/goat", "status": ["DIRECTLY_VERIFIED", "REBUILD_REQUIRED"],
+     "evidence": "legacy C == stored cache exact; differs from G (rms 0.7668 / 0.7615); white-mask C == G exact. Fixed copies in private C-008 cache-fixed/."},
+    {"item": "C-006 cache-v2 vace_context, train x8 (bear, blackswan, bmx-bumps, boat, bus, camel, cows, dance-twirl)", "status": ["SAME_PATH_INFERRED", "REBUILD_REQUIRED"],
+     "evidence": "same cache_conditions.py run (cache-v2-heavy stage, code sha efe0ba31...), same mask expression; not re-encoded in C-008"},
+    {"item": "C-006 cache-v2 vace_context, test horsejump-low/lucia", "status": ["SAME_PATH_INFERRED", "REBUILD_REQUIRED"],
+     "evidence": "same run; test generations themselves used pipe(...) with helper masks and are unaffected"},
+    {"item": "C-006 cross-cache (cross-ID dog) vace_context", "status": ["SAME_PATH_INFERRED", "REBUILD_REQUIRED"],
+     "evidence": "cross_cache.py:58 has the identical expression"},
+    {"item": "C-006 cache (v1) directory", "status": ["UNKNOWN"], "evidence": "directory is empty on Spark; nothing to classify"},
+    {"item": "clean_latent (training target)", "status": ["DIRECTLY_VERIFIED"],
+     "evidence": "does not consume the mask; re-encoded elephant/goat == stored exact; train clips SAME_PATH_INFERRED valid"},
+    {"item": "endpoint latents and 3x3 point patches", "status": ["DIRECTLY_VERIFIED"],
+     "evidence": "independent 1-frame encodes; recomputed patches == stored exact (elephant, goat); first-frame-alone == full t0"},
+    {"item": "T5 positive/negative context", "status": ["DIRECTLY_VERIFIED"],
+     "evidence": "no mask dependency; C-007 already exact; not re-run"},
+    {"item": "loss_mask", "status": ["DIRECTLY_VERIFIED"], "evidence": "built from dataset object masks, not the generation mask; carried unchanged"},
+    {"item": "train-v2 checkpoints 128/256", "status": ["RETRAIN_REQUIRED"],
+     "evidence": "every update consumed a wrong vace_context; the adapter was optimized under a condition generation never supplies"},
+    {"item": "checkpoint-000 (init)", "status": ["DIRECTLY_VERIFIED"], "evidence": "no data seen"},
+    {"item": "C-006 / C-007 generated videos (BASE/ON/NULL, CFG1/5)", "status": ["SAME_PATH_INFERRED"],
+     "evidence": "generation context == white-mask encoding (elephant verified exact); BASE videos are valid native baselines; ON/NULL used checkpoints trained on the wrong condition"},
+    {"item": "C-007 data-noised one-step probes (PROBES, CFG_STATS, BLOCK_STATS) and C-006 validation losses", "status": ["REBUILD_REQUIRED"],
+     "evidence": "fed the cache vace_context (wrong); ROLLOUT_PROBES/REPLAY_* used the actual generation context (correct)"}
+  ]
+}

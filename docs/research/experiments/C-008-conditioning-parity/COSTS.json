@@ -1,0 +1,13 @@
+{
+  "public_vae_encode_calls": {"c-elephant": 7, "g-elephant": 4, "c-fixed": 14, "g-goat": 4, "total": 29, "budget": 64, "recovery_used": 0},
+  "videos_per_encode_call": 1,
+  "frames_per_call": "33 (VACE branches, clean target, semantics full/altered), 5 (prefix), 1 (endpoints)",
+  "vace_context_encodes_note": "each VACE context = 2 public encodes (inactive, reactive)",
+  "vae_decode_calls": 0,
+  "dit_forward_calls": 0,
+  "full_sampler_runs": 0,
+  "training_updates": 0,
+  "downloads": 0,
+  "guarded_stage_seconds": {"c-elephant-heavy": 24.6, "g-elephant-heavy": 19.2, "c-fixed-heavy": 18.1, "g-goat-heavy": 16.1, "cpu_routes_each": 2.3},
+  "guard_changes": "none; C-001 run_guarded.py + C-003 guard reused, all stages guard_reason=COMPLETE, worker_returncode=0"
+}

@@ -458,3 +458,7 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 ## C-007 동결 adapter CFG 진단 완료 (2026-10-30)
 
 기존 checkpoint를 동결하고 validation 두 영상160 one-step, elephant BASE/ON×CFG1/5 영상4개, 실제 경로40 replay를 완료했다. CFG1에서도 ON의 색 번짐/중복 윤곽 회귀가 확인되어 CFG5만의 문제는 아니다. 낮은 sigma 분기 오차 증가와 ON/NULL 공유 효과가 관측됐지만 cache와 생성의 VACE context 불일치가 발견되어 teacher-forced→rollout 원인 연결은 제한한다. Native/bypass/zero 및 실제 replay는 검증 범위에서 bit-exact다. 품질 이득은 없고 temporal=UNVERIFIED, 기존 판정과 가드는 보존했다. 다음 하나는 cache↔generation 조건 경로 일치 문제의 별도 규명/검증이며 이번에 수리·학습·scale 탐색을 시작하지 않는다. [결과](experiments/C-007-frozen-adapter-cfg-diagnostics/RESULTS.md) · [해설](experiments/C-007-frozen-adapter-cfg-diagnostics/LESSON_KO.md).
+
+## C-008 조건 인코딩 불일치 규명 완료 (2026-10-31)
+
+원인: C-006 cache의 생성 마스크가 PIL int fill 때문에 빨강 (255,0,0)이었다. `vace_context`만 잘못됐고, target·patch·T5는 유효하다. 수정 후 cache↔생성 PARITY_EXACT, ENCODER_SEMANTICS_VERIFIED. C-006/C-007 adapter 회귀는 조건 shift와 분리되지 않았으므로 adapter 구조·CFG 판단은 보류한다. 다음 하나(별도 승인): 12개 cache와 cross-cache의 `vace_context`를 재생성하고, train-v2 설정 그대로 재학습한 뒤 C-007 probe와 elephant BASE/ON을 재비교한다. [결과](experiments/C-008-conditioning-parity/RESULTS.md).

@@ -1,0 +1,11 @@
+{
+  "status": "NOT_EXECUTED — scope for a separately approved run",
+  "rebuild": [
+    {"what": "vace_context for all 12 cache-v2 clips", "how": "cache_conditions.py with generation masks filled (v,v,v); only the vace_context key changes", "encodes": "2 per clip = 24",
+     "already_done": ["elephant", "goat (private C-008 cache-fixed, sha in PARITY.json)"]},
+    {"what": "cross-cache dog vace_context", "how": "cross_cache.py with the same mask fix", "encodes": 2},
+    {"what": "adapter retrain", "how": "same init checkpoint-000, DATA_SPLIT, TRAIN_CONFIG (train-v2), seeds, 256 updates, against rebuilt cache", "depends_on": "rebuilt train vace_context"},
+    {"what": "validation one-step probes and BASE/ON generation", "how": "C-007 probe and generation configs with the retrained checkpoint", "depends_on": "retrain"}
+  ],
+  "keep_unchanged": ["clean_latent", "patches", "positions/visible/valid/anchor_valid/box_wh", "T5 contexts", "loss_mask", "original cache-v2 and checkpoints (historical, read-only)"]
+}

@@ -773,3 +773,7 @@ Native1회로 끝 앵커를 부분 교정(PARTIAL_BUT_USABLE)하고, C002 동적
 ## C-007 동결 adapter CFG 진단 완료 (2026-10-30)
 
 기존 checkpoint를 동결하고 validation 두 영상160 one-step, elephant BASE/ON×CFG1/5 영상4개, 실제 경로40 replay를 완료했다. CFG1에서도 ON의 색 번짐/중복 윤곽 회귀가 확인되어 CFG5만의 문제는 아니다. 낮은 sigma 분기 오차 증가와 ON/NULL 공유 효과가 관측됐지만 cache와 생성의 VACE context 불일치가 발견되어 teacher-forced→rollout 원인 연결은 제한한다. Native/bypass/zero 및 실제 replay는 검증 범위에서 bit-exact다. 품질 이득은 없고 temporal=UNVERIFIED, 기존 판정과 가드는 보존했다. 다음 하나는 cache↔generation 조건 경로 일치 문제의 별도 규명/검증이며 이번에 수리·학습·scale 탐색을 시작하지 않는다. [결과](experiments/C-007-frozen-adapter-cfg-diagnostics/RESULTS.md) · [해설](experiments/C-007-frozen-adapter-cfg-diagnostics/LESSON_KO.md).
+
+## C-008 조건 인코딩 불일치 규명 완료 (2026-10-31)
+
+C-007에서 발견한 cache↔생성 VACE context 불일치의 원인을 확정했다. C-006 `cache_conditions.py`(및 `cross_cache.py`)가 생성 마스크를 `Image.new('RGB', size, 255)`로 만들었고, PIL은 이를 흰색이 아니라 (255,0,0)으로 해석한다. VACE의 채널별 `X·(1−M)`/`X·M` 때문에 학습 cache의 중간 프레임은 R만 reactive, G/B는 inactive로 인코딩됐다. mask latent는 채널0만 읽어서 mask64는 일치했고, 프레임0은 마스크0이라 latent0도 일치했다. VAE 시간 cache, 적재 형태, dtype, 실행 모드, tile, 직렬화는 직접 관측으로 반증했다. 마스크 fill만 흰색으로 바꾼 C 경로와 독립 G 경로가 elephant·goat에서 bit-exact였고, VAE causal 계약도 검증했다. clean target, endpoint patch, T5는 영향이 없다. train-v2 checkpoint는 생성에 없는 조건에서 학습됐으므로 재학습이 필요하다(분기 B). 영상·DiT probe·학습은 실행하지 않았다. encode 29회. [결과](experiments/C-008-conditioning-parity/RESULTS.md) · [원인](experiments/C-008-conditioning-parity/ROOT_CAUSE.md) · [해설](experiments/C-008-conditioning-parity/LESSON_KO.md).

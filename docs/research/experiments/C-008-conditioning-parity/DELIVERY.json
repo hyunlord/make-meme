@@ -1,0 +1,20 @@
+{
+  "package": "C008-review-20261031.zip",
+  "sha256": "924584a479166d0809cf3cfcb058d90d0166a6d3632f54be581e8ecad5227a8c",
+  "bytes": 68900,
+  "contents": "public docs, PARITY/AFFECTED/REBUILD/COSTS json, per_t_diff.png (latent-difference chart; not a video), MANIFEST.json",
+  "spark": {
+    "location": "/tmp",
+    "zip_crc_testzip": "PASS",
+    "actual_extraction_manifest_sha256": "PASS"
+  },
+  "mac": {
+    "location": "/tmp",
+    "sha256_equal_to_spark": true,
+    "actual_extraction_manifest_sha256": "PASS"
+  },
+  "private_only_on_spark": "probe report.json, tensors.pt (contexts, clean/endpoint latents), cache-fixed/{elephant,goat}.pt, stage configs/logs; sha256 in PARITY.json",
+  "videos": "NOT_RUN (branch B)",
+  "reconstruction_diagnostics": "NOT_RUN",
+  "note": "Packaged before REPRODUCE.md step 5 (public make_stage.py parametrization note) was added; the repository copy is authoritative."
+}
