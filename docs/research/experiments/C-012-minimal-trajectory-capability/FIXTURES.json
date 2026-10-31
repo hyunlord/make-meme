@@ -1,0 +1,44 @@
+{
+  "truth_A": {
+    "max_error_px": 0.02943725152286447,
+    "statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+    ],
+    "min_peak": 0.9988009333610535
+  },
+  "truth_B": {
+    "max_error_px": 0.02943725152286447,
+    "statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok",
+      "ok"
+    ],
+    "min_peak": 0.9987788200378418
+  },
+  "truth_pair": "CAPABILITY_PASS",
+  "empty_background": {
+    "status": "missing",
+    "peak": 0.2103642374277115
+  },
+  "duplicate_object": {
+    "status": "duplicate",
+    "peak": 0.9990383386611938,
+    "second_peak": 0.9921842217445374
+  },
+  "camera_shift_9x6": 10.816653826391969,
+  "pass": true
+}
