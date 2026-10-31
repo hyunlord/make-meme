@@ -1,0 +1,1516 @@
+{
+ "public_vae_encode_calls": 22,
+ "mask_contract": "white_v1",
+ "files": {
+  "bear": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "7b974378d6c8d30bdd6de2f65006f036615328ba8b63a2110afaa41129809180",
+   "new_file_sha256": "630b029e3d677dde702dbb4d2e640e95254c1d324c93ee5c7c4649973a95fd21",
+   "vace_context_sha256": "6e5b77914ef4f95c6bd9b7941ae42c4dbeecd0a9b1f78b84fc5b8ddac32e81bb",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3144139051437378,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "7f6907ef064624a04a023ecd5d8887ea4f9f2ec1fb5e1540817862387862354a"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "6cff8c9c5d849dae7b691cf9a1bdc6693008eafe0bb97e6268a74ac45f4e4789"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "7530f6143ef4f379715b2261b9653decbf956d02935f18ed47327214c0bb107a"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "d9e6624917fa41a61917891490bc99621685e731057fef8f816a6eea1cd2ae2e"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "a96a73410b5c5e9922ec74ee06b7016b4439c5c1d32e422c05268edbb6fac9ca"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "d01b1a57fca81e2ea383eb9402dcebc497354b5d829d22cc4e5826bd2e555a94"
+    },
+    "sequence": "bear",
+    "split": "train",
+    "prompt": "A bear walks through a natural rocky enclosure.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "22fa9b6f85a88b2194fb8023a9157f510e93d3465d5a998c4d577d40b18d0d33"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "54966e8e030dc9407df18429dbacf6093f53c7de86cef999aabbe11b72e7e383"
+    }
+   }
+  },
+  "blackswan": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "aca71df62c61cff54423f0aeda825c93d5aea590d6c264237d5cee9634935ed4",
+   "new_file_sha256": "1b020f028f7576b6da351f8ec14b5803f73743c8b0a2592d10cf108737ea28b4",
+   "vace_context_sha256": "2fa30234b187b0f90f5a4268e612e4143cb907562a2c75540c8356c448805f6c",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.323137640953064,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "48f71131655787bf0a589cf4387ffc0cbff4026cd490d6552be92296b8e5a6f4"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "40df69ae895c59904c8bcebec64b90f72f778173635a6887867e01083fdfb47a"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "56d5e8e5af561d8a757cf57c585999476caa699bae19069c603b94bd70446104"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "598c2044bd04b2b98a899116ed797b20b177bf5ee5787772a2568c0a7cbf819e"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "0fb6d8300f351e94030305581d4b591ad0fa0304aae55f28a5c9425687a579f5"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "aebce5b1289324c63af2cbdfd576f595e44f97f18936c46fa48c16fa0cb6b4e1"
+    },
+    "sequence": "blackswan",
+    "split": "train",
+    "prompt": "A black swan swims on water.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "b77cdc1b0a8bbac4436011bb63a539e1897370830b7a323eff75234242d5d7cf"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "a3ac9bd8d9eb06f6b4fc3bb9dacce0ff6fd95f0c203234394b034203932d4823"
+    }
+   }
+  },
+  "bmx-bumps": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "f3627b8c71b7d56f7df0dc3b9d6f0f4656a257ff021926abaa6c1c2f2dbe1a13",
+   "new_file_sha256": "3fb4fdea190c2f668ec1bbd6e88b9bf82cb69da908acba45f0462d65be196848",
+   "vace_context_sha256": "29b9ad59336afbb5711a2b01511b228dd19375851fd9d70e917b72f05011354d",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3272408246994019,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "76ea2186341086e420bc84b4291e93ba3d4c459e2f5570e12e6676e1a2616e9c"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "1f07eb1848352d765dd8760e0064f40060654f75a6ef31cde2c9f2130acb6324"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "8aa49884c7e9d33bb3fc3d5140d0f9bca52b1ce02c77607ae79df0932ce51b2e"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "dbbd3736356f12df124369af106bb195197fa2be1bd6ef9fbb375910f0be0663"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "c3476959a1e82a27bfb59c408c2cd57440b623c5475dcbf4293ae8dc9a502a94"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "fb50660ca6a954c661c5cdfb2acec233d585be0763a31f67f3dbb4faf4886e25"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "0abaaccb0efd474b2b98b8efa36082b461b140532d594af73b4ca458a5915d99"
+    },
+    "sequence": "bmx-bumps",
+    "split": "train",
+    "prompt": "A bicycle rider rides over dirt bumps.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "8eaaf06504e6f025557e3eab1a35c968bdcf574ba552c8f6df102201c8df2c28"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "959d9c9eed630b42f42101056c5a838a5d448f0b9032073d02806d2178e55821"
+    }
+   }
+  },
+  "boat": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "24475ddfc31e242d92db602163b9e418d2f28fbce91688811bbada6c225f34c7",
+   "new_file_sha256": "be74d0fe4e7fec9bcca86c40881bf8e1fcb31b1bbd68dd2a7156dce89c994805",
+   "vace_context_sha256": "00e6becbcde40b209bd01b9e05b6f2fedee74dc302d84f88754df2e36e750b5b",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3259915113449097,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "8b990c27ce03cbbb91ffbc085fe91efd1795e0abfe9e6d813bde3b2b2556d460"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "2c7f7e3733b0b548f17bc27938bfaa418a06499969d6373b802fa097a23734a4"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "27081ec884637b2e8dc8121d05a5521d3d5779633debcb66fa97173ec7767f1d"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "10c027963990cfe54c16fd15967912e1c5b89a5578801c6b05752caa74d11e19"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "72cd6e8422c407fb6d098690f1130b7ded7ec2f7f5e1d30bd9d521f015363793"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "3f5b9e4c1e71bb1d3abf51478a3cbabcd46ea130102bf57ddb931ebfea3b747d"
+    },
+    "sequence": "boat",
+    "split": "train",
+    "prompt": "A boat moves across the water.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "5a20a8471e9c8a3d8c958efbdad6cd8d9cd5b70e6392dad77fdb17ac5c4e2603"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "7fc4ada0a2168c548993c38110a5f08e97a7905844da5c25dccd59c7e5f99e2d"
+    }
+   }
+  },
+  "bus": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "2915dfd007e7a7c3f5cb2a5dcfa4dd2f52f31864efe13d6c22820d7f98de1d6a",
+   "new_file_sha256": "de906d26d4697042db2222ad803da61d025a365f5e16fc3739fb7e1b4eb9bb1f",
+   "vace_context_sha256": "aa49929e609a904766f0099b58133c989811c1443d0f12d6590ae13eae29a8f8",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3213293552398682,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "6073eebf6dff87c53ecac30438b96e285887df5569477e016e3d96cd09ef9c66"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "db4ab90b5c38ef633bc6e648c1f978b76e299c9bda1535ec5f904b0e63f10349"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "f3831f9595731753401f4d00562ca484f0748cd7b1d05e11c7f63df368734173"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "a6b8674b175be6d0e05b28d9958ce363388bb8e4c06e4c390800f579a61fe009"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "e138a83c74e242b0e7d2a68519035417911835e3776364991626bea8ba631f66"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "2ec405b05aeff10a0df36ee9feb783b6d2ad96a71db43ab9e3b417e8d218a634"
+    },
+    "sequence": "bus",
+    "split": "train",
+    "prompt": "A bus drives along a road.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "e2107a93253de6d66f899c2a34d7c7c6372bbcee32667fd9703a15037285cfe9"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "a960e864c5bac4f0643f50725c9e80f52cd9bc8bf7ec19fb9ee3816c5cb34c03"
+    }
+   }
+  },
+  "camel": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "e2e0a7807b5e71fb0c79f5aa954cb3d829fd04dbab103c2aecbced83460b20bf",
+   "new_file_sha256": "87dd4cdfedc1b6d57b0333e3b3ffd6fbfb4167a7663ffde408f3a13053ee9e45",
+   "vace_context_sha256": "e01590015022357141ef136cc0b0093f165227a14034f12efa6bf3c211fb631f",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3348629474639893,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "64ca91388e9b1b4f821053042d8e968e3b19bd441f9ce704d1e03f4e81ee2eb3"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "081dd26e289008e758415024ed5c04e9543b0eebca301f6605d5abf5fef386bb"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "ba17614dcd6e87f666bbb88d6265b6eee78e8f2c6fb7781a7513c4c7c9f15346"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "d5ea2ea23e385d2d339d4a998a25c2d4ea4a2b2de1d73defa634e6d61466b9e9"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "5ebeaefe1ab5c030e1cfe85213b73e38aa06d0464cc4204ddffce690a02a4d2d"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "94283a69b133616b1827fc93a2e7e49e2b3f410630b41ff381e081dd801e0514"
+    },
+    "sequence": "camel",
+    "split": "train",
+    "prompt": "A camel walks outdoors.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "3715f38693f51d049715320b3bf127ba2f8aca59a6fae22c6613078b4c5dbd1b"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "f9bd0aed922121bb5b8cd5f4d112584accf9dc42f55f0ec4e6160471075ee912"
+    }
+   }
+  },
+  "cows": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "91d1257586b3d512432e2d7389da426ea89e309a9eef44586206084d919aba13",
+   "new_file_sha256": "82ada515f7d026621412c4cbc3bdcb8d6b982c9b35d6c285bd7f1c5861359ebf",
+   "vace_context_sha256": "01e6ef0cf5563cc5b8d095a62b10728651c4b7bc1c3431a8aa83fdb966ae2c9d",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3262194395065308,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "b844ab21fa6e310be9c8a63127fc82e3b3de4730ed1bd53010f8c13b01a12ef4"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "cceb2db0f822a8adfbaf4c34ef2bd38836a9528e848d29584e54049d8bda175e"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "b8b337e85846a5580480c8ac46ed5c5cdee7c8b33064eb69d13fda711fc6e671"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "55a15efef9149f25070065926ae00e682521a7850ab1f16ec9ea910f64b6ddf5"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "e9771d8d3be6d54deb78eeaecaf4f7a552da4fd4170e947346e9f56d36582f1f"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "09cf4eb40a38ad6a7f5bd76db5442a6f52a53e3bc229cbff267206fc24fef6ba"
+    },
+    "sequence": "cows",
+    "split": "train",
+    "prompt": "Cows walk on a grassy hillside.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "c5c78b6fb729a26e13ff9cba0d1f7bc334fb4afa82a44aa35aa34601d51b67e9"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "0719f36161826d1fae6ed2aac3df4a9b1d7188f95c86c83f84c7bcb44734c2e2"
+    }
+   }
+  },
+  "dance-twirl": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "e230dde3bb60380e93d077a9d759e6846a9d39478890786685258c383cb595c2",
+   "new_file_sha256": "a81fd4592ba0c3ee55035d2c8f5ec5dc4b6939cd63f94be0a1b9224939526152",
+   "vace_context_sha256": "7f27c19714142a566424ec68d68f8a4d6b4f96ffff8ff6b7ff0c052577be7ed1",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3288494348526,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "c679e67f758e28c16c64e50b7ead2806f23fa5a5592ec9c2a6fdb3818c07a136"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "084f2982fec9a4bd5582ade15dab859cf1b79c7080b2590f67283a82fd8c4cb5"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "e3f6e803f07267a35638c717d5a575b8f6027c704d0bd84e1c51f0c3c5acecdc"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "257a89deeb25cbefbc531bb2cdf010d788f431f29fd118adee58f5e2160843a8"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "e4274e8068219f63880fba9d04f1f3b22bb2b9ec6eec2a5870fed5df2e7f53c3"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "4261d37d064468b301beb2cfc3217b6740f128010d8ecaeffb94f7e90f7aeac5"
+    },
+    "sequence": "dance-twirl",
+    "split": "train",
+    "prompt": "A person dances and twirls outdoors.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "e136a657559bed7d76099c48417fd1bcfc523c4683b431900afba0b74badc67f"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "f2856e61669e00c9b91734201139cf1056c8a2c15ca0b866dfa868d79fe02fdb"
+    }
+   }
+  },
+  "elephant": {
+   "origin": "reused C-008 white-mask encoding (PARITY_EXACT with generation)",
+   "legacy_file_sha256": "1a327ce552a087184204b7430d1d797c723f47d3ddcf856c46a795a823a5ddf5",
+   "new_file_sha256": "64e99761670c5cb3a8e0e5e87162562aac4f70a7ee8de80d484a16ba8a2ad3a4",
+   "vace_context_sha256": "6d7a6df64a19ccfa3f478bc15de1ee4bf54d54ad052685f429e15f0d10db58c7",
+   "mask_checks": null,
+   "normalized_mask": null,
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3281471729278564,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "c125b6c78fbd9cf5115f81b021738c435b1475207a9a3721dee1548f9e1055d7"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "9e8975abd92f132b26d057f4af2b07041e0d9b9f86c2f50ea2e5ff9aecae69a1"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "28de5b3ab992d646585896c906ef9b7e62d029082409ffac90d50457d39938a1"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "b70fa59794882ac352a6ff26b22dc2d0ea83fdcd07461a8546b75365d546386f"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "ee0d9ce4b303703918d1cea6ab7fe06406749a77e9c441b942daa87a01951066"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "8b1d1ab46e4ae0feb2196c6712719f0baddd2b6e24fe6752e351dfb642c7a24c"
+    },
+    "sequence": "elephant",
+    "split": "validation",
+    "prompt": "An elephant walks outdoors.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "c24842762005553562b364f674263bf62a9e1016fa7a1cdb2f355a8db089535a"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "b28ebc27b49d86f0884179e1c715ed271bbfff46e4481a801392c6de6650a092"
+    }
+   }
+  },
+  "goat": {
+   "origin": "reused C-008 white-mask encoding (PARITY_EXACT with generation)",
+   "legacy_file_sha256": "561bf2212b2013d6b13a7cd19dfccd616889b9e919ce65ff2df4a6c9f6aa2f13",
+   "new_file_sha256": "e12396d67fe8a9d531356a059f585314b94a8b126237ed3241722f9d8fdc1d26",
+   "vace_context_sha256": "0a7b90e767d99560180c53d0b68d0a7bdb0671b38406a37009fbda3505578cbc",
+   "mask_checks": null,
+   "normalized_mask": null,
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3189191818237305,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "7b90379fb157c3f0a17a76dfadb964efb595d75e6b83e3250a2e9a7aaf67e8eb"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "2bf4adb7d605e0f3be467869a2ad4ac9fe93b9c07cad3ba04e630ef371b39dc8"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "5bf8a06c02d7d11713b03a15d2919d36aec4570a4cfb47486219cd5f620b0f17"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "fffc525e0c9c05c422b41f5ea15cfaaf6bd46e8574711f83269f35f99614baa2"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "eba3094eb27811bd9a96e53678a19defdd058034eb5166891b15e32f5a885099"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "238475d50db733e8d61c58ad076f38db2e399f26ee0b97ba40150acbc342e963"
+    },
+    "sequence": "goat",
+    "split": "validation",
+    "prompt": "A goat walks on rocky ground.",
+    "clean_latent": {
+     "shape": [
+      1,
+      16,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "3feaef99237ff9d0bb331542db053f9eb1e4025f30b34f50652bf83aeb687b60"
+    },
+    "loss_mask": {
+     "shape": [
+      1,
+      1,
+      9,
+      30,
+      52
+     ],
+     "dtype": "torch.float32",
+     "sha256": "2c667942b5795495b63c2324924f5ebed1d53e23e6e8d9b415180dff13d0fb6a"
+    }
+   }
+  },
+  "horsejump-low": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "8cbd71a8bc40e47fb6b56712553d1eb7cdf390087d9e18faaf0de3a8b499f28e",
+   "new_file_sha256": "735f7a31ecc47c9efb689222f567131a4cc1c9258e666720400de22f89f0da5a",
+   "vace_context_sha256": "14126a8a1c2c4f2cb5127fb929f8830ef9fa9f86c979c5770ffe133e039bea53",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3297786712646484,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "ff77530db1aaba7c4fed121f9f0ff2c2a4a34518bbeda25a3b6ad4f09b36f631"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "e63358ba54814fbc89cdff465dc0c31a290fc364a8b5d4a519c81d3cbe890d7c"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "030e27bfbfb1ca577ccc5fee811a3b4e1cc5fcf8a76691298d8dd3e105270b84"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "af4ec69e2c99f4e1c78c1be739fc5510f967a648a4f44da8bb1dd2a256ae2f8d"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "e119390b6e0b5584f7bf8af582ba1ca228637ffcbe69a9ccb3d3d8a82940c71a"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "a5ea23d2cd034bff200d5666dc5ffb25c718eb45b08354437919705af77f1b75"
+    },
+    "sequence": "horsejump-low",
+    "split": "test",
+    "prompt": "A horse and rider jump over an obstacle."
+   }
+  },
+  "lucia": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "d1d724d87eb4c82030f2bb2244bd7775bdaeec377feff49de4497210e9a98cbc",
+   "new_file_sha256": "e9a4e4ea506367e844acd1ef56c6c2d5f1e69a68574e04b69fc76d7ea660a6b7",
+   "vace_context_sha256": "b422448a34c563bd35eb668d88c787f94a7fde7d0c31a04bc59e9b70323d65bd",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.3166043758392334,
+   "unchanged_fields": {
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "b4cfce17cdfbe1511f323cf9f555236bbc8ca9557af95f8ca3424c788196364d"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      16,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "d68d3cd9a891ea602c38ff1b625291da9006f41293ed289e634277133c42c3b3"
+    },
+    "positions": {
+     "shape": [
+      33,
+      16,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "ab2baf2a5684bdf0fe31f11c18a0f55e7b5915a12631e9d2898711806e7ae2f8"
+    },
+    "visible": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "db5a3d022faddb30a240c8fd0f679b738e1c118d4152c7fcdec519849137f123"
+    },
+    "valid": {
+     "shape": [
+      33,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      16
+     ],
+     "dtype": "torch.bool",
+     "sha256": "0d68279095d0147361bf6608367b0efd1cc55d5e02a196bece5093d51ab2a56e"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "0ffd660c052bd90bd1fb3fe71b1ec7ba9913ea950b569e5bc517032d92411ef1"
+    },
+    "sequence": "lucia",
+    "split": "test",
+    "prompt": "A woman walks outdoors."
+   }
+  },
+  "cross-id-dog": {
+   "origin": "C-009 re-encode, white mask",
+   "legacy_file_sha256": "2f316e4b9ea44514cd0b0220c987ec1cc83af995c1cdeaa7cf6861030d1b1686",
+   "new_file_sha256": "a817fd486546a696434e36bee708243bb7940b533bb7436cce6a3948ddaa6fcb",
+   "vace_context_sha256": "b973f3cd1e062c08065bf2f37664df551ede3d1029cab5e831d52a75922f4533",
+   "mask_checks": {
+    "shape": [
+     33,
+     240,
+     416,
+     3
+    ],
+    "dtype": "uint8",
+    "rgb_equal": true,
+    "endpoints_zero": true,
+    "middle_255": true,
+    "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+   },
+   "normalized_mask": {
+    "values": [
+     0.0,
+     1.0
+    ],
+    "channels_equal": true
+   },
+   "mask64_equal_legacy": true,
+   "latent0_rgb_equal_legacy": true,
+   "rgb_branches_rms_vs_legacy": 1.317672848701477,
+   "unchanged_fields": {
+    "sequence": "cross-id-dog",
+    "split": "exploratory",
+    "prompt": "A black dog with a white snout and white chest lowers its head and steps forward toward the camera on grass. Preserve the fence, shrub, grass and fixed camera. Natural realistic continuous quadruped motion and consistent dog identity.",
+    "context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "e78cd0b9030fd3c166dd03a8fdebf1453057764d08af71ed2b1089abd4e27bd3"
+    },
+    "negative_context": {
+     "shape": [
+      1,
+      512,
+      4096
+     ],
+     "dtype": "torch.bfloat16",
+     "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+    },
+    "patches": {
+     "shape": [
+      3,
+      2,
+      144
+     ],
+     "dtype": "torch.float32",
+     "sha256": "5315617c075037d1ab843e673641f272f943cf30b733bbba8482fe3e74acbc1d"
+    },
+    "positions": {
+     "shape": [
+      33,
+      3,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "54f5ad808d60fe90d544e01a97a534bb0cb977fbd3f7721712ab6b45404cbf35"
+    },
+    "visible": {
+     "shape": [
+      33,
+      3
+     ],
+     "dtype": "torch.bool",
+     "sha256": "754b58164ca4660ee2d2ad3b87d97a9f086b1f6dca6621808cdcc8db87741de0"
+    },
+    "valid": {
+     "shape": [
+      33,
+      3
+     ],
+     "dtype": "torch.bool",
+     "sha256": "754b58164ca4660ee2d2ad3b87d97a9f086b1f6dca6621808cdcc8db87741de0"
+    },
+    "anchor_valid": {
+     "shape": [
+      2,
+      3
+     ],
+     "dtype": "torch.bool",
+     "sha256": "dfea2964b5deedea7b1ef077de529c3959e6788bdbb3441e70c77a1ae875bb48"
+    },
+    "box_wh": {
+     "shape": [
+      33,
+      2
+     ],
+     "dtype": "torch.float32",
+     "sha256": "2eb2468007f549be49da2393a65b9bf450a1a84609969597e1c835c86e4c81c3"
+    }
+   }
+  }
+ }
+}

@@ -462,3 +462,7 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 ## C-008 조건 인코딩 불일치 규명 완료 (2026-10-31)
 
 원인: C-006 cache의 생성 마스크가 PIL int fill 때문에 빨강 (255,0,0)이었다. `vace_context`만 잘못됐고, target·patch·T5는 유효하다. 수정 후 cache↔생성 PARITY_EXACT, ENCODER_SEMANTICS_VERIFIED. C-006/C-007 adapter 회귀는 조건 shift와 분리되지 않았으므로 adapter 구조·CFG 판단은 보류한다. 다음 하나(별도 승인): 12개 cache와 cross-cache의 `vace_context`를 재생성하고, train-v2 설정 그대로 재학습한 뒤 C-007 probe와 elephant BASE/ON을 재비교한다. [결과](experiments/C-008-conditioning-parity/RESULTS.md).
+
+## C-009 정상 조건 재학습 완료 (2026-10-31)
+
+오류 조건(C-006/C-007)과 정상 조건(C-009)의 결과를 구분한다. 정상 조건에서 adapter의 손상은 없어졌지만 BASE·NULL 대비 이득도 없다. 다음 하나(별도 승인): 정상 조건 adapter의 기여가 왜 작은지(residual 크기, ON/NULL block 통계, 궤적 신호 gradient)를 진단하고, 그 결과로 표현·주입 구조 변경 여부를 정한다. 독립 영상 확장 검증은 그 다음이다. [결과](experiments/C-009-corrected-conditioning-retrain/RESULTS.md).

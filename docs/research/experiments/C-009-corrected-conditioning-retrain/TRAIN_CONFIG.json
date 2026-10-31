@@ -1,0 +1,11 @@
+{
+ "base": "C-006 configs/train-v2.json (TRAIN_CONFIG.json of C-006 unchanged)",
+ "script": "C-006 code/train_adapter.py unchanged (sha256 recorded in stage freeze), run through code/train_white.py",
+ "resume_from": "C-006 outputs/train/checkpoint-000.pt (the same step-0 file train-v2 resumed from)",
+ "runtime_differences_only": {
+  "cache_root": "C-006 cache-v2 -> C-009 cache-white (white_v1 manifest)",
+  "output": "C-006 outputs/train-v2 -> C-009 outputs/train-white",
+  "deadline_epoch": "new run deadline"
+ },
+ "unchanged": "model, adapter, lr, betas, weight_decay, grad_clip, seeds, max_updates 256, train_seconds 8990, point_exclusions, split"
+}

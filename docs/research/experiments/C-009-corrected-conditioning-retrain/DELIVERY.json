@@ -1,0 +1,11 @@
+{
+  "package": "C009-review-20261031.zip",
+  "sha256": "1b884054595288de8598252481f391a10d698cf9ca693a6bb07586540a7a2011",
+  "bytes": 6512737,
+  "files": 28,
+  "contents": "index.html viewer (CFG1 / CFG5 / ON-vs-NULL tabs), original generated MP4 byte copies (C-007 BASE_1, BASE_5, OLD_ON_1, OLD_ON_5; C-009 NEW_ON_1, NEW_ON_5, NEW_NULL_5), derived SOURCE MP4, derived 9-frame and 33-frame sheets, docs and public JSON",
+  "spark": {"location": "/tmp", "zip_testzip": "PASS", "extraction_manifest_sha256": "PASS"},
+  "mac": {"location": "/tmp", "sha256_equal_to_spark": true, "extraction_manifest_sha256": "PASS"},
+  "all_mp4_ffmpeg_decode": "PASS (decodability only; temporal=UNVERIFIED)",
+  "private_only_on_spark": "cache-white (12), cross-cache-white (1) with CACHE_MANIFEST, train-white checkpoints 000/128/256 with optimizer/RNG/cursor, updates.jsonl, probe JSONL, generation final_latent/raw/33 PNG/trace, stage configs and logs"
+}

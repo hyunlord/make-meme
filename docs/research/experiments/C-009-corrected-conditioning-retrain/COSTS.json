@@ -1,0 +1,11 @@
+{
+  "public_vae_encode_calls": {"cache_rebuild": 22, "live_generation_prepare_parity": 4, "new_video_conditions": 6, "total": 32, "cache_prepare_budget": 30, "cache_prepare_used": 26},
+  "training": {"updates": 256, "training_forwards": 256, "backwards": 256, "validation_forwards": 18, "diagnostic_forwards": 5, "active_seconds": 257.7},
+  "probe_dit_forwards": 60,
+  "samplers": {"new": 3, "base_regenerated": 0, "mechanical_retry": 0, "scheduler_steps": 150, "model_fn_calls": 250},
+  "vae_decodes": {"videos": 3, "recovery": 0},
+  "quality_retries": 0, "seed_search": 0, "downloads": 0,
+  "guarded_heavy_stage_seconds": {"rebuild": 31.3, "live_parity": 17.2, "train": 265.9, "probes": 55.8, "NEW_ON_1": 55.8, "NEW_ON_5": 95.0, "NEW_NULL_5": 96.2},
+  "manual_review": "fixed 9-frame sheets of all 8 rows read once by the agent; no continuous playback review; time not measured (null)",
+  "guard_changes": "none"
+}
