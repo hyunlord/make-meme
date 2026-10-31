@@ -1,0 +1,1726 @@
+{
+ "CACHE_MANIFEST": {
+  "schema": "C-011 cache",
+  "mask_contract": "white_v1: (v,v,v), v=0 at frames 0/32 else 255",
+  "condition_family": "endpoint_gray127_v1",
+  "middle_rgb": "(127,127,127) on all 31 middle frames; anchors = source frames 0/32",
+  "source_layout_parent_manifest_sha256": "c200a8efe9cee25da5a9c2f2d9dcfada6f7e5ff518e831e8ca06b61f00f09a3b",
+  "files": {
+   "bear": {
+    "root": "main",
+    "sha256": "70a1929eb2ffbe7ebc5989dbb2130ea0678174d7c35bb155312dfe72f504ebc3"
+   },
+   "blackswan": {
+    "root": "main",
+    "sha256": "b7c1b97a5b7a53e1f1834539a7254556a8ccae1659bf3c9c177cb01c3559b48b"
+   },
+   "bmx-bumps": {
+    "root": "main",
+    "sha256": "06946701e08debe202300321cffc085e66f3591d055880307f2310f189daa76d"
+   },
+   "boat": {
+    "root": "main",
+    "sha256": "91cccb48103bf92ce73942f7ff989ccb2b5c5edf9e14479c497da97f9ed5a287"
+   },
+   "bus": {
+    "root": "main",
+    "sha256": "53a63a729cbefc8979010e1e2c06c2bc984076d7298addcdcc5a3f2e510e0946"
+   },
+   "camel": {
+    "root": "main",
+    "sha256": "6c7b77a5d53a094786756d26ac7847fbd3037235a8279332215add971a4843a7"
+   },
+   "cows": {
+    "root": "main",
+    "sha256": "a27a07721fe3a7d1552741d8d92304bd0e579c94490bb7bf08bf15e2fa965345"
+   },
+   "dance-twirl": {
+    "root": "main",
+    "sha256": "9c778f2710260eaedc17e50d1b3518dce0f5c6870e5e30f2971fa4b6bf7b0f99"
+   },
+   "elephant": {
+    "root": "main",
+    "sha256": "00356738900019b55eaa1904dda7001c771f8ff5a40869a3c88e27fd7091e93e"
+   },
+   "goat": {
+    "root": "main",
+    "sha256": "822f4bb51cb1b7f5f5f141a8cf4d86ee046a2f84b1b8081096dcf079fad388af"
+   }
+  },
+  "legacy_sha256": {
+   "bear": "630b029e3d677dde702dbb4d2e640e95254c1d324c93ee5c7c4649973a95fd21",
+   "blackswan": "1b020f028f7576b6da351f8ec14b5803f73743c8b0a2592d10cf108737ea28b4",
+   "bmx-bumps": "3fb4fdea190c2f668ec1bbd6e88b9bf82cb69da908acba45f0462d65be196848",
+   "boat": "be74d0fe4e7fec9bcca86c40881bf8e1fcb31b1bbd68dd2a7156dce89c994805",
+   "bus": "de906d26d4697042db2222ad803da61d025a365f5e16fc3739fb7e1b4eb9bb1f",
+   "camel": "87dd4cdfedc1b6d57b0333e3b3ffd6fbfb4167a7663ffde408f3a13053ee9e45",
+   "cows": "82ada515f7d026621412c4cbc3bdcb8d6b982c9b35d6c285bd7f1c5861359ebf",
+   "dance-twirl": "a81fd4592ba0c3ee55035d2c8f5ec5dc4b6939cd63f94be0a1b9224939526152",
+   "elephant": "64e99761670c5cb3a8e0e5e87162562aac4f70a7ee8de80d484a16ba8a2ad3a4",
+   "goat": "e12396d67fe8a9d531356a059f585314b94a8b126237ed3241722f9d8fdc1d26"
+  }
+ },
+ "cache_rebuild": {
+  "public_vae_encode_calls": 20,
+  "files": {
+   "bear": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "89b016022e5dc4bc11f76b2f29c3b83884febfbf09332ddfc7df15cb9b64f645"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.010310411453247,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "630b029e3d677dde702dbb4d2e640e95254c1d324c93ee5c7c4649973a95fd21",
+    "vace_context_sha256": "6ce4375bd6280b26e7b2268b1448efb56be80d96f4fe2b0ae91386568fc06a11",
+    "file_sha256": "70a1929eb2ffbe7ebc5989dbb2130ea0678174d7c35bb155312dfe72f504ebc3",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "7f6907ef064624a04a023ecd5d8887ea4f9f2ec1fb5e1540817862387862354a"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "6cff8c9c5d849dae7b691cf9a1bdc6693008eafe0bb97e6268a74ac45f4e4789"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "7530f6143ef4f379715b2261b9653decbf956d02935f18ed47327214c0bb107a"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "d9e6624917fa41a61917891490bc99621685e731057fef8f816a6eea1cd2ae2e"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "a96a73410b5c5e9922ec74ee06b7016b4439c5c1d32e422c05268edbb6fac9ca"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "d01b1a57fca81e2ea383eb9402dcebc497354b5d829d22cc4e5826bd2e555a94"
+     },
+     "sequence": "bear",
+     "split": "train",
+     "prompt": "A bear walks through a natural rocky enclosure.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "22fa9b6f85a88b2194fb8023a9157f510e93d3465d5a998c4d577d40b18d0d33"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "54966e8e030dc9407df18429dbacf6093f53c7de86cef999aabbe11b72e7e383"
+     }
+    }
+   },
+   "blackswan": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "2d63139d85b886c79b030f7bc59f68e1f7f80f3c395011668f4a3e6b9b12c785"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.017535924911499,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "1b020f028f7576b6da351f8ec14b5803f73743c8b0a2592d10cf108737ea28b4",
+    "vace_context_sha256": "caaad899a134a4302c3a8f2d16b8fee35bd1689b46a3efc8d0d44a69133028af",
+    "file_sha256": "b7c1b97a5b7a53e1f1834539a7254556a8ccae1659bf3c9c177cb01c3559b48b",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "48f71131655787bf0a589cf4387ffc0cbff4026cd490d6552be92296b8e5a6f4"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "40df69ae895c59904c8bcebec64b90f72f778173635a6887867e01083fdfb47a"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "56d5e8e5af561d8a757cf57c585999476caa699bae19069c603b94bd70446104"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "598c2044bd04b2b98a899116ed797b20b177bf5ee5787772a2568c0a7cbf819e"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "0fb6d8300f351e94030305581d4b591ad0fa0304aae55f28a5c9425687a579f5"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "aebce5b1289324c63af2cbdfd576f595e44f97f18936c46fa48c16fa0cb6b4e1"
+     },
+     "sequence": "blackswan",
+     "split": "train",
+     "prompt": "A black swan swims on water.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "b77cdc1b0a8bbac4436011bb63a539e1897370830b7a323eff75234242d5d7cf"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "a3ac9bd8d9eb06f6b4fc3bb9dacce0ff6fd95f0c203234394b034203932d4823"
+     }
+    }
+   },
+   "bmx-bumps": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "baf1c659389aec032935d5ca1604c2f3fd2b10eb7a6150cff614692f405230d4"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.017685890197754,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "3fb4fdea190c2f668ec1bbd6e88b9bf82cb69da908acba45f0462d65be196848",
+    "vace_context_sha256": "0358e58744f6ba7034f4ba09affa382edc0c6d2799f3eb142be8686e271a3130",
+    "file_sha256": "06946701e08debe202300321cffc085e66f3591d055880307f2310f189daa76d",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "76ea2186341086e420bc84b4291e93ba3d4c459e2f5570e12e6676e1a2616e9c"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "1f07eb1848352d765dd8760e0064f40060654f75a6ef31cde2c9f2130acb6324"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "8aa49884c7e9d33bb3fc3d5140d0f9bca52b1ce02c77607ae79df0932ce51b2e"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "dbbd3736356f12df124369af106bb195197fa2be1bd6ef9fbb375910f0be0663"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "c3476959a1e82a27bfb59c408c2cd57440b623c5475dcbf4293ae8dc9a502a94"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "fb50660ca6a954c661c5cdfb2acec233d585be0763a31f67f3dbb4faf4886e25"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "0abaaccb0efd474b2b98b8efa36082b461b140532d594af73b4ca458a5915d99"
+     },
+     "sequence": "bmx-bumps",
+     "split": "train",
+     "prompt": "A bicycle rider rides over dirt bumps.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "8eaaf06504e6f025557e3eab1a35c968bdcf574ba552c8f6df102201c8df2c28"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "959d9c9eed630b42f42101056c5a838a5d448f0b9032073d02806d2178e55821"
+     }
+    }
+   },
+   "boat": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "88cbcc2cf01feff87d12a4abdf8fef61129cf816b30f59cf8471b7ea2e3eb5d1"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.0152151584625244,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "be74d0fe4e7fec9bcca86c40881bf8e1fcb31b1bbd68dd2a7156dce89c994805",
+    "vace_context_sha256": "9def4d3577dc26d17d0c5f89bad0f49fec01722a53318f868df939af4ae5d8e2",
+    "file_sha256": "91cccb48103bf92ce73942f7ff989ccb2b5c5edf9e14479c497da97f9ed5a287",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "8b990c27ce03cbbb91ffbc085fe91efd1795e0abfe9e6d813bde3b2b2556d460"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "2c7f7e3733b0b548f17bc27938bfaa418a06499969d6373b802fa097a23734a4"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "27081ec884637b2e8dc8121d05a5521d3d5779633debcb66fa97173ec7767f1d"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "10c027963990cfe54c16fd15967912e1c5b89a5578801c6b05752caa74d11e19"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "72cd6e8422c407fb6d098690f1130b7ded7ec2f7f5e1d30bd9d521f015363793"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "3f5b9e4c1e71bb1d3abf51478a3cbabcd46ea130102bf57ddb931ebfea3b747d"
+     },
+     "sequence": "boat",
+     "split": "train",
+     "prompt": "A boat moves across the water.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "5a20a8471e9c8a3d8c958efbdad6cd8d9cd5b70e6392dad77fdb17ac5c4e2603"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "7fc4ada0a2168c548993c38110a5f08e97a7905844da5c25dccd59c7e5f99e2d"
+     }
+    }
+   },
+   "bus": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "07a30b634b8868f8207f93ef816fd735104046eb4e0fbb5108cfd98d315886d9"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.014847755432129,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "de906d26d4697042db2222ad803da61d025a365f5e16fc3739fb7e1b4eb9bb1f",
+    "vace_context_sha256": "454b4dda6a95b8218fbda64e1ac4b73a7ab16213c094de6dfab74dd1a2782b5b",
+    "file_sha256": "53a63a729cbefc8979010e1e2c06c2bc984076d7298addcdcc5a3f2e510e0946",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "6073eebf6dff87c53ecac30438b96e285887df5569477e016e3d96cd09ef9c66"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "db4ab90b5c38ef633bc6e648c1f978b76e299c9bda1535ec5f904b0e63f10349"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "f3831f9595731753401f4d00562ca484f0748cd7b1d05e11c7f63df368734173"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "a6b8674b175be6d0e05b28d9958ce363388bb8e4c06e4c390800f579a61fe009"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "e138a83c74e242b0e7d2a68519035417911835e3776364991626bea8ba631f66"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "2ec405b05aeff10a0df36ee9feb783b6d2ad96a71db43ab9e3b417e8d218a634"
+     },
+     "sequence": "bus",
+     "split": "train",
+     "prompt": "A bus drives along a road.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "e2107a93253de6d66f899c2a34d7c7c6372bbcee32667fd9703a15037285cfe9"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "a960e864c5bac4f0643f50725c9e80f52cd9bc8bf7ec19fb9ee3816c5cb34c03"
+     }
+    }
+   },
+   "camel": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "599f54c4070bc7789504a8a701f072ff125a81113bfe341fbf8093ab3c6f3779"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.0412845611572266,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "87dd4cdfedc1b6d57b0333e3b3ffd6fbfb4167a7663ffde408f3a13053ee9e45",
+    "vace_context_sha256": "59fc085d81a7327faa0553d7ce8921846000f974836e5789cd03ba57377555b6",
+    "file_sha256": "6c7b77a5d53a094786756d26ac7847fbd3037235a8279332215add971a4843a7",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "64ca91388e9b1b4f821053042d8e968e3b19bd441f9ce704d1e03f4e81ee2eb3"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "081dd26e289008e758415024ed5c04e9543b0eebca301f6605d5abf5fef386bb"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "ba17614dcd6e87f666bbb88d6265b6eee78e8f2c6fb7781a7513c4c7c9f15346"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "d5ea2ea23e385d2d339d4a998a25c2d4ea4a2b2de1d73defa634e6d61466b9e9"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "5ebeaefe1ab5c030e1cfe85213b73e38aa06d0464cc4204ddffce690a02a4d2d"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "94283a69b133616b1827fc93a2e7e49e2b3f410630b41ff381e081dd801e0514"
+     },
+     "sequence": "camel",
+     "split": "train",
+     "prompt": "A camel walks outdoors.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "3715f38693f51d049715320b3bf127ba2f8aca59a6fae22c6613078b4c5dbd1b"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "f9bd0aed922121bb5b8cd5f4d112584accf9dc42f55f0ec4e6160471075ee912"
+     }
+    }
+   },
+   "cows": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "ee194bfaf815b98cd3348cf24df2f4c1e7b11a0f512d30d16f827ac31fe79be4"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.0248851776123047,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "82ada515f7d026621412c4cbc3bdcb8d6b982c9b35d6c285bd7f1c5861359ebf",
+    "vace_context_sha256": "72d9c5750cb0fba3f364910a4a9422a5d5085f1474cf0fbd4dddd3f24b8d8292",
+    "file_sha256": "a27a07721fe3a7d1552741d8d92304bd0e579c94490bb7bf08bf15e2fa965345",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "b844ab21fa6e310be9c8a63127fc82e3b3de4730ed1bd53010f8c13b01a12ef4"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "cceb2db0f822a8adfbaf4c34ef2bd38836a9528e848d29584e54049d8bda175e"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "b8b337e85846a5580480c8ac46ed5c5cdee7c8b33064eb69d13fda711fc6e671"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "55a15efef9149f25070065926ae00e682521a7850ab1f16ec9ea910f64b6ddf5"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "e9771d8d3be6d54deb78eeaecaf4f7a552da4fd4170e947346e9f56d36582f1f"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "09cf4eb40a38ad6a7f5bd76db5442a6f52a53e3bc229cbff267206fc24fef6ba"
+     },
+     "sequence": "cows",
+     "split": "train",
+     "prompt": "Cows walk on a grassy hillside.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "c5c78b6fb729a26e13ff9cba0d1f7bc334fb4afa82a44aa35aa34601d51b67e9"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "0719f36161826d1fae6ed2aac3df4a9b1d7188f95c86c83f84c7bcb44734c2e2"
+     }
+    }
+   },
+   "dance-twirl": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "4add91325dcf085db721f36ac29dada169862725554a9615ec474a788f45c2ff"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.0284266471862793,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "a81fd4592ba0c3ee55035d2c8f5ec5dc4b6939cd63f94be0a1b9224939526152",
+    "vace_context_sha256": "f899cd89580b54686bf3fb8dda466ae75188da8b913659d949a1e02cb3ed8f4f",
+    "file_sha256": "9c778f2710260eaedc17e50d1b3518dce0f5c6870e5e30f2971fa4b6bf7b0f99",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "c679e67f758e28c16c64e50b7ead2806f23fa5a5592ec9c2a6fdb3818c07a136"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "084f2982fec9a4bd5582ade15dab859cf1b79c7080b2590f67283a82fd8c4cb5"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "e3f6e803f07267a35638c717d5a575b8f6027c704d0bd84e1c51f0c3c5acecdc"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "257a89deeb25cbefbc531bb2cdf010d788f431f29fd118adee58f5e2160843a8"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "e4274e8068219f63880fba9d04f1f3b22bb2b9ec6eec2a5870fed5df2e7f53c3"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "4261d37d064468b301beb2cfc3217b6740f128010d8ecaeffb94f7e90f7aeac5"
+     },
+     "sequence": "dance-twirl",
+     "split": "train",
+     "prompt": "A person dances and twirls outdoors.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "e136a657559bed7d76099c48417fd1bcfc523c4683b431900afba0b74badc67f"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "f2856e61669e00c9b91734201139cf1056c8a2c15ca0b866dfa868d79fe02fdb"
+     }
+    }
+   },
+   "elephant": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "4fac25fbd30c981806012c4d9498a1877516230e9cfae903f9bec0d8372dc8f5"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.025430679321289,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "64e99761670c5cb3a8e0e5e87162562aac4f70a7ee8de80d484a16ba8a2ad3a4",
+    "vace_context_sha256": "c11a2cf5594e5ee5767315a981fe888f8246d8e10a1bbfd1dc7f93888fba471d",
+    "file_sha256": "00356738900019b55eaa1904dda7001c771f8ff5a40869a3c88e27fd7091e93e",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "c125b6c78fbd9cf5115f81b021738c435b1475207a9a3721dee1548f9e1055d7"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "9e8975abd92f132b26d057f4af2b07041e0d9b9f86c2f50ea2e5ff9aecae69a1"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "28de5b3ab992d646585896c906ef9b7e62d029082409ffac90d50457d39938a1"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "b70fa59794882ac352a6ff26b22dc2d0ea83fdcd07461a8546b75365d546386f"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "ee0d9ce4b303703918d1cea6ab7fe06406749a77e9c441b942daa87a01951066"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "8b1d1ab46e4ae0feb2196c6712719f0baddd2b6e24fe6752e351dfb642c7a24c"
+     },
+     "sequence": "elephant",
+     "split": "validation",
+     "prompt": "An elephant walks outdoors.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "c24842762005553562b364f674263bf62a9e1016fa7a1cdb2f355a8db089535a"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "b28ebc27b49d86f0884179e1c715ed271bbfff46e4481a801392c6de6650a092"
+     }
+    }
+   },
+   "goat": {
+    "frames": {
+     "middle_all_127": true,
+     "anchors_byte_equal_source_0_32": true,
+     "pixel_sha256": "d1179248450146bf737eacb858528d0cc39450dcb2ca514419eab0507cf68199"
+    },
+    "mask": {
+     "shape": [
+      33,
+      240,
+      416,
+      3
+     ],
+     "dtype": "uint8",
+     "rgb_equal": true,
+     "endpoints_zero": true,
+     "middle_255": true,
+     "pixel_sha256": "555b004fdc1e63eff59ba994f5bb228ca371cbe6943c1e92b675cc331d56256a"
+    },
+    "normalized_mask": {
+     "values": [
+      0.0,
+      1.0
+     ],
+     "channels_equal": true
+    },
+    "normalized_gray_value": [
+     -0.00390625
+    ],
+    "normalized_dtype": "torch.bfloat16",
+    "inactive_equal_layout": true,
+    "mask64_equal_layout": true,
+    "reactive_rms_vs_layout": 2.0151681900024414,
+    "reactive_latent0_equal_layout": true,
+    "layout_parent_file_sha256": "e12396d67fe8a9d531356a059f585314b94a8b126237ed3241722f9d8fdc1d26",
+    "vace_context_sha256": "5e382230ca37bf50e9ae5ab95dbab819eb08ed31db5eda5a7b76d2baeaa5f497",
+    "file_sha256": "822f4bb51cb1b7f5f5f141a8cf4d86ee046a2f84b1b8081096dcf079fad388af",
+    "unchanged_fields": {
+     "context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "7b90379fb157c3f0a17a76dfadb964efb595d75e6b83e3250a2e9a7aaf67e8eb"
+     },
+     "negative_context": {
+      "shape": [
+       1,
+       512,
+       4096
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "bc747a6f278533157a20562fc5e061f0d3bcd54fa321d5beeca78fac1d19dd3f"
+     },
+     "patches": {
+      "shape": [
+       16,
+       2,
+       144
+      ],
+      "dtype": "torch.float32",
+      "sha256": "2bf4adb7d605e0f3be467869a2ad4ac9fe93b9c07cad3ba04e630ef371b39dc8"
+     },
+     "positions": {
+      "shape": [
+       33,
+       16,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "5bf8a06c02d7d11713b03a15d2919d36aec4570a4cfb47486219cd5f620b0f17"
+     },
+     "visible": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "fffc525e0c9c05c422b41f5ea15cfaaf6bd46e8574711f83269f35f99614baa2"
+     },
+     "valid": {
+      "shape": [
+       33,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "97a93d04c8c6b09934b730c6e6e244ca75f2286f71750085141d7431f8fa37cb"
+     },
+     "anchor_valid": {
+      "shape": [
+       2,
+       16
+      ],
+      "dtype": "torch.bool",
+      "sha256": "eba3094eb27811bd9a96e53678a19defdd058034eb5166891b15e32f5a885099"
+     },
+     "box_wh": {
+      "shape": [
+       33,
+       2
+      ],
+      "dtype": "torch.float32",
+      "sha256": "238475d50db733e8d61c58ad076f38db2e399f26ee0b97ba40150acbc342e963"
+     },
+     "sequence": "goat",
+     "split": "validation",
+     "prompt": "A goat walks on rocky ground.",
+     "clean_latent": {
+      "shape": [
+       1,
+       16,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "3feaef99237ff9d0bb331542db053f9eb1e4025f30b34f50652bf83aeb687b60"
+     },
+     "loss_mask": {
+      "shape": [
+       1,
+       1,
+       9,
+       30,
+       52
+      ],
+      "dtype": "torch.float32",
+      "sha256": "2c667942b5795495b63c2324924f5ebed1d53e23e6e8d9b415180dff13d0fb6a"
+     }
+    }
+   }
+  }
+ },
+ "live_parity": {
+  "elephant": {
+   "condition_mode": "endpoint",
+   "missing_rgb_uint8": 127,
+   "live_vs_endpoint_cache": {
+    "exact": true,
+    "max_abs": 0.0,
+    "rms": 0.0,
+    "ref_rms": 1.076947569847107,
+    "rel_rms": 0.0,
+    "inactive_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reactive_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "mask_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "live_vs_layout_cache_should_differ": {
+    "exact": false,
+    "rms": 0.8268786072731018,
+    "inactive_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reactive_per_t_rms": [
+     0.0,
+     1.8994898796081543,
+     2.0645394325256348,
+     2.2556238174438477,
+     2.2246451377868652,
+     2.2135236263275146,
+     2.220532178878784,
+     2.1966333389282227,
+     2.087679624557495
+    ],
+    "mask_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "goat": {
+   "condition_mode": "endpoint",
+   "missing_rgb_uint8": 127,
+   "live_vs_endpoint_cache": {
+    "exact": true,
+    "max_abs": 0.0,
+    "rms": 0.0,
+    "ref_rms": 1.0759563446044922,
+    "rel_rms": 0.0,
+    "inactive_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reactive_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "mask_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "live_vs_layout_cache_should_differ": {
+    "exact": false,
+    "rms": 0.8226889967918396,
+    "inactive_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reactive_per_t_rms": [
+     0.0,
+     1.8901493549346924,
+     2.0476267337799072,
+     2.239616632461548,
+     2.2119946479797363,
+     2.204087495803833,
+     2.203399181365967,
+     2.2006402015686035,
+     2.078002452850342
+    ],
+    "mask_per_t_rms": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "public_vae_encode_calls": 4,
+  "dit_forward_calls": 0
+ },
+ "generation_first_model_input": {
+  "E_elephant_BASE": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "endpoint",
+   "adapter": "BASE",
+   "cfg": 5.0,
+   "middle_rgb": 127,
+   "seconds": 90
+  },
+  "E_elephant_ON": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "endpoint",
+   "adapter": "ON",
+   "cfg": 5.0,
+   "middle_rgb": 127,
+   "seconds": 90
+  },
+  "E_elephant_NULL": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "endpoint",
+   "adapter": "NULL",
+   "cfg": 5.0,
+   "middle_rgb": 127,
+   "seconds": 90
+  },
+  "E_goat_BASE": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "endpoint",
+   "adapter": "BASE",
+   "cfg": 5.0,
+   "middle_rgb": 127,
+   "seconds": 90
+  },
+  "E_goat_ON": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "endpoint",
+   "adapter": "ON",
+   "cfg": 5.0,
+   "middle_rgb": 127,
+   "seconds": 90
+  },
+  "E_goat_NULL": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "endpoint",
+   "adapter": "NULL",
+   "cfg": 5.0,
+   "middle_rgb": 127,
+   "seconds": 90
+  },
+  "L_goat_BASE": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "layout_mov",
+   "adapter": "BASE",
+   "cfg": 5.0,
+   "middle_rgb": null,
+   "seconds": 90
+  },
+  "L_goat_ON": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "layout_mov",
+   "adapter": "ON",
+   "cfg": 5.0,
+   "middle_rgb": null,
+   "seconds": 90
+  },
+  "L_elephant_BASE": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "layout_mov",
+   "adapter": "BASE",
+   "cfg": 5.0,
+   "middle_rgb": null,
+   "seconds": 90
+  },
+  "L_elephant_ON": {
+   "context_matches_family_cache": true,
+   "latents_sha": "055551b8c8918497",
+   "model_fn": 100,
+   "steps": 50,
+   "mode": "layout_mov",
+   "adapter": "ON",
+   "cfg": 5.0,
+   "middle_rgb": null,
+   "seconds": 90
+  }
+ },
+ "video_metrics_auxiliary": {
+  "elephant": {
+   "pair_mae_mid1_28": {
+    "E_ON~E_NULL": 3.77,
+    "E_ON~E_BASE": 6.97,
+    "E_NULL~E_BASE": 7.0,
+    "E_ON~L_ON": 25.07,
+    "E_BASE~L_BASE": 27.18,
+    "L_ON~L_BASE": 5.63
+   },
+   "source_object_roi_mae_mid1_28": {
+    "E_BASE": 24.5,
+    "E_ON": 23.2,
+    "E_NULL": 23.1,
+    "L_BASE": 32.6,
+    "L_ON": 27.1
+   },
+   "source_background_mae_mid1_28": {
+    "E_BASE": 33.0,
+    "E_ON": 32.4,
+    "E_NULL": 32.5,
+    "L_BASE": 30.9,
+    "L_ON": 30.6
+   }
+  },
+  "goat": {
+   "pair_mae_mid1_28": {
+    "E_ON~E_NULL": 6.84,
+    "E_ON~E_BASE": 10.6,
+    "E_NULL~E_BASE": 11.8,
+    "E_ON~L_ON": 37.89,
+    "E_BASE~L_BASE": 38.72,
+    "L_ON~L_BASE": 7.79
+   },
+   "source_object_roi_mae_mid1_28": {
+    "E_BASE": 47.0,
+    "E_ON": 43.9,
+    "E_NULL": 43.7,
+    "L_BASE": 39.7,
+    "L_ON": 36.3
+   },
+   "source_background_mae_mid1_28": {
+    "E_BASE": 41.1,
+    "E_ON": 40.9,
+    "E_NULL": 40.6,
+    "L_BASE": 40.7,
+    "L_ON": 39.9
+   }
+  }
+ }
+}

@@ -1,0 +1,11 @@
+{
+  "package": "C011-review-20261101.zip",
+  "sha256": "ed74dc2f86ef2de1c528407dda23a39be98bebd3b9ee620257cf34dc012503ff",
+  "bytes": 21823077, "files": 428,
+  "contents": "index.html viewer (elephant/goat tabs; E-inner / vs-L / evidence modes; same-index frame slider), original generated MP4 byte copies (6 new E, 2 new goat L, elephant L reused from C-007 BASE_5 and C-009 NEW_ON_5), derived SOURCE MP4s, derived 33-frame JPGs, blind sheets, condition examples, C-010 track overlays, delta chart, docs and public JSON",
+  "spark": {"location": "/tmp", "zip_testzip": "PASS", "extraction_manifest_sha256": "PASS"},
+  "mac": {"location": "/tmp", "sha256_equal_to_spark": true, "extraction_manifest_sha256": "PASS"},
+  "all_mp4_ffmpeg_decode": "PASS (decodability only; temporal=UNVERIFIED)",
+  "note": "DELIVERY.json is written after packaging and is not inside the zip",
+  "private_only_on_spark": "cache-endpoint (10) + manifest, train-endpoint checkpoints 000/128/256 with optimizer/RNG/cursor, updates.jsonl, probe JSON, generation final_latent/raw/33 PNG/trace, blind key, stage configs and logs"
+}

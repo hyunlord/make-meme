@@ -791,3 +791,15 @@ C-009 white checkpoint 000/128/256을 동결하고, bear·dance-twirl(train), el
 - 사전 규칙 판정은 DIAGNOSTIC_INCONCLUSIVE, 우선 가설은 조건 중복(동적 윤곽·noisy state가 이미 중간 동작을 줌)이다.
 
 [결과](experiments/C-010-trajectory-signal-diagnostics/RESULTS.md) · [해설](experiments/C-010-trajectory-signal-diagnostics/LESSON_KO.md).
+
+## C-011 endpoint-only 조건 재학습 (2026-11-01)
+
+정상 조건(C-009) 이후의 단일 개입이다. VACE 중간 조건 RGB를 동적 윤곽에서 회색 127로 바꾸고, train8 + validation2 cache의 `vace_context`만 다시 만들었다.
+- 계약 확인: inactive와 mask64는 L과 exact, 생성 준비 경로와도 exact다.
+- 학습: C-006 원본 학습 코드로 같은 step000·256행 schedule에서 256회 재학습했다.
+- probe: 중심 셀(validation σ0.5)의 Δ_E가 +0.0002/+0.0006으로 NO_PROBE_GAIN이다.
+- 영상: elephant·goat의 E-BASE/ON/NULL 6개와 goat L 대조 2개를 만들었다. 블라인드 시트에서 두 사례 모두 E-ON과 E-NULL이 구별되지 않는 쌍으로 묶였다 → COMMON_ADAPTER_EFFECT_ONLY.
+- 시스템 비교: elephant는 E가 L의 다리 손상 없이 원본에 더 가까웠고, goat는 L이 나았다. 둘 다 point가 아니라 윤곽 경로 자체의 효과다.
+- C-010의 조건 중복 가설은 이번 절차에서 지지되지 않았다. 처음 적었던 "학습 σ 비중" 후보는 실측(update의 55%가 이미 σ ≥ 0.8)으로 철회했다.
+
+[결과](experiments/C-011-endpoint-only-trajectory-ablation/RESULTS.md) · [관측](experiments/C-011-endpoint-only-trajectory-ablation/OBSERVATIONS.md) · [해설](experiments/C-011-endpoint-only-trajectory-ablation/LESSON_KO.md).

@@ -474,3 +474,11 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 다음 하나(별도 승인): 중간 프레임 동적 윤곽을 뺀 endpoint-only VACE 조건으로 바꾸고, adapter·loss·scale·위치는 그대로 둔 채 같은 진단을 한다. 그래서 궤적이 유일한 중간 동작 정보원일 때 ON/NULL gradient와 보정 방향이 갈라지는지 본다.
 
 반증 조건과 그 다음 후보(입력 표현)는 [RESULTS](experiments/C-010-trajectory-signal-diagnostics/RESULTS.md)에 있다. 더 큰 residual·더 긴 학습은 근거가 없어 보류한다.
+
+## C-011 endpoint-only ablation 완료 (2026-11-01)
+
+동적 윤곽 제거만으로는 point 궤적 adapter가 유용한 추가 제어를 학습하지 않았다(NO_ESTABLISHED_GAIN). 과거 판정은 보존한다. endpoint-only를 기본 경로로 채택하지 않는다.
+
+다음 하나(별도 승인): E 조건·adapter·학습량은 그대로 두고, 예측 x̂0의 track 위치 latent가 같은 점의 endpoint patch와 일치하도록 하는 **궤적 일치 감독 항**을 추가한다.
+
+반증 조건(보조 항은 줄지만 블라인드에서 ON ≈ NULL이고 사건 이득이 없음)이 성립하면, 이 residual 주입 경로를 버리고 VACE 입력 쪽 궤적 표현을 검토한다. [결과](experiments/C-011-endpoint-only-trajectory-ablation/RESULTS.md).

@@ -1,0 +1,8 @@
+{
+  "L_layout": {"frames_0_32": "source frames 0/32 (= anchors start/end, byte-equal)", "frames_1_31": "dynamic binary layout (C-006 data/<clip>/layout)", "mask_G": "white_v1 (v,v,v)", "cache": "C-009 cache-white", "checkpoint": "C-009 train-white checkpoint-256"},
+  "E_endpoint": {"frames_0_32": "same anchors", "frames_1_31": "(127,127,127) all channels; normalized -0.00390625 bf16, not zero", "mask_G": "same white_v1", "cache": "C-011 cache-endpoint (condition_family endpoint_gray127_v1)", "checkpoint": "C-011 train-endpoint checkpoint-256"},
+  "verified": {"inactive_branch_L_equals_E": true, "mask64_L_equals_E": true, "reactive_differs": true, "noncontext_keys_byte_equal": true,
+               "live_generation_prepare_equals_E_cache": {"elephant": true, "goat": true},
+               "video_first_model_input_context_equals_family_cache": "10/10", "video_initial_noise_identical": "10/10"},
+  "generation": {"code": "C-009 gen/generate_video.py unchanged", "E": "condition_mode=endpoint, layout_dir=None", "L": "condition_mode=layout_mov", "point_sidecar": "C-007 sidecars/<clip>.pt (no clean_latent)", "CFG": 5, "steps": 50, "seed": 20261028}
+}

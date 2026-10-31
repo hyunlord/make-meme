@@ -1,0 +1,4 @@
+{"base": "C-009 configs/train-white.json (= C-006 train-v2 contract)", "script": "C-006 code/train_adapter.py unchanged via C-009 train_white.py via C-011 train_endpoint.py",
+ "resume_from": "C-006 outputs/train/checkpoint-000.pt (same step000 as C-006 train-v2 and C-009)",
+ "runtime_differences_only": {"cache_root": "C-011 cache-endpoint", "output": "C-011 outputs/train-endpoint", "deadline_epoch": "new"},
+ "refusals": ["condition_family != endpoint_gray127_v1", "mask_contract != white_v1", "any cache file listed as layout parent (legacy_sha256)", "any file not in manifest"]}

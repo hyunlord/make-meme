@@ -1,0 +1,11 @@
+{
+  "public_vae_encode": {"cache": 20, "live_parity": 4, "video_conditions": 16, "total": 40, "cap": 40, "spare_used": 0},
+  "training": {"updates": 256, "training_forward": 256, "backward": 256, "validation_forward": 18, "diagnostic_forward": 5, "active_seconds": 258, "heavy_stage_seconds": 266.6},
+  "probe_full_forward": 72, "gradient_forward": 16, "vjp": 16, "optimizer_steps_outside_training": 0,
+  "samplers": {"new": 8, "spare_used": 0, "scheduler_steps": 400, "model_fn_calls": 800, "seconds_each": 90},
+  "vae_decode": 8, "decode_recovery": 0,
+  "heavy_stage_seconds": {"rebuild": 44.9, "live_parity": 20.4, "train": 266.6, "probes": 80.3},
+  "downloads": 0, "imagegen": 0, "sam": 0, "cotracker": 0, "14b": 0, "upscale_or_composite": 0,
+  "manual_review": "agent blind sheet review once per clip; time not measured (null); no human continuous playback",
+  "guard_changes": "none"
+}
