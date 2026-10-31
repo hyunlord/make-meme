@@ -1,0 +1,11 @@
+{
+  "package": "C010-review-20261031.zip",
+  "sha256": "766a8b3ccbde401115498a2839767f35c4ad9ad2b7bd27a3e7efa92764d6d6ef",
+  "bytes": 2535957,
+  "files": 19,
+  "contents": "index.html viewer, track overlays (derived), chain/decomposition/finite-difference charts (derived), C-009 MP4 byte copies (SOURCE_derived, BASE_5, NEW_ON_5, NEW_NULL_5; reference only, not new generation), docs and public JSON",
+  "spark": {"location": "/tmp", "zip_testzip": "PASS", "extraction_manifest_sha256": "PASS"},
+  "mac": {"location": "/tmp", "sha256_equal_to_spark": true, "extraction_manifest_sha256": "PASS"},
+  "note": "DELIVERY.json itself is not inside the package (written after hashing)",
+  "private_only_on_spark": "outputs/diagnose/METRICS.json original, input-contrast outputs, stage configs and logs"
+}

@@ -466,3 +466,11 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 ## C-009 정상 조건 재학습 완료 (2026-10-31)
 
 오류 조건(C-006/C-007)과 정상 조건(C-009)의 결과를 구분한다. 정상 조건에서 adapter의 손상은 없어졌지만 BASE·NULL 대비 이득도 없다. 다음 하나(별도 승인): 정상 조건 adapter의 기여가 왜 작은지(residual 크기, ON/NULL block 통계, 궤적 신호 gradient)를 진단하고, 그 결과로 표현·주입 구조 변경 여부를 정한다. 독립 영상 확장 검증은 그 다음이다. [결과](experiments/C-009-corrected-conditioning-retrain/RESULTS.md).
+
+## C-010 궤적 신호 진단 완료 (2026-10-31)
+
+정상 조건(C-009) 이후의 진단이다. 신호 전달은 끊기지 않지만, 궤적 고유의 보정 방향과 학습 신호가 없다.
+
+다음 하나(별도 승인): 중간 프레임 동적 윤곽을 뺀 endpoint-only VACE 조건으로 바꾸고, adapter·loss·scale·위치는 그대로 둔 채 같은 진단을 한다. 그래서 궤적이 유일한 중간 동작 정보원일 때 ON/NULL gradient와 보정 방향이 갈라지는지 본다.
+
+반증 조건과 그 다음 후보(입력 표현)는 [RESULTS](experiments/C-010-trajectory-signal-diagnostics/RESULTS.md)에 있다. 더 큰 residual·더 긴 학습은 근거가 없어 보류한다.

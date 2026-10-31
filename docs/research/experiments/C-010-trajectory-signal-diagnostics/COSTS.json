@@ -1,0 +1,11 @@
+{
+  "full_forward": {"main_native": 12, "main_bypass": 12, "main_zero": 12, "main_on": 24, "main_null": 24, "observer_off": 4, "repeat": 2, "gradient_forward": 16, "finite_difference": 12, "rollout": 9, "total": 127, "normal_cap": 131, "spare_used": 0},
+  "backward_vjp": 16,
+  "backward_note": "non-reentrant checkpointing recomputes blocks 26-29 inside each backward; not counted as full forwards",
+  "adapter_only_calls": 116,
+  "optimizer_steps": 0, "training": 0, "samplers": 0, "vae_encode": 0, "vae_decode": 0, "downloads": 0,
+  "stage_a_cpu": "input contrast + overlays, CPU only, before PLAN commit",
+  "heavy_stage_seconds": 126, "memory_peak_gb": 8.7, "swap_peak": 0,
+  "manual_review": "track overlays and charts inspected once by the agent; time not measured (null)",
+  "guard_changes": "none"
+}

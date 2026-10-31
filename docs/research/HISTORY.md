@@ -781,3 +781,13 @@ C-007에서 발견한 cache↔생성 VACE context 불일치의 원인을 확정�
 ## C-009 흰 마스크 cache 재생성 · 동일 설정 재학습 (2026-10-31)
 
 C-008에서 확정한 빨간 마스크 오류만 고쳐 13개 cache의 `vace_context`를 재생성했다. 다른 필드는 byte 단위로 동일하고, 실제 생성 경로와 exact로 일치한다. C-006 train-v2와 같은 step000(adapter·optimizer·RNG·generator·cursor exact)과 같은 256-step schedule로 원본 학습 코드를 다시 실행했다. 정상 context probe에서 과거 adapter는 모든 σ에서 BASE보다 나빴고(+0.03~+0.15), 새 adapter는 BASE와 ±0.005 이내였다. elephant 영상에서 과거의 붉은 번짐(붉은 기 86)은 사라졌지만(12), NEW_ON은 BASE와 픽셀 차이 4–5.5, NEW_NULL과 3.3으로 거의 같다. C-006/C-007의 회귀는 오류 조건 학습 때문이었고, 정상 조건에서는 point adapter의 이득이 확인되지 않는다(CONDITION_FIX_REDUCES_DAMAGE, NO_ESTABLISHED_GAIN). 과거 판정은 보존한다. [결과](experiments/C-009-corrected-conditioning-retrain/RESULTS.md) · [해설](experiments/C-009-corrected-conditioning-retrain/LESSON_KO.md).
+
+## C-010 정상 조건 adapter 궤적 신호 진단 (2026-10-31)
+
+C-009 white checkpoint 000/128/256을 동결하고, bear·dance-twirl(train), elephant·goat(validation) × σ 0.95/0.50/0.05에서 같은 noisy state의 BASE/ON/NULL을 비교했다(full forward 127, 학습·sampler·VAE 0).
+- ON−NULL 입력 차이(3.7–24 px)는 adapter 내부에서 줄지 않는다(시간 평균 η 0.96–0.98). residual은 hidden의 약 2.5%로 BF16에서도 그대로 더해지고, 최종 예측을 1–2% 바꾼다.
+- 그러나 궤적 고유 변화는 σ 0.95·0.50에서 4/4 사례 모두 FM 오차 방향과 정렬되지 않아 손실을 늘린다. BASE 대비 개선은 NULL도 얻는 공통 보정이다.
+- ON/NULL 학습 gradient cos가 0.95 이상으로 궤적 고유의 학습 신호가 거의 없다.
+- 사전 규칙 판정은 DIAGNOSTIC_INCONCLUSIVE, 우선 가설은 조건 중복(동적 윤곽·noisy state가 이미 중간 동작을 줌)이다.
+
+[결과](experiments/C-010-trajectory-signal-diagnostics/RESULTS.md) · [해설](experiments/C-010-trajectory-signal-diagnostics/LESSON_KO.md).

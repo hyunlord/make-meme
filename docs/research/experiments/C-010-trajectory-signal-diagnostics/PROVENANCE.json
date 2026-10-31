@@ -1,0 +1,34 @@
+{
+ "parent_commit": "fbb07f11af7da0d81b7c72e951ac90e93b1d8189",
+ "plan_commit": "91287fee92d30e88c098bd510c6aec261a172089",
+ "white_cache": {
+  "mask_contract": "white_v1: Image.new(RGB, (416,240), (v,v,v)), v=0 at frames 0/32 else 255",
+  "files": {
+   "bear": "630b029e3d677dde702dbb4d2e640e95254c1d324c93ee5c7c4649973a95fd21",
+   "dance-twirl": "a81fd4592ba0c3ee55035d2c8f5ec5dc4b6939cd63f94be0a1b9224939526152",
+   "elephant": "64e99761670c5cb3a8e0e5e87162562aac4f70a7ee8de80d484a16ba8a2ad3a4",
+   "goat": "e12396d67fe8a9d531356a059f585314b94a8b126237ed3241722f9d8fdc1d26"
+  }
+ },
+ "checkpoints_c009_white": {
+  "000": "c8e923ef0d9d3e096eb35d094cd6bd0da2d08ef99942d673ab19d5d58baf7fec",
+  "128": "cbc266ef59c00c08bd15d0cc4b98352745a2f2858d2cf11435fd1c3367b203c3",
+  "256": "d28981573a7ac05e214023329bea4f7d439acee24bed61d44a45f79edee1fb78"
+ },
+ "probe_grid_source": "C-007 INFERENCE_INPUT_MANIFEST probe_grid sha256 605b02529514caf45add747cad81bb5f7e1497be82b7b62b0e18653c3316730e",
+ "point_exclusions_sha256": "606b2b76c49f6edef96eff48b89965237deb762bc7d8e0c75d71ad2beb276972",
+ "rollout_source": "C-009 NEW_ON_5 trace step-00/40/49 + contexts.pt",
+ "code_sha256": {
+  "signal_common.py": "e4f874b27724f144bbdcdb70ecc3b1e7b6ac162ac4a1e7b891a72d69e14f0379",
+  "input_contrast.py": "beda0ffeb66c011447036b26fcafc7d2ccdf527e33412c30a40bb9e8a8d43e7e",
+  "diagnose_signal.py": "a76898f4e5a7b77d6224768dba70ad08788415aa7376f3d7dee9ce47a1997539",
+  "make_stage.py": "19a4b28e58f3b9347e50431f912ed5cdf58fdb9ff96f88fadf32c7f9267ee37c"
+ },
+ "c006_code_sha256": {
+  "point_adapter.py": "d0ba6a81c3eb195685bd4bc83c480c5904ab9d29416d95ce4671b2b661a25fd4",
+  "point_features.py": "22bbb7b8ebbdfb961633a4e6dfae3775a8292a496d1738c25e6b840220ca6c58",
+  "wan_adapter_forward.py": "c0afa6cf1e4afdabda2b8b41f9d295c6a4313230e5eaf42ed244989eed86bb30",
+  "training_state.py": "911dbd9f3015332a592e659d109e64e208af63743aeb7a4a2d9c64c825770ef1"
+ },
+ "metrics_private_sha256": "0fdb711f7a8c973df7743130e363797e120866d44b062a79b128f18370dd81e5"
+}
