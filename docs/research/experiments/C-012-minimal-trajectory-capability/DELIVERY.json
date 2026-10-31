@@ -1,0 +1,20 @@
+{
+  "experiment": "C-012-minimal-trajectory-capability",
+  "review_zip": {"name": "C012-review-20261101.zip", "sha256": "21dbf96c4800cff55d7b2386f30eb5f095cf1fc18360c6c60b1d2d3f2d967df0",
+                 "bytes": 6141821, "entries": 79, "contents": "derived MP4s (33f@16fps; DragAnything 20f@7fps native + 10fps comparison copy), 9-sample sheets, path plots, index.html viewer, docs, code, RUNS/METRICS/TASK_MANIFEST/FIXTURES, MANIFEST.sha256 (78 files, excludes itself)"},
+  "verification": {
+    "spark": {"location": "/tmp", "zip_crc_test": "PASS", "sha256": "PASS", "extract_and_manifest_check": "PASS"},
+    "mac": {"location": "/tmp", "transfer_sha256_equal": "PASS", "size_equal": "PASS", "zip_crc_test": "PASS", "extract_and_manifest_check": "PASS (78/78)"},
+    "first_build_note": "first ZIP (sha a27c5462...) listed MANIFEST.sha256 inside itself; rebuilt without the self-entry, no content change"
+  },
+  "not_packaged": "raw latents, checkpoints, caches, task frames beyond sheets/MP4s, external weights and the DragAnything code checkout (no LICENSE file in repo); kept private on Spark",
+  "external_licenses": {
+    "DragAnything code @79355363": "no LICENSE file in repository; redistribution terms unconfirmed; not redistributed",
+    "stabilityai/stable-video-diffusion-img2vid @9cf024d5": "Stability AI community license ('other'); non-commercial research use",
+    "weijiawu/DragAnything @f66fb7cc": "apache-2.0 (model card)",
+    "windwhinny/chilloutmix @e0bf5dae": "no license field on HF mirror; upstream reported as CreativeML OpenRAIL-M (unconfirmed)",
+    "commercial_use_classification": "not assessed; this result is not a commercially deployable system"
+  },
+  "temporal": "UNVERIFIED (no continuous human viewing)",
+  "follow_up_started": false
+}

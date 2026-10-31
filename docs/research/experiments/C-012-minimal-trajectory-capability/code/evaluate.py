@@ -111,10 +111,10 @@ def judge_pair(rows_a: list[dict], rows_b: list[dict]) -> dict:
             'c5_central_side_count': int(sum(side)), 'c5_pass': sum(side) >= 4,
             'c8_max_background_shift_px': bg, 'c8_pass': bg <= 3.0,
             'central_missing': any(i in central for i in bad)}
-    mid = [i for i, r in enumerate(rows_a) if abs(r['tau'] - 0.5) < 1e-9][0]
+    mid = 4   # the pre-registered tau=4/8 sample; for N != 33 frames its actual tau is round(0.5*(N-1))/(N-1)
     ca, cb = rows_a[mid]['center'], rows_b[mid]['center']
     gap = None if ca is None or cb is None else math.hypot(ca[0] - cb[0], ca[1] - cb[1])
-    truth = abs(path_center('A', 0.5)[1] - path_center('B', 0.5)[1])
+    truth = abs(path_center('A', rows_a[mid]['tau'])[1] - path_center('B', rows_a[mid]['tau'])[1])
     result['c6_mid_gap_px'] = gap
     result['c6_pass'] = gap is not None and gap >= 0.5 * truth
     matched, swapped = [], []

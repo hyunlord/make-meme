@@ -482,3 +482,12 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 다음 하나(별도 승인): E 조건·adapter·학습량은 그대로 두고, 예측 x̂0의 track 위치 latent가 같은 점의 endpoint patch와 일치하도록 하는 **궤적 일치 감독 항**을 추가한다.
 
 반증 조건(보조 항은 줄지만 블라인드에서 ON ≈ NULL이고 사건 이득이 없음)이 성립하면, 이 residual 주입 경로를 버리고 VACE 입력 쪽 궤적 표현을 검토한다. [결과](experiments/C-011-endpoint-only-trajectory-ablation/RESULTS.md).
+
+## C-012 최소 기능 시험 완료 (2026-11-01)
+
+현재 point adapter는 같은 양끝에서 학습한 두 2D 경로를 point 조건으로 골라 생성할 수 있다(첫 seed 통과, 두 번째 seed는 배경 붕괴 → SEED_SENSITIVE_CAPABILITY).
+- **계속**: residual 주입 구조. 폐기 근거가 없다.
+- **철회**: C-011의 궤적 일치 보조 항 제안. FM만으로 분기를 학습했다.
+- **보류**: 동물 자료 확대 학습, scale·주입 위치 변경.
+- **비교 기준**: DragAnything(학습 없이 부분 분기)과 native layout(dense 조건)은 참고 기준으로 남긴다. 전환 근거는 없다.
+- **다음 단일 조건(미실행)**: 같은 장면에서 학습하지 않은 경로로 시험해, 연속 관계를 배웠는지 두 경로를 기억했는지 가른다. BASE seed 20261029로 배경 붕괴 원인도 함께 가른다. 반증 조건은 [RESULTS](experiments/C-012-minimal-trajectory-capability/RESULTS.md) §5에 있다.

@@ -803,3 +803,20 @@ C-009 white checkpoint 000/128/256을 동결하고, bear·dance-twirl(train), el
 - C-010의 조건 중복 가설은 이번 절차에서 지지되지 않았다. 처음 적었던 "학습 σ 비중" 후보는 실측(update의 55%가 이미 σ ≥ 0.8)으로 철회했다.
 
 [결과](experiments/C-011-endpoint-only-trajectory-ablation/RESULTS.md) · [관측](experiments/C-011-endpoint-only-trajectory-ablation/OBSERVATIONS.md) · [해설](experiments/C-011-endpoint-only-trajectory-ablation/LESSON_KO.md).
+
+## C-012 최소 궤적 제어 능력 시험 (2026-11-01)
+
+C-009~C-011은 동물 영상에서 ON/NULL의 작은 차이를 진단했다. 그 차이가 자료·평가·구조 중 무엇 때문인지 가를 수 없어, 질문을 "할 수 있는가"로 바꿨다.
+- 과제: CPU renderer로 무늬 공 1개를 만들었다. 같은 양끝·텍스트·noise에서 중간 경로만 위(A)/아래(B)로 반대다(중앙 간격 96px).
+- 과제 유효성: 정답과 VAE 재구성에서 판독기가 두 경로를 구분했다.
+- 학습: 현재 PointAnchorAdapter를 구조 변경 없이 A/B 두 clip에만 학습했다(NULL·negative dropout 0, step000 값에서 새 optimizer).
+- 결과:
+  - 256·1024는 기준 미달이다.
+  - **2048에서 seed 20261028의 A/B 영상이 각각 요청 경로를 따랐다**(오차 1.8/1.6px) → CAPABILITY_PASS.
+  - 사전 고정한 seed 20261029에서는 경로는 맞지만 배경이 무너졌다 → SEED_SENSITIVE_CAPABILITY.
+- 대조군:
+  - native layout: A는 정확했고, B는 경로를 따르지만 외형이 무너졌다.
+  - DragAnything(공식, 첫 이미지+궤적): 중앙 분기는 맞지만 끝 구간에서 외형이 바뀌었다 → PARTIAL_CONTROL.
+- 의미: 이 주입 구조와 FM 목적은 궤적이 정답을 가르는 자료에서는 추가 loss 없이 분기를 학습한다. C-011의 보조 항 제안은 철회한다. 일반화(학습하지 않은 경로)는 아직 모른다.
+
+[결과](experiments/C-012-minimal-trajectory-capability/RESULTS.md) · [해설](experiments/C-012-minimal-trajectory-capability/METHOD_AND_LESSON_KO.md).

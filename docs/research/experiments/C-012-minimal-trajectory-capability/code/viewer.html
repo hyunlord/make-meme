@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C-012 궤적 A/B 검토</title>
+<style>
+:root{--bg:#f6f4ef;--fg:#1d1d1b;--muted:#6b675e;--card:#fff;--line:#d9d4c8;--a:#2a5ac8;--b:#c8462a}
+@media (prefers-color-scheme:dark){:root{--bg:#191a1c;--fg:#ecebe7;--muted:#a19d94;--card:#232427;--line:#3a3b3f}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:8px 0}.q{font-size:17px;font-weight:600;margin:4px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin:12px 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.pair{grid-template-columns:1fr}}
+video,img{width:100%;border-radius:4px;background:#000}.lab{font-weight:600}.muted{color:var(--muted);font-size:13px}
+.A{color:var(--a)}.B{color:var(--b)}.v{font-family:ui-monospace,monospace;font-size:13px}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;border:1px solid var(--line);font-size:12px;margin-left:6px}
+</style></head><body><main>
+<h1>C-012 최소 궤적 제어</h1>
+<p class="q">같은 양끝 이미지와 같은 noise에서 궤적 A를 주면 A로, 궤적 B를 주면 B로 움직이는가?</p>
+<div class="card"><div class="lab">공통 시작·종료 앵커</div><div class="pair"><img src="anchor_start.png" alt="start"><img src="anchor_end.png" alt="end"></div>
+<p class="muted">A(파랑)는 가운데에서 위쪽, B(빨강)는 아래쪽을 지난다(중앙 간격 96px). 텍스트·noise·VACE context·checkpoint는 A/B 동일, point 중간 좌표만 다르다. 판독은 요청 경로를 모르는 전체 화면 template matching. 연속 재생 품질은 확인하지 않았다(temporal=UNVERIFIED).</p></div>
+<div id="list"></div>
+</main><script>
+const E=/*ENTRIES*/[];
+const f=x=>x==null?'—':(typeof x==='number'?x.toFixed(1):x);
+document.getElementById('list').innerHTML=E.map(e=>{
+ const sides=Object.keys(e.files).map(s=>`<div><div class="lab ${s}">${e.key==='base'?'A/B 공통':s}</div>
+  <video src="${e.files[s].mp4}" controls loop muted playsinline></video><img src="${e.files[s].sheet}" alt="sheet">
+  ${e.files[s].compare?`<div class="muted">비교 속도 사본: <a href="${e.files[s].compare}">${e.files[s].compare}</a> (native ${e.fps}fps 원본은 위)</div>`:''}</div>`).join('');
+ const j=e.judge?`<div class="v">판정 ${e.judge.verdict} · τ0.5 간격 ${f(e.judge.mid_gap_px)}px · matched ${f(e.judge.matched_px)} / swapped ${f(e.judge.swapped_px)}px<br>
+  A: 평균오차 ${f(e.judge.A.c3_mean_observed_error_px)}px, 누락 ${e.judge.A.missing_or_duplicate.length}, 중앙 위쪽 ${e.judge.A.c5_central_side_count}/5, 배경이동 ${f(e.judge.A.c8_max_background_shift_px)}px<br>
+  B: 평균오차 ${f(e.judge.B.c3_mean_observed_error_px)}px, 누락 ${e.judge.B.missing_or_duplicate.length}, 중앙 아래쪽 ${e.judge.B.c5_central_side_count}/5, 배경이동 ${f(e.judge.B.c8_max_background_shift_px)}px</div>`:'';
+ return `<div class="card"><div class="lab">${e.label}<span class="tag">${e.frames}f</span></div><div class="pair">${sides}</div>
+  <img src="${e.paths_plot}" alt="paths" style="max-width:520px;margin-top:8px">${j}</div>`}).join('');
+</script></body></html>
