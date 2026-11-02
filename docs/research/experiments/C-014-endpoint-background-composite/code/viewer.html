@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="C-014 양끝 관측 배경 CPU 합성 RAW POST 비교"><title>C-014 관측 배경 합성 검토</title>
+<style>
+:root{--bg:#f6f4ef;--fg:#1d1d1b;--muted:#59564e;--card:#fff;--line:#d9d4c8;--link:#2a5ac8;--warn:#a52f1a;--space:16px;--half:8px;--large:24px;--radius:4px;--body:16px;--small:14px;--h1:24px;--h2:18px;--border:1px;--max:1280px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:var(--body)/1.5 system-ui,sans-serif;word-break:keep-all;overflow-wrap:anywhere}main{max-width:var(--max);margin:auto;padding:var(--space)}h1{font-size:var(--h1)}h2{font-size:var(--h2)}nav,.controls{display:flex;flex-wrap:wrap;gap:var(--space);align-items:center;margin-bottom:var(--space)}button{font:inherit;padding:var(--half) var(--space);background:var(--card);color:var(--fg);border:var(--border) solid var(--line);border-radius:var(--radius);cursor:pointer}button:hover,button[aria-selected=true]{border-color:var(--link);color:var(--link)}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--link);outline-offset:4px}.pair,.sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space)}article,details{padding:var(--space);background:var(--card);border:var(--border) solid var(--line);border-radius:var(--radius);margin-bottom:var(--space)}video,img{width:100%;height:auto;aspect-ratio:416/240}.crop{aspect-ratio:1;max-width:336px;image-rendering:auto}.note,small{color:var(--muted);font-size:var(--small)}a{color:var(--link)}input{max-width:100%}.error{color:var(--warn)}[hidden]{display:none!important}@media(max-width:700px){.pair,.sources{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>C-014 양끝 관측 배경 · RAW / CPU 합성</h1>
+<p>RAW는 기존 생성 원본, POST는 동일한 고정 44–52px 영역으로 합성한 파생 결과입니다. 생성 모델 개선 결과가 아닙니다.</p>
+<nav role="tablist" aria-label="사례 선택"><button role="tab" data-case="I50_S1" aria-selected="true">I50 · seed1</button><button role="tab" data-case="S_S1" aria-selected="false">S · seed1</button><button role="tab" data-case="ON2048_S2_A" aria-selected="false">A · seed2</button></nav>
+<div class="controls"><label for="frame">공통 frame-index <output id="index">16</output> / 32</label><input id="frame" type="range" min="0" max="32" step="1" value="16"><button id="play">RAW / POST 함께 재생</button><button id="pause">일시정지</button></div>
+<p id="media-error" class="error" role="alert" hidden>미디어를 읽지 못했습니다. ZIP 전체를 추출한 뒤 index.html을 열어 주세요.</p>
+<section class="pair" aria-label="실제 영상 비교"><article><h2>RAW · 부모 생성 원 MP4</h2><video id="raw-video" controls muted playsinline preload="metadata" width="416" height="240"></video></article><article><h2>POST · ENDPOINT_BG_COMPOSITE</h2><video id="post-video" controls muted playsinline preload="metadata" width="416" height="240"></video></article></section>
+<p id="numeric-summary" aria-live="polite"></p>
+<p class="note">16fps MP4는 손실 미리보기입니다. 아래 PNG가 정확한 frame-index 비교 기준입니다. 기술적 재생 검사는 연속 지각 평가가 아닙니다. temporal=UNVERIFIED.</p>
+<div class="controls"><label><input id="overlay" type="checkbox"> RAW에 alpha와 r=28/44/52 QA 원 표시</label><span class="note">정답 분할이 아닌 고정 편집 영역입니다. 최종 영상에는 표시하지 않습니다.</span></div>
+<section class="pair" aria-label="무손실 프레임 비교"><article><h2>RAW · 원 PNG / 선택적 QA overlay</h2><img id="raw-frame" width="416" height="240" alt="RAW 선택 프레임"></article><article><h2>POST · 저장 PNG</h2><img id="post-frame" width="416" height="240" alt="POST 선택 프레임"></article></section>
+<section class="pair" aria-label="동일 배율 경계 확대"><article><h2>RAW · 경계 crop</h2><img class="crop" id="raw-crop" width="112" height="112" alt="RAW 요청 중심 112픽셀 crop"></article><article><h2>POST · 경계 crop</h2><img class="crop" id="post-crop" width="112" height="112" alt="POST 요청 중심 112픽셀 crop"></article></section>
+<p class="note">112×112px crop은 요청 중심을 반올림한 동일 위치입니다. core 픽셀 보존은 늘어난 실제 객체 전체의 보존을 보장하지 않습니다.</p>
+<p><a id="raw-sheet">RAW 전33프레임 시트</a> · <a id="post-sheet">POST 전33프레임 시트</a> · <a id="boundary-sheet">9시점 경계 비교</a> (모두 파생 검토물)</p>
+<details><summary>실제 입력 앵커 · 관측 배경 · 출처 지도</summary><div class="sources"><figure><img src="anchors/start.png" width="416" height="240" alt="원 입력 시작 앵커"><figcaption>입력 A0 · 생성 첫 프레임 아님</figcaption></figure><figure><img src="anchors/end.png" width="416" height="240" alt="원 입력 종료 앵커"><figcaption>입력 AT · 생성 마지막 프레임 아님</figcaption></figure><figure><img src="plate/background_from_endpoints.png" width="416" height="240" alt="두 앵커에서 복사한 배경 plate"><figcaption>ENDPOINT_OBSERVED_BACKGROUND</figcaption></figure><figure><img src="plate/source_map_display.png" width="416" height="240" alt="배경 픽셀의 앵커 출처 지도"><figcaption>파랑=A0 · 주황=AT · 검정=unknown. 표시용 파생 색상 지도.</figcaption></figure></div></details>
+<p><a href="RESULTS.md">실제 결과·판정</a> · <a href="METRICS.json">전33프레임 수치</a> · <a href="METHOD_AND_LESSON_KO.md">한국어 해설</a> · <a href="MEDIA_MANIFEST.json">미디어 계보·해시</a></p>
+</main><script>
+const data=/*DATA*/{};
+const frame=document.getElementById('frame'), toggle=document.getElementById('overlay');
+const videos=[document.getElementById('raw-video'),document.getElementById('post-video')];
+let selected=data.cases[0];
+function pause(){videos.forEach(v=>v.pause())}
+function images(){const t=Number(frame.value), f=String(t).padStart(3,'0');document.getElementById('index').value=String(t);for(const kind of ['raw','post']){const img=document.getElementById(`${kind}-frame`);img.src=kind==='raw'&&toggle.checked?`overlays/${selected}/${f}.png`:`frames/${selected}/${kind.toUpperCase()}/${f}.png`;img.alt=`${selected} ${kind.toUpperCase()} t=${t}${kind==='raw'&&toggle.checked?' QA overlay':''}`;document.getElementById(`${kind}-crop`).src=`crops/${selected}/${kind.toUpperCase()}/${f}.png`;document.getElementById(`${kind}-sheet`).href=`sheets/${selected}-${kind.toUpperCase()}-all33.png`}document.getElementById('boundary-sheet').href=`sheets/${selected}-boundary9.png`}
+function seek(){pause();videos.forEach(v=>{if(v.readyState>=1)v.currentTime=Number(frame.value)/16});images()}
+function select(id){pause();selected=id;const m=data.summaries[id];document.getElementById('numeric-summary').textContent=`${m.position} · 전33프레임 최대 중심 변화 ${m.shift===null?'판독불가':m.shift.toFixed(3)+'px'} · core44 exact=${m.core} · outside52 exact=${m.outside}. 복사 영역 exact는 합성식의 성질입니다.`;document.getElementById('media-error').hidden=true;document.querySelectorAll('[data-case]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.case===id)));videos.forEach((v,i)=>{v.src=`media/${id}-${i===0?'RAW':'POST'}.mp4`});images()}
+videos.forEach(v=>{v.addEventListener('loadedmetadata',()=>{v.currentTime=Number(frame.value)/16});v.addEventListener('error',()=>{document.getElementById('media-error').hidden=false})});
+document.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{document.getElementById('media-error').hidden=false}));
+document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.case)));
+frame.addEventListener('input',seek);toggle.addEventListener('change',images);
+document.getElementById('pause').addEventListener('click',pause);
+document.getElementById('play').addEventListener('click',()=>{videos.forEach(v=>{v.currentTime=Number(frame.value)/16});Promise.all(videos.map(v=>v.play())).catch(()=>{document.getElementById('media-error').hidden=false})});
+select(selected);
+</script></body></html>
