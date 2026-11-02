@@ -820,3 +820,7 @@ C-009~C-011은 동물 영상에서 ON/NULL의 작은 차이를 진단했다. 그
 - 의미: 이 주입 구조와 FM 목적은 궤적이 정답을 가르는 자료에서는 추가 loss 없이 분기를 학습한다. C-011의 보조 항 제안은 철회한다. 일반화(학습하지 않은 경로)는 아직 모른다.
 
 [결과](experiments/C-012-minimal-trajectory-capability/RESULTS.md) · [해설](experiments/C-012-minimal-trajectory-capability/METHOD_AND_LESSON_KO.md).
+
+## C-013 동결 미학습 경로 시험 착수와 안전 중단 (2026-11-02)
+
+C-012 최소 능력의 후속으로 I25/I50/I75/S와 seed2 BASE 대조5개를 사전 고정했다(c515cc8). checkpoint/좌표/sidecar CPU 검증 후 첫 guarded CPU admission에서 START_SWAP_BUDGET(235.9MiB >64MiB)으로 중단했다. 신규 영상0/5, 학습·model load·sampler·step·forward0. 재시도/가드 완화 없음. 일반화와 배경 원인은 INCONCLUSIVE, temporal UNVERIFIED. C-012 SEED_SENSITIVE_CAPABILITY는 보존한다. [결과](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md).

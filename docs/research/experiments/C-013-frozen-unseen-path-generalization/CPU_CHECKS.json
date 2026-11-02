@@ -1,0 +1,13 @@
+{
+  "geometry_contract": {
+    "I25": "PASS: exact geometry, trained A/B rejection, core missing/duplicate rejection, off-sample missing quality rejection",
+    "I50": "PASS: exact geometry, trained A/B rejection, core missing/duplicate rejection, off-sample missing quality rejection",
+    "I75": "PASS: exact geometry, trained A/B rejection, core missing/duplicate rejection, off-sample missing quality rejection",
+    "S": "PASS: exact geometry, trained A/B rejection, core missing/duplicate rejection, off-sample missing quality rejection"
+  },
+  "python_syntax": "PASS",
+  "renderer_fixtures": "NOT_RUN",
+  "renderer_reason": "Mac Python lacks cv2; Spark guarded entry stopped on START_SWAP_BUDGET; no bypass or installation",
+  "model_outputs_evaluated": 0,
+  "lint_typecheck": "NOT_RUN: ruff/basedpyright unavailable on local PATH"
+}

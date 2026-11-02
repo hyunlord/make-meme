@@ -491,3 +491,7 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 - **보류**: 동물 자료 확대 학습, scale·주입 위치 변경.
 - **비교 기준**: DragAnything(학습 없이 부분 분기)과 native layout(dense 조건)은 참고 기준으로 남긴다. 전환 근거는 없다.
 - **다음 단일 조건(미실행)**: 같은 장면에서 학습하지 않은 경로로 시험해, 연속 관계를 배웠는지 두 경로를 기억했는지 가른다. BASE seed 20261029로 배경 붕괴 원인도 함께 가른다. 반증 조건은 [RESULTS](experiments/C-012-minimal-trajectory-capability/RESULTS.md) §5에 있다.
+
+## C-013 후속 상태 (2026-11-02)
+
+[C-012](experiments/C-012-minimal-trajectory-capability/RESULTS.md)의 학습한 A/B 최소 제어 능력을 보존한다. [C-013](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md)은 동결 checkpoint의 미학습 보간/S 경로 및 seed2 BASE 대조를 계획·준비했으나 START_SWAP_BUDGET으로 BLOCKED_SAFETY, 생성0/5이다. 일반화 미확인, 배경 원인 미분리. 다음 실행은 기존 guard 만족이 선행되어야 하며 자동 재개/학습/새 seed/외부 모델 예약 없음.

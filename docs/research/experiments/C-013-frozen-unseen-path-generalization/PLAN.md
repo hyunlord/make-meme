@@ -39,3 +39,6 @@ seed2 BASE/ON A/B 비교는 noise/context/text/앵커 exact가 전제. BASE_FAIL
 PLAN/PATHS/RUNS/METRICS/RESULTS/METHOD_AND_LESSON_KO/REPRODUCE/DELIVERY 기록. 원 MP4 byte 보존; raw/latent/가중치 private Spark. 공개 Git에는 비민감 문서·코드·hash만.
 연속 지각 검수 없이 temporal=UNVERIFIED. 같은 세션의 이미지 검토는 독립 human 평가 아님. 실제 새4영상과 요청 경로를 첫 화면, 부모A/B 비교, seed2 BASE/ON 별도 탭, 공통 slider·시트·평면도·재생 제공.
 ZIP은 실제 날짜, manifest 자기 자신/ZIP 제외; payload 수와 총 entry 수 분리. 접근하지 못한 호스트 PASS 금지. 다음 실험 자동 시작 없음.
+
+## 실행 종료 주석 (원 사전 계획 보존)
+첫 guarded CPU admission에서 START_SWAP_BUDGET으로 중단. 신규5셀 모두 NOT_RUN. 세부 RUNS/RESULTS 참조. 재시도·가드 변경 없이 종료; 사전 평가 기준은 수정하지 않음.

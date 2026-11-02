@@ -1,0 +1,104 @@
+{
+  "experiment": "C-013-frozen-unseen-path-generalization",
+  "status": "BLOCKED_SAFETY",
+  "parent_commit": "6fba3a00d587bc0f130420e0f5b8c264b5e7a548",
+  "preregistered_commit": "c515cc8",
+  "generation": {
+    "BASE_S2": {
+      "status": "NOT_RUN",
+      "reason": "START_SWAP_BUDGET before CPU worker creation",
+      "model_load_attempts": 0,
+      "sampler_attempts": 0,
+      "scheduler_steps": 0,
+      "model_fn_calls": 0,
+      "input_parity": "NOT_RUN",
+      "output_available": false
+    },
+    "I25_S1": {
+      "status": "NOT_RUN",
+      "reason": "Not started after first guarded safety stop",
+      "model_load_attempts": 0,
+      "sampler_attempts": 0,
+      "scheduler_steps": 0,
+      "model_fn_calls": 0,
+      "input_parity": "NOT_RUN",
+      "output_available": false
+    },
+    "I50_S1": {
+      "status": "NOT_RUN",
+      "reason": "Not started after first guarded safety stop",
+      "model_load_attempts": 0,
+      "sampler_attempts": 0,
+      "scheduler_steps": 0,
+      "model_fn_calls": 0,
+      "input_parity": "NOT_RUN",
+      "output_available": false
+    },
+    "I75_S1": {
+      "status": "NOT_RUN",
+      "reason": "Not started after first guarded safety stop",
+      "model_load_attempts": 0,
+      "sampler_attempts": 0,
+      "scheduler_steps": 0,
+      "model_fn_calls": 0,
+      "input_parity": "NOT_RUN",
+      "output_available": false
+    },
+    "S_S1": {
+      "status": "NOT_RUN",
+      "reason": "Not started after first guarded safety stop",
+      "model_load_attempts": 0,
+      "sampler_attempts": 0,
+      "scheduler_steps": 0,
+      "model_fn_calls": 0,
+      "input_parity": "NOT_RUN",
+      "output_available": false
+    }
+  },
+  "actual_budget": {
+    "guarded_cpu_admission_attempts": 1,
+    "heavy_starts": 0,
+    "model_loads": 0,
+    "samplers": 0,
+    "scheduler_steps": 0,
+    "model_fn_calls": 0,
+    "condition_vae_encode": 0,
+    "generation_decode": 0,
+    "optimizer_updates": 0,
+    "backwards": 0,
+    "probes": 0,
+    "target_encodes": 0,
+    "endpoint_patch_encodes": 0,
+    "downloads": 0,
+    "installs": 0,
+    "quality_retries": 0,
+    "mechanical_retries": 0
+  },
+  "guard": {
+    "decision": "START_SWAP_BUDGET",
+    "global_swap_bytes": 247345152,
+    "start_swap_limit_bytes": 67108864,
+    "available_bytes": 121253744640,
+    "gpu_process_count": 0,
+    "queue_status": "UNAVAILABLE",
+    "queue_counts": null,
+    "service_status": "EXPECTED_ABSENT_OBSERVED",
+    "return_code": 2,
+    "worker_created": false,
+    "supervisor_result_json": "NOT_EMITTED: admission stopped before worker creation",
+    "evidence_sha256": "7da851840cfbbc5ba4a07ec062c8b59f5fab6f93bd6d115ef369866390f3a625",
+    "guard_modified": false,
+    "retry_attempted": false
+  },
+  "checkpoint_sha256_verified": "c246971ad353f78ddb0ff7bbb162f26187f9d5437eb1158e732fd29cd334f977",
+  "cleanup": {
+    "owned_execution_terminated": true,
+    "unit_active_state": "inactive",
+    "unit_load_state": "not-found",
+    "unit_main_pid": 0,
+    "c013_process_match_count": 0,
+    "other_processes_terminated": 0,
+    "files_deleted": 0
+  },
+  "temporal": "UNVERIFIED"
+}

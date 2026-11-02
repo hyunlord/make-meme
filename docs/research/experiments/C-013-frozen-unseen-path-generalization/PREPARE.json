@@ -1,0 +1,50 @@
+{
+  "source_sidecar_sha256": "94b365070e71042f7c5c97aca25b7f7228d52baf4339decdb9237328b9b8bf57",
+  "paths": {
+    "I25": {
+      "sidecar_sha256": "89ce633bcda6a3758c5536b615aa24b6c96b1155f234b1c20a93063a2f0ef826",
+      "shared_fields_exact": true,
+      "endpoints_exact": true,
+      "positions_shape": [
+        33,
+        9,
+        2
+      ],
+      "dtype": "torch.float32"
+    },
+    "I50": {
+      "sidecar_sha256": "7e3bace72f7d444710df0682511d721b207aeea160b1195b8bb1fc1fae990402",
+      "shared_fields_exact": true,
+      "endpoints_exact": true,
+      "positions_shape": [
+        33,
+        9,
+        2
+      ],
+      "dtype": "torch.float32"
+    },
+    "I75": {
+      "sidecar_sha256": "c9f55a5e63cc071f542cd90d79965635e1d3c7600c057e00b736b288c1e45a1f",
+      "shared_fields_exact": true,
+      "endpoints_exact": true,
+      "positions_shape": [
+        33,
+        9,
+        2
+      ],
+      "dtype": "torch.float32"
+    },
+    "S": {
+      "sidecar_sha256": "c61698d9408a069c7d449bc1ccacc6f22e7844c0b7da202e3e4a546550009500",
+      "shared_fields_exact": true,
+      "endpoints_exact": true,
+      "positions_shape": [
+        33,
+        9,
+        2
+      ],
+      "dtype": "torch.float32"
+    }
+  },
+  "cuda_initialized": false
+}
