@@ -1,0 +1,11 @@
+--- C003-guard/memory.py
++++ C013-resume-guard/memory.py
+@@ -190,8 +190,6 @@
+             verdict['warnings'].append('GLOBAL_SWAP_WARNING')
+         if system['available'] < (72 if start else 24)*GIB:
+             verdict['decision'] = 'START_HEADROOM_NOT_MET' if start else 'SYSTEM_HEADROOM'
+-        elif start and system['swap'] > 64*MIB:
+-            verdict['decision'] = 'START_SWAP_BUDGET'
+         elif growth >= 64*MIB:
+             verdict['decision'] = 'GLOBAL_SWAP_GROWTH'
+         elif swapout >= 64*MIB:

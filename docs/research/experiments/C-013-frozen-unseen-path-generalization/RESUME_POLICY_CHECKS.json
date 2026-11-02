@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": {
+    "stable_high_swap": "CLEAR",
+    "growth": "GLOBAL_SWAP_GROWTH",
+    "swapout": "SWAPOUT_PRESSURE",
+    "psi": "SYSTEM_PSI_FULL_PRESSURE",
+    "start_headroom": "START_HEADROOM_NOT_MET",
+    "runtime_headroom": "SYSTEM_HEADROOM",
+    "observation_error": "OBSERVATION_FAILED",
+    "swap_current": "WORKER_SWAP_CONTRACT",
+    "swap_max": "WORKER_SWAP_CONTRACT",
+    "events": "WORKER_OOM",
+    "external_gpu": "BLOCKED",
+    "service": "BLOCKED",
+    "insufficient_window": "BLOCKED"
+  }
+}
