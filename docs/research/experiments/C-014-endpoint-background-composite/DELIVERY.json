@@ -1,0 +1,55 @@
+{
+  "name": "C014-review-20261103.zip",
+  "bytes": 44560349,
+  "sha256": "2e6dda97677e3d1f698c65ec6a37cb4c6e7f44e676101f4418b40993876d8986",
+  "zip_entries": 540,
+  "manifest_payload_count": 539,
+  "crc": "PASS",
+  "actual_extraction": "PASS",
+  "payload_hashes": "PASS",
+  "mac": {
+    "bytes": 44560349,
+    "sha256": "2e6dda97677e3d1f698c65ec6a37cb4c6e7f44e676101f4418b40993876d8986",
+    "zip_entries": 540,
+    "manifest_payload_count": 539,
+    "crc": "PASS",
+    "actual_extraction": "PASS",
+    "payload_hashes": "PASS",
+    "location_role": "Downloads ZIP and extracted review folder on actual Mac"
+  },
+  "spark": {
+    "bytes": 44560349,
+    "sha256": "2e6dda97677e3d1f698c65ec6a37cb4c6e7f44e676101f4418b40993876d8986",
+    "zip_entries": 540,
+    "manifest_payload_count": 539,
+    "crc": "PASS",
+    "actual_extraction": "PASS",
+    "payload_hashes": "PASS",
+    "location_role": "private C-014 archive and verified extraction"
+  },
+  "cross_host_transfer_equal": true,
+  "raw_mp4_copied_byte_exact": 3,
+  "post_mp4_cpu_encoded": 3,
+  "lossless_raw_png": 99,
+  "lossless_post_png": 99,
+  "excluded": [
+    "weights",
+    "latent",
+    "prior ZIPs",
+    "private input manifest and raw logs",
+    "float64 alpha NPY retained privately; formula and perframe hashes included",
+    "MANIFEST itself and ZIP from payload hashes",
+    "DELIVERY external receipt"
+  ],
+  "temporal": "UNVERIFIED",
+  "status": "COMPLETE_WITH_BOUNDARY_AND_IDENTITY_LIMITATIONS",
+  "follow_up_started": false,
+  "shutdown": {
+    "all_three_guarded_cpu_stages_normal_exit": true,
+    "c014_systemd_units_remaining": 0,
+    "gpu_jobs_at_final_query": 0,
+    "owned_browser_closed": true,
+    "final_input_hashes_unchanged": 106,
+    "other_processes_terminated": false
+  }
+}

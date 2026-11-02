@@ -1,0 +1,109 @@
+{
+  "compose": {
+    "status": "COMPLETE",
+    "started_epoch": 1793648027.215528,
+    "finished_epoch": 1793648032.6935186,
+    "worker_elapsed_seconds": 5.477990627288818,
+    "start_samples": 6,
+    "start_window_seconds": 10.258381051011384,
+    "baseline_swap_bytes": 460775424,
+    "start_available_bytes": 122218934272,
+    "max_swap_growth_bytes": 0,
+    "max_swapout_10s_bytes": 0,
+    "max_psi_full_ratio_10s": 0.0,
+    "max_worker_swap_current": 0,
+    "normal_exit_recorded": true,
+    "final_unit_inactive": true,
+    "worker_entry_freeze_validation": "PASS via unchanged run_guarded worker",
+    "final_source_hash_differences": {
+      "build_review.py": {
+        "frozen": "6dee98918b97ed00804b3b3024be7ba538e557eb177f890da688cc19ecf82f63",
+        "current": "5dc3feb3980510ff5ab368062c8db19cf4980359b11b04cd1c22140fa28eb3dc"
+      }
+    },
+    "difference_explanation": "Unused review builder finalized after compose completed; evaluator/review freeze match current. Composition code and all used inputs unchanged.",
+    "final_gpu_jobs": 0,
+    "protected_service_status": "EXPECTED_ABSENT_OBSERVED",
+    "queue_counts": null,
+    "systemd_resource_lines": [
+      "Service runtime: 4.322s",
+      "CPU time consumed: 3.717s",
+      "Memory peak: 120.5M",
+      "Memory swap peak: 0B"
+    ],
+    "guard_hashes": {
+      "policy.py": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620",
+      "supervisor.py": "760b83966cf99d4ac492085ec98f4d95fd8aab8a3b023b0599aa6be108ebf4ea",
+      "memory.py": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075",
+      "safety.py": "d3364ccf96322321354419c074e28da0e5477789886f48088d8d32a7ebb5f4ac"
+    }
+  },
+  "evaluate": {
+    "status": "COMPLETE",
+    "started_epoch": 1793648085.1408443,
+    "finished_epoch": 1793648089.5368772,
+    "worker_elapsed_seconds": 4.396032810211182,
+    "start_samples": 6,
+    "start_window_seconds": 10.258552283979952,
+    "baseline_swap_bytes": 460771328,
+    "start_available_bytes": 122223489024,
+    "max_swap_growth_bytes": 0,
+    "max_swapout_10s_bytes": 0,
+    "max_psi_full_ratio_10s": 0.0,
+    "max_worker_swap_current": 0,
+    "normal_exit_recorded": true,
+    "final_unit_inactive": true,
+    "worker_entry_freeze_validation": "PASS via unchanged run_guarded worker",
+    "final_source_hash_differences": {},
+    "difference_explanation": null,
+    "final_gpu_jobs": 0,
+    "protected_service_status": "EXPECTED_ABSENT_OBSERVED",
+    "queue_counts": null,
+    "systemd_resource_lines": [
+      "Service runtime: 3.235s",
+      "CPU time consumed: 3.428s",
+      "Memory peak: 37.5M",
+      "Memory swap peak: 0B"
+    ],
+    "guard_hashes": {
+      "policy.py": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620",
+      "supervisor.py": "760b83966cf99d4ac492085ec98f4d95fd8aab8a3b023b0599aa6be108ebf4ea",
+      "memory.py": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075",
+      "safety.py": "d3364ccf96322321354419c074e28da0e5477789886f48088d8d32a7ebb5f4ac"
+    }
+  },
+  "review": {
+    "status": "COMPLETE",
+    "started_epoch": 1793648099.874101,
+    "finished_epoch": 1793648106.3365006,
+    "worker_elapsed_seconds": 6.46239972114563,
+    "start_samples": 6,
+    "start_window_seconds": 10.248748444020748,
+    "baseline_swap_bytes": 460771328,
+    "start_available_bytes": 122248155136,
+    "max_swap_growth_bytes": 0,
+    "max_swapout_10s_bytes": 0,
+    "max_psi_full_ratio_10s": 0.0,
+    "max_worker_swap_current": 0,
+    "normal_exit_recorded": true,
+    "final_unit_inactive": true,
+    "worker_entry_freeze_validation": "PASS via unchanged run_guarded worker",
+    "final_source_hash_differences": {},
+    "difference_explanation": null,
+    "final_gpu_jobs": 0,
+    "protected_service_status": "EXPECTED_ABSENT_OBSERVED",
+    "queue_counts": null,
+    "systemd_resource_lines": [
+      "Service runtime: 5.326s",
+      "CPU time consumed: 5.214s",
+      "Memory peak: 71.6M",
+      "Memory swap peak: 0B"
+    ],
+    "guard_hashes": {
+      "policy.py": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620",
+      "supervisor.py": "760b83966cf99d4ac492085ec98f4d95fd8aab8a3b023b0599aa6be108ebf4ea",
+      "memory.py": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075",
+      "safety.py": "d3364ccf96322321354419c074e28da0e5477789886f48088d8d32a7ebb5f4ac"
+    }
+  }
+}

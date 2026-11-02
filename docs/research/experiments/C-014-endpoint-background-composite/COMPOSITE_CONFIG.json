@@ -164,5 +164,18 @@
       "generalized realistic video editing",
       "temporal quality verified without review"
     ]
+  },
+  "execution": {
+    "preregistered_commit": "97a5d4f1e3e882fd7e3f317496d38324d868f7c4",
+    "compositor_code_commit": "be64d7d2c5a5adf21b0a201718ba1d7811acca0e",
+    "review_code_commit": "12f15d88408c201aeb132c0a9e51209067c6ccb6",
+    "original_config_sha256": "c5b4f2dde0d26a8a985df1122c7e97f8e2dc80f4b7f18783c8f034b9a3d84494",
+    "policy_values_changed": false,
+    "runtime_original_config": "PREDECLARED_CONFIG.json bytes; execution metadata added after run",
+    "source_fps_verified": {
+      "I50_S1": "16/1",
+      "S_S1": "16/1",
+      "ON2048_S2_A": "16/1"
+    }
   }
 }

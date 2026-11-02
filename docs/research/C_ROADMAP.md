@@ -37,3 +37,8 @@ Native1회로 끝 앵커를 부분 교정(PARTIAL_BUT_USABLE)하고, C002 동적
 ## C-013 승인 재개 완료 (2026-11-02)
 
 C-012 동결2048 adapter로 새 보간3개와 S1개, seed2 BASE1개를 생성했다. SAME_SCENE_INTERPOLATION_SUPPORTED / NEW_PATH_SHAPE_SUPPORTED이지만 외형 잔상·무늬 변화와 seed2 배경 붕괴가 남는다. seed2 BASE부터 실패하며 ON도 다른 손상을 남겨 MIXED_BASE_ADAPTER_EFFECT. temporal=UNVERIFIED. 승인된 C-013 전용 swap 총량 시작 예외만 적용했고 나머지 보호 및 8a5cc37 BLOCKED_SAFETY/C-012 SEED_SENSITIVE_CAPABILITY 이력은 보존했다. 추가 실험은 시작하지 않았다. [결과](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md).
+
+
+## C-014 CPU 관측 배경 합성 완료 (2026-11-03)
+
+C-013 I50/S와 C-012 seed2 A의 기존 출력에 양끝 앵커 기반 plate와 고정44/52px envelope를 적용했다.99PNG core/outside exact,전33중심 변화0px. I50/S는 배경 복사를 넘어선 NO_ESTABLISHED_JOINT_GAIN,seed2는 원형 모자이크 잔존으로 BACKGROUND_GAIN_WITH_BOUNDARY_TRADEOFF. 생성 모델 향상이 아닌 저비용 후합성 기준선이며 temporal=UNVERIFIED. 모델/학습/GPU0,C-013 승인guard만 그대로 승계. 다음 후보는 같은 후합성 뒤에도 이득이 남는 생성 중 문맥 제약 하나이며 자동 실행하지 않았다. 과거 판정과 중단 이력은 보존한다. [결과](experiments/C-014-endpoint-background-composite/RESULTS.md).

@@ -1,0 +1,124 @@
+{
+  "breakpoints": [
+    {
+      "width": 375,
+      "overflow": false,
+      "brokenImages": 0,
+      "videoErrors": 0,
+      "metadataFrame16": true
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "brokenImages": 0,
+      "videoErrors": 0,
+      "metadataFrame16": true
+    },
+    {
+      "width": 1280,
+      "overflow": false,
+      "brokenImages": 0,
+      "videoErrors": 0,
+      "metadataFrame16": true
+    }
+  ],
+  "tabs": [
+    {
+      "tab": "I50_S1",
+      "frames": [
+        {
+          "frame": 0,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        },
+        {
+          "frame": 16,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        },
+        {
+          "frame": 32,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        }
+      ],
+      "overlay": true,
+      "playback": true
+    },
+    {
+      "tab": "S_S1",
+      "frames": [
+        {
+          "frame": 0,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        },
+        {
+          "frame": 16,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        },
+        {
+          "frame": 32,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        }
+      ],
+      "overlay": true,
+      "playback": true
+    },
+    {
+      "tab": "ON2048_S2_A",
+      "frames": [
+        {
+          "frame": 0,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        },
+        {
+          "frame": 16,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        },
+        {
+          "frame": 32,
+          "pngCorrect": true,
+          "cropsCorrect": true,
+          "videoSeek": true
+        }
+      ],
+      "overlay": true,
+      "playback": true
+    }
+  ],
+  "errors": [],
+  "temporal": "UNVERIFIED",
+  "scope": "technical browser and static screenshots; not continuous perceptual quality",
+  "finalErrorVisible": false,
+  "pass": true,
+  "static_visual_review": {
+    "reviewer": "same Codex session; not independent human",
+    "screenshots": [
+      "qa-1280.png",
+      "qa-375.png",
+      "qa-boundary.png",
+      "qa-provenance.png"
+    ],
+    "verdict": "PASS_VIEWER_LAYOUT",
+    "observations": [
+      "RAW and POST videos precede metrics and diagnostic crops",
+      "375px layout wraps controls and stacks comparison without horizontal overflow",
+      "same-scale seed2 boundary crop visibly exposes retained mosaic patch instead of hiding it",
+      "original anchors, recovered plate and source map correctly labeled"
+    ],
+    "not_evaluated": "continuous temporal perception; this is viewer QA, not a composite quality pass"
+  }
+}

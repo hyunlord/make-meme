@@ -1,0 +1,168 @@
+{
+  "experiment": "C-014",
+  "purpose": "Preregistered CPU endpoint-observed background composite baseline; not an executed result",
+  "executor": "fresh Codex session",
+  "parent_ref": "11b4313c8d9c1b1c17ccdff70b9b75216cce3868",
+  "task_ref": "6fba3a00d587bc0f130420e0f5b8c264b5e7a548",
+  "runtime_paths": "resolve existing local files from parent manifests; no absolute paths supplied",
+  "cases": [
+    {
+      "id": "I50_S1",
+      "source": "C-013",
+      "seed": 20261028,
+      "path": "I50",
+      "raw_media_hint": "media/I50_S1.mp4",
+      "lossless_frames_hint": "frames/I50_S1/000.png .. 032.png"
+    },
+    {
+      "id": "S_S1",
+      "source": "C-013",
+      "seed": 20261028,
+      "path": "S",
+      "raw_media_hint": "media/S_S1.mp4",
+      "lossless_frames_hint": "frames/S_S1/000.png .. 032.png"
+    },
+    {
+      "id": "ON2048_S2_A",
+      "source": "C-012 (included in C-013 review)",
+      "seed": 20261029,
+      "path": "A",
+      "raw_media_hint": "media/ON2048_S2_A.mp4",
+      "lossless_frames_hint": "frames/ON2048_S2_A/000.png .. 032.png"
+    }
+  ],
+  "coordinates": {
+    "width": 416,
+    "height": 240,
+    "frames": 33,
+    "convention": "pixel-index center; y grows downward",
+    "object_diameter_px": 56,
+    "start_center_xy": [
+      104,
+      120
+    ],
+    "end_center_xy": [
+      312,
+      120
+    ],
+    "path_source": "parent frozen command coordinates, not detections",
+    "preview_fps": 16,
+    "source_fps": null,
+    "file_duration_seconds": 2.0625,
+    "endpoint_sample_interval_seconds": 2.0
+  },
+  "plate": {
+    "sources": [
+      "original_input_start_anchor",
+      "original_input_end_anchor"
+    ],
+    "not_sources": [
+      "generated_video_endpoints",
+      "renderer_background",
+      "renderer_sprite",
+      "middle_target_rgb",
+      "intermediate_ground_truth_masks"
+    ],
+    "endpoint_exclusion_radius_px": 52,
+    "validity_rule": "distance > 52",
+    "source_priority": [
+      "start",
+      "end"
+    ],
+    "common_valid_pixels_exact": true,
+    "unknown_pixels_required": 0,
+    "same_pixel_coordinate_copy_only": true,
+    "oracle_audit": "optional evaluator-only after plate is frozen; never used to correct plate"
+  },
+  "alpha": {
+    "source": "requested_path_and_given_object_diameter",
+    "core_radius_px": 44,
+    "object_radius_px": 28,
+    "core_margin_px": 16,
+    "feather_width_px": 8,
+    "outer_radius_px": 52,
+    "formula": "1 if d<=44; 0.5*(1+cos(pi*(d-44)/8)) if 44<d<52; 0 if d>=52",
+    "same_policy_all_cases": true,
+    "center_from_generated_detector": false,
+    "retuning_allowed": false
+  },
+  "blend": {
+    "domain": "RGB uint8 code-value blend in float64; no gamma/exposure adjustment",
+    "formula": "alpha*raw+(1-alpha)*endpoint_plate",
+    "quantization": "numpy.rint then clip [0,255] then uint8",
+    "core_exact_bytes": true,
+    "outside_exact_bytes": true,
+    "endpoint_frame_replacement": false,
+    "output_png_is_metric_basis": true,
+    "mp4_is_lossy_preview_not_pixel_exact": true
+  },
+  "evaluation": {
+    "all_frame_numeric_checks": 33,
+    "primary_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28,
+      32
+    ],
+    "reader": "parent whole-frame Reader; thresholds unchanged",
+    "path_criteria": "reuse appropriate parent I50/S/A criteria",
+    "center_shift_warning_px": 2,
+    "core_exact_is_not_support_coverage_proof": true,
+    "zones": {
+      "object_core": "d<=28",
+      "preserved_collar": "32<d<=44",
+      "feather_ring": "44<d<52",
+      "copied_outside": "d>=52"
+    },
+    "background_difference_threshold_for_reporting": 25,
+    "background_threshold_is_pass_gate": false,
+    "clipping_labels": [
+      "CLIPPING_OBSERVED",
+      "CLIPPING_UNCERTAIN",
+      "NO_OBVIOUS_CLIPPING_IN_REVIEWED_FRAMES"
+    ],
+    "temporal_without_actual_perceptual_playback": "UNVERIFIED"
+  },
+  "resource_budget": {
+    "cases": 3,
+    "frames_composited": 99,
+    "new_derived_mp4": 3,
+    "sampler": 0,
+    "model_load": 0,
+    "dit_forward": 0,
+    "vae_encode": 0,
+    "vae_decode": 0,
+    "optimizer_update": 0,
+    "backward": 0,
+    "gpu_compute": 0,
+    "model_or_data_download": 0,
+    "installation": 0,
+    "quality_retries": 0,
+    "thread_cap": 2,
+    "target_peak_rss_gib": 2,
+    "total_task_cap_minutes": 90,
+    "reserved_delivery_minutes": 15
+  },
+  "safety": {
+    "execution_path": "existing CPU path only; reuse C-013 approved startup exception if guarded entry is required",
+    "scope_extension_explicitly_authorized": "C-014 CPU stages only",
+    "global_existing_swap": "warning, not sole startup blocker, as in approved C-013 resume",
+    "new_pressure_worker_external_protections": "unchanged",
+    "system_mutation": "none"
+  },
+  "interpretation": {
+    "allowed_claim": "known static background reuse can improve a composed system output if position/clipping/boundary checks also hold",
+    "not_claims": [
+      "generator improved",
+      "identity fixed",
+      "novel algorithm established",
+      "generalized realistic video editing",
+      "temporal quality verified without review"
+    ]
+  }
+}
