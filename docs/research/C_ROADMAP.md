@@ -32,3 +32,8 @@ Native1회로 끝 앵커를 부분 교정(PARTIAL_BUT_USABLE)하고, C002 동적
 과학적 판정은 세 사례 모두 NO_ESTABLISHED_GAIN이다. ON/NULL에서 색 번짐·잔상·외형 및 보호 장면 회귀가 발생했고 실제 궤적의 추가 이득은 미입증이다. 고정 validation loss 감소와 CFG sampling 품질이 달랐다. 기본 채택하지 않으며 temporal=UNVERIFIED, 정밀 표면점 측정은 제한된다. 다음 논의는 one-step FM 오차 감소와 실제 sampling의 기존 예측 보존·안정성 사이의 간극 하나다. 원인을 단정하거나 추가 학습·scale/seed 탐색을 자동 시작하지 않는다.
 
 운영: 기존 guard를 유지했다. cache device 불일치와 학습 전 과도한 assert의 두 기계적 실패는 raw NOT_CLEAN/OBSERVATION_FAILED와 사용량을 보존하고 승인 범위에서 복구했다. 최종 sampler 9회, 영상 품질 재시도·VAE-only 복구·imagegen·backbone 학습은 0회다. C-005의 14B 안전 중단과 모든 A/B/C의 과거 판정은 불변이다. [결과](experiments/C-006-motion-point-adapter-pilot/RESULTS.md) · [해설](experiments/C-006-motion-point-adapter-pilot/LESSON_KO.md) · [전달](experiments/C-006-motion-point-adapter-pilot/DELIVERY.json).
+
+
+## C-013 승인 재개 완료 (2026-11-02)
+
+C-012 동결2048 adapter로 새 보간3개와 S1개, seed2 BASE1개를 생성했다. SAME_SCENE_INTERPOLATION_SUPPORTED / NEW_PATH_SHAPE_SUPPORTED이지만 외형 잔상·무늬 변화와 seed2 배경 붕괴가 남는다. seed2 BASE부터 실패하며 ON도 다른 손상을 남겨 MIXED_BASE_ADAPTER_EFFECT. temporal=UNVERIFIED. 승인된 C-013 전용 swap 총량 시작 예외만 적용했고 나머지 보호 및 8a5cc37 BLOCKED_SAFETY/C-012 SEED_SENSITIVE_CAPABILITY 이력은 보존했다. 추가 실험은 시작하지 않았다. [결과](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md).

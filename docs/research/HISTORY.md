@@ -824,3 +824,8 @@ C-009~C-011은 동물 영상에서 ON/NULL의 작은 차이를 진단했다. 그
 ## C-013 동결 미학습 경로 시험 착수와 안전 중단 (2026-11-02)
 
 C-012 최소 능력의 후속으로 I25/I50/I75/S와 seed2 BASE 대조5개를 사전 고정했다(c515cc8). checkpoint/좌표/sidecar CPU 검증 후 첫 guarded CPU admission에서 START_SWAP_BUDGET(235.9MiB >64MiB)으로 중단했다. 신규 영상0/5, 학습·model load·sampler·step·forward0. 재시도/가드 완화 없음. 일반화와 배경 원인은 INCONCLUSIVE, temporal UNVERIFIED. C-012 SEED_SENSITIVE_CAPABILITY는 보존한다. [결과](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md).
+
+
+## C-013 승인 재개 완료 (2026-11-02)
+
+C-012 동결2048 adapter로 새 보간3개와 S1개, seed2 BASE1개를 생성했다. SAME_SCENE_INTERPOLATION_SUPPORTED / NEW_PATH_SHAPE_SUPPORTED이지만 외형 잔상·무늬 변화와 seed2 배경 붕괴가 남는다. seed2 BASE부터 실패하며 ON도 다른 손상을 남겨 MIXED_BASE_ADAPTER_EFFECT. temporal=UNVERIFIED. 승인된 C-013 전용 swap 총량 시작 예외만 적용했고 나머지 보호 및 8a5cc37 BLOCKED_SAFETY/C-012 SEED_SENSITIVE_CAPABILITY 이력은 보존했다. 추가 실험은 시작하지 않았다. [결과](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md).

@@ -1,0 +1,52 @@
+{
+  "breakpoints": [
+    {
+      "width": 375,
+      "cards": 4,
+      "overflow": false,
+      "brokenImages": 0,
+      "videoErrors": 0
+    },
+    {
+      "width": 768,
+      "cards": 4,
+      "overflow": false,
+      "brokenImages": 0,
+      "videoErrors": 0
+    },
+    {
+      "width": 1280,
+      "cards": 4,
+      "overflow": false,
+      "brokenImages": 0,
+      "videoErrors": 0
+    }
+  ],
+  "tabs": [
+    {
+      "tab": "new",
+      "visible": [
+        "new"
+      ],
+      "framesCorrect": true,
+      "playable": true
+    },
+    {
+      "tab": "parent",
+      "visible": [
+        "parent"
+      ],
+      "framesCorrect": true,
+      "playable": true
+    },
+    {
+      "tab": "seed2",
+      "visible": [
+        "seed2"
+      ],
+      "framesCorrect": true,
+      "playable": true
+    }
+  ],
+  "errors": []
+}

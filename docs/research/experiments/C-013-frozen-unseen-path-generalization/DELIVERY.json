@@ -1,38 +1,47 @@
 {
-  "name": "C013-blocked-review-20261102.zip",
-  "bytes": 24733,
-  "sha256": "dbba44c9d9f13914aba2568b6549eebca82855623a84a721a17a4a286580596e",
-  "zip_entries": 17,
-  "manifest_payload_count": 16,
+  "name": "C013-review-20261102.zip",
+  "bytes": 63103358,
+  "sha256": "3be8f4661a798be09e97c520140f31c6f8088a8fd9ab5e85100fb0c8b7ed818c",
+  "zip_entries": 478,
+  "manifest_payload_count": 477,
+  "crc": "PASS",
+  "actual_extraction": "PASS",
+  "payload_hashes": "PASS",
   "mac": {
+    "bytes": 63103358,
+    "sha256": "3be8f4661a798be09e97c520140f31c6f8088a8fd9ab5e85100fb0c8b7ed818c",
+    "zip_entries": 478,
+    "manifest_payload_count": 477,
     "crc": "PASS",
     "actual_extraction": "PASS",
     "payload_hashes": "PASS",
-    "hostname_role": "actual Mac workstation",
-    "location_role": "Downloads"
+    "location_role": "Downloads on actual Mac workstation"
   },
-  "contents": "blocked-execution documents and CPU code; no generated videos",
-  "excluded": [
-    "MANIFEST.sha256 from its own payload hashes",
-    "ZIP from payload hashes",
-    "DELIVERY.json external receipt",
-    "private raw guard/config paths",
-    "all weights, latent and media"
-  ],
   "spark": {
-    "sha256": "dbba44c9d9f13914aba2568b6549eebca82855623a84a721a17a4a286580596e",
-    "bytes": 24733,
-    "zip_entries": 17,
-    "manifest_payload_count": 16,
+    "bytes": 63103358,
+    "sha256": "3be8f4661a798be09e97c520140f31c6f8088a8fd9ab5e85100fb0c8b7ed818c",
+    "zip_entries": 478,
+    "manifest_payload_count": 477,
     "crc": "PASS",
     "actual_extraction": "PASS",
-    "payload_hashes": "PASS"
+    "payload_hashes": "PASS",
+    "location_role": "C-013 private resume1 archive"
   },
   "cross_host_transfer_equal": true,
-  "experiment_status": "BLOCKED_SAFETY",
-  "new_videos": 0,
-  "requested_videos": 5,
-  "viewer": "NOT_RUN: no generated C-013 media",
+  "original_media_files_byte_verified": 306,
+  "contents": "9 original MP4,297 original PNG,132 oracle PNG,9 derived sheets,viewer,public documents/code",
+  "excluded": [
+    "weights",
+    "raw outputs",
+    "latent",
+    "private configs/logs",
+    "MANIFEST.sha256 itself and ZIP from payload hashes",
+    "DELIVERY.json external receipt"
+  ],
+  "viewer": "PASS technical playback,slider,tabs,responsive and same-session visual review",
+  "new_videos": 5,
+  "experiment_status": "COMPLETE_WITH_QUALITY_LIMITATIONS",
   "temporal": "UNVERIFIED",
+  "historical_blocked_delivery": "historical-attempt01/DELIVERY.json",
   "follow_up_started": false
 }

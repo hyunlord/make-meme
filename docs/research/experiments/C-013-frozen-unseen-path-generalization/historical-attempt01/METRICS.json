@@ -1,0 +1,63 @@
+{
+  "experiment": "C-013",
+  "status": "NOT_RUN",
+  "reason": "No generated C-013 videos: START_SWAP_BUDGET",
+  "runs": {
+    "BASE_S2": {
+      "rows": null,
+      "midpoint_center": null,
+      "mean_error_px": null,
+      "E_req": null,
+      "E_mem": null,
+      "position_verdict": "INCONCLUSIVE",
+      "appearance_verdict": "NOT_EVALUATED",
+      "background_verdict": "NOT_EVALUATED"
+    },
+    "I25_S1": {
+      "rows": null,
+      "midpoint_center": null,
+      "mean_error_px": null,
+      "E_req": null,
+      "E_mem": null,
+      "position_verdict": "INCONCLUSIVE",
+      "appearance_verdict": "NOT_EVALUATED",
+      "background_verdict": "NOT_EVALUATED"
+    },
+    "I50_S1": {
+      "rows": null,
+      "midpoint_center": null,
+      "mean_error_px": null,
+      "E_req": null,
+      "E_mem": null,
+      "position_verdict": "INCONCLUSIVE",
+      "appearance_verdict": "NOT_EVALUATED",
+      "background_verdict": "NOT_EVALUATED"
+    },
+    "I75_S1": {
+      "rows": null,
+      "midpoint_center": null,
+      "mean_error_px": null,
+      "E_req": null,
+      "E_mem": null,
+      "position_verdict": "INCONCLUSIVE",
+      "appearance_verdict": "NOT_EVALUATED",
+      "background_verdict": "NOT_EVALUATED"
+    },
+    "S_S1": {
+      "rows": null,
+      "midpoint_center": null,
+      "mean_error_px": null,
+      "E_req": null,
+      "E_mem": null,
+      "position_verdict": "INCONCLUSIVE",
+      "appearance_verdict": "NOT_EVALUATED",
+      "background_verdict": "NOT_EVALUATED"
+    }
+  },
+  "interpolation_verdict": "INCONCLUSIVE",
+  "s_verdict": "INCONCLUSIVE",
+  "seed2_background_verdict": "BACKGROUND_CAUSE_INCONCLUSIVE",
+  "temporal": "UNVERIFIED",
+  "geometry_checks": "CPU_CHECKS.json",
+  "renderer_fixtures": "NOT_RUN"
+}

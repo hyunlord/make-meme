@@ -495,3 +495,8 @@ OPTIONAL_EXPECTED_ABSENT 승인과 공유 정책 검증은 완료했다. 실제 
 ## C-013 후속 상태 (2026-11-02)
 
 [C-012](experiments/C-012-minimal-trajectory-capability/RESULTS.md)의 학습한 A/B 최소 제어 능력을 보존한다. [C-013](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md)은 동결 checkpoint의 미학습 보간/S 경로 및 seed2 BASE 대조를 계획·준비했으나 START_SWAP_BUDGET으로 BLOCKED_SAFETY, 생성0/5이다. 일반화 미확인, 배경 원인 미분리. 다음 실행은 기존 guard 만족이 선행되어야 하며 자동 재개/학습/새 seed/외부 모델 예약 없음.
+
+
+## C-013 승인 재개 완료 (2026-11-02)
+
+C-012 동결2048 adapter로 새 보간3개와 S1개, seed2 BASE1개를 생성했다. SAME_SCENE_INTERPOLATION_SUPPORTED / NEW_PATH_SHAPE_SUPPORTED이지만 외형 잔상·무늬 변화와 seed2 배경 붕괴가 남는다. seed2 BASE부터 실패하며 ON도 다른 손상을 남겨 MIXED_BASE_ADAPTER_EFFECT. temporal=UNVERIFIED. 승인된 C-013 전용 swap 총량 시작 예외만 적용했고 나머지 보호 및 8a5cc37 BLOCKED_SAFETY/C-012 SEED_SENSITIVE_CAPABILITY 이력은 보존했다. 추가 실험은 시작하지 않았다. [결과](experiments/C-013-frozen-unseen-path-generalization/RESULTS.md).

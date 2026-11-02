@@ -1,69 +1,698 @@
 {
-  "experiment": "C-013-frozen-unseen-path-generalization",
-  "status": "BLOCKED_SAFETY",
-  "parent_commit": "6fba3a00d587bc0f130420e0f5b8c264b5e7a548",
-  "preregistered_commit": "c515cc8",
+  "experiment": "C-013",
+  "status": "COMPLETE_WITH_QUALITY_LIMITATIONS",
+  "historical_attempt": {
+    "experiment": "C-013-frozen-unseen-path-generalization",
+    "status": "BLOCKED_SAFETY",
+    "parent_commit": "6fba3a00d587bc0f130420e0f5b8c264b5e7a548",
+    "preregistered_commit": "c515cc8",
+    "generation": {
+      "BASE_S2": {
+        "status": "NOT_RUN",
+        "reason": "START_SWAP_BUDGET before CPU worker creation",
+        "model_load_attempts": 0,
+        "sampler_attempts": 0,
+        "scheduler_steps": 0,
+        "model_fn_calls": 0,
+        "input_parity": "NOT_RUN",
+        "output_available": false
+      },
+      "I25_S1": {
+        "status": "NOT_RUN",
+        "reason": "Not started after first guarded safety stop",
+        "model_load_attempts": 0,
+        "sampler_attempts": 0,
+        "scheduler_steps": 0,
+        "model_fn_calls": 0,
+        "input_parity": "NOT_RUN",
+        "output_available": false
+      },
+      "I50_S1": {
+        "status": "NOT_RUN",
+        "reason": "Not started after first guarded safety stop",
+        "model_load_attempts": 0,
+        "sampler_attempts": 0,
+        "scheduler_steps": 0,
+        "model_fn_calls": 0,
+        "input_parity": "NOT_RUN",
+        "output_available": false
+      },
+      "I75_S1": {
+        "status": "NOT_RUN",
+        "reason": "Not started after first guarded safety stop",
+        "model_load_attempts": 0,
+        "sampler_attempts": 0,
+        "scheduler_steps": 0,
+        "model_fn_calls": 0,
+        "input_parity": "NOT_RUN",
+        "output_available": false
+      },
+      "S_S1": {
+        "status": "NOT_RUN",
+        "reason": "Not started after first guarded safety stop",
+        "model_load_attempts": 0,
+        "sampler_attempts": 0,
+        "scheduler_steps": 0,
+        "model_fn_calls": 0,
+        "input_parity": "NOT_RUN",
+        "output_available": false
+      }
+    },
+    "actual_budget": {
+      "guarded_cpu_admission_attempts": 1,
+      "heavy_starts": 0,
+      "model_loads": 0,
+      "samplers": 0,
+      "scheduler_steps": 0,
+      "model_fn_calls": 0,
+      "condition_vae_encode": 0,
+      "generation_decode": 0,
+      "optimizer_updates": 0,
+      "backwards": 0,
+      "probes": 0,
+      "target_encodes": 0,
+      "endpoint_patch_encodes": 0,
+      "downloads": 0,
+      "installs": 0,
+      "quality_retries": 0,
+      "mechanical_retries": 0
+    },
+    "guard": {
+      "decision": "START_SWAP_BUDGET",
+      "global_swap_bytes": 247345152,
+      "start_swap_limit_bytes": 67108864,
+      "available_bytes": 121253744640,
+      "gpu_process_count": 0,
+      "queue_status": "UNAVAILABLE",
+      "queue_counts": null,
+      "service_status": "EXPECTED_ABSENT_OBSERVED",
+      "return_code": 2,
+      "worker_created": false,
+      "supervisor_result_json": "NOT_EMITTED: admission stopped before worker creation",
+      "evidence_sha256": "7da851840cfbbc5ba4a07ec062c8b59f5fab6f93bd6d115ef369866390f3a625",
+      "guard_modified": false,
+      "retry_attempted": false
+    },
+    "checkpoint_sha256_verified": "c246971ad353f78ddb0ff7bbb162f26187f9d5437eb1158e732fd29cd334f977",
+    "cleanup": {
+      "owned_execution_terminated": true,
+      "unit_active_state": "inactive",
+      "unit_load_state": "not-found",
+      "unit_main_pid": 0,
+      "c013_process_match_count": 0,
+      "other_processes_terminated": 0,
+      "files_deleted": 0
+    },
+    "temporal": "UNVERIFIED"
+  },
+  "resume_plan_commit": "40cf52423a42a275315537b7e232a05115cd75c7",
   "generation": {
     "BASE_S2": {
-      "status": "NOT_RUN",
-      "reason": "START_SWAP_BUDGET before CPU worker creation",
-      "model_load_attempts": 0,
-      "sampler_attempts": 0,
-      "scheduler_steps": 0,
-      "model_fn_calls": 0,
-      "input_parity": "NOT_RUN",
-      "output_available": false
+      "run": "BASE_S2",
+      "status": "INPUT_PARITY_PASS",
+      "reference": "ON2048_S2_A",
+      "initial_latent_sha256": "5a92f1e7386ad19aef9cd55875679ce0cd2c8c18cafea994c101d092e54457a0",
+      "vace_context_sha256": "2c7a6691c209d2b3a9465f9dcbd9866721f0af8f77db68724ada79325eabbf2d",
+      "text_sha256": {
+        "positive": "53ecbe163460ac640f02784850b7222513eec90f382440c7b0c14a0624f2c36c"
+      },
+      "full_rgb_and_three_channel_mask_png_exact": true,
+      "scheduler_grid_exact": true,
+      "point": null,
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 62.95607328199549,
+        "model_fn_calls": 50,
+        "scheduler_steps": 50,
+        "branch_counts": {
+          "positive": 50,
+          "negative": 0
+        },
+        "effective_cfg": 1.0,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "mask_given_conditioning": true,
+        "condition_mode": "endpoint",
+        "source_middle_rgb_conditioning": false,
+        "adapter_mode": "BASE"
+      },
+      "mp4_sha256": "00c07e23b569b6386f5a3698634b6564fee35f41f0dbb28f27e021cd3b875860"
     },
     "I25_S1": {
-      "status": "NOT_RUN",
-      "reason": "Not started after first guarded safety stop",
-      "model_load_attempts": 0,
-      "sampler_attempts": 0,
-      "scheduler_steps": 0,
-      "model_fn_calls": 0,
-      "input_parity": "NOT_RUN",
-      "output_available": false
+      "run": "I25_S1",
+      "status": "INPUT_PARITY_PASS",
+      "reference": "ON2048_A",
+      "initial_latent_sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+      "vace_context_sha256": "2c7a6691c209d2b3a9465f9dcbd9866721f0af8f77db68724ada79325eabbf2d",
+      "text_sha256": {
+        "positive": "53ecbe163460ac640f02784850b7222513eec90f382440c7b0c14a0624f2c36c"
+      },
+      "full_rgb_and_three_channel_mask_png_exact": true,
+      "scheduler_grid_exact": true,
+      "point": {
+        "mode": "ON",
+        "motion_context": {
+          "shape": [
+            1,
+            3510,
+            192
+          ],
+          "dtype": "torch.float32",
+          "sha256": "47b16e6928eb5a1155cc9d3123e9e2daf2d55d20e617949e751f2783e411ce2b",
+          "finite": true,
+          "minimum": -0.2645259201526642,
+          "maximum": 3.4294068813323975
+        },
+        "positions": {
+          "shape": [
+            33,
+            9,
+            2
+          ],
+          "dtype": "torch.float32",
+          "sha256": "1a5852ce3429c1bd2d11f2221c10b896c6ddb772be9157488f023afc67853492",
+          "finite": true,
+          "minimum": 0.21754807233810425,
+          "maximum": 0.7848557829856873
+        },
+        "valid": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "visible": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "endpoint_patches": {
+          "shape": [
+            9,
+            2,
+            144
+          ],
+          "dtype": "torch.float32",
+          "sha256": "2f7eee072b43820a131052926921e19ea587e72f7c3fe6bb979c95328e380e3a",
+          "finite": true,
+          "minimum": -1.2987632751464844,
+          "maximum": 1.492173194885254
+        },
+        "source_motion_available": true,
+        "adapter_checkpoint_sha256": "c246971ad353f78ddb0ff7bbb162f26187f9d5437eb1158e732fd29cd334f977",
+        "additional_forward_calls": 0
+      },
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 50.36503373703454,
+        "model_fn_calls": 50,
+        "scheduler_steps": 50,
+        "branch_counts": {
+          "positive": 50,
+          "negative": 0
+        },
+        "effective_cfg": 1.0,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "mask_given_conditioning": true,
+        "condition_mode": "endpoint",
+        "source_middle_rgb_conditioning": false,
+        "adapter_mode": "ON"
+      },
+      "mp4_sha256": "5aac03915bab1a3f9ac191d720aeeddde1eaf4d4daec1405b9822eef1efe5c1e"
     },
     "I50_S1": {
-      "status": "NOT_RUN",
-      "reason": "Not started after first guarded safety stop",
-      "model_load_attempts": 0,
-      "sampler_attempts": 0,
-      "scheduler_steps": 0,
-      "model_fn_calls": 0,
-      "input_parity": "NOT_RUN",
-      "output_available": false
+      "run": "I50_S1",
+      "status": "INPUT_PARITY_PASS",
+      "reference": "ON2048_A",
+      "initial_latent_sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+      "vace_context_sha256": "2c7a6691c209d2b3a9465f9dcbd9866721f0af8f77db68724ada79325eabbf2d",
+      "text_sha256": {
+        "positive": "53ecbe163460ac640f02784850b7222513eec90f382440c7b0c14a0624f2c36c"
+      },
+      "full_rgb_and_three_channel_mask_png_exact": true,
+      "scheduler_grid_exact": true,
+      "point": {
+        "mode": "ON",
+        "motion_context": {
+          "shape": [
+            1,
+            3510,
+            192
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d7a3180d5ab02c0bcce48010a43471f2b83841f889abf954d9536c074d904b09",
+          "finite": true,
+          "minimum": -0.2645259201526642,
+          "maximum": 3.4294068813323975
+        },
+        "positions": {
+          "shape": [
+            33,
+            9,
+            2
+          ],
+          "dtype": "torch.float32",
+          "sha256": "479776eed217b24d388286d0d4a468c916983ed1372891fed5c42ca1b963f627",
+          "finite": true,
+          "minimum": 0.21754807233810425,
+          "maximum": 0.7848557829856873
+        },
+        "valid": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "visible": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "endpoint_patches": {
+          "shape": [
+            9,
+            2,
+            144
+          ],
+          "dtype": "torch.float32",
+          "sha256": "2f7eee072b43820a131052926921e19ea587e72f7c3fe6bb979c95328e380e3a",
+          "finite": true,
+          "minimum": -1.2987632751464844,
+          "maximum": 1.492173194885254
+        },
+        "source_motion_available": true,
+        "adapter_checkpoint_sha256": "c246971ad353f78ddb0ff7bbb162f26187f9d5437eb1158e732fd29cd334f977",
+        "additional_forward_calls": 0
+      },
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 50.26081611099653,
+        "model_fn_calls": 50,
+        "scheduler_steps": 50,
+        "branch_counts": {
+          "positive": 50,
+          "negative": 0
+        },
+        "effective_cfg": 1.0,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "mask_given_conditioning": true,
+        "condition_mode": "endpoint",
+        "source_middle_rgb_conditioning": false,
+        "adapter_mode": "ON"
+      },
+      "mp4_sha256": "79e526112e6aa9738b07df1da7de08a096456ce068e916d834e70d77411ab15c"
     },
     "I75_S1": {
-      "status": "NOT_RUN",
-      "reason": "Not started after first guarded safety stop",
-      "model_load_attempts": 0,
-      "sampler_attempts": 0,
-      "scheduler_steps": 0,
-      "model_fn_calls": 0,
-      "input_parity": "NOT_RUN",
-      "output_available": false
+      "run": "I75_S1",
+      "status": "INPUT_PARITY_PASS",
+      "reference": "ON2048_A",
+      "initial_latent_sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+      "vace_context_sha256": "2c7a6691c209d2b3a9465f9dcbd9866721f0af8f77db68724ada79325eabbf2d",
+      "text_sha256": {
+        "positive": "53ecbe163460ac640f02784850b7222513eec90f382440c7b0c14a0624f2c36c"
+      },
+      "full_rgb_and_three_channel_mask_png_exact": true,
+      "scheduler_grid_exact": true,
+      "point": {
+        "mode": "ON",
+        "motion_context": {
+          "shape": [
+            1,
+            3510,
+            192
+          ],
+          "dtype": "torch.float32",
+          "sha256": "3c1cf6e7873aabb8dc9d0082d2811c65c4bdda1444d3eaa028d43e2a2fd1e992",
+          "finite": true,
+          "minimum": -0.2645259201526642,
+          "maximum": 3.4532878398895264
+        },
+        "positions": {
+          "shape": [
+            33,
+            9,
+            2
+          ],
+          "dtype": "torch.float32",
+          "sha256": "ad233956e649edb218b9169f7e4685525981dcfc327882d53d6e427720b40a0c",
+          "finite": true,
+          "minimum": 0.21754807233810425,
+          "maximum": 0.7848557829856873
+        },
+        "valid": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "visible": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "endpoint_patches": {
+          "shape": [
+            9,
+            2,
+            144
+          ],
+          "dtype": "torch.float32",
+          "sha256": "2f7eee072b43820a131052926921e19ea587e72f7c3fe6bb979c95328e380e3a",
+          "finite": true,
+          "minimum": -1.2987632751464844,
+          "maximum": 1.492173194885254
+        },
+        "source_motion_available": true,
+        "adapter_checkpoint_sha256": "c246971ad353f78ddb0ff7bbb162f26187f9d5437eb1158e732fd29cd334f977",
+        "additional_forward_calls": 0
+      },
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 50.25893569301115,
+        "model_fn_calls": 50,
+        "scheduler_steps": 50,
+        "branch_counts": {
+          "positive": 50,
+          "negative": 0
+        },
+        "effective_cfg": 1.0,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "mask_given_conditioning": true,
+        "condition_mode": "endpoint",
+        "source_middle_rgb_conditioning": false,
+        "adapter_mode": "ON"
+      },
+      "mp4_sha256": "a06763fe66827a4998f762c5c70f3a9d144c84cfc9c4b25f99361142b1833574"
     },
     "S_S1": {
-      "status": "NOT_RUN",
-      "reason": "Not started after first guarded safety stop",
-      "model_load_attempts": 0,
-      "sampler_attempts": 0,
-      "scheduler_steps": 0,
-      "model_fn_calls": 0,
-      "input_parity": "NOT_RUN",
-      "output_available": false
+      "run": "S_S1",
+      "status": "INPUT_PARITY_PASS",
+      "reference": "ON2048_A",
+      "initial_latent_sha256": "055551b8c89184971f62c55d74e7610f12cb080c6919f3416732d10215869a2c",
+      "vace_context_sha256": "2c7a6691c209d2b3a9465f9dcbd9866721f0af8f77db68724ada79325eabbf2d",
+      "text_sha256": {
+        "positive": "53ecbe163460ac640f02784850b7222513eec90f382440c7b0c14a0624f2c36c"
+      },
+      "full_rgb_and_three_channel_mask_png_exact": true,
+      "scheduler_grid_exact": true,
+      "point": {
+        "mode": "ON",
+        "motion_context": {
+          "shape": [
+            1,
+            3510,
+            192
+          ],
+          "dtype": "torch.float32",
+          "sha256": "99354e4fc1db555e0fb45013f1c5b353c433090f083c93287444e4f97c6c1e27",
+          "finite": true,
+          "minimum": -0.2645259201526642,
+          "maximum": 3.4294068813323975
+        },
+        "positions": {
+          "shape": [
+            33,
+            9,
+            2
+          ],
+          "dtype": "torch.float32",
+          "sha256": "888191a822c464f270c7261b6ebfc32dc0c093f2f729eac0e592d92da90e15bf",
+          "finite": true,
+          "minimum": 0.21754807233810425,
+          "maximum": 0.7848557829856873
+        },
+        "valid": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "visible": {
+          "shape": [
+            33,
+            9
+          ],
+          "dtype": "torch.bool",
+          "sha256": "b4ed9d541eb1ff24a153ac31e5b98442a8a11bb525227808738bc1ef56595950",
+          "finite": true,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "endpoint_patches": {
+          "shape": [
+            9,
+            2,
+            144
+          ],
+          "dtype": "torch.float32",
+          "sha256": "2f7eee072b43820a131052926921e19ea587e72f7c3fe6bb979c95328e380e3a",
+          "finite": true,
+          "minimum": -1.2987632751464844,
+          "maximum": 1.492173194885254
+        },
+        "source_motion_available": true,
+        "adapter_checkpoint_sha256": "c246971ad353f78ddb0ff7bbb162f26187f9d5437eb1158e732fd29cd334f977",
+        "additional_forward_calls": 0
+      },
+      "result": {
+        "status": "COMPLETE",
+        "elapsed_seconds": 50.07919077097904,
+        "model_fn_calls": 50,
+        "scheduler_steps": 50,
+        "branch_counts": {
+          "positive": 50,
+          "negative": 0
+        },
+        "effective_cfg": 1.0,
+        "frames": 33,
+        "fps": 16,
+        "file_duration_seconds": 2.0625,
+        "endpoint_interval_seconds": 2.0,
+        "endpoint_overwrite": false,
+        "sam_conditioning": false,
+        "mask_given_conditioning": true,
+        "condition_mode": "endpoint",
+        "source_middle_rgb_conditioning": false,
+        "adapter_mode": "ON"
+      },
+      "mp4_sha256": "62b31dcb44e62689480d5e51c987eeef64e5e77926fc31c18530640c3b1b2f6b"
+    }
+  },
+  "guarded_stages": {
+    "BASE_S2-cpu": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.263226595998276,
+      "baseline_swap_bytes": 247238656,
+      "start_available_bytes": 121220055040,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 1.2999999999999998e-06,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "BASE_S2-heavy": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.250442593998741,
+      "baseline_swap_bytes": 247238656,
+      "start_available_bytes": 121091637248,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "I25_S1-cpu": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.261961295036599,
+      "baseline_swap_bytes": 247238656,
+      "start_available_bytes": 120941711360,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "I25_S1-heavy": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.26322619401617,
+      "baseline_swap_bytes": 247238656,
+      "start_available_bytes": 120908152832,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "I50_S1-cpu": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.25494171102764,
+      "baseline_swap_bytes": 247238656,
+      "start_available_bytes": 121194618880,
+      "max_swap_growth_bytes": -4096,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "I50_S1-heavy": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.26359773799777,
+      "baseline_swap_bytes": 247234560,
+      "start_available_bytes": 121148866560,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "I75_S1-cpu": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.249519566015806,
+      "baseline_swap_bytes": 247234560,
+      "start_available_bytes": 121025359872,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "I75_S1-heavy": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.253406467963941,
+      "baseline_swap_bytes": 247234560,
+      "start_available_bytes": 121159012352,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "S_S1-cpu": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.2413350190036,
+      "baseline_swap_bytes": 247234560,
+      "start_available_bytes": 121207431168,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
+    },
+    "S_S1-heavy": {
+      "status": "COMPLETE",
+      "start_samples": 6,
+      "start_window_seconds": 10.257318619987927,
+      "baseline_swap_bytes": 247234560,
+      "start_available_bytes": 121165418496,
+      "max_swap_growth_bytes": 0,
+      "max_swapout_10s_bytes": 0,
+      "max_psi_full_ratio_10s": 0.0,
+      "worker_swap_max_observed": 0,
+      "normal_exit_recorded": true,
+      "final_unit_inactive": true,
+      "freeze_verified": true,
+      "guard_memory_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075"
     }
   },
   "actual_budget": {
-    "guarded_cpu_admission_attempts": 1,
-    "heavy_starts": 0,
-    "model_loads": 0,
-    "samplers": 0,
-    "scheduler_steps": 0,
-    "model_fn_calls": 0,
-    "condition_vae_encode": 0,
-    "generation_decode": 0,
+    "samplers": 5,
+    "scheduler_steps": 250,
+    "model_fn_calls": 250,
+    "condition_vae_encode": 10,
+    "generation_decode": 5,
     "optimizer_updates": 0,
     "backwards": 0,
     "probes": 0,
@@ -74,31 +703,8 @@
     "quality_retries": 0,
     "mechanical_retries": 0
   },
-  "guard": {
-    "decision": "START_SWAP_BUDGET",
-    "global_swap_bytes": 247345152,
-    "start_swap_limit_bytes": 67108864,
-    "available_bytes": 121253744640,
-    "gpu_process_count": 0,
-    "queue_status": "UNAVAILABLE",
-    "queue_counts": null,
-    "service_status": "EXPECTED_ABSENT_OBSERVED",
-    "return_code": 2,
-    "worker_created": false,
-    "supervisor_result_json": "NOT_EMITTED: admission stopped before worker creation",
-    "evidence_sha256": "7da851840cfbbc5ba4a07ec062c8b59f5fab6f93bd6d115ef369866390f3a625",
-    "guard_modified": false,
-    "retry_attempted": false
-  },
-  "checkpoint_sha256_verified": "c246971ad353f78ddb0ff7bbb162f26187f9d5437eb1158e732fd29cd334f977",
-  "cleanup": {
-    "owned_execution_terminated": true,
-    "unit_active_state": "inactive",
-    "unit_load_state": "not-found",
-    "unit_main_pid": 0,
-    "c013_process_match_count": 0,
-    "other_processes_terminated": 0,
-    "files_deleted": 0
-  },
-  "temporal": "UNVERIFIED"
+  "vae_count_basis": "normal unchanged live path: two condition branches and one decode per completed cell; no additional encode/decode",
+  "temporal": "UNVERIFIED",
+  "final_gpu_process_query": "EMPTY at 2026-11-02T22:21:06+09:00",
+  "follow_up_started": false
 }

@@ -89,14 +89,15 @@ def main() -> None:
             for path in paths:
                 runs[name].setdefault('observed_parent_vs_requested', {})[path] = judge(rows, paths[path]['center_xy_pixel_index'], s_path=path == 'S')
     joint = []
-    for t in CORE:
+    complete = all(runs[f'{p}_S1']['status'] == 'EVALUATED' for p in ('I25', 'I50', 'I75'))
+    for t in (CORE if complete else ()):
         centers = [runs[f'{p}_S1']['rows'][t]['center'] for p in ('I25', 'I50', 'I75')]
         gaps = None if any(c is None for c in centers) else [centers[i + 1][1] - centers[i][1] for i in (0, 1)]
         target_gap = paths['I50']['center_xy_pixel_index'][t][1] - paths['I25']['center_xy_pixel_index'][t][1]
         x_ok = gaps is not None and all(abs(c[0] - (104 + 208 * t / 32)) <= 8.4 for c in centers)
         joint.append({'frame': t, 'centers': centers, 'adjacent_y_gaps': gaps, 'minimum_gap': target_gap / 2, 'pass': bool(x_ok and all(g > 0 and g >= target_gap / 2 for g in gaps))})
-    interpolation = all(r['pass'] for r in joint) and all(runs[f'{p}_S1']['judgment']['full_path_quality_pass'] for p in ('I25', 'I50', 'I75'))
-    result = {'experiment': 'C-013', 'detector': {'template': 64, 'present': .5, 'duplicate_ratio': .75, 'search': 'whole_frame'}, 'roi_pixels': int(roi.sum()), 'roi_dilation': 'Euclidean disk radius8', 'runs': runs, 'interpolation_joint': joint, 'interpolation_verdict': 'SAME_SCENE_INTERPOLATION_SUPPORTED' if interpolation else 'INTERPOLATION_NOT_SUPPORTED', 's_verdict': 'NEW_PATH_SHAPE_SUPPORTED' if runs['S_S1']['judgment']['full_path_quality_pass'] else 'NEW_PATH_SHAPE_NOT_SUPPORTED', 'temporal': 'UNVERIFIED', 'appearance_review': 'PENDING_STATIC_REVIEW'}
+    interpolation = complete and all(r['pass'] for r in joint) and all(runs[f'{p}_S1']['judgment']['full_path_quality_pass'] for p in ('I25', 'I50', 'I75'))
+    result = {'experiment': 'C-013', 'detector': {'template': 64, 'present': .5, 'duplicate_ratio': .75, 'search': 'whole_frame'}, 'roi_pixels': int(roi.sum()), 'roi_dilation': 'Euclidean disk radius8', 'runs': runs, 'interpolation_joint': joint, 'interpolation_verdict': ('SAME_SCENE_INTERPOLATION_SUPPORTED' if interpolation else 'INTERPOLATION_NOT_SUPPORTED') if complete else 'INCONCLUSIVE', 's_verdict': ('NEW_PATH_SHAPE_SUPPORTED' if runs['S_S1']['judgment']['full_path_quality_pass'] else 'NEW_PATH_SHAPE_NOT_SUPPORTED') if runs['S_S1']['status'] == 'EVALUATED' else 'INCONCLUSIVE', 'verdict_scope': 'MECHANICAL_GEOMETRY_ONLY: appearance and identity continuity require static review; temporal unverified', 'temporal': 'UNVERIFIED', 'appearance_review': 'PENDING_STATIC_REVIEW'}
     (root / 'METRICS.json').write_text(json.dumps(result, indent=2))
     print(json.dumps({k: v for k, v in result.items() if k != 'runs'}, indent=2))
 
