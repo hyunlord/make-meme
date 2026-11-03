@@ -1,0 +1,208 @@
+{
+  "status": "STATIC_CPU_CONTRACT_VERIFIED",
+  "official_revision": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
+  "source_evidence": {
+    "stage": {
+      "relative_path": "packages/ltx-pipelines/src/ltx_pipelines/ic_lora.py",
+      "sha256": "d39b87f9032b61c6991e7e3b4f92a0480c56079a4728e601510f97520f6d75a6",
+      "definitions": [
+        {
+          "line": 907,
+          "text": "height=args.height // 2,  # Stage 1 operates at half resolution"
+        },
+        {
+          "line": 908,
+          "text": "width=args.width // 2,"
+        }
+      ]
+    },
+    "reference": {
+      "relative_path": "packages/ltx-pipelines/src/ltx_pipelines/iclora_utils.py",
+      "sha256": "aa6dcb4cbe6e6657ae0e18122a3fe6969eb0067e04e570e335bccf1c0806a9f2",
+      "definitions": [
+        {
+          "line": 32,
+          "text": "def read_lora_reference_downscale_factor(lora_path: str) -> int:"
+        },
+        {
+          "line": 33,
+          "text": "\"\"\"Read ``reference_downscale_factor`` from LoRA safetensors metadata (default 1).\"\"\""
+        },
+        {
+          "line": 37,
+          "text": "return int(metadata.get(\"reference_downscale_factor\", 1))"
+        },
+        {
+          "line": 120,
+          "text": "reference_downscale_factor: int,"
+        },
+        {
+          "line": 134,
+          "text": "scale = reference_downscale_factor"
+        },
+        {
+          "line": 137,
+          "text": "f\"Output dimensions ({height}x{width}) must be divisible by reference_downscale_factor ({scale})\""
+        },
+        {
+          "line": 139,
+          "text": "ref_height = height // scale"
+        },
+        {
+          "line": 140,
+          "text": "ref_width = width // scale"
+        }
+      ]
+    },
+    "vae_scale": {
+      "relative_path": "packages/ltx-core/src/ltx_core/types.py",
+      "sha256": "b038620f6c9262325139165befcc2e33d497b8157a6f3031d228802b8b6db2f5",
+      "definitions": [
+        {
+          "line": 35,
+          "text": "return cls(time=8, height=32, width=32)"
+        },
+        {
+          "line": 38,
+          "text": "def from_blocks(cls, blocks: list, patch_size: int) -> \"SpatioTemporalScaleFactors\":"
+        },
+        {
+          "line": 40,
+          "text": "Each ``compress_*`` block halves (encoder) or doubles (decoder) its target"
+        },
+        {
+          "line": 42,
+          "text": "patchify contributes an extra ``patch_size`` of spatial compression. Deriving"
+        },
+        {
+          "line": 50,
+          "text": "if block_name.startswith((\"compress_space\", \"compress_all\")):"
+        },
+        {
+          "line": 52,
+          "text": "if block_name.startswith((\"compress_time\", \"compress_all\")):"
+        },
+        {
+          "line": 54,
+          "text": "spatial = patch_size * (2**spatial_steps)"
+        },
+        {
+          "line": 69,
+          "text": "return cls.from_blocks(blocks, vae_config.get(\"patch_size\", 4))"
+        }
+      ]
+    }
+  },
+  "stage_divisor": 2,
+  "lora": {
+    "filename": "ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors",
+    "header_sha256": "72a4f0dfa2d66f3a6f746ca6d2a5e29039cbd2a777c39f99d0c62a5b868bf332",
+    "reference_downscale_factor": 2
+  },
+  "vae": {
+    "checkpoint_filename": "ltx-2.3-22b-distilled.safetensors",
+    "header_sha256": "2cf11fb92023e235e2b17433c92614311867721e75d0a0de8f30611d0262d29f",
+    "patch_size": 4,
+    "encoder_blocks": [
+      [
+        "res_x",
+        {
+          "num_layers": 4
+        }
+      ],
+      [
+        "compress_space_res",
+        {
+          "multiplier": 2
+        }
+      ],
+      [
+        "res_x",
+        {
+          "num_layers": 6
+        }
+      ],
+      [
+        "compress_time_res",
+        {
+          "multiplier": 2
+        }
+      ],
+      [
+        "res_x",
+        {
+          "num_layers": 4
+        }
+      ],
+      [
+        "compress_all_res",
+        {
+          "multiplier": 2
+        }
+      ],
+      [
+        "res_x",
+        {
+          "num_layers": 2
+        }
+      ],
+      [
+        "compress_all_res",
+        {
+          "multiplier": 1
+        }
+      ],
+      [
+        "res_x",
+        {
+          "num_layers": 2
+        }
+      ]
+    ],
+    "derived_spatial_stride": 32,
+    "derived_temporal_stride": 8
+  },
+  "geometry": {
+    "final_wh": [
+      1152,
+      640
+    ],
+    "stage1_wh": [
+      576,
+      320
+    ],
+    "reference_stage1_wh": [
+      288,
+      160
+    ],
+    "reference_vae_grid_wh": [
+      9,
+      5
+    ],
+    "anchor_stage1_wh": [
+      576,
+      320
+    ],
+    "anchor_vae_grid_wh": [
+      18,
+      10
+    ],
+    "all_reference_and_anchor_dims_divisible_by_32": true,
+    "required_final_spatial_multiple": 128
+  },
+  "frames": [
+    {
+      "count": 73,
+      "condition": "8n+1",
+      "latent_frames": 10,
+      "valid": true
+    },
+    {
+      "count": 49,
+      "condition": "8n+1",
+      "latent_frames": 7,
+      "valid": true
+    }
+  ],
+  "verification_scope": "Stdlib source/header reads and integer arithmetic only; no Torch import/model execution. This does not establish successful inference."
+}
