@@ -1,5 +1,5 @@
 {
-  "status": "SEGMENT_NOT_ESTABLISHED",
+  "status": "SEGMENT_ESTABLISHED_ANCHOR_GATE_PASS_OUTPUTS_NOT_RUN",
   "segments": {
     "primary": {
       "start": 96,
@@ -8813,5 +8813,33 @@
   },
   "generated_output_metrics": null,
   "quality": "HUMAN_REVIEW_PENDING",
-  "reason": "Neither preregistered segment meets two-instance gate; no output exists to score."
+  "reason": "Neither preregistered segment meets two-instance gate; no output exists to score.",
+  "historical_status": "SEGMENT_NOT_ESTABLISHED",
+  "amendment2": {
+    "definition_change_after_results": true,
+    "segment_metrics": "AMENDMENT2_SEGMENT_METRICS.json",
+    "anchor_metrics": "ANCHOR_GATE_METRICS.json",
+    "selected_segment": [
+      240,
+      313
+    ],
+    "cast": {
+      "Lab": 0,
+      "IG": 1
+    },
+    "valid_frames": 73,
+    "required": 66,
+    "source_sam_reruns": 0
+  },
+  "output_metrics": {
+    "status": "NOT_RUN",
+    "object_count_stability": null,
+    "motion_following": null,
+    "identity_swaps": null,
+    "lab_body_ratio": null,
+    "background_flicker": null,
+    "reflection_color_correspondence": null,
+    "generation_cost": null,
+    "reason": "No video engine output; anchor gates are not output quality metrics"
+  }
 }

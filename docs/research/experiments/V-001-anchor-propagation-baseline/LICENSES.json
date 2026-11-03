@@ -1,5 +1,5 @@
 {
-  "status": "ACTUALLY_USED_SAM_LICENSES_RECORDED",
+  "status": "SAM_INFERENCE_AND_E2_SETUP_LICENSES_RECORDED",
   "checked": [
     {
       "component": "LTX-2.3-code-and-weights",
@@ -31,16 +31,33 @@
       "license": "GPL-3.0",
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
       "used_for_inference": true
+    },
+    {
+      "component": "Bernini-R weights partial snapshot",
+      "license": "Apache-2.0 (model card declaration)",
+      "revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+      "source": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/blob/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/README.md",
+      "sha256": "f8bd9e3f5fae1ba075b61e3ba29c80a17d02b8555c80388fe545a15b6fa1e67f",
+      "used_for_inference": false,
+      "download_complete": false
+    },
+    {
+      "component": "VeOmni",
+      "version": "0.1.11",
+      "license": "Apache-2.0",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "license_source": "installed wheel dist-info/licenses/LICENSE",
+      "used_for_inference": false
     }
   ],
   "not_yet_retrieved": [
     {
       "component": "Gemma terms",
-      "reason": "engine not installed or run after source gate failure"
+      "reason": "E1 access blocker; component not downloaded or executed"
     },
     {
       "component": "Video Depth Anything weights license",
-      "reason": "engine not installed or run after source gate failure"
+      "reason": "E1 access blocker; component not downloaded or executed"
     }
   ],
   "excluded": [
@@ -49,5 +66,7 @@
       "reason": "User explicitly excludes download and execution because of Republic of Korea territorial restriction."
     }
   ],
-  "inference_weights_downloaded": 0
+  "inference_weights_downloaded": 0,
+  "partially_downloaded_model_snapshots": 1,
+  "updated_at": "2026-11-03T11:24:20.322829+00:00"
 }

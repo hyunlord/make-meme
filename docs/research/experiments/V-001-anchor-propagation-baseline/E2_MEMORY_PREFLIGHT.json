@@ -1,0 +1,432 @@
+{
+  "observed_at_utc": "2026-11-03T11:23:51.591472+00:00",
+  "status": "STATIC_PREFLIGHT_CAP_EXCEEDED",
+  "runtime_oom_observed": false,
+  "heavy_model_loads_by_this_inspection": 0,
+  "gpu_calls_by_this_inspection": 0,
+  "interpretation": "Metadata-bound resident-weight estimate exceeds the existing worker MemoryMax before activations and runtime overhead. This is a stopping basis before heavy execution, not an observed OOM or measured peak.",
+  "model_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+  "official_code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
+  "snapshot_download_state_at_inspection": "PARTIAL; owner stopped downloader at2026-11-03T11:20:55Z after static cap conflict. Full checkpoint availability is not claimed. All27 indexed shard headers independently verified from pinned remote revision.",
+  "index_sources": [
+    {
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model.safetensors.index.json",
+      "metadata_total_size": 57153966336
+    },
+    {
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model.safetensors.index.json",
+      "metadata_total_size": 57153966336
+    },
+    {
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/text_encoder/model.safetensors.index.json",
+      "metadata_total_size": 11361820672
+    }
+  ],
+  "local_header_cross_checks": [
+    "transformer/diffusion_pytorch_model-00001-of-00012.safetensors",
+    "transformer/diffusion_pytorch_model-00002-of-00012.safetensors",
+    "transformer/diffusion_pytorch_model-00003-of-00012.safetensors",
+    "text_encoder/model-00001-of-00003.safetensors",
+    "text_encoder/model-00003-of-00003.safetensors"
+  ],
+  "shards": [
+    {
+      "file": "transformer/diffusion_pytorch_model-00001-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00001-of-00012.safetensors",
+      "header_bytes": 10112,
+      "stored_dtype": "F32",
+      "tensor_elements": 1237745152,
+      "payload_bytes": 4950980608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2475490304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00002-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00002-of-00012.safetensors",
+      "header_bytes": 9576,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248249856,
+      "payload_bytes": 4992999424,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496499712,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00003-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00003-of-00012.safetensors",
+      "header_bytes": 9904,
+      "stored_dtype": "F32",
+      "tensor_elements": 1237738496,
+      "payload_bytes": 4950953984,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2475476992,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00004-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00004-of-00012.safetensors",
+      "header_bytes": 9544,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00005-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00005-of-00012.safetensors",
+      "header_bytes": 9696,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00006-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00006-of-00012.safetensors",
+      "header_bytes": 9576,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00007-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00007-of-00012.safetensors",
+      "header_bytes": 9664,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00008-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00008-of-00012.safetensors",
+      "header_bytes": 9576,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00009-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00009-of-00012.safetensors",
+      "header_bytes": 9696,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00010-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00010-of-00012.safetensors",
+      "header_bytes": 9536,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00011-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00011-of-00012.safetensors",
+      "header_bytes": 9600,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model-00012-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer/diffusion_pytorch_model-00012-of-00012.safetensors",
+      "header_bytes": 4984,
+      "stored_dtype": "F32",
+      "tensor_elements": 725717568,
+      "payload_bytes": 2902870272,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 1451435136,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00001-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00001-of-00012.safetensors",
+      "header_bytes": 10112,
+      "stored_dtype": "F32",
+      "tensor_elements": 1237745152,
+      "payload_bytes": 4950980608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2475490304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00002-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00002-of-00012.safetensors",
+      "header_bytes": 9576,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248249856,
+      "payload_bytes": 4992999424,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496499712,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00003-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00003-of-00012.safetensors",
+      "header_bytes": 9904,
+      "stored_dtype": "F32",
+      "tensor_elements": 1237738496,
+      "payload_bytes": 4950953984,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2475476992,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00004-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00004-of-00012.safetensors",
+      "header_bytes": 9544,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00005-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00005-of-00012.safetensors",
+      "header_bytes": 9696,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00006-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00006-of-00012.safetensors",
+      "header_bytes": 9576,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00007-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00007-of-00012.safetensors",
+      "header_bytes": 9664,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00008-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00008-of-00012.safetensors",
+      "header_bytes": 9576,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00009-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00009-of-00012.safetensors",
+      "header_bytes": 9696,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00010-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00010-of-00012.safetensors",
+      "header_bytes": 9536,
+      "stored_dtype": "F32",
+      "tensor_elements": 1248241152,
+      "payload_bytes": 4992964608,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2496482304,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00011-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00011-of-00012.safetensors",
+      "header_bytes": 9600,
+      "stored_dtype": "F32",
+      "tensor_elements": 1211518976,
+      "payload_bytes": 4846075904,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 2423037952,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "transformer_2/diffusion_pytorch_model-00012-of-00012.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/transformer_2/diffusion_pytorch_model-00012-of-00012.safetensors",
+      "header_bytes": 4984,
+      "stored_dtype": "F32",
+      "tensor_elements": 725717568,
+      "payload_bytes": 2902870272,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 1451435136,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "text_encoder/model-00001-of-00003.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/text_encoder/model-00001-of-00003.safetensors",
+      "header_bytes": 9648,
+      "stored_dtype": "BF16",
+      "tensor_elements": 2467901440,
+      "payload_bytes": 4935802880,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 4935802880,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "text_encoder/model-00002-of-00003.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/text_encoder/model-00002-of-00003.safetensors",
+      "header_bytes": 16080,
+      "stored_dtype": "BF16",
+      "tensor_elements": 2491543552,
+      "payload_bytes": 4983087104,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 4983087104,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    },
+    {
+      "file": "text_encoder/model-00003-of-00003.safetensors",
+      "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/text_encoder/model-00003-of-00003.safetensors",
+      "header_bytes": 4784,
+      "stored_dtype": "BF16",
+      "tensor_elements": 721465344,
+      "payload_bytes": 1442930688,
+      "runtime_dtype": "BF16",
+      "runtime_payload_bytes": 1442930688,
+      "evidence": "HTTP range header; no full shard downloaded by this inspection"
+    }
+  ],
+  "vae": {
+    "url": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/resolve/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/vae/diffusion_pytorch_model.safetensors",
+    "stored_dtype": "F32",
+    "runtime_dtype": "F32",
+    "tensor_count": 194,
+    "file_bytes": 507591892,
+    "length_prefix_bytes": 8,
+    "json_header_bytes": 21760,
+    "tensor_payload_bytes": 507570124,
+    "container_overhead_bytes": 21768,
+    "http_first_range": "bytes 0-7/507591892",
+    "http_header_range": "bytes 0-21767/507591892",
+    "http_status": 206,
+    "bytes_read_for_two_requests": 21776
+  },
+  "runtime_weight_estimate": {
+    "dit_pair_bf16_bytes": 57153966336,
+    "t5_bf16_bytes": 11361820672,
+    "vae_fp32_bytes": 507570124,
+    "total_bytes": 69023357132,
+    "total_gib": 64.28301067277789,
+    "cap_bytes": 68719476736,
+    "excess_bytes": 303880396,
+    "excess_mib": 289.80292892456055,
+    "excluded": [
+      "Python and module metadata",
+      "allocator overhead",
+      "loading and dtype conversion temporaries",
+      "source video and anchor tensors",
+      "VAE and DiT activations",
+      "CUDA context",
+      "filesystem page cache"
+    ]
+  },
+  "guard": {
+    "path": "code/guard/supervisor.py",
+    "sha256": "78d8e41b4f8083f5c103a4b485f7dd65b1cbc376450297ff1f59ae40f6bd604c",
+    "lines": [
+      44,
+      45
+    ],
+    "cap_expression": "min(64*2**30, initial['available']-12*2**30)",
+    "MemorySwapMax": 0,
+    "maximum_cap_gib": 64,
+    "actual_configured_cap_may_be_lower": true
+  },
+  "code_evidence": [
+    {
+      "file": "bernini/pipeline.py",
+      "lines": [
+        226,
+        240
+      ],
+      "finding": "Loads VAE as float32, then constructs renderer retaining VAE."
+    },
+    {
+      "file": "bernini/models/renderer.py",
+      "lines": [
+        137,
+        149
+      ],
+      "finding": "dtype defaults to bfloat16; creates UMT5 and both-expert diffusion module. Actual snapshot config has no dtype override or skip flags."
+    },
+    {
+      "file": "bernini/models/wan_diffusion.py",
+      "lines": [
+        154,
+        190
+      ],
+      "finding": "Both expert from_pretrained calls use model_dtype; both modules remain attached."
+    },
+    {
+      "file": "bernini/models/renderer.py",
+      "lines": [
+        345,
+        355
+      ],
+      "finding": "T5 moves to GPU for encoding then back to CPU, without deleting weights."
+    },
+    {
+      "file": "bernini/models/wan_diffusion.py",
+      "lines": [
+        345,
+        380
+      ],
+      "finding": "Active expert moves to GPU, inactive to CPU; both resident across sampling."
+    }
+  ],
+  "assumptions_and_limits": [
+    "Resident tensor estimate follows official loader with all stored floating weights materialized and no unsupported quantization/disk offload/architecture change.",
+    "GB10 CPU/GPU share physical memory; CPU offload is not a claim of freeing total resident bytes.",
+    "Actual cgroup accounting, allocation peaks and OOM are NOT_MEASURED.",
+    "Frame reduction does not reduce retained parameter bytes."
+  ],
+  "reproduce": [
+    "Read pinned config.json and three shard index JSON files.",
+    "For each unique shard in index weight_map, request HTTP Range bytes=0-65535; read at most65536 bytes and close. Decode little-endian uint64 header length and JSON header only.",
+    "For each tensor, multiply shape dimensions to count elements; sum data_offsets length for stored payload. All DiT headers are F32, all T5 headers BF16. Apply official runtime dtype:2 bytes per DiT/T5 element.",
+    "For VAE request bytes0-7 then bytes0-(7+header_length); observed206 both times. Sum tensor data_offsets lengths; FP32 retained by official loader.",
+    "Sum runtime tensors and compare with64*2**30. No tensor payload import, model construction or GPU execution needed."
+  ]
+}

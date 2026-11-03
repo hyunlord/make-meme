@@ -1,32 +1,46 @@
 {
-  "pass": true,
-  "initial": [
-    {
-      "ready": 4,
-      "width": 1280,
-      "height": 720,
-      "duration": 3.041667
-    },
-    {
-      "ready": 4,
-      "width": 1280,
-      "height": 720,
-      "duration": 3.041667
-    },
-    {
-      "ready": 4,
-      "width": 1280,
-      "height": 720,
-      "duration": 3.041667
-    },
-    {
-      "ready": 4,
-      "width": 1280,
-      "height": 720,
-      "duration": 3.041667
-    }
-  ],
-  "stepped": {
+  "initial": {
+    "segment": "fallback",
+    "source": "fallback.mp4",
+    "anchorLoaded": true,
+    "mediaSizes": [
+      {
+        "width": 200,
+        "height": 112.5
+      },
+      {
+        "width": 200,
+        "height": 112.5
+      }
+    ],
+    "videos": [
+      {
+        "ready": 4,
+        "width": 1280,
+        "height": 720,
+        "duration": 3.041667
+      },
+      {
+        "ready": 4,
+        "width": 1280,
+        "height": 720,
+        "duration": 3.041667
+      },
+      {
+        "ready": 4,
+        "width": 1280,
+        "height": 720,
+        "duration": 3.041667
+      },
+      {
+        "ready": 4,
+        "width": 1280,
+        "height": 720,
+        "duration": 3.041667
+      }
+    ]
+  },
+  "step": {
     "position": "1 / 72",
     "times": [
       0.041666,
@@ -43,25 +57,216 @@
   },
   "played": [
     {
-      "time": 0.3878,
+      "time": 0.3428,
       "paused": true
     },
     {
-      "time": 0.3874,
+      "time": 0.3428,
       "paused": true
     },
     {
-      "time": 0.3874,
+      "time": 0.3428,
       "paused": true
     },
     {
-      "time": 0.3868,
+      "time": 0.3428,
       "paused": true
     }
   ],
   "switched": {
-    "src": "fallback.mp4",
+    "src": "sourceprimary.mp4",
     "position": "0 / 72"
   },
-  "temporal_quality": "UNVERIFIED"
+  "mobile": {
+    "viewport": 375,
+    "documentWidth": 375
+  },
+  "pass": true,
+  "temporal_quality": "UNVERIFIED",
+  "method": "Existing Chrome headless CDP, real package media; no installs",
+  "corrected": "Anchor height:auto makes image/video display sizes identical",
+  "html_sha256": "ec7465c3b362033a4a418b73053cc0e77d646af17d87e83b26e1873abe50e492",
+  "visual_review": {
+    "viewports": [
+      1280,
+      375
+    ],
+    "screenshots": [
+      ".qa/desktop-final.png",
+      ".qa/mobile-final.png"
+    ],
+    "observed": "Anchor and source equal16:9 display; no document overflow at375; explicit block reasons; frame counter nowrap corrected in final desktop screenshot; first-frame fixed IG/Lab labels directly over source, hidden on play/frame1/primary and restored on fallbackframe0",
+    "continuous_quality": "UNVERIFIED"
+  },
+  "casting_overlay": {
+    "initial": {
+      "hidden": false,
+      "frame": "0 / 72",
+      "segment": "fallback",
+      "time": 0,
+      "labels": [
+        {
+          "text": "IG",
+          "left": 98.5234375,
+          "top": 349.5
+        },
+        {
+          "text": "Lab",
+          "left": 117.984375,
+          "top": 347.25
+        }
+      ],
+      "mediaSizes": [
+        {
+          "width": 200,
+          "height": 112.5
+        },
+        {
+          "width": 200,
+          "height": 112.5
+        }
+      ]
+    },
+    "frame1": {
+      "hidden": true,
+      "frame": "1 / 72",
+      "segment": "fallback",
+      "time": 0.041666,
+      "labels": [
+        {
+          "text": "IG",
+          "left": 0,
+          "top": 0
+        },
+        {
+          "text": "Lab",
+          "left": 0,
+          "top": 0
+        }
+      ],
+      "mediaSizes": [
+        {
+          "width": 200,
+          "height": 112.5
+        },
+        {
+          "width": 200,
+          "height": 112.5
+        }
+      ]
+    },
+    "return0": {
+      "hidden": false,
+      "frame": "0 / 72",
+      "segment": "fallback",
+      "time": 0,
+      "labels": [
+        {
+          "text": "IG",
+          "left": 98.5234375,
+          "top": 349.5
+        },
+        {
+          "text": "Lab",
+          "left": 117.984375,
+          "top": 347.25
+        }
+      ],
+      "mediaSizes": [
+        {
+          "width": 200,
+          "height": 112.5
+        },
+        {
+          "width": 200,
+          "height": 112.5
+        }
+      ]
+    },
+    "playing": {
+      "hidden": true,
+      "frame": "3 / 72",
+      "segment": "fallback",
+      "time": 0.1518,
+      "labels": [
+        {
+          "text": "IG",
+          "left": 0,
+          "top": 0
+        },
+        {
+          "text": "Lab",
+          "left": 0,
+          "top": 0
+        }
+      ],
+      "mediaSizes": [
+        {
+          "width": 200,
+          "height": 112.5
+        },
+        {
+          "width": 200,
+          "height": 112.5
+        }
+      ]
+    },
+    "primary": {
+      "hidden": true,
+      "frame": "0 / 72",
+      "segment": "primary",
+      "time": 0,
+      "labels": [
+        {
+          "text": "IG",
+          "left": 0,
+          "top": 0
+        },
+        {
+          "text": "Lab",
+          "left": 0,
+          "top": 0
+        }
+      ],
+      "mediaSizes": [
+        {
+          "width": 200,
+          "height": 112.5
+        },
+        {
+          "width": 200,
+          "height": 112.5
+        }
+      ]
+    },
+    "restored": {
+      "hidden": false,
+      "frame": "0 / 72",
+      "segment": "fallback",
+      "time": 0,
+      "labels": [
+        {
+          "text": "IG",
+          "left": 98.5234375,
+          "top": 349.5
+        },
+        {
+          "text": "Lab",
+          "left": 117.984375,
+          "top": 347.25
+        }
+      ],
+      "mediaSizes": [
+        {
+          "width": 200,
+          "height": 112.5
+        },
+        {
+          "width": 200,
+          "height": 112.5
+        }
+      ]
+    },
+    "pass": true
+  }
 }

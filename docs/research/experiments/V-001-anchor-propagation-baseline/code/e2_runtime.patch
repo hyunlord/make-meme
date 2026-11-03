@@ -1,0 +1,79 @@
+diff --git a/bernini/data/utils/video_utils.py b/bernini/data/utils/video_utils.py
+index 027e964..254c9aa 100644
+--- a/bernini/data/utils/video_utils.py
++++ b/bernini/data/utils/video_utils.py
+@@ -16,7 +16,7 @@ import math
+ import os
+ from typing import List, Union
+ 
+-import decord
++from bernini import decord_compat as decord
+ import torch
+ import torchvision
+ from PIL import Image
+diff --git a/bernini/data_utils.py b/bernini/data_utils.py
+index 1c7a0d4..02cf291 100644
+--- a/bernini/data_utils.py
++++ b/bernini/data_utils.py
+@@ -20,7 +20,7 @@ import math
+ import os
+ from typing import List, Union
+ 
+-import decord
++from bernini import decord_compat as decord
+ import numpy as np
+ import torch
+ from PIL import Image
+diff --git a/bernini/models/__init__.py b/bernini/models/__init__.py
+index 1be4936..ff377ce 100644
+--- a/bernini/models/__init__.py
++++ b/bernini/models/__init__.py
+@@ -12,7 +12,6 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from .bernini import BerniniConfig, BerniniModel
+ from .renderer import BerniniRendererConfig, BerniniRendererModel
+ from .transformer_wan import WanTransformer3DModel
+ from .wan_diffusion import GEN_Wanx22
+diff --git a/bernini/pipeline.py b/bernini/pipeline.py
+index a1432b9..c237d76 100644
+--- a/bernini/pipeline.py
++++ b/bernini/pipeline.py
+@@ -31,14 +31,11 @@ import torch
+ from diffusers.models import AutoencoderKLWan
+ from diffusers.video_processor import VideoProcessor
+ from tqdm import tqdm
+-from transformers import AutoConfig, AutoTokenizer, AutoProcessor, Qwen2_5_VLModel
++from transformers import AutoConfig, AutoTokenizer
+ 
+-from .data.bernini_process import bernini_process_sample
+-from .data.bernini_template import BerniniTemplate
+ from .data.utils.video_utils import PathVideoReader, smart_video_nframes
+ from .data_utils import make_divisible, preprocess_image, preprocess_video, tensor_to_bytes, get_vit_features, get_vae_features, FakeVideoReader, create_fake_image, VAEVideoTransform
+ from .io_utils import save_output
+-from .models import BerniniConfig, BerniniModel
+ from .models import BerniniRendererConfig, BerniniRendererModel
+ from .models.transformer_wan import WanRotaryPosEmbed
+ from .weights import load_weights
+@@ -401,6 +398,9 @@ class BerniniPipeline:
+         device="cuda",
+         **config_overrides,
+     ) -> "BerniniPipeline":
++        from transformers import AutoProcessor
++        from .models.bernini import BerniniConfig, BerniniModel
++
+         config = BerniniConfig.from_pretrained(config_dir, **config_overrides)
+         _localize_bernini_config(config, config_dir)
+         if ckpt is None: ckpt = config_dir
+@@ -612,6 +612,10 @@ class BerniniPipeline:
+         t5_neg_prompt: str = "",
+         use_qwen_neg_prompt: bool = True,
+     ):
++        from transformers import Qwen2_5_VLModel
++        from .data.bernini_process import bernini_process_sample
++        from .data.bernini_template import BerniniTemplate
++
+         if neg_prompt is not None:
+             t5_neg_prompt = neg_prompt
+         rope = WanRotaryPosEmbed(

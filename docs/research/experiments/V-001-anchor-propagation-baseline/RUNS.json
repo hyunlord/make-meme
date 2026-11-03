@@ -1,21 +1,25 @@
 {
   "recorded_at": "2026-11-03T06:37:01.350438+00:00",
-  "status": "SEGMENT_NOT_ESTABLISHED",
+  "status": "ANCHOR_READY_ENGINES_BLOCKED",
   "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
   "counts": {
-    "weight_downloads": 0,
-    "installs": 0,
-    "sam": 2,
+    "weight_downloads": 1,
+    "installs": 1,
+    "sam": 3,
     "sam_fallback_authorized": true,
-    "imagegen": 0,
-    "model_loads": 2,
+    "imagegen": 1,
+    "model_loads": 3,
     "timing_probes": 0,
     "video_generations": 0,
-    "training": 0
+    "training": 0,
+    "weight_downloads_completed": 0,
+    "video_engine_model_loads": 0,
+    "installs_unit": "one isolated engine environment, seven local packages",
+    "model_loads_scope": "SAM only"
   },
   "engines": {
     "E1": {
-      "status": "NOT_RUN",
+      "status": "ENGINE_BLOCKED_ENV",
       "code_commit": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
       "outputs": 0,
       "historical_blocker": "Official default first stage resolution divisor2 requires final dimensions divisible by64; 480 fails. No resolution or recipe change authorized.",
@@ -23,13 +27,32 @@
         1024,
         576
       ],
-      "reason": "SEGMENT_NOT_ESTABLISHED before anchor or engine installation"
+      "reason": "Existing authentication received GatedRepoError HTTP403 for google/gemma-3-12b-it model shard",
+      "access_retry": false
     },
     "E2": {
-      "status": "NOT_RUN",
-      "reason": "SEGMENT_NOT_ESTABLISHED before anchor or engine installation",
+      "status": "ENGINE_BLOCKED_ENV",
+      "reason": "PREFLIGHT_MEMORY_CAP: simultaneous resident weights approximately64.283GiB exceed frozen64GiB worker cap; no heavy run or observed OOM",
       "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
-      "outputs": 0
+      "outputs": 0,
+      "model_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+      "environment_import": "PASS",
+      "partial_download": {
+        "started": 1793704314.7529936,
+        "repo": "ByteDance/Bernini-R-Diffusers",
+        "revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+        "status": "STOPPED_BY_OWNER_PREFLIGHT_MEMORY_CAP",
+        "finished": 1793704855.5898664,
+        "partial_files_preserved": true
+      },
+      "partial_directory_apparent_bytes": 32190848586,
+      "runtime_diff": "RUNTIME_DIFF.md",
+      "disk_preflight": {
+        "required_download_bytes": 126200552703,
+        "required_free_multiplier": 1.3,
+        "observed_free_bytes": 781679652864,
+        "pass": true
+      }
     }
   },
   "quality": "HUMAN_REVIEW_PENDING",
@@ -83,14 +106,40 @@
       "cuda_peak_allocated_bytes": 3195012608,
       "final_gpu_process_count": 0,
       "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "sam-anchor1-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "elapsed_supervised_seconds": 2.251873254776001,
+      "sam_elapsed_seconds": null,
+      "cuda_peak_allocated_bytes": null,
+      "final_gpu_process_count": 0,
+      "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "sam-anchor1-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "elapsed_supervised_seconds": 24.430022716522217,
+      "sam_elapsed_seconds": 21.551804304122925,
+      "cuda_peak_allocated_bytes": 2566345216,
+      "final_gpu_process_count": 0,
+      "final_memory_decision": "CLEAR"
     }
   ],
   "sam_checkpoint_sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
   "shutdown": {
-    "own_worker_units_remaining": 0,
-    "gpu_compute_processes_at_final_check": 0,
+    "observed_at_epoch": 1793705144.50485,
+    "own_engine_or_download_processes_remaining": 0,
+    "own_sam_units_remaining": 0,
+    "gpu_compute_process_count": 0,
     "external_processes_terminated": 0,
     "common_guard_modified": false,
     "follow_up_scheduled": false
-  }
+  },
+  "previous_status": "SEGMENT_NOT_ESTABLISHED under original reflection-unaware definition",
+  "updated_at": "2026-11-03T11:23:22.034403+00:00"
 }

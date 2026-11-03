@@ -844,3 +844,7 @@ V-001은 imagegen 앵커와 조밀한 원본 조건의 오픈 영상 전파를 �
 ## V-001 구간 검증 중단 (2026-11-03)
 
 Kling 대응으로 배역 확정 및E1 1024×576 사전개정 후 SAM기본21/73·대체0/73으로66/73 기준미달. 대체는바닥반사를포함해전73프레임4트랙. SEGMENT_NOT_ESTABLISHED,앵커/영상0,생성엔진품질미평가. V전용가드4단계정상종료. 반사선택규약만다음검토후보이며자동후속없음. [결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).
+
+## V-001 개정2: 반사 정의 수정 후 앵커 확보 (2026-11-03)
+
+사용자 승인에 따른 결과 확인 후 정의 수정으로 fallback73/73, native앵커1장 G1–G5 PASS. E1 Gemma403·E2 고정64GiB worker한도 대비 가중치약64.283GiB로 영상0/4. 실제OOM은관측하지않았다. A동결·C보류, HUMAN_REVIEW_PENDING 유지. [현재 결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).
