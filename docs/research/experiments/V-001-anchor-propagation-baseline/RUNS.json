@@ -1,6 +1,6 @@
 {
   "recorded_at": "2026-11-03T06:37:01.350438+00:00",
-  "status": "AMENDMENT3_E1_BLOCKED_ENV_E2_STOPPED_GUARD",
+  "status": "AMENDMENT4_E1_RAN_2_OF_2_E2_CONVERSION_PENDING",
   "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
   "counts": {
     "weight_downloads": null,
@@ -8,52 +8,73 @@
     "sam": 3,
     "sam_fallback_authorized": true,
     "imagegen": 1,
-    "model_loads": 6,
-    "timing_probes": 0,
-    "video_generations": 0,
+    "model_loads": 9,
+    "timing_probes": 1,
+    "video_generations": 2,
     "training": 0,
     "weight_downloads_completed": null,
-    "video_engine_model_loads": 2,
+    "video_engine_model_loads": 5,
     "installs_unit": "pending amendment3 component ledger; old unit retained in historical snapshot",
-    "model_loads_scope": "logical phases: SAM3+VDA1+E1entry1+E2entry1, not fully instantiated components",
-    "timing_probe_attempts": 2,
-    "timing_probes_completed": 0,
-    "video_engine_model_loads_scope": "E1 andE2 guarded pipeline entries, both ended before denoiser; E2 secondexpert loading incomplete",
+    "model_loads_scope": "logical phases through E1amend4: SAM3+VDA1+E1entries4+E2entry1; not individual components",
+    "timing_probe_attempts": 3,
+    "timing_probes_completed": 1,
+    "video_engine_model_loads_scope": "E1amend3failed1+E2amend3stopped1+E1amend4probe1+generations2",
     "depth_inference_calls": 1,
     "depth_model_forward_windows": 4,
-    "scheduler_steps_completed": 0,
-    "denoiser_calls": 0,
-    "download_install_count_note": "Amendment2 counters preserved in historical snapshot; amendment3 component download/install totals pending final ledger."
+    "scheduler_steps_completed": 23,
+    "denoiser_calls": 23,
+    "download_install_count_note": "Amendment2 counters preserved in historical snapshot; amendment3 component download/install totals pending final ledger.",
+    "generation_scheduler_steps_completed": 22,
+    "generation_denoiser_calls": 22,
+    "timing_probe_scheduler_steps_completed": 1
   },
   "engines": {
     "E1": {
-      "status": "ENGINE_BLOCKED_ENV",
+      "status": "ENGINE_RAN(2/2)",
       "code_commit": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
-      "outputs": 0,
+      "outputs": 2,
       "historical_blocker": "Official default first stage resolution divisor2 requires final dimensions divisible by64; 480 fails. No resolution or recipe change authorized.",
       "resolution": [
-        1024,
-        576
+        1152,
+        640
       ],
-      "reason": "Official VAE spatial patchification EinopsError: latent height9 cannot divide by2 at requested1024x576 with ref0.5 conditioning; failure before denoiser/scheduler.",
+      "reason": "User amendment4 geometry enabled official pipeline;1-step probe and both fixed seeds completed normally.",
       "access_retry": true,
       "access_retry_basis": "User amendment3 authorized existing-authentication recheck; Gemma access passed before E1 attempt",
       "timing_probe": {
         "mode": "probe",
-        "status": "FAILED",
-        "grids": [],
-        "elapsed_seconds": 18.981282936991192,
-        "first_step_seconds": null,
-        "denoiser_calls": 0,
-        "scheduler_steps_completed": 0,
-        "peak_rss_kib": 11389644,
-        "cuda_peak_allocated_bytes": 25431249920,
-        "cuda_peak_reserved_bytes": 25784483840,
-        "estimate_73_linear_stage2_seconds": null,
-        "estimate_73_quadratic_stage2_seconds": null,
-        "estimate_49_conservative_seconds": null,
+        "status": "PROBE_COMPLETE",
+        "grids": [
+          [
+            1.0,
+            0.9937499761581421,
+            0.987500011920929,
+            0.981249988079071,
+            0.9750000238418579,
+            0.909375011920929,
+            0.7250000238418579,
+            0.421875,
+            0.0
+          ]
+        ],
+        "elapsed_seconds": 73.03691958403215,
+        "first_step_seconds": 2.7166211979929358,
+        "denoiser_calls": 1,
+        "scheduler_steps_completed": 1,
+        "peak_rss_kib": 42461308,
+        "cuda_peak_allocated_bytes": 42509118464,
+        "cuda_peak_reserved_bytes": 43864031232,
+        "estimate_73_linear_stage2_seconds": 124.65272234589793,
+        "estimate_73_quadratic_stage2_seconds": 222.45108547364362,
+        "estimate_49_conservative_seconds": 176.81184934736228,
         "estimate_excludes_unmeasured_decode": true,
-        "peak_rss_bytes": 11662995456
+        "run": "E1_probe_amend4",
+        "seed": 20261103,
+        "width": 1152,
+        "height": 640,
+        "num_frames": 73,
+        "fps": 24,
+        "peak_rss_bytes": 43480379392
       },
       "depth": {
         "status": "INCOMPLETE_NO_AUTOMATIC_RETRY",
@@ -93,11 +114,121 @@
         "torch_imported": false,
         "new_model_loads": 0,
         "new_depth_calls": 0
-      }
+      },
+      "generation_runs": [
+        {
+          "mode": "generate",
+          "status": "GENERATED",
+          "grids": [
+            [
+              1.0,
+              0.9937499761581421,
+              0.987500011920929,
+              0.981249988079071,
+              0.9750000238418579,
+              0.909375011920929,
+              0.7250000238418579,
+              0.421875,
+              0.0
+            ],
+            [
+              0.909375011920929,
+              0.7250000238418579,
+              0.421875,
+              0.0
+            ]
+          ],
+          "elapsed_seconds": 135.80087075696792,
+          "first_step_seconds": 1.803197797969915,
+          "denoiser_calls": 11,
+          "scheduler_steps_completed": 11,
+          "peak_rss_kib": 43660912,
+          "cuda_peak_allocated_bytes": 42509118464,
+          "cuda_peak_reserved_bytes": 44379930624,
+          "estimate_73_linear_stage2_seconds": null,
+          "estimate_73_quadratic_stage2_seconds": null,
+          "estimate_49_conservative_seconds": null,
+          "estimate_excludes_unmeasured_decode": true,
+          "run": "E1_20261103_amend4",
+          "seed": 20261103,
+          "width": 1152,
+          "height": 640,
+          "num_frames": 73,
+          "fps": 24,
+          "peak_rss_bytes": 44708773888,
+          "output_mp4": {
+            "bytes": 536668,
+            "sha256": "763fbe29637437c40aafdb3f21438601144361f47308dd22234d10b4e2e59289",
+            "encoding": "original engine output; no overwrite",
+            "ffprobe": {
+              "width": 1152,
+              "height": 640,
+              "r_frame_rate": "24/1",
+              "duration": "3.041667",
+              "nb_frames": "73"
+            }
+          }
+        },
+        {
+          "mode": "generate",
+          "status": "GENERATED",
+          "grids": [
+            [
+              1.0,
+              0.9937499761581421,
+              0.987500011920929,
+              0.981249988079071,
+              0.9750000238418579,
+              0.909375011920929,
+              0.7250000238418579,
+              0.421875,
+              0.0
+            ],
+            [
+              0.909375011920929,
+              0.7250000238418579,
+              0.421875,
+              0.0
+            ]
+          ],
+          "elapsed_seconds": 83.5878347089747,
+          "first_step_seconds": 1.8885336460079998,
+          "denoiser_calls": 11,
+          "scheduler_steps_completed": 11,
+          "peak_rss_kib": 44198104,
+          "cuda_peak_allocated_bytes": 42509118464,
+          "cuda_peak_reserved_bytes": 44379930624,
+          "estimate_73_linear_stage2_seconds": null,
+          "estimate_73_quadratic_stage2_seconds": null,
+          "estimate_49_conservative_seconds": null,
+          "estimate_excludes_unmeasured_decode": true,
+          "run": "E1_20261104_amend4",
+          "seed": 20261104,
+          "width": 1152,
+          "height": 640,
+          "num_frames": 73,
+          "fps": 24,
+          "peak_rss_bytes": 45258858496,
+          "output_mp4": {
+            "bytes": 477325,
+            "sha256": "8844caea618a2ab54f9bea76b1a8225bebd8c244167da36f0c19ec9bf667900b",
+            "encoding": "original engine output; no overwrite",
+            "ffprobe": {
+              "width": 1152,
+              "height": 640,
+              "r_frame_rate": "24/1",
+              "duration": "3.041667",
+              "nb_frames": "73"
+            }
+          }
+        }
+      ],
+      "current_geometry_contract": "amendment4:1152x640; actual transform recorded separately",
+      "quality": "HUMAN_REVIEW_PENDING"
     },
     "E2": {
-      "status": "ENGINE_STOPPED_GUARD",
-      "reason": "SYSTEM_PSI_FULL_PRESSURE: full avg10 exceeded25% for60.661806s during secondexpert model loading (5/12 shards); maximum76.64%. No denoising. No automatic retry.",
+      "status": "AMENDMENT4_CONVERSION_PENDING",
+      "reason": "Parent preparing user-authorized amendment4 conversion and execution copy; no new E2 probe or output claimed. Earlier amendment3 PSI stop remains in historical snapshot.",
       "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
       "outputs": 0,
       "model_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
@@ -111,8 +242,8 @@
       },
       "worker_memory_max_gib": 100,
       "start_min_available_gib": 112,
-      "guard_scope": "code/guard-e2-amend3",
-      "probe_status": "STOPPED_BEFORE_DENOISING",
+      "guard_scope": "code/guard-e2-amend4",
+      "probe_status": "NOT_RUN_UNDER_AMENDMENT4",
       "historical_amendment2_partial_download": {
         "started": 1793704314.7529936,
         "repo": "ByteDance/Bernini-R-Diffusers",
@@ -122,10 +253,6 @@
         "partial_files_preserved": true
       },
       "historical_amendment2_partial_directory_apparent_bytes": 32190848586,
-      "timing_probe_attempts": 1,
-      "timing_probes_completed": 0,
-      "scheduler_steps_completed": 0,
-      "dit_forward_calls": 0,
       "download_resume": {
         "started": 1793719205.7494626,
         "remaining_setup_seconds": 4859,
@@ -138,19 +265,10 @@
         "indexed_shards_present": 27,
         "actual_model_file_bytes": 126200552703
       },
-      "raw_probe_receipt": {
-        "mode": "probe",
-        "seed": 20261103,
-        "num_frames": 73,
-        "scheduler_steps": 0,
-        "dit_forward_calls": 0,
-        "status": "STARTED"
-      },
-      "raw_probe_receipt_note": "STARTED receipt preserved; SIGTERM prevented final worker receipt. Supervisor is terminal evidence.",
-      "retry_performed": false,
       "estimated_video_time_seconds": null,
       "estimated_15_second_cost": null,
-      "quality": "HUMAN_REVIEW_PENDING"
+      "quality": "HUMAN_REVIEW_PENDING",
+      "worker_memory_high_gib": 100
     }
   },
   "quality": "HUMAN_REVIEW_PENDING",
@@ -531,11 +649,293 @@
       "final_memory_errors": [
         "cgroup:REMOVED:exit_not_verified"
       ]
+    },
+    {
+      "stage": "v001-e1-20261103-amend4-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721609.0657473,
+      "finished_epoch": 1793721611.3097692,
+      "elapsed_supervised_seconds": 2.2440218925476074,
+      "minimum_available_bytes": 122768801792,
+      "max_psi_full_avg10": 0.11,
+      "max_observed_cgroup_peak_bytes": 8609792,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": -16384,
+      "swapout_bytes": 0,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e1-20261103-amend4-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721632.4406714,
+      "finished_epoch": 1793721771.467448,
+      "elapsed_supervised_seconds": 139.02677655220032,
+      "minimum_available_bytes": 74732724224,
+      "max_psi_full_avg10": 54.93,
+      "max_observed_cgroup_peak_bytes": 66572255232,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 243,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": 49348608,
+      "swapout_bytes": 48099328,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING",
+        "PRESSURE_DURATION_OBSERVING"
+      ],
+      "max_contiguous_psi_above25_seconds": 21.901431287056766,
+      "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e1-20261104-amend4-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721814.7564127,
+      "finished_epoch": 1793721816.9758928,
+      "elapsed_supervised_seconds": 2.219480037689209,
+      "minimum_available_bytes": 122873704448,
+      "max_psi_full_avg10": 0.01,
+      "max_observed_cgroup_peak_bytes": 4624384,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": -925696,
+      "swapout_bytes": 0,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e1-20261104-amend4-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721833.368007,
+      "finished_epoch": 1793721920.0186384,
+      "elapsed_supervised_seconds": 86.65063142776489,
+      "minimum_available_bytes": 75004084224,
+      "max_psi_full_avg10": 5.25,
+      "max_observed_cgroup_peak_bytes": 12687179776,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": 11169792,
+      "swapout_bytes": 11935744,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e1-prepare-amend4-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721400.9490263,
+      "finished_epoch": 1793721403.1597865,
+      "elapsed_supervised_seconds": 2.2107601165771484,
+      "minimum_available_bytes": 122617823232,
+      "max_psi_full_avg10": 0.0,
+      "max_observed_cgroup_peak_bytes": 8290304,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": 0,
+      "swapout_bytes": 0,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e1-prepare-amend4-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721426.9205432,
+      "finished_epoch": 1793721440.881787,
+      "elapsed_supervised_seconds": 13.961243867874146,
+      "minimum_available_bytes": 121886834688,
+      "max_psi_full_avg10": 0.0,
+      "max_observed_cgroup_peak_bytes": 672337920,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": 0,
+      "swapout_bytes": 0,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e1-probe-amend4-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721463.9717553,
+      "finished_epoch": 1793721466.1951888,
+      "elapsed_supervised_seconds": 2.223433494567871,
+      "minimum_available_bytes": 122573824000,
+      "max_psi_full_avg10": 0.0,
+      "max_observed_cgroup_peak_bytes": 8441856,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": -110592,
+      "swapout_bytes": 0,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e1-probe-amend4-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793721481.765939,
+      "finished_epoch": 1793721558.23155,
+      "elapsed_supervised_seconds": 76.46561098098755,
+      "minimum_available_bytes": 74769539072,
+      "max_psi_full_avg10": 23.83,
+      "max_observed_cgroup_peak_bytes": 61245005824,
+      "worker_cgroup_max_bytes": [
+        68719476736
+      ],
+      "worker_cgroup_high_bytes": [
+        66571993088
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": 848146432,
+      "swapout_bytes": 841555968,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR",
+      "warnings": [
+        "GLOBAL_SWAP_WARNING",
+        "PRESSURE_DURATION_OBSERVING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "max_contiguous_available_below12_seconds": 0.0
     }
   ],
   "sam_checkpoint_sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
   "previous_status": "SEGMENT_NOT_ESTABLISHED under original reflection-unaware definition",
-  "updated_at": "2026-11-03T15:45:12.018350+00:00",
+  "updated_at": "2026-11-03T16:07:07.328044+00:00",
   "historical_amendment2_snapshot": {
     "recorded_at": "2026-11-03T06:37:01.350438+00:00",
     "status": "ANCHOR_READY_ENGINES_BLOCKED",
@@ -706,35 +1106,745 @@
     "normal_completion": false,
     "historical_guard_stop_preserved": true
   },
-  "shutdown": {
-    "observed_at_epoch": 1793720671.7593899,
-    "own_worker_download_or_guard_processes_remaining": 0,
-    "gpu_compute_process_count": 0,
-    "historical_failed_units_preserved": [
+  "historical_amendment3_snapshot": {
+    "recorded_at": "2026-11-03T06:37:01.350438+00:00",
+    "status": "AMENDMENT3_E1_BLOCKED_ENV_E2_STOPPED_GUARD",
+    "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
+    "counts": {
+      "weight_downloads": null,
+      "installs": null,
+      "sam": 3,
+      "sam_fallback_authorized": true,
+      "imagegen": 1,
+      "model_loads": 6,
+      "timing_probes": 0,
+      "video_generations": 0,
+      "training": 0,
+      "weight_downloads_completed": null,
+      "video_engine_model_loads": 2,
+      "installs_unit": "pending amendment3 component ledger; old unit retained in historical snapshot",
+      "model_loads_scope": "logical phases: SAM3+VDA1+E1entry1+E2entry1, not fully instantiated components",
+      "timing_probe_attempts": 2,
+      "timing_probes_completed": 0,
+      "video_engine_model_loads_scope": "E1 andE2 guarded pipeline entries, both ended before denoiser; E2 secondexpert loading incomplete",
+      "depth_inference_calls": 1,
+      "depth_model_forward_windows": 4,
+      "scheduler_steps_completed": 0,
+      "denoiser_calls": 0,
+      "download_install_count_note": "Amendment2 counters preserved in historical snapshot; amendment3 component download/install totals pending final ledger."
+    },
+    "engines": {
+      "E1": {
+        "status": "ENGINE_BLOCKED_ENV",
+        "code_commit": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
+        "outputs": 0,
+        "historical_blocker": "Official default first stage resolution divisor2 requires final dimensions divisible by64; 480 fails. No resolution or recipe change authorized.",
+        "resolution": [
+          1024,
+          576
+        ],
+        "reason": "Official VAE spatial patchification EinopsError: latent height9 cannot divide by2 at requested1024x576 with ref0.5 conditioning; failure before denoiser/scheduler.",
+        "access_retry": true,
+        "access_retry_basis": "User amendment3 authorized existing-authentication recheck; Gemma access passed before E1 attempt",
+        "timing_probe": {
+          "mode": "probe",
+          "status": "FAILED",
+          "grids": [],
+          "elapsed_seconds": 18.981282936991192,
+          "first_step_seconds": null,
+          "denoiser_calls": 0,
+          "scheduler_steps_completed": 0,
+          "peak_rss_kib": 11389644,
+          "cuda_peak_allocated_bytes": 25431249920,
+          "cuda_peak_reserved_bytes": 25784483840,
+          "estimate_73_linear_stage2_seconds": null,
+          "estimate_73_quadratic_stage2_seconds": null,
+          "estimate_49_conservative_seconds": null,
+          "estimate_excludes_unmeasured_decode": true,
+          "peak_rss_bytes": 11662995456
+        },
+        "depth": {
+          "status": "INCOMPLETE_NO_AUTOMATIC_RETRY",
+          "revision": "4f5ae23172ba60fd7bc11ef671cca678842c7072",
+          "encoder": "vitl",
+          "input_size": 518,
+          "target_fps": 24,
+          "fp32": false,
+          "metric": false,
+          "infer_video_depth_calls": 1,
+          "model_forward_calls": 4,
+          "normalization": "official whole-clip min/max grayscale",
+          "source_sha256": "9a73d6a23820557a8f95104f20c541a62b8156901dcf94546f036f77167535b0",
+          "checkpoint_sha256": "43df27c6b396042ba34ff7b798ab279f64d204d2e86d7a373968f8fa36d0e6fa",
+          "infer_seconds": 44.70854484802112,
+          "depths_sha256": "11debd60bfdd02cea8e7fe3d52a02f0f626c7023a9cf55ae9a20644d53fd9181",
+          "elapsed_seconds": 56.84959209105,
+          "peak_cuda_allocated_bytes": 22914256896,
+          "peak_cuda_reserved_bytes": 34001125376,
+          "peak_rss_kib": 4179360
+        },
+        "depth_packaging_recovery": {
+          "status": "CPU_PACKAGING_RECOVERED",
+          "original_receipt_sha256": "2d85f79c1276230cf11d40ed336c7062b8dcca2f481f1bd817c2bec2aea65615",
+          "original_receipt_preserved": true,
+          "depths_sha256": "11debd60bfdd02cea8e7fe3d52a02f0f626c7023a9cf55ae9a20644d53fd9181",
+          "png_exact": 73,
+          "frames": 73,
+          "width": 1024,
+          "height": 576,
+          "fps": 24,
+          "control_sha256": "799df9ff516abe604d54ba31915825be67d19d7923b4657e3d75691099dc9f2c",
+          "elapsed_seconds": 0.5018052500672638,
+          "matplotlib_version": "3.11.2",
+          "cm_get_cmap_alias_added": true,
+          "encoder": "official save_video libx264 CRF18 grayscale",
+          "torch_imported": false,
+          "new_model_loads": 0,
+          "new_depth_calls": 0
+        }
+      },
+      "E2": {
+        "status": "ENGINE_STOPPED_GUARD",
+        "reason": "SYSTEM_PSI_FULL_PRESSURE: full avg10 exceeded25% for60.661806s during secondexpert model loading (5/12 shards); maximum76.64%. No denoising. No automatic retry.",
+        "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
+        "outputs": 0,
+        "model_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+        "environment_import": "PASS",
+        "runtime_diff": "RUNTIME_DIFF.md",
+        "disk_preflight": {
+          "required_download_bytes": 126200552703,
+          "required_free_multiplier": 1.3,
+          "observed_free_bytes": 781679652864,
+          "pass": true
+        },
+        "worker_memory_max_gib": 100,
+        "start_min_available_gib": 112,
+        "guard_scope": "code/guard-e2-amend3",
+        "probe_status": "STOPPED_BEFORE_DENOISING",
+        "historical_amendment2_partial_download": {
+          "started": 1793704314.7529936,
+          "repo": "ByteDance/Bernini-R-Diffusers",
+          "revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+          "status": "STOPPED_BY_OWNER_PREFLIGHT_MEMORY_CAP",
+          "finished": 1793704855.5898664,
+          "partial_files_preserved": true
+        },
+        "historical_amendment2_partial_directory_apparent_bytes": 32190848586,
+        "timing_probe_attempts": 1,
+        "timing_probes_completed": 0,
+        "scheduler_steps_completed": 0,
+        "dit_forward_calls": 0,
+        "download_resume": {
+          "started": 1793719205.7494626,
+          "remaining_setup_seconds": 4859,
+          "expected_full_bytes": 126200552703,
+          "disk_free_before": 673884078080,
+          "status": "COMPLETE",
+          "prior_active_seconds": 540.8368728,
+          "finished": 1793720489.9176376,
+          "download_command_exit": 0,
+          "indexed_shards_present": 27,
+          "actual_model_file_bytes": 126200552703
+        },
+        "raw_probe_receipt": {
+          "mode": "probe",
+          "seed": 20261103,
+          "num_frames": 73,
+          "scheduler_steps": 0,
+          "dit_forward_calls": 0,
+          "status": "STARTED"
+        },
+        "raw_probe_receipt_note": "STARTED receipt preserved; SIGTERM prevented final worker receipt. Supervisor is terminal evidence.",
+        "retry_performed": false,
+        "estimated_video_time_seconds": null,
+        "estimated_15_second_cost": null,
+        "quality": "HUMAN_REVIEW_PENDING"
+      }
+    },
+    "quality": "HUMAN_REVIEW_PENDING",
+    "execution_commit": "185e769",
+    "geometry_amendment_commit": "32e2371",
+    "stages": [
       {
-        "unit": "make-meme-c001-c012-v001-e1-depth-amend3-heavy.service",
-        "load_state": "loaded",
-        "active_state": "failed",
-        "sub_state": "failed"
+        "stage": "sam-primary-cpu",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "normal_exit_recorded": true,
+        "elapsed_supervised_seconds": 2.218825340270996,
+        "worker_peak_memory_bytes": 8343552,
+        "sam_elapsed_seconds": null,
+        "cuda_peak_allocated_bytes": null,
+        "final_gpu_process_count": 0,
+        "final_memory_decision": "CLEAR"
       },
       {
-        "unit": "make-meme-c001-c012-v001-e1-depth-package-amend3-cpu.service",
-        "load_state": "loaded",
-        "active_state": "failed",
-        "sub_state": "failed"
+        "stage": "sam-primary-heavy",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "normal_exit_recorded": true,
+        "elapsed_supervised_seconds": 48.91566753387451,
+        "worker_peak_memory_bytes": 6182961152,
+        "sam_elapsed_seconds": 46.773287773132324,
+        "cuda_peak_allocated_bytes": 3043695616,
+        "final_gpu_process_count": 0,
+        "final_memory_decision": "CLEAR"
       },
       {
-        "unit": "make-meme-c001-c012-v001-e1-probe-amend3-heavy.service",
-        "load_state": "loaded",
-        "active_state": "failed",
-        "sub_state": "failed"
+        "stage": "sam-fallback-cpu",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "normal_exit_recorded": true,
+        "elapsed_supervised_seconds": 2.2483439445495605,
+        "worker_peak_memory_bytes": 8351744,
+        "sam_elapsed_seconds": null,
+        "cuda_peak_allocated_bytes": null,
+        "final_gpu_process_count": 0,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "sam-fallback-heavy",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "normal_exit_recorded": true,
+        "elapsed_supervised_seconds": 44.55468511581421,
+        "worker_peak_memory_bytes": 4913725440,
+        "sam_elapsed_seconds": 42.226502656936646,
+        "cuda_peak_allocated_bytes": 3195012608,
+        "final_gpu_process_count": 0,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "sam-anchor1-cpu",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "normal_exit_recorded": true,
+        "elapsed_supervised_seconds": 2.251873254776001,
+        "sam_elapsed_seconds": null,
+        "cuda_peak_allocated_bytes": null,
+        "final_gpu_process_count": 0,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "sam-anchor1-heavy",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "normal_exit_recorded": true,
+        "elapsed_supervised_seconds": 24.430022716522217,
+        "sam_elapsed_seconds": 21.551804304122925,
+        "cuda_peak_allocated_bytes": 2566345216,
+        "final_gpu_process_count": 0,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "v001-e1-depth-amend3-cpu",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_errors": [],
+        "elapsed_supervised_seconds": 2.2307329177856445,
+        "minimum_available_bytes": 117064065024,
+        "max_psi_full_avg10": 0.0,
+        "global_oom_kill_delta": 0,
+        "swapout_bytes": 0,
+        "global_swap_growth_bytes": 0,
+        "worker_cgroup_max_bytes": [
+          68719476736
+        ],
+        "max_observed_cgroup_peak_bytes": 17408000,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "max_worker_swap_bytes": 0,
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "v001-e1-depth-amend3-heavy",
+        "status": "NOT_CLEAN",
+        "guard_reason": "OBSERVATION_FAILED",
+        "worker_returncode": 1,
+        "normal_exit_recorded": false,
+        "cleanup_errors": [],
+        "elapsed_supervised_seconds": 59.499452352523804,
+        "minimum_available_bytes": 74270457856,
+        "max_psi_full_avg10": 10.28,
+        "global_oom_kill_delta": 0,
+        "swapout_bytes": 47300608,
+        "global_swap_growth_bytes": 48758784,
+        "worker_cgroup_max_bytes": [
+          68719476736
+        ],
+        "max_observed_cgroup_peak_bytes": 3927592960,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "max_worker_swap_bytes": 0,
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_memory_decision": "OBSERVATION_FAILED"
+      },
+      {
+        "stage": "v001-e1-depth-package-amend3-cpu",
+        "status": "NOT_CLEAN",
+        "guard_reason": "OBSERVATION_FAILED",
+        "worker_returncode": 1,
+        "normal_exit_recorded": false,
+        "cleanup_errors": [],
+        "elapsed_supervised_seconds": 1.1673130989074707,
+        "minimum_available_bytes": 120820346880,
+        "max_psi_full_avg10": 0.0,
+        "global_oom_kill_delta": 0,
+        "swapout_bytes": 0,
+        "global_swap_growth_bytes": 0,
+        "worker_cgroup_max_bytes": [
+          68719476736
+        ],
+        "max_observed_cgroup_peak_bytes": 6492160,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "max_worker_swap_bytes": 0,
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_memory_decision": "OBSERVATION_FAILED"
+      },
+      {
+        "stage": "v001-e1-depth-package-amend3-heavy",
+        "status": "NOT_RUN",
+        "reason": "stage prepared without supervisor result or observations"
+      },
+      {
+        "stage": "v001-e1-depth-package-r2-amend3-cpu",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_errors": [],
+        "elapsed_supervised_seconds": 3.291079044342041,
+        "minimum_available_bytes": 122028085248,
+        "max_psi_full_avg10": 0.0,
+        "global_oom_kill_delta": 0,
+        "swapout_bytes": 0,
+        "global_swap_growth_bytes": 0,
+        "worker_cgroup_max_bytes": [
+          68719476736
+        ],
+        "max_observed_cgroup_peak_bytes": 371736576,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "max_worker_swap_bytes": 0,
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "v001-e1-depth-package-r2-amend3-heavy",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_errors": [],
+        "elapsed_supervised_seconds": 3.3147122859954834,
+        "minimum_available_bytes": 121862385664,
+        "max_psi_full_avg10": 0.0,
+        "global_oom_kill_delta": 0,
+        "swapout_bytes": 0,
+        "global_swap_growth_bytes": 0,
+        "worker_cgroup_max_bytes": [
+          68719476736
+        ],
+        "max_observed_cgroup_peak_bytes": 368889856,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "max_worker_swap_bytes": 0,
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "v001-e1-probe-amend3-cpu",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "normal_exit_recorded": true,
+        "cleanup_errors": [],
+        "elapsed_supervised_seconds": 2.241403341293335,
+        "minimum_available_bytes": 122039128064,
+        "max_psi_full_avg10": 0.0,
+        "global_oom_kill_delta": 0,
+        "swapout_bytes": 0,
+        "global_swap_growth_bytes": 0,
+        "worker_cgroup_max_bytes": [
+          68719476736
+        ],
+        "max_observed_cgroup_peak_bytes": 9191424,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "max_worker_swap_bytes": 0,
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_memory_decision": "CLEAR"
+      },
+      {
+        "stage": "v001-e1-probe-amend3-heavy",
+        "status": "NOT_CLEAN",
+        "guard_reason": "OBSERVATION_FAILED",
+        "worker_returncode": 1,
+        "normal_exit_recorded": false,
+        "cleanup_errors": [],
+        "elapsed_supervised_seconds": 20.250929594039917,
+        "minimum_available_bytes": 91391135744,
+        "max_psi_full_avg10": 2.12,
+        "global_oom_kill_delta": 0,
+        "swapout_bytes": 4096,
+        "global_swap_growth_bytes": -4096,
+        "worker_cgroup_max_bytes": [
+          68719476736
+        ],
+        "max_observed_cgroup_peak_bytes": 6907310080,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "max_worker_swap_bytes": 0,
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_memory_decision": "OBSERVATION_FAILED"
+      },
+      {
+        "stage": "v001-e2-probe-amend3-cpu",
+        "status": "COMPLETE",
+        "guard_reason": "COMPLETE",
+        "worker_returncode": 0,
+        "worker_returncode_note": "systemd-run result is not model success; guard reason and normal-exit receipt govern completion",
+        "cleanup_errors": [],
+        "normal_exit_recorded": true,
+        "elapsed_supervised_seconds": 2.249610424041748,
+        "started_epoch": 1793720500.599213,
+        "finished_epoch": 1793720502.8488233,
+        "start_admission": {
+          "available_bytes": 121969967104,
+          "minimum_required_bytes": 120259084288,
+          "observation_seconds": 10.242435683030635,
+          "decision": "CLEAR"
+        },
+        "minimum_available_bytes": 121955844096,
+        "peak_worker_rss_bytes_observed": 24293376,
+        "rss_scope": "registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss",
+        "max_observed_cgroup_peak_bytes": 15249408,
+        "worker_cgroup_max_bytes": [
+          107374182400
+        ],
+        "worker_cgroup_high_bytes": [
+          105226698752
+        ],
+        "worker_max_high_events": 0,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "global_oom_kill_delta": 0,
+        "max_worker_swap_bytes": 0,
+        "global_swap_baseline_bytes": 522944512,
+        "global_swap_final_bytes": 522944512,
+        "global_swap_growth_bytes": 0,
+        "swapout_bytes": 0,
+        "max_psi_full_avg10": 0.0,
+        "pressure_interval": null,
+        "terminal_memory_metrics": {
+          "s0": 522944512,
+          "swap_growth": 0,
+          "window_seconds": 10.379706286010332,
+          "swapout_bytes_10s": 0,
+          "psi_full_ratio_10s": 0.0,
+          "headroom_low_seconds": 0.0,
+          "psi_high_seconds": 0.0,
+          "psi_full_avg10": 0.0,
+          "swapout_bytes_total": 0
+        },
+        "warnings": [
+          "GLOBAL_SWAP_WARNING"
+        ],
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_unit_active_state": "inactive",
+        "final_memory_decision": "CLEAR",
+        "final_memory_errors": []
+      },
+      {
+        "stage": "v001-e2-probe-amend3-heavy",
+        "status": "NOT_CLEAN",
+        "guard_reason": "SYSTEM_PSI_FULL_PRESSURE",
+        "worker_returncode": 0,
+        "worker_returncode_note": "systemd-run result is not model success; guard reason and normal-exit receipt govern completion",
+        "cleanup_errors": [],
+        "normal_exit_recorded": false,
+        "elapsed_supervised_seconds": 75.63668894767761,
+        "started_epoch": 1793720520.991672,
+        "finished_epoch": 1793720596.628361,
+        "start_admission": {
+          "available_bytes": 122000728064,
+          "minimum_required_bytes": 120259084288,
+          "observation_seconds": 10.269204886979423,
+          "decision": "CLEAR"
+        },
+        "minimum_available_bytes": 80019353600,
+        "peak_worker_rss_bytes_observed": 105177120768,
+        "rss_scope": "registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss",
+        "max_observed_cgroup_peak_bytes": 105262604288,
+        "worker_cgroup_max_bytes": [
+          107374182400
+        ],
+        "worker_cgroup_high_bytes": [
+          105226698752
+        ],
+        "worker_max_high_events": 1417,
+        "worker_oom_events": 0,
+        "worker_oom_kill_events": 0,
+        "global_oom_kill_delta": 0,
+        "max_worker_swap_bytes": 0,
+        "global_swap_baseline_bytes": 522944512,
+        "global_swap_final_bytes": 1153400832,
+        "global_swap_growth_bytes": 630456320,
+        "swapout_bytes": 606171136,
+        "max_psi_full_avg10": 76.64,
+        "pressure_interval": {
+          "first_observed_above25_epoch": 1793720532.672951,
+          "first_observed_above25_utc": "2026-11-03T15:42:12.672951+00:00",
+          "first_monotonic": 618694.556545645,
+          "last_monotonic": 618755.218351681,
+          "stop_observed_epoch": 1793720593.345029,
+          "stop_observed_utc": "2026-11-03T15:43:13.345029+00:00",
+          "uninterrupted_observed_seconds": 60.6618060360197,
+          "threshold_seconds": 60,
+          "stop_psi_full_avg10": 76.64
+        },
+        "terminal_memory_metrics": {
+          "s0": 522944512,
+          "swap_growth": 630456320,
+          "window_seconds": 10.640009824070148,
+          "swapout_bytes_10s": 205262848,
+          "psi_full_ratio_10s": 0.8183678999999999,
+          "headroom_low_seconds": 0.0,
+          "psi_high_seconds": 60.6618060360197,
+          "psi_full_avg10": 76.64,
+          "swapout_bytes_total": 606171136,
+          "cgroup_high_events": 1417,
+          "cgroup_oom": 0,
+          "cgroup_oom_kill": 0
+        },
+        "warnings": [
+          "GLOBAL_SWAP_WARNING",
+          "PRESSURE_DURATION_OBSERVING"
+        ],
+        "final_gpu_process_count": 0,
+        "final_main_pid_zero": true,
+        "final_unit_active_state": "inactive",
+        "final_memory_decision": "OBSERVATION_FAILED",
+        "final_memory_errors": [
+          "cgroup:REMOVED:exit_not_verified"
+        ]
       }
     ],
-    "historical_failed_units_are_running": false,
-    "external_processes_terminated": 0,
-    "follow_up_scheduled": false,
-    "common_guard_modified": false,
-    "normal_experiment_completion": false,
-    "note": "Cleaned-up own process absence is distinct from the preserved E2 guard stop and earlier mechanical failures."
-  }
+    "sam_checkpoint_sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
+    "previous_status": "SEGMENT_NOT_ESTABLISHED under original reflection-unaware definition",
+    "updated_at": "2026-11-03T15:45:12.018350+00:00",
+    "historical_amendment2_snapshot": {
+      "recorded_at": "2026-11-03T06:37:01.350438+00:00",
+      "status": "ANCHOR_READY_ENGINES_BLOCKED",
+      "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
+      "counts": {
+        "weight_downloads": 1,
+        "installs": 1,
+        "sam": 3,
+        "sam_fallback_authorized": true,
+        "imagegen": 1,
+        "model_loads": 3,
+        "timing_probes": 0,
+        "video_generations": 0,
+        "training": 0,
+        "weight_downloads_completed": 0,
+        "video_engine_model_loads": 0,
+        "installs_unit": "one isolated engine environment, seven local packages",
+        "model_loads_scope": "SAM only"
+      },
+      "engines": {
+        "E1": {
+          "status": "ENGINE_BLOCKED_ENV",
+          "code_commit": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
+          "outputs": 0,
+          "historical_blocker": "Official default first stage resolution divisor2 requires final dimensions divisible by64; 480 fails. No resolution or recipe change authorized.",
+          "resolution": [
+            1024,
+            576
+          ],
+          "reason": "Existing authentication received GatedRepoError HTTP403 for google/gemma-3-12b-it model shard",
+          "access_retry": false
+        },
+        "E2": {
+          "status": "ENGINE_BLOCKED_ENV",
+          "reason": "PREFLIGHT_MEMORY_CAP: simultaneous resident weights approximately64.283GiB exceed frozen64GiB worker cap; no heavy run or observed OOM",
+          "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
+          "outputs": 0,
+          "model_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+          "environment_import": "PASS",
+          "partial_download": {
+            "started": 1793704314.7529936,
+            "repo": "ByteDance/Bernini-R-Diffusers",
+            "revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+            "status": "STOPPED_BY_OWNER_PREFLIGHT_MEMORY_CAP",
+            "finished": 1793704855.5898664,
+            "partial_files_preserved": true
+          },
+          "partial_directory_apparent_bytes": 32190848586,
+          "runtime_diff": "RUNTIME_DIFF.md",
+          "disk_preflight": {
+            "required_download_bytes": 126200552703,
+            "required_free_multiplier": 1.3,
+            "observed_free_bytes": 781679652864,
+            "pass": true
+          }
+        }
+      },
+      "quality": "HUMAN_REVIEW_PENDING",
+      "execution_commit": "185e769",
+      "geometry_amendment_commit": "32e2371",
+      "stages": [
+        {
+          "stage": "sam-primary-cpu",
+          "status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "normal_exit_recorded": true,
+          "elapsed_supervised_seconds": 2.218825340270996,
+          "worker_peak_memory_bytes": 8343552,
+          "sam_elapsed_seconds": null,
+          "cuda_peak_allocated_bytes": null,
+          "final_gpu_process_count": 0,
+          "final_memory_decision": "CLEAR"
+        },
+        {
+          "stage": "sam-primary-heavy",
+          "status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "normal_exit_recorded": true,
+          "elapsed_supervised_seconds": 48.91566753387451,
+          "worker_peak_memory_bytes": 6182961152,
+          "sam_elapsed_seconds": 46.773287773132324,
+          "cuda_peak_allocated_bytes": 3043695616,
+          "final_gpu_process_count": 0,
+          "final_memory_decision": "CLEAR"
+        },
+        {
+          "stage": "sam-fallback-cpu",
+          "status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "normal_exit_recorded": true,
+          "elapsed_supervised_seconds": 2.2483439445495605,
+          "worker_peak_memory_bytes": 8351744,
+          "sam_elapsed_seconds": null,
+          "cuda_peak_allocated_bytes": null,
+          "final_gpu_process_count": 0,
+          "final_memory_decision": "CLEAR"
+        },
+        {
+          "stage": "sam-fallback-heavy",
+          "status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "normal_exit_recorded": true,
+          "elapsed_supervised_seconds": 44.55468511581421,
+          "worker_peak_memory_bytes": 4913725440,
+          "sam_elapsed_seconds": 42.226502656936646,
+          "cuda_peak_allocated_bytes": 3195012608,
+          "final_gpu_process_count": 0,
+          "final_memory_decision": "CLEAR"
+        },
+        {
+          "stage": "sam-anchor1-cpu",
+          "status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "normal_exit_recorded": true,
+          "elapsed_supervised_seconds": 2.251873254776001,
+          "sam_elapsed_seconds": null,
+          "cuda_peak_allocated_bytes": null,
+          "final_gpu_process_count": 0,
+          "final_memory_decision": "CLEAR"
+        },
+        {
+          "stage": "sam-anchor1-heavy",
+          "status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "normal_exit_recorded": true,
+          "elapsed_supervised_seconds": 24.430022716522217,
+          "sam_elapsed_seconds": 21.551804304122925,
+          "cuda_peak_allocated_bytes": 2566345216,
+          "final_gpu_process_count": 0,
+          "final_memory_decision": "CLEAR"
+        }
+      ],
+      "sam_checkpoint_sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
+      "shutdown": {
+        "observed_at_epoch": 1793705144.50485,
+        "own_engine_or_download_processes_remaining": 0,
+        "own_sam_units_remaining": 0,
+        "gpu_compute_process_count": 0,
+        "external_processes_terminated": 0,
+        "common_guard_modified": false,
+        "follow_up_scheduled": false
+      },
+      "previous_status": "SEGMENT_NOT_ESTABLISHED under original reflection-unaware definition",
+      "updated_at": "2026-11-03T11:23:22.034403+00:00"
+    },
+    "amendment3_e1_stage_summary": {
+      "supervisor_stages_executed": 7,
+      "cpu_stages_executed": 4,
+      "heavy_named_stages_executed": 3,
+      "heavy_named_cpu_packaging_only": 1,
+      "gpu_model_phases": 2,
+      "prepared_not_run_stages": 1,
+      "mechanical_failures": {
+        "v001-e1-depth-amend3-heavy": "matplotlib.cm.get_cmap unavailable after successful depth inference; raw depths and73PNGs preserved",
+        "v001-e1-depth-package-amend3-cpu": "ModuleNotFoundError vda_entry before model import; fixed import path inr2 CPU-only packaging",
+        "v001-e1-probe-amend3-heavy": "EinopsError spatialheight9 cannotdivideby2 before denoiser"
+      },
+      "pressure_stop_observed": false,
+      "historical_NOT_CLEAN_preserved": true,
+      "shutdown_status": "HISTORICAL_STAGE_ONLY; see final E2 stop and independent cleanup observation"
+    },
+    "amendment3_e2_shutdown_observation": {
+      "observed_at_epoch": 1793720693.3984325,
+      "gpu_compute_process_count": 0,
+      "own_worker_entry_or_download_process_matches": 0,
+      "read_only": true,
+      "processes_terminated_by_audit": 0,
+      "normal_completion": false,
+      "historical_guard_stop_preserved": true
+    },
+    "shutdown": {
+      "observed_at_epoch": 1793720671.7593899,
+      "own_worker_download_or_guard_processes_remaining": 0,
+      "gpu_compute_process_count": 0,
+      "historical_failed_units_preserved": [
+        {
+          "unit": "make-meme-c001-c012-v001-e1-depth-amend3-heavy.service",
+          "load_state": "loaded",
+          "active_state": "failed",
+          "sub_state": "failed"
+        },
+        {
+          "unit": "make-meme-c001-c012-v001-e1-depth-package-amend3-cpu.service",
+          "load_state": "loaded",
+          "active_state": "failed",
+          "sub_state": "failed"
+        },
+        {
+          "unit": "make-meme-c001-c012-v001-e1-probe-amend3-heavy.service",
+          "load_state": "loaded",
+          "active_state": "failed",
+          "sub_state": "failed"
+        }
+      ],
+      "historical_failed_units_are_running": false,
+      "external_processes_terminated": 0,
+      "follow_up_scheduled": false,
+      "common_guard_modified": false,
+      "normal_experiment_completion": false,
+      "note": "Cleaned-up own process absence is distinct from the preserved E2 guard stop and earlier mechanical failures."
+    }
+  },
+  "current_work_status": "E1 review delivery and E2 amendment4 preparation ongoing; no final shutdown assertion"
 }

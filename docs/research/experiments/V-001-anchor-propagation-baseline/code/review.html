@@ -13,7 +13,7 @@
 <body>
 <main>
 <h1>V-001 · 확정 구간과 앵커 검토</h1>
-<p class="status"><strong>SEGMENT_ESTABLISHED · ANCHOR_GATE_PASS · 전파 영상 0/4</strong><br>2026-11-04 KST · 개정3 종료. 대체 구간 73/73과 native imagegen 앵커 G1–G5 통과를 유지합니다. E1은 공식 ref0.5 해상도 제약으로 차단됐습니다(Gemma 접근 PASS). E2는 두 번째 expert 적재 중 PSI full 압박으로 안전 중단했습니다. 두 엔진 모두 denoising 0 step·전파 영상0개입니다. 품질: <strong>HUMAN_REVIEW_PENDING</strong>.</p>
+<p class="status"><strong>개정4 · E1 ENGINE_RAN(2/2) · E2 PENDING</strong><br>2026-11-04 KST · 확정 구간과 native imagegen 앵커를 유지합니다. E1 원본 출력 두 개: 1152×640 · 73프레임 · 24fps · 각각 11 step / 11 model call. E2 변환·추론과 SAM 출력 측정은 대기 중입니다. 품질: <strong>HUMAN_REVIEW_PENDING</strong> · temporal=UNVERIFIED.</p>
 <div class="controls" aria-label="전체 영상 동기 제어">
 <label>주 비교 구간 <select id="segment"><option value="fallback">확정 [240,313)</option><option value="primary">이전 기본 [96,169) · 이력</option></select></label>
 <button id="play" type="button">전체 재생</button><button id="pause" type="button">전체 일시정지</button>
@@ -25,14 +25,14 @@
 <div class="strip" aria-label="원본·미실행 출력·Kling 비교">
 <figure><figcaption id="source-title">원본 · 확정 구간</figcaption><div class="source-frame"><video id="source" src="fallback.mp4" muted playsinline preload="metadata" aria-label="선택 원본 구간"></video><div id="casting-overlay" class="casting-overlay" hidden aria-label="원본240프레임 고정 배역"><span class="casting-label ig">IG</span><span class="casting-label lab">Lab</span></div></div></figure>
 <figure><figcaption>앵커 · native imagegen 1회</figcaption><img class="anchor" src="anchor.png" width="1280" height="720" alt="확정 구간 첫 프레임을 편집한 Lab·IG 앵커. 생성 원출력을 수정 없이 표시합니다."></figure>
-<figure><figcaption>E1 · seed 20261103</figcaption><div class="missing"><strong>ENGINE_BLOCKED_ENV</strong><span>ref0.5 조건 높이 144<br>VAE 32배수 불충족</span></div></figure>
-<figure><figcaption>E1 · seed 20261104</figcaption><div class="missing"><strong>ENGINE_BLOCKED_ENV</strong><span>ref0.5 조건 높이 144<br>VAE 32배수 불충족</span></div></figure>
-<figure><figcaption>E2 · seed 20261103</figcaption><div class="missing"><strong>ENGINE_STOPPED_GUARD</strong><span>모델 적재 중 PSI full 압박<br>denoising 0 step · 영상 없음</span></div></figure>
-<figure><figcaption>E2 · seed 20261104</figcaption><div class="missing"><strong>ENGINE_STOPPED_GUARD</strong><span>모델 적재 중 PSI full 압박<br>denoising 0 step · 영상 없음</span></div></figure>
+<figure><figcaption>E1 · seed 20261103</figcaption><video id="e1-s1" src="e1-s1.mp4" muted playsinline preload="metadata" aria-label="E1 seed 20261103 실제 원본 출력"></video></figure>
+<figure><figcaption>E1 · seed 20261104</figcaption><video id="e1-s2" src="e1-s2.mp4" muted playsinline preload="metadata" aria-label="E1 seed 20261104 실제 원본 출력"></video></figure>
+<figure><figcaption>E2 · seed 20261103</figcaption><div class="missing"><strong>PENDING</strong><span>E2 변환·추론 대기<br>결과 미확정</span></div></figure>
+<figure><figcaption>E2 · seed 20261104</figcaption><div class="missing"><strong>PENDING</strong><span>E2 변환·추론 대기<br>결과 미확정</span></div></figure>
 <figure><figcaption>Kling · 기존 참고 결과</figcaption><video id="kling" src="kling-fallback.mp4" muted playsinline preload="metadata" aria-label="선택 구간의 기존 Kling 결과"></video></figure>
 </div>
 <p><strong>배역 기준(frame 240): 오른쪽 앞 갈색 개 → Lab / 왼쪽 뒤 회색 개 → IG.</strong> 원본 위 라벨은 확정 구간 첫 프레임을 정지한 때만 표시하는 고정 배역이며, 프레임별 추적 라벨이 아닙니다.</p>
-<p class="note">가로로 스크롤하면 모든 열을 볼 수 있습니다. 빈 출력 칸은 실제 미실행 상태입니다. Kling은 배역 대응과 참고 비교에만 사용했으며 이번 생성물이 아닙니다.</p>
+<p class="note">가로로 스크롤하면 모든 열을 볼 수 있습니다. E1 두 열은 실제 출력이며 E2 두 칸은 대기 상태입니다. Kling은 배역 대응과 참고 비교에만 사용했으며 이번 생성물이 아닙니다.</p>
 <h2>승인 개정 후 게이트 측정</h2>
 <div class="table-scroll"><table><thead><tr><th scope="col">항목</th><th scope="col">측정</th><th scope="col">판정</th></tr></thead><tbody>
 <tr><th scope="row">확정 구간 [240,313)</th><td>73 / 73 프레임</td><td>SEGMENT_ESTABLISHED</td></tr>
@@ -41,7 +41,7 @@
 <tr><th scope="row">G3 / G4 bbox 높이 비율</th><td>Lab 1.2482 / IG 1.1837</td><td>PASS · [0.85,1.60] / [0.70,1.30]</td></tr>
 <tr><th scope="row">G5 배경 RGB MAE</th><td>5.62783</td><td>PASS · 한도 12</td></tr>
 </tbody></table></div>
-<p>E1은 1024×576 요청에서 첫 단계 높이288, ref0.5 조건 높이144가 되어 VAE의32배수 조건을 충족하지 못합니다. E1 생성 영상0·denoising step0이며 Gemma 접근 차단은 현재 원인이 아닙니다. E2는 두 번째 expert 적재 중 약75.6초에 SYSTEM_PSI_FULL_PRESSURE로 중단됐습니다. 이는 모델 적재 시도 시간이며, 클립 생성 시간이나1-step 측정값이 아닙니다. E2 denoising0 step·영상0개이므로 출력 동작 추종·뒤바뀜·Lab 체형 유지·깜빡임·클립 생성 비용과15초 예상 비용은 측정하지 못했습니다. 비용: NOT_MEASURED. temporal=UNVERIFIED. 앵커 게이트 통과는 전파 품질의 증거가 아닙니다.</p>
+<p>E1 실제 클립 생성 시간: seed 20261103은 135.8008708초, seed 20261104는 83.5878347초입니다. 두 출력 모두 73프레임·24fps·1152×640·11 step / 11 model call이며 원본 MP4 byte를 유지했습니다. SAM 출력 측정과 15초 비용 추정은 PENDING입니다. E2 변환·추론도 PENDING이며 이전 안전 중단을 현재 최종 상태로 취급하지 않습니다. HUMAN_REVIEW_PENDING · temporal=UNVERIFIED.</p>
 <h2>이전 기본 구간 · 참고 이력</h2>
 <p>기존 기준에서 기본 [96,169)은 21/73, 대체 [240,313)은 0/73이었습니다. 대체 구간의 기존 4트랙에는 바닥 반사가 포함됐습니다. 이 기록을 보존하며, 현재 결과는 승인 개정 후 판정을 따릅니다.</p>
 <div class="pair"><figure><figcaption>원본 [96,169) · 이전 기본 구간</figcaption><video src="sourceprimary.mp4" muted playsinline preload="metadata" aria-label="이전 기본 원본 구간"></video></figure><figure><figcaption>Kling [96,169) · 기존 참고</figcaption><video src="kling-primary.mp4" muted playsinline preload="metadata" aria-label="이전 기본 구간 기존 Kling 결과"></video></figure></div>

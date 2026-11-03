@@ -1,13 +1,21 @@
 {
   "date_kst": "2026-11-04",
   "method": "Existing Chrome headless CDP with actual packaged media; no installations",
-  "html_sha256": "b380caefb6df4a1f6a746e6b61431fe3f11bef5f1600c8a8750194fedf5a428a",
+  "html_sha256": "67d81fd26db27f923bd3e5d7d134f3663358a0fcde1cfe9d4ec2d24ab209528e",
   "initial": {
     "segment": "fallback",
     "source": "fallback.mp4",
     "anchorLoaded": true,
     "labelsHidden": false,
     "mediaSizes": [
+      {
+        "width": 200,
+        "height": 112.5
+      },
+      {
+        "width": 200,
+        "height": 112.5
+      },
       {
         "width": 200,
         "height": 112.5
@@ -22,6 +30,18 @@
         "ready": 4,
         "width": 1280,
         "height": 720,
+        "duration": 3.041667
+      },
+      {
+        "ready": 4,
+        "width": 1152,
+        "height": 640,
+        "duration": 3.041667
+      },
+      {
+        "ready": 4,
+        "width": 1152,
+        "height": 640,
         "duration": 3.041667
       },
       {
@@ -44,17 +64,17 @@
       }
     ],
     "blocked": [
-      "ENGINE_BLOCKED_ENV",
-      "ENGINE_BLOCKED_ENV",
-      "ENGINE_STOPPED_GUARD",
-      "ENGINE_STOPPED_GUARD"
+      "PENDING",
+      "PENDING"
     ],
-    "costNotMeasured": true
+    "actualE1": true
   },
   "next": {
     "position": "1 / 72",
     "labelsHidden": true,
     "times": [
+      0.041666,
+      0.041666,
       0.041666,
       0.041666,
       0.041666,
@@ -64,9 +84,13 @@
       0.5,
       0.5,
       0.5,
+      0.5,
+      0.5,
       0.5
     ],
     "paused": [
+      true,
+      true,
       true,
       true,
       true,
@@ -80,15 +104,21 @@
       0,
       0,
       0,
+      0,
+      0,
       0
     ],
     "rates": [
       0.5,
       0.5,
       0.5,
+      0.5,
+      0.5,
       0.5
     ],
     "paused": [
+      true,
+      true,
       true,
       true,
       true,
@@ -102,15 +132,21 @@
       0.416666,
       0.416666,
       0.416666,
+      0.416666,
+      0.416666,
       0.416666
     ],
     "rates": [
       0.5,
       0.5,
       0.5,
+      0.5,
+      0.5,
       0.5
     ],
     "paused": [
+      true,
+      true,
       true,
       true,
       true,
@@ -121,18 +157,24 @@
     "position": "17 / 72",
     "labelsHidden": true,
     "times": [
-      0.7177,
-      0.7177,
-      0.7177,
-      0.7177
+      0.7183,
+      0.7174,
+      0.7174,
+      0.7183,
+      0.7182,
+      0.7182
     ],
     "rates": [
+      0.5,
+      0.5,
       0.5,
       0.5,
       0.5,
       0.5
     ],
     "paused": [
+      false,
+      false,
       false,
       false,
       false,
@@ -143,18 +185,24 @@
     "position": "17 / 72",
     "labelsHidden": true,
     "times": [
-      0.718,
-      0.718,
-      0.718,
-      0.7179
+      0.7186,
+      0.7174,
+      0.7174,
+      0.7185,
+      0.7185,
+      0.7185
     ],
     "rates": [
+      0.5,
+      0.5,
       0.5,
       0.5,
       0.5,
       0.5
     ],
     "paused": [
+      true,
+      true,
       true,
       true,
       true,
@@ -168,15 +216,21 @@
       0,
       0,
       0,
+      0,
+      0,
       0
     ],
     "rates": [
       0.5,
       0.5,
       0.5,
+      0.5,
+      0.5,
       0.5
     ],
     "paused": [
+      true,
+      true,
       true,
       true,
       true,
@@ -190,15 +244,21 @@
       0,
       0,
       0,
+      0,
+      0,
       0
     ],
     "rates": [
       0.5,
       0.5,
       0.5,
+      0.5,
+      0.5,
       0.5
     ],
     "paused": [
+      true,
+      true,
       true,
       true,
       true,
@@ -213,11 +273,8 @@
   "temporal_quality": "UNVERIFIED",
   "quality": "HUMAN_REVIEW_PENDING",
   "notes": [
-    "No generated videos exist; actual source/Kling playback and static native anchor tested",
-    "E1 environment blocker and E2 safety stop displayed explicitly"
+    "Two actual E1 raw outputs, source/Kling playback and static native anchor tested",
+    "E1 ENGINE_RAN(2/2), E2 PENDING, SAM metrics PENDING displayed explicitly"
   ],
-  "visual_inspection": {
-    "desktop_1280x1000": "Inspected actual screenshot: source, anchor, first-frame labels and explicit blocked output slots visible; strip scrolls horizontally to seventh column.",
-    "mobile_375x900": "Inspected actual screenshot: controls wrap, labels visible, document fits viewport; strip intentionally scrolls."
-  }
+  "visual_inspection": "Actual desktop1280x1000 and mobile375x900 screenshots inspected: source/anchor/E1 clips visible, E2 pending, casting labels and controls visible; strip intentionally scrolls."
 }
