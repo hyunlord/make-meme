@@ -1,0 +1,210 @@
+--- C013/memory.py
++++ V001/memory.py
+@@ -7,6 +7,7 @@
+ from pathlib import Path
+ from typing import Final, Literal, TypedDict, assert_never
+ import os
++import math
+ import time
+ 
+ MIB: Final = 2**20
+@@ -25,6 +26,8 @@
+     pswpin: int
+     pswpout: int
+     psi_full_total: int
++    psi_full_avg10: float
++    oom_kill: int
+     errors: list[str]
+ 
+ 
+@@ -45,6 +48,7 @@
+     baseline: SystemSample | None
+     history: list[SystemSample]
+     cgroup_events: dict[str, dict[str, int]]
++    pressure_since: dict[str, float | None]
+ 
+ 
+ class Verdict(TypedDict):
+@@ -84,9 +88,11 @@
+                     row['swap'] = row['swap_total'] - row['swap_free']
+                 case 'vmstat':
+                     values = _pairs(text)
+-                    row.update(pswpin=values['pswpin'], pswpout=values['pswpout'])
++                    row.update(pswpin=values['pswpin'], pswpout=values['pswpout'], oom_kill=values['oom_kill'])
+                 case 'pressure/memory':
+                     row['psi_full_total'] = _full_total(text)
++                    full = next(line for line in text.splitlines() if line.startswith('full '))
++                    row['psi_full_avg10'] = float(dict(part.split('=', 1) for part in full.split()[1:])['avg10'])
+                 case unreachable:
+                     assert_never(unreachable)
+         except (OSError, ValueError, KeyError, IndexError, StopIteration) as error:
+@@ -123,7 +129,8 @@
+ class MemoryBudget:
+     """Mutable attempt ledger; export is persisted unchanged between STEP and decode."""
+     def __init__(self, snapshot: BudgetState | None = None) -> None:
+-        self.state: BudgetState = snapshot if snapshot is not None else {'baseline': None, 'history': [], 'cgroup_events': {}}
++        self.state: BudgetState = snapshot if snapshot is not None else {'baseline': None, 'history': [], 'cgroup_events': {}, 'pressure_since': {}}
++        self.state.setdefault('pressure_since', {})
+ 
+     def export(self) -> BudgetState:
+         return self.state
+@@ -132,7 +139,7 @@
+                 *, start: bool = False, verified_exit: bool = False, require_window: bool = True) -> Verdict:
+         """One verdict for preflight, startup, runtime, stage boundaries and final checks."""
+         verdict: Verdict = {'decision': 'CLEAR', 'warnings': [], 'errors': list(system.get('errors', [])), 'metrics': {}}
+-        required = ('monotonic','page_size','available','swap_total','swap_free','swap','pswpin','pswpout','psi_full_total')
++        required = ('monotonic','page_size','available','swap_total','swap_free','swap','pswpin','pswpout','psi_full_total','psi_full_avg10','oom_kill')
+         verdict['errors'].extend(f'system:missing:{key}' for key in required if system.get(key) is None)
+         match state:
+             case 'ACTIVE':
+@@ -154,7 +161,7 @@
+         if verdict['errors']:
+             verdict['decision'] = 'OBSERVATION_FAILED'
+             return verdict
+-        if (any(system[key] < 0 for key in required) or system['page_size'] == 0
++        if (any(not math.isfinite(system[key]) or system[key] < 0 for key in required) or system['page_size'] == 0
+                 or system['swap_free'] > system['swap_total']):
+             verdict['errors'].append('system:invalid_negative_counter_page_size_or_swap_range')
+         baseline = self.state['baseline']
+@@ -169,7 +176,7 @@
+         history = self.state['history']
+         now = system['monotonic']
+         if history and (now < history[-1]['monotonic'] or now-history[-1]['monotonic'] > WINDOW+0.5
+-                        or any(system[key] < history[-1][key] for key in ('pswpin','pswpout','psi_full_total'))):
++                        or any(system[key] < history[-1][key] for key in ('pswpin','pswpout','psi_full_total','oom_kill'))):
+             verdict['errors'].append('system:counter_regression_or_observation_gap_over_10.5s')
+             verdict['decision'] = 'OBSERVATION_FAILED'
+             return verdict
+@@ -188,15 +195,31 @@
+                               'swapout_bytes_10s': swapout, 'psi_full_ratio_10s': ratio}
+         if system['swap'] > 0 or growth != 0 or swapout:
+             verdict['warnings'].append('GLOBAL_SWAP_WARNING')
+-        if system['available'] < (72 if start else 24)*GIB:
+-            verdict['decision'] = 'START_HEADROOM_NOT_MET' if start else 'SYSTEM_HEADROOM'
+-        elif growth >= 64*MIB:
+-            verdict['decision'] = 'GLOBAL_SWAP_GROWTH'
+-        elif swapout >= 64*MIB:
++        timers = self.state['pressure_since']
++        for key, active in (('headroom', system['available'] < 12*GIB),
++                            ('psi', system['psi_full_avg10'] > 25)):
++            if not active:
++                timers[key] = None
++            elif timers.get(key) is None:
++                timers[key] = now
++        low_since, psi_since = timers.get('headroom'), timers.get('psi')
++        low_seconds = 0.0 if low_since is None else now-low_since
++        psi_seconds = 0.0 if psi_since is None else now-psi_since
++        total_swapout = (system['pswpout']-baseline['pswpout'])*system['page_size']
++        verdict['metrics'].update(headroom_low_seconds=low_seconds, psi_high_seconds=psi_seconds,
++                                  psi_full_avg10=system['psi_full_avg10'], swapout_bytes_total=total_swapout)
++        if low_since is not None or system['psi_full_avg10'] > 10:
++            verdict['warnings'].append('PRESSURE_DURATION_OBSERVING')
++        if system['oom_kill'] > baseline['oom_kill']:
++            verdict['decision'] = 'SYSTEM_OOM'
++        elif low_seconds >= 30:
++            verdict['decision'] = 'SYSTEM_HEADROOM'
++        elif psi_seconds >= 60:
++            verdict['decision'] = 'SYSTEM_PSI_FULL_PRESSURE'
++        elif total_swapout >= GIB:
++            # The authorization only permits swap-out increases below 1 GiB.
+             verdict['decision'] = 'SWAPOUT_PRESSURE'
+-        elif ratio >= 0.10:
+-            verdict['decision'] = 'SYSTEM_PSI_FULL_PRESSURE'
+-        elif start and require_window and duration < WINDOW:
++        elif start and (low_since is not None or psi_since is not None or (require_window and duration < WINDOW)):
+             verdict['decision'] = 'START_OBSERVATION_INCOMPLETE'
+         if state == 'ACTIVE' and cgroup is not None:
+             events = cgroup['events']
+--- C013/safety.py
++++ V001/safety.py
+@@ -15,9 +15,8 @@
+ 
+ 
+ def start_decision(decision:str,available_gib:float,remaining_seconds:float)->str:
+-    """The existing stronger start threshold remains separate from runtime limits."""
++    """MemoryBudget owns V-001 pressure durations; this check only bounds time."""
+     if decision!='CLEAR':return decision
+-    if available_gib<72:return 'START_HEADROOM_NOT_MET'
+     if remaining_seconds<=60:return 'DEADLINE'
+     return 'CLEAR'
+ 
+@@ -39,8 +38,9 @@
+     if policy is not None:
+         from policy import observe_service
+         service=observe_service(policy);row['service_policy']=service
+-        row['queue']=None;row['queue_counts']=None;row['queue_status']=service['queue_status']
+-        if service['status']!='EXPECTED_ABSENT_OBSERVED':row['errors'].append('service:'+service['status'])
++        row['queue']=None;row['queue_counts']=service['queue_counts'];row['queue_status']=service['queue_status']
++        if service['status'] not in ('EXPECTED_ABSENT_OBSERVED','PROTECTED_SERVICE_IDLE'):
++            row['errors'].append('service:'+service['status'])
+     else:
+         try:
+             raw=json.loads(subprocess.check_output(['curl','-fsS','--max-time','3','http://127.0.0.1:8190/queue'],timeout=5))
+--- C013/policy.py
++++ V001/policy.py
+@@ -20,7 +20,7 @@
+     assert policy['stage_root']==str(root.resolve()) and policy['stage']==cfg['stage']
+     assert policy['boot_id']==Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+     assert time.time()<policy['deadline_epoch']==cfg['deadline_epoch']
+-    assert policy['attempt_id']=='B034_CONT02_EXPECTED_ABSENT_01'
++    assert policy['attempt_id']=='C001_V001_APPROVED_01'
+     assert policy['process_markers'] and policy['service_cwd'].endswith('/make-meme/ComfyUI')
+     assert policy['endpoint']=='http://127.0.0.1:8190/queue'
+     for path,digest in policy['logical_files'].items():
+@@ -30,7 +30,7 @@
+ 
+ def observe_service(policy:dict)->dict:
+     """Read bounded process/listener and actual TCP state without GPU initialization."""
+-    errors=[];processes=[];listeners=[];duplicates=[];queue_errno=None;queue_error=None;queue_status='UNAVAILABLE'
++    errors=[];processes=[];listeners=[];duplicates=[];queue_errno=None;queue_error=None;queue_status='UNAVAILABLE';queue_counts=None
+     if 'boot_id' in policy:
+         try:
+             if Path('/proc/sys/kernel/random/boot_id').read_text().strip()!=policy['boot_id']:errors.append('boot:CHANGED')
+@@ -67,10 +67,19 @@
+     except (OSError,subprocess.SubprocessError) as error:errors.append('listener:'+type(error).__name__)
+     connection=http.client.HTTPConnection('127.0.0.1',8190,timeout=3)
+     try:
+-        connection.request('GET','/queue');response=connection.getresponse();response.read()
+-        queue_error='UNEXPECTED_ENDPOINT_AVAILABLE:'+str(response.status);queue_status='AVAILABLE_UNEXPECTED'
++        connection.request('GET','/queue');response=connection.getresponse();body=response.read()
++        if response.status != 200:
++            errors.append('queue:http_status:'+str(response.status))
++        else:
++            parsed_queue=json.loads(body)
++            queue_counts={key:len(parsed_queue['queue_'+key]) for key in ('running','pending')}
++            if any(not isinstance(parsed_queue['queue_'+key],list) for key in ('running','pending')):
++                errors.append('queue:malformed_lists')
++            queue_status='AVAILABLE'
+     except ConnectionRefusedError as error:queue_errno=error.errno;queue_error=type(error).__name__
+-    except (OSError,http.client.HTTPException) as error:queue_error=type(error).__name__;queue_errno=getattr(error,'errno',None)
++    except (OSError,http.client.HTTPException,ValueError,KeyError,TypeError) as error:queue_error=type(error).__name__;queue_errno=getattr(error,'errno',None)
+     finally:connection.close()
+     status=absence_decision(policy.get('authorized') is True,processes,listeners,errors,queue_errno)
+-    return {'status':status,'research_worker_pids':duplicates,'related_pids':processes,'listener_lines':listeners,'errors':errors,'queue_status':queue_status,'queue_counts':None,'queue_errno':queue_errno,'queue_error':queue_error,'observed_at':time.time()}
++    if queue_status=='AVAILABLE':
++        status='OBSERVATION_FAILED' if errors else ('QUEUE_BUSY' if any(queue_counts.values()) else 'PROTECTED_SERVICE_IDLE')
++    return {'status':status,'research_worker_pids':duplicates,'related_pids':processes,'listener_lines':listeners,'errors':errors,'queue_status':queue_status,'queue_counts':queue_counts,'queue_errno':queue_errno,'queue_error':queue_error,'observed_at':time.time()}
+--- C013/supervisor.py
++++ V001/supervisor.py
+@@ -24,10 +24,10 @@
+     for path,digest in json.loads((root/'freeze.json').read_text())['files'].items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==digest,path
+     with (root/'reports/supervisor-attempt.json').open('x') as out:json.dump({'started':time.time(),'unit':unit,'deadline':deadline},out)
+     units=subprocess.check_output(['systemctl','--user','list-units','--all','--no-legend','--plain','--no-pager'],timeout=5,text=True)
+-    conflicts=[line for line in units.splitlines() if 'b034' in line.lower() and any(state in line.split() for state in ('active','activating','deactivating'))]
++    conflicts=[line for line in units.splitlines() if 'v001' in line.lower() and any(state in line.split() for state in ('active','activating','deactivating'))]
+     assert not conflicts, 'DUPLICATE_RESEARCH_UNIT'
+     samples=[]
+-    for index in range(8):
++    for index in range(36):
+         initial=observe(allowed,set(),False,policy,budget)
+         initial['memory_verdict']=budget.inspect(initial['system_memory'],None,'BEFORE_CREATED',start=True)
+         if initial['decision']=='CLEAR':initial['decision']=initial['memory_verdict']['decision']
+@@ -41,7 +41,7 @@
+         time.sleep(2)
+     if initial['decision']!='CLEAR':return 2
+     (root/'reports/start-safety.json').write_text(json.dumps(initial,indent=2))
+-    cap=min(64*2**30,initial['available']-24*2**30);seconds=min(config['worker_max_seconds'],int(deadline-time.time()-10))
++    cap=min(64*2**30,initial['available']-12*2**30);seconds=min(config['worker_max_seconds'],int(deadline-time.time()-10))
+     command=['systemd-run','--user','--wait','--pipe','--unit='+unit,'-p',f'RuntimeMaxSec={seconds}','-p',f'MemoryMax={cap}','-p',f'MemoryHigh={cap-2*2**30}','-p','MemorySwapMax=0','-p','TasksMax=256','-p','RemainAfterExit=yes','-p','KillMode=control-group','-p','TimeoutStopSec=20','--',sys.executable,str(root/'code/worker.py'),str(root)]
+     registered={};exit_receipt=None;uncertain_since=None;started=time.time();reason='UNKNOWN';cleanup=[]
+     with (root/'reports/worker.log').open('w') as log:

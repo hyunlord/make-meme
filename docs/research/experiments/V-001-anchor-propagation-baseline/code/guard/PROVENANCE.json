@@ -1,0 +1,36 @@
+{
+  "source": "C-013 approved resume guard copy",
+  "scope": "V-001 only",
+  "files": [
+    {
+      "file": "memory.py",
+      "parent_sha256": "8506c22a2ca598755de8fe0b65be7f8c81c53c4c5a5ec1364c28db696c10b075",
+      "v001_sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa"
+    },
+    {
+      "file": "safety.py",
+      "parent_sha256": "d3364ccf96322321354419c074e28da0e5477789886f48088d8d32a7ebb5f4ac",
+      "v001_sha256": "af6890f5563ae83289d8dd84ce5601b58176ea43a193aed360365fc5c498e1a3"
+    },
+    {
+      "file": "policy.py",
+      "parent_sha256": "b546a23fafef4032867e3d829fa1cecda5c46aa030a1824667d7efaabb937620",
+      "v001_sha256": "fffe160914716d6be0cf34375017a845795c55e39eda39119ffb4f5c34fe6941"
+    },
+    {
+      "file": "supervisor.py",
+      "parent_sha256": "760b83966cf99d4ac492085ec98f4d95fd8aab8a3b023b0599aa6be108ebf4ea",
+      "v001_sha256": "78d8e41b4f8083f5c103a4b485f7dd65b1cbc376450297ff1f59ae40f6bd604c"
+    }
+  ],
+  "tests": {
+    "command": "python3 -m unittest discover -s code/guard -p test_v001.py",
+    "cases": 12,
+    "result": "PASS"
+  },
+  "not_run": [
+    "Linux systemd integration",
+    "GPU worker",
+    "ruff/basedpyright (not installed on this Mac)"
+  ]
+}
