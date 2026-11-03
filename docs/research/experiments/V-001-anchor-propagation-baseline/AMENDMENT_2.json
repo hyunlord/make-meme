@@ -1,0 +1,28 @@
+{
+  "id": 2,
+  "recorded_at": "2026-11-03T11:07:33.584294+00:00",
+  "classification": "POST_RESULT_DEFINITION_CORRECTION",
+  "authority": "User amendment2 after inspecting failed segment gate",
+  "reflection_rule": {
+    "horizontal_overlap_min_fraction_smaller_width": 0.5,
+    "vertical_rule": "B.bbox.top > A.bbox.bottom - 40",
+    "coordinate_canvas": [
+      1280,
+      720
+    ],
+    "ordered_distinct_tracks": true
+  },
+  "segment": {
+    "evaluate_only": "fallback [240,313)",
+    "reuse_existing_sam": true,
+    "criterion": "casted actual Lab and IG each area>=0.005 in>=66/73 frames",
+    "assignment": "first frame actual right=Lab,left=IG; preserve track_index"
+  },
+  "anchor": {
+    "G1": "actual nonreflection count equals2",
+    "G5": "exclude24px dilated union of actual+reflection masks from source and anchor"
+  },
+  "prompt_append": "바닥에 비친 두 강아지의 반사도 새 강아지의 털색과 체형에 맞게 바꿔 주세요. 반사의 위치와 모양은 첫 번째 이미지와 같게 유지해 주세요.",
+  "metrics": "actualtracks for count/trajectory/swap/body; reflections separate color-correspondence reference metric and included background exclusion",
+  "budgets_unchanged": true
+}
