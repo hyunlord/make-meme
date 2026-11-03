@@ -1,0 +1,46 @@
+{
+  "recorded_at": "2026-11-03T15:55:21.160935+00:00",
+  "authorization": "User amendment4 after amendment3 observed engine failures",
+  "deadline_kst": "2026-11-04T08:00:00+09:00",
+  "no_new_generation_after_kst": "2026-11-04T07:30:00+09:00",
+  "E1": {
+    "resolution": [
+      1152,
+      640
+    ],
+    "transform": "canonical1280x720 ->1152x648 -> crop top4 bottom4",
+    "depth": "resample preserved raw on CPU; VDA reruns0",
+    "cpu_contract": "official two-stage/ref2/VAE32 requires final128multiples; frames8n+1",
+    "mechanical_resolution_exception": "choose valid resolution closest to original16:9 with least crop if actualengineconstraints conflict; record beforeexecution"
+  },
+  "E2": {
+    "inspect_stored_transformer_dtype": true,
+    "fp32_to_bf16": "one sequential low-priority CPU conversion; bitexact original.to(bfloat16) validation everytensor; preserve originals",
+    "memory_max_gib": 100,
+    "memory_high_gib": 100,
+    "start_available_gib": 112,
+    "existing_safety_stops_unchanged": true
+  },
+  "unchanged": [
+    "models",
+    "source segment",
+    "anchor",
+    "prompts",
+    "strength",
+    "seeds",
+    "call budgets",
+    "human quality judgment"
+  ],
+  "order": [
+    "E1 probe",
+    "E1 seeds",
+    "refresh and deliver E1 viewer",
+    "E2 conversion",
+    "E2 probe",
+    "E2 seeds",
+    "final delivery"
+  ],
+  "historical_failures_preserved": true,
+  "prior_completed_denoising_probes": 0,
+  "prior_generated_videos": 0
+}
