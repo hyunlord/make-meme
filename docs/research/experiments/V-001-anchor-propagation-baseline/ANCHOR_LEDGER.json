@@ -1,9 +1,21 @@
 {
-  "status": "NOT_RUN",
-  "reason": "SEGMENT_NOT_ESTABLISHED",
-  "calls": 0,
-  "candidates": 0,
+  "status": "CALL_1_RETURNED_GATE_PENDING",
+  "calls": 1,
+  "candidates_requested": 1,
+  "started_at": "2026-11-03T11:08:04.342360+00:00",
+  "native_tool": true,
   "model_identifier": "UNKNOWN",
   "billing": "UNKNOWN",
-  "gates": null
+  "source_frame": 240,
+  "inputs": [
+    "SOURCE_FRAME_240",
+    "REF_LAB_ORIGINAL",
+    "REF_IG_ORIGINAL"
+  ],
+  "raw_dimensions": [
+    1672,
+    941
+  ],
+  "raw_sha256": "ff5a592fe07cdd360a733e81d028fc0dec7c51f455d293839f80104309158721",
+  "anchor_sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779"
 }
