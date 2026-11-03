@@ -110,5 +110,41 @@ the unchanged official grayscale/libx264/CRF18 writer. It imports no Torch or
 model module, writes a new packaging receipt, and verifies the original failure
 receipt remains byte-identical. `vda_entry.py` and its prior freeze remain unchanged.
 
-Recovery execution is pending the parent's guarded CPU run; script preparation
-and compilation alone do not establish a usable control video.
+The parent's saved `packaging-recovery.json` subsequently records
+`CPU_PACKAGING_RECOVERED`: 73 PNGs matched exactly, 1024 by 576 at 24 fps,
+control MP4 SHA256
+`799df9ff516abe604d54ba31915825be67d19d7923b4657e3d75691099dc9f2c`.
+The recovery added zero model loads and zero depth calls.
+
+## Observed ref0.5 geometry failure
+
+The first E1 probe attempt failed during reference VAE encoding, before any
+denoiser or scheduler call. Its receipt has empty grids, 0 denoiser calls,
+0 completed steps and 18.981282936991192 seconds elapsed. No timing estimate
+or generated video was obtained.
+
+The earlier 64-pixel divisibility check covered the top-level two-stage recipe
+but missed the stricter reference VAE requirement. Direct standard-library
+inspection of the downloaded Union safetensors header confirms
+`reference_downscale_factor = "2"`. The official path therefore computes:
+
+```
+requested output:       1024 x 576
+first stage:             512 x 288
+ref0.5 control encode:   256 x 144
+VAE spatial divisor:    32
+144 / 32 = 4.5: invalid
+```
+
+`iclora_utils.py` derives reference dimensions from the stage, then resizes the
+supplied control video to those dimensions. Changing the control file's stored
+resolution cannot repair this. The observed tensor `[1,1024,20,9,16]` failed the
+next spatial divide-by-two operation, consistent with that geometry.
+This combination requires output dimensions divisible by 128; height 576 is
+not. Preserving the approved resolution, reference factor and official default
+recipe leaves no input-only mechanical correction. Changing output geometry,
+padding inside the VAE, altering reference factor, or adopting a different stage
+recipe would change the approved experiment. No such modification was made.
+
+Technical classification: `ENGINE_BLOCKED_ENV`, geometry incompatibility;
+this is not a model-quality failure or an observed runtime-speed result.

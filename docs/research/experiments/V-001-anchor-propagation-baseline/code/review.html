@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="V-001 승인 개정 후 확정 구간과 imagegen 앵커 검토. 엔진 실행은 접근 및 메모리 제한으로 미실행입니다.">
+<meta name="description" content="V-001 개정3 진행 자료. E1 공식 ref0.5 해상도 제약으로 차단, E2 다운로드 재개 후 측정·생성 대기.">
 <title>V-001 앵커 검토 · 전파 엔진 미실행</title>
 <style>
 :root{--paper:#fff;--ink:#171717;--muted:#595959;--line:#bdbdbd;--surface:#f4f4f4;--focus:#005fcc;--gap:12px;--space:24px;--body:16px;--small:14px;--heading:24px;--label:12px}
@@ -13,7 +13,7 @@
 <body>
 <main>
 <h1>V-001 · 확정 구간과 앵커 검토</h1>
-<p class="status"><strong>SEGMENT_ESTABLISHED · ANCHOR_GATE_PASS · 전파 영상 0/4</strong><br>승인 개정 후 대체 구간은 73/73프레임을 통과했고, native imagegen 앵커 1장은 G1–G5를 통과했습니다. E1은 Gemma 접근 거부(HTTP 403), E2는 정적 가중치 64.283GiB가 동결 worker 한도 64GiB를 초과해 실행하지 않았습니다. 품질: <strong>HUMAN_REVIEW_PENDING</strong>.</p>
+<p class="status"><strong>SEGMENT_ESTABLISHED · ANCHOR_GATE_PASS · 전파 영상 0/4</strong><br>2026-11-04 KST · 개정3 진행 중. 대체 구간 73/73과 native imagegen 앵커 G1–G5 통과를 유지합니다. E1의 Gemma 접근은 통과했지만 공식 ref0.5 경로의 해상도 제약으로 차단됐습니다. E2는 다운로드 재개 후 시간 측정·생성 대기 중입니다. 품질: <strong>HUMAN_REVIEW_PENDING</strong>.</p>
 <div class="controls" aria-label="전체 영상 동기 제어">
 <label>주 비교 구간 <select id="segment"><option value="fallback">확정 [240,313)</option><option value="primary">이전 기본 [96,169) · 이력</option></select></label>
 <button id="play" type="button">전체 재생</button><button id="pause" type="button">전체 일시정지</button>
@@ -25,10 +25,10 @@
 <div class="strip" aria-label="원본·미실행 출력·Kling 비교">
 <figure><figcaption id="source-title">원본 · 확정 구간</figcaption><div class="source-frame"><video id="source" src="fallback.mp4" muted playsinline preload="metadata" aria-label="선택 원본 구간"></video><div id="casting-overlay" class="casting-overlay" hidden aria-label="원본240프레임 고정 배역"><span class="casting-label ig">IG</span><span class="casting-label lab">Lab</span></div></div></figure>
 <figure><figcaption>앵커 · native imagegen 1회</figcaption><img class="anchor" src="anchor.png" width="1280" height="720" alt="확정 구간 첫 프레임을 편집한 Lab·IG 앵커. 생성 원출력을 수정 없이 표시합니다."></figure>
-<figure><figcaption>E1 · seed 20261103</figcaption><div class="missing"><strong>BLOCKED · 생성 없음</strong><span>Gemma 접근 거부<br>HTTP 403</span></div></figure>
-<figure><figcaption>E1 · seed 20261104</figcaption><div class="missing"><strong>BLOCKED · 생성 없음</strong><span>Gemma 접근 거부<br>HTTP 403</span></div></figure>
-<figure><figcaption>E2 · seed 20261103</figcaption><div class="missing"><strong>BLOCKED · 생성 없음</strong><span>정적 가중치 64.283GiB<br>worker 한도 64GiB</span></div></figure>
-<figure><figcaption>E2 · seed 20261104</figcaption><div class="missing"><strong>BLOCKED · 생성 없음</strong><span>정적 가중치 64.283GiB<br>worker 한도 64GiB</span></div></figure>
+<figure><figcaption>E1 · seed 20261103</figcaption><div class="missing"><strong>ENGINE_BLOCKED_ENV</strong><span>ref0.5 조건 높이 144<br>VAE 32배수 불충족</span></div></figure>
+<figure><figcaption>E1 · seed 20261104</figcaption><div class="missing"><strong>ENGINE_BLOCKED_ENV</strong><span>ref0.5 조건 높이 144<br>VAE 32배수 불충족</span></div></figure>
+<figure><figcaption>E2 · seed 20261103</figcaption><div class="missing"><strong>PENDING · 생성 대기</strong><span>다운로드 재개<br>시간 측정·생성 미완료</span></div></figure>
+<figure><figcaption>E2 · seed 20261104</figcaption><div class="missing"><strong>PENDING · 생성 대기</strong><span>다운로드 재개<br>시간 측정·생성 미완료</span></div></figure>
 <figure><figcaption>Kling · 기존 참고 결과</figcaption><video id="kling" src="kling-fallback.mp4" muted playsinline preload="metadata" aria-label="선택 구간의 기존 Kling 결과"></video></figure>
 </div>
 <p><strong>배역 기준(frame 240): 오른쪽 앞 갈색 개 → Lab / 왼쪽 뒤 회색 개 → IG.</strong> 원본 위 라벨은 확정 구간 첫 프레임을 정지한 때만 표시하는 고정 배역이며, 프레임별 추적 라벨이 아닙니다.</p>
@@ -41,7 +41,7 @@
 <tr><th scope="row">G3 / G4 bbox 높이 비율</th><td>Lab 1.2482 / IG 1.1837</td><td>PASS · [0.85,1.60] / [0.70,1.30]</td></tr>
 <tr><th scope="row">G5 배경 RGB MAE</th><td>5.62783</td><td>PASS · 한도 12</td></tr>
 </tbody></table></div>
-<p>영상 모델 적재·시간 측정·전파 생성은 실행하지 않았습니다. 따라서 출력의 동작 추종·뒤바뀜·Lab 체형 유지·깜빡임·클립 생성 시간 및 15초 비용은 <strong>NOT_RUN</strong>입니다. 앵커 게이트 통과는 전파 품질의 증거가 아닙니다.</p>
+<p>E1은 1024×576 요청에서 첫 단계 높이288, ref0.5 조건 높이144가 되어 VAE의32배수 조건을 충족하지 못합니다. E1 생성 영상0·denoising step0이며 Gemma 접근 차단은 현재 원인이 아닙니다. E2의 이전64GiB 한도 차단을 현재 상태로 반복하지 않으며, 다운로드 이후 측정·생성 결과를 기다립니다. 출력 동작 추종·뒤바뀜·Lab 체형 유지·깜빡임·클립 생성 비용은 아직 측정 결과가 없습니다. 앵커 게이트 통과는 전파 품질의 증거가 아닙니다.</p>
 <h2>이전 기본 구간 · 참고 이력</h2>
 <p>기존 기준에서 기본 [96,169)은 21/73, 대체 [240,313)은 0/73이었습니다. 대체 구간의 기존 4트랙에는 바닥 반사가 포함됐습니다. 이 기록을 보존하며, 현재 결과는 승인 개정 후 판정을 따릅니다.</p>
 <div class="pair"><figure><figcaption>원본 [96,169) · 이전 기본 구간</figcaption><video src="sourceprimary.mp4" muted playsinline preload="metadata" aria-label="이전 기본 원본 구간"></video></figure><figure><figcaption>Kling [96,169) · 기존 참고</figcaption><video src="kling-primary.mp4" muted playsinline preload="metadata" aria-label="이전 기본 구간 기존 Kling 결과"></video></figure></div>

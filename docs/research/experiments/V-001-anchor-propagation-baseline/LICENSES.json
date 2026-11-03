@@ -1,5 +1,5 @@
 {
-  "status": "SAM_INFERENCE_AND_E2_SETUP_LICENSES_RECORDED",
+  "status": "E1_DOWNLOAD_AND_CONDITIONING_ATTEMPT_LICENSES_RECORDED",
   "checked": [
     {
       "component": "LTX-2.3-code-and-weights",
@@ -7,7 +7,20 @@
       "source": "https://raw.githubusercontent.com/Lightricks/LTX-2/e98f6d927d83c92ef2be6aec76c8440b19306e39/LICENSE-2",
       "retrieved_at": "2026-11-03T06:24:35.781695+00:00",
       "sha256": "c325da090976a313b214bf0d6a1738003b96505c01c46043e80edc200a72c147",
-      "used_for_inference": false
+      "used_for_inference": true,
+      "revision": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
+      "usage_scope": "Gemma/anchor/control conditioning attempt; denoiser calls 0, generated videos 0 at this update",
+      "weight_revisions": {
+        "Lightricks/LTX-2.3": "c1521179de480464f366a98a9d9b2acc4cc097b9",
+        "Lightricks/LTX-2.3-22b-IC-LoRA-Union-Control": "20a580c8606c06a0988d40375a61309e0fe5893d"
+      },
+      "download_complete": true,
+      "selected_weights": [
+        "ltx-2.3-22b-distilled.safetensors",
+        "ltx-2.3-spatial-upscaler-x2-1.1.safetensors",
+        "ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors"
+      ],
+      "upsampler_executed": false
     },
     {
       "component": "Bernini-code",
@@ -48,16 +61,47 @@
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "license_source": "installed wheel dist-info/licenses/LICENSE",
       "used_for_inference": false
+    },
+    {
+      "component": "Gemma 3 12B IT",
+      "license": "Gemma Terms of Use (saved model card declaration and link)",
+      "repo": "google/gemma-3-12b-it",
+      "revision": "96b6f1eccf38110c56df3a15bffe176da04bfd80",
+      "source": "https://huggingface.co/google/gemma-3-12b-it/blob/96b6f1eccf38110c56df3a15bffe176da04bfd80/README.md",
+      "terms_link_from_saved_card": "https://ai.google.dev/gemma/terms",
+      "model_card_sha256": "bcd00f0d73a59772e5cac6a98519e8f5eca15f1354cd3889c916e45ba16d8c2e",
+      "full_terms_archived": false,
+      "terms_version_date": "UNKNOWN",
+      "download_complete": true,
+      "used_for_inference": true,
+      "usage_scope": "Prompt encoding in failed E1 conditioning attempt; no video generated"
+    },
+    {
+      "component": "Video Depth Anything code",
+      "license": "Apache-2.0",
+      "revision": "4f5ae23172ba60fd7bc11ef671cca678842c7072",
+      "source": "https://github.com/DepthAnything/Video-Depth-Anything/blob/4f5ae23172ba60fd7bc11ef671cca678842c7072/LICENSE",
+      "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+      "used_for_inference": true
+    },
+    {
+      "component": "Video Depth Anything Large weights",
+      "license": "CC-BY-NC-4.0 (official saved README declaration)",
+      "repo": "depth-anything/Video-Depth-Anything-Large",
+      "revision": "7aafbcb5c6af0bac741aad2b6471894fb4761afa",
+      "file": "video_depth_anything_vitl.pth",
+      "source": "https://github.com/DepthAnything/Video-Depth-Anything/blob/4f5ae23172ba60fd7bc11ef671cca678842c7072/README.md#license",
+      "model_card_sha256": "cb786de4a6ef8f344cd8212dd9e51a6c08923fa5ccafc91dd6c96ee4f4af4d88",
+      "download_complete": true,
+      "used_for_inference": true,
+      "usage_scope": "One source-depth inference; four internal forwards; 73 frames",
+      "distinction": "Code is Apache-2.0; Large weights are noncommercial CC-BY-NC-4.0. Small-only Apache weight terms do not apply."
     }
   ],
   "not_yet_retrieved": [
     {
-      "component": "Gemma terms",
-      "reason": "E1 access blocker; component not downloaded or executed"
-    },
-    {
-      "component": "Video Depth Anything weights license",
-      "reason": "E1 access blocker; component not downloaded or executed"
+      "component": "Full Gemma Terms of Use document",
+      "reason": "Model card and terms URL are saved; full terms text/version not found in saved evidence. No external retrieval performed in this documentation pass."
     }
   ],
   "excluded": [
@@ -66,7 +110,9 @@
       "reason": "User explicitly excludes download and execution because of Republic of Korea territorial restriction."
     }
   ],
-  "inference_weights_downloaded": 0,
   "partially_downloaded_model_snapshots": 1,
-  "updated_at": "2026-11-03T11:24:20.322829+00:00"
+  "updated_at": "2026-11-03T15:19:53.595915+00:00",
+  "e1_completed_weight_files": 9,
+  "e1_completed_weight_files_definition": "3 LTX files + 5 Gemma shards + 1 VDA-Large file",
+  "update_evidence": "Saved download-completion record, local weight headers/file sizes, local model cards and source LICENSE files; no new external retrieval."
 }
