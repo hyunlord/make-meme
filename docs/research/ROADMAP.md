@@ -519,3 +519,8 @@ Kling 대응으로 배역 확정 및E1 1024×576 사전개정 후 SAM기본21/73
 ## V-001 개정2: 반사 정의 수정 후 앵커 확보 (2026-11-03)
 
 사용자 승인에 따른 결과 확인 후 정의 수정으로 fallback73/73, native앵커1장 G1–G5 PASS. E1 Gemma403·E2 고정64GiB worker한도 대비 가중치약64.283GiB로 영상0/4. 실제OOM은관측하지않았다. A동결·C보류, HUMAN_REVIEW_PENDING 유지. [현재 결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).
+
+
+## V-001 개정3 실행 종료 (2026-11-04 KST)
+
+Gemma 접근 회복과 E1/E2 공식 가중치 다운로드를 완료했으나 영상은0/4다. E1은 ref0.5 공식2단계의128배수 높이 조건과 승인576의 충돌로 조건 인코딩 실패, E2는100GiB worker에서 전문가 적재 중 지속 PSI 압박으로 가드 중단했다. 두 엔진 모두 denoising0이므로 모델 품질·15초 비용은 미측정이다. 원본 구간73/73·앵커 G1–G5 PASS는 유지한다. A동결·C보류·HUMAN_REVIEW_PENDING, 추가실험 예약없음. [결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).

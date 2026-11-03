@@ -1,5 +1,5 @@
 {
-  "status": "SEGMENT_ESTABLISHED_ANCHOR_GATE_PASS_OUTPUTS_NOT_RUN",
+  "status": "SEGMENT_ESTABLISHED_ANCHOR_GATE_PASS_NO_GENERATED_OUTPUTS",
   "segments": {
     "primary": {
       "start": 96,
@@ -8813,7 +8813,7 @@
   },
   "generated_output_metrics": null,
   "quality": "HUMAN_REVIEW_PENDING",
-  "reason": "Neither preregistered segment meets two-instance gate; no output exists to score.",
+  "reason": "Fallback segment established and anchor passed; E1 condition-encode geometry failure and E2 sustained PSI guard stop prevented all generated outputs.",
   "historical_status": "SEGMENT_NOT_ESTABLISHED",
   "amendment2": {
     "definition_change_after_results": true,
@@ -8832,7 +8832,7 @@
     "source_sam_reruns": 0
   },
   "output_metrics": {
-    "status": "NOT_RUN",
+    "status": "NOT_MEASURED_NO_GENERATED_OUTPUTS",
     "object_count_stability": null,
     "motion_following": null,
     "identity_swaps": null,
@@ -8841,5 +8841,18 @@
     "reflection_color_correspondence": null,
     "generation_cost": null,
     "reason": "No video engine output; anchor gates are not output quality metrics"
-  }
+  },
+  "historical_reason_before_amendment2": "Neither preregistered segment meets two-instance gate; no output exists to score.",
+  "amendment3": {
+    "E1": "ENGINE_BLOCKED_ENV",
+    "E2": "ENGINE_STOPPED_GUARD",
+    "video_outputs": 0,
+    "completed_timing_probes": 0,
+    "completed_denoising_steps": 0,
+    "clip_generation_seconds": null,
+    "fifteen_second_projection": null,
+    "reason": "No completed first denoising step; loading time is not generation cost.",
+    "temporal": "UNVERIFIED"
+  },
+  "updated_at": "2026-11-03T15:44:21.411662+00:00"
 }

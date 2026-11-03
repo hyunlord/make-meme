@@ -1,5 +1,5 @@
 {
-  "status": "E1_DOWNLOAD_AND_CONDITIONING_ATTEMPT_LICENSES_RECORDED",
+  "status": "FINAL_DOWNLOADED_LICENSES_AND_PRE_DENOISING_ATTEMPTS_RECORDED",
   "checked": [
     {
       "component": "LTX-2.3-code-and-weights",
@@ -9,7 +9,7 @@
       "sha256": "c325da090976a313b214bf0d6a1738003b96505c01c46043e80edc200a72c147",
       "used_for_inference": true,
       "revision": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
-      "usage_scope": "Gemma/anchor/control conditioning attempt; denoiser calls 0, generated videos 0 at this update",
+      "usage_scope": "Gemma/anchor/control conditioning attempt; denoiser calls 0, generated videos 0",
       "weight_revisions": {
         "Lightricks/LTX-2.3": "c1521179de480464f366a98a9d9b2acc4cc097b9",
         "Lightricks/LTX-2.3-22b-IC-LoRA-Union-Control": "20a580c8606c06a0988d40375a61309e0fe5893d"
@@ -28,7 +28,9 @@
       "source": "https://raw.githubusercontent.com/bytedance/Bernini/e6c2cf11843470b08491745947abcba9c3c6b079/LICENSE",
       "retrieved_at": "2026-11-03T06:24:35.781695+00:00",
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-      "used_for_inference": false
+      "used_for_inference": false,
+      "usage_scope": "Renderer setup/model loading attempted; no denoising completed",
+      "model_loading_attempted": true
     },
     {
       "component": "existing SAM3.1 weights",
@@ -46,13 +48,17 @@
       "used_for_inference": true
     },
     {
-      "component": "Bernini-R weights partial snapshot",
+      "component": "Bernini-R weights complete snapshot",
       "license": "Apache-2.0 (model card declaration)",
       "revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
       "source": "https://huggingface.co/ByteDance/Bernini-R-Diffusers/blob/de8c4621d3ac75cc33efe3db8deaed2023e9ac8c/README.md",
       "sha256": "f8bd9e3f5fae1ba075b61e3ba29c80a17d02b8555c80388fe545a15b6fa1e67f",
       "used_for_inference": false,
-      "download_complete": false
+      "download_complete": true,
+      "snapshot_bytes": 126200552703,
+      "indexed_weight_shards_verified": 27,
+      "usage_scope": "Partial model loading; guard stopped during second expert shard 5/12; denoising 0, generated videos 0",
+      "model_loading_attempted": true
     },
     {
       "component": "VeOmni",
@@ -60,7 +66,9 @@
       "license": "Apache-2.0",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "license_source": "installed wheel dist-info/licenses/LICENSE",
-      "used_for_inference": false
+      "used_for_inference": false,
+      "usage_scope": "Renderer setup/model loading attempted; no denoising completed",
+      "model_loading_attempted": true
     },
     {
       "component": "Gemma 3 12B IT",
@@ -110,9 +118,11 @@
       "reason": "User explicitly excludes download and execution because of Republic of Korea territorial restriction."
     }
   ],
-  "partially_downloaded_model_snapshots": 1,
-  "updated_at": "2026-11-03T15:19:53.595915+00:00",
+  "partially_downloaded_model_snapshots": 0,
+  "updated_at": "2026-11-03T15:44:46.110792+00:00",
   "e1_completed_weight_files": 9,
   "e1_completed_weight_files_definition": "3 LTX files + 5 Gemma shards + 1 VDA-Large file",
-  "update_evidence": "Saved download-completion record, local weight headers/file sizes, local model cards and source LICENSE files; no new external retrieval."
+  "update_evidence": "Saved download-completion record, local weight headers/file sizes, local model cards and source LICENSE files; no new external retrieval.",
+  "generated_videos": 0,
+  "denoising_calls": 0
 }
