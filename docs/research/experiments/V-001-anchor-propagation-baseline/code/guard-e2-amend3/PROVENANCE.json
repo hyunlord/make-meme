@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-11-03T14:57:00.433619+00:00",
+  "scope": "V-001 E2 amendment 3 only; E1 remains original guard",
+  "files": [
+    {
+      "file": "memory.py",
+      "parent_sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+      "e2_amend3_sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+      "unchanged": true
+    },
+    {
+      "file": "safety.py",
+      "parent_sha256": "af6890f5563ae83289d8dd84ce5601b58176ea43a193aed360365fc5c498e1a3",
+      "e2_amend3_sha256": "663a461f08abdfcf335ab6ef54d3bd1456912a9c9e1d0cd9a5adbb95d35692fd",
+      "unchanged": false
+    },
+    {
+      "file": "policy.py",
+      "parent_sha256": "fffe160914716d6be0cf34375017a845795c55e39eda39119ffb4f5c34fe6941",
+      "e2_amend3_sha256": "fffe160914716d6be0cf34375017a845795c55e39eda39119ffb4f5c34fe6941",
+      "unchanged": true
+    },
+    {
+      "file": "supervisor.py",
+      "parent_sha256": "78d8e41b4f8083f5c103a4b485f7dd65b1cbc376450297ff1f59ae40f6bd604c",
+      "e2_amend3_sha256": "513f4dcf2df881bbf33e78781f7dfbb4c7db00586973f78980c1fdc90e970bf1",
+      "unchanged": false
+    },
+    {
+      "file": "test_v001.py",
+      "parent_sha256": "c369c78d02bb051f9bd7e3731b29702c47c8798ff4357c84acdc608725fce7cc",
+      "e2_amend3_sha256": "ea50b699b51cc9ff690cded8a67d6c4413a6b15c271f3af326d79a16baeb9871",
+      "unchanged": false
+    }
+  ],
+  "admission_min_available_gib": 112,
+  "worker_memory_max_gib": 100,
+  "existing_host_reserve_gib": 12,
+  "tests": {
+    "new_suite_cases": 19,
+    "original_suite_cases": 12,
+    "result": "PASS",
+    "original_files_hash_check": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "not_run": [
+    "SSH or systemd",
+    "GPU/model execution",
+    "ruff/basedpyright unavailable on Mac"
+  ],
+  "metrics": {
+    "peak_worker_rss_bytes_observed": "Sampled /proc registered PID VmHWM, lower bound when killed before next sample; distinct from final worker ru_maxrss",
+    "min_available_bytes_observed": "Minimum of valid startup/runtime/final MemAvailable samples"
+  }
+}
