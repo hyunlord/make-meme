@@ -1,0 +1,33 @@
+{
+  "status": "PREPARATORY_PARTIAL",
+  "checked": [
+    {
+      "component": "LTX-2.3-code-and-weights",
+      "license": "LTX-2 Community License, 2026-01-05",
+      "source": "https://raw.githubusercontent.com/Lightricks/LTX-2/e98f6d927d83c92ef2be6aec76c8440b19306e39/LICENSE-2",
+      "retrieved_at": "2026-11-03T06:24:35.781695+00:00",
+      "sha256": "c325da090976a313b214bf0d6a1738003b96505c01c46043e80edc200a72c147",
+      "used_for_inference": false
+    },
+    {
+      "component": "Bernini-code",
+      "license": "Apache-2.0",
+      "source": "https://raw.githubusercontent.com/bytedance/Bernini/e6c2cf11843470b08491745947abcba9c3c6b079/LICENSE",
+      "retrieved_at": "2026-11-03T06:24:35.781695+00:00",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "used_for_inference": false
+    }
+  ],
+  "not_yet_retrieved": [
+    "Gemma terms",
+    "Video Depth Anything weights license",
+    "SAM3.1 weights license"
+  ],
+  "excluded": [
+    {
+      "engine": "Viggle-Animate / MiniMax H3",
+      "reason": "User explicitly excludes download and execution because of Republic of Korea territorial restriction."
+    }
+  ],
+  "inference_weights_downloaded": 0
+}

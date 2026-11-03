@@ -1,0 +1,30 @@
+{
+  "recorded_at": "2026-11-03T06:24:35.781695+00:00",
+  "status": "BLOCKED_CASTING_CONFIRMATION",
+  "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
+  "counts": {
+    "weight_downloads": 0,
+    "installs": 0,
+    "sam": 0,
+    "imagegen": 0,
+    "model_loads": 0,
+    "timing_probes": 0,
+    "video_generations": 0,
+    "training": 0
+  },
+  "engines": {
+    "E1": {
+      "status": "ENGINE_BLOCKED_ENV",
+      "reason": "Official default first stage resolution divisor2 requires final dimensions divisible by64; 480 fails. No resolution or recipe change authorized.",
+      "code_commit": "e98f6d927d83c92ef2be6aec76c8440b19306e39",
+      "outputs": 0
+    },
+    "E2": {
+      "status": "NOT_RUN",
+      "reason": "Upstream casting and segment/anchor prerequisites unresolved",
+      "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
+      "outputs": 0
+    }
+  },
+  "quality": "HUMAN_REVIEW_PENDING"
+}
