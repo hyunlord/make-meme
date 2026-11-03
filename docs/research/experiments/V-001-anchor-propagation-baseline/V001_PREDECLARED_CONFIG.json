@@ -1,0 +1,141 @@
+{
+  "experiment": "V-001-anchor-propagation-baseline",
+  "track": "V (deliverable track)",
+  "work_order": "V001_ANCHOR_PROPAGATION_BASELINE_CODEX_KO.md",
+  "parent": {
+    "repo": "hyunlord/make-meme",
+    "branch": "docs/c-research-20261028",
+    "commit": "c55ff97655a87ea3e3321bb5ce14c829876ed526",
+    "new_branch": "docs/v-research-20261103"
+  },
+  "excluded_engines": [
+    {
+      "name": "Viggle-Animate / MiniMax H3",
+      "reason": "MiniMax H3 Community License grants rights only within the Applicable Territory, which excludes the EU, UK, Republic of Korea and USA; user is in Korea. Do not download or run."
+    }
+  ],
+  "inputs": {
+    "roles": ["SOURCE_VIDEO", "CASTING", "REF_LAB", "REF_IG", "KLING_RESULT(optional)"],
+    "private_manifest_only": true,
+    "casting_ambiguity_policy": "stop_and_ask_user_before_generation"
+  },
+  "segment": {
+    "timeline_reference": "A-track Lab/IG project, 1280x720, 24fps, 360-frame timeline",
+    "frames": 73,
+    "fps": 24,
+    "primary": {"start": 96, "end_exclusive": 169, "contains_event": "wink [113,144)"},
+    "fallback": {"start": 240, "end_exclusive": 313, "contains_event": "kick [250,288)"},
+    "validity_rule": {
+      "sam3_text_prompt": "dog",
+      "dogs_per_frame": 2,
+      "min_mask_area_fraction": 0.005,
+      "min_valid_frames": 66
+    },
+    "time_cap_reduction": {"frames": 49, "same_start": true},
+    "max_segment_switches": 1
+  },
+  "geometry": {
+    "model_input": [832, 480],
+    "rule": "resize source 1280x720 to 853x480 keeping aspect, center-crop width to 832; apply identically to source, anchor and masks"
+  },
+  "seeds": [20261103, 20261104],
+  "anchor": {
+    "engine": "Codex native imagegen (same path as C-001/C-004)",
+    "inputs_order": ["segment first frame (base)", "REF_LAB photo", "REF_IG photo"],
+    "max_calls": 2,
+    "candidates_per_call": 1,
+    "fallback_engines_allowed": false,
+    "gates": {
+      "G1_dog_count": {"equals": 2, "hard_stop_on_fail": true},
+      "G2_centroid_shift_max_frac_width": 0.08,
+      "G3_lab_bbox_height_ratio": [0.85, 1.60],
+      "G4_ig_bbox_height_ratio": [0.70, 1.30],
+      "G5_background_mae_max": 12,
+      "G5_mask_dilation_px": 24
+    },
+    "repair_sentences": {
+      "G2": "두 강아지의 화면 위치를 첫 번째 이미지의 해당 강아지와 같은 자리에 두세요.",
+      "G3": "래브라도의 크기를 첫 번째 이미지의 해당 강아지와 비슷하거나 조금 더 크게 해 주세요.",
+      "G4": "이탈리안 그레이하운드의 크기를 첫 번째 이미지의 해당 강아지와 비슷하게 해 주세요.",
+      "G5": "배경, 바닥, 조명은 첫 번째 이미지와 완전히 같게 유지해 주세요."
+    },
+    "after_second_failure": "record failed gates and proceed with second anchor, except G1 which stops (ANCHOR_UNUSABLE)"
+  },
+  "engines": {
+    "E1": {
+      "name": "LTX-2.3 + Union Control IC-LoRA",
+      "order": 1,
+      "license": "LTX-2 Community License (verify actual LICENSE file); Gemma Terms of Use for text encoder",
+      "checkpoint": "LTX-2.3 22B distilled",
+      "ic_lora": "ltx-2.3-22b-ic-lora-union-control-ref0.5",
+      "ic_lora_strength": 1.0,
+      "first_frame": "anchor",
+      "structure_control": "depth (Video Depth Anything, official default)",
+      "pose_control": false,
+      "canny_control": false,
+      "prompt": "Two dogs dancing in the same room: a large black Labrador Retriever and a slender grey Italian Greyhound. Keep their identities, body sizes and the original background. Stable camera.",
+      "other_settings": "official defaults; record actual values",
+      "timing_probe_max_minutes_full_run": 60
+    },
+    "E2": {
+      "name": "Bernini-R RV2V",
+      "order": 2,
+      "license": "Apache-2.0 (verify actual LICENSE file)",
+      "weights": "ByteDance/Bernini-R-Diffusers (or official single-GPU path)",
+      "source_video": "segment",
+      "reference_images": ["anchor", "optional: REF_LAB, REF_IG if official case format supports multiple references"],
+      "instruction": "Replace the two dogs in the video with the two dogs in the reference image: the large black Labrador Retriever and the slender grey Italian Greyhound, matching their positions. Keep the dance motion, timing, background, lighting and camera exactly.",
+      "planner_external_api_allowed": false,
+      "env_policy": "isolated venv sharing existing torch (2.14+cu130 per C-012); prevent pip from installing another torch; record RUNTIME_DIFF",
+      "timing_probe_max_minutes_full_run": 120
+    },
+    "too_slow_rule": "if 49-frame extrapolation still exceeds 1.5x the engine cap, mark ENGINE_TOO_SLOW and skip"
+  },
+  "budget": {
+    "engine_setup_minutes_cap_each": 90,
+    "imagegen_calls_max": 2,
+    "timing_probes_per_engine": 1,
+    "video_generations_max": 4,
+    "quality_retries": 0,
+    "training": 0,
+    "total_wall_hours_cap": 8,
+    "reserved_minutes_for_records_and_delivery": 30,
+    "disk_free_min_factor_of_download": 1.3,
+    "delete_existing_weights": false
+  },
+  "ops_policy_v001_only": {
+    "warn_and_continue": [
+      "pre-existing swap occupancy at start",
+      "swap-out increase below 1 GiB",
+      "PSI full avg10 above 10% for less than 30 s (including during model load)"
+    ],
+    "stop": [
+      "OOM or OOM-killer activity",
+      "MemAvailable below 12 GiB for 30 s or longer",
+      "PSI full avg10 above 25% for 60 s or longer",
+      "real conflict with a protected external service (e.g. queue on 8190)",
+      "another user's GPU job detected"
+    ],
+    "auto_retry_after_stop": false,
+    "modify_common_guard_code": false
+  },
+  "evaluation": {
+    "automatic_metrics": [
+      "dog_count_stability",
+      "trajectory_following_per_casting",
+      "identity_swap_frames",
+      "lab_body_size_ratio_median_and_drift",
+      "background_flicker_ratio_vs_source",
+      "cost_time_memory_steps_calls"
+    ],
+    "reference_only_metrics": ["appearance embedding similarity to REF_LAB / REF_IG"],
+    "quality_verdict": "HUMAN_REVIEW_PENDING until user fills HUMAN_REVIEW.md",
+    "viewer": "6-column synced playback (source, anchor, E1-s1, E1-s2, E2-s1, E2-s2) + optional Kling column; casting labels on source"
+  },
+  "delivery": {
+    "public_git": "docs, non-sensitive code, hashes only",
+    "private_media_in_git": false,
+    "zip": "single compact ZIP to Mac ~/Downloads/V001-review-<date>.zip",
+    "integrity_report": "automated, one-line summary"
+  }
+}

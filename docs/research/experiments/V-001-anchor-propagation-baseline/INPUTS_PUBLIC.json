@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-11-03T06:23:25.172703+00:00",
+  "assets": [
+    {
+      "role": "SOURCE_VIDEO",
+      "sha256": "da33bb95d4e05c49c537f3fdb27b2189fafec2b4f8d1a27e6b14efe034071f6b",
+      "bytes": 7824508
+    },
+    {
+      "role": "REF_LAB",
+      "sha256": "54f8052c7264139a41d2818d5c881abd2442f462b5d02cc7908c1f360f00fadb",
+      "bytes": 507749
+    },
+    {
+      "role": "REF_IG",
+      "sha256": "bbfcbe937fe870e387f28784e94ab00616aa13afdd7d0a809a776bc937a6194c",
+      "bytes": 765356
+    },
+    {
+      "role": "KLING_RESULT",
+      "sha256": "829e234a83fbe487560b5ce58e1a453c1087d3683034fc363cccc2056cba3e94",
+      "bytes": 8326491
+    }
+  ],
+  "casting": {
+    "status": "AWAITING_USER_MAPPING",
+    "known_roles": {
+      "lead": "Lab",
+      "partner": "IG"
+    },
+    "reason": "Preserved contract is an unannotated design template; no verified frame-to-performer map located."
+  }
+}

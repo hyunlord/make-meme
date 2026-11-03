@@ -834,3 +834,8 @@ C-012 동결2048 adapter로 새 보간3개와 S1개, seed2 BASE1개를 생성했
 ## C-014 CPU 관측 배경 합성 완료 (2026-11-03)
 
 C-013 I50/S와 C-012 seed2 A의 기존 출력에 양끝 앵커 기반 plate와 고정44/52px envelope를 적용했다.99PNG core/outside exact,전33중심 변화0px. I50/S는 배경 복사를 넘어선 NO_ESTABLISHED_JOINT_GAIN,seed2는 원형 모자이크 잔존으로 BACKGROUND_GAIN_WITH_BOUNDARY_TRADEOFF. 생성 모델 향상이 아닌 저비용 후합성 기준선이며 temporal=UNVERIFIED. 모델/학습/GPU0,C-013 승인guard만 그대로 승계. 다음 후보는 같은 후합성 뒤에도 이득이 남는 생성 중 문맥 제약 하나이며 자동 실행하지 않았다. 과거 판정과 중단 이력은 보존한다. [결과](experiments/C-014-endpoint-background-composite/RESULTS.md).
+
+
+## V 트랙 착수 (2026-11-03)
+
+V-001은 imagegen 앵커와 조밀한 원본 조건의 오픈 영상 전파를 비교하는 결과물 트랙이다. A 동결·C 학습 실습용 보류를 유지한다. 현재 인수·사전 계획 단계이며 배역 실제 개체 대응 확인을 기다린다. 생성0, 품질 HUMAN_REVIEW_PENDING. [계획](experiments/V-001-anchor-propagation-baseline/PLAN.md).
