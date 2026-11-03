@@ -1,0 +1,124 @@
+{
+  "amendment": 2,
+  "coordinate_size": [
+    1280,
+    720
+  ],
+  "casting": {
+    "Lab": 0,
+    "IG": 1
+  },
+  "actual_count": 2,
+  "center_shift_px": {
+    "Lab": 5.825569371178689,
+    "IG": 22.557338454106933
+  },
+  "bbox_height_ratio": {
+    "Lab": 1.2482014388489209,
+    "IG": 1.183673469387755
+  },
+  "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": true
+  },
+  "source_classification": {
+    "actual_track_indices": [
+      0,
+      1
+    ],
+    "reflection_track_indices": [
+      2,
+      3
+    ],
+    "pairs": [
+      {
+        "above_track_index": 0,
+        "reflection_track_index": 3,
+        "horizontal_overlap": 197,
+        "smaller_width": 197
+      },
+      {
+        "above_track_index": 1,
+        "reflection_track_index": 2,
+        "horizontal_overlap": 175,
+        "smaller_width": 177
+      },
+      {
+        "above_track_index": 1,
+        "reflection_track_index": 3,
+        "horizontal_overlap": 103,
+        "smaller_width": 197
+      }
+    ]
+  },
+  "anchor_classification": {
+    "actual_track_indices": [
+      0,
+      1
+    ],
+    "reflection_track_indices": [
+      2,
+      3
+    ],
+    "pairs": [
+      {
+        "above_track_index": 0,
+        "reflection_track_index": 2,
+        "horizontal_overlap": 206,
+        "smaller_width": 206
+      },
+      {
+        "above_track_index": 1,
+        "reflection_track_index": 3,
+        "horizontal_overlap": 166,
+        "smaller_width": 166
+      }
+    ]
+  },
+  "background_mae": 5.6278300285339355,
+  "background_pixels": 756366,
+  "dilation_radius_px": 24,
+  "background_exclusion": "union of all source and anchor actual/reflection masks",
+  "failed_gates": [],
+  "all_gates_pass": true,
+  "reflection_color_reference_only": [
+    {
+      "above_track_index": 0,
+      "reflection_track_index": 2,
+      "above_mean_rgb": [
+        44.782689397184384,
+        40.85776292869585,
+        40.68662725948771
+      ],
+      "reflection_mean_rgb": [
+        152.3493196656294,
+        146.4003905058271,
+        145.57947403746417
+      ],
+      "mean_rgb_absolute_difference": 106.00070154118424
+    },
+    {
+      "above_track_index": 1,
+      "reflection_track_index": 3,
+      "above_mean_rgb": [
+        113.03962578633259,
+        98.49282219474165,
+        94.62497983762567
+      ],
+      "reflection_mean_rgb": [
+        178.91121709621206,
+        169.19691827937265,
+        167.2246170778685
+      ],
+      "mean_rgb_absolute_difference": 69.72510821158443
+    }
+  ],
+  "reflection_color_quality_verdict": "UNVERIFIED_NO_THRESHOLD",
+  "input_summary_sha256": {
+    "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+    "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+  }
+}
