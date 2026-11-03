@@ -1,0 +1,22 @@
+[
+  {
+    "file": "memory.py",
+    "original_sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa"
+  },
+  {
+    "file": "policy.py",
+    "original_sha256": "fffe160914716d6be0cf34375017a845795c55e39eda39119ffb4f5c34fe6941"
+  },
+  {
+    "file": "safety.py",
+    "original_sha256": "af6890f5563ae83289d8dd84ce5601b58176ea43a193aed360365fc5c498e1a3"
+  },
+  {
+    "file": "supervisor.py",
+    "original_sha256": "78d8e41b4f8083f5c103a4b485f7dd65b1cbc376450297ff1f59ae40f6bd604c"
+  },
+  {
+    "file": "test_v001.py",
+    "original_sha256": "c369c78d02bb051f9bd7e3731b29702c47c8798ff4357c84acdc608725fce7cc"
+  }
+]

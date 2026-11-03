@@ -1,0 +1,49 @@
+{
+  "recorded_at": "2026-11-03T15:55:49.423515+00:00",
+  "scope": "V-001 E2 amendment4 only; original V001 and amendment3 runtime files unchanged",
+  "change": "systemd MemoryHigh=MemoryMax=100GiB; prior MemoryHigh98GiB",
+  "files": [
+    {
+      "file": "memory.py",
+      "amendment3_sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+      "amendment4_sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+      "unchanged": true
+    },
+    {
+      "file": "policy.py",
+      "amendment3_sha256": "fffe160914716d6be0cf34375017a845795c55e39eda39119ffb4f5c34fe6941",
+      "amendment4_sha256": "fffe160914716d6be0cf34375017a845795c55e39eda39119ffb4f5c34fe6941",
+      "unchanged": true
+    },
+    {
+      "file": "safety.py",
+      "amendment3_sha256": "663a461f08abdfcf335ab6ef54d3bd1456912a9c9e1d0cd9a5adbb95d35692fd",
+      "amendment4_sha256": "663a461f08abdfcf335ab6ef54d3bd1456912a9c9e1d0cd9a5adbb95d35692fd",
+      "unchanged": true
+    },
+    {
+      "file": "supervisor.py",
+      "amendment3_sha256": "513f4dcf2df881bbf33e78781f7dfbb4c7db00586973f78980c1fdc90e970bf1",
+      "amendment4_sha256": "52f4f80c51d74caca427ab4dcdd98bf025882ae02d2c57154234125d41bce56a",
+      "unchanged": false
+    }
+  ],
+  "admission_min_available_gib": 112,
+  "worker_memory_max_gib": 100,
+  "worker_memory_high_gib": 100,
+  "worker_swap_max_bytes": 0,
+  "tests": {
+    "amendment4_cases": 22,
+    "unchanged_amendment3_cases": 19,
+    "result": "PASS",
+    "original_runtime_hash_check": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "observability": "Inherited sampled VmHWM/minMemAvailable summary and per-observation memory.peak/cgroup events/PSI full avg10; no monitor change",
+  "not_run": [
+    "SSH/deployment",
+    "systemd actual properties",
+    "GPU or model execution"
+  ]
+}

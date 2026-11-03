@@ -1,0 +1,5 @@
+--- V001-E2-amend3/supervisor.py
++++ V001-E2-amend4/supervisor.py
+@@ -65 +65 @@
+-    command=['systemd-run','--user','--wait','--pipe','--unit='+unit,'-p',f'RuntimeMaxSec={seconds}','-p',f'MemoryMax={cap}','-p',f'MemoryHigh={cap-2*2**30}','-p','MemorySwapMax=0','-p','TasksMax=256','-p','RemainAfterExit=yes','-p','KillMode=control-group','-p','TimeoutStopSec=20','--',sys.executable,str(root/'code/worker.py'),str(root)]
++    command=['systemd-run','--user','--wait','--pipe','--unit='+unit,'-p',f'RuntimeMaxSec={seconds}','-p',f'MemoryMax={cap}','-p',f'MemoryHigh={cap}','-p','MemorySwapMax=0','-p','TasksMax=256','-p','RemainAfterExit=yes','-p','KillMode=control-group','-p','TimeoutStopSec=20','--',sys.executable,str(root/'code/worker.py'),str(root)]
