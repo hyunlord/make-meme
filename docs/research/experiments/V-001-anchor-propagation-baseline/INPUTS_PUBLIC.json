@@ -23,11 +23,16 @@
     }
   ],
   "casting": {
-    "status": "AWAITING_USER_MAPPING",
-    "known_roles": {
-      "lead": "Lab",
-      "partner": "IG"
-    },
-    "reason": "Preserved contract is an unannotated design template; no verified frame-to-performer map located."
+    "status": "ESTABLISHED_BY_KLING_MATCH",
+    "frame": 240,
+    "pts_seconds": 10.0,
+    "Lab": "source right-front tan dog matches black Labrador in Kling",
+    "IG": "source left-rear grey dog matches Italian Greyhound in Kling",
+    "basis": "user-authorized same-timestamp visual comparison; matched placement, pose, feet and tail",
+    "evidence_sha256": {
+      "source-frame-240.png": "2bb4d117f83090898be12019bbf4f6e510383f5865400cb74e99383908463d08",
+      "kling-frame-240.png": "7a3dc43b8df4b01fd0a3aecb3da026245a6edd6e85d8ad81ef7a7c81c20d749a",
+      "casting-source-left-kling-right-f240.png": "86e5e6edf9777caa1e86462cea9d5aaa2763cc36ddacb77733ff39ba6c5537f9"
+    }
   }
 }
