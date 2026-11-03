@@ -64,8 +64,11 @@ def validate_config(path: Path) -> EntryConfig:
         message = "Repeated official options are forbidden"
         raise ValueError(message)
     values = parser.parse_args(config.official_args)
-    if (values.height, values.width, values.frame_rate) != ("576", "1024", "24"):
-        message = "E1 must use 1024x576 at 24fps"
+    if (values.height, values.width, values.frame_rate) != ("640", "1152", "24"):
+        message = "E1 must use 1152x640 at 24fps"
+        raise ValueError(message)
+    if int(values.width) % 128 or int(values.height) % 128 or (int(values.num_frames) - 1) % 8:
+        message = "Two-stage ref2 VAE32 needs 128-multiple spatial dimensions and 8n+1 frames"
         raise ValueError(message)
     if values.num_frames not in ("49", "73") or values.seed not in ("20261103", "20261104"):
         message = "Unapproved frame count or seed"
@@ -104,8 +107,8 @@ def validate_config(path: Path) -> EntryConfig:
             check=True, capture_output=True, text=True,
         )
         info = json.loads(completed.stdout)["streams"][0]
-        if (info["width"], info["height"]) != (1024, 576):
-            message = "Anchor and depth input dimensions must be 1024x576"
+        if (info["width"], info["height"]) != (1152, 640):
+            message = "Anchor and depth input dimensions must be 1152x640"
             raise ValueError(message)
         if is_depth:
             count = int(info["nb_read_frames"])

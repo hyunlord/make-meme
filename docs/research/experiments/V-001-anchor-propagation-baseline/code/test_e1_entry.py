@@ -51,7 +51,7 @@ def test_cpu_contract() -> None:
             "--gemma-root", str(root), "--lora", str(root / "union"), "1.0",
             "--image", str(root / "anchor"), "0", "1.0",
             "--video-conditioning", str(root / "depth"), "1.0",
-            "--height", "576", "--width", "1024", "--num-frames", "73",
+            "--height", "640", "--width", "1152", "--num-frames", "73",
             "--frame-rate", "24", "--seed", "20261103", "--prompt", PROMPT,
             "--output-path", str(root / "output.mp4"),
         ]
@@ -59,11 +59,20 @@ def test_cpu_contract() -> None:
                   "official_args": official, "output": str(root / "output.mp4")}
         path = root / "private.json"
         info = SimpleNamespace(stdout=json.dumps({"streams": [
-            {"width": 1024, "height": 576, "nb_read_frames": "73", "r_frame_rate": "24/1"},
+            {"width": 1152, "height": 640, "nb_read_frames": "73", "r_frame_rate": "24/1"},
         ]}))
         with patch("e1_entry.subprocess.run", return_value=info):
             path.write_text(json.dumps(config))
             assert validate_config(path).mode == "probe"
+            official[official.index("--height") + 1] = "576"
+            path.write_text(json.dumps(config))
+            try:
+                validate_config(path)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("Old invalid reference geometry accepted")
+            official[official.index("--height") + 1] = "640"
             config["mode"] = "generate"
             official[official.index("--num-frames") + 1] = "49"
             path.write_text(json.dumps(config))
