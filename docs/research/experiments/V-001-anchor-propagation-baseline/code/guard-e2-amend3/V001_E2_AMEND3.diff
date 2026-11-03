@@ -1,22 +1,13 @@
 --- V001-guard/safety.py
 +++ V001-E2-amend3/safety.py
-@@ -15,8 +15,9 @@
- 
- 
- def start_decision(decision:str,available_gib:float,remaining_seconds:float)->str:
+@@ -18 +18 @@
 -    """MemoryBudget owns V-001 pressure durations; this check only bounds time."""
 +    """E2 amendment 3 adds 112 GiB admission; runtime durations remain unchanged."""
-     if decision!='CLEAR':return decision
+@@ -19,0 +20 @@
 +    if available_gib<112:return 'START_HEADROOM_NOT_MET'
-     if remaining_seconds<=60:return 'DEADLINE'
-     return 'CLEAR'
- 
 --- V001-guard/supervisor.py
 +++ V001-E2-amend3/supervisor.py
-@@ -10,6 +10,26 @@
-     names=['MainPID','ExecMainPID','ActiveState','SubState','Result','ExecMainCode','ExecMainStatus','InvocationID','ControlGroup']
-     command=['systemctl','--user','show',unit]+[arg for name in names for arg in ('-p',name)]
-     return dict(line.split('=',1) for line in subprocess.check_output(command,timeout=5).decode().splitlines() if '=' in line)
+@@ -12,0 +13,20 @@
 +
 +
 +def worker_memory_cap(available: int) -> int:
@@ -37,68 +28,29 @@
 +    if unit != 'kB' or not value.isdigit():
 +        raise ValueError(f'WORKER_RSS_OBSERVATION_INVALID:{pid}')
 +    return int(value)*1024
- 
- 
- def main()->int:
-@@ -41,15 +61,18 @@
-         time.sleep(2)
-     if initial['decision']!='CLEAR':return 2
-     (root/'reports/start-safety.json').write_text(json.dumps(initial,indent=2))
+@@ -44 +64 @@
 -    cap=min(64*2**30,initial['available']-12*2**30);seconds=min(config['worker_max_seconds'],int(deadline-time.time()-10))
 +    cap=worker_memory_cap(initial['available']);seconds=min(config['worker_max_seconds'],int(deadline-time.time()-10))
-     command=['systemd-run','--user','--wait','--pipe','--unit='+unit,'-p',f'RuntimeMaxSec={seconds}','-p',f'MemoryMax={cap}','-p',f'MemoryHigh={cap-2*2**30}','-p','MemorySwapMax=0','-p','TasksMax=256','-p','RemainAfterExit=yes','-p','KillMode=control-group','-p','TimeoutStopSec=20','--',sys.executable,str(root/'code/worker.py'),str(root)]
-     registered={};exit_receipt=None;uncertain_since=None;started=time.time();reason='UNKNOWN';cleanup=[]
+@@ -46,0 +67,2 @@
 +    peak_worker_rss=None
 +    min_available=min(row['available'] for row in samples if row['available'] is not None)
-     with (root/'reports/worker.log').open('w') as log:
-         child=subprocess.Popen(command,stdout=log,stderr=subprocess.STDOUT)
-         try:
-             while True:
-                 completed=child.poll() is not None
-                 row=observe(allowed,set(),completed,policy,budget)
+@@ -52,0 +75 @@
 +                if row['available'] is not None:min_available=min(min_available,row['available'])
-                 try:
-                     unit_info=unit_state(unit);cg=unit_info['ControlGroup'];folder=Path('/sys/fs/cgroup')/cg.lstrip('/')
-                     stats={name:(folder/name).read_text() for name in ('cgroup.procs','memory.current','memory.peak','memory.events','memory.stat') if cg and (folder/name).exists()}
-@@ -60,6 +83,11 @@
-                             registered={**ident,'pid':pid,'unit':unit,'invocation_id':unit_info['InvocationID'],'unit_cgroup':cg,'registered_at':time.time()}
-                             temporary=root/'reports/worker-identity.json.tmp';temporary.write_text(json.dumps(registered,indent=2));temporary.replace(root/'reports/worker-identity.json')
-                     row['systemd']=unit_info;row['cgroup']=stats;row['registered_identity']=registered
+@@ -62,0 +86,5 @@
 +                    rss=worker_rss_highwater(registered['pid']) if registered else None
 +                    if rss is not None:peak_worker_rss=rss if peak_worker_rss is None else max(peak_worker_rss,rss)
 +                    row['worker_rss_highwater_bytes']=rss
 +                    row['peak_worker_rss_bytes_observed']=peak_worker_rss
 +                    row['min_available_bytes_observed']=min_available
-                     cg_state='ACTIVE' if cg else ('REMOVED' if registered else 'BEFORE_CREATED')
-                     row['worker_memory']=collect_cgroup(folder) if cg else None
-                     row['cgroup_state']=cg_state
-@@ -91,6 +119,7 @@
-             try:result=child.wait(timeout=40)
-             except subprocess.TimeoutExpired:result=124;cleanup.append('WAIT_TIMEOUT')
-             final=observe(allowed,set(),False,policy,budget)
+@@ -93,0 +122 @@
 +            if final['available'] is not None:min_available=min(min_available,final['available'])
-             final['cgroup_state']='REMOVED';final['worker_memory']=None
-             final['memory_verdict']=budget.inspect(final['system_memory'],None,'REMOVED',verified_exit=exit_receipt is not None)
-             if final['decision']=='CLEAR':final['decision']=final['memory_verdict']['decision']
-@@ -99,7 +128,7 @@
-             except (OSError,subprocess.SubprocessError,ValueError) as error:
-                 final['systemd_error']=type(error).__name__;final['decision']='OBSERVATION_FAILED'
-             if final['decision']=='CLEAR' and not finalized_exit(final.get('systemd',{}),registered,exit_receipt):final['decision']='UNIT_EXIT_NOT_VERIFIED'
+@@ -102 +131 @@
 -            report={'guard_reason':reason,'worker_returncode':result,'cleanup_errors':cleanup,'normal_exit_recorded':exit_receipt is not None,'started':started,'finished':time.time(),'final':final,'status':'COMPLETE' if reason=='COMPLETE' and result==0 and not cleanup and final['decision']=='CLEAR' else 'NOT_CLEAN'}
 +            report={'peak_worker_rss_bytes_observed':peak_worker_rss,'peak_worker_rss_scope':'registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss','min_available_bytes_observed':min_available,'guard_reason':reason,'worker_returncode':result,'cleanup_errors':cleanup,'normal_exit_recorded':exit_receipt is not None,'started':started,'finished':time.time(),'final':final,'status':'COMPLETE' if reason=='COMPLETE' and result==0 and not cleanup and final['decision']=='CLEAR' else 'NOT_CLEAN'}
-             (root/'reports/supervisor-result.json').write_text(json.dumps(report,indent=2))
-     return 0 if report['status']=='COMPLETE' else 2
- if __name__=='__main__':raise SystemExit(main())
 --- V001-guard/test_v001.py
 +++ V001-E2-amend3/test_v001.py
-@@ -44,8 +44,8 @@
-         self.assertEqual(b.inspect(sample(1,oom=1),None,'BEFORE_CREATED')['decision'],'SYSTEM_OOM')
-         self.assertEqual(b.inspect({'errors':['missing']},None,'BEFORE_CREATED')['decision'],'OBSERVATION_FAILED')
- 
+@@ -47,2 +47,2 @@
 -    def test_start_no_old_72gib_limit(self):
 -        self.assertEqual(start_decision('CLEAR',32,100),'CLEAR')
 +    def test_start_uses_e2_amended_admission(self):
 +        self.assertEqual(start_decision('CLEAR',112,100),'CLEAR')
- 
-     def test_external_work_and_queue_block(self):
-         clear={'decision':'CLEAR'}

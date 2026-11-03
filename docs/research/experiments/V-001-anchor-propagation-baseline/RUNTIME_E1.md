@@ -90,3 +90,25 @@ Total listed payload: 73,752,109,408 bytes. These are remote metadata sizes, not
 download-integrity receipts. Text encoder access was rechecked under amendment 3;
 the earlier 403 is retained as historical evidence. LTX weights link `LICENSE-2`;
 VDA-Large is CC-BY-NC-4.0. The parent ledger owns actual downloads and access checks.
+
+## VDA preprocessing packaging failure and bounded CPU recovery
+
+The actual depth inference completed one `infer_video_depth` invocation and four
+internal model forwards in 44.708544848 seconds. All 73 normalized lossless depth
+PNGs and the raw depth NPZ were saved before the official MP4 writer failed:
+installed Matplotlib no longer exposes `matplotlib.cm.get_cmap`. The official
+`save_video` references that API even when its grayscale path does not use the
+palette. This is a packaging failure, not a request to run depth inference again.
+
+The preserved NPZ SHA256 is
+`11debd60bfdd02cea8e7fe3d52a02f0f626c7023a9cf55ae9a20644d53fd9181`.
+`code/vda_package.py` is a separate CPU-only recovery entry. Before packaging it
+checks that exact hash, the recorded one-call/four-forward budget, and all 73 PNGs
+against the official whole-clip min/max normalization. It supplies the missing
+`cm.get_cmap` compatibility alias from `matplotlib.colormaps.get_cmap` and calls
+the unchanged official grayscale/libx264/CRF18 writer. It imports no Torch or
+model module, writes a new packaging receipt, and verifies the original failure
+receipt remains byte-identical. `vda_entry.py` and its prior freeze remain unchanged.
+
+Recovery execution is pending the parent's guarded CPU run; script preparation
+and compilation alone do not establish a usable control video.

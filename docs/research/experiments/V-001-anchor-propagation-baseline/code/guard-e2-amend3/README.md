@@ -33,3 +33,5 @@ sample. This survives worker OOM/guard termination and is distinct from final E2
 ru_maxrss. `min_available_bytes_observed` includes startup, runtime and final observations.
 Disappeared/zombie processes yield null RSS; malformed live status or permission failure
 remains an observation failure. No additional process or monitoring framework was introduced.
+
+`V001_E2_AMEND3.diff` uses zero context for whitespace-clean inspection. Applying it requires `git apply --unidiff-zero`; it is an audit artifact, not an execution step.
