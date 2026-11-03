@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-11-03T16:40:24.503054+00:00",
+  "status": "REMOTE_ACCESS_UNAVAILABLE",
+  "evidence_source": "Parent session observed SSH and Tailscale results; local static guard audit. No reconnect performed by this audit.",
+  "last_successful_remote_observation": {
+    "time_utc_approximate": "2026-11-03T16:34:00Z",
+    "scheduler_progress": "0/40",
+    "minimum_available_bytes_observed": 46517473280,
+    "peak_worker_rss_bytes_observed": 21135147008,
+    "oom_events_observed": 0,
+    "memory_high_events_observed": 0,
+    "worker_swap_bytes_observed": 0,
+    "observation_errors": [],
+    "scope": "Last available snapshot only; does not establish subsequent runtime state."
+  },
+  "access_events": [
+    {
+      "time_utc_approximate": "2026-11-03T16:36:00Z",
+      "event": "New read-only SSH attempt timed out"
+    },
+    {
+      "time_utc": "2026-11-03T16:37:23Z",
+      "event": "Active generation SSH session exited",
+      "exit_code": 255,
+      "error": "Broken pipe"
+    }
+  ],
+  "tailscale_observation": {
+    "mac_time_utc": "2026-11-03T16:37:39Z",
+    "backend_state": "Running",
+    "self_online": true,
+    "spark_peer_online": false,
+    "peer_last_seen_reported": "2026-11-03T16:40:00.1Z",
+    "clock_note": "Reported peer LastSeen is later than the observing Mac time; no ordering or outage-cause inference is made."
+  },
+  "unknown": [
+    "further scheduler steps",
+    "further DiT calls",
+    "output existence or completeness",
+    "worker running or stopped",
+    "supervisor survival",
+    "live PSI/headroom monitoring survival",
+    "shutdown completion",
+    "cause of remote access loss"
+  ],
+  "static_lifecycle_audit": {
+    "adapter_invokes_supervisor_directly": true,
+    "sighup_or_sigterm_handlers_present": false,
+    "worker_lifecycle": "systemd user service with RuntimeMaxSec and cgroup limits",
+    "cleanup": "Python finally stops service during normal unwinding; default signal termination does not guarantee finally execution. SSH disconnect does not establish worker termination.",
+    "guard_path": "code/guard-e2-amend4/supervisor.py"
+  },
+  "automatic_generation_retry": false,
+  "shutdown_status": "UNKNOWN",
+  "non_tailscale_address_found_in_scoped_project_records": false
+}

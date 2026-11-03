@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="V-001 개정3 최종 검토. E1 공식 ref0.5 해상도 제약으로 차단, E2 모델 적재 중 PSI 압박으로 안전 중단. 전파 영상0개.">
-<title>V-001 앵커 검토 · 전파 엔진 미실행</title>
+<meta name="description" content="V-001 개정4 검토. E1 실제 출력 두 개와 원본·앵커·Kling 비교. E2 seed1은 원격 연결 상실 후 실행 상태 미확인, seed2는 미실행.">
+<title>V-001 개정4 · E1 출력 2개 · E2 상태 미확인</title>
 <style>
 :root{--paper:#fff;--ink:#171717;--muted:#595959;--line:#bdbdbd;--surface:#f4f4f4;--focus:#005fcc;--gap:12px;--space:24px;--body:16px;--small:14px;--heading:24px;--label:12px}
 *{box-sizing:border-box}body{margin:var(--space);font:var(--body)/1.55 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);word-break:keep-all}h1{font-size:var(--heading);margin:0 0 var(--gap)}h2{font-size:20px;margin:var(--space) 0 var(--gap)}p{margin:var(--gap) 0}a{color:var(--focus)}button,select,input{font:inherit}button,select{padding:8px 12px;background:var(--paper);color:var(--ink);border:1px solid var(--line)}button{cursor:pointer}button:hover{background:var(--surface)}:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.controls{display:flex;gap:var(--gap);flex-wrap:wrap;align-items:center;margin:var(--space) 0}.seek{display:flex;gap:var(--gap);align-items:center;flex:1;min-width:260px}.seek input{width:100%}#position{white-space:nowrap;min-width:64px}.strip{display:grid;grid-template-columns:repeat(7,minmax(200px,1fr));gap:var(--gap);overflow-x:auto;padding-bottom:var(--gap)}figure{margin:0;min-width:0}figcaption{font-weight:600;margin-bottom:8px}video,.anchor,.missing{display:block;width:100%;aspect-ratio:16/9;background:var(--surface);border:1px solid var(--line)}video,.anchor{object-fit:contain}.anchor{height:auto}.source-frame{position:relative}.casting-overlay{position:absolute;inset:0;pointer-events:none}.casting-overlay[hidden]{display:none}.casting-label{position:absolute;transform:translate(-50%,-100%);font-size:var(--label);font-weight:700;line-height:1.2;color:var(--paper);background:var(--ink);padding:2px 4px;border:1px solid var(--paper)}.casting-label.ig{left:43%;top:33%}.casting-label.lab{left:55%;top:31%}.missing{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--gap);gap:8px}.missing strong{font-size:var(--small);overflow-wrap:anywhere;max-width:100%}.missing span,.note{font-size:var(--small);color:var(--muted)}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}.evidence{display:block;width:100%;height:auto;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;margin:var(--gap) 0}th,td{padding:8px;text-align:left;border:1px solid var(--line)}.table-scroll{overflow:auto}.status{padding:var(--gap);border-left:4px solid var(--ink);background:var(--surface)}#message{min-height:1.6em}footer{margin-top:var(--space);padding-top:var(--gap);border-top:1px solid var(--line)}@media(max-width:600px){body{margin:12px}.pair{grid-template-columns:1fr}.seek{flex-basis:100%}h1{font-size:20px}}
@@ -13,7 +13,7 @@
 <body>
 <main>
 <h1>V-001 · 확정 구간과 앵커 검토</h1>
-<p class="status"><strong>개정4 · E1 ENGINE_RAN(2/2) · E2 PENDING</strong><br>2026-11-04 KST · 확정 구간과 native imagegen 앵커를 유지합니다. E1 원본 출력 두 개: 1152×640 · 73프레임 · 24fps · 각각 11 step / 11 model call. E2 변환·추론과 SAM 출력 측정은 대기 중입니다. 품질: <strong>HUMAN_REVIEW_PENDING</strong> · temporal=UNVERIFIED.</p>
+<p class="status"><strong>개정4 · E1 ENGINE_RAN(2/2) · E2 원격 상태 확인 불가</strong><br>2026-11-04 KST · E1 실제 원본 출력 두 개를 검토할 수 있습니다. E2 seed1은 0/40 이후 원격 연결이 끊겨 이후 실행 상태를 확인하지 못했으며, seed2는 실행하지 않았습니다. E2 출력과 SAM 출력 측정은 확보하지 못했습니다. 원격 종료 여부나 중단 원인은 확인되지 않았습니다. 품질: <strong>HUMAN_REVIEW_PENDING</strong> · temporal=UNVERIFIED.</p>
 <div class="controls" aria-label="전체 영상 동기 제어">
 <label>주 비교 구간 <select id="segment"><option value="fallback">확정 [240,313)</option><option value="primary">이전 기본 [96,169) · 이력</option></select></label>
 <button id="play" type="button">전체 재생</button><button id="pause" type="button">전체 일시정지</button>
@@ -22,17 +22,17 @@
 <label class="seek">프레임 <input id="frame" type="range" min="0" max="72" step="1" value="0"><output id="position">0 / 72</output></label>
 </div>
 <p id="message" role="status" aria-live="polite">원본 프레임 240 · 24fps · 모든 실제 영상은 같은 상대 프레임으로 이동합니다.</p>
-<div class="strip" aria-label="원본·미실행 출력·Kling 비교">
+<div class="strip" aria-label="원본·앵커·E1 실제 출력 2개·E2 미확인 및 미실행 상태·Kling 비교">
 <figure><figcaption id="source-title">원본 · 확정 구간</figcaption><div class="source-frame"><video id="source" src="fallback.mp4" muted playsinline preload="metadata" aria-label="선택 원본 구간"></video><div id="casting-overlay" class="casting-overlay" hidden aria-label="원본240프레임 고정 배역"><span class="casting-label ig">IG</span><span class="casting-label lab">Lab</span></div></div></figure>
 <figure><figcaption>앵커 · native imagegen 1회</figcaption><img class="anchor" src="anchor.png" width="1280" height="720" alt="확정 구간 첫 프레임을 편집한 Lab·IG 앵커. 생성 원출력을 수정 없이 표시합니다."></figure>
 <figure><figcaption>E1 · seed 20261103</figcaption><video id="e1-s1" src="e1-s1.mp4" muted playsinline preload="metadata" aria-label="E1 seed 20261103 실제 원본 출력"></video></figure>
 <figure><figcaption>E1 · seed 20261104</figcaption><video id="e1-s2" src="e1-s2.mp4" muted playsinline preload="metadata" aria-label="E1 seed 20261104 실제 원본 출력"></video></figure>
-<figure><figcaption>E2 · seed 20261103</figcaption><div class="missing"><strong>PENDING</strong><span>E2 변환·추론 대기<br>결과 미확정</span></div></figure>
-<figure><figcaption>E2 · seed 20261104</figcaption><div class="missing"><strong>PENDING</strong><span>E2 변환·추론 대기<br>결과 미확정</span></div></figure>
+<figure><figcaption>E2 · seed 20261103</figcaption><div class="missing"><strong>EXECUTION_UNOBSERVED_REMOTE_UNAVAILABLE</strong><span>seed1 · 연결 상실 후 상태 미확인</span></div></figure>
+<figure><figcaption>E2 · seed 20261104</figcaption><div class="missing"><strong>NOT_RUN_REMOTE_UNAVAILABLE</strong><span>seed2 · 실행하지 않음</span></div></figure>
 <figure><figcaption>Kling · 기존 참고 결과</figcaption><video id="kling" src="kling-fallback.mp4" muted playsinline preload="metadata" aria-label="선택 구간의 기존 Kling 결과"></video></figure>
 </div>
 <p><strong>배역 기준(frame 240): 오른쪽 앞 갈색 개 → Lab / 왼쪽 뒤 회색 개 → IG.</strong> 원본 위 라벨은 확정 구간 첫 프레임을 정지한 때만 표시하는 고정 배역이며, 프레임별 추적 라벨이 아닙니다.</p>
-<p class="note">가로로 스크롤하면 모든 열을 볼 수 있습니다. E1 두 열은 실제 출력이며 E2 두 칸은 대기 상태입니다. Kling은 배역 대응과 참고 비교에만 사용했으며 이번 생성물이 아닙니다.</p>
+<p class="note">가로로 스크롤하면 모든 열을 볼 수 있습니다. E1 두 열은 실제 출력입니다. E2 seed1의 이후 실행 상태는 미확인이고 seed2는 미실행입니다. Kling은 배역 대응과 참고 비교에만 사용했으며 이번 생성물이 아닙니다.</p>
 <h2>승인 개정 후 게이트 측정</h2>
 <div class="table-scroll"><table><thead><tr><th scope="col">항목</th><th scope="col">측정</th><th scope="col">판정</th></tr></thead><tbody>
 <tr><th scope="row">확정 구간 [240,313)</th><td>73 / 73 프레임</td><td>SEGMENT_ESTABLISHED</td></tr>
@@ -41,7 +41,7 @@
 <tr><th scope="row">G3 / G4 bbox 높이 비율</th><td>Lab 1.2482 / IG 1.1837</td><td>PASS · [0.85,1.60] / [0.70,1.30]</td></tr>
 <tr><th scope="row">G5 배경 RGB MAE</th><td>5.62783</td><td>PASS · 한도 12</td></tr>
 </tbody></table></div>
-<p>E1 실제 클립 생성 시간: seed 20261103은 135.8008708초, seed 20261104는 83.5878347초입니다. 두 출력 모두 73프레임·24fps·1152×640·11 step / 11 model call이며 원본 MP4 byte를 유지했습니다. SAM 출력 측정과 15초 비용 추정은 PENDING입니다. E2 변환·추론도 PENDING이며 이전 안전 중단을 현재 최종 상태로 취급하지 않습니다. HUMAN_REVIEW_PENDING · temporal=UNVERIFIED.</p>
+<p>E1 실제 클립 생성 시간: seed 20261103은 135.8008708초, seed 20261104는 83.5878347초입니다. 두 출력 모두 73프레임·24fps·1152×640·11 step / 11 model call이며 원본 MP4 byte를 유지했습니다. SAM 출력 자동 측정은 NOT_RUN_REMOTE_UNAVAILABLE입니다. 15초 비용은 측정하지 않았습니다. E2 seed1은 0/40 이후 원격 연결 상실로 실행 상태가 UNKNOWN이며 출력은 확보하지 못했습니다. E2 seed2는 NOT_RUN_REMOTE_UNAVAILABLE입니다. 호스트 종료나 가드 중단으로 단정하지 않습니다. HUMAN_REVIEW_PENDING · temporal=UNVERIFIED.</p>
 <h2>이전 기본 구간 · 참고 이력</h2>
 <p>기존 기준에서 기본 [96,169)은 21/73, 대체 [240,313)은 0/73이었습니다. 대체 구간의 기존 4트랙에는 바닥 반사가 포함됐습니다. 이 기록을 보존하며, 현재 결과는 승인 개정 후 판정을 따릅니다.</p>
 <div class="pair"><figure><figcaption>원본 [96,169) · 이전 기본 구간</figcaption><video src="sourceprimary.mp4" muted playsinline preload="metadata" aria-label="이전 기본 원본 구간"></video></figure><figure><figcaption>Kling [96,169) · 기존 참고</figcaption><video src="kling-primary.mp4" muted playsinline preload="metadata" aria-label="이전 기본 구간 기존 Kling 결과"></video></figure></div>

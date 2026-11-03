@@ -1,5 +1,5 @@
 {
-  "status": "SEGMENT_ESTABLISHED_ANCHOR_GATE_PASS_NO_GENERATED_OUTPUTS",
+  "status": "E1_OUTPUTS_AVAILABLE_OUTPUT_SAM_NOT_RUN_REMOTE_UNAVAILABLE",
   "segments": {
     "primary": {
       "start": 96,
@@ -8813,7 +8813,7 @@
   },
   "generated_output_metrics": null,
   "quality": "HUMAN_REVIEW_PENDING",
-  "reason": "Fallback segment established and anchor passed; E1 condition-encode geometry failure and E2 sustained PSI guard stop prevented all generated outputs.",
+  "reason": "E1 generated two preserved videos. Spark access was lost during E2seed1; output SAM and cast metrics have not run. No zero or surrogate scores are substituted.",
   "historical_status": "SEGMENT_NOT_ESTABLISHED",
   "amendment2": {
     "definition_change_after_results": true,
@@ -8832,15 +8832,41 @@
     "source_sam_reruns": 0
   },
   "output_metrics": {
-    "status": "NOT_MEASURED_NO_GENERATED_OUTPUTS",
+    "status": "NOT_RUN_REMOTE_UNAVAILABLE",
     "object_count_stability": null,
     "motion_following": null,
     "identity_swaps": null,
     "lab_body_ratio": null,
     "background_flicker": null,
     "reflection_color_correspondence": null,
-    "generation_cost": null,
-    "reason": "No video engine output; anchor gates are not output quality metrics"
+    "generation_cost": {
+      "E1_20261103_amend4": {
+        "seed": 20261103,
+        "num_frames": 73,
+        "width": 1152,
+        "height": 640,
+        "fps": 24,
+        "elapsed_seconds": 135.80087075696792,
+        "peak_rss_bytes": 44708773888,
+        "cuda_peak_allocated_bytes": 42509118464,
+        "scheduler_steps_completed": 11,
+        "denoiser_calls": 11
+      },
+      "E1_20261104_amend4": {
+        "seed": 20261104,
+        "num_frames": 73,
+        "width": 1152,
+        "height": 640,
+        "fps": 24,
+        "elapsed_seconds": 83.5878347089747,
+        "peak_rss_bytes": 45258858496,
+        "cuda_peak_allocated_bytes": 42509118464,
+        "scheduler_steps_completed": 11,
+        "denoiser_calls": 11
+      }
+    },
+    "reason": "Output SAM unavailable after Spark access loss; source and anchor masks cannot substitute for output detections.",
+    "generation_cost_scope": "E1 completed outputs only; E2probe is not clip generation cost. RSS excludes some GPU/unified-memory accounting; cgroup and available-memory observations are separately in RUNS."
   },
   "historical_reason_before_amendment2": "Neither preregistered segment meets two-instance gate; no output exists to score.",
   "amendment3": {
@@ -8854,5 +8880,19 @@
     "reason": "No completed first denoising step; loading time is not generation cost.",
     "temporal": "UNVERIFIED"
   },
-  "updated_at": "2026-11-03T15:44:21.411662+00:00"
+  "updated_at": "2026-11-03T16:40:36.902918+00:00",
+  "historical_status_before_amendment4": "SEGMENT_ESTABLISHED_ANCHOR_GATE_PASS_NO_GENERATED_OUTPUTS",
+  "historical_reason_before_amendment4": "Fallback segment established and anchor passed; E1 condition-encode geometry failure and E2 sustained PSI guard stop prevented all generated outputs.",
+  "amendment4": {
+    "E1_outputs_available": 2,
+    "E2_generation_state": "EXECUTION_UNOBSERVED_REMOTE_UNAVAILABLE",
+    "output_sam_runs": 0,
+    "quality": "HUMAN_REVIEW_PENDING",
+    "temporal": "UNVERIFIED",
+    "metric_limitations": [
+      "SAM track and nearest-position correspondence do not prove visual identity.",
+      "The literal reflection rule may associate a reflection with multiple bodies.",
+      "SAM omissions and inverse-resize filtering affect descriptive background differences."
+    ]
+  }
 }

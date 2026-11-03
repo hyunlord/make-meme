@@ -1,7 +1,7 @@
 {
   "date_kst": "2026-11-04",
   "method": "Existing Chrome headless CDP with actual packaged media; no installations",
-  "html_sha256": "67d81fd26db27f923bd3e5d7d134f3663358a0fcde1cfe9d4ec2d24ab209528e",
+  "html_sha256": "bacffe2a529d8eefec826070c41d5f1250461ee05f5ac0748ba2c6db7bb1c863",
   "initial": {
     "segment": "fallback",
     "source": "fallback.mp4",
@@ -64,8 +64,8 @@
       }
     ],
     "blocked": [
-      "PENDING",
-      "PENDING"
+      "EXECUTION_UNOBSERVED_REMOTE_UNAVAILABLE",
+      "NOT_RUN_REMOTE_UNAVAILABLE"
     ],
     "actualE1": true
   },
@@ -157,12 +157,12 @@
     "position": "17 / 72",
     "labelsHidden": true,
     "times": [
-      0.7183,
       0.7174,
-      0.7174,
-      0.7183,
-      0.7182,
-      0.7182
+      0.676955,
+      0.67696,
+      0.7173,
+      0.7173,
+      0.7172
     ],
     "rates": [
       0.5,
@@ -185,12 +185,12 @@
     "position": "17 / 72",
     "labelsHidden": true,
     "times": [
-      0.7186,
-      0.7174,
-      0.7174,
-      0.7185,
-      0.7185,
-      0.7185
+      0.7176,
+      0.677204,
+      0.677213,
+      0.7175,
+      0.7175,
+      0.7175
     ],
     "rates": [
       0.5,
@@ -274,7 +274,20 @@
   "quality": "HUMAN_REVIEW_PENDING",
   "notes": [
     "Two actual E1 raw outputs, source/Kling playback and static native anchor tested",
-    "E1 ENGINE_RAN(2/2), E2 PENDING, SAM metrics PENDING displayed explicitly"
+    "E1 ENGINE_RAN(2/2), E2 seed1 unobserved, seed2 not run, SAM not run due to remote unavailable displayed explicitly"
   ],
-  "visual_inspection": "Actual desktop1280x1000 and mobile375x900 screenshots inspected: source/anchor/E1 clips visible, E2 pending, casting labels and controls visible; strip intentionally scrolls."
+  "visual_inspection": "Desktop1280x1000 and mobile375x900 actual screenshots inspected; E1 outputs visible, original first-frame casting labels visible, E2 unknown/not-run distinguished. No temporal quality acceptance inferred.",
+  "raw_media_sha256": {
+    "e1-s1.mp4": "763fbe29637437c40aafdb3f21438601144361f47308dd22234d10b4e2e59289",
+    "e1-s2.mp4": "8844caea618a2ab54f9bea76b1a8225bebd8c244167da36f0c19ec9bf667900b"
+  },
+  "metadata_revalidation": {
+    "method": "Actual Chrome CDP document metadata after metadata-only patch",
+    "title": "V-001 개정4 · E1 출력 2개 · E2 상태 미확인",
+    "description": "V-001 개정4 검토. E1 실제 출력 두 개와 원본·앵커·Kling 비교. E2 seed1은 원격 연결 상실 후 실행 상태 미확인, seed2는 미실행.",
+    "strip": "원본·앵커·E1 실제 출력 2개·E2 미확인 및 미실행 상태·Kling 비교",
+    "e1Videos": 2,
+    "pass": true
+  },
+  "controls_revalidation_note": "Existing full control QA retained; subsequent patch only changed description, title and strip accessible label."
 }

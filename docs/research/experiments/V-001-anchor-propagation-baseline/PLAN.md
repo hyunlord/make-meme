@@ -116,3 +116,7 @@ E1두원본MP4의Mac검토페이지와실제브라우저QA를먼저완료했다.
 ### 개정4 E2 길이·시작 결정 — 2026-11-04 01:26 KST
 
 73프레임probe정상완료:1scheduler step/4DiT호출,firststep295.574372초,준비포함584.233394초. setup288.659022초를고정하고40step외삽하면12111.633906초(201.86분)>120분이므로동일시작240의49프레임으로축소한다. latent시간13/19선형비율을적용한49예상8378.062890초(139.63분)<180분이며추가probe는하지않는다. 디코드미측정에900초여유를두면약154.63분/seed다. 현재두seed의보수적합산도07:30전이므로seed1을시작하고,seed2는seed1실측종료후남은시간으로다시시작여부만판단한다. 품질설정은불변이다. 원본73의처음49프레임과새FFV1입력의decoded RGB SHA256이exact같음을확인했다. 49축소는속도외삽이며실측확정값이아니다.
+
+## Amendment4 remote access observation — 2026-11-03T16:40:36.902918+00:00
+
+E2 seed20261103 was started once at49frames after the completed timing probe. At approximately16:34 UTC, the last readable worker log showed0/40 and the last observation had no errors, OOM/high/swap events0, minimum available memory46,517,473,280bytes and observed peak RSS21,135,147,008bytes. A subsequent read-only SSH connection timed out; at16:37:23UTC the original generation SSH exited255 with Broken pipe. The local Tailscale client remained online while the Spark peer was reported offline. This is an access observation, not proof of OOM, guard stop, output absence, or worker termination. No replacement generation or second seed is launched while ownership and remote status are unknown. Bounded read-only reconnection checks continue; E1 raw videos already on Mac are preserved for delivery. Output SAM/metrics and remote shutdown/transfer verification remain unavailable until access returns. The original deadline and all generation budgets remain unchanged.

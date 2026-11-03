@@ -853,3 +853,8 @@ Kling 대응으로 배역 확정 및E1 1024×576 사전개정 후 SAM기본21/73
 ## V-001 개정3 실행 종료 (2026-11-04 KST)
 
 Gemma 접근 회복과 E1/E2 공식 가중치 다운로드를 완료했으나 영상은0/4다. E1은 ref0.5 공식2단계의128배수 높이 조건과 승인576의 충돌로 조건 인코딩 실패, E2는100GiB worker에서 전문가 적재 중 지속 PSI 압박으로 가드 중단했다. 두 엔진 모두 denoising0이므로 모델 품질·15초 비용은 미측정이다. 원본 구간73/73·앵커 G1–G5 PASS는 유지한다. A동결·C보류·HUMAN_REVIEW_PENDING, 추가실험 예약없음. [결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).
+
+
+## V-001 개정4: E1 영상 확보, E2 원격 관측 유실 (2026-11-04 KST)
+
+E1은 공식128배수1152×640 규약에서73프레임 영상2개를 생성해 Mac에 보존했다(135.8초·83.6초). 기존 raw depth를 CPU 재표본화했고 VDA 재실행은0회다. E2는 FP32원본을 보존한 채24shard·2,190tensor의 BF16 bit-exact 변환과1step 측정을 완료했고, 사전 시간 규칙에 따라49프레임 seed1을 시작했다. 도중 Spark 접근이 유실되어 완료·실패·종료 여부는 UNKNOWN이며 seed2는 시작하지 않았다. 출력SAM/동작·체형·배경 지표는 미실행으로 남긴다. A동결·C보류·HUMAN_REVIEW_PENDING을 유지하며 후속 실험은 예약하지 않는다. [결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).

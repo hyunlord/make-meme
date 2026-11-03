@@ -1,6 +1,6 @@
 {
   "recorded_at": "2026-11-03T06:37:01.350438+00:00",
-  "status": "AMENDMENT4_E1_RAN_2_OF_2_E2_SEED1_RUNNING",
+  "status": "AMENDMENT4_E1_RAN_2_OF_2_E2_EXECUTION_UNOBSERVED_REMOTE_UNAVAILABLE",
   "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
   "counts": {
     "weight_downloads": null,
@@ -15,10 +15,10 @@
     "weight_downloads_completed": null,
     "video_engine_model_loads": 6,
     "installs_unit": "pending amendment3 component ledger; old unit retained in historical snapshot",
-    "model_loads_scope": "logical phases through completed E2amend4probe, excluding active seed1; CPU shard conversion is not model inference",
+    "model_loads_scope": "Logical phases through completed E2 amendment4 probe; unresolved seed1 entry excluded. CPU conversion is not inference.",
     "timing_probe_attempts": 4,
     "timing_probes_completed": 2,
-    "video_engine_model_loads_scope": "completed/failed/stopped entries through E2amend4probe; active seed1 entry recorded separately",
+    "video_engine_model_loads_scope": "Completed/failed/stopped entries through E2 amendment4 probe; unresolved seed1 entry recorded separately.",
     "depth_inference_calls": 1,
     "depth_model_forward_windows": 4,
     "scheduler_steps_completed": 24,
@@ -29,8 +29,9 @@
     "timing_probe_scheduler_steps_completed": 2,
     "timing_probe_dit_or_denoiser_calls": 5,
     "video_generation_attempts": 3,
-    "video_generation_attempts_in_progress": 1,
-    "counts_scope": "Completed-stage evidence excludes unfinalized active E2seed1 scheduler/DiT calls"
+    "video_generation_attempts_in_progress": null,
+    "counts_scope": "Completed-stage counts are lower bounds excluding unresolved E2 seed1 progress after remote access loss; 3 attempts, 2 completed, 1 unresolved.",
+    "video_generation_attempts_unresolved": 1
   },
   "engines": {
     "E1": {
@@ -81,7 +82,7 @@
         "peak_rss_bytes": 43480379392
       },
       "depth": {
-        "status": "INCOMPLETE_NO_AUTOMATIC_RETRY",
+        "status": "CPU_PACKAGING_RECOVERED_NO_VDA_RERUN",
         "revision": "4f5ae23172ba60fd7bc11ef671cca678842c7072",
         "encoder": "vitl",
         "input_size": 518,
@@ -98,7 +99,9 @@
         "elapsed_seconds": 56.84959209105,
         "peak_cuda_allocated_bytes": 22914256896,
         "peak_cuda_reserved_bytes": 34001125376,
-        "peak_rss_kib": 4179360
+        "peak_rss_kib": 4179360,
+        "historical_inference_receipt_status": "INCOMPLETE_NO_AUTOMATIC_RETRY",
+        "current_status_evidence": "depth_packaging_recovery: 73 PNGs exact, original depths hash preserved, new_model_loads=0 and new_depth_calls=0; completed r2 CPU packaging stages."
       },
       "depth_packaging_recovery": {
         "status": "CPU_PACKAGING_RECOVERED",
@@ -231,10 +234,10 @@
       "quality": "HUMAN_REVIEW_PENDING"
     },
     "E2": {
-      "status": "RUNNING(0/2)",
-      "reason": "Authorized amendment4 CPU conversion and1-step timing probe completed;49-frame seed1 generation in progress,seed2 pending time. Earlier amendment3 stop retained historically.",
+      "status": "EXECUTION_UNOBSERVED_REMOTE_UNAVAILABLE",
+      "reason": "Conversion and timing probe completed. Seed1 access lost after last observed 0/40 progress; subsequent execution, outputs and guard survival unknown. No automatic generation retry. Seed2 not run.",
       "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
-      "outputs": 0,
+      "outputs": null,
       "model_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
       "environment_import": "PASS",
       "runtime_diff": "RUNTIME_DIFF.md",
@@ -700,17 +703,25 @@
           "seed": 20261103,
           "num_frames": 49,
           "source_start_frame": 240,
-          "status": "RUNNING",
-          "output_verified": false
+          "status": "EXECUTION_UNOBSERVED_REMOTE_UNAVAILABLE",
+          "output_verified": false,
+          "output_existence": "UNKNOWN",
+          "further_scheduler_steps": "UNKNOWN",
+          "further_dit_calls": "UNKNOWN",
+          "worker_stop_status": "UNKNOWN",
+          "guard_monitoring_survival": "UNKNOWN",
+          "remote_access_evidence": "REMOTE_ACCESS_AMEND4.json"
         },
         {
           "seed": 20261104,
           "num_frames": 49,
           "source_start_frame": 240,
-          "status": "NOT_RUN_PENDING_TIME",
+          "status": "NOT_RUN_REMOTE_UNAVAILABLE",
           "output_verified": false
         }
-      ]
+      ],
+      "outputs_verified_or_available": 0,
+      "output_count_scope": "Output existence after remote access loss is unknown; zero denotes verified or locally available outputs only."
     }
   },
   "quality": "HUMAN_REVIEW_PENDING",
@@ -1530,7 +1541,7 @@
   ],
   "sam_checkpoint_sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
   "previous_status": "SEGMENT_NOT_ESTABLISHED under original reflection-unaware definition",
-  "updated_at": "2026-11-03T16:29:16.097227+00:00",
+  "updated_at": "2026-11-03T16:40:24.503054+00:00",
   "historical_amendment2_snapshot": {
     "recorded_at": "2026-11-03T06:37:01.350438+00:00",
     "status": "ANCHOR_READY_ENGINES_BLOCKED",
@@ -2441,5 +2452,7 @@
       "note": "Cleaned-up own process absence is distinct from the preserved E2 guard stop and earlier mechanical failures."
     }
   },
-  "current_work_status": "E1 outputs complete; E2seed1 model generation running. No final shutdown assertion."
+  "current_work_status": "E1 outputs complete. E2 seed1 execution unobserved after remote access loss; further steps, output, worker termination and monitoring survival unknown. Seed2 not run. No final shutdown assertion.",
+  "remote_access_evidence": "REMOTE_ACCESS_AMEND4.json",
+  "shutdown_status": "UNKNOWN"
 }
