@@ -1,6 +1,6 @@
 {
   "recorded_at": "2026-11-03T06:37:01.350438+00:00",
-  "status": "AMENDMENT4_E1_RAN_2_OF_2_E2_CONVERSION_PENDING",
+  "status": "AMENDMENT4_E1_RAN_2_OF_2_E2_SEED1_RUNNING",
   "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
   "counts": {
     "weight_downloads": null,
@@ -8,25 +8,29 @@
     "sam": 3,
     "sam_fallback_authorized": true,
     "imagegen": 1,
-    "model_loads": 9,
-    "timing_probes": 1,
+    "model_loads": 10,
+    "timing_probes": 2,
     "video_generations": 2,
     "training": 0,
     "weight_downloads_completed": null,
-    "video_engine_model_loads": 5,
+    "video_engine_model_loads": 6,
     "installs_unit": "pending amendment3 component ledger; old unit retained in historical snapshot",
-    "model_loads_scope": "logical phases through E1amend4: SAM3+VDA1+E1entries4+E2entry1; not individual components",
-    "timing_probe_attempts": 3,
-    "timing_probes_completed": 1,
-    "video_engine_model_loads_scope": "E1amend3failed1+E2amend3stopped1+E1amend4probe1+generations2",
+    "model_loads_scope": "logical phases through completed E2amend4probe, excluding active seed1; CPU shard conversion is not model inference",
+    "timing_probe_attempts": 4,
+    "timing_probes_completed": 2,
+    "video_engine_model_loads_scope": "completed/failed/stopped entries through E2amend4probe; active seed1 entry recorded separately",
     "depth_inference_calls": 1,
     "depth_model_forward_windows": 4,
-    "scheduler_steps_completed": 23,
-    "denoiser_calls": 23,
+    "scheduler_steps_completed": 24,
+    "denoiser_calls": 27,
     "download_install_count_note": "Amendment2 counters preserved in historical snapshot; amendment3 component download/install totals pending final ledger.",
     "generation_scheduler_steps_completed": 22,
     "generation_denoiser_calls": 22,
-    "timing_probe_scheduler_steps_completed": 1
+    "timing_probe_scheduler_steps_completed": 2,
+    "timing_probe_dit_or_denoiser_calls": 5,
+    "video_generation_attempts": 3,
+    "video_generation_attempts_in_progress": 1,
+    "counts_scope": "Completed-stage evidence excludes unfinalized active E2seed1 scheduler/DiT calls"
   },
   "engines": {
     "E1": {
@@ -227,8 +231,8 @@
       "quality": "HUMAN_REVIEW_PENDING"
     },
     "E2": {
-      "status": "AMENDMENT4_CONVERSION_PENDING",
-      "reason": "Parent preparing user-authorized amendment4 conversion and execution copy; no new E2 probe or output claimed. Earlier amendment3 PSI stop remains in historical snapshot.",
+      "status": "RUNNING(0/2)",
+      "reason": "Authorized amendment4 CPU conversion and1-step timing probe completed;49-frame seed1 generation in progress,seed2 pending time. Earlier amendment3 stop retained historically.",
       "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
       "outputs": 0,
       "model_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
@@ -243,7 +247,7 @@
       "worker_memory_max_gib": 100,
       "start_min_available_gib": 112,
       "guard_scope": "code/guard-e2-amend4",
-      "probe_status": "NOT_RUN_UNDER_AMENDMENT4",
+      "probe_status": "PROBE_COMPLETE_NO_DECODE",
       "historical_amendment2_partial_download": {
         "started": 1793704314.7529936,
         "repo": "ByteDance/Bernini-R-Diffusers",
@@ -268,7 +272,445 @@
       "estimated_video_time_seconds": null,
       "estimated_15_second_cost": null,
       "quality": "HUMAN_REVIEW_PENDING",
-      "worker_memory_high_gib": 100
+      "worker_memory_high_gib": 100,
+      "probe": {
+        "mode": "probe",
+        "seed": 20261103,
+        "num_frames": 73,
+        "scheduler_steps": 1,
+        "dit_forward_calls": 4,
+        "status": "PROBE_COMPLETE_NO_DECODE",
+        "timesteps": [
+          999,
+          994,
+          989,
+          983,
+          978,
+          972,
+          965,
+          959,
+          952,
+          944,
+          937,
+          929,
+          920,
+          911,
+          902,
+          892,
+          882,
+          870,
+          859,
+          846,
+          833,
+          818,
+          803,
+          786,
+          768,
+          749,
+          728,
+          706,
+          681,
+          654,
+          624,
+          591,
+          555,
+          514,
+          468,
+          416,
+          356,
+          288,
+          208,
+          113
+        ],
+        "sigmas": [
+          0.9997998476028442,
+          0.9946947693824768,
+          0.9893770217895508,
+          0.9838330149650574,
+          0.9780480265617371,
+          0.9720060229301453,
+          0.9656894207000732,
+          0.9590790867805481,
+          0.9521540403366089,
+          0.9448912739753723,
+          0.9372654557228088,
+          0.9292486906051636,
+          0.9208100438117981,
+          0.9119154810905457,
+          0.9025267958641052,
+          0.8926018476486206,
+          0.8820932507514954,
+          0.8709479570388794,
+          0.8591062426567078,
+          0.8465008735656738,
+          0.8330553770065308,
+          0.8186829090118408,
+          0.803284227848053,
+          0.7867453694343567,
+          0.7689347267150879,
+          0.7496998310089111,
+          0.7288626432418823,
+          0.7062143683433533,
+          0.6815081238746643,
+          0.6544499397277832,
+          0.6246873140335083,
+          0.5917934775352478,
+          0.5552467703819275,
+          0.5144029855728149,
+          0.4684569239616394,
+          0.4163888096809387,
+          0.35688766837120056,
+          0.28823959827423096,
+          0.2081597000360489,
+          0.11353304982185364,
+          0.0
+        ],
+        "first_step_seconds": 295.57437208795454,
+        "first_step_dit_calls": 4,
+        "elapsed_seconds": 584.2333941520192,
+        "peak_cuda_allocated_bytes": 52460551680,
+        "peak_cuda_reserved_bytes": 75778490368,
+        "peak_rss_native_units": 20566084,
+        "rss_units": "KiB on Linux; bytes on macOS",
+        "peak_rss_bytes": 21059670016,
+        "rss_conversion_basis": "Linux KiB ru_maxrss *1024"
+      },
+      "frame_decision": {
+        "recorded_epoch": 1793723160.4993563,
+        "frames": 49,
+        "source_same_start_frame": 240,
+        "decoded_rgb_sha256": "SHA256=6fe4dc0c044c217aedc303358f70a50e42c78b1193a36e600607c3114728c378",
+        "source_file_sha256": "c695b48be5cf4f4306f9ee8f75ab44bb1739d4e91f49c5a4cc1c534c3b0cb7c6",
+        "first_step_seconds": 295.57437208795454,
+        "setup_seconds": 288.65902206406463,
+        "estimate_73_seconds": 12111.633905582246,
+        "estimate_49_seconds": 8378.0628897344,
+        "projection": "fixed setup +40*step*13/19 latent-time ratio; no second probe",
+        "decode_reserve_seconds": 900,
+        "deadline_compute_epoch": 1793745000.0
+      },
+      "conversion": {
+        "status": "COMPLETE_VERIFIED_CPU_CAST",
+        "source_revision": "de8c4621d3ac75cc33efe3db8deaed2023e9ac8c",
+        "started_utc": "2026-11-03T16:08:40.812747+00:00",
+        "torch_version": "2.14.0+cu130",
+        "operation": "original.cpu().to(torch.bfloat16)",
+        "verification": "all tensors uint8-view equality with original.to(BF16)",
+        "cuda_visible_devices": "",
+        "nice_increment": 10,
+        "cpu_threads": 2,
+        "shards": [
+          {
+            "file": "transformer/diffusion_pytorch_model-00001-of-00012.safetensors",
+            "source_payload_bytes": 4950980608,
+            "target_payload_bytes": 2475490304,
+            "tensor_count": 100,
+            "source_sha256": "617a6f286ff92f1647feaffdd0d70fc4eb5e917336106ebb34eec1fd3574e094",
+            "converted_sha256": "e8da90e9209c6874da5aa42f979c680f00c053a486067245fca09dd5ff3c96d4",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 11.987361356033944
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00002-of-00012.safetensors",
+            "source_payload_bytes": 4992999424,
+            "target_payload_bytes": 2496499712,
+            "tensor_count": 94,
+            "source_sha256": "9f5347453ef44624311fd148db574e847b8b7b4968cbebc9119aa23744999a95",
+            "converted_sha256": "c96dbe7cb1d0b34e9cfe667e746482104496c7116ee5eeb4ee1dd2a3bc358bb2",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 11.744488424970768
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00003-of-00012.safetensors",
+            "source_payload_bytes": 4950953984,
+            "target_payload_bytes": 2475476992,
+            "tensor_count": 97,
+            "source_sha256": "430420aa1e82adbf31d8600b7b4db6eb8628584a05dcf8fdcaaecd2b6a029193",
+            "converted_sha256": "0fa48d0d1f7ac16b8cac1113fa5fcda2d18dd19ee61ae3c611b4d96344b9b1ec",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.729829262010753
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00004-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "be3c96081d8e72b994e0f45de571875583f8ed279f580c0241ce321af532739c",
+            "converted_sha256": "8d8f3f5126d13ef7bebe0b4468041763cee037fe933a0f3876c064c4495f7505",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.38529995502904
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00005-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "597bcc31f88efcca8f493f80ee68b4c716c8e0ccb2499fb05532279df72b5460",
+            "converted_sha256": "513521240d38b8dc89271d266725901fbb1d502e6bb0cd883c8f319f85ce9450",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 11.874558895942755
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00006-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "152ff90a6595b041488b568894b56ce2c36eec8d66e47c538946ea3b382092d1",
+            "converted_sha256": "7b9dba9a83175a0c7fad303bb7da27b1aeca28dfcdd33c67ca787481c9fa371c",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.483360304031521
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00007-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "f378d8f6081e8f2f679875309931f5663d09504d1a7ecc3754c4bc94a77a7613",
+            "converted_sha256": "c2a047913a960da2d1e193a85d71b069d738f50bf94bd558a709db693d68e2d7",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.395453960984014
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00008-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "862d218835e8317faf45accc1abbe6615000d5ba4be819189467134e8feb2ed2",
+            "converted_sha256": "13d7942e330017a6e7e61096c8f9a61abd68a6b93f3478c6599fb5181e187f58",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.077111350023188
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00009-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "f8dc819a1f6fd55d4d1e88cfe16392a4902e0a49129626417f3f02330ba72e34",
+            "converted_sha256": "4a9b300aba673fabcc182df180d96e6797319352b57319051188cb9da6b3a04b",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.504653524956666
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00010-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "1530b469d075a45097a410a90717ef5f1d0d2065c61ea979aac7ae045d2e6563",
+            "converted_sha256": "2beba9e00d36330d9ad90b2ab9fc1fa10beb601042bb0a003ecb2d430ad1c2b4",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.053984416066669
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00011-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "3d7a90667daadfa9a936c787fe021b987fb8c9a1df9c48747874daa19b65ff0c",
+            "converted_sha256": "4835dbfcd7fc64d76131daafda0c0e8aa8a85e65326d4f6fb8fa03e16fab4ee8",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.415401301928796
+          },
+          {
+            "file": "transformer/diffusion_pytorch_model-00012-of-00012.safetensors",
+            "source_payload_bytes": 2902870272,
+            "target_payload_bytes": 1451435136,
+            "tensor_count": 48,
+            "source_sha256": "bfb928fd34863143a2bcb14ad68242d40c0493cf8ecc25f3efbc04338c800d6c",
+            "converted_sha256": "aa6ee9d7c786bd5930a6aaac5b945e5a6b97c660eb9488ecbdf6fa6650f507c3",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 7.7052485179156065
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00001-of-00012.safetensors",
+            "source_payload_bytes": 4950980608,
+            "target_payload_bytes": 2475490304,
+            "tensor_count": 100,
+            "source_sha256": "33a109b49e7181e53c43dff25f8fa1a0b33ed181bea82106335086b493413cc0",
+            "converted_sha256": "81bf2579f43c92458873ec501b5e91f8b0cf11945ff61a937bd2655db50d1da7",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.138099557021633
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00002-of-00012.safetensors",
+            "source_payload_bytes": 4992999424,
+            "target_payload_bytes": 2496499712,
+            "tensor_count": 94,
+            "source_sha256": "0f5be35e69f2e27674546f8f78becac0e16e1656a14c333f453aa5c5ba71cb5e",
+            "converted_sha256": "7e03fb546a1f2d9c916e403c704f6fc390384de244e2a6e2d5d0cdbdf725710a",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.077538077021018
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00003-of-00012.safetensors",
+            "source_payload_bytes": 4950953984,
+            "target_payload_bytes": 2475476992,
+            "tensor_count": 97,
+            "source_sha256": "9798b8135800ec4fe6052ac6a6680045d00215719d2b787128196ea5fef22cb7",
+            "converted_sha256": "facb5925d34cd0c29c81880b1bcafae517b088ff861fb339ae3be20077b5415a",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 14.66769115801435
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00004-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "896c6dd0680e1c798344a60c87558bfd854559a904a4a0ed49962ef503522d29",
+            "converted_sha256": "08f38f575d33cf49cd5ee147f7877a2c14d7542013be9ac6e425cd025b9b8eb6",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.234779686899856
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00005-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "62204fe8fffd621fa98e2683dccc7438417fcb1fcd579ddc007226de99372b4f",
+            "converted_sha256": "892ff6459a4d6f82315b7bf058e61c95230868fa7569ad322c06715d0d38d8e4",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.735546746989712
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00006-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "3025dcd2a163da3973f6aea8fffc7e477b75ecbf82f65d2ce4dfdb5b6c49720d",
+            "converted_sha256": "bc53de8d189b2507e259e1c6f270967fb4c1df4dd5ed1d0fe25ed9c54b6c266b",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.16555802396033
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00007-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "2a08555bbb89dadf8b82bd780c1dbf3eb249678913954cbb764bec1b8129bafb",
+            "converted_sha256": "393dacf4b1be7bea842cd6142ac11ffc47b5f69da89c1f56a1b4b623696cdc38",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 12.735485282028094
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00008-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "9a9244ee00164ce43cb717cfc9f48ed5252f8e70aba688057c55f1b41f7c91df",
+            "converted_sha256": "dccee851003d97245f838fdb6a79fc5583179502f7adaf3a6332c555d38714b7",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.603942031040788
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00009-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "1bab9d32346d129ce83b56725cff076f2f86eb01584235512fa048132aafe376",
+            "converted_sha256": "e395eb74229cfdea391e47248115e7637e653314a2d58b342debf2fee5b1f68f",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.097359532024711
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00010-of-00012.safetensors",
+            "source_payload_bytes": 4992964608,
+            "target_payload_bytes": 2496482304,
+            "tensor_count": 94,
+            "source_sha256": "12a7ce6160a32af2cfdadbf831237c6a02a380596a5798579a0969c1855ddbc8",
+            "converted_sha256": "020b97e3c58ecb0fb35e1bf7534d93616beb75cf05b57d84f70ae171733cbec1",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 13.326175356982276
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00011-of-00012.safetensors",
+            "source_payload_bytes": 4846075904,
+            "target_payload_bytes": 2423037952,
+            "tensor_count": 95,
+            "source_sha256": "8fd8f3d3fd4cb69ed0759e9f5a91677763856fbe1c965403c421c53d1f3e8273",
+            "converted_sha256": "52f689cef2c989e6aa0d6fe3cb6480303a663efb797d60f8ab786108a0f180a5",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 14.204199398052879
+          },
+          {
+            "file": "transformer_2/diffusion_pytorch_model-00012-of-00012.safetensors",
+            "source_payload_bytes": 2902870272,
+            "target_payload_bytes": 1451435136,
+            "tensor_count": 48,
+            "source_sha256": "bf2174c704af6cac1379ee87662b3a114a14f1921d8cebcaf8f423d146199d97",
+            "converted_sha256": "218a7a1f5772e3cf96c3bb260778fcf5c4954740fcd6398532c9d5032f076fca",
+            "verification": "ALL_TENSORS_BIT_EXACT_TO_OFFICIAL_CPU_CAST",
+            "elapsed_seconds": 7.701985489926301
+          }
+        ],
+        "component_indices": [
+          {
+            "component": "transformer",
+            "source_sha256": "462fed479c13e3973d65f54ba109bab57a7d079f0556af42aa70a2859085badd",
+            "converted_sha256": "8fe13fc607a484616b9db31363aaa1168f17e141ebb003f80449098361bd9b16",
+            "target_payload_bytes": 28576983168
+          },
+          {
+            "component": "transformer_2",
+            "source_sha256": "462fed479c13e3973d65f54ba109bab57a7d079f0556af42aa70a2859085badd",
+            "converted_sha256": "8fe13fc607a484616b9db31363aaa1168f17e141ebb003f80449098361bd9b16",
+            "target_payload_bytes": 28576983168
+          }
+        ],
+        "reused_components": [
+          {
+            "name": ".gitattributes",
+            "method": "symlink-original"
+          },
+          {
+            "name": "README.md",
+            "method": "symlink-original"
+          },
+          {
+            "name": "assets",
+            "method": "symlink-original"
+          },
+          {
+            "name": "config.json",
+            "method": "symlink-original"
+          },
+          {
+            "name": "scheduler",
+            "method": "symlink-original"
+          },
+          {
+            "name": "text_encoder",
+            "method": "symlink-original"
+          },
+          {
+            "name": "tokenizer",
+            "method": "symlink-original"
+          },
+          {
+            "name": "vae",
+            "method": "symlink-original"
+          }
+        ],
+        "source_root_config_sha256": "2416ac0725777045a69cf34f3f9b6ffcdbf51fbeea5f57f4a837fe815eaca23b",
+        "elapsed_seconds": 298.3423142679967,
+        "finished_utc": "2026-11-03T16:13:39.145368+00:00",
+        "shard_count": 24,
+        "tensor_count": 2190
+      },
+      "generation_runs": [
+        {
+          "seed": 20261103,
+          "num_frames": 49,
+          "source_start_frame": 240,
+          "status": "RUNNING",
+          "output_verified": false
+        },
+        {
+          "seed": 20261104,
+          "num_frames": 49,
+          "source_start_frame": 240,
+          "status": "NOT_RUN_PENDING_TIME",
+          "output_verified": false
+        }
+      ]
     }
   },
   "quality": "HUMAN_REVIEW_PENDING",
@@ -931,11 +1373,164 @@
       ],
       "max_contiguous_psi_above25_seconds": 0.0,
       "max_contiguous_available_below12_seconds": 0.0
+    },
+    {
+      "stage": "v001-e2-cast-amend4-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793722101.589747,
+      "finished_epoch": 1793722103.8259418,
+      "elapsed_supervised_seconds": 2.2361948490142822,
+      "minimum_available_bytes": 123726835712,
+      "max_psi_full_avg10": 0.0,
+      "max_observed_cgroup_peak_bytes": 7852032,
+      "peak_worker_rss_bytes_observed": 17190912,
+      "rss_scope": "registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss",
+      "worker_cgroup_max_bytes": [
+        107374182400
+      ],
+      "worker_cgroup_high_bytes": [
+        107374182400
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": -4096,
+      "swapout_bytes": 0,
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "start_admission_available_bytes": 123738185728,
+      "start_observation_seconds": 10.258818226051517,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "v001-e2-cast-amend4-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793722120.0843081,
+      "finished_epoch": 1793722421.1589208,
+      "elapsed_supervised_seconds": 301.0746126174927,
+      "minimum_available_bytes": 120049127424,
+      "max_psi_full_avg10": 3.1,
+      "max_observed_cgroup_peak_bytes": 93258866688,
+      "peak_worker_rss_bytes_observed": 8145592320,
+      "rss_scope": "registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss",
+      "worker_cgroup_max_bytes": [
+        107374182400
+      ],
+      "worker_cgroup_high_bytes": [
+        107374182400
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": -323584,
+      "swapout_bytes": 610304,
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "start_admission_available_bytes": 123740028928,
+      "start_observation_seconds": 10.273946105968207,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "v001-e2-probe-amend4-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793722458.42741,
+      "finished_epoch": 1793722460.663039,
+      "elapsed_supervised_seconds": 2.235629081726074,
+      "minimum_available_bytes": 123374538752,
+      "max_psi_full_avg10": 0.04,
+      "max_observed_cgroup_peak_bytes": 6025216,
+      "peak_worker_rss_bytes_observed": 11595776,
+      "rss_scope": "registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss",
+      "worker_cgroup_max_bytes": [
+        107374182400
+      ],
+      "worker_cgroup_high_bytes": [
+        107374182400
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": -12288,
+      "swapout_bytes": 0,
+      "warnings": [
+        "GLOBAL_SWAP_WARNING"
+      ],
+      "max_contiguous_psi_above25_seconds": 0.0,
+      "start_admission_available_bytes": 123520389120,
+      "start_observation_seconds": 10.25426084594801,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "v001-e2-probe-amend4-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "cleanup_errors": [],
+      "started_epoch": 1793722481.412076,
+      "finished_epoch": 1793723074.8599782,
+      "elapsed_supervised_seconds": 593.4479022026062,
+      "minimum_available_bytes": 31606784000,
+      "max_psi_full_avg10": 32.14,
+      "max_observed_cgroup_peak_bytes": 24236527616,
+      "peak_worker_rss_bytes_observed": 21059670016,
+      "rss_scope": "registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss",
+      "worker_cgroup_max_bytes": [
+        107374182400
+      ],
+      "worker_cgroup_high_bytes": [
+        107374182400
+      ],
+      "worker_max_high_events": 0,
+      "worker_oom_events": 0,
+      "worker_oom_kill_events": 0,
+      "global_oom_kill_delta": 0,
+      "max_worker_swap_bytes": 0,
+      "global_swap_growth_bytes": 50503680,
+      "swapout_bytes": 58535936,
+      "warnings": [
+        "GLOBAL_SWAP_WARNING",
+        "PRESSURE_DURATION_OBSERVING"
+      ],
+      "max_contiguous_psi_above25_seconds": 8.574730674969032,
+      "start_admission_available_bytes": 123630235648,
+      "start_observation_seconds": 10.273848167969845,
+      "final_gpu_process_count": 0,
+      "final_main_pid_zero": true,
+      "final_memory_decision": "CLEAR"
     }
   ],
   "sam_checkpoint_sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
   "previous_status": "SEGMENT_NOT_ESTABLISHED under original reflection-unaware definition",
-  "updated_at": "2026-11-03T16:07:07.328044+00:00",
+  "updated_at": "2026-11-03T16:29:16.097227+00:00",
   "historical_amendment2_snapshot": {
     "recorded_at": "2026-11-03T06:37:01.350438+00:00",
     "status": "ANCHOR_READY_ENGINES_BLOCKED",
@@ -1846,5 +2441,5 @@
       "note": "Cleaned-up own process absence is distinct from the preserved E2 guard stop and earlier mechanical failures."
     }
   },
-  "current_work_status": "E1 review delivery and E2 amendment4 preparation ongoing; no final shutdown assertion"
+  "current_work_status": "E1 outputs complete; E2seed1 model generation running. No final shutdown assertion."
 }
