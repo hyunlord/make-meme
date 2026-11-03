@@ -32,16 +32,19 @@ class Config:
     comfy_root: Path
     revision: str
     mode: Literal['video', 'image']
+    coordinate_size: tuple[int, int] = SIZE
 
     @classmethod
     def read(cls, path: Path) -> Config:
         """Parse the private configuration before any model imports."""
         raw = json.loads(path.read_text())
         cfg = cls(*(Path(raw[key]) for key in ('frames', 'output', 'checkpoint', 'comfy_root')),
-                  revision=raw['revision'], mode=raw['mode'])
+                  revision=raw['revision'], mode=raw['mode'],
+                  coordinate_size=tuple(raw.get('coordinate_size', SIZE)))
         assert all(p.is_absolute() for p in (cfg.frames, cfg.output, cfg.checkpoint, cfg.comfy_root))
         assert cfg.frames.is_dir() and cfg.checkpoint.is_file() and cfg.comfy_root.is_dir()
         assert cfg.mode in ('video', 'image') and cfg.revision
+        assert cfg.coordinate_size in (SIZE, (1024, 576), (832, 480))
         return cfg
 
 
@@ -93,11 +96,11 @@ def main() -> None:
             assert_never(unreachable)
     for path in paths:
         with Image.open(path) as image:
-            assert image.size == SIZE
+            assert image.size == cfg.coordinate_size
             image.verify()
     if '--cpu-only' in sys.argv:
         print(json.dumps({'status': 'CPU_ENTRY_PASS', 'images_verified': len(paths),
-                          'torch_imported': 'torch' in sys.modules, 'coordinate_size': SIZE}))
+                          'torch_imported': 'torch' in sys.modules, 'coordinate_size': cfg.coordinate_size}))
         return
     started = time.time()
     cfg.output.mkdir(parents=True, exist_ok=True)
@@ -119,7 +122,7 @@ def main() -> None:
     model, clip, _, _ = comfy.sd.load_checkpoint_guess_config(str(cfg.checkpoint), output_vae=False)
     summary = {'status': 'RUNNING', 'implementation': 'existing ComfyUI SAM3.1',
                'revision': cfg.revision, 'mode': cfg.mode, 'query': 'dog', 'threshold': 0.5,
-               'max_objects': 4, 'detect_interval': 1, 'coordinate_size': list(SIZE),
+               'max_objects': 4, 'detect_interval': 1, 'coordinate_size': list(cfg.coordinate_size),
                'casting_assignment': 'UNASSIGNED_TRACK_INDICES', 'frames': [],
                'input_sha256': [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths]}
     try:
@@ -153,12 +156,12 @@ def main() -> None:
             for frame_index in range(len(paths)):
                 if packed is not None:
                     raw_masks = unpack_masks(packed[frame_index:frame_index+1]).float()
-                    frame_masks = functional.interpolate(raw_masks, size=(SIZE[1], SIZE[0]),
+                    frame_masks = functional.interpolate(raw_masks, size=(cfg.coordinate_size[1], cfg.coordinate_size[0]),
                                                          mode='bilinear', align_corners=False)[0] > 0.5
                 elif detected is not None:
                     frame_masks = detected > 0.5
                 else:
-                    frame_masks = torch.zeros((0, SIZE[1], SIZE[0]), dtype=torch.bool)
+                    frame_masks = torch.zeros((0, cfg.coordinate_size[1], cfg.coordinate_size[0]), dtype=torch.bool)
                 objects = []
                 for index, mask in enumerate(frame_masks):
                     array = mask.cpu().numpy().astype(bool)
