@@ -1,0 +1,52 @@
+{
+  "amendment": 3,
+  "recorded_at": "2026-11-03T14:55:39.041156+00:00",
+  "reason": "User completed Gemma terms and explicitly raised only E2 worker cap",
+  "gemma_access_recheck": {
+    "checked_at": "2026-11-03T14:54:42.251055+00:00",
+    "repo": "google/gemma-3-12b-it",
+    "file": "model-00001-of-00005.safetensors",
+    "attempts": 1,
+    "status": "ACCESS_GRANTED",
+    "bytes": 4979902192,
+    "revision": "96b6f1eccf38110c56df3a15bffe176da04bfd80",
+    "mem_available_bytes": 122199515136,
+    "e2_start_memory_pass": true
+  },
+  "e1_resolution": [
+    1024,
+    576
+  ],
+  "e2_resolution": [
+    832,
+    480
+  ],
+  "e2_worker_max_gib": 100,
+  "e2_start_available_min_gib": 112,
+  "runtime_stop_policy": "V001 section7 unchanged",
+  "sequential_expert_loading": {
+    "available_in_pinned_official_code": false,
+    "evidence": [
+      "bernini/models/renderer.py:135",
+      "bernini/models/wan_diffusion.py:140"
+    ],
+    "note": "Both experts loaded in constructor; skip_transformer flags omit experts, not sequential loading. No new loader implementation."
+  },
+  "execution_order": [
+    "E1_probe",
+    "E1_seed20261103",
+    "E1_seed20261104",
+    "E2_probe",
+    "E2_seed20261103",
+    "E2_seed20261104",
+    "metrics_viewer_delivery"
+  ],
+  "existing_inputs_models_seeds_budgets_preserved": true,
+  "time_budget_status": "USER_EXTENDED_DEADLINE",
+  "prior_deadline_utc": "2026-11-03T14:10:00Z",
+  "no_download_or_gpu_started_under_amendment3": true,
+  "deadline_utc": "2026-11-03T23:00:00Z",
+  "record_delivery_from_utc": "2026-11-03T22:30:00Z",
+  "time_authorization_recorded_at": "2026-11-03T14:56:55.083104+00:00",
+  "unattended_policy": "Apply predefined rules; unresolved issue blocks that engine only; no new questions; no new generation projected to overrun22:30UTC; E2 may run one seed per explicit authorization"
+}
