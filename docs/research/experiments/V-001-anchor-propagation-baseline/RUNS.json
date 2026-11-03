@@ -1,13 +1,14 @@
 {
-  "recorded_at": "2026-11-03T06:24:35.781695+00:00",
-  "status": "PREREQUISITES_RESOLVED_PREPARING",
+  "recorded_at": "2026-11-03T06:37:01.350438+00:00",
+  "status": "SEGMENT_NOT_ESTABLISHED",
   "preregistration_commit": "8ad08a9ad9c0ddd9a511a37c1a6dffdb29e37a7a",
   "counts": {
     "weight_downloads": 0,
     "installs": 0,
-    "sam": 0,
+    "sam": 2,
+    "sam_fallback_authorized": true,
     "imagegen": 0,
-    "model_loads": 0,
+    "model_loads": 2,
     "timing_probes": 0,
     "video_generations": 0,
     "training": 0
@@ -21,14 +22,75 @@
       "resolution": [
         1024,
         576
-      ]
+      ],
+      "reason": "SEGMENT_NOT_ESTABLISHED before anchor or engine installation"
     },
     "E2": {
       "status": "NOT_RUN",
-      "reason": "Awaiting ordered SAM/anchor prerequisite execution",
+      "reason": "SEGMENT_NOT_ESTABLISHED before anchor or engine installation",
       "code_commit": "e6c2cf11843470b08491745947abcba9c3c6b079",
       "outputs": 0
     }
   },
-  "quality": "HUMAN_REVIEW_PENDING"
+  "quality": "HUMAN_REVIEW_PENDING",
+  "execution_commit": "185e769",
+  "geometry_amendment_commit": "32e2371",
+  "stages": [
+    {
+      "stage": "sam-primary-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "elapsed_supervised_seconds": 2.218825340270996,
+      "worker_peak_memory_bytes": 8343552,
+      "sam_elapsed_seconds": null,
+      "cuda_peak_allocated_bytes": null,
+      "final_gpu_process_count": 0,
+      "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "sam-primary-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "elapsed_supervised_seconds": 48.91566753387451,
+      "worker_peak_memory_bytes": 6182961152,
+      "sam_elapsed_seconds": 46.773287773132324,
+      "cuda_peak_allocated_bytes": 3043695616,
+      "final_gpu_process_count": 0,
+      "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "sam-fallback-cpu",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "elapsed_supervised_seconds": 2.2483439445495605,
+      "worker_peak_memory_bytes": 8351744,
+      "sam_elapsed_seconds": null,
+      "cuda_peak_allocated_bytes": null,
+      "final_gpu_process_count": 0,
+      "final_memory_decision": "CLEAR"
+    },
+    {
+      "stage": "sam-fallback-heavy",
+      "status": "COMPLETE",
+      "guard_reason": "COMPLETE",
+      "normal_exit_recorded": true,
+      "elapsed_supervised_seconds": 44.55468511581421,
+      "worker_peak_memory_bytes": 4913725440,
+      "sam_elapsed_seconds": 42.226502656936646,
+      "cuda_peak_allocated_bytes": 3195012608,
+      "final_gpu_process_count": 0,
+      "final_memory_decision": "CLEAR"
+    }
+  ],
+  "sam_checkpoint_sha256": "9ba99c92703c2e8b4f47de2d34a539bb8e18923049e238b780d70dbe6368eb03",
+  "shutdown": {
+    "own_worker_units_remaining": 0,
+    "gpu_compute_processes_at_final_check": 0,
+    "external_processes_terminated": 0,
+    "common_guard_modified": false,
+    "follow_up_scheduled": false
+  }
 }

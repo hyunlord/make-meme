@@ -1,0 +1,67 @@
+{
+  "pass": true,
+  "initial": [
+    {
+      "ready": 4,
+      "width": 1280,
+      "height": 720,
+      "duration": 3.041667
+    },
+    {
+      "ready": 4,
+      "width": 1280,
+      "height": 720,
+      "duration": 3.041667
+    },
+    {
+      "ready": 4,
+      "width": 1280,
+      "height": 720,
+      "duration": 3.041667
+    },
+    {
+      "ready": 4,
+      "width": 1280,
+      "height": 720,
+      "duration": 3.041667
+    }
+  ],
+  "stepped": {
+    "position": "1 / 72",
+    "times": [
+      0.041666,
+      0.041666,
+      0.041666,
+      0.041666
+    ],
+    "rates": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  "played": [
+    {
+      "time": 0.3878,
+      "paused": true
+    },
+    {
+      "time": 0.3874,
+      "paused": true
+    },
+    {
+      "time": 0.3874,
+      "paused": true
+    },
+    {
+      "time": 0.3868,
+      "paused": true
+    }
+  ],
+  "switched": {
+    "src": "fallback.mp4",
+    "position": "0 / 72"
+  },
+  "temporal_quality": "UNVERIFIED"
+}

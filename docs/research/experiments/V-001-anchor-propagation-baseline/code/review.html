@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="V-001 원본 구간 SAM 검출 게이트와 배역 대응 검토 자료. 생성 출력은 없습니다.">
+<title>V-001 구간 검토 · 생성 미실행</title>
+<style>
+:root{--paper:#fff;--ink:#171717;--muted:#595959;--line:#bdbdbd;--surface:#f4f4f4;--focus:#005fcc;--gap:12px;--space:24px;--body:16px;--small:14px;--heading:24px}
+*{box-sizing:border-box}body{margin:var(--space);font:var(--body)/1.55 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);word-break:keep-all}h1{font-size:var(--heading);margin:0 0 var(--gap)}h2{font-size:20px;margin:var(--space) 0 var(--gap)}p{margin:var(--gap) 0}a{color:var(--focus)}button,select,input{font:inherit}button,select{padding:8px 12px;background:var(--paper);color:var(--ink);border:1px solid var(--line)}button{cursor:pointer}button:hover{background:var(--surface)}:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.controls{display:flex;gap:var(--gap);flex-wrap:wrap;align-items:center;margin:var(--space) 0}.seek{display:flex;gap:var(--gap);align-items:center;flex:1;min-width:260px}.seek input{width:100%}.strip{display:grid;grid-template-columns:repeat(7,minmax(200px,1fr));gap:var(--gap);overflow-x:auto;padding-bottom:var(--gap)}figure{margin:0;min-width:0}figcaption{font-weight:600;margin-bottom:8px}video,.missing{display:block;width:100%;aspect-ratio:16/9;background:var(--surface);border:1px solid var(--line)}video{object-fit:contain}.missing{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--gap);gap:8px}.missing strong{font-size:var(--small)}.missing span,.note{font-size:var(--small);color:var(--muted)}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}.evidence{display:block;width:100%;height:auto;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;margin:var(--gap) 0}th,td{padding:8px;text-align:left;border:1px solid var(--line)}.table-scroll{overflow:auto}.status{padding:var(--gap);border-left:4px solid var(--ink);background:var(--surface)}#message{min-height:1.6em}footer{margin-top:var(--space);padding-top:var(--gap);border-top:1px solid var(--line)}@media(max-width:600px){body{margin:12px}.pair{grid-template-columns:1fr}.seek{flex-basis:100%}h1{font-size:20px}}
+</style>
+</head>
+<body>
+<main>
+<h1>V-001 · 원본 구간 검토</h1>
+<p class="status"><strong>SEGMENT_NOT_ESTABLISHED · 생성 영상 0/4</strong><br>기본·대체 구간 모두 사전 검출 기준을 충족하지 못해 imagegen과 영상 생성은 실행하지 않았습니다. 이는 전파 엔진의 품질 실패 판정이 아닙니다. 품질: <strong>HUMAN_REVIEW_PENDING</strong>.</p>
+<div class="controls" aria-label="전체 영상 동기 제어">
+<label>주 비교 구간 <select id="segment"><option value="primary">기본 [96,169)</option><option value="fallback">대체 [240,313)</option></select></label>
+<button id="play" type="button">전체 재생</button><button id="pause" type="button">전체 일시정지</button>
+<label>속도 <select id="speed"><option value="1">1배속</option><option value="0.5">0.5배속</option></select></label>
+<button id="previous" type="button" aria-label="이전 프레임">−1 프레임</button><button id="next" type="button" aria-label="다음 프레임">+1 프레임</button>
+<label class="seek">프레임 <input id="frame" type="range" min="0" max="72" step="1" value="0"><output id="position">0 / 72</output></label>
+</div>
+<p id="message" role="status" aria-live="polite">원본 프레임 96 · 24fps · 모든 실제 영상은 같은 상대 프레임으로 이동합니다.</p>
+<div class="strip" aria-label="원본·미실행 출력·Kling 비교">
+<figure><figcaption id="source-title">원본 · 기본 구간</figcaption><video id="source" src="sourceprimary.mp4" muted playsinline preload="metadata" aria-label="선택 원본 구간"></video></figure>
+<figure><figcaption>앵커</figcaption><div class="missing"><strong>NOT_RUN</strong><span>imagegen 0회<br>이미지 없음</span></div></figure>
+<figure><figcaption>E1 · seed 20261103</figcaption><div class="missing"><strong>NOT_RUN</strong><span>선행 구간 게이트 미충족</span></div></figure>
+<figure><figcaption>E1 · seed 20261104</figcaption><div class="missing"><strong>NOT_RUN</strong><span>선행 구간 게이트 미충족</span></div></figure>
+<figure><figcaption>E2 · seed 20261103</figcaption><div class="missing"><strong>NOT_RUN</strong><span>선행 구간 게이트 미충족</span></div></figure>
+<figure><figcaption>E2 · seed 20261104</figcaption><div class="missing"><strong>NOT_RUN</strong><span>선행 구간 게이트 미충족</span></div></figure>
+<figure><figcaption>Kling · 기존 참고 결과</figcaption><video id="kling" src="kling-primary.mp4" muted playsinline preload="metadata" aria-label="선택 구간의 기존 Kling 결과"></video></figure>
+</div>
+<p class="note">가로로 스크롤하면 모든 열을 볼 수 있습니다. 빈 출력 칸은 실제 미실행 상태입니다. Kling은 배역 대응과 참고 비교에만 사용했으며 이번 생성물이 아닙니다.</p>
+<h2>구간 게이트 측정</h2>
+<div class="table-scroll"><table><thead><tr><th scope="col">구간</th><th scope="col">기준 충족 프레임</th><th scope="col">사전 기준</th><th scope="col">관측</th></tr></thead><tbody><tr><th scope="row">기본 [96,169)</th><td>21 / 73</td><td>66 / 73 이상</td><td>발·얼굴 클로즈업 포함</td></tr><tr><th scope="row">대체 [240,313)</th><td>0 / 73</td><td>66 / 73 이상</td><td>73프레임 모두 4트랙; 첫 프레임 바닥 반사 위치도 분할</td></tr></tbody></table></div>
+<p>기준은 프레임마다 개체 정확히 2개, 각 마스크 면적이 화면의 0.5% 이상입니다. 트랙을 임의로 제외하거나 검출 기준을 변경하지 않았습니다. 출력의 동작 추종·뒤바뀜·Lab 체형·깜빡임·생성 비용은 <strong>NOT_RUN</strong>입니다.</p>
+<h2>대체 구간과 기존 Kling 결과</h2>
+<div class="pair"><figure><figcaption>원본 [240,313)</figcaption><video src="fallback.mp4" muted playsinline preload="metadata" aria-label="대체 원본 구간"></video></figure><figure><figcaption>Kling [240,313) · 기존 참고</figcaption><video src="kling-fallback.mp4" muted playsinline preload="metadata" aria-label="대체 구간 기존 Kling 결과"></video></figure></div>
+<p class="note">상단 제어는 이 두 영상도 같은 상대 프레임으로 제어합니다. 선택한 주 비교 구간과 절대 원본 시점은 다를 수 있습니다.</p>
+<h2>배역 근거 · 원본 / Kling frame 240</h2>
+<p><strong>오른쪽 앞 갈색 개 → Lab · 왼쪽 뒤 회색 개 → IG.</strong> 같은 시점의 위치·자세·발·꼬리 대응으로 확정했습니다.</p>
+<img class="evidence" src="casting-f240.png" width="2560" height="720" alt="왼쪽 원본240프레임과 오른쪽 Kling240프레임. 원본 오른쪽 앞 갈색 개가 Kling의 검은 Lab과 대응합니다.">
+<h2>기본 구간 확인 시트</h2><img class="evidence" src="primary-sheet.jpg" width="1280" height="795" loading="lazy" alt="기본 구간의 발·얼굴 클로즈업 및 두 마리 장면, 각 프레임 SAM 검출 수">
+<h2>대체 구간 마스크 확인 시트</h2><img class="evidence" src="fallback-mask-sheet.jpg" loading="lazy" alt="대체 구간의 SAM 개체 마스크와 바닥 반사 분할을 확인하는 시트">
+<footer><a href="RESULTS.md">결과 기록</a> · <a href="HUMAN_REVIEW.md">사용자 검토 양식</a><p class="note">이 페이지의 재생 가능 여부와 연속 영상 품질 판정은 별개입니다. 자동 측정은 사용자 품질 평가를 대신하지 않습니다.</p></footer>
+</main>
+<script>
+'use strict';
+const videos = [...document.querySelectorAll('video')];
+const source = document.querySelector('#source');
+const kling = document.querySelector('#kling');
+const slider = document.querySelector('#frame');
+const position = document.querySelector('#position');
+const segment = document.querySelector('#segment');
+const speed = document.querySelector('#speed');
+const message = document.querySelector('#message');
+const fps = 24;
+let playing = false;
+let requestedFrame = 0;
+function reportFrame(frame) {
+  requestedFrame = Math.max(0, Math.min(72, frame));
+  slider.value = String(requestedFrame);
+  position.value = `${requestedFrame} / 72`;
+  const start = segment.value === 'primary' ? 96 : 240;
+  message.textContent = `원본 프레임 ${start + requestedFrame} · 상대 ${requestedFrame}/72 · 24fps`;
+}
+function pauseAll() { playing = false; videos.forEach(video => video.pause()); }
+function seek(frame) {
+  pauseAll(); reportFrame(frame);
+  videos.forEach(video => { if (video.readyState >= 1) video.currentTime = requestedFrame / fps; });
+}
+async function playAll() {
+  if (requestedFrame >= 72) seek(0);
+  playing = true;
+  const results = await Promise.allSettled(videos.map(video => { video.playbackRate = Number(speed.value); return video.play(); }));
+  if (results.some(result => result.status === 'rejected')) {
+    pauseAll(); message.textContent = '재생하지 못한 파일이 있습니다. ZIP을 완전히 압축 해제하고 영상 파일이 index.html과 같은 폴더에 있는지 확인해 주세요.';
+  }
+}
+document.querySelector('#play').addEventListener('click', playAll);
+document.querySelector('#pause').addEventListener('click', pauseAll);
+document.querySelector('#previous').addEventListener('click', () => seek(requestedFrame - 1));
+document.querySelector('#next').addEventListener('click', () => seek(requestedFrame + 1));
+slider.addEventListener('input', () => seek(Number(slider.value)));
+speed.addEventListener('change', () => videos.forEach(video => { video.playbackRate = Number(speed.value); }));
+segment.addEventListener('change', () => {
+  pauseAll(); reportFrame(0);
+  const primary = segment.value === 'primary';
+  source.src = primary ? 'sourceprimary.mp4' : 'fallback.mp4';
+  kling.src = primary ? 'kling-primary.mp4' : 'kling-fallback.mp4';
+  document.querySelector('#source-title').textContent = primary ? '원본 · 기본 구간' : '원본 · 대체 구간';
+  videos.forEach(video => { if (video.readyState >= 1) video.currentTime = 0; });
+});
+videos.forEach(video => {
+  video.addEventListener('loadedmetadata', () => { video.currentTime = requestedFrame / fps; });
+  video.addEventListener('error', () => { pauseAll(); message.textContent = `미디어를 열 수 없습니다: ${video.getAttribute('src')}. 압축 해제된 파일을 확인해 주세요.`; });
+});
+function update() {
+  if (playing) {
+    const frame = Math.min(72, Math.floor(source.currentTime * fps));
+    reportFrame(frame);
+    videos.forEach(video => { if (video !== source && Math.abs(video.currentTime - source.currentTime) > 1 / fps) video.currentTime = source.currentTime; });
+    if (source.ended || source.currentTime >= 73 / fps) { pauseAll(); reportFrame(72); }
+  }
+  requestAnimationFrame(update);
+}
+requestAnimationFrame(update);
+</script>
+</body>
+</html>

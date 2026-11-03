@@ -1,5 +1,5 @@
 {
-  "status": "PREPARATORY_PARTIAL",
+  "status": "ACTUALLY_USED_SAM_LICENSES_RECORDED",
   "checked": [
     {
       "component": "LTX-2.3-code-and-weights",
@@ -16,12 +16,32 @@
       "retrieved_at": "2026-11-03T06:24:35.781695+00:00",
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
       "used_for_inference": false
+    },
+    {
+      "component": "existing SAM3.1 weights",
+      "license": "SAM License",
+      "source": "https://raw.githubusercontent.com/facebookresearch/sam3/main/LICENSE",
+      "sha256": "4dea99bfaa016e21bc860d73f344236bd1e5c4977d1a9a8fd32f822b500ae1be",
+      "retrieved_at": "2026-11-03T06:32:29.436693+00:00",
+      "used_for_inference": true
+    },
+    {
+      "component": "existing ComfyUI integration",
+      "revision": "5cc4b870094c89090db54bd8d12649dcaf89f2ba",
+      "license": "GPL-3.0",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "used_for_inference": true
     }
   ],
   "not_yet_retrieved": [
-    "Gemma terms",
-    "Video Depth Anything weights license",
-    "SAM3.1 weights license"
+    {
+      "component": "Gemma terms",
+      "reason": "engine not installed or run after source gate failure"
+    },
+    {
+      "component": "Video Depth Anything weights license",
+      "reason": "engine not installed or run after source gate failure"
+    }
   ],
   "excluded": [
     {

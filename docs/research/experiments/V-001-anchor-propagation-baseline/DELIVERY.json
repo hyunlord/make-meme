@@ -1,0 +1,20 @@
+{
+  "filename": "V001-review-20261103.zip",
+  "bytes": 4000510,
+  "sha256": "0cf7b208681f3a8722f05606b75d6ad3fb1f22e248bfed7cff38119f57882e71",
+  "payload_files": 18,
+  "zip_total_files": 19,
+  "mac_crc": "PASS",
+  "mac_actual_extraction": "PASS",
+  "mac_payload_hash": "PASS",
+  "spark_transfer": "PASS",
+  "spark_crc": "PASS",
+  "spark_actual_extraction": "PASS",
+  "spark_payload_hash": "PASS",
+  "cross_host_sha256": "PASS",
+  "mac_location_role": "Downloads",
+  "spark_location_role": "private V001 experiment root",
+  "contents": "source/Kling excerpts, casting evidence, SAM sheets, records; generated outputs absent",
+  "generated_output_count": 0,
+  "verified_at": "2026-11-03T06:39:35.959809+00:00"
+}

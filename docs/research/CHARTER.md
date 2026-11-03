@@ -87,3 +87,5 @@ B-022는 실제 완료됐고 품질 개선은 입증되지 않았다. B-021 FAIL
 ## V 트랙 착수 (2026-11-03)
 
 V-001은 imagegen 앵커와 조밀한 원본 조건의 오픈 영상 전파를 비교하는 결과물 트랙이다. A 동결·C 학습 실습용 보류를 유지한다. 현재 인수·사전 계획 단계이며 배역 실제 개체 대응 확인을 기다린다. 생성0, 품질 HUMAN_REVIEW_PENDING. [계획](experiments/V-001-anchor-propagation-baseline/PLAN.md).
+
+V-001 종료 업데이트: 배역은Kling대응으로확정했으나 두사전구간SAM검출게이트미달로 SEGMENT_NOT_ESTABLISHED. A동결·C보류와V결과물목표는유지하며후속실행은없다.

@@ -1,0 +1,9 @@
+{
+  "status": "NOT_RUN",
+  "reason": "SEGMENT_NOT_ESTABLISHED",
+  "calls": 0,
+  "candidates": 0,
+  "model_identifier": "UNKNOWN",
+  "billing": "UNKNOWN",
+  "gates": null
+}

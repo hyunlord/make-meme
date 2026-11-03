@@ -839,3 +839,8 @@ C-013 I50/S와 C-012 seed2 A의 기존 출력에 양끝 앵커 기반 plate와 �
 ## V 트랙 착수 (2026-11-03)
 
 V-001은 imagegen 앵커와 조밀한 원본 조건의 오픈 영상 전파를 비교하는 결과물 트랙이다. A 동결·C 학습 실습용 보류를 유지한다. 현재 인수·사전 계획 단계이며 배역 실제 개체 대응 확인을 기다린다. 생성0, 품질 HUMAN_REVIEW_PENDING. [계획](experiments/V-001-anchor-propagation-baseline/PLAN.md).
+
+
+## V-001 구간 검증 중단 (2026-11-03)
+
+Kling 대응으로 배역 확정 및E1 1024×576 사전개정 후 SAM기본21/73·대체0/73으로66/73 기준미달. 대체는바닥반사를포함해전73프레임4트랙. SEGMENT_NOT_ESTABLISHED,앵커/영상0,생성엔진품질미평가. V전용가드4단계정상종료. 반사선택규약만다음검토후보이며자동후속없음. [결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).

@@ -66,3 +66,7 @@ E1은1024×576 크롭 없는16:9 축소로 개정해 공식64배수 제약을 �
 - source-frame-240.png: `2bb4d117f83090898be12019bbf4f6e510383f5865400cb74e99383908463d08`
 - kling-frame-240.png: `7a3dc43b8df4b01fd0a3aecb3da026245a6edd6e85d8ad81ef7a7c81c20d749a`
 - casting-source-left-kling-right-f240.png: `86e5e6edf9777caa1e86462cea9d5aaa2763cc36ddacb77733ff39ba6c5537f9`
+
+## 실행 종료
+
+사전규칙대로 기본/대체SAM각1회 후 두구간모두미달하여 SEGMENT_NOT_ESTABLISHED. 앵커·엔진단계는제거하지않고 NOT_RUN으로보존한다. 검토자료전달및자체worker종료확인완료. 상세실행량/전송근거는RUNS·DELIVERY,현재결론은RESULTS를따른다.
