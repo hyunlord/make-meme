@@ -40,7 +40,7 @@ git apply "$V_CODE/e2_runtime.patch"
 설치 중 torch 미발견→공유Comfy경로추가,시스템OpenSSL충돌→격리venv system-site-packages=false로해결했다. 위 경로변수는 재현 문서용 역할명이며 실제절대경로·명령·로그는private에보존한다. 가중치download는고정revision을사용했지만memorycap확인후자체downloader를종료해미완료다. 생성 명령을 실행한 것처럼 기록하지 않는다. E2probe와모든sampler는NOT_RUN이다.
 
 
-## 개정3 실제 실행과 현재 제한
+## 개정3 실제 실행과 당시 제한
 
 사전 개정 기록은 `abf48fd`다. 기존 Gemma 403과 개정2 E2 다운로드 중단은 과거 기록으로 보존한다. 개정3에서는 같은 `google/gemma-3-12b-it`의 기존 인증 접근을 다시 확인하여 성공했고, 고정 revision의 E1 가중치를 내려받았다. E2에만 worker 100GiB 예외를 적용하며 E1은 기존 64GiB다. 정확한 패키지·revision은 `RUNTIME_E1.md`, `RUNTIME_DIFF.md`, `LICENSES.json`을 참조한다.
 
@@ -63,3 +63,14 @@ Depth 모델은 1회 호출(내부 forward 4회), 44.7085초였다. raw NPZ와 �
 E1 probe는 조건 VAE에서 약 18.9813초 뒤 실패했다. reference tensor `[1,1024,20,9,16]`의 높이 9를 stride 2로 나눌 수 없었다. 공식 half-resolution stage와 LoRA의 `reference_downscale_factor=2`가 결합해 최종 공간 크기에 **128 배수**가 필요하지만 사전 CPU 검사는 64 배수까지만 확인하여 이를 놓쳤다. 1024×576에서 내부 reference는 256×144가 된다. Denoiser 호출 0, 완료 scheduler step 0, 생성 영상 0이므로 시간 probe 완료나 생성 비용으로 계산하지 않는다. 해상도·reference 배율·모델 연산을 바꾸지 않고 고칠 수 없어 `ENGINE_BLOCKED_ENV`로 남겼다.
 
 E2는 고정 코드의 renderer-only RV2V 경로를 준비했다. 원본은 case의 video 역할, 공통 앵커는 reference images 역할로 전달하고 prompt enhancer를 비활성화한다. 공식 `BerniniRendererPipeline`이 원본과 참조를 각각 VAE encode해 `multi_video_vae_latents`와 `multi_image_vae_latents`를 sampler에 전달하는 것을 정적으로 확인했다. 이후 E2 snapshot 126,200,552,703 bytes와 index 참조 shard 27개를 모두 확보해 기존 guarded heavy 경로에서 적재를 시작했다. 두 번째 expert 5/12 지점, 약 75.6초에 `SYSTEM_PSI_FULL_PRESSURE`로 중단됐고 denoising은 0회다. 정확한 압박 구간은 guard 원본 로그와 RUNS 감사 기록을 따른다. 모델 적재 시작을 sampler 실행이나 영상 생성 성공으로 간주하지 않으며 동일 단계 재시도는 하지 않았다.
+
+
+## 개정4 실제 입력 준비와 E1 생성
+
+사용자 추가 승인 후 `e1_prepare.py PRIVATE_CONFIG.json [--cpu-only]`를 기존 CPU guard 경로에서 실행했다. Config 역할은 `source_frames`, `anchor`, `depths`, `engine_root`, `output`, `ffmpeg`, `ffprobe`이며 private 절대경로를 공개하지 않는다. 신규 출력 디렉터리에 입력 hash·변환 출력 hash manifest를 보존했다. Source/anchor는 1280×720→1152×648→위아래 4px crop, 보존 raw depth는 1024×576→1152×648→동일 crop이다. 추가 VDA 호출·모델 적재 없이 CPU에서 depth를 변환하고 공식 global min/max 정규화와 grayscale libx264 CRF18로 포장했다.
+
+고정 소스와 실제 가중치 헤더에서 확인한 공간 조건은 `E1_GEOMETRY_AMEND4.json`에 있다. `e1_entry.py`의 승인 geometry는 이제 1152×640이며, 공식 two-stage÷2·reference÷2·VAE stride32의 결합 조건(최종128배수)과 8n+1을 검사한다. 과거 1024×576 실패 기록과 freeze를 소급 변경하지 않았다.
+
+기존 guarded 실행 경로로 seed 20261103, 20261104를 순서대로 실행했다. 두 결과 모두 73프레임·24fps·1152×640과 11 scheduler step/denoiser call을 완료했으며 실제 시간은 각각 135.8008708초, 83.5878347초다. 최종 생성 결과와 상세 receipt는 RUNS를 따른다. 이 시간의 5배인 약6.97–11.32분은 15초를 5개 구간으로 만들 때의 단순 외삽이며, 앵커·depth·SAM·구간 연결 비용과 캐시 차이를 제외한다. 15초 직접 실행이나 품질 검증으로 기록하지 않는다.
+
+E2는 개정4 변환 준비 중이며 이번 문서 갱신에서는 생성 완료를 주장하지 않는다. E1 출력 SAM 측정도 대기 중이다. 검토 페이지는 실제 두 E1 영상을 보여 주며, 사용자 판정은 HUMAN_REVIEW_PENDING이다.
