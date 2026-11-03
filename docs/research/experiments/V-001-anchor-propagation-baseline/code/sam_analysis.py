@@ -44,7 +44,7 @@ class Config:
         assert all(p.is_absolute() for p in (cfg.frames, cfg.output, cfg.checkpoint, cfg.comfy_root))
         assert cfg.frames.is_dir() and cfg.checkpoint.is_file() and cfg.comfy_root.is_dir()
         assert cfg.mode in ('video', 'image') and cfg.revision
-        assert cfg.coordinate_size in (SIZE, (1024, 576), (832, 480))
+        assert cfg.coordinate_size in (SIZE, (1152, 640), (832, 480))
         return cfg
 
 
@@ -53,7 +53,7 @@ class ObjectRow(TypedDict):
     area: int
     area_fraction: float
     center: list[float] | None
-    bbox: list[int] | None
+    bbox: list[float] | None
     present: bool
     meets_area_minimum: bool
 

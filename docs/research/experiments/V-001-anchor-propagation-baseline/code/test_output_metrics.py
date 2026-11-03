@@ -1,15 +1,29 @@
 """CPU fixtures for coordinates, literal reflections and missing measurements."""
+import math
 import numpy as np
 from PIL import Image
 
-from output_metrics import Frame, canonical, match_cast, object_metrics, transition, visible_support
+from output_metrics import Frame, canonical, canonical_object, match_cast, object_metrics, transition, visible_support
 from reflections import classify
 from sam_analysis import describe
 from test_reflections import obj
 
 
 def test_engine_geometry() -> None:
-    assert canonical(Image.new('RGB',(1024,576)), 'E1',mask=False).size == (1280,720)
+    assert canonical(Image.new('RGB',(1152,640)), 'E1',mask=False).size == (1280,720)
+    e1_support = visible_support('E1')
+    assert not e1_support[:5].any() and not e1_support[-5:].any()
+    assert e1_support[5:-5].all()
+    e1mask = Image.new('L',(1152,640));e1mask.putpixel((500,200),255)
+    e1mapped = np.asarray(canonical(e1mask,'E1',mask=True)) > 0
+    row = obj(1,[400,100,600,300])
+    converted = canonical_object(row,e1mapped,'E1')
+    assert converted['center'] is not None and converted['bbox'] is not None
+    assert math.isclose(converted['center'][0],(500+.5)*1280/1152-.5)
+    assert math.isclose(converted['center'][1],(200+4+.5)*720/648-.5)
+    expected_bbox = [400*1280/1152,104*720/648,600*1280/1152,304*720/648]
+    assert all(math.isclose(actual, expected, rel_tol=1e-12, abs_tol=1e-12)
+               for actual, expected in zip(converted['bbox'], expected_bbox, strict=True))
     support = visible_support('E2')
     assert not support[:,0].any() and not support[:,-1].any()
     assert support[:,640].all() and int(support.sum()) < 1280*720

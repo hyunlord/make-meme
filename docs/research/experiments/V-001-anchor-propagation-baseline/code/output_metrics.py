@@ -53,31 +53,65 @@ class FrameMetric(TypedDict):
 
 def native_size(geometry: Geometry) -> tuple[int, int]:
     match geometry:
-        case 'E1': return (1024, 576)
+        case 'E1': return (1152, 640)
         case 'E2': return (832, 480)
         case 'CANONICAL': return (1280, 720)
         case unreachable: assert_never(unreachable)
 
 
 def canonical(image: Image.Image, geometry: Geometry, *, mask: bool) -> Image.Image:
-    """Invert engine spatial preprocessing; E2 cropped borders stay unobserved."""
+    """Invert the approved engine crop; omitted pixels remain unobserved."""
     assert image.size == native_size(geometry)
     resample = Image.Resampling.NEAREST if mask else Image.Resampling.BILINEAR
-    if geometry == 'E2':
-        padded = Image.new(image.mode, (853, 480), 0)
-        padded.paste(image, (10, 0))
-        image = padded
+    match geometry:
+        case 'E1':
+            padded = Image.new(image.mode, (1152, 648), 0)
+            padded.paste(image, (0, 4))
+            image = padded
+        case 'E2':
+            padded = Image.new(image.mode, (853, 480), 0)
+            padded.paste(image, (10, 0))
+            image = padded
+        case 'CANONICAL':
+            pass
+        case unreachable:
+            assert_never(unreachable)
     return image.resize((1280, 720), resample)
 
 
 def visible_support(geometry: Geometry) -> NDArray[np.bool_]:
     """Exclude unobserved crop borders, including RGB resampling edge support."""
     mask = np.asarray(canonical(Image.new('L', native_size(geometry), 255), geometry, mask=True)) > 0
-    if geometry == 'E2':
-        # A bilinear sample needs both neighbouring native pixels to be observed.
-        x = (np.arange(1280)+.5)*853/1280-.5
-        mask &= ((x >= 10) & (x <= 841))[None, :]
+    # A bilinear sample needs both neighbouring native pixels to be observed.
+    match geometry:
+        case 'E1':
+            y = (np.arange(720)+.5)*648/720-.5
+            mask &= ((y >= 4) & (y <= 643))[:, None]
+        case 'E2':
+            x = (np.arange(1280)+.5)*853/1280-.5
+            mask &= ((x >= 10) & (x <= 841))[None, :]
+        case 'CANONICAL':
+            pass
+        case unreachable:
+            assert_never(unreachable)
     return mask
+
+
+def canonical_object(row: ObjectRow, mask: NDArray[np.bool_], geometry: Geometry) -> ObjectRow:
+    """Transform pixel-index centers and bbox edges analytically, without rounding."""
+    match geometry:
+        case 'E1': sx, sy, ox, oy = 1280/1152, 720/648, 0, 4
+        case 'E2': sx, sy, ox, oy = 1280/853, 720/480, 10, 0
+        case 'CANONICAL': sx, sy, ox, oy = 1.0, 1.0, 0, 0
+        case unreachable: assert_never(unreachable)
+    transformed = describe(mask, row['track_index'])
+    if row['center'] is not None:
+        x, y = row['center']
+        transformed['center'] = [(x+ox+.5)*sx-.5, (y+oy+.5)*sy-.5]
+    if row['bbox'] is not None:
+        left, top, right, bottom = row['bbox']
+        transformed['bbox'] = [(left+ox)*sx, (top+oy)*sy, (right+ox)*sx, (bottom+oy)*sy]
+    return transformed
 
 
 def load_frame(folder: Path, image_path: Path, objects: list[ObjectRow], index: int,
@@ -93,7 +127,7 @@ def load_frame(folder: Path, image_path: Path, objects: list[ObjectRow], index: 
         with Image.open(folder/f'{index:03d}-track-{track:02d}.png') as image:
             mask = np.asarray(canonical(image.convert('L'), geometry, mask=True)) > 0
         masks[track] = mask
-        rows.append(describe(mask, track))
+        rows.append(canonical_object(row, mask, geometry))
         union |= mask
     return Frame(rgb, rows, masks, union)
 
@@ -200,8 +234,9 @@ def main() -> None:
     anchor_ratio = json.loads(Path(cfg['anchor_gates']).read_text())['bbox_height_ratio']['Lab']
     median = statistics.median(heights) if heights else None
     report = {'status':'MEASURED' if casting is not None else 'CASTING_INCONCLUSIVE','quality':'HUMAN_REVIEW_PENDING',
-              'geometry':geometry,'coordinate_size':[1280,720],'mask_normalization':'nearest resize to common pixel canvas; E2 pad10left/11right before resize',
-              'rgb_normalization':'bilinear; E2 unobserved and interpolation-edge support excluded','visible_pixels':int(visible.sum()),
+              'geometry':geometry,'coordinate_size':[1280,720],'mask_normalization':'nearest resize; E1 pad4top/4bottom at1152x648; E2 pad10left/11right at853x480',
+              'descriptor_normalization':'analytic pixel-center and bbox-edge inverse crop transform; no rounding',
+              'rgb_normalization':'bilinear; all unobserved crop and interpolation-edge support excluded','visible_pixels':int(visible.sum()),
               'output_fps':fps,'frame_count':len(rows),'casting':casting,'frames':rows,
               'actual_two_fraction':sum(row['actual_count']==2 for row in rows)/len(rows),
               'actual_two_area_fraction':sum(row['actual_two_area_gate'] for row in rows)/len(rows),
