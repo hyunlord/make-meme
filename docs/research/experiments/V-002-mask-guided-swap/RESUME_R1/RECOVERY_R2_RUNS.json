@@ -47,11 +47,16 @@
     "complete_output": false
   },
   "M2_recovery": {
-    "status": "NOT_STARTED",
-    "authorized_attempts": 1
+    "status": "RUNNING",
+    "authorized_attempts": 1,
+    "input_config_delta_from_prior": [
+      "output"
+    ],
+    "last_observed_scheduler_steps": 3,
+    "last_observed_model_fn_calls": 7
   },
   "M3": {
-    "status": "NOT_STARTED"
+    "status": "QUEUED_AFTER_M2_SUCCESS"
   },
   "VACE_14B": {
     "status": "DEFERRED_USER_SELECTION",
@@ -60,5 +65,5 @@
   "LTX_CANNY": {
     "status": "DEFERRED_THIS_RECOVERY"
   },
-  "management": "Spark tmux wraps existing guard and wait helper; no auto retry"
+  "management": "Spark tmux generation chain plus receipt-gated output SAM and CPU measurement batch; all GPU steps sequential; no auto retry"
 }

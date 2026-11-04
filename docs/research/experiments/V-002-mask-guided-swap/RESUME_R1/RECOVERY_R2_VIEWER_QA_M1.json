@@ -1,0 +1,68 @@
+{
+  "media": [
+    {
+      "src": "source.mp4",
+      "readyState": 4,
+      "duration": 3.041667,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "src": "baseline.mp4",
+      "readyState": 4,
+      "duration": 3.041667,
+      "width": 1152,
+      "height": 640
+    },
+    {
+      "src": "M1.mp4",
+      "readyState": 4,
+      "duration": 3.041667,
+      "width": 832,
+      "height": 480
+    }
+  ],
+  "playing": [
+    {
+      "paused": false,
+      "time": 0.6039
+    },
+    {
+      "paused": false,
+      "time": 0.598338
+    },
+    {
+      "paused": false,
+      "time": 0.6038
+    }
+  ],
+  "pause": "PASS",
+  "seek_times": [
+    1,
+    1,
+    1
+  ],
+  "frame_buttons": "PASS",
+  "half_speed": "PASS",
+  "columns": 7,
+  "deferred_labels": 2,
+  "quality_pending": true,
+  "links": [
+    "baseline-sheet.jpg",
+    "M1-sheet.jpg",
+    "HUMAN_REVIEW.md",
+    "RESULTS.md",
+    "review-data.json"
+  ],
+  "missing_links": [
+    "RESULTS.md"
+  ],
+  "page_errors": [],
+  "verdict": "REVISE_FOOTER_LINK_ONLY",
+  "video_quality": "HUMAN_REVIEW_PENDING",
+  "temporal_quality": "UNVERIFIED",
+  "final_template_footer_fix": "PASS_BROWSER_NAVIGATION",
+  "delivered_M1_zip_unchanged": true,
+  "visual_screenshot_inspected": true,
+  "visual_note": "Seven columns, readable Korean labels, measured values and pending quality notice visible at 1600px; no full responsive or independent dual-review performed."
+}
