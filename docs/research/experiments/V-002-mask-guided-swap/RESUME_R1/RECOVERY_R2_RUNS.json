@@ -1,0 +1,64 @@
+{
+  "status": "RECOVERY_RUNNING",
+  "start_utc": "2026-11-04T19:25:55Z",
+  "finish_deadline_utc": "2026-11-05T01:25:55Z",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "M1": {
+    "status": "GENERATED",
+    "mode": "generate",
+    "model_size": "1.3B",
+    "variant": "M1",
+    "seed": 20261103,
+    "frames": 73,
+    "width": 832,
+    "height": 480,
+    "fps": 24,
+    "elapsed_seconds": 976.8770044409903,
+    "model_fn_calls": 100,
+    "scheduler_steps": 50,
+    "first_model_start": 91860.209446515,
+    "first_step_seconds": 15.892224548995728,
+    "peak_rss_bytes": 13114093568,
+    "cuda_peak_allocated_bytes": 20036397568,
+    "cuda_peak_reserved_bytes": 21728591872,
+    "guidance": 5.0,
+    "sigma_shift": 16.0,
+    "scheduler": "DiffSynth FlowMatchScheduler native Euler",
+    "training": 0,
+    "endpoint_overwrite": false,
+    "post_composite": false,
+    "mac_mp4_sha256": "50df935150219f22d59d1f28c42097e7e96791127898df121da607d3c3a9a352",
+    "output_sam": {
+      "status": "COMPLETE",
+      "elapsed_seconds": 45.11371946334839,
+      "normal_exit_recorded": true,
+      "nvrm_events": 0,
+      "concurrent_external_gpu": false,
+      "peak_worker_rss_bytes_observed": 5023559680,
+      "min_available_bytes_observed": 113530765312
+    },
+    "cpu_metrics": "COMPLETE",
+    "diagnostic_sheet": "COMPLETE"
+  },
+  "M2_prior": {
+    "status": "INTERRUPTED_HOST_REBOOT",
+    "model_fn_calls": 45,
+    "scheduler_steps": 22,
+    "complete_output": false
+  },
+  "M2_recovery": {
+    "status": "NOT_STARTED",
+    "authorized_attempts": 1
+  },
+  "M3": {
+    "status": "NOT_STARTED"
+  },
+  "VACE_14B": {
+    "status": "DEFERRED_USER_SELECTION",
+    "automatic_selection": false
+  },
+  "LTX_CANNY": {
+    "status": "DEFERRED_THIS_RECOVERY"
+  },
+  "management": "Spark tmux wraps existing guard and wait helper; no auto retry"
+}

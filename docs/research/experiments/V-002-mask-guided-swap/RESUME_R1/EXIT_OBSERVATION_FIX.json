@@ -37,9 +37,10 @@
     "test_v001.py": "ea50b699b51cc9ff690cded8a67d6c4413a6b15c271f3af326d79a16baeb9871",
     "uma.py": "936cb7b2a937970eb61c86e9cb3e29fcb9b73f12e00e11c4f24e3c1561f2720b"
   },
-  "diff_sha256": "433aa988b58b0e60dc0b8f969c33640daef769c76ac35edcb30d8dba59873b51",
+  "diff_sha256": "7085a6cff6cf0f1542fd340a6c00cd5e45d0b14a6b31e60398c3f23e3d9a21e0",
   "previous_guard_snapshot_verified_unchanged": true,
   "focused_test_path": "code/test_exit_observation.py",
   "reproduce": "Copy code/guard-r1-contract to a new private guard directory; apply EXIT_OBSERVATION_FIX.diff with patch -p1 inside that directory; copy code/test_exit_observation.py there; run python3 -m unittest discover -s <new-private-guard> -p test*.py. Existing frozen stage directories must remain unchanged.",
-  "historical_failure": "UNKNOWN lifecycle ValueError: original log did not retain exception text. RSS race is the strongest diagnosis, not confirmed historical throw; this correction covers that specific invalid RSS field race only."
+  "historical_failure": "UNKNOWN lifecycle ValueError: original log did not retain exception text. RSS race is the strongest diagnosis, not confirmed historical throw; this correction covers that specific invalid RSS field race only.",
+  "diff_format": "unified zero context; apply with git apply --unidiff-zero in a new guard copy"
 }

@@ -1,0 +1,22 @@
+{
+  "filename": "V002-review-20261105-r1-recovery2-M1.zip",
+  "bytes": 2537532,
+  "sha256": "5762d6605a6594195434f53151019d15ce918ed000ba47c58d8065ab67307752",
+  "delivery_stage": "RECOVERY_R2_M1_ONLY",
+  "payload_count": 23,
+  "zip_entry_count": 24,
+  "spark_crc": "PASS",
+  "spark_actual_extraction": "PASS",
+  "spark_payload_hashes": "PASS",
+  "mac_crc": "PASS",
+  "mac_actual_extraction": "PASS",
+  "mac_payload_hashes": "PASS",
+  "host_transfer_equality": "PASS",
+  "M1_original_generated_mp4_sha256": "50df935150219f22d59d1f28c42097e7e96791127898df121da607d3c3a9a352",
+  "M1_original_generated_mp4_delivered": true,
+  "mac_location_role": "Downloads",
+  "browser_qa": "NOT_RUN",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "prior_delivery_preserved": true,
+  "receipt_in_payload": false
+}
