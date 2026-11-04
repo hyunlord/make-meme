@@ -1,1 +1,32 @@
-{"total_wait_seconds":0,"observations":[]}
+{
+  "total_external_busy_wait_seconds": 0,
+  "admission_observation_seconds": 180,
+  "observations": [
+    {
+      "at": "2026-11-04T18:13:49.801660+00:00",
+      "gpu_compute_count": 0,
+      "known_batch_parent_count": 0,
+      "observation_errors": ""
+    },
+    {
+      "at": "2026-11-04T18:14:49.836370+00:00",
+      "gpu_compute_count": 0,
+      "known_batch_parent_count": 0,
+      "observation_errors": ""
+    },
+    {
+      "at": "2026-11-04T18:15:49.876510+00:00",
+      "gpu_compute_count": 0,
+      "known_batch_parent_count": 0,
+      "observation_errors": ""
+    },
+    {
+      "at": "2026-11-04T18:16:49.916417+00:00",
+      "gpu_compute_count": 0,
+      "known_batch_parent_count": 0,
+      "observation_errors": ""
+    }
+  ],
+  "stage": "baseline-s1",
+  "status": "IDLE_WINDOW_CONFIRMED"
+}
