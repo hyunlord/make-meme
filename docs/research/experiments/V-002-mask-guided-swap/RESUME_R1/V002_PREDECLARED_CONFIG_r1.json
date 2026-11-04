@@ -1,0 +1,100 @@
+{
+  "experiment": "V-002-mask-guided-swap",
+  "revision": "r1",
+  "supersedes_run": {"commit": "9f78153", "status": "BLOCKED_EXTERNAL_GPU", "videos": 0, "records_preserved": true},
+  "record_dir": "RESUME_R1/",
+  "parent": {"experiment": "V-001-anchor-propagation-baseline", "branch": "docs/v-research-20261103", "after_commit": "9f78153"},
+  "reuse": {
+    "segment": {"start": 240, "end_exclusive": 313, "frames": 73, "fps": 24},
+    "casting": {"Lab": "track0 (right-front, source brown dog)", "IG": "track1 (left-back, source grey dog)"},
+    "reflections": ["track2", "track3"],
+    "anchor": "V-001 accepted anchor",
+    "prepared_inputs": "first-run masks, M1-M3 inputs, reference crops, canny control; verify against INPUTS_PUBLIC.json / MASK_CHECK.json hashes, rebuild only on mismatch"
+  },
+  "geometry": {"resolution": [832, 480], "rule": "1280x720 -> 853x480 keep aspect, center-crop width to 832"},
+  "mask": {
+    "dilation_px_at_832x480": {"Lab": 24, "IG": 12, "reflections": 12},
+    "white_rgb": [255, 255, 255],
+    "channel_check_required": true
+  },
+  "prompt": "Two dogs dancing on a reflective floor in the same room: on the right, a large black Labrador Retriever with a broad chest and thick legs; on the left, a slender grey Italian Greyhound. Their reflections on the floor match them. Keep the original motion, timing, room and camera.",
+  "seed": 20261103,
+  "vace_1_3b_variants": {
+    "M1": {"inside_mask": "gray 127", "frame0": "source + mask", "refs": "Lab, IG crops"},
+    "M2": {"inside_mask": "source depth (resampled V-001 raw, no new inference)", "frame0": "source + mask", "refs": "Lab, IG crops"},
+    "M3": {"inside_mask": "gray 127", "frame0": "anchor RGB, mask 0", "refs": "Lab, IG crops"}
+  },
+  "selection_for_14b": {
+    "eligibility": "real-dog count == 2 in >= 66/73 frames",
+    "criterion": "highest mean casting-wise silhouette IoU vs source",
+    "tie_margin": 0.02,
+    "tie_winner": "M1",
+    "no_candidate": "NO_14B_CANDIDATE",
+    "human_wait": false
+  },
+  "vace_14b": {
+    "weights": "research/make-meme-c/models/Wan2.1-VACE-14B",
+    "bf16_conversion": {
+      "when": "if transformer stored as fp32",
+      "method": "CPU shard-by-shard, nice, CUDA_VISIBLE_DEVICES empty",
+      "verification": "every tensor bit-exact to original.to(torch.bfloat16)",
+      "keep_original": true,
+      "confirm_loader_dtype": "bf16"
+    },
+    "re_estimate_after_conversion_max_gib": 100,
+    "expected_estimate_gib": 67,
+    "timing_probe": 1,
+    "cap_minutes_73": 150,
+    "fallback_frames": 49,
+    "skip_if_49_exceeds_minutes": 225,
+    "requires_cache_helper": true
+  },
+  "ltx_canny_control": {
+    "settings": "V-001 E1 (1152x640, anchor first frame, distilled two-stage, Union IC-LoRA 1.0)",
+    "control": "canny only, CannyEdgePreprocessor 92/200, reuse first-run control if hash matches",
+    "runs": 1,
+    "requires_cache_helper": true
+  },
+  "uma_memory_policy": {
+    "drop_caches": "sudo -n /usr/local/sbin/drop-caches before every heavy load",
+    "if_helper_absent": "run SAM and VACE 1.3B; skip VACE 14B and LTX canny as SKIPPED_NO_CACHE_HELPER",
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
+    "preflight_peak_estimate_max_gib": 100,
+    "nvrm_watch": "stop on first NV_ERR_NO_MEMORY; ENGINE_STOPPED_NVRM; no retry",
+    "worker_memory_max_gib": 100,
+    "memory_high_equals_max": true,
+    "v001_section7_stop_rules": "unchanged"
+  },
+  "external_gpu_policy": {
+    "poll_interval_seconds": 60,
+    "start_condition": "3 consecutive samples with no external GPU compute process and no known external batch parent (e.g. dgx-serving r25_grid)",
+    "max_wait_minutes_per_stage": 120,
+    "max_wait_minutes_total": 180,
+    "on_timeout": "mark remaining stages BLOCKED_EXTERNAL_GPU, deliver completed stages",
+    "if_appears_mid_run": "finish current generation, flag CONCURRENT_EXTERNAL_GPU, wait before next stage",
+    "kill_other_processes": false,
+    "cpu_services_not_counted": ["millie demos", "ht-estate api/embed", "fls-play"]
+  },
+  "slot_keeper": {
+    "service": "fls-slot-keeper.service",
+    "use_if": "documented interface usable by other projects",
+    "else": "do not use; record findings only",
+    "modify_service": false
+  },
+  "budget": {
+    "imagegen": 0,
+    "sam_measurements": "V-001 E1 x2 + all new outputs",
+    "vace_1_3b_runs": 3,
+    "vace_14b": {"conversion": 1, "timing_probe": 1, "generation": 1},
+    "ltx_canny_runs": 1,
+    "max_videos": 5,
+    "quality_retries": 0,
+    "training": 0,
+    "execution_hours_cap_excluding_wait": 7,
+    "reserved_minutes_for_records_and_delivery": 30,
+    "interim_delivery_after_M1_M3": true
+  },
+  "mechanical_fix_preapproval": "V-001 amendment 4 rule (geometry/frame multiples, paths, formats); never quality settings",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "delivery": {"git": "docs, non-sensitive code, hashes", "zip": "Mac ~/Downloads/V002-review-<date>-r1.zip", "integrity_report": "one line"}
+}
