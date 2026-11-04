@@ -1,0 +1,33 @@
+{
+  "filename": "V002-review-20261105-r1-recovery2.zip",
+  "bytes": 2542521,
+  "sha256": "4ed0523a2c04196f5527568ccc7b922d9123ccd8672150c6832681dd9cb52234",
+  "delivery_stage": "RECOVERY_R2_PARTIAL_FINAL",
+  "built_on": "MAC_DUE_SECOND_SPARK_OUTAGE",
+  "mac_location_role": "Downloads",
+  "payload_count": 25,
+  "zip_entry_count": 26,
+  "mac_crc": "PASS",
+  "mac_actual_extraction": "PASS",
+  "mac_payload_hashes": "PASS",
+  "original_media_byte_identity": "PASS",
+  "original_media_sha256": {
+    "M1.mp4": "50df935150219f22d59d1f28c42097e7e96791127898df121da607d3c3a9a352",
+    "source.mp4": "c5c1f439d07b1ecfa31fcd3d1bdef4ac505acd5e444270d58f4c6ecc16faf396",
+    "baseline.mp4": "763fbe29637437c40aafdb3f21438601144361f47308dd22234d10b4e2e59289"
+  },
+  "M1_original_generated_mp4_delivered": true,
+  "M2_execution": "UNKNOWN",
+  "M3_execution": "UNKNOWN",
+  "V14B": "DEFERRED_THIS_RECOVERY",
+  "LTX_CANNY": "DEFERRED_THIS_RECOVERY",
+  "spark_final_zip_equality": "UNVERIFIED",
+  "spark_final_delivery_verified": false,
+  "earlier_M1_interim_host_equality": "PASS_SEPARATE_ARTIFACT",
+  "browser_controls": "PASS_PRIVATE_PARTIAL_FINAL",
+  "all_relative_links": "PASS",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal_quality": "UNVERIFIED",
+  "prior_archives_preserved": true,
+  "receipt_in_payload": false
+}

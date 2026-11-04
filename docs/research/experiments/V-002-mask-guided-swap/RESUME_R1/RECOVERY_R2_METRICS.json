@@ -1,0 +1,209 @@
+{
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "automatic_14b_selection": false,
+  "motion_iou_interpretation": "Descriptive silhouette overlap only; unreliable as a standalone motion comparison or selection criterion",
+  "measured": {
+    "M1": {
+      "status": "MEASURED",
+      "frame_count": 73,
+      "actual_two_frames": 73,
+      "silhouette_iou": {
+        "per_casting": {
+          "Lab": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5248679656327092,
+            "all_frame_mean": 0.5248679656327092
+          },
+          "IG": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5930917811203696,
+            "all_frame_mean": 0.5930917811203696
+          }
+        },
+        "all_frame_mean_lab_ig": 0.5589798733765394,
+        "definition": "Undilated source and fixed-cast output masks, intersected with observed crop support. Missing output detection yields observed=null and explicit empty-prediction IoU0. Technical SAM failure has no metric.",
+        "eligible_for_14b_by_count": true
+      },
+      "trajectory": {
+        "Lab": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 25.3998954528663,
+          "mean_error_percent_width": 1.9843668322551795
+        },
+        "IG": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 9.000519996812555,
+          "mean_error_percent_width": 0.7031656247509808
+        }
+      },
+      "opposite_assignment_proxy_frames": 0,
+      "lab_ig_height_ratio": {
+        "output_median": 1.5033112582781456,
+        "output_observed_frames": 73,
+        "source_median": 1.4185022026431717,
+        "anchor": 1.196551724137931
+      },
+      "outside_mask_preservation": {
+        "frame_mean_mae": 0.9693233893342215,
+        "pixel_weighted_mae": 0.9696744377769277,
+        "observed_frames": 73,
+        "pixels": 54338222,
+        "frame0_mae": 1.5596420764923096,
+        "later_frame_mean_mae": 0.961124518679248,
+        "caveat": "Original canonical RGB comparison after inverse bilinear resize; crop support excluded. M3 frame0 mask is zero, so its approved anchor difference is included. Baseline/canny use M1 evaluation ROI only."
+      },
+      "background_flicker": {
+        "output_mean": 0.33417047125597793,
+        "source_mean": 0.18048683186579081,
+        "ratio": 1.8514950248806272
+      },
+      "caveats": [
+        "SAM correspondence and opposite nearest assignment are geometric proxies, not proof of visual identity.",
+        "Reflection bbox rule may associate one reflection with multiple bodies; color differences are reference-only.",
+        "SAM max4 tracking can omit instances; masks and inverse resizing affect descriptive metrics."
+      ],
+      "full_frames_file": "metrics/M1.json"
+    },
+    "baseline-e1-20261103": {
+      "status": "MEASURED",
+      "frame_count": 73,
+      "actual_two_frames": 73,
+      "silhouette_iou": {
+        "per_casting": {
+          "Lab": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5733010160837976,
+            "all_frame_mean": 0.5733010160837976
+          },
+          "IG": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5242140179547553,
+            "all_frame_mean": 0.5242140179547553
+          }
+        },
+        "all_frame_mean_lab_ig": 0.5487575170192764,
+        "definition": "Undilated source and fixed-cast output masks, intersected with observed crop support. Missing output detection yields observed=null and explicit empty-prediction IoU0. Technical SAM failure has no metric.",
+        "eligible_for_14b_by_count": true
+      },
+      "trajectory": {
+        "Lab": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 13.567071780405453,
+          "mean_error_percent_width": 1.0599274828441758
+        },
+        "IG": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 12.400536375735037,
+          "mean_error_percent_width": 0.9687919043542997
+        }
+      },
+      "opposite_assignment_proxy_frames": 0,
+      "lab_ig_height_ratio": {
+        "output_median": 1.2581818181818183,
+        "output_observed_frames": 73,
+        "source_median": 1.4185022026431717,
+        "anchor": 1.196551724137931
+      },
+      "outside_mask_preservation": {
+        "frame_mean_mae": 13.52357040692682,
+        "pixel_weighted_mae": 13.489086071402804,
+        "observed_frames": 73,
+        "pixels": 53530664,
+        "frame0_mae": 4.5349650382995605,
+        "later_frame_mean_mae": 13.648412148157755,
+        "caveat": "Original canonical RGB comparison after inverse bilinear resize; crop support excluded. M3 frame0 mask is zero, so its approved anchor difference is included. Baseline/canny use M1 evaluation ROI only."
+      },
+      "background_flicker": {
+        "output_mean": 0.41062067366308636,
+        "source_mean": 0.18304209514624542,
+        "ratio": 2.2433127928032737
+      },
+      "caveats": [
+        "SAM correspondence and opposite nearest assignment are geometric proxies, not proof of visual identity.",
+        "Reflection bbox rule may associate one reflection with multiple bodies; color differences are reference-only.",
+        "SAM max4 tracking can omit instances; masks and inverse resizing affect descriptive metrics."
+      ],
+      "full_frames_file": "metrics/baseline-e1-20261103.json"
+    },
+    "baseline-e1-20261104": {
+      "status": "MEASURED",
+      "frame_count": 73,
+      "actual_two_frames": 73,
+      "silhouette_iou": {
+        "per_casting": {
+          "Lab": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5980259072268066,
+            "all_frame_mean": 0.5980259072268066
+          },
+          "IG": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.46712389916001734,
+            "all_frame_mean": 0.46712389916001734
+          }
+        },
+        "all_frame_mean_lab_ig": 0.5325749031934119,
+        "definition": "Undilated source and fixed-cast output masks, intersected with observed crop support. Missing output detection yields observed=null and explicit empty-prediction IoU0. Technical SAM failure has no metric.",
+        "eligible_for_14b_by_count": true
+      },
+      "trajectory": {
+        "Lab": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 13.013548848701296,
+          "mean_error_percent_width": 1.0166835038047888
+        },
+        "IG": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 18.1392378472132,
+          "mean_error_percent_width": 1.417127956813531
+        }
+      },
+      "opposite_assignment_proxy_frames": 0,
+      "lab_ig_height_ratio": {
+        "output_median": 1.1236749116607774,
+        "output_observed_frames": 73,
+        "source_median": 1.4185022026431717,
+        "anchor": 1.196551724137931
+      },
+      "outside_mask_preservation": {
+        "frame_mean_mae": 10.184342390870395,
+        "pixel_weighted_mae": 10.173884300471048,
+        "observed_frames": 73,
+        "pixels": 53530664,
+        "frame0_mae": 4.551541805267334,
+        "later_frame_mean_mae": 10.262575732337105,
+        "caveat": "Original canonical RGB comparison after inverse bilinear resize; crop support excluded. M3 frame0 mask is zero, so its approved anchor difference is included. Baseline/canny use M1 evaluation ROI only."
+      },
+      "background_flicker": {
+        "output_mean": 0.19481845013797283,
+        "source_mean": 0.18302251890094745,
+        "ratio": 1.0644507097151765
+      },
+      "caveats": [
+        "SAM correspondence and opposite nearest assignment are geometric proxies, not proof of visual identity.",
+        "Reflection bbox rule may associate one reflection with multiple bodies; color differences are reference-only.",
+        "SAM max4 tracking can omit instances; masks and inverse resizing affect descriptive metrics."
+      ],
+      "full_frames_file": "metrics/baseline-e1-20261104.json"
+    }
+  },
+  "M2": null,
+  "M3": null,
+  "M2_status": "UNKNOWN",
+  "M3_status": "UNKNOWN",
+  "14B": "DEFERRED_USER_SELECTION",
+  "LTX_CANNY": "DEFERRED_THIS_RECOVERY"
+}

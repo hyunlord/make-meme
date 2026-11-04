@@ -1,5 +1,5 @@
 {
-  "status": "RECOVERY_RUNNING",
+  "status": "BLOCKED_HOST_UNREACHABLE",
   "start_utc": "2026-11-04T19:25:55Z",
   "finish_deadline_utc": "2026-11-05T01:25:55Z",
   "quality": "HUMAN_REVIEW_PENDING",
@@ -47,16 +47,16 @@
     "complete_output": false
   },
   "M2_recovery": {
-    "status": "RUNNING",
+    "status": "EXECUTION_STATE_UNKNOWN_AFTER_CONNECTION_LOSS",
     "authorized_attempts": 1,
     "input_config_delta_from_prior": [
       "output"
     ],
-    "last_observed_scheduler_steps": 3,
-    "last_observed_model_fn_calls": 7
+    "last_observed_scheduler_steps": 8,
+    "last_observed_model_fn_calls": 17
   },
   "M3": {
-    "status": "QUEUED_AFTER_M2_SUCCESS"
+    "status": "LAST_KNOWN_QUEUED_CURRENT_STATE_UNKNOWN"
   },
   "VACE_14B": {
     "status": "DEFERRED_USER_SELECTION",
@@ -65,5 +65,18 @@
   "LTX_CANNY": {
     "status": "DEFERRED_THIS_RECOVERY"
   },
-  "management": "Spark tmux generation chain plus receipt-gated output SAM and CPU measurement batch; all GPU steps sequential; no auto retry"
+  "management": "Spark tmux generation chain plus receipt-gated output SAM and CPU measurement batch; all GPU steps sequential; no auto retry",
+  "recovery_connection_loss": {
+    "first_bounded_recheck_utc": "2026-11-04T19:46:14Z",
+    "ssh": "CONNECT_TIMEOUT",
+    "tailscale": "OFFLINE_OBSERVED",
+    "remote_worker_exit": "UNVERIFIED",
+    "host_reboot_since_recovery_start": "UNVERIFIED",
+    "generation_retry_after_loss": false,
+    "spark_local_generation_and_postprocess_batches": "STARTED_BEFORE_LOSS_CURRENT_STATE_UNKNOWN",
+    "last_recheck_utc": "2026-11-04T19:58:30Z",
+    "last_recheck_result": "SSH_CONNECT_TIMEOUT"
+  },
+  "output_postprocess_current_status": "UNKNOWN_AFTER_CONNECTION_LOSS",
+  "own_remote_process_shutdown_verified": false
 }

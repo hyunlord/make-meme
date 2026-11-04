@@ -539,3 +539,5 @@ E1은 공식128배수1152×640 규약에서73프레임 영상2개를 생성해 M
 ## V-002 r1: M1 생성 완료·M2 실행 중 원격 관측 유실 (2026-11-05 KST)
 
 외부 GPU 부재를 단계별 180초 관측한 뒤 baseline SAM 2개와 M1 73프레임 생성(976.9초)을 완료했다. M2 21/50 step 확인 후 Spark SSH·Tailscale 연결이 유실되어 완료·실패·worker 종료는 UNKNOWN이다. M1 출력 SAM과 M3·14B·LTX는 미실행이며, M1 미디어의 Mac 전달도 확인하지 못했다. 첫 실행 9f78153은 보존한다. A 동결·C 보류·HUMAN_REVIEW_PENDING 유지, 새 생성 재시도나 후속 예약 없음. [r1 기록](experiments/V-002-mask-guided-swap/RESUME_R1/RESULTS.md).
+
+V-002 복구 개정2: M1 실제 영상·측정 전달 완료. M2 재시작 뒤 원격 상태 재확인이 선행되어야 하며 중복 생성 금지. 실루엣 IoU 자동 선택 대신 사용자 선택을 기다리고,14B/LTX·V-003는 자동 시작하지 않는다. [현재 복구 기록](experiments/V-002-mask-guided-swap/RESUME_R1/RECOVERY_R2_RESULTS.md).
