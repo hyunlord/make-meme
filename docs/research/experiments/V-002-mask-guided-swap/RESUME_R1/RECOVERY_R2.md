@@ -29,3 +29,8 @@ Spark 내부 tmux 또는 사용자 unit으로 실행 수명을 관리해 SSH 연
 - 학습·imagegen·새 앵커·Bernini·외부 API·품질 재시도는 계속 0회다. 별도 후속 실험을 예약하지 않는다.
 
 실제 완료·전달 여부는 새 receipt와 전달 검증으로 갱신한다. 이 사전 기록은 M1 SAM·M2 재시작·M3 또는 전달이 이미 끝났다는 증거가 아니다.
+
+
+### CPU 종료 관측의 기계적 수정
+
+M2 CPU 입력 검증은 exit0으로 끝났으나 종료 직후 RSS 관측 ValueError 때문에 정상 종료가 기록되지 않았다. 이전 stage는 NOT_CLEAN으로 보존한다. 새 private guard 사본에서 해당 owned PID의 RSS 필드 오류에 한해서만 systemd를 재관측하고, 기존 PID·InvocationID·정상 exit 조건을 모두 통과할 때만 후속 정상 종료 검증을 이어간다. 보호 임계값·관측 실패 차단은 유지한다. CPU fixture 45개 통과, 실제 실행 검증은 아직 별도다. [작은 diff](EXIT_OBSERVATION_FIX.diff), [증거](EXIT_OBSERVATION_FIX.json).

@@ -1,0 +1,121 @@
+{
+  "status": "HOST_REBOOT_CONFIRMED_CAUSE_UNKNOWN",
+  "observed_at_utc": "2026-11-04T19:28:50.251211+00:00",
+  "prior_boot_id": "d83c9536dd8b46c5ac0ce18d5ac7bea4",
+  "current_boot_id": "fcc2f8df3c8d4018b439de62adecb85f",
+  "prior_journal_last_kst": "2026-11-05T03:59:08+09:00",
+  "current_journal_first_kst": "2026-11-05T04:22:30+09:00",
+  "uptime_reported_boot_kst": "2026-11-05T04:22:22+09:00",
+  "journal_and_guard_timestamps_differ": true,
+  "m2": {
+    "state": "INTERRUPTED_BY_HOST_REBOOT",
+    "scheduler_steps": 22,
+    "model_fn_calls": 45,
+    "output_mp4_found": false,
+    "final_latent_found": false,
+    "receipt": "STARTED_STALE",
+    "normal_exit_verified": false,
+    "guard": {
+      "valid_observations": 401,
+      "invalid_tail": [
+        {
+          "line": 402,
+          "bytes": 2968,
+          "all_nul": true,
+          "error_type": "JSONDecodeError"
+        }
+      ],
+      "last_observation_utc": "2026-11-04T19:00:07.705402+00:00",
+      "decisions": [
+        "CLEAR"
+      ],
+      "min_available_bytes": 95239196672,
+      "max_psi_full_avg10": 0.0,
+      "max_swap_bytes": 0,
+      "peak_worker_rss_bytes_observed": 13114322944,
+      "valid_kernel_watch_rows": 406,
+      "kernel_watch_statuses": [
+        "AVAILABLE"
+      ],
+      "kernel_nvrm_hits": 0,
+      "kernel_invalid_tail": [
+        {
+          "line": 407,
+          "bytes": 1733,
+          "all_nul": true,
+          "error_type": "JSONDecodeError"
+        }
+      ],
+      "max_cgroup_high": 0,
+      "max_cgroup_oom": 0,
+      "max_cgroup_oom_kill": 0
+    }
+  },
+  "incident_kernel_findings": {
+    "window_kst": "2026-11-05 03:00 through prior boot end",
+    "NV_ERR_NO_MEMORY_matches": 0,
+    "oom_killer_matches": 0,
+    "kernel_panic_matches": 0,
+    "orderly_system_shutdown_matches": 0,
+    "limitations": "No logged trigger is not proof of absence; logs may not have persisted through the event."
+  },
+  "historical_nvrm": {
+    "first_kst": "2026-11-04T19:22:27+09:00",
+    "last_kst": "2026-11-04T19:58:41+09:00",
+    "message": "refcntRequestReference_IMPL: Failed to enter state 1 (current state: 0, status: 0x00000056)",
+    "attributed_to_current_incident": false,
+    "NV_ERR_NO_MEMORY": false
+  },
+  "pstore": {
+    "direct_read": "PERMISSION_DENIED",
+    "boot_journal": "systemd-pstore archival skipped: ConditionDirectoryNotEmpty unmet",
+    "sudo_used": false
+  },
+  "hypotheses": [
+    {
+      "hypothesis": "host reset / power event / kernel or GPU fatal hang",
+      "assessment": "CONSISTENT_NOT_IDENTIFIED",
+      "evidence": "Boot ID changed; no clean shutdown record found; persisted telemetry ends with NUL tail. Cannot distinguish physical power, manual reset, kernel fault or GPU hang."
+    },
+    {
+      "hypothesis": "system or worker OOM",
+      "assessment": "NOT_OBSERVED_NOT_RULED_OUT",
+      "evidence": "All persisted guard observations CLEAR, min available >88GiB, PSI0, cgroup OOM0; no incident-window OOM journal message."
+    },
+    {
+      "hypothesis": "network-only outage without host restart",
+      "assessment": "INSUFFICIENT_TO_EXPLAIN_FULL_EVENT",
+      "evidence": "A new host boot is confirmed. Network interruption could precede or accompany it but cannot explain the boot change by itself."
+    }
+  ],
+  "actions": {
+    "read_only_ssh": true,
+    "reboot_requested": false,
+    "processes_killed": false,
+    "services_changed": false,
+    "model_or_gpu_calls": 0
+  },
+  "root_cause": "UNKNOWN",
+  "private_evidence_hashes": {
+    "M2-observations.jsonl": {
+      "bytes": 2203648,
+      "sha256": "f6957121558232cf74a8f087ff4d352f789e8dae309d3c47153966767fd76b06"
+    },
+    "boot-error-search.txt": {
+      "bytes": 14071,
+      "sha256": "03a0f9e558234e66eb9a758fe135008306c5b0f4eeba715c784889620127f592"
+    },
+    "M2-kernel-events.jsonl": {
+      "bytes": 102314,
+      "sha256": "02fbc17a341ad02dc220ce3ca1032b0ee88f71ff866202990514bfb046ce606d"
+    },
+    "prior-boot-late-journal.txt": {
+      "bytes": 69693,
+      "sha256": "edfa0cfd3fd7068150b4df84dab44b74d866c57328b5692998c119b2dac3906d"
+    },
+    "current-boot-and-m2-files.txt": {
+      "bytes": 1698,
+      "sha256": "6989db149d5c715c0eedc3abb293b3435be285377ed79050b9aa2322e6eb57f4"
+    }
+  }
+}

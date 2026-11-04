@@ -1,0 +1,40 @@
+--- guard-r1-contract/supervisor.py
++++ guard-r2-exit-observation/supervisor.py
+@@ -31,6 +31,22 @@
+     if unit != 'kB' or not value.isdigit():
+         raise ValueError(f'WORKER_RSS_OBSERVATION_INVALID:{pid}')
+     return int(value)*1024
++
++
++def sample_owned_rss(unit: str, registered: dict, unit_info: dict) -> tuple[int | None, dict, bool]:
++    """Recheck exact owned exit only when the RSS field vanishes during exit."""
++    if not registered:
++        return None, unit_info, False
++    try:
++        rss = worker_rss_highwater(registered['pid'])
++    except ValueError as error:
++        if str(error) != f"WORKER_RSS_OBSERVATION_INVALID:{registered['pid']}":
++            raise
++        refreshed = unit_state(unit)
++        if not normal_exit(refreshed, registered):
++            raise
++        return None, refreshed, True
++    return rss, unit_info, False
+ 
+ 
+ def main()->int:
+@@ -117,7 +133,13 @@
+                             registered={**ident,'pid':pid,'unit':unit,'invocation_id':unit_info['InvocationID'],'unit_cgroup':cg,'registered_at':time.time()}
+                             temporary=root/'reports/worker-identity.json.tmp';temporary.write_text(json.dumps(registered,indent=2));temporary.replace(root/'reports/worker-identity.json')
+                     row['systemd']=unit_info;row['cgroup']=stats;row['registered_identity']=registered
+-                    rss=worker_rss_highwater(registered['pid']) if registered else None
++                    rss,unit_info,rss_exit_refreshed=sample_owned_rss(unit,registered,unit_info)
++                    row['rss_exit_observation_refreshed']=rss_exit_refreshed
++                    if rss_exit_refreshed:
++                        cg=unit_info['ControlGroup'];folder=Path('/sys/fs/cgroup')/cg.lstrip('/')
++                        stats={name:(folder/name).read_text() for name in ('cgroup.procs','memory.current','memory.peak','memory.events','memory.stat') if cg and (folder/name).exists()}
++                        row['systemd']=unit_info;row['cgroup']=stats
++                        row['rss_unavailable_reason']='OWN_VERIFIED_EXIT_DURING_RSS_SAMPLE'
+                     if rss is not None:peak_worker_rss=rss if peak_worker_rss is None else max(peak_worker_rss,rss)
+                     row['worker_rss_highwater_bytes']=rss
+                     row['peak_worker_rss_bytes_observed']=peak_worker_rss
