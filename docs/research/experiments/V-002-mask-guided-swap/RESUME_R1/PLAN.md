@@ -16,3 +16,6 @@ helper 현재 존재, 각heavy직전 지정sudo -n만 호출. 실패하면 SAM/1
 
 ## 인수 확인
 입력808+369+6파일 hash일치,재제작0. helper실제호출APPLIED. slotkeeper는FLS디렉터리/세션구조에결합돼문서화된타프로젝트interface없음,미사용/서비스변경0. 첫SAM전18:13:49–18:16:49UTC 4표본모두GPU/배치부모없음. 첫SAM50.35초정상종료.
+
+## r1 계약 연결 수정 (2026-11-04T18:24Z, 모델 결과 재시도 아님)
+두 번째 SAM heavy와 M3 CPU는 모델 적재 전에 START_HEADROOM_NOT_MET로 거절됐다. 첫 실패 관측 MemAvailable=119789596672B, swap=0, PSI=0. 기존 guard가 E2 개정3의112GiB 시작 조건과 min(100,available-12)worker cap을 그대로 물려받았다. r1이 지정한 V001§7에는112GiB 시작 조건이 없고 r1은MemoryHigh=MemoryMax100GiB를 명시한다. 따라서 새 guard-r1-contract 사본에서 해당 시작 조건만 제거하고 cap을100GiB로 고정한다. 기존가드/거절stage는수정하지않고별도새admission으로진행한다. runtime12GiB30초/PSI25%60초/OOM/NVRM/관측실패/100GiB추정상한은변경없다. 38CPU검사통과. seed/prompt/input/모델조건변경없음.

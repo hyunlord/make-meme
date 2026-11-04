@@ -1,0 +1,54 @@
+--- V002/code/guard/policy.py
++++ V002/RESUME_R1/code/guard/policy.py
+@@ -23 +23 @@
+-    assert policy['attempt_id']=='C001_V002_APPROVED_01'
++    assert policy['attempt_id']=='C001_V002_R1_APPROVED_01'
+--- V002/code/guard/safety.py
++++ V002/RESUME_R1/code/guard/safety.py
+@@ -89 +89 @@
+-def lifecycle_decision(row:dict, registered:dict, unit:dict, completed:bool, elapsed:float|None)->str:
++def lifecycle_decision(row:dict, registered:dict, unit:dict, completed:bool, elapsed:float|None,*,allow_external_gpu:bool=False)->str:
+@@ -99 +99,2 @@
+-    if unknown-set([registered.get('pid')]):return 'UNKNOWN_GPU_PID'
++    if unknown-set([registered.get('pid')]) and not allow_external_gpu:return 'UNKNOWN_GPU_PID'
++    if allow_external_gpu:unknown &= {registered.get('pid')}
+--- V002/code/guard/supervisor.py
++++ V002/RESUME_R1/code/guard/supervisor.py
+@@ -5 +5 @@
+-from uma import ALLOCATOR,KernelWatch,drop_caches,peak_decision
++from uma import ALLOCATOR,KernelWatch,drop_caches,peak_decision,cache_requirement_decision
+@@ -52,0 +53,3 @@
++    allow_external_gpu=heavy and config.get('continue_generation_on_external_gpu',False)
++    assert type(config.get('continue_generation_on_external_gpu',False)) is bool
++    assert type(config.get('cache_helper_required',False)) is bool
+@@ -62,0 +66 @@
++        cache['decision']=cache_requirement_decision(cache['status'],required=config.get('cache_helper_required',False))
+@@ -63,0 +68 @@
++        if cache['decision']!='CLEAR':return 2
+@@ -86 +91 @@
+-    peak_worker_rss=None;nvrm_count=0
++    peak_worker_rss=None;nvrm_count=0;concurrent_external_gpu=False
+@@ -126 +131,4 @@
+-                    decision=lifecycle_decision(row,registered,unit_info,completed,elapsed)
++                    row['external_gpu_pids']=sorted(set(row['unclassified_pids'])-{registered.get('pid')})
++                    row['concurrent_external_gpu']=bool(allow_external_gpu and row['external_gpu_pids'])
++                    concurrent_external_gpu |= row['concurrent_external_gpu']
++                    decision=lifecycle_decision(row,registered,unit_info,completed,elapsed,allow_external_gpu=allow_external_gpu)
+@@ -133 +141 @@
+-                if decision in ('CLEAR','COMPLETE') and not row['unclassified_pids'] and normal_exit(unit_info,registered):
++                if decision in ('CLEAR','COMPLETE') and (not row['unclassified_pids'] or allow_external_gpu and set(row['unclassified_pids'])==set(row.get('external_gpu_pids',[]))) and normal_exit(unit_info,registered):
+@@ -154,0 +163,3 @@
++            if allow_external_gpu and final['decision']=='UNKNOWN_GPU_PID':
++                final['concurrent_external_gpu']=True;concurrent_external_gpu=True
++                final['decision']=final['memory_verdict']['decision']
+@@ -161 +172 @@
+-            report={'nvrm_events':nvrm_count,'kernel_watch_status':watch.status if watch is not None else 'NOT_REQUESTED_CPU','allocator':ALLOCATOR,'peak_worker_rss_bytes_observed':peak_worker_rss,'peak_worker_rss_scope':'registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss','min_available_bytes_observed':min_available,'guard_reason':reason,'worker_returncode':result,'cleanup_errors':cleanup,'normal_exit_recorded':exit_receipt is not None,'started':started,'finished':time.time(),'final':final,'status':'ENGINE_STOPPED_NVRM' if reason=='ENGINE_STOPPED_NVRM' else 'COMPLETE' if reason=='COMPLETE' and result==0 and not cleanup and final['decision']=='CLEAR' else 'NOT_CLEAN'}
++            report={'concurrent_external_gpu':concurrent_external_gpu,'result_flags':['CONCURRENT_EXTERNAL_GPU'] if concurrent_external_gpu else [],'nvrm_events':nvrm_count,'kernel_watch_status':watch.status if watch is not None else 'NOT_REQUESTED_CPU','allocator':ALLOCATOR,'peak_worker_rss_bytes_observed':peak_worker_rss,'peak_worker_rss_scope':'registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss','min_available_bytes_observed':min_available,'guard_reason':reason,'worker_returncode':result,'cleanup_errors':cleanup,'normal_exit_recorded':exit_receipt is not None,'started':started,'finished':time.time(),'final':final,'status':'ENGINE_STOPPED_NVRM' if reason=='ENGINE_STOPPED_NVRM' else 'COMPLETE' if reason=='COMPLETE' and result==0 and not cleanup and final['decision']=='CLEAR' else 'NOT_CLEAN'}
+--- V002/code/guard/uma.py
++++ V002/RESUME_R1/code/guard/uma.py
+@@ -109,0 +110,5 @@
++
++
++def cache_requirement_decision(status: str, *, required: bool) -> str:
++    """V002 r1 large engines require a successful authorized cache invocation."""
++    return 'SKIPPED_NO_CACHE_HELPER' if required and status != 'APPLIED' else 'CLEAR'

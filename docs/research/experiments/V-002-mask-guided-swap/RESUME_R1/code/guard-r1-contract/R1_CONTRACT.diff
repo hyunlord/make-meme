@@ -1,0 +1,14 @@
+--- guard/safety.py
++++ guard-r1-contract/safety.py
+@@ -18 +18 @@
+-    """E2 amendment 3 adds 112 GiB admission; runtime durations remain unchanged."""
++    """V002 r1 uses observed pressure and deadline, not E2-only 112 GiB admission."""
+@@ -20 +19,0 @@
+-    if available_gib<112:return 'START_HEADROOM_NOT_MET'
+--- guard/supervisor.py
++++ guard-r1-contract/supervisor.py
+@@ -17,2 +17,2 @@
+-    """E2-only 100 GiB cap with the existing 12 GiB host reserve."""
+-    return min(100*2**30, available-12*2**30)
++    """V002 r1 specifies a fixed 100 GiB cap; runtime pressure protection remains."""
++    return 100*2**30

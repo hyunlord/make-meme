@@ -1,0 +1,56 @@
+{
+  "scope": "V002 r1 execution copy only",
+  "parent_commit": "9f78153",
+  "changed_files": [
+    "policy.py",
+    "safety.py",
+    "supervisor.py",
+    "uma.py"
+  ],
+  "files": {
+    "memory.py": {
+      "sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+      "parent_sha256": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa"
+    },
+    "policy.py": {
+      "sha256": "3807d7b8ad5b9d6af251f2b69c59d9c01819a017a05f6d36381a299befa4dfbd",
+      "parent_sha256": "f1a323e286dc4341dfa43a57b8d58a12cfb86a369644b92f4b5d8f5de0df0875"
+    },
+    "safety.py": {
+      "sha256": "df43bd2a81944f323f7ab818f61dedd4935be69f1bc924e980ffdef192d7be30",
+      "parent_sha256": "663a461f08abdfcf335ab6ef54d3bd1456912a9c9e1d0cd9a5adbb95d35692fd"
+    },
+    "supervisor.py": {
+      "sha256": "cd54af341fe46990c7a013a36ed0c51894f8d127ff6d3522b7ffe1869d59585c",
+      "parent_sha256": "1e3d73c88674c3d86c49a51ea52e1db3885a69ce2b09b82eeff064f39f57f11b"
+    },
+    "test_r1.py": {
+      "sha256": "7cad764ce4152d1487de27080f4f25581d0e75b7733c3903a276c079492488bb",
+      "parent_sha256": null
+    },
+    "test_v001.py": {
+      "sha256": "ea50b699b51cc9ff690cded8a67d6c4413a6b15c271f3af326d79a16baeb9871",
+      "parent_sha256": "ea50b699b51cc9ff690cded8a67d6c4413a6b15c271f3af326d79a16baeb9871"
+    },
+    "test_v002.py": {
+      "sha256": "e637b8af21d890cb9ac5bc357d2c671fea1f7d3a6a5c10b84b4f3d570b072d3c",
+      "parent_sha256": "e637b8af21d890cb9ac5bc357d2c671fea1f7d3a6a5c10b84b4f3d570b072d3c"
+    },
+    "uma.py": {
+      "sha256": "936cb7b2a937970eb61c86e9cb3e29fcb9b73f12e00e11c4f24e3c1561f2720b",
+      "parent_sha256": "7492eaeed533013cb8e305f5e39d0b3cd362d4b7411901de57f7b0613d0a2fa9"
+    }
+  },
+  "cpu_tests": {
+    "count": 34,
+    "status": "PASS"
+  },
+  "gpu_or_ssh_execution": false,
+  "integration": {
+    "attempt_id": "C001_V002_R1_APPROVED_01",
+    "cache_helper_required": "true only14B/LTX; falseSAM1.3B",
+    "continue_generation_on_external_gpu": "true generation-heavy only; falseSAM/probe/CPU",
+    "external_wait": "root owns 60s samples, 3min absent window before everyheavy",
+    "freeze": "include all guard .py and UMA helper"
+  }
+}
