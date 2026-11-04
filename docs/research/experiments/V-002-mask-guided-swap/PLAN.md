@@ -34,3 +34,7 @@ OOM,가용<12GiB30초,PSIfull>25%60초,외부GPU/서비스충돌/관측오류중
 신규영상최대5,14Bprobe최대1,품질재시도0,학습0,imagegen0,외부API0,Bernini0. 정상생성완료셀재실행없음.
 전체7시간: 2026-11-04T12:46:38Z(21:46:38KST)종료,12:16:38Z(21:16:38KST)부터기록전달. 시간상완료예측안되는생성은시작하지않는다. 입력/모델/환경기계오류는같은범위에서수정하되가드중단재시도없음.
 공개문서/코드/hash만stage/push. 개인미디어/경로/원시로그/weights는private. 기존ZIP/과거판정보존,새compactZIPMac전달CRC/실제추출/hash확인. 자체process종료와외부작업보존확인. V003자동예약0.
+
+## 14B 사전 메모리 판정
+
+신규 출력 확인 전 정적 적재 코드와 실제 저장 dtype 크기로 보수적 peak를 계산했다. 14B는약128GiB 추정으로100GiB상한초과, ENGINE_BLOCKED_MEMORY_ESTIMATE. 후보 선택은 M1–M3 측정 후 규칙대로 기록하되 후보가 있어도 이번14Bprobe/생성은 시작하지 않는다. 원본FP32전체CPU복사는없지만pagecache와temporaryCUDA중복을제외할근거가없다. 별도변환·새offload구현을추가하지않는다. SAM/1.3B/LTX는각40/85/95GiB계획추정으로개별guard대상이며실측상한을보장하는수치가아니다.

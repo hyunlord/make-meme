@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-11-04T05:57:44.342302+00:00",
+  "threshold_gib": 100,
+  "estimate_kind": "preflight planning estimates, not measured peak or mathematical bounds",
+  "SAM": {
+    "estimated_peak_gib": 40,
+    "weights_file_bytes": 1745546848,
+    "basis": "Existing SAM3.1 checkpoint1.63GiB + source RGB float tensor0.65GiB + activation/tracking allowance24GiB + file-cache/loading/overhead allowance13GiB; no new model."
+  },
+  "VACE_1_3B": {
+    "estimated_peak_gib": 85,
+    "bf16_transformer_bytes": 4307944064,
+    "transformer_storage_payload_bytes": 7145937664,
+    "t5_file_bytes": 11361920418,
+    "vae_file_bytes": 507609880,
+    "basis": "BF16 transformer4.01GiB + T5/VAE11.06GiB + activation32GiB + original-file page-cache18GiB + loading/temp/host allowance19GiB, rounded85GiB."
+  },
+  "VACE_14B": {
+    "status": "ENGINE_BLOCKED_MEMORY_ESTIMATE",
+    "estimated_peak_gib": 128,
+    "bf16_transformer_bytes": 34675185792,
+    "transformer_storage_payload_bytes": 63252168960,
+    "basis": "58.91GiB original transformer page cache +32.29GiB BF16 transformer +11.06GiB T5/VAE +24GiB activation =126.26GiB before additional transient conversion buffers, rounded128. DiskMap is per-tensor not fullFP32 CPUcopy, but vram_limit24 is not a total hard bound and cache eviction is not guaranteed. No model/probe launched."
+  },
+  "LTX_canny": {
+    "estimated_peak_gib": 95,
+    "weights_files_bytes": 47799553950,
+    "text_encoder_tree_bytes": 24414169015,
+    "basis": "Pinned LTX checkpoint+upsampler+LoRA44.51GiB including VAEs, Gemma22.74GiB, activation16GiB, host/loading allowance11.75GiB. Same shape/path as V001 measured cgroup62GiB. Page-cache reclamation and allocator behavior remain runtime uncertainties, not a hard bound; freshNVRM/headroom/PSI monitor applies."
+  },
+  "cache_helper_at_intake": "ABSENT_CONTINUE",
+  "external_gpu_at_intake": "PRESENT_HEAVY_NOT_STARTED",
+  "notes": [
+    "MemoryHigh=MemoryMax100GiB does not cap all CUDA unified-memory allocations.",
+    "No Bernini import or run.",
+    "Actual resource metrics will be reported separately."
+  ]
+}

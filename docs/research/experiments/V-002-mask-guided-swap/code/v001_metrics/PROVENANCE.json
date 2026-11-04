@@ -1,0 +1,11 @@
+{
+  "source_experiment": "V-001-anchor-propagation-baseline",
+  "source_commit": "0cfd0ef1b66be66b20765b644f063894d4044b82",
+  "copies_unchanged": true,
+  "sha256": {
+    "output_metrics.py": "b5973d74f3f7307131f509639c21d800e7551c088ebd38e2dac14bce8e82196c",
+    "reflections.py": "4777dabc572a33593474789d9ad1d0a10a208455be5a71bc851d508c055ca77d",
+    "anchor_gates.py": "08b43aa69e0ccb41ec05e0619e7633fb97c7ee93b522bc9a1f85fc10fcc8e10a",
+    "sam_analysis.py": "08820b4ef8b4ae7f29816147e354eef8a54aa551352b991ede03c2cdc5cd2f7e"
+  }
+}

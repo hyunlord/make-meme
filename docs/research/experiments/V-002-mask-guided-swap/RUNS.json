@@ -1,0 +1,60 @@
+{
+  "status": "CPU_INPUTS_READY_WAITING_EXTERNAL_GPU",
+  "started_at": "2026-11-04T05:46:38Z",
+  "updated_at": "2026-11-04T05:58:45.029713+00:00",
+  "generation_budget": 5,
+  "counts": {
+    "new_video_attempts": 0,
+    "new_video_outputs": 0,
+    "timing_probes": 0,
+    "output_sam_calls": 0,
+    "imagegen": 0,
+    "training": 0,
+    "depth_inference": 0,
+    "source_sam_reruns": 0
+  },
+  "variants": {
+    "V001_E1_S1_SAM": {
+      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+    },
+    "V001_E1_S2_SAM": {
+      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+    },
+    "M1": {
+      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+    },
+    "M2": {
+      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+    },
+    "M3": {
+      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+    },
+    "LTX_CANNY": {
+      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+    }
+  },
+  "VACE14B": {
+    "status": "ENGINE_BLOCKED_MEMORY_ESTIMATE",
+    "estimate_gib": 128,
+    "limit_gib": 100,
+    "probe_calls": 0,
+    "generation_calls": 0
+  },
+  "cpu_inputs": {
+    "status": "CPU_INPUTS_PREPARED",
+    "mask_check_sha256": "1f9ae06dc590e18e497e3fd0d73322ac10ed2329af67d6217474d2513046070e",
+    "references_visual_check": "Lab and IG white-background crops observed by parent session; not independent human review"
+  },
+  "intake": {
+    "spark_access": "PASS",
+    "different_boot_from_V001": true,
+    "prior_boot_nvrm_errors_observed": true,
+    "V001_E2_output_mp4_found": false,
+    "V001_E2_receipt_status": "STARTED_STALE_AFTER_REBOOT",
+    "drop_cache_helper": "ABSENT_CONTINUE",
+    "kernel_journal_readable": true,
+    "external_gpu": "OBSERVED_PRESERVED",
+    "heavy_started": false
+  },
+  "quality": "HUMAN_REVIEW_PENDING"
+}

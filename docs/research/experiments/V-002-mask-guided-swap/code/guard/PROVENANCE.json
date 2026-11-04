@@ -1,0 +1,22 @@
+{
+  "parent": "V-001-anchor-propagation-baseline/code/guard-e2-amend4",
+  "original_hashes": {
+    "memory.py": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+    "safety.py": "663a461f08abdfcf335ab6ef54d3bd1456912a9c9e1d0cd9a5adbb95d35692fd",
+    "policy.py": "fffe160914716d6be0cf34375017a845795c55e39eda39119ffb4f5c34fe6941",
+    "supervisor.py": "52f4f80c51d74caca427ab4dcdd98bf025882ae02d2c57154234125d41bce56a"
+  },
+  "current_hashes": {
+    "memory.py": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+    "safety.py": "663a461f08abdfcf335ab6ef54d3bd1456912a9c9e1d0cd9a5adbb95d35692fd",
+    "policy.py": "f1a323e286dc4341dfa43a57b8d58a12cfb86a369644b92f4b5d8f5de0df0875",
+    "supervisor.py": "1e3d73c88674c3d86c49a51ea52e1db3885a69ce2b09b82eeff064f39f57f11b",
+    "uma.py": "7492eaeed533013cb8e305f5e39d0b3cd362d4b7411901de57f7b0613d0a2fa9"
+  },
+  "unchanged_runtime_files": [
+    "memory.py",
+    "safety.py"
+  ],
+  "common_guard_modified": false,
+  "spark_sync_or_execution_by_this_lane": false
+}

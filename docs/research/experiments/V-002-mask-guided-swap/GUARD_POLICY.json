@@ -1,0 +1,67 @@
+{
+  "experiment": "V-002-mask-guided-swap",
+  "scope": "V002 execution copy only",
+  "attempt_id": "C001_V002_APPROVED_01",
+  "worker_memory_max_gib": 100,
+  "worker_memory_high_gib": 100,
+  "worker_swap_max": 0,
+  "start_available_gib_min": 112,
+  "start_basis": "Conservative existing E2amend4 admission retained for a100GiB cap and12GiB system reserve.",
+  "estimated_peak_gib_max": 100,
+  "required_heavy_config": [
+    "estimated_peak_gib",
+    "estimate_basis"
+  ],
+  "allocator": "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True",
+  "cache_command": [
+    "sudo",
+    "-n",
+    "/usr/local/sbin/drop-caches"
+  ],
+  "cache_unavailable_behavior": "record and continue",
+  "cache_external_conflict_behavior": "do not invoke when external GPU, service, observation, or memory precheck is not CLEAR",
+  "kernel_watch": {
+    "command": "journalctl -k --after-cursor=<prelaunch_cursor> -o json --show-cursor --no-pager",
+    "freshness": "Initial historical entry establishes cursor only, never triggers; subsequent entries are checked before each guard observation.",
+    "trigger": "NV_ERR_NO_MEMORY",
+    "on_trigger": "Stop the owned systemd worker through existing finally cleanup; ENGINE_STOPPED_NVRM; no retry.",
+    "unreadable": "Initial permission denial, absent/unsupported journal reader, or no readable cursor: UNAVAILABLE_CONTINUE. Unexpected initial read/parse/timeout errors and any read failure after AVAILABLE: OBSERVATION_FAILED, stop.",
+    "read_timeout_seconds": 3
+  },
+  "stop_rules": {
+    "system_or_worker_oom": "immediate",
+    "available_below_12gib_seconds": 30,
+    "psi_full_avg10_above_25_percent_seconds": 60,
+    "swapout_increase_gib": 1,
+    "worker_swap": "any or max!=0",
+    "external_gpu_or_service_collision": "stop",
+    "ordinary_observation_failure": "stop"
+  },
+  "freeze_required": [
+    "config.json",
+    "service-policy.json",
+    "worker.py",
+    "target script",
+    "memory.py",
+    "safety.py",
+    "policy.py",
+    "supervisor.py",
+    "uma.py"
+  ],
+  "evidence": [
+    "peak-estimate.json",
+    "cache-admission.json",
+    "cache-drop.json",
+    "kernel-watch-start.json",
+    "kernel-events.jsonl",
+    "observations.jsonl",
+    "supervisor-result.json"
+  ],
+  "cpu_validation": {
+    "tests": 24,
+    "status": "PASS",
+    "model_imports": 0,
+    "gpu_calls": 0
+  },
+  "limits": "Kernel polling cannot guarantee recovery if the driver or host stops responding before userspace can observe it."
+}
