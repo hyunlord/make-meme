@@ -1,0 +1,35 @@
+{
+  "filename": "V002-review-20261105-r1.zip",
+  "bytes": 1883996,
+  "sha256": "459e5922400927243c0feb1c030bbe01f425ef0ad92455d1060a7bb8a6776a76",
+  "delivery_kind": "PARTIAL_HOST_UNREACHABLE",
+  "payload_count": 22,
+  "zip_entry_count": 23,
+  "mac_location_role": "Downloads",
+  "mac_crc": "PASS",
+  "mac_actual_extraction": "PASS",
+  "mac_payload_hashes": "PASS",
+  "source_and_baseline_byte_identity": "PASS",
+  "original_media_sha256": {
+    "source.mp4": "c5c1f439d07b1ecfa31fcd3d1bdef4ac505acd5e444270d58f4c6ecc16faf396",
+    "baseline.mp4": "763fbe29637437c40aafdb3f21438601144361f47308dd22234d10b4e2e59289"
+  },
+  "playable_media_roles": [
+    "SOURCE_REVIEW_ENCODE",
+    "V001_E1_S1_ORIGINAL_GENERATED_MP4"
+  ],
+  "new_generated_media_in_archive": false,
+  "M1_media": "GENERATED_REMOTE_MEDIA_UNAVAILABLE",
+  "M2_execution": "UNKNOWN",
+  "spark_delivery_verified": false,
+  "spark_delivery": "UNVERIFIED_HOST_UNREACHABLE",
+  "host_transfer_equality": "UNVERIFIED",
+  "browser_qa": "NOT_RUN_THIS_PACKAGE",
+  "static_status_and_link_checks": "PASS",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "manifest_self_excluded": true,
+  "zip_self_excluded": true,
+  "delivery_receipt_in_payload": false,
+  "prior_zip_preserved": true,
+  "draft_zip_preserved": true
+}

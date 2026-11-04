@@ -1,8 +1,8 @@
 {
-  "status": "RUNNING",
+  "status": "BLOCKED_HOST_UNREACHABLE",
   "started_at": "2026-11-04T18:12:33Z",
   "parent": "9f78153",
-  "new_video_attempts": 1,
+  "new_video_attempts": 2,
   "output_sam_calls": 2,
   "quality": "HUMAN_REVIEW_PENDING",
   "baseline_s1": {
@@ -49,7 +49,9 @@
     "endpoint_overwrite": false,
     "post_composite": false,
     "guard_status": "COMPLETE",
-    "mp4_sha256": "50df935150219f22d59d1f28c42097e7e96791127898df121da607d3c3a9a352"
+    "mp4_sha256": "50df935150219f22d59d1f28c42097e7e96791127898df121da607d3c3a9a352",
+    "output_sam_status": "NOT_RUN",
+    "mac_media_delivery": "UNVERIFIED_REMOTE_MEDIA_UNAVAILABLE"
   },
   "preload_denials": [
     {
@@ -63,5 +65,42 @@
       "model_loads": 0
     }
   ],
-  "new_video_outputs": 1
+  "new_video_outputs": 1,
+  "M2": {
+    "status": "EXECUTION_STATE_UNKNOWN_AFTER_CONNECTION_LOSS",
+    "last_observed_scheduler_steps": 21,
+    "last_observed_model_fn_calls": 44,
+    "completion_verified": false,
+    "termination_verified": false,
+    "last_guard_decision": "CLEAR",
+    "last_observed_min_available_bytes": 95239196672,
+    "cause": "UNKNOWN",
+    "retry_started": false
+  },
+  "connectivity_incident": {
+    "observed_at": "2026-11-04T19:02:00Z",
+    "ssh": "CONNECT_TIMEOUT",
+    "tailscale_peer_online": false,
+    "tailscale_peer_last_seen": "2026-11-04T19:00:00.1Z",
+    "icmp_received_of_3": 0,
+    "reboot_oom_nvrm_cause": "UNVERIFIED",
+    "automatic_generation_retry": false,
+    "last_recheck_at": "2026-11-04T19:05:40Z",
+    "last_recheck": "PEER_OFFLINE_AND_SSH_CONNECT_TIMEOUT"
+  },
+  "remote_worker_shutdown": "UNVERIFIED",
+  "local_supervisor_ssh": "EXIT_255_CONNECTION_TIMEOUT_NOT_WORKER_EXIT",
+  "subsequent_heavy_started": false,
+  "M3": {
+    "status": "NOT_RUN",
+    "reason": "BLOCKED_HOST_UNREACHABLE"
+  },
+  "VACE_14B": {
+    "status": "NOT_RUN",
+    "reason": "BLOCKED_HOST_UNREACHABLE"
+  },
+  "LTX_CANNY": {
+    "status": "NOT_RUN",
+    "reason": "BLOCKED_HOST_UNREACHABLE"
+  }
 }

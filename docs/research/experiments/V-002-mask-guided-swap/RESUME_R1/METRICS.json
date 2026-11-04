@@ -1,0 +1,220 @@
+{
+  "status": "PARTIAL_MEASURED_HOST_UNREACHABLE",
+  "observability_lost_at": "2026-11-04T19:02Z",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "baseline": {
+    "20261103": {
+      "status": "MEASURED",
+      "quality": "HUMAN_REVIEW_PENDING",
+      "temporal": "UNVERIFIED",
+      "geometry": "E1",
+      "coordinate_size": [
+        1280,
+        720
+      ],
+      "frame_count": 73,
+      "output_fps": 24.0,
+      "casting": {
+        "Lab": 0,
+        "IG": 1
+      },
+      "actual_two_frames": 73,
+      "actual_two_fraction": 1.0,
+      "actual_two_area_frames": 73,
+      "trajectory": {
+        "Lab": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 13.567071780405453,
+          "mean_error_percent_width": 1.0599274828441758
+        },
+        "IG": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 12.400536375735037,
+          "mean_error_percent_width": 0.9687919043542997
+        }
+      },
+      "opposite_assignment_proxy_frames": 0,
+      "opposite_assignment_unobserved_frames": 0,
+      "lab_ig_height_ratio": {
+        "output_median": 1.2581818181818183,
+        "output_observed_frames": 73,
+        "source_median": 1.4185022026431717,
+        "anchor": 1.196551724137931
+      },
+      "outside_mask_preservation": {
+        "frame_mean_mae": 13.52357040692682,
+        "pixel_weighted_mae": 13.489086071402804,
+        "observed_frames": 73,
+        "pixels": 53530664,
+        "frame0_mae": 4.5349650382995605,
+        "later_frame_mean_mae": 13.648412148157755,
+        "caveat": "Original canonical RGB comparison after inverse bilinear resize; crop support excluded. M3 frame0 mask is zero, so its approved anchor difference is included. Baseline/canny use M1 evaluation ROI only."
+      },
+      "background_flicker": {
+        "output_mean": 0.41062067366308636,
+        "source_mean": 0.18304209514624542,
+        "ratio": 2.2433127928032737
+      },
+      "caveats": [
+        "SAM correspondence and opposite nearest assignment are geometric proxies, not proof of visual identity.",
+        "Reflection bbox rule may associate one reflection with multiple bodies; color differences are reference-only.",
+        "SAM max4 tracking can omit instances; masks and inverse resizing affect descriptive metrics."
+      ],
+      "input_summary_sha256": {
+        "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+        "output": "a771e73810ad6236c96f87baedae9c96e1f975a5a862952570e63e99cec4d17c",
+        "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+      },
+      "silhouette_iou": {
+        "per_casting": {
+          "Lab": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5733010160837976,
+            "all_frame_mean": 0.5733010160837976
+          },
+          "IG": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5242140179547553,
+            "all_frame_mean": 0.5242140179547553
+          }
+        },
+        "all_frame_mean_lab_ig": 0.5487575170192764,
+        "definition": "Undilated source and fixed-cast output masks, intersected with observed crop support. Missing output detection yields observed=null and explicit empty-prediction IoU0. Technical SAM failure has no metric."
+      },
+      "detail_ref": "metrics/baseline-e1-20261103.json",
+      "selection_role": "BASELINE_ONLY_NOT_14B_CANDIDATE"
+    },
+    "20261104": {
+      "status": "MEASURED",
+      "quality": "HUMAN_REVIEW_PENDING",
+      "temporal": "UNVERIFIED",
+      "geometry": "E1",
+      "coordinate_size": [
+        1280,
+        720
+      ],
+      "frame_count": 73,
+      "output_fps": 24.0,
+      "casting": {
+        "Lab": 0,
+        "IG": 1
+      },
+      "actual_two_frames": 73,
+      "actual_two_fraction": 1.0,
+      "actual_two_area_frames": 73,
+      "trajectory": {
+        "Lab": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 13.013548848701296,
+          "mean_error_percent_width": 1.0166835038047888
+        },
+        "IG": {
+          "observed_frames": 73,
+          "missing_frames": 0,
+          "mean_error_px": 18.1392378472132,
+          "mean_error_percent_width": 1.417127956813531
+        }
+      },
+      "opposite_assignment_proxy_frames": 0,
+      "opposite_assignment_unobserved_frames": 0,
+      "lab_ig_height_ratio": {
+        "output_median": 1.1236749116607774,
+        "output_observed_frames": 73,
+        "source_median": 1.4185022026431717,
+        "anchor": 1.196551724137931
+      },
+      "outside_mask_preservation": {
+        "frame_mean_mae": 10.184342390870395,
+        "pixel_weighted_mae": 10.173884300471048,
+        "observed_frames": 73,
+        "pixels": 53530664,
+        "frame0_mae": 4.551541805267334,
+        "later_frame_mean_mae": 10.262575732337105,
+        "caveat": "Original canonical RGB comparison after inverse bilinear resize; crop support excluded. M3 frame0 mask is zero, so its approved anchor difference is included. Baseline/canny use M1 evaluation ROI only."
+      },
+      "background_flicker": {
+        "output_mean": 0.19481845013797283,
+        "source_mean": 0.18302251890094745,
+        "ratio": 1.0644507097151765
+      },
+      "caveats": [
+        "SAM correspondence and opposite nearest assignment are geometric proxies, not proof of visual identity.",
+        "Reflection bbox rule may associate one reflection with multiple bodies; color differences are reference-only.",
+        "SAM max4 tracking can omit instances; masks and inverse resizing affect descriptive metrics."
+      ],
+      "input_summary_sha256": {
+        "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+        "output": "dfdb7ef3499cc47fcbf6257ba9981b6e73ed1945c7e16d452188766955a4659b",
+        "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+      },
+      "silhouette_iou": {
+        "per_casting": {
+          "Lab": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.5980259072268066,
+            "all_frame_mean": 0.5980259072268066
+          },
+          "IG": {
+            "observed_frames": 73,
+            "missing_frames": 0,
+            "observed_mean": 0.46712389916001734,
+            "all_frame_mean": 0.46712389916001734
+          }
+        },
+        "all_frame_mean_lab_ig": 0.5325749031934119,
+        "definition": "Undilated source and fixed-cast output masks, intersected with observed crop support. Missing output detection yields observed=null and explicit empty-prediction IoU0. Technical SAM failure has no metric."
+      },
+      "detail_ref": "metrics/baseline-e1-20261104.json",
+      "selection_role": "BASELINE_ONLY_NOT_14B_CANDIDATE"
+    }
+  },
+  "new_outputs": {
+    "M1": {
+      "technical_status": "GENERATED",
+      "measurement_status": "NOT_RUN",
+      "metrics": null,
+      "reason": "Output SAM NOT_RUN; original media remains on unreachable Spark and Mac delivery is unverified"
+    },
+    "M2": {
+      "technical_status": "UNKNOWN",
+      "measurement_status": "NOT_RUN",
+      "metrics": null,
+      "reason": "Last confirmed 21/50 scheduler steps and 44 model_fn calls; no completion receipt"
+    },
+    "M3": {
+      "technical_status": "NOT_RUN",
+      "measurement_status": "NOT_RUN",
+      "metrics": null,
+      "reason": "Host unreachable"
+    },
+    "V14B": {
+      "technical_status": "NOT_RUN",
+      "measurement_status": "NOT_RUN",
+      "metrics": null,
+      "reason": "No selection, conversion, probe, or generation occurred"
+    },
+    "LTX_CANNY": {
+      "technical_status": "NOT_RUN",
+      "measurement_status": "NOT_RUN",
+      "metrics": null,
+      "reason": "Host unreachable"
+    }
+  },
+  "selection_14b": {
+    "status": "NOT_RUN",
+    "selected_variant": null,
+    "reason": "M1-M3 output SAM metrics unavailable; baseline results are not selection candidates"
+  },
+  "caveats": [
+    "Technical unmeasured results are null, never synthetic zero scores.",
+    "Connectivity loss does not establish OOM, reboot, worker termination, or ongoing progress.",
+    "Outside original RGB is model conditioning, not guaranteed generated-pixel preservation."
+  ]
+}

@@ -534,3 +534,8 @@ E1은 공식128배수1152×640 규약에서73프레임 영상2개를 생성해 M
 ## V-002 마스크 편집 준비·외부 GPU 차단 (2026-11-04)
 
 고정 SAM 마스크·세 MV2V 입력·canny 대조를 준비했으나 외부 GPU 배치로 모델 적재/신규 영상/출력 SAM 모두 0회다. 14B는 사전 추정 128GiB가 100GiB 상한을 넘어 차단했다. A 동결·C 보류·HUMAN_REVIEW_PENDING 유지, 후속 생성 예약 없음. [결과](experiments/V-002-mask-guided-swap/RESULTS.md).
+
+
+## V-002 r1: M1 생성 완료·M2 실행 중 원격 관측 유실 (2026-11-05 KST)
+
+외부 GPU 부재를 단계별 180초 관측한 뒤 baseline SAM 2개와 M1 73프레임 생성(976.9초)을 완료했다. M2 21/50 step 확인 후 Spark SSH·Tailscale 연결이 유실되어 완료·실패·worker 종료는 UNKNOWN이다. M1 출력 SAM과 M3·14B·LTX는 미실행이며, M1 미디어의 Mac 전달도 확인하지 못했다. 첫 실행 9f78153은 보존한다. A 동결·C 보류·HUMAN_REVIEW_PENDING 유지, 새 생성 재시도나 후속 예약 없음. [r1 기록](experiments/V-002-mask-guided-swap/RESUME_R1/RESULTS.md).

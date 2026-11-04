@@ -28,5 +28,34 @@
     }
   ],
   "stage": "baseline-s1",
-  "status": "IDLE_WINDOW_CONFIRMED"
+  "status": "IDLE_WINDOW_CONFIRMED",
+  "scope": "Detailed observations below cover initial baseline-s1 only; full remote ledger not retrieved after host loss.",
+  "later_admissions_observed": [
+    {
+      "stage": "baseline-s2",
+      "status": "READY",
+      "minimum_observation_seconds": 180,
+      "external_gpu_or_batch_seen": false
+    },
+    {
+      "stage": "baseline-s2-contract",
+      "status": "READY",
+      "minimum_observation_seconds": 180,
+      "external_gpu_or_batch_seen": false
+    },
+    {
+      "stage": "M1",
+      "status": "READY",
+      "minimum_observation_seconds": 180,
+      "external_gpu_or_batch_seen": false
+    },
+    {
+      "stage": "M2",
+      "status": "READY",
+      "minimum_observation_seconds": 180,
+      "external_gpu_or_batch_seen": false
+    }
+  ],
+  "final_remote_ledger_retrieved": false,
+  "total_all_admission_seconds_exact": null
 }
