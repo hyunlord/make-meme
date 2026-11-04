@@ -1,0 +1,14 @@
+{
+  "verified_at": "2026-11-04T05:52Z",
+  "roles_sha256": {
+    "anchor": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779",
+    "source_sam_summary": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+    "anchor_sam_summary": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3",
+    "depth_raw": "11debd60bfdd02cea8e7fe3d52a02f0f626c7023a9cf55ae9a20644d53fd9181",
+    "V001_E1_s1": "763fbe29637437c40aafdb3f21438601144361f47308dd22234d10b4e2e59289",
+    "V001_E1_s2": "8844caea618a2ab54f9bea76b1a8225bebd8c244167da36f0c19ec9bf667900b"
+  },
+  "source_frames": 73,
+  "source_mask_files": 292,
+  "manifest_note": "Individual frame hashes will be emitted by CPU preparation before inference."
+}

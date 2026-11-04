@@ -1,0 +1,81 @@
+{
+  "experiment": "V-002-mask-guided-swap",
+  "parent": {"experiment": "V-001-anchor-propagation-baseline", "branch": "docs/v-research-20261103", "after_commit": "0cfd0ef"},
+  "reuse": {
+    "segment": {"start": 240, "end_exclusive": 313, "frames": 73, "fps": 24},
+    "casting": {"Lab": "track0 (right-front, source brown dog)", "IG": "track1 (left-back, source grey dog)"},
+    "reflections": ["track2", "track3"],
+    "reflection_rule": "V-001 amendment 2",
+    "anchor": "V-001 accepted anchor (1 imagegen call, G1-G5 PASS)",
+    "depth_raw": "V-001 E1 Video Depth Anything raw, resampled on CPU (no new depth inference)"
+  },
+  "geometry": {"resolution": [832, 480], "rule": "1280x720 -> 853x480 keep aspect, center-crop width to 832"},
+  "mask": {
+    "dilation_px_at_832x480": {"Lab": 24, "IG": 12, "reflections": 12},
+    "generate_region": "union of dilated Lab, IG, reflection masks",
+    "white_rgb": [255, 255, 255],
+    "channel_check_required": true,
+    "lesson": "C-008: PIL integer fill produced (255,0,0) red masks"
+  },
+  "references": "Lab and IG crops from anchor via SAM anchor masks, placed on white background per VACE reference convention",
+  "prompt": "Two dogs dancing on a reflective floor in the same room: on the right, a large black Labrador Retriever with a broad chest and thick legs; on the left, a slender grey Italian Greyhound. Their reflections on the floor match them. Keep the original motion, timing, room and camera.",
+  "seed": 20261103,
+  "vace_1_3b_variants": {
+    "M1": {"inside_mask": "gray 127", "frame0": "source + mask", "refs": "Lab, IG crops"},
+    "M2": {"inside_mask": "source depth", "frame0": "source + mask", "refs": "Lab, IG crops"},
+    "M3": {"inside_mask": "gray 127", "frame0": "anchor RGB, mask 0 (keep)", "refs": "Lab, IG crops"}
+  },
+  "selection_for_14b": {
+    "eligibility": "real-dog count == 2 in >= 66/73 frames",
+    "criterion": "highest mean casting-wise silhouette IoU vs source (Lab and IG averaged)",
+    "tie_margin": 0.02,
+    "tie_winner": "M1",
+    "no_candidate": "NO_14B_CANDIDATE, skip 14B",
+    "human_wait": false
+  },
+  "vace_14b": {
+    "weights": "research/make-meme-c/models/Wan2.1-VACE-14B (official, from C-005)",
+    "timing_probe": 1,
+    "cap_minutes_73": 150,
+    "fallback_frames": 49,
+    "skip_if_49_exceeds_minutes": 225
+  },
+  "ltx_canny_control": {
+    "settings": "V-001 E1 (1152x640, anchor first frame, distilled two-stage, Union IC-LoRA strength 1.0)",
+    "control": "canny only, official CannyEdgePreprocessor defaults 92/200",
+    "runs": 1
+  },
+  "uma_memory_policy": {
+    "drop_caches_before_heavy_load": "sudo /usr/local/sbin/drop-caches (user-created); if absent or refused, record and continue",
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
+    "preflight_peak_estimate_max_gib": 100,
+    "nvrm_watch": "stop worker on first NV_ERR_NO_MEMORY in kernel log; ENGINE_STOPPED_NVRM; no retry",
+    "worker_memory_max_gib": 100,
+    "memory_high_equals_max": true,
+    "v001_section7_stop_rules": "unchanged"
+  },
+  "budget": {
+    "imagegen": 0,
+    "vace_1_3b_runs": 3,
+    "vace_14b": {"timing_probe": 1, "generation": 1},
+    "ltx_canny_runs": 1,
+    "max_videos": 5,
+    "quality_retries": 0,
+    "training": 0,
+    "total_wall_hours_cap": 7,
+    "reserved_minutes_for_records_and_delivery": 30
+  },
+  "metrics": [
+    "silhouette_iou_per_casting (primary)",
+    "trajectory_distance_per_casting",
+    "real_dog_count_stability",
+    "identity_swap_frames",
+    "lab_ig_size_ratio_median (with source and anchor ratios)",
+    "reflection_color_reference",
+    "outside_mask_preservation_mae",
+    "cost_time_memory_steps_nvrm_guard_events"
+  ],
+  "baseline_metrics_on": ["V-001 E1 seed 20261103", "V-001 E1 seed 20261104"],
+  "quality": "HUMAN_REVIEW_PENDING",
+  "delivery": {"git": "docs, non-sensitive code, hashes", "zip": "Mac ~/Downloads/V002-review-<date>.zip", "integrity_report": "one line"}
+}
