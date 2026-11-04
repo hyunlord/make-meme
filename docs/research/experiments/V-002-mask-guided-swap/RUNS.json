@@ -1,7 +1,7 @@
 {
   "status": "CPU_INPUTS_READY_WAITING_EXTERNAL_GPU",
   "started_at": "2026-11-04T05:46:38Z",
-  "updated_at": "2026-11-04T05:58:45.029713+00:00",
+  "updated_at": "2026-11-04T06:11:00.749177+00:00",
   "generation_budget": 5,
   "counts": {
     "new_video_attempts": 0,
@@ -56,5 +56,23 @@
     "external_gpu": "OBSERVED_PRESERVED",
     "heavy_started": false
   },
-  "quality": "HUMAN_REVIEW_PENDING"
+  "quality": "HUMAN_REVIEW_PENDING",
+  "prelaunch_admission": [
+    {
+      "stage": "v002-sam-baseline-e1-20261103-cpu",
+      "result": "UNKNOWN_GPU_PID",
+      "worker_started": false,
+      "model_loads": 0,
+      "raw_records_preserved": true
+    }
+  ],
+  "cpu_entry_validation": {
+    "M1": "CPU_ENTRY_PASS",
+    "M2": "CPU_ENTRY_PASS",
+    "M3": "CPU_ENTRY_PASS",
+    "LTX_CANNY": "CPU_VALIDATED",
+    "torch_imported": false,
+    "ltx_argument_repair": "missing --config fixed before stage execution; failed direct CLI record preserved"
+  },
+  "static_review": "No blocking defect found; no GPU success inferred"
 }

@@ -38,3 +38,9 @@ OOM,가용<12GiB30초,PSIfull>25%60초,외부GPU/서비스충돌/관측오류중
 ## 14B 사전 메모리 판정
 
 신규 출력 확인 전 정적 적재 코드와 실제 저장 dtype 크기로 보수적 peak를 계산했다. 14B는약128GiB 추정으로100GiB상한초과, ENGINE_BLOCKED_MEMORY_ESTIMATE. 후보 선택은 M1–M3 측정 후 규칙대로 기록하되 후보가 있어도 이번14Bprobe/생성은 시작하지 않는다. 원본FP32전체CPU복사는없지만pagecache와temporaryCUDA중복을제외할근거가없다. 별도변환·새offload구현을추가하지않는다. SAM/1.3B/LTX는각40/85/95GiB계획추정으로개별guard대상이며실측상한을보장하는수치가아니다.
+
+## 시작 관측 및 CPU 검증 추가 기록
+
+2026-11-04T06:11Z: 최초 SAM 기준선 CPU guarded admission은 외부 GPU 작업으로 거절됐다. Worker 생성·모델 적재·SAM 호출은 모두 0회이며 해당 stage와 원본 관측을 보존한다. 외부 배치의 일시적인 GPU 공백은 종료로 간주하지 않는다. 실행 중인 엔진의 안전 중단을 재시도하지 않으며, 현재는 모델 실행 전 외부 자원 충돌 상태다.
+
+M1–M3와 LTX canny의 직접 CPU 입력 검사 통과(torch import 없음). LTX의 누락된 --config 인자는 아직 실행하지 않은 stage에 수정 후 freeze를 갱신했다. 원래 CLI 오류는 비공개 기록에 보존한다. 정적 검토에서 blocking defect 없음; 실제 추론 검증을 대신하지 않는다.

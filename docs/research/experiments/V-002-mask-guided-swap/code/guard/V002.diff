@@ -1,37 +1,21 @@
---- V001/policy.py
-+++ V002/policy.py
-@@ -20,7 +20,7 @@
-     assert policy['stage_root']==str(root.resolve()) and policy['stage']==cfg['stage']
-     assert policy['boot_id']==Path('/proc/sys/kernel/random/boot_id').read_text().strip()
-     assert time.time()<policy['deadline_epoch']==cfg['deadline_epoch']
+--- parent/policy.py
++++ v002/policy.py
+@@ -23 +23 @@
 -    assert policy['attempt_id']=='C001_V001_APPROVED_01'
 +    assert policy['attempt_id']=='C001_V002_APPROVED_01'
-     assert policy['process_markers'] and policy['service_cwd'].endswith('/make-meme/ComfyUI')
-     assert policy['endpoint']=='http://127.0.0.1:8190/queue'
-     for path,digest in policy['logical_files'].items():
---- V001/supervisor.py
-+++ V002/supervisor.py
-@@ -2,6 +2,7 @@
- from pathlib import Path
- import hashlib,json,subprocess,sys,time,fcntl
- from policy import load_policy
+--- parent/supervisor.py
++++ v002/supervisor.py
+@@ -4,0 +5 @@
 +from uma import ALLOCATOR,KernelWatch,drop_caches,peak_decision
- from memory import MemoryBudget,collect_cgroup
- from safety import observe,start_decision,identity,lifecycle_decision,normal_exit,finalized_exit
- 
-@@ -41,11 +42,25 @@
-         temporary=budget_path.with_suffix('.tmp');temporary.write_text(json.dumps(budget.export(),indent=2));temporary.replace(budget_path)
-     lock=open(config['research_lock'],'a+')
-     fcntl.flock(lock.fileno(),fcntl.LOCK_EX|fcntl.LOCK_NB)
+@@ -44 +45,3 @@
 -    for path,digest in json.loads((root/'freeze.json').read_text())['files'].items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==digest,path
 +    frozen=json.loads((root/'freeze.json').read_text())['files']
 +    assert str(Path(__file__).with_name('uma.py').resolve()) in frozen,'UMA_HELPER_NOT_FROZEN'
 +    for path,digest in frozen.items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==digest,path
-     with (root/'reports/supervisor-attempt.json').open('x') as out:json.dump({'started':time.time(),'unit':unit,'deadline':deadline},out)
-     units=subprocess.check_output(['systemctl','--user','list-units','--all','--no-legend','--plain','--no-pager'],timeout=5,text=True)
+@@ -47 +50 @@
 -    conflicts=[line for line in units.splitlines() if 'v001' in line.lower() and any(state in line.split() for state in ('active','activating','deactivating'))]
 +    conflicts=[line for line in units.splitlines() if any(marker in line.lower() for marker in ('v001','v002')) and any(state in line.split() for state in ('active','activating','deactivating'))]
-     assert not conflicts, 'DUPLICATE_RESEARCH_UNIT'
+@@ -48,0 +52,12 @@
 +    heavy=config['stage'].endswith('-heavy')
 +    assert config['environment'].get('PYTORCH_CUDA_ALLOC_CONF',ALLOCATOR)==ALLOCATOR,'ALLOCATOR_CONTRACT'
 +    if heavy:
@@ -44,28 +28,17 @@
 +        if precache['decision']!='CLEAR' or precache['service_policy']['research_worker_pids']:return 2
 +        cache=drop_caches()
 +        (root/'reports/cache-drop.json').write_text(json.dumps(cache,indent=2))
-     samples=[]
-     for index in range(36):
-         initial=observe(allowed,set(),False,policy,budget)
-@@ -62,15 +77,29 @@
-     if initial['decision']!='CLEAR':return 2
-     (root/'reports/start-safety.json').write_text(json.dumps(initial,indent=2))
-     cap=worker_memory_cap(initial['available']);seconds=min(config['worker_max_seconds'],int(deadline-time.time()-10))
+@@ -65 +80,5 @@
 -    command=['systemd-run','--user','--wait','--pipe','--unit='+unit,'-p',f'RuntimeMaxSec={seconds}','-p',f'MemoryMax={cap}','-p',f'MemoryHigh={cap}','-p','MemorySwapMax=0','-p','TasksMax=256','-p','RemainAfterExit=yes','-p','KillMode=control-group','-p','TimeoutStopSec=20','--',sys.executable,str(root/'code/worker.py'),str(root)]
 +    command=['systemd-run','--user','--wait','--pipe','--unit='+unit,'-p',f'RuntimeMaxSec={seconds}','-p',f'MemoryMax={cap}','-p',f'MemoryHigh={cap}','-p','MemorySwapMax=0','-p','TasksMax=256','-p','RemainAfterExit=yes','-p','KillMode=control-group','-p','TimeoutStopSec=20','--setenv=PYTORCH_CUDA_ALLOC_CONF='+ALLOCATOR,'--',sys.executable,str(root/'code/worker.py'),str(root)]
 +    watch=KernelWatch.start() if heavy else None
 +    if watch is not None:
 +        (root/'reports/kernel-watch-start.json').write_text(json.dumps({'status':watch.status,'cursor':watch.cursor,'detail':watch.detail,'started':time.time()},indent=2))
 +        if watch.status=='OBSERVATION_FAILED':return 2
-     registered={};exit_receipt=None;uncertain_since=None;started=time.time();reason='UNKNOWN';cleanup=[]
+@@ -67 +86 @@
 -    peak_worker_rss=None
 +    peak_worker_rss=None;nvrm_count=0
-     min_available=min(row['available'] for row in samples if row['available'] is not None)
-     with (root/'reports/worker.log').open('w') as log:
-         child=subprocess.Popen(command,stdout=log,stderr=subprocess.STDOUT)
-         try:
-             while True:
-                 completed=child.poll() is not None
+@@ -73,0 +93,10 @@
 +                kernel=watch.poll() if watch is not None else None
 +                if kernel is not None:
 +                    with (root/'reports/kernel-events.jsonl').open('a') as out:out.write(json.dumps(kernel)+'\n')
@@ -76,32 +49,123 @@
 +                        reason='ENGINE_STOPPED_NVRM'
 +                        nvrm_count+=len(kernel['messages'])
 +                        break
-                 row=observe(allowed,set(),completed,policy,budget)
-                 if row['available'] is not None:min_available=min(min_available,row['available'])
-                 try:
-@@ -106,6 +135,7 @@
-                     (root/'reports/normal-exit.json').write_text(json.dumps(exit_receipt,indent=2))
-                     subprocess.run(['systemctl','--user','stop',unit],check=True,timeout=30)
-                 if decision in ('OWN_WORKER_DRAINING','IDENTITY_UNCERTAIN') and uncertain_since is None:uncertain_since=time.monotonic()
+@@ -108,0 +138 @@
 +                row['kernel_watch']=kernel
-                 row['decision']=decision;row['uncertainty_elapsed']=None if uncertain_since is None else time.monotonic()-uncertain_since
-                 with (root/'reports/observations.jsonl').open('a') as out:out.write(json.dumps(row)+'\n')
-                 reason=decision
-@@ -113,7 +143,7 @@
-                 if time.time()>=min(deadline,started+seconds):reason='DEADLINE';break
-                 time.sleep(1)
-         finally:
+@@ -116 +146 @@
 -            if child.poll() is None:
 +            if child.poll() is None or reason=='ENGINE_STOPPED_NVRM':
-                 try:subprocess.run(['systemctl','--user','stop',unit],check=False,timeout=30)
-                 except (OSError,subprocess.SubprocessError) as error:cleanup.append(type(error).__name__)
-             try:result=child.wait(timeout=40)
-@@ -128,7 +158,7 @@
-             except (OSError,subprocess.SubprocessError,ValueError) as error:
-                 final['systemd_error']=type(error).__name__;final['decision']='OBSERVATION_FAILED'
-             if final['decision']=='CLEAR' and not finalized_exit(final.get('systemd',{}),registered,exit_receipt):final['decision']='UNIT_EXIT_NOT_VERIFIED'
+@@ -131 +161 @@
 -            report={'peak_worker_rss_bytes_observed':peak_worker_rss,'peak_worker_rss_scope':'registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss','min_available_bytes_observed':min_available,'guard_reason':reason,'worker_returncode':result,'cleanup_errors':cleanup,'normal_exit_recorded':exit_receipt is not None,'started':started,'finished':time.time(),'final':final,'status':'COMPLETE' if reason=='COMPLETE' and result==0 and not cleanup and final['decision']=='CLEAR' else 'NOT_CLEAN'}
 +            report={'nvrm_events':nvrm_count,'kernel_watch_status':watch.status if watch is not None else 'NOT_REQUESTED_CPU','allocator':ALLOCATOR,'peak_worker_rss_bytes_observed':peak_worker_rss,'peak_worker_rss_scope':'registered worker process /proc VmHWM; sampled lower bound, not final ru_maxrss','min_available_bytes_observed':min_available,'guard_reason':reason,'worker_returncode':result,'cleanup_errors':cleanup,'normal_exit_recorded':exit_receipt is not None,'started':started,'finished':time.time(),'final':final,'status':'ENGINE_STOPPED_NVRM' if reason=='ENGINE_STOPPED_NVRM' else 'COMPLETE' if reason=='COMPLETE' and result==0 and not cleanup and final['decision']=='CLEAR' else 'NOT_CLEAN'}
-             (root/'reports/supervisor-result.json').write_text(json.dumps(report,indent=2))
-     return 0 if report['status']=='COMPLETE' else 2
- if __name__=='__main__':raise SystemExit(main())
+--- parent/uma.py
++++ v002/uma.py
+@@ -0,0 +1,109 @@
++# /// script
++# requires-python = ">=3.11"
++# dependencies = []
++# ///
++# How to run: imported by the V002 scoped supervisor; CPU tests: python -m unittest test_v002
++"""V002-only cache invocation and fresh kernel-event observations, without model imports."""
++from dataclasses import dataclass
++from pathlib import Path
++from typing import Final, TypedDict
++import json
++import math
++import subprocess
++import time
++
++CACHE_HELPER: Final = Path('/usr/local/sbin/drop-caches')
++ALLOCATOR: Final = 'expandable_segments:True'
++
++class CacheReceipt(TypedDict):
++    status: str
++    started: float
++    finished: float
++    returncode: int | None
++    detail: str
++
++class KernelReceipt(TypedDict):
++    status: str
++    cursor: str | None
++    observed_at: float
++    nvrm_hit: bool
++    messages: list[str]
++    detail: str
++
++
++def peak_decision(value: float | None, basis: str) -> str:
++    """Require a finite, explicit estimate before admitting any heavy load."""
++    if type(value) not in (int, float) or value is None or not math.isfinite(value) or value <= 0:
++        return 'START_PEAK_ESTIMATE_INVALID'
++    if not isinstance(basis, str) or not basis.strip():
++        return 'START_PEAK_ESTIMATE_INVALID'
++    return 'START_PEAK_ESTIMATE_EXCEEDED' if value > 100 else 'CLEAR'
++
++
++def drop_caches() -> CacheReceipt:
++    """Invoke only the preinstalled authorized command, never create or repair it."""
++    receipt: CacheReceipt = {'status':'ABSENT_CONTINUE','started':time.time(),'finished':0.0,'returncode':None,'detail':''}
++    if CACHE_HELPER.is_file():
++        try:
++            result = subprocess.run(['sudo','-n',str(CACHE_HELPER)],capture_output=True,text=True,timeout=30,check=False)
++            receipt.update(status='APPLIED' if result.returncode == 0 else 'REFUSED_CONTINUE',
++                           returncode=result.returncode,detail=(result.stdout+result.stderr)[-4096:])
++        except (OSError, subprocess.SubprocessError) as error:
++            receipt.update(status='UNAVAILABLE_CONTINUE',detail=type(error).__name__+':'+str(error))
++    receipt['finished'] = time.time()
++    return receipt
++
++
++@dataclass(slots=True)
++class KernelWatch:
++    """Mutable cursor ledger: reads only events after the pre-launch cursor."""
++    cursor: str | None
++    status: str
++    detail: str = ''
++
++    @classmethod
++    def start(cls) -> 'KernelWatch':
++        watch = cls(None, 'AVAILABLE')
++        watch._read(initial=True)
++        return watch
++
++    def _read(self, *, initial: bool) -> KernelReceipt:
++        receipt: KernelReceipt = {'status':self.status,'cursor':self.cursor,'observed_at':time.time(),
++                                  'nvrm_hit':False,'messages':[],'detail':self.detail}
++        if self.status != 'AVAILABLE':
++            return receipt
++        command = ['journalctl','-k','--no-pager','-o','json','--show-cursor']
++        command += ['-n','1'] if initial else ['--after-cursor='+str(self.cursor)]
++        try:
++            result = subprocess.run(command,capture_output=True,text=True,timeout=3,check=False)
++            if result.returncode:
++                unreadable=any(marker in result.stderr.lower() for marker in ('permission','not permitted','no journal files','not found','unrecognized option'))
++                self.status='UNAVAILABLE_CONTINUE' if initial and unreadable else 'OBSERVATION_FAILED'
++                self.detail=result.stderr[-4096:]
++            else:
++                for line in result.stdout.splitlines():
++                    if line.startswith('-- cursor: '):
++                        self.cursor=line.removeprefix('-- cursor: ').strip()
++                    elif line.startswith('{'):
++                        entry=json.loads(line)
++                        if entry.get('__CURSOR'):
++                            self.cursor=str(entry['__CURSOR'])
++                        message=entry.get('MESSAGE','')
++                        if not isinstance(message,str):
++                            message=json.dumps(message)
++                        if not initial and 'NV_ERR_NO_MEMORY' in message:
++                            receipt['messages'].append(message)
++                if not self.cursor:
++                    self.status='UNAVAILABLE_CONTINUE' if initial else 'OBSERVATION_FAILED'
++                    self.detail='No readable kernel cursor: '+result.stderr[-4096:]
++        except (FileNotFoundError, PermissionError) as error:
++            self.status='UNAVAILABLE_CONTINUE' if initial else 'OBSERVATION_FAILED'
++            self.detail=type(error).__name__+':'+str(error)
++        except (OSError, subprocess.SubprocessError, ValueError, KeyError) as error:
++            self.status='OBSERVATION_FAILED'
++            self.detail=type(error).__name__+':'+str(error)
++        receipt.update(status=self.status,cursor=self.cursor,nvrm_hit=bool(receipt['messages']),detail=self.detail)
++        return receipt
++
++    def poll(self) -> KernelReceipt:
++        return self._read(initial=False)
