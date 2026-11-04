@@ -1,0 +1,56 @@
+{
+  "status": "NOT_MEASURED_EXTERNAL_GPU",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "outputs": {
+    "V001_E1_S1": {
+      "status": "NOT_RUN",
+      "metrics": null
+    },
+    "V001_E1_S2": {
+      "status": "NOT_RUN",
+      "metrics": null
+    },
+    "M1": {
+      "status": "NOT_RUN",
+      "metrics": null
+    },
+    "M2": {
+      "status": "NOT_RUN",
+      "metrics": null
+    },
+    "M3": {
+      "status": "NOT_RUN",
+      "metrics": null
+    },
+    "VACE14B": {
+      "status": "NOT_RUN",
+      "metrics": null
+    },
+    "LTX_CANNY": {
+      "status": "NOT_RUN",
+      "metrics": null
+    }
+  },
+  "selection": {
+    "status": "NOT_EVALUATED",
+    "selected": null,
+    "reason": "M1-M3 were not generated; absence is not a model-quality failure"
+  },
+  "cpu_scorer_fixtures": {
+    "status": "PASS",
+    "source_as_output": {
+      "frames": 73,
+      "iou": 1.0,
+      "trajectory_distance": 0.0,
+      "outside_mask_mae": 0.0,
+      "count_two_frames": 73,
+      "swaps": 0
+    },
+    "not_model_measurements": true
+  },
+  "V001_user_verdict": {
+    "quote": "개가 움직이지만 원본과 전혀 다른 동작을 한다.",
+    "source": "V002 user work order",
+    "automated_confirmation": "NOT_RUN"
+  }
+}

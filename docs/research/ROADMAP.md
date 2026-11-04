@@ -529,3 +529,8 @@ Gemma 접근 회복과 E1/E2 공식 가중치 다운로드를 완료했으나 �
 ## V-001 개정4: E1 영상 확보, E2 원격 관측 유실 (2026-11-04 KST)
 
 E1은 공식128배수1152×640 규약에서73프레임 영상2개를 생성해 Mac에 보존했다(135.8초·83.6초). 기존 raw depth를 CPU 재표본화했고 VDA 재실행은0회다. E2는 FP32원본을 보존한 채24shard·2,190tensor의 BF16 bit-exact 변환과1step 측정을 완료했고, 사전 시간 규칙에 따라49프레임 seed1을 시작했다. 도중 Spark 접근이 유실되어 완료·실패·종료 여부는 UNKNOWN이며 seed2는 시작하지 않았다. 출력SAM/동작·체형·배경 지표는 미실행으로 남긴다. A동결·C보류·HUMAN_REVIEW_PENDING을 유지하며 후속 실험은 예약하지 않는다. [결과](experiments/V-001-anchor-propagation-baseline/RESULTS.md).
+
+
+## V-002 마스크 편집 준비·외부 GPU 차단 (2026-11-04)
+
+고정 SAM 마스크·세 MV2V 입력·canny 대조를 준비했으나 외부 GPU 배치로 모델 적재/신규 영상/출력 SAM 모두 0회다. 14B는 사전 추정 128GiB가 100GiB 상한을 넘어 차단했다. A 동결·C 보류·HUMAN_REVIEW_PENDING 유지, 후속 생성 예약 없음. [결과](experiments/V-002-mask-guided-swap/RESULTS.md).

@@ -1,0 +1,21 @@
+{
+  "filename": "V002-review-20261104.zip",
+  "bytes": 1390947,
+  "sha256": "a476b5ad706412f83bfccf38912b682bba0aa14b76aba0cb5ae7b6f817535a31",
+  "payload_count": 17,
+  "zip_entry_count": 18,
+  "mac_crc": "PASS",
+  "mac_actual_extraction": "PASS",
+  "mac_payload_hashes": "PASS",
+  "spark": "PASS",
+  "spark_crc": "PASS",
+  "spark_actual_extraction": "PASS",
+  "spark_payload_hashes": "PASS",
+  "host_transfer_equality": "PASS",
+  "browser_qa": "PASS source and baseline only; five NOT_RUN slots",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "contains_new_model_outputs": false,
+  "mac_location_role": "Downloads",
+  "spark_location_role": "V002 private delivery",
+  "manifest_self_excluded": true
+}

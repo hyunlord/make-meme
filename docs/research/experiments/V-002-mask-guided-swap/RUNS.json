@@ -1,7 +1,7 @@
 {
-  "status": "CPU_INPUTS_READY_WAITING_EXTERNAL_GPU",
+  "status": "BLOCKED_EXTERNAL_GPU",
   "started_at": "2026-11-04T05:46:38Z",
-  "updated_at": "2026-11-04T06:11:00.749177+00:00",
+  "updated_at": "2026-11-04T06:12:33.462352+00:00",
   "generation_budget": 5,
   "counts": {
     "new_video_attempts": 0,
@@ -15,22 +15,28 @@
   },
   "variants": {
     "V001_E1_S1_SAM": {
-      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+      "status": "BLOCKED_EXTERNAL_GPU",
+      "worker_started": false
     },
     "V001_E1_S2_SAM": {
-      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+      "status": "BLOCKED_EXTERNAL_GPU",
+      "worker_started": false
     },
     "M1": {
-      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+      "status": "BLOCKED_EXTERNAL_GPU",
+      "worker_started": false
     },
     "M2": {
-      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+      "status": "BLOCKED_EXTERNAL_GPU",
+      "worker_started": false
     },
     "M3": {
-      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+      "status": "BLOCKED_EXTERNAL_GPU",
+      "worker_started": false
     },
     "LTX_CANNY": {
-      "status": "NOT_RUN_WAITING_EXTERNAL_GPU"
+      "status": "BLOCKED_EXTERNAL_GPU",
+      "worker_started": false
     }
   },
   "VACE14B": {
@@ -74,5 +80,26 @@
     "torch_imported": false,
     "ltx_argument_repair": "missing --config fixed before stage execution; failed direct CLI record preserved"
   },
-  "static_review": "No blocking defect found; no GPU success inferred"
+  "static_review": "No blocking defect found; no GPU success inferred",
+  "finished_at": "2026-11-04T06:12:33.462352+00:00",
+  "remaining_budget_not_scheduled": true,
+  "external_observation": {
+    "from": "2026-11-04T06:01:22Z",
+    "to": "2026-11-04T06:11:03Z",
+    "interval_seconds": 20,
+    "samples": 30,
+    "external_batch_present_all_samples": true,
+    "gpu_process_count_observed": [
+      0,
+      1
+    ],
+    "interpretation": "GPU gaps occurred between external child processes; batch still active at close",
+    "process_termination_performed": false
+  },
+  "shutdown": {
+    "own_v002_systemd_units_loaded": 0,
+    "own_v002_worker_processes_found": 0,
+    "external_batch_alive_at_close": true,
+    "new_experiment_scheduled": false
+  }
 }
