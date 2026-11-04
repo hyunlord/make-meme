@@ -2,8 +2,8 @@
   "status": "RUNNING",
   "started_at": "2026-11-04T18:12:33Z",
   "parent": "9f78153",
-  "new_video_attempts": 0,
-  "output_sam_calls": 1,
+  "new_video_attempts": 1,
+  "output_sam_calls": 2,
   "quality": "HUMAN_REVIEW_PENDING",
   "baseline_s1": {
     "status": "COMPLETE",
@@ -13,5 +13,55 @@
     "nvrm_events": 0,
     "concurrent_external_gpu": false,
     "normal_exit_recorded": true
-  }
+  },
+  "baseline_s2": {
+    "status": "COMPLETE",
+    "started": 1793816853.0142443,
+    "finished": 1793816902.229266,
+    "nvrm_events": 0,
+    "concurrent_external_gpu": false,
+    "peak_worker_rss_bytes_observed": 5319127040,
+    "min_available_bytes_observed": 113197473792,
+    "normal_exit_recorded": true
+  },
+  "M1": {
+    "status": "GENERATED",
+    "mode": "generate",
+    "model_size": "1.3B",
+    "variant": "M1",
+    "seed": 20261103,
+    "frames": 73,
+    "width": 832,
+    "height": 480,
+    "fps": 24,
+    "elapsed_seconds": 976.8770044409903,
+    "model_fn_calls": 100,
+    "scheduler_steps": 50,
+    "first_model_start": 91860.209446515,
+    "first_step_seconds": 15.892224548995728,
+    "peak_rss_bytes": 13114093568,
+    "cuda_peak_allocated_bytes": 20036397568,
+    "cuda_peak_reserved_bytes": 21728591872,
+    "guidance": 5.0,
+    "sigma_shift": 16.0,
+    "scheduler": "DiffSynth FlowMatchScheduler native Euler",
+    "training": 0,
+    "endpoint_overwrite": false,
+    "post_composite": false,
+    "guard_status": "COMPLETE",
+    "mp4_sha256": "50df935150219f22d59d1f28c42097e7e96791127898df121da607d3c3a9a352"
+  },
+  "preload_denials": [
+    {
+      "stage": "baseline2-old-r1-heavy",
+      "reason": "START_HEADROOM_NOT_MET",
+      "model_loads": 0
+    },
+    {
+      "stage": "M3-old-r1-cpu",
+      "reason": "START_HEADROOM_NOT_MET",
+      "model_loads": 0
+    }
+  ],
+  "new_video_outputs": 1
 }
