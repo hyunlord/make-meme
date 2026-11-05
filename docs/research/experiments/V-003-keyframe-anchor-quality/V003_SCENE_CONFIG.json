@@ -172,7 +172,8 @@
     "kind": "derived CPU output, never replaces RAW",
     "edit_region": "per-frame union of source and output SAM dog+reflection masks, dilated by 15% of each dog's bbox height",
     "feather_px": 8,
-    "outside": "source pixels"
+    "outside": "source pixels",
+    "dilation_fraction": 0.15
   },
   "metrics": [
     "upright_aspect_ratio_vs_source",

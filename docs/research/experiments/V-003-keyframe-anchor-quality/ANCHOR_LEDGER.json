@@ -1,23 +1,89 @@
 {
-  "imagegen_calls": 1,
+  "imagegen_calls": 2,
   "model_identifier": "UNKNOWN",
   "billing": "UNKNOWN",
   "calls": [
     {
       "keyframe": 12,
       "attempt": 1,
-      "status": "GENERATED_GATE_PENDING",
-      "raw_dimensions": [
-        1672,
-        941
-      ],
-      "master_dimensions": [
-        1280,
-        720
-      ],
       "raw_sha256": "61e78cc4b54ddc4df7c3e46a4df7822cad5539b153a4427b3e7d7ce0912aba22",
       "master_sha256": "b5c783e182f7c04a5eec5b0b4666190ce09f5659c852ac9b3d417e65cbaee0ed",
-      "prompt_sha256": "3291a8e63c29b89cefc6ccda4fc504f4c94c326a520cfe61296bf0e40f3d885e"
+      "prompt_sha256": "3291a8e63c29b89cefc6ccda4fc504f4c94c326a520cfe61296bf0e40f3d885e",
+      "status": "GATE_PASS",
+      "gates": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 14.903909550484071,
+          "IG": 11.479587611258353
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0816326530612246,
+          "IG": 1.0642857142857143
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0773233596227336,
+          "IG": 1.0516906170752325
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.010643005371094,
+        "background_pixels": 761534,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 12,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "2318fb340e7682ee9cce720cf59b93df4dc11504167c74a8aae1f0eaae1f5798",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
+        }
+      }
+    },
+    {
+      "keyframe": 24,
+      "attempt": 1,
+      "raw_sha256": "9a48adee89ea4dc634755d63b6b82ba072c3f45b74e46ddf1939aaf995b8e111",
+      "master_sha256": "f43914d16be543735a00b0f71c24ed9fb4a0afacf8d61ae07b21e210e1703d44",
+      "prompt_sha256": "b30c9ccae40ea2c3bd3691c0640f9ed301c0622c0ef3a18aa62c9ddd7c10c7dc",
+      "status": "GENERATED_GATE_PENDING"
     }
   ],
   "reused_anchor0_sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779"
