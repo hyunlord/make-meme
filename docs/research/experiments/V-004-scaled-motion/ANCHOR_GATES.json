@@ -1297,7 +1297,7 @@
     60,
     72
   ],
-  "G7_new_measurement": "PENDING_REFERENCE_ONLY",
+  "G7_new_measurement": "MEASURED_REFERENCE_ONLY",
   "G8_all_accepted_reference_only": {
     "f000": {
       "gate": false,
@@ -1640,5 +1640,370 @@
       },
       "quadrant_agreement": true
     }
+  },
+  "G7_all_accepted_reference_only": {
+    "scope": "All 11 accepted anchors, including seven unchanged V003 anchors and four new V004 anchors",
+    "accepted_frames": [
+      0,
+      12,
+      16,
+      20,
+      24,
+      28,
+      32,
+      36,
+      48,
+      60,
+      72
+    ],
+    "report_sha256": "352cbdd473cbdd037538d2ac5f6ea172ff3ebb6af1ca84c74d08400f034c3aea",
+    "status": "MEASURED_REFERENCE_ONLY",
+    "gate": false,
+    "reference_id": "f000",
+    "feature": "SiglipVisionModel.pooler_output; L2 normalized",
+    "crop": "SAM bbox RGB, unmasked; official local image processor",
+    "dtype": "torch.bfloat16",
+    "items": [
+      {
+        "id": "f000",
+        "cosine_vs_reference": {
+          "Lab": 1.0,
+          "IG": 0.9999998807907104
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            492,
+            229,
+            746,
+            576
+          ],
+          "IG": [
+            351,
+            264,
+            572,
+            554
+          ]
+        },
+        "image_sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779",
+        "sam_summary_sha256": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3",
+        "casting_report_sha256": "3f546a40e7e07a8a103edd56daf47046e962e83285bc574fb7389c29fe3fd24a"
+      },
+      {
+        "id": "f012",
+        "cosine_vs_reference": {
+          "Lab": 0.9026162624359131,
+          "IG": 0.8842923045158386
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            528,
+            253,
+            779,
+            571
+          ],
+          "IG": [
+            417,
+            251,
+            586,
+            549
+          ]
+        },
+        "image_sha256": "b5c783e182f7c04a5eec5b0b4666190ce09f5659c852ac9b3d417e65cbaee0ed",
+        "sam_summary_sha256": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f",
+        "casting_report_sha256": "6d6b4264c6e7ea2b1f2221873a1e34148ceb688a105ab2197559d19f734df02b"
+      },
+      {
+        "id": "f016",
+        "cosine_vs_reference": {
+          "Lab": 0.8580374717712402,
+          "IG": 0.927419900894165
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            530,
+            255,
+            784,
+            566
+          ],
+          "IG": [
+            417,
+            264,
+            583,
+            551
+          ]
+        },
+        "image_sha256": "89f9dc3b543613ddb761c8acca378a5cdd87cd4da5455a83b3654d5109367305",
+        "sam_summary_sha256": "a576306822afcde0e6887b7504da9fc7a72dc38a770460cdcc4f6276afa862c0",
+        "casting_report_sha256": "931c04b08f46a5061cefb2ac237a00b96fb54bd47108544722969dcb03fa47db"
+      },
+      {
+        "id": "f020",
+        "cosine_vs_reference": {
+          "Lab": 0.898529589176178,
+          "IG": 0.9139072895050049
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            503,
+            274,
+            796,
+            575
+          ],
+          "IG": [
+            402,
+            267,
+            578,
+            552
+          ]
+        },
+        "image_sha256": "275cb7674e0aaeffedb3213b367b719047c56ac58338f249d188e775b41ea700",
+        "sam_summary_sha256": "31960e9b28ffda1b6d9e8b00e3b1f351a5fbc937349bd833d623c2f8c830420f",
+        "casting_report_sha256": "8de4f7d943565277499f36df6467c84f5763cfac64f50b4f63dc7cc6bcb7eb6d"
+      },
+      {
+        "id": "f024",
+        "cosine_vs_reference": {
+          "Lab": 0.7412821054458618,
+          "IG": 0.8921977281570435
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            592,
+            195,
+            804,
+            548
+          ],
+          "IG": [
+            420,
+            263,
+            583,
+            527
+          ]
+        },
+        "image_sha256": "f43914d16be543735a00b0f71c24ed9fb4a0afacf8d61ae07b21e210e1703d44",
+        "sam_summary_sha256": "2660a921e5912277b2a6a1d95406391499d4ca3b78d61debd170683c623cc0ea",
+        "casting_report_sha256": "2816efa0535eadfa3c96f5056f768a73ef91acbb31bb51781b30fd452c8c441b"
+      },
+      {
+        "id": "f028",
+        "cosine_vs_reference": {
+          "Lab": 0.7690663933753967,
+          "IG": 0.9028012752532959
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            598,
+            215,
+            806,
+            571
+          ],
+          "IG": [
+            406,
+            272,
+            579,
+            551
+          ]
+        },
+        "image_sha256": "8a459d576cad441f967cbd2d8849df46ab83bc600d4d623ca33146c962b01827",
+        "sam_summary_sha256": "a8efbf114e14fddb73c98e8d1943b7055a5b6be62c77270b8691cf6ecbce6b48",
+        "casting_report_sha256": "5558cede129e98b620f1f1f5c9f943781976606655e3c2cb1f728284b0cf20fa"
+      },
+      {
+        "id": "f032",
+        "cosine_vs_reference": {
+          "Lab": 0.8070195913314819,
+          "IG": 0.9023762941360474
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            627,
+            208,
+            857,
+            576
+          ],
+          "IG": [
+            417,
+            288,
+            586,
+            555
+          ]
+        },
+        "image_sha256": "8581b299d3637314c1295b40233acad60bb0bf7f5bded1e455db0d3b78ec20d4",
+        "sam_summary_sha256": "78d742a3d5d21b51e67adcd931c6216f8c0981a56fc0b80ded430287777faf05",
+        "casting_report_sha256": "6b0b7af89a31a66db4c77501e51520bf5cf78d935bca7968e229b04bf630bb54"
+      },
+      {
+        "id": "f036",
+        "cosine_vs_reference": {
+          "Lab": 0.8472852110862732,
+          "IG": 0.8900498151779175
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            611,
+            164,
+            812,
+            577
+          ],
+          "IG": [
+            418,
+            263,
+            577,
+            551
+          ]
+        },
+        "image_sha256": "3f2adb575c77ccc0daf8b1d9a4f5ff6868039ab3cb87632c0fd5b57715891738",
+        "sam_summary_sha256": "7bce4a6ff43d102b167d0f79b7850421168571876b6d6bcb74630209831f8f63",
+        "casting_report_sha256": "bd2ca1659b7524cc83efa3c8ebdb87c7cacd15d8aa90befd742533f0dc349e85"
+      },
+      {
+        "id": "f048",
+        "cosine_vs_reference": {
+          "Lab": 0.9316020011901855,
+          "IG": 0.8691859245300293
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            553,
+            194,
+            776,
+            577
+          ],
+          "IG": [
+            429,
+            289,
+            586,
+            552
+          ]
+        },
+        "image_sha256": "579d75f12672c1362b42091e97cfc33666795875880815edbd175bdb4d7ac89e",
+        "sam_summary_sha256": "ba59774982d154f80a9eb76df0749c51323fc229d3951400544aa8c25357f905",
+        "casting_report_sha256": "a7389b02aa40b85a399b305e21b439d41ea18ac084808955934301df6e78e3da"
+      },
+      {
+        "id": "f060",
+        "cosine_vs_reference": {
+          "Lab": 0.8622336387634277,
+          "IG": 0.8703752756118774
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            633,
+            208,
+            873,
+            575
+          ],
+          "IG": [
+            473,
+            294,
+            625,
+            554
+          ]
+        },
+        "image_sha256": "75f2b9553e80bef6d6f04469fb05c5faaffec3c7ac15df5fb72798a3e9014f4c",
+        "sam_summary_sha256": "2c2a8522deacf76268a019c4ff058fe4f9c71cf29e481baf5edec75c546cbe13",
+        "casting_report_sha256": "086bf699d78f0a0c7af64ca8ca981b13701d2e74907b6f0e7ae60cd6ffc0ff0d"
+      },
+      {
+        "id": "f072",
+        "cosine_vs_reference": {
+          "Lab": 0.8654326796531677,
+          "IG": 0.8648660182952881
+        },
+        "comparison_id": null,
+        "cosine_vs_comparison": {
+          "Lab": null,
+          "IG": null
+        },
+        "crop_bbox": {
+          "Lab": [
+            747,
+            190,
+            961,
+            559
+          ],
+          "IG": [
+            504,
+            280,
+            661,
+            543
+          ]
+        },
+        "image_sha256": "cc6410ff80ed7eb8319d333a527cee981a39176f9d3e39081a4bd0b5f4b06bb5",
+        "sam_summary_sha256": "2e5f65f8cccfc1b4757a7401f9a838aeab331a590e205d4b04e7ca1e569f9004",
+        "casting_report_sha256": "130e3e2618ade24425377ed398b2baec50767b61eb89a87683a410eed9591fe9"
+      }
+    ],
+    "aggregate": {
+      "Lab": {
+        "minimum": 0.7412821054458618,
+        "mean": 0.8621004494753751,
+        "observed": 11,
+        "total": 11
+      },
+      "IG": {
+        "minimum": 0.8648660182952881,
+        "mean": 0.901588336987929,
+        "observed": 11,
+        "total": 11
+      }
+    },
+    "model_revision": "e8e487298228002f3d8a82e0cd5c8ea9c567f57f",
+    "local_files_only": true,
+    "model_config_sha256": "73477b47ae9a395f008f993ebd8fb5c16ce0b5e8419ffdf2f5b2183b260f9cff",
+    "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
+    "elapsed_seconds": 7.75217604637146,
+    "finished_unix": 1793905479.9065971,
+    "prior_anchor_rows_preserved": "All per-anchor before/after/G7/G8 fields remain unchanged; this separate all-anchor measurement does not change acceptance."
   }
 }
