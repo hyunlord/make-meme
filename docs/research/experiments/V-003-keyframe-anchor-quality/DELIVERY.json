@@ -92,5 +92,63 @@
       "clip-04-raw.mp4": "PASS",
       "clip-06-raw.mp4": "PASS"
     }
+  },
+  "final": {
+    "filename": "V003-review-20261106.zip",
+    "bytes": 16521122,
+    "sha256": "d22313cca940d789bb987272ad84ed0bf4cf2da897dd2dffd492353b89386f15",
+    "payload_count": 41,
+    "zip_entry_count": 42,
+    "crc": "PASS",
+    "actual_extraction": "PASS",
+    "payload_hashes": "PASS",
+    "browser_qa": {
+      "status": "PASS",
+      "actual_media": true,
+      "columns": 10,
+      "raw_generated": 6,
+      "post_generated": 6,
+      "reference_videos": 4,
+      "anchors": 7,
+      "default": "BOTH",
+      "controls": [
+        "play",
+        "pause",
+        "seek",
+        "0.5x",
+        "RAW",
+        "POST",
+        "BOTH",
+        "keyframe"
+      ],
+      "viewports": [
+        375,
+        768,
+        1280
+      ],
+      "errors": [],
+      "temporal_quality": "UNVERIFIED",
+      "quality": "HUMAN_REVIEW_PENDING"
+    },
+    "quality": "HUMAN_REVIEW_PENDING",
+    "host_transfer_sha256": "PASS",
+    "mac_crc": "PASS",
+    "mac_actual_extraction": "PASS",
+    "mac_payload_hashes": "PASS",
+    "latest_public_documents": "PASS",
+    "visual_qa": "PASS: fresh desktop viewport and actual numeric table inspected; comparison rows scroll horizontally",
+    "payload_document_commit": "511317b",
+    "completed_at_utc": "2026-11-05T18:15:33.638415+00:00",
+    "package_worker_exit": "COMPLETE",
+    "browser_closed": true,
+    "human_review_form": "BLANK",
+    "original_mp4_byte_preservation": {
+      "clip-02-raw.mp4": "PASS",
+      "clip-03-raw.mp4": "PASS",
+      "clip-04-raw.mp4": "PASS",
+      "clip-05-raw.mp4": "PASS",
+      "clip-06-raw.mp4": "PASS",
+      "clip-07-raw.mp4": "PASS"
+    }
   }
 }
