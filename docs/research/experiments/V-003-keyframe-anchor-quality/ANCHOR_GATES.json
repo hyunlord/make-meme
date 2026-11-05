@@ -1,0 +1,19 @@
+{
+  "amendments": [
+    {
+      "recorded_at_utc": "2026-11-05T16:28:03.677666+00:00",
+      "reason": "User identified gate design error: G6 intended to detect aspect reduction from quadrupedal collapse; upper growth can reflect taller upright Labrador. Apply uniformly, not candidate selection.",
+      "before": {
+        "G6_failure": "ratio < 0.8 or ratio > 1.25"
+      },
+      "after": {
+        "G6_failure": "ratio < 0.8",
+        "upper_1_25": "reference only"
+      },
+      "anchor0_explicit_reuse": true,
+      "sam_rerun": false,
+      "prior_reports_preserved": true
+    }
+  ],
+  "anchors": []
+}

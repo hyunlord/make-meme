@@ -72,3 +72,21 @@ def test_gate_cli_background_and_readback(tmp_path: Path) -> None:
     assert result['failed_gates'] == ['G5']
     assert result['background_mae'] == 13
     assert result['G7']['status'] == 'NOT_MEASURED'
+
+
+def test_g6_taller_ratio_is_reference_only() -> None:
+    source = [row(0, (500, 100, 600, 300)), row(1, (200, 100, 300, 300))]
+    anchor = [row(0, (500, 100, 600, 367.4)), row(1, (200, 100, 300, 300))]
+    result = geometry(source, anchor, policy())
+    assert abs(result['aspect_ratio_vs_source']['Lab'] - 1.337) < 1e-12
+    assert result['gates']['G6']
+    assert result['G6_above_reference_upper'] == {'Lab': True, 'IG': False}
+
+
+def test_g6_below_lower_still_fails() -> None:
+    source = [row(0, (500, 100, 600, 300)), row(1, (200, 100, 300, 300))]
+    anchor = [row(0, (500, 100, 600, 259.8)), row(1, (200, 100, 300, 300))]
+    result = geometry(source, anchor, policy())
+    assert not result['gates']['G6']
+    assert result['G6_thresholds']['lower_inclusive'] == policy().aspect[0]
+    assert result['G6_thresholds']['upper_bound_is_failure'] is False

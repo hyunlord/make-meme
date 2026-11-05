@@ -30,6 +30,7 @@ class Policy:
     shift: float
     height: dict[str, tuple[float, float]]
     aspect: tuple[float, float]
+    upper_gating: bool
     dilation: int
     mae: float
 
@@ -49,7 +50,8 @@ class Policy:
                    scene['reflection_rule']['x_overlap_min_frac_of_narrower'],
                    scene['reflection_rule']['lower_top_below_upper_bottom_minus_px'],
                    gates['G1_real_dog_count']['equals'], gates['G2_centroid_shift_max_frac_width'],
-                   height, tuple(gates['G6_upright_aspect_ratio_vs_source']), dilation,
+                   height, tuple(gates['G6_upright_aspect_ratio_vs_source']),
+                   gates['G6_upper_bound_is_failure'], dilation,
                    gates['G5_background_mae_max'])
 
 
@@ -62,12 +64,20 @@ class Row:
     area: int
 
 
+class G6Thresholds(TypedDict):
+    lower_inclusive: float
+    reference_upper: float
+    upper_bound_is_failure: bool
+
+
 class Geometry(TypedDict):
     casting: dict[str, int]
     actual_count: int
     center_shift_px: dict[str, float]
     bbox_height_ratio: dict[str, float]
     aspect_ratio_vs_source: dict[str, float]
+    G6_above_reference_upper: dict[str, bool]
+    G6_thresholds: G6Thresholds
     gates: dict[str, bool]
 
 
@@ -95,6 +105,10 @@ def geometry(source: list[Row], anchor: list[Row], policy: Policy) -> Geometry:
     actual, _ = classify(anchor, policy)
     result: Geometry = {'casting': {}, 'actual_count': len(actual), 'center_shift_px': {},
                         'bbox_height_ratio': {}, 'aspect_ratio_vs_source': {},
+                        'G6_above_reference_upper': {},
+                        'G6_thresholds': {'lower_inclusive': policy.aspect[0],
+                                          'reference_upper': policy.aspect[1],
+                                          'upper_bound_is_failure': policy.upper_gating},
                         'gates': {name: False for name in ('G1', 'G2', 'G3', 'G4', 'G6')}}
     result['gates']['G1'] = len(actual) == policy.count
     source_actual, _ = classify(source, policy)
@@ -122,11 +136,12 @@ def geometry(source: list[Row], anchor: list[Row], policy: Policy) -> Geometry:
         result['center_shift_px'][role] = math.dist(first.center, second.center)
         result['bbox_height_ratio'][role] = ah/sh
         result['aspect_ratio_vs_source'][role] = (ah/aw)/(sh/sw)
+        result['G6_above_reference_upper'][role] = result['aspect_ratio_vs_source'][role] > policy.aspect[1]
         lo, hi = policy.height[role]
         height_pass.append(lo <= ah/sh <= hi)
     result['gates'].update(G2=all(x <= policy.shift*policy.size[0] for x in result['center_shift_px'].values()),
                           G3=height_pass[0], G4=height_pass[1],
-                          G6=all(policy.aspect[0] <= x <= policy.aspect[1]
+                          G6=all(x >= policy.aspect[0] and (not policy.upper_gating or x <= policy.aspect[1])
                                  for x in result['aspect_ratio_vs_source'].values()))
     return result
 

@@ -86,7 +86,9 @@
         "model": "existing local embedding model, e.g. google/siglip2-so400m-patch14-384 in HF cache",
         "use": "record only"
       },
-      "G5_dilation_px": 24
+      "G5_dilation_px": 24,
+      "G6_upper_bound_is_failure": false,
+      "G6_interpretation": "Only ratio below lower bound fails; above upper bound is reference-only per user gate-design correction."
     },
     "repair_sentences": {
       "G2": "두 강아지의 화면 위치를 첫 번째 이미지의 해당 강아지와 같은 자리에 두세요.",
