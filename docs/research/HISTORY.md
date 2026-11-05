@@ -878,3 +878,5 @@ E1은 공식128배수1152×640 규약에서73프레임 영상2개를 생성해 M
 사용자 지시로 V-002 잔여 변형 실행을 종료하고 M1·과거 실패 기록을 보존한다. V-003은 기존 앵커0와 촘촘한 신규 앵커·LTX canny/guide/replace 비교를 사전 등록한다. 펌웨어 지정 버전과 hw.csv 기록을 확인했다. [계획](experiments/V-003-keyframe-anchor-quality/PLAN.md).
 
 V-003 결과(2026-11-06): 앵커7장(신규6·재사용1), K1/K2/K3 각2 seed의 RAW6개와 POST6개, 전73프레임 측정 완료. 두 중간 전달을 지켰으며 Kling 대비 품질은 HUMAN_REVIEW_PENDING이다. 사용자 검토 전 후속 생성은 예약하지 않는다. [결과](experiments/V-003-keyframe-anchor-quality/RESULTS.md).
+
+V-004 사전등록(2026-11-06): V-003 K1을 기반으로 추가발차기앵커4장·체형확대canny·2배시간축을비교한다. 두중간전달과비압축검토폴더를기본으로하며자동우열판정/후속예약없음. [계획](experiments/V-004-scaled-motion/PLAN.md).
