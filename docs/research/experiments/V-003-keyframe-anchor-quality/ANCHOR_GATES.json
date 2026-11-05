@@ -15,5 +15,546 @@
       "prior_reports_preserved": true
     }
   ],
-  "anchors": []
+  "anchors": [
+    {
+      "segment_frame": 0,
+      "candidate": "reused",
+      "G6_rejudgment": "EXISTING_SAM_CPU_ONLY",
+      "sam_reruns": 0,
+      "before": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 5.825569371178689,
+          "IG": 22.557338454106933
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.2482014388489209,
+          "IG": 1.183673469387755
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.3366566589248288,
+          "IG": 1.1943854464862869
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": false,
+          "G5": true
+        },
+        "failed_gates": [
+          "G6"
+        ],
+        "all_gates_pass": false,
+        "background_mae": 5.6278300285339355,
+        "background_pixels": 756366,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 0,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "2318fb340e7682ee9cce720cf59b93df4dc11504167c74a8aae1f0eaae1f5798",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+        }
+      },
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 5.825569371178689,
+          "IG": 22.557338454106933
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.2482014388489209,
+          "IG": 1.183673469387755
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.3366566589248288,
+          "IG": 1.1943854464862869
+        },
+        "G6_above_reference_upper": {
+          "Lab": true,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 5.6278300285339355,
+        "background_pixels": 756366,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 0,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+        }
+      }
+    },
+    {
+      "segment_frame": 12,
+      "candidate": "call1",
+      "G6_rejudgment": "EXISTING_SAM_CPU_ONLY",
+      "sam_reruns": 0,
+      "before": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 14.903909550484071,
+          "IG": 11.479587611258353
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0816326530612246,
+          "IG": 1.0642857142857143
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0773233596227336,
+          "IG": 1.0516906170752325
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.010643005371094,
+        "background_pixels": 761534,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 12,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "2318fb340e7682ee9cce720cf59b93df4dc11504167c74a8aae1f0eaae1f5798",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
+        }
+      },
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 14.903909550484071,
+          "IG": 11.479587611258353
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0816326530612246,
+          "IG": 1.0642857142857143
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0773233596227336,
+          "IG": 1.0516906170752325
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.010643005371094,
+        "background_pixels": 761534,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 12,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
+        }
+      }
+    },
+    {
+      "segment_frame": 24,
+      "candidate": "call1",
+      "G6_rejudgment": "FIRST_EVALUATION_AFTER_AMENDMENT",
+      "sam_reruns": 0,
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 0.4912521662375422,
+          "IG": 21.373479286828843
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0202312138728324,
+          "IG": 1.0731707317073171
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.9336078089213654,
+          "IG": 1.0600029926679635
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.038745880126953,
+        "background_pixels": 765137,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 24,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2660a921e5912277b2a6a1d95406391499d4ca3b78d61debd170683c623cc0ea"
+        }
+      }
+    },
+    {
+      "segment_frame": 36,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 15.155549491844035,
+          "IG": 40.297886023250754
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1699716713881019,
+          "IG": 1.2
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0244528067875918,
+          "IG": 1.2377358490566037
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 8.00423812866211,
+        "background_pixels": 737463,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 36,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          []
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "7bce4a6ff43d102b167d0f79b7850421168571876b6d6bcb74630209831f8f63"
+        }
+      },
+      "sam_reruns": 0
+    },
+    {
+      "segment_frame": 48,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 30.586327314606635,
+          "IG": 57.191384190685184
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.15015015015015,
+          "IG": 1.1535087719298245
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.010894302374123,
+          "IG": 1.1020784445189407
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.416417121887207,
+        "background_pixels": 753439,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 48,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "ba59774982d154f80a9eb76df0749c51323fc229d3951400544aa8c25357f905"
+        }
+      },
+      "sam_reruns": 0
+    }
+  ],
+  "updated_at_utc": "2026-11-05T16:47:37.679349+00:00"
 }

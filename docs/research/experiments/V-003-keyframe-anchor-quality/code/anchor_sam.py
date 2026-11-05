@@ -41,9 +41,16 @@ class Config:
         """Parse the private configuration before any model imports."""
         raw = json.loads(path.read_text())
         scene = json.loads(Path(raw['scene_config']).read_text())
+        mode: Literal['image', 'video'] = raw['mode']
+        match mode:
+            case 'image':
+                coordinate_size = tuple(scene['anchor_generation']['resolution_master'])
+            case 'video':
+                coordinate_size = tuple(scene['generation']['resolution'])
+            case unreachable:
+                assert_never(unreachable)
         cfg = cls(*(Path(raw[key]) for key in ('frames', 'output', 'checkpoint', 'comfy_root')),
-                  revision=raw['revision'], mode=raw['mode'],
-                  coordinate_size=tuple(scene['anchor_generation']['resolution_master']),
+                  revision=raw['revision'], mode=mode, coordinate_size=coordinate_size,
                   query=scene['scene']['sam_text_prompt'], min_area=scene['sam_settings']['min_area_fraction'],
                   threshold=scene['sam_settings']['detection_threshold'], max_objects=scene['sam_settings']['max_objects'])
         assert all(p.is_absolute() for p in (cfg.frames, cfg.output, cfg.checkpoint, cfg.comfy_root))

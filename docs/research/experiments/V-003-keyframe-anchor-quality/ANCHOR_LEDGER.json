@@ -1,11 +1,13 @@
 {
-  "imagegen_calls": 2,
+  "imagegen_calls": 5,
   "model_identifier": "UNKNOWN",
   "billing": "UNKNOWN",
   "calls": [
     {
       "keyframe": 12,
       "attempt": 1,
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
       "raw_sha256": "61e78cc4b54ddc4df7c3e46a4df7822cad5539b153a4427b3e7d7ce0912aba22",
       "master_sha256": "b5c783e182f7c04a5eec5b0b4666190ce09f5659c852ac9b3d417e65cbaee0ed",
       "prompt_sha256": "3291a8e63c29b89cefc6ccda4fc504f4c94c326a520cfe61296bf0e40f3d885e",
@@ -27,6 +29,15 @@
         "aspect_ratio_vs_source": {
           "Lab": 1.0773233596227336,
           "IG": 1.0516906170752325
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
         },
         "gates": {
           "G1": true,
@@ -70,7 +81,7 @@
             3
           ]
         ],
-        "scene_config_sha256": "2318fb340e7682ee9cce720cf59b93df4dc11504167c74a8aae1f0eaae1f5798",
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
         "input_summary_sha256": {
           "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
           "anchor": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
@@ -80,9 +91,262 @@
     {
       "keyframe": 24,
       "attempt": 1,
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
       "raw_sha256": "9a48adee89ea4dc634755d63b6b82ba072c3f45b74e46ddf1939aaf995b8e111",
       "master_sha256": "f43914d16be543735a00b0f71c24ed9fb4a0afacf8d61ae07b21e210e1703d44",
       "prompt_sha256": "b30c9ccae40ea2c3bd3691c0640f9ed301c0622c0ef3a18aa62c9ddd7c10c7dc",
+      "status": "GATE_PASS",
+      "gates": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 0.4912521662375422,
+          "IG": 21.373479286828843
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0202312138728324,
+          "IG": 1.0731707317073171
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.9336078089213654,
+          "IG": 1.0600029926679635
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.038745880126953,
+        "background_pixels": 765137,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 24,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2660a921e5912277b2a6a1d95406391499d4ca3b78d61debd170683c623cc0ea"
+        }
+      }
+    },
+    {
+      "keyframe": 36,
+      "attempt": 1,
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
+      "raw_sha256": "89a5b1d705127a158ad1ec4322edae304e3e0a19d687d18f283910a262a99037",
+      "master_sha256": "3f2adb575c77ccc0daf8b1d9a4f5ff6868039ab3cb87632c0fd5b57715891738",
+      "prompt_sha256": "0b09a262b403647b58178a603d58f5f35007b629cb6754ffba31273e3ec5445a",
+      "status": "GATE_PASS",
+      "gates": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 15.155549491844035,
+          "IG": 40.297886023250754
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1699716713881019,
+          "IG": 1.2
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0244528067875918,
+          "IG": 1.2377358490566037
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 8.00423812866211,
+        "background_pixels": 737463,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 36,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          []
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "7bce4a6ff43d102b167d0f79b7850421168571876b6d6bcb74630209831f8f63"
+        }
+      }
+    },
+    {
+      "keyframe": 48,
+      "attempt": 1,
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
+      "raw_sha256": "0aa3aa27d04831fea1daa0857224be054980b3b430ed070a3a4fac5f6fe6f62e",
+      "master_sha256": "579d75f12672c1362b42091e97cfc33666795875880815edbd175bdb4d7ac89e",
+      "prompt_sha256": "ade41c8eb290e195460938b4508126a21423123c09fdf235857999572dbc6551",
+      "status": "GATE_PASS",
+      "gates": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 30.586327314606635,
+          "IG": 57.191384190685184
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.15015015015015,
+          "IG": 1.1535087719298245
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.010894302374123,
+          "IG": 1.1020784445189407
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.416417121887207,
+        "background_pixels": 753439,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 48,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "ba59774982d154f80a9eb76df0749c51323fc229d3951400544aa8c25357f905"
+        }
+      }
+    },
+    {
+      "keyframe": 60,
+      "attempt": 1,
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
+      "raw_sha256": "22ee178d340c8232233be046a8db237c624d2e5c675d3a948fd15475c487ed97",
+      "master_sha256": "75f2b9553e80bef6d6f04469fb05c5faaffec3c7ac15df5fb72798a3e9014f4c",
+      "prompt_sha256": "e0054fd5ac752046ada8ed7163f13f5cd5366079750dd1efaaa11c8d33b29f6a",
       "status": "GENERATED_GATE_PENDING"
     }
   ],
