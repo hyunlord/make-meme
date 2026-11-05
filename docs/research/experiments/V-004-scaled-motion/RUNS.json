@@ -1,7 +1,7 @@
 {
   "experiment": "V-004-scaled-motion",
-  "status": "PARTIAL_OR_PENDING",
-  "snapshot_utc": "2026-11-05T19:26:14.392050+00:00",
+  "status": "ALL_GENERATIONS_COMPLETE",
+  "snapshot_utc": "2026-11-05T19:48:36.374497+00:00",
   "parent_commit": "8bb131081540e0c10a92d56889af7b63d13e7eff",
   "preplan_commit_ref": "594eb39",
   "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
@@ -9,7 +9,7 @@
   "temporal": "UNVERIFIED",
   "imagegen_actual_calls": 4,
   "imagegen_repairs": 0,
-  "generation_completed_count": 3,
+  "generation_completed_count": 6,
   "generation_budget_max": 6,
   "cells": [
     {
@@ -77,6 +77,31 @@
             "min_mem_available_mib": 68716.0
           },
           "evidence_issues": []
+        },
+        "output_analysis": {
+          "sam": {
+            "status": "SAM_ANALYSIS_COMPLETED",
+            "frame_count": 73,
+            "elapsed_seconds": 45.88277864456177,
+            "cuda_peak_allocated_bytes": 3149846528,
+            "cuda_peak_reserved_bytes": 3349151744,
+            "process_max_rss_kib": 5213968
+          },
+          "sam_guard": {
+            "status": "COMPLETE",
+            "normal_exit_recorded": true,
+            "worker_returncode": 0,
+            "nvrm_events": 0,
+            "concurrent_external_gpu": false
+          },
+          "post": {
+            "status": "COMPLETE",
+            "frames": 73,
+            "raw_preserved": true,
+            "kind": "DERIVED_CPU_POST_NOT_MODEL_OUTPUT"
+          },
+          "base_metrics_status": "COMPLETE",
+          "scaled_metrics_status": "COMPLETE"
         }
       }
     },
@@ -145,6 +170,31 @@
             "min_mem_available_mib": 72875.0
           },
           "evidence_issues": []
+        },
+        "output_analysis": {
+          "sam": {
+            "status": "SAM_ANALYSIS_COMPLETED",
+            "frame_count": 73,
+            "elapsed_seconds": 45.65390396118164,
+            "cuda_peak_allocated_bytes": 3149846528,
+            "cuda_peak_reserved_bytes": 3349151744,
+            "process_max_rss_kib": 5191732
+          },
+          "sam_guard": {
+            "status": "COMPLETE",
+            "normal_exit_recorded": true,
+            "worker_returncode": 0,
+            "nvrm_events": 0,
+            "concurrent_external_gpu": false
+          },
+          "post": {
+            "status": "COMPLETE",
+            "frames": 73,
+            "raw_preserved": true,
+            "kind": "DERIVED_CPU_POST_NOT_MODEL_OUTPUT"
+          },
+          "base_metrics_status": "COMPLETE",
+          "scaled_metrics_status": "COMPLETE"
         }
       }
     },
@@ -213,6 +263,31 @@
             "min_mem_available_mib": 72922.0
           },
           "evidence_issues": []
+        },
+        "output_analysis": {
+          "sam": {
+            "status": "SAM_ANALYSIS_COMPLETED",
+            "frame_count": 73,
+            "elapsed_seconds": 47.37854981422424,
+            "cuda_peak_allocated_bytes": 3149846528,
+            "cuda_peak_reserved_bytes": 3349151744,
+            "process_max_rss_kib": 5193464
+          },
+          "sam_guard": {
+            "status": "COMPLETE",
+            "normal_exit_recorded": true,
+            "worker_returncode": 0,
+            "nvrm_events": 0,
+            "concurrent_external_gpu": false
+          },
+          "post": {
+            "status": "COMPLETE",
+            "frames": 73,
+            "raw_preserved": true,
+            "kind": "DERIVED_CPU_POST_NOT_MODEL_OUTPUT"
+          },
+          "base_metrics_status": "COMPLETE",
+          "scaled_metrics_status": "COMPLETE"
         }
       }
     },
@@ -231,60 +306,81 @@
         "scheduler_steps": 11
       },
       "actual": {
-        "status": "NOT_RUN",
+        "status": "COMPLETE",
         "evidence": {
-          "status": "UNKNOWN",
-          "receipt_status": "UNKNOWN",
-          "guard_status": "UNKNOWN",
-          "guard_reason": "UNKNOWN",
-          "output_file_present": false,
-          "normal_exit_recorded": null,
-          "measurement_scope": "PARTIAL_OR_UNAVAILABLE",
-          "start_epoch": null,
-          "end_epoch": null,
-          "guard_elapsed_seconds": null,
-          "observations": 0,
-          "elapsed_seconds": null,
-          "first_step_seconds": null,
-          "denoiser_calls": null,
-          "scheduler_steps_completed": null,
-          "cuda_peak_allocated_bytes": null,
-          "cuda_peak_reserved_bytes": null,
-          "peak_rss_bytes_receipt": null,
-          "peak_rss_bytes_sampled": null,
-          "cgroup_peak_bytes_sampled": null,
-          "cgroup_high_events_sampled": null,
-          "min_mem_available_bytes_sampled": null,
-          "psi_full_avg10_max_sampled": null,
-          "nvrm_events": null,
-          "nvrm_hit_observed": null,
-          "kernel_watch_status": "UNKNOWN",
-          "concurrent_external_gpu": null,
+          "status": "COMPLETE",
+          "receipt_status": "GENERATED",
+          "guard_status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "output_file_present": true,
+          "normal_exit_recorded": true,
+          "measurement_scope": "FINAL_RECEIPT_AND_SAMPLED_GUARD",
+          "start_epoch": 1793907131.8352256,
+          "end_epoch": 1793907273.0797446,
+          "guard_elapsed_seconds": 141.24451899528503,
+          "observations": 132,
+          "elapsed_seconds": 129.10562531400137,
+          "first_step_seconds": 3.070162360001632,
+          "denoiser_calls": 11.0,
+          "scheduler_steps_completed": 11.0,
+          "cuda_peak_allocated_bytes": 42501514240.0,
+          "cuda_peak_reserved_bytes": 42618322944.0,
+          "peak_rss_bytes_receipt": 45359693824.0,
+          "peak_rss_bytes_sampled": 45359693824.0,
+          "cgroup_peak_bytes_sampled": 76370206720.0,
+          "cgroup_high_events_sampled": 0.0,
+          "min_mem_available_bytes_sampled": 76485283840.0,
+          "psi_full_avg10_max_sampled": 0.0,
+          "nvrm_events": 0.0,
+          "nvrm_hit_observed": false,
+          "kernel_watch_status": "AVAILABLE",
+          "concurrent_external_gpu": false,
           "hardware": {
-            "status": "UNKNOWN",
-            "samples": 0,
+            "status": "OBSERVED_SAMPLES",
+            "samples": 28,
             "invalid_rows_in_file": 0,
-            "first_timestamp": null,
-            "last_timestamp": null,
+            "first_timestamp": "2026-11-06T04:32:14+09:00",
+            "last_timestamp": "2026-11-06T04:34:30+09:00",
             "excerpt": "S2-s2-hardware.csv",
             "missing_sensor_values": 0,
-            "max_gpu_temperature_c": null,
-            "max_gpu_power_w": null,
-            "max_sm_clock_mhz": null,
-            "max_thermal_zone0_millidegc": null,
-            "max_thermal_zone1_millidegc": null,
-            "max_thermal_zone2_millidegc": null,
-            "max_thermal_zone3_millidegc": null,
-            "max_thermal_zone4_millidegc": null,
-            "max_thermal_zone5_millidegc": null,
-            "max_thermal_zone6_millidegc": null,
-            "min_mem_available_mib": null
+            "max_gpu_temperature_c": 76.0,
+            "max_gpu_power_w": 83.75,
+            "max_sm_clock_mhz": 2470.0,
+            "max_thermal_zone0_millidegc": 85200.0,
+            "max_thermal_zone1_millidegc": 61100.0,
+            "max_thermal_zone2_millidegc": 61900.0,
+            "max_thermal_zone3_millidegc": 62300.0,
+            "max_thermal_zone4_millidegc": 75400.0,
+            "max_thermal_zone5_millidegc": 85200.0,
+            "max_thermal_zone6_millidegc": 66700.0,
+            "min_mem_available_mib": 73353.0
           },
-          "evidence_issues": [
-            "RECEIPT_UNAVAILABLE_OR_INVALID",
-            "SUPERVISOR_UNAVAILABLE_OR_INVALID",
-            "OBSERVATIONS_UNAVAILABLE"
-          ]
+          "evidence_issues": []
+        },
+        "output_analysis": {
+          "sam": {
+            "status": "SAM_ANALYSIS_COMPLETED",
+            "frame_count": 73,
+            "elapsed_seconds": 46.28063654899597,
+            "cuda_peak_allocated_bytes": 3149846528,
+            "cuda_peak_reserved_bytes": 3349151744,
+            "process_max_rss_kib": 5190812
+          },
+          "sam_guard": {
+            "status": "COMPLETE",
+            "normal_exit_recorded": true,
+            "worker_returncode": 0,
+            "nvrm_events": 0,
+            "concurrent_external_gpu": false
+          },
+          "post": {
+            "status": "COMPLETE",
+            "frames": 73,
+            "raw_preserved": true,
+            "kind": "DERIVED_CPU_POST_NOT_MODEL_OUTPUT"
+          },
+          "base_metrics_status": "COMPLETE",
+          "scaled_metrics_status": "COMPLETE"
         }
       }
     },
@@ -303,60 +399,81 @@
         "scheduler_steps": 11
       },
       "actual": {
-        "status": "NOT_RUN",
+        "status": "COMPLETE",
         "evidence": {
-          "status": "UNKNOWN",
-          "receipt_status": "UNKNOWN",
-          "guard_status": "UNKNOWN",
-          "guard_reason": "UNKNOWN",
-          "output_file_present": false,
-          "normal_exit_recorded": null,
-          "measurement_scope": "PARTIAL_OR_UNAVAILABLE",
-          "start_epoch": null,
-          "end_epoch": null,
-          "guard_elapsed_seconds": null,
-          "observations": 0,
-          "elapsed_seconds": null,
-          "first_step_seconds": null,
-          "denoiser_calls": null,
-          "scheduler_steps_completed": null,
-          "cuda_peak_allocated_bytes": null,
-          "cuda_peak_reserved_bytes": null,
-          "peak_rss_bytes_receipt": null,
-          "peak_rss_bytes_sampled": null,
-          "cgroup_peak_bytes_sampled": null,
-          "cgroup_high_events_sampled": null,
-          "min_mem_available_bytes_sampled": null,
-          "psi_full_avg10_max_sampled": null,
-          "nvrm_events": null,
-          "nvrm_hit_observed": null,
-          "kernel_watch_status": "UNKNOWN",
-          "concurrent_external_gpu": null,
+          "status": "COMPLETE",
+          "receipt_status": "GENERATED",
+          "guard_status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "output_file_present": true,
+          "normal_exit_recorded": true,
+          "measurement_scope": "FINAL_RECEIPT_AND_SAMPLED_GUARD",
+          "start_epoch": 1793907523.6146126,
+          "end_epoch": 1793907660.6131027,
+          "guard_elapsed_seconds": 136.99849009513855,
+          "observations": 128,
+          "elapsed_seconds": 125.01264594399981,
+          "first_step_seconds": 3.026252302001012,
+          "denoiser_calls": 11.0,
+          "scheduler_steps_completed": 11.0,
+          "cuda_peak_allocated_bytes": 42501514240.0,
+          "cuda_peak_reserved_bytes": 42618322944.0,
+          "peak_rss_bytes_receipt": 45360988160.0,
+          "peak_rss_bytes_sampled": 45360988160.0,
+          "cgroup_peak_bytes_sampled": 76385452032.0,
+          "cgroup_high_events_sampled": 0.0,
+          "min_mem_available_bytes_sampled": 76395610112.0,
+          "psi_full_avg10_max_sampled": 0.0,
+          "nvrm_events": 0.0,
+          "nvrm_hit_observed": false,
+          "kernel_watch_status": "AVAILABLE",
+          "concurrent_external_gpu": false,
           "hardware": {
-            "status": "UNKNOWN",
-            "samples": 0,
+            "status": "OBSERVED_SAMPLES",
+            "samples": 27,
             "invalid_rows_in_file": 0,
-            "first_timestamp": null,
-            "last_timestamp": null,
+            "first_timestamp": "2026-11-06T04:38:47+09:00",
+            "last_timestamp": "2026-11-06T04:40:59+09:00",
             "excerpt": "S1-s2-hardware.csv",
             "missing_sensor_values": 0,
-            "max_gpu_temperature_c": null,
-            "max_gpu_power_w": null,
-            "max_sm_clock_mhz": null,
-            "max_thermal_zone0_millidegc": null,
-            "max_thermal_zone1_millidegc": null,
-            "max_thermal_zone2_millidegc": null,
-            "max_thermal_zone3_millidegc": null,
-            "max_thermal_zone4_millidegc": null,
-            "max_thermal_zone5_millidegc": null,
-            "max_thermal_zone6_millidegc": null,
-            "min_mem_available_mib": null
+            "max_gpu_temperature_c": 74.0,
+            "max_gpu_power_w": 83.33,
+            "max_sm_clock_mhz": 2470.0,
+            "max_thermal_zone0_millidegc": 85300.0,
+            "max_thermal_zone1_millidegc": 61800.0,
+            "max_thermal_zone2_millidegc": 62100.0,
+            "max_thermal_zone3_millidegc": 62700.0,
+            "max_thermal_zone4_millidegc": 76400.0,
+            "max_thermal_zone5_millidegc": 85300.0,
+            "max_thermal_zone6_millidegc": 67400.0,
+            "min_mem_available_mib": 73073.0
           },
-          "evidence_issues": [
-            "RECEIPT_UNAVAILABLE_OR_INVALID",
-            "SUPERVISOR_UNAVAILABLE_OR_INVALID",
-            "OBSERVATIONS_UNAVAILABLE"
-          ]
+          "evidence_issues": []
+        },
+        "output_analysis": {
+          "sam": {
+            "status": "SAM_ANALYSIS_COMPLETED",
+            "frame_count": 73,
+            "elapsed_seconds": 45.53840374946594,
+            "cuda_peak_allocated_bytes": 3149846528,
+            "cuda_peak_reserved_bytes": 3349151744,
+            "process_max_rss_kib": 5196688
+          },
+          "sam_guard": {
+            "status": "COMPLETE",
+            "normal_exit_recorded": true,
+            "worker_returncode": 0,
+            "nvrm_events": 0,
+            "concurrent_external_gpu": false
+          },
+          "post": {
+            "status": "COMPLETE",
+            "frames": 73,
+            "raw_preserved": true,
+            "kind": "DERIVED_CPU_POST_NOT_MODEL_OUTPUT"
+          },
+          "base_metrics_status": "COMPLETE",
+          "scaled_metrics_status": "COMPLETE"
         }
       }
     },
@@ -375,65 +492,103 @@
         "scheduler_steps": 11
       },
       "actual": {
-        "status": "NOT_RUN",
+        "status": "COMPLETE",
         "evidence": {
-          "status": "UNKNOWN",
-          "receipt_status": "UNKNOWN",
-          "guard_status": "UNKNOWN",
-          "guard_reason": "UNKNOWN",
-          "output_file_present": false,
-          "normal_exit_recorded": null,
-          "measurement_scope": "PARTIAL_OR_UNAVAILABLE",
-          "start_epoch": null,
-          "end_epoch": null,
-          "guard_elapsed_seconds": null,
-          "observations": 0,
-          "elapsed_seconds": null,
-          "first_step_seconds": null,
-          "denoiser_calls": null,
-          "scheduler_steps_completed": null,
-          "cuda_peak_allocated_bytes": null,
-          "cuda_peak_reserved_bytes": null,
-          "peak_rss_bytes_receipt": null,
-          "peak_rss_bytes_sampled": null,
-          "cgroup_peak_bytes_sampled": null,
-          "cgroup_high_events_sampled": null,
-          "min_mem_available_bytes_sampled": null,
-          "psi_full_avg10_max_sampled": null,
-          "nvrm_events": null,
-          "nvrm_hit_observed": null,
-          "kernel_watch_status": "UNKNOWN",
-          "concurrent_external_gpu": null,
+          "status": "COMPLETE",
+          "receipt_status": "GENERATED",
+          "guard_status": "COMPLETE",
+          "guard_reason": "COMPLETE",
+          "output_file_present": true,
+          "normal_exit_recorded": true,
+          "measurement_scope": "FINAL_RECEIPT_AND_SAMPLED_GUARD",
+          "start_epoch": 1793907898.6149364,
+          "end_epoch": 1793908076.042815,
+          "guard_elapsed_seconds": 177.42787861824036,
+          "observations": 165,
+          "elapsed_seconds": 166.8652891439997,
+          "first_step_seconds": 4.580580685000314,
+          "denoiser_calls": 11.0,
+          "scheduler_steps_completed": 11.0,
+          "cuda_peak_allocated_bytes": 42661304832.0,
+          "cuda_peak_reserved_bytes": 42867884032.0,
+          "peak_rss_bytes_receipt": 45358272512.0,
+          "peak_rss_bytes_sampled": 45358272512.0,
+          "cgroup_peak_bytes_sampled": 76267900928.0,
+          "cgroup_high_events_sampled": 0.0,
+          "min_mem_available_bytes_sampled": 74551185408.0,
+          "psi_full_avg10_max_sampled": 0.0,
+          "nvrm_events": 0.0,
+          "nvrm_hit_observed": false,
+          "kernel_watch_status": "AVAILABLE",
+          "concurrent_external_gpu": false,
           "hardware": {
-            "status": "UNKNOWN",
-            "samples": 0,
+            "status": "OBSERVED_SAMPLES",
+            "samples": 35,
             "invalid_rows_in_file": 0,
-            "first_timestamp": null,
-            "last_timestamp": null,
+            "first_timestamp": "2026-11-06T04:45:01+09:00",
+            "last_timestamp": "2026-11-06T04:47:53+09:00",
             "excerpt": "S3-s2-hardware.csv",
             "missing_sensor_values": 0,
-            "max_gpu_temperature_c": null,
-            "max_gpu_power_w": null,
-            "max_sm_clock_mhz": null,
-            "max_thermal_zone0_millidegc": null,
-            "max_thermal_zone1_millidegc": null,
-            "max_thermal_zone2_millidegc": null,
-            "max_thermal_zone3_millidegc": null,
-            "max_thermal_zone4_millidegc": null,
-            "max_thermal_zone5_millidegc": null,
-            "max_thermal_zone6_millidegc": null,
-            "min_mem_available_mib": null
+            "max_gpu_temperature_c": 82.0,
+            "max_gpu_power_w": 78.16,
+            "max_sm_clock_mhz": 2463.0,
+            "max_thermal_zone0_millidegc": 96600.0,
+            "max_thermal_zone1_millidegc": 71500.0,
+            "max_thermal_zone2_millidegc": 86700.0,
+            "max_thermal_zone3_millidegc": 70700.0,
+            "max_thermal_zone4_millidegc": 96600.0,
+            "max_thermal_zone5_millidegc": 89700.0,
+            "max_thermal_zone6_millidegc": 76500.0,
+            "min_mem_available_mib": 71303.0
           },
-          "evidence_issues": [
-            "RECEIPT_UNAVAILABLE_OR_INVALID",
-            "SUPERVISOR_UNAVAILABLE_OR_INVALID",
-            "OBSERVATIONS_UNAVAILABLE"
-          ]
+          "evidence_issues": []
+        },
+        "output_analysis": {
+          "sam": {
+            "status": "SAM_ANALYSIS_COMPLETED",
+            "frame_count": 73,
+            "elapsed_seconds": 45.51890277862549,
+            "cuda_peak_allocated_bytes": 3149846528,
+            "cuda_peak_reserved_bytes": 3349151744,
+            "process_max_rss_kib": 5189916
+          },
+          "sam_guard": {
+            "status": "COMPLETE",
+            "normal_exit_recorded": true,
+            "worker_returncode": 0,
+            "nvrm_events": 0,
+            "concurrent_external_gpu": false
+          },
+          "post": {
+            "status": "COMPLETE",
+            "frames": 73,
+            "raw_preserved": true,
+            "kind": "DERIVED_CPU_POST_NOT_MODEL_OUTPUT"
+          },
+          "base_metrics_status": "COMPLETE",
+          "scaled_metrics_status": "COMPLETE"
         }
       }
     }
   ],
   "sampling_note": "Guard/hardware extrema are sampled observations, not proof of continuous coverage.",
   "evidence_ref": "evidence/RUN_EVIDENCE.json",
-  "privacy": "Only RUNS.json and evidence whitelist files are public candidates; PRIVATE_COLLECT_RUNTIME.json stays private."
+  "privacy": "Only RUNS.json and evidence whitelist files are public candidates; PRIVATE_COLLECT_RUNTIME.json stays private.",
+  "confirmed_generation_sampler_runs": 6,
+  "confirmed_scheduler_steps_total": 66,
+  "confirmed_denoiser_calls_total": 66,
+  "output_measurement_status": "SAM_POST_BASE_SCALED_EMBEDDING_COMPLETE",
+  "completion_scope": "GENERATION_ONLY_NOT_QUALITY_OR_DELIVERY_ACCEPTANCE",
+  "output_sam_completed_calls": 6,
+  "output_embedding": {
+    "status": "COMPLETE",
+    "guard_status": "COMPLETE",
+    "worker_returncode": 0,
+    "normal_exit_recorded": true,
+    "nvrm_events": 0,
+    "outputs": 6,
+    "reference_only": true,
+    "metrics_ref": "METRICS.json",
+    "metrics_sha256": "07118c9e16882b577534f1712740901b5b42713e1dda73d5ac7e5add78474c20"
+  }
 }

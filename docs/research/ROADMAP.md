@@ -547,3 +547,5 @@ V-003 승인 착수: V-002 잔여 변형 종료, 앵커 시트 및 seed1 세 변
 V-003 결과(2026-11-06): 앵커7장(신규6·재사용1), K1/K2/K3 각2 seed의 RAW6개와 POST6개, 전73프레임 측정 완료. 두 중간 전달을 지켰으며 Kling 대비 품질은 HUMAN_REVIEW_PENDING이다. 사용자 검토 전 후속 생성은 예약하지 않는다. [결과](experiments/V-003-keyframe-anchor-quality/RESULTS.md).
 
 V-004 사전등록(2026-11-06): V-003 K1을 기반으로 추가발차기앵커4장·체형확대canny·2배시간축을비교한다. 두중간전달과비압축검토폴더를기본으로하며자동우열판정/후속예약없음. [계획](experiments/V-004-scaled-motion/PLAN.md).
+
+V-004 실행 기록(2026-11-06): 신규 앵커 4장 수용, S1/S2/S3 각 2 seed 총 6개 생성과 RAW/POST 측정을 완료했다. 앵커·윤곽 시트와 seed 1의 두 중간 전달을 보존하며, 발차기 품질은 HUMAN_REVIEW_PENDING이다. [결과](experiments/V-004-scaled-motion/RESULTS.md). 후속 실험은 시작하지 않았다.

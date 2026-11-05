@@ -1,0 +1,87 @@
+{
+  "scope": "private CPU postprocessing assertion only; no generation/input/result changes",
+  "failure": "S3 offset checker expected source_frame * multiplier - native_target, but frozen generation entry records source_frame - native_target",
+  "before_assertion": "assert image['offset'] == source_frame*multiplier-target_frame",
+  "after_assertions": [
+    "assert image['offset'] == source_frame-target_frame",
+    "assert target_frame == source_frame*multiplier"
+  ],
+  "actual_receipts": [
+    "S3-s1",
+    "S3-s2"
+  ],
+  "red_failed_anchor_checks": 20,
+  "green_passed_anchor_checks": 22,
+  "incorrect_target_mutations_rejected": 22,
+  "generation_receipt_hashes_unchanged": true,
+  "qa": "Full S3 CPU pipeline validation recorded separately by execution owner",
+  "fixture_rows": [
+    {
+      "source_frame": 0,
+      "native_target_frame": 0,
+      "recorded_offset": 0,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 12,
+      "native_target_frame": 24,
+      "recorded_offset": -12,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 16,
+      "native_target_frame": 32,
+      "recorded_offset": -16,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 20,
+      "native_target_frame": 40,
+      "recorded_offset": -20,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 24,
+      "native_target_frame": 48,
+      "recorded_offset": -24,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 28,
+      "native_target_frame": 56,
+      "recorded_offset": -28,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 32,
+      "native_target_frame": 64,
+      "recorded_offset": -32,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 36,
+      "native_target_frame": 72,
+      "recorded_offset": -36,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 48,
+      "native_target_frame": 96,
+      "recorded_offset": -48,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 60,
+      "native_target_frame": 120,
+      "recorded_offset": -60,
+      "multiplier": 2
+    },
+    {
+      "source_frame": 72,
+      "native_target_frame": 144,
+      "recorded_offset": -72,
+      "multiplier": 2
+    }
+  ],
+  "fixture_provenance": "Actual saved S3-s1/S3-s2 image mapping rows, path fields removed"
+}

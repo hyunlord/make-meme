@@ -103,9 +103,11 @@ def main() -> None:
         copy_verified(source, folder/scaled_sheet)
         documents['원본 canny / 확대 canny / 앵커 비교 시트'] = scaled_sheet
     for filename, source in cfg.get('documents', {}).items():
-        if Path(filename).name != filename:
-            raise ValueError('Documents must use flat relative names')
-        copy_verified(Path(source), folder/filename)
+        relative = Path(filename)
+        if relative.is_absolute() or '..' in relative.parts:
+            raise ValueError('Documents must stay inside the review folder')
+        (folder/relative).parent.mkdir(parents=True, exist_ok=True)
+        copy_verified(Path(source), folder/relative)
         documents[filename] = filename
     labels = [clip['label'] for clip in clips if clip['generated']]
     (folder/'HUMAN_REVIEW.md').write_text(human_review(labels, scene['viewer']['human_review_extra_item']))
@@ -125,14 +127,14 @@ def main() -> None:
         raise ValueError('Expected one viewer data slot')
     (folder/'index.html').write_text(html)
     (folder/'MEDIA_PROVENANCE.json').write_text(json.dumps(provenance, indent=2)+'\n')
-    payload = sorted(path for path in folder.iterdir() if path.is_file())
+    payload = sorted(path for path in folder.rglob('*') if path.is_file())
     manifest = {'payload_count': len(payload), 'excludes': ['MANIFEST.json', 'ZIP itself'],
                 'scene_config_sha256': digest(scene_path),
-                'files': {path.name: {'bytes': path.stat().st_size, 'sha256': digest(path)} for path in payload}}
+                'files': {path.relative_to(folder).as_posix(): {'bytes': path.stat().st_size, 'sha256': digest(path)} for path in payload}}
     (folder/'MANIFEST.json').write_text(json.dumps(manifest, indent=2)+'\n')
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as output:
         for path in [*payload, folder/'MANIFEST.json']:
-            output.write(path, path.name)
+            output.write(path, path.relative_to(folder).as_posix())
     extracted = folder.with_name(folder.name+'-verified-extraction')
     if extracted.exists():
         raise FileExistsError(extracted)

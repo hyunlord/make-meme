@@ -1,0 +1,657 @@
+{
+  "policy": "V002_R1",
+  "accounting_note": "Includes mandatory idle admission observation; not equivalent to external GPU blocking duration",
+  "total_wait_seconds": 3242.9688773155212,
+  "stage_limit_seconds": 7200.0,
+  "total_limit_seconds": 10800.0,
+  "stages": {
+    "v004-sam-f016-c1-admission": {
+      "started_at_epoch": 1793903620.4412074,
+      "accounted_until_epoch": 1793903800.5935378,
+      "elapsed_seconds": 180.15233039855957,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793903620.4763477,
+          "elapsed_seconds": 0.035140275955200195,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793903680.5136118,
+          "elapsed_seconds": 60.07240438461304,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793903740.556683,
+          "elapsed_seconds": 120.11547565460205,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793903800.5935378,
+          "elapsed_seconds": 180.15233039855957,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-f020-c1-admission": {
+      "started_at_epoch": 1793904178.8499315,
+      "accounted_until_epoch": 1793904359.006525,
+      "elapsed_seconds": 180.15659356117249,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793904178.8910055,
+          "elapsed_seconds": 0.04107403755187988,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904238.9284024,
+          "elapsed_seconds": 60.078470945358276,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904298.9675825,
+          "elapsed_seconds": 120.11765098571777,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904359.006525,
+          "elapsed_seconds": 180.15659356117249,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-f028-c1-admission": {
+      "started_at_epoch": 1793904522.7910733,
+      "accounted_until_epoch": 1793904702.9558864,
+      "elapsed_seconds": 180.164813041687,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793904522.8339162,
+          "elapsed_seconds": 0.042842864990234375,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904582.873673,
+          "elapsed_seconds": 60.08259963989258,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904642.9126763,
+          "elapsed_seconds": 120.12160301208496,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904702.9558864,
+          "elapsed_seconds": 180.164813041687,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-f032-c1-admission": {
+      "started_at_epoch": 1793904865.7374914,
+      "accounted_until_epoch": 1793905045.8945405,
+      "elapsed_seconds": 180.15704917907715,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793904865.7788258,
+          "elapsed_seconds": 0.04133439064025879,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904925.8179507,
+          "elapsed_seconds": 60.08045935630798,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793904985.8556209,
+          "elapsed_seconds": 120.11812949180603,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793905045.8945405,
+          "elapsed_seconds": 180.15704917907715,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-anchor-embeddings-admission": {
+      "started_at_epoch": 1793905280.3771849,
+      "accounted_until_epoch": 1793905460.5379555,
+      "elapsed_seconds": 180.16077065467834,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793905280.4134514,
+          "elapsed_seconds": 0.03626656532287598,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793905340.4567666,
+          "elapsed_seconds": 60.07958173751831,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793905400.4996483,
+          "elapsed_seconds": 120.12246346473694,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793905460.5379555,
+          "elapsed_seconds": 180.16077065467834,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-s2-s1-admission": {
+      "started_at_epoch": 1793905567.822859,
+      "accounted_until_epoch": 1793905747.9955256,
+      "elapsed_seconds": 180.17266654968262,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793905567.8652337,
+          "elapsed_seconds": 0.042374610900878906,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793905627.9078634,
+          "elapsed_seconds": 60.0850043296814,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793905687.9522817,
+          "elapsed_seconds": 120.12942266464233,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793905747.9955256,
+          "elapsed_seconds": 180.17266654968262,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-s1-s1-admission": {
+      "started_at_epoch": 1793905977.3047986,
+      "accounted_until_epoch": 1793906157.462389,
+      "elapsed_seconds": 180.1575903892517,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793905977.3430667,
+          "elapsed_seconds": 0.038268089294433594,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793906037.3798451,
+          "elapsed_seconds": 60.07504653930664,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793906097.4192827,
+          "elapsed_seconds": 120.11448407173157,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793906157.462389,
+          "elapsed_seconds": 180.1575903892517,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-s3-s1-admission": {
+      "started_at_epoch": 1793906358.0169497,
+      "accounted_until_epoch": 1793906538.1891944,
+      "elapsed_seconds": 180.1722447872162,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793906358.0608568,
+          "elapsed_seconds": 0.04390716552734375,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793906418.1040277,
+          "elapsed_seconds": 60.08707809448242,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793906478.1464262,
+          "elapsed_seconds": 120.12947654724121,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793906538.1891944,
+          "elapsed_seconds": 180.1722447872162,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-s2-s2-admission": {
+      "started_at_epoch": 1793906935.9321482,
+      "accounted_until_epoch": 1793907116.1029413,
+      "elapsed_seconds": 180.17079305648804,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793906935.9677553,
+          "elapsed_seconds": 0.035607099533081055,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793906996.0120153,
+          "elapsed_seconds": 60.079867124557495,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907056.0559862,
+          "elapsed_seconds": 120.12383794784546,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907116.1029413,
+          "elapsed_seconds": 180.17079305648804,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-s1-s2-admission": {
+      "started_at_epoch": 1793907327.770798,
+      "accounted_until_epoch": 1793907507.93686,
+      "elapsed_seconds": 180.16606211662292,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793907327.8127604,
+          "elapsed_seconds": 0.041962385177612305,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907387.8507507,
+          "elapsed_seconds": 60.07995271682739,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907447.8925157,
+          "elapsed_seconds": 120.12171769142151,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907507.93686,
+          "elapsed_seconds": 180.16606211662292,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-s3-s2-admission": {
+      "started_at_epoch": 1793907702.6721065,
+      "accounted_until_epoch": 1793907882.8428211,
+      "elapsed_seconds": 180.1707146167755,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793907702.7140315,
+          "elapsed_seconds": 0.04192495346069336,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907762.7578926,
+          "elapsed_seconds": 60.08578610420227,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907822.800756,
+          "elapsed_seconds": 120.12864947319031,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793907882.8428211,
+          "elapsed_seconds": 180.1707146167755,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-output-s2-s1-admission": {
+      "started_at_epoch": 1793908123.8617454,
+      "accounted_until_epoch": 1793908304.028686,
+      "elapsed_seconds": 180.1669406890869,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793908123.9025137,
+          "elapsed_seconds": 0.04076838493347168,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908183.9421282,
+          "elapsed_seconds": 60.08038282394409,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908243.9847462,
+          "elapsed_seconds": 120.12300086021423,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908304.028686,
+          "elapsed_seconds": 180.1669406890869,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-output-s1-s1-admission": {
+      "started_at_epoch": 1793908456.855688,
+      "accounted_until_epoch": 1793908637.0222688,
+      "elapsed_seconds": 180.16658067703247,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793908456.8973389,
+          "elapsed_seconds": 0.04165077209472656,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908516.9405067,
+          "elapsed_seconds": 60.084818601608276,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908576.983516,
+          "elapsed_seconds": 120.12782788276672,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908637.0222688,
+          "elapsed_seconds": 180.16658067703247,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-output-s3-s1-admission": {
+      "started_at_epoch": 1793908776.0217311,
+      "accounted_until_epoch": 1793908956.1930888,
+      "elapsed_seconds": 180.17135763168335,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793908776.062423,
+          "elapsed_seconds": 0.04069185256958008,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908836.1045895,
+          "elapsed_seconds": 60.0828583240509,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908896.1488943,
+          "elapsed_seconds": 120.12716317176819,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793908956.1930888,
+          "elapsed_seconds": 180.17135763168335,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-output-s2-s2-admission": {
+      "started_at_epoch": 1793909116.1676881,
+      "accounted_until_epoch": 1793909296.3228812,
+      "elapsed_seconds": 180.15519309043884,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793909116.20291,
+          "elapsed_seconds": 0.03522181510925293,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909176.2425063,
+          "elapsed_seconds": 60.07481813430786,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909236.2805727,
+          "elapsed_seconds": 120.11288452148438,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909296.3228812,
+          "elapsed_seconds": 180.15519309043884,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-output-s1-s2-admission": {
+      "started_at_epoch": 1793909396.240726,
+      "accounted_until_epoch": 1793909576.4074564,
+      "elapsed_seconds": 180.16673040390015,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793909396.2781549,
+          "elapsed_seconds": 0.037428855895996094,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909456.321577,
+          "elapsed_seconds": 60.08085107803345,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909516.36554,
+          "elapsed_seconds": 120.1248140335083,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909576.4074564,
+          "elapsed_seconds": 180.16673040390015,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-sam-output-s3-s2-admission": {
+      "started_at_epoch": 1793909703.507974,
+      "accounted_until_epoch": 1793909883.681002,
+      "elapsed_seconds": 180.17302799224854,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793909703.551075,
+          "elapsed_seconds": 0.04310107231140137,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909763.5944,
+          "elapsed_seconds": 60.08642601966858,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909823.6370037,
+          "elapsed_seconds": 120.12902975082397,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793909883.681002,
+          "elapsed_seconds": 180.17302799224854,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    },
+    "v004-output-embeddings-admission": {
+      "started_at_epoch": 1793910148.5422087,
+      "accounted_until_epoch": 1793910328.7096272,
+      "elapsed_seconds": 180.16741847991943,
+      "status": "READY",
+      "samples": [
+        {
+          "observed_at_epoch": 1793910148.5829198,
+          "elapsed_seconds": 0.040711164474487305,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793910208.6264806,
+          "elapsed_seconds": 60.0842719078064,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793910268.6652904,
+          "elapsed_seconds": 120.12308168411255,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        },
+        {
+          "observed_at_epoch": 1793910328.7096272,
+          "elapsed_seconds": 180.16741847991943,
+          "gpu_count": 0,
+          "batch_parent_count": 0,
+          "empty": true
+        }
+      ]
+    }
+  }
+}
