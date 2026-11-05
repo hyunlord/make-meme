@@ -28,6 +28,8 @@ class Item:
     summary: Path
     frame_index: int
     casting_report: Path
+    allow_missing: bool = False
+    comparison_id: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -50,7 +52,7 @@ class Config:
         scene_path = Path(raw['scene_config'])
         scene = json.loads(scene_path.read_text())
         items = tuple(Item(row['id'], Path(row['image']), Path(row['summary']), row['frame_index'],
-                           Path(row['casting_report'])) for row in raw['items'])
+                           Path(row['casting_report']), row.get('allow_missing', False), row.get('comparison_id')) for row in raw['items'])
         cfg = cls(scene_path, Path(raw['model_path']), Path(raw['output']), raw['reference_id'],
                   raw['device'], raw['cpu_threads'], raw['batch_size'],
                   tuple(scene['scene']['casting_track_indices']),
@@ -59,7 +61,9 @@ class Config:
         assert cfg.model.is_absolute() and cfg.model.is_dir()
         assert (cfg.model/'config.json').is_file() and (cfg.model/'model.safetensors').is_file()
         assert len({item.identifier for item in items}) == len(items)
-        assert cfg.reference_id in {item.identifier for item in items}
+        identifiers = {item.identifier for item in items}
+        assert cfg.reference_id in identifiers
+        assert all(item.comparison_id is None or item.comparison_id in identifiers for item in items)
         assert not cfg.output.exists(), 'Preserve earlier embedding reports'
         return cfg
 
@@ -67,17 +71,26 @@ class Config:
 def crop_bounds(item: Item, roles: tuple[str, ...], size: tuple[int, int]) -> dict[str, tuple[int, int, int, int]]:
     """Use the saved gate correspondence and SAM bbox, without reassigning roles."""
     summary = json.loads(item.summary.read_text())
-    assert tuple(summary['coordinate_size']) == size
+    canvas = tuple(summary['coordinate_size'])
+    if not item.allow_missing:
+        assert canvas == size
     frame = next(row for row in summary['frames'] if row['index'] == item.frame_index)
     objects = {row['track_index']: row for row in frame['objects']}
-    casting = json.loads(item.casting_report.read_text())['casting']
+    report = json.loads(item.casting_report.read_text())
+    casting = report['casting'] or {}
+    measured = next((f for f in report.get('frames', []) if f['frame'] == item.frame_index), None)
+    actual = measured['actual_tracks'] if measured is not None else None
     bounds = {}
     for role in roles:
-        row = objects[casting[role]]
-        assert row['present'] and row['bbox'] is not None
+        track = casting.get(role)
+        row = objects.get(track)
+        available = row is not None and row['present'] and row['bbox'] is not None and (actual is None or track in actual)
+        if item.allow_missing and not available:
+            continue
+        assert available
         x0, y0, x1, y1 = row['bbox']
         box = (math.floor(x0), math.floor(y0), math.ceil(x1), math.ceil(y1))
-        assert 0 <= box[0] < box[2] <= size[0] and 0 <= box[1] < box[3] <= size[1]
+        assert 0 <= box[0] < box[2] <= canvas[0] and 0 <= box[1] < box[3] <= canvas[1]
         bounds[role] = box
     return bounds
 
@@ -86,9 +99,10 @@ def crops(item: Item, roles: tuple[str, ...], size: tuple[int, int]) -> list[Ima
     """Read unmodified RGB bbox crops; processor handles the model's input resize."""
     bounds = crop_bounds(item, roles, size)
     with Image.open(item.image) as image:
-        assert image.size == size
+        expected = tuple(json.loads(item.summary.read_text())['coordinate_size']) if item.allow_missing else size
+        assert image.size == expected
         rgb = image.convert('RGB')
-        return [rgb.crop(bounds[role]) for role in roles]
+        return [rgb.crop(bounds[role]) for role in roles if role in bounds]
 
 
 def atomic_report(output: Path, payload: str) -> None:
@@ -104,12 +118,14 @@ def atomic_report(output: Path, payload: str) -> None:
 
 def main() -> None:
     cfg = Config.read(Path(sys.argv[1]))
+    crop_count = 0
     for item in cfg.items:
         for crop in crops(item, cfg.roles, cfg.size):
+            crop_count += 1
             crop.close()
     if '--cpu-only' in sys.argv:
         print(json.dumps({'status': 'CPU_ENTRY_PASS', 'items': len(cfg.items),
-                          'crops': len(cfg.items)*len(cfg.roles), 'torch_imported': 'torch' in sys.modules}))
+                          'crops': crop_count, 'torch_imported': 'torch' in sys.modules}))
         return
     started = time.time()
     os.environ['HF_HUB_OFFLINE'] = '1'
@@ -141,7 +157,8 @@ def main() -> None:
                 norms = pooled.norm(dim=-1, keepdim=True)
                 assert bool((norms > 0).all())
                 item_vectors.extend((pooled/norms).cpu())
-            vectors[item.identifier] = dict(zip(cfg.roles, item_vectors))
+            present_roles = tuple(crop_bounds(item, cfg.roles, cfg.size))
+            vectors[item.identifier] = dict(zip(present_roles, item_vectors))
             for crop in images:
                 crop.close()
     baseline = vectors[cfg.reference_id]
@@ -149,14 +166,22 @@ def main() -> None:
     for item in cfg.items:
         rows.append({'id': item.identifier,
                      'cosine_vs_reference': {role: float(torch.dot(vectors[item.identifier][role], baseline[role]))
+                                              if role in vectors[item.identifier] and role in baseline else None
                                               for role in cfg.roles},
+                     'comparison_id': item.comparison_id,
+                     'cosine_vs_comparison': {role: float(torch.dot(vectors[item.identifier][role], vectors[item.comparison_id][role]))
+                                               if item.comparison_id and role in vectors[item.identifier] and role in vectors[item.comparison_id] else None
+                                               for role in cfg.roles},
                      'crop_bbox': crop_bounds(item, cfg.roles, cfg.size),
                      'image_sha256': hashlib.sha256(item.image.read_bytes()).hexdigest(),
                      'sam_summary_sha256': hashlib.sha256(item.summary.read_bytes()).hexdigest(),
                      'casting_report_sha256': hashlib.sha256(item.casting_report.read_bytes()).hexdigest()})
-    aggregate = {role: {'minimum': min(row['cosine_vs_reference'][role] for row in rows),
-                        'mean': sum(row['cosine_vs_reference'][role] for row in rows)/len(rows)}
-                 for role in cfg.roles}
+    aggregate = {}
+    for role in cfg.roles:
+        observed = [row['cosine_vs_reference'][role] for row in rows if row['cosine_vs_reference'][role] is not None]
+        aggregate[role] = {'minimum': min(observed) if observed else None,
+                           'mean': sum(observed)/len(observed) if observed else None,
+                           'observed': len(observed), 'total': len(rows)}
     report = {'status': 'MEASURED_REFERENCE_ONLY', 'gate': False, 'reference_id': cfg.reference_id,
               'feature': 'SiglipVisionModel.pooler_output; L2 normalized',
               'crop': 'SAM bbox RGB, unmasked; official local image processor',
