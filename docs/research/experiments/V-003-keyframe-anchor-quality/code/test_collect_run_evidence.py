@@ -91,3 +91,17 @@ def test_incomplete_kernel_hit_is_not_lost(tmp_path):
     assert result['nvrm_events'] is None
     assert result['nvrm_hit_observed'] is True
     assert '/private/host' not in json.dumps(result)
+
+
+def test_positive_supervisor_nvrm_count_without_kernel_row(tmp_path):
+    hw, out = fixture(tmp_path)
+    supervisor_path = tmp_path / 'stages/v003-k1-s1-heavy/reports/supervisor-result.json'
+    supervisor = json.loads(supervisor_path.read_text())
+    supervisor.update(status='FAILED', guard_reason='ENGINE_STOPPED_NVRM',
+                      normal_exit_recorded=False, nvrm_events=1)
+    put(supervisor_path, supervisor)
+    result = collect_run(tmp_path, {'name': 'K1-s1'}, hw, 'UTC', out)
+    assert result['status'] == 'UNKNOWN'
+    assert result['guard_reason'] == 'ENGINE_STOPPED_NVRM'
+    assert result['nvrm_events'] == 1
+    assert result['nvrm_hit_observed'] is True

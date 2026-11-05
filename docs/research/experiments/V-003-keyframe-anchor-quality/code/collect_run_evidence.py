@@ -174,7 +174,7 @@ def collect_run(root: Path, spec: dict[str, JSON], hw: Path, zone: str,
     result['min_mem_available_bytes_sampled'] = extreme([supervisor.get('min_available_bytes_observed')] + [obj(r.get('system_memory')).get('available') for r in rows], minimum=True)
     result['psi_full_avg10_max_sampled'] = extreme([obj(r.get('system_memory')).get('psi_full_avg10') for r in rows])
     result['nvrm_events'] = number(supervisor.get('nvrm_events'))
-    result['nvrm_hit_observed'] = (True if any(obj(r.get('kernel_watch')).get('nvrm_hit') is True for r in rows) or any(r.get('nvrm_hit') is True for r in kernel_rows)
+    result['nvrm_hit_observed'] = (True if (number(result['nvrm_events']) or 0) > 0 or any(obj(r.get('kernel_watch')).get('nvrm_hit') is True for r in rows) or any(r.get('nvrm_hit') is True for r in kernel_rows)
                                   else (False if result['nvrm_events'] == 0 and supervisor.get('kernel_watch_status') == 'AVAILABLE' else None))
     result['kernel_watch_status'] = status(supervisor.get('kernel_watch_status'))
     concurrent = supervisor.get('concurrent_external_gpu')
