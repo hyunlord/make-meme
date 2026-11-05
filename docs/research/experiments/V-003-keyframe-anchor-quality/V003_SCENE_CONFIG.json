@@ -222,5 +222,10 @@
       "after seed-1 of K1/K2/K3"
     ]
   },
-  "config_separation_rule": "all scene-specific values live only in this file; code reads them, never hardcodes"
+  "config_separation_rule": "all scene-specific values live only in this file; code reads them, never hardcodes",
+  "sam_settings": {
+    "min_area_fraction": 0.005,
+    "detection_threshold": 0.5,
+    "max_objects": 4
+  }
 }
