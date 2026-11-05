@@ -163,6 +163,10 @@
           "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
           "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
         }
+      },
+      "G7_reference_only": {
+        "Lab": 1.0,
+        "IG": 0.9999998807907104
       }
     },
     {
@@ -310,6 +314,10 @@
           "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
           "anchor": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
         }
+      },
+      "G7_reference_only": {
+        "Lab": 0.9026162624359131,
+        "IG": 0.8842923045158386
       }
     },
     {
@@ -393,6 +401,10 @@
           "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
           "anchor": "2660a921e5912277b2a6a1d95406391499d4ca3b78d61debd170683c623cc0ea"
         }
+      },
+      "G7_reference_only": {
+        "Lab": 0.7412821054458618,
+        "IG": 0.8921977281570435
       }
     },
     {
@@ -472,7 +484,11 @@
           "anchor": "7bce4a6ff43d102b167d0f79b7850421168571876b6d6bcb74630209831f8f63"
         }
       },
-      "sam_reruns": 0
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.8472852110862732,
+        "IG": 0.8900498151779175
+      }
     },
     {
       "segment_frame": 48,
@@ -553,7 +569,11 @@
           "anchor": "ba59774982d154f80a9eb76df0749c51323fc229d3951400544aa8c25357f905"
         }
       },
-      "sam_reruns": 0
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.9316020011901855,
+        "IG": 0.8691859245300293
+      }
     },
     {
       "segment_frame": 60,
@@ -635,7 +655,11 @@
           "anchor": "2c2a8522deacf76268a019c4ff058fe4f9c71cf29e481baf5edec75c546cbe13"
         }
       },
-      "sam_reruns": 0
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.8622336387634277,
+        "IG": 0.8703752756118774
+      }
     },
     {
       "segment_frame": 72,
@@ -717,8 +741,33 @@
           "anchor": "2e5f65f8cccfc1b4757a7401f9a838aeab331a590e205d4b04e7ca1e569f9004"
         }
       },
-      "sam_reruns": 0
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.8654326796531677,
+        "IG": 0.8648660182952881
+      }
     }
   ],
-  "updated_at_utc": "2026-11-05T16:56:29.151611+00:00"
+  "updated_at_utc": "2026-11-05T16:56:29.151611+00:00",
+  "G7_measurement": {
+    "status": "MEASURED_REFERENCE_ONLY",
+    "feature": "SiglipVisionModel.pooler_output; L2 normalized",
+    "crop": "SAM bbox RGB, unmasked; official local image processor",
+    "model_revision": "e8e487298228002f3d8a82e0cd5c8ea9c567f57f",
+    "aggregate": {
+      "Lab": {
+        "minimum": 0.7412821054458618,
+        "mean": 0.8786359855106899,
+        "observed": 7,
+        "total": 7
+      },
+      "IG": {
+        "minimum": 0.8648660182952881,
+        "mean": 0.8958524210112435,
+        "observed": 7,
+        "total": 7
+      }
+    },
+    "elapsed_seconds": 8.112682104110718
+  }
 }

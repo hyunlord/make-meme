@@ -1,0 +1,48 @@
+{
+  "anchor_interim": {
+    "filename": "V003-review-20261106-anchors.zip",
+    "bytes": 8396367,
+    "sha256": "4b664ccb0d4e38d75f99d4af6ab41661cfa08d7f837b0283fcb1893bcfd337f0",
+    "payload_count": 25,
+    "zip_entry_count": 26,
+    "crc": "PASS",
+    "actual_extraction": "PASS",
+    "payload_hashes": "PASS",
+    "browser_qa": {
+      "status": "PASS",
+      "actual_media": true,
+      "columns": 10,
+      "videos": 4,
+      "anchors": 7,
+      "not_run": 6,
+      "controls": [
+        "play",
+        "pause",
+        "frame",
+        "slider",
+        "0.5x",
+        "RAW_POST",
+        "keyframe_anchor"
+      ],
+      "viewports": [
+        375,
+        768,
+        1280
+      ],
+      "errors": [],
+      "quality": "HUMAN_REVIEW_PENDING",
+      "temporal_quality": "UNVERIFIED"
+    },
+    "quality": "HUMAN_REVIEW_PENDING",
+    "host_transfer_sha256": "PASS",
+    "mac_crc": "PASS",
+    "mac_actual_extraction": "PASS",
+    "mac_payload_hashes": "PASS",
+    "visual_qa": "PASS: actual 1280px viewport and anchor row inspected; horizontal comparison scrolling intentional",
+    "G7": "PENDING",
+    "original_mp4_byte_preservation": {
+      "clip-08-raw.mp4": "PASS",
+      "clip-09-raw.mp4": "PASS"
+    }
+  }
+}

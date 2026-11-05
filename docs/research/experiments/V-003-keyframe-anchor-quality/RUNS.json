@@ -1,5 +1,5 @@
 {
-  "status": "ANCHORS_7_ACCEPTED_G7_PENDING",
+  "status": "VIDEO_CPU_PREFLIGHT",
   "quality": "HUMAN_REVIEW_PENDING",
   "temporal": "UNVERIFIED",
   "video_generations_started": 0,
@@ -32,10 +32,11 @@
       "seed_index": 2
     }
   },
-  "interim_anchor_delivery": "PENDING",
+  "interim_anchor_delivery": "VERIFIED_SPARK_MAC_BEFORE_VIDEO_GENERATION",
   "interim_seed1_delivery": "PENDING",
   "firmware_verified": true,
   "hwlog_verified_running": true,
   "anchor_sam_runs_completed": 6,
-  "anchor0_sam_reused": true
+  "anchor0_sam_reused": true,
+  "G7": "MEASURED_REFERENCE_ONLY"
 }
