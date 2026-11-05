@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from PIL import Image
 from embed_images import Item, crop_bounds, crops
-from output_embedding_metrics import build, merge
+from output_embedding_metrics import build, merge, comparison_map
 
 
 class OutputEmbeddingTests(unittest.TestCase):
@@ -30,6 +30,20 @@ class OutputEmbeddingTests(unittest.TestCase):
             self.assertEqual(crop_bounds(item, ('A', 'B'), (200, 120)), {})
             self.assertEqual(crops(item, ('A', 'B'), (200, 120)), [])
 
+    def test_receipt_mapping_offsets_reuse_and_validation(self):
+        anchors = [{'id': 'a0', 'frame': 0}, {'id': 'a12', 'frame': 12}, {'id': 'a36', 'frame': 36}]
+        k3 = {'keyframes': [{'frame': 0, 'anchor_id': 'a0'}, {'frame': 17, 'anchor_id': 'a12'},
+                            {'frame': 33, 'anchor_id': 'a36'}, {'frame': 49, 'anchor_id': 'a36'}]}
+        mapped = comparison_map(anchors, k3, 73)
+        self.assertEqual(mapped, {0: 'a0', 17: 'a12', 33: 'a36', 49: 'a36'})
+        self.assertNotIn(12, mapped)
+        self.assertEqual(comparison_map(anchors, {}, 73), {0: 'a0', 12: 'a12', 36: 'a36'})
+        for bad in ([{'frame': 17, 'anchor_id': 'unknown'}],
+                    [{'frame': 73, 'anchor_id': 'a0'}],
+                    [{'frame': 0, 'anchor_id': 'a0'}, {'frame': 0, 'anchor_id': 'a12'}]):
+            with self.assertRaises(ValueError):
+                comparison_map(anchors, {'keyframes': bad}, 73)
+
     def test_builder_and_nullable_merge(self):
         with tempfile.TemporaryDirectory() as temp:
             scene = Path(temp)/'scene.json'
@@ -51,6 +65,18 @@ class OutputEmbeddingTests(unittest.TestCase):
             self.assertEqual(stats, {'minimum': .7, 'mean': .7, 'observed_frames': 1, 'total_frames': 2})
             self.assertEqual(len(merged['outputs']['K1']['keyframes']), 1)
             self.assertEqual(merged['quality'], 'HUMAN_REVIEW_PENDING')
+            manifest['outputs'][0]['keyframes'] = [{'frame': 1, 'anchor_id': 'anchor0'}]
+            remapped = build(manifest)
+            self.assertEqual(len([i for i in remapped['items'] if i['id'] == 'anchor0']), 1)
+            self.assertIsNone(remapped['items'][1]['comparison_id'])
+            self.assertEqual(remapped['items'][2]['comparison_id'], 'anchor0')
+            with self.assertRaises(ValueError):
+                merge(manifest, report)
+            report['items'][0]['comparison_id'] = None
+            report['items'][1]['comparison_id'] = 'anchor0'
+            missing = merge(manifest, report)['outputs']['K1']['keyframes'][0]
+            self.assertEqual(missing['frame'], 1)
+            self.assertIsNone(missing['cosine_vs_keyframe']['A'])
 
 
 if __name__ == '__main__':

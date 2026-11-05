@@ -4,7 +4,8 @@ build PRIVATE_MANIFEST.json PRIVATE_RUNTIME.json
 merge PRIVATE_MANIFEST.json EMBEDDINGS.json PUBLIC_METRICS.json
 Manifest: scene_config, model_path, device, cpu_threads, batch_size,
 embedding_output, reference_id, anchors [{id,frame,image,summary,casting_report,
-frame_index}], outputs [{id,raw_frames,summary,metrics}]. Anchor frame is the
+frame_index}], outputs [{id,raw_frames,summary,metrics,keyframes:[{frame,anchor_id}]}].
+Per-output keyframes should come from actual receipts; omitted uses anchor times. Anchor frame is the
 output comparison time; frame_index is the saved SAM index (normally zero).
 All anchors are embedded once. All output frames use fixed saved metrics casting.
 """
@@ -17,15 +18,29 @@ import sys
 from embed_images import atomic_report
 
 
+def comparison_map(anchors: list[dict], output: dict, frames: int) -> dict[int, str]:
+    identifiers = {row['id'] for row in anchors}
+    if len(identifiers) != len(anchors):
+        raise ValueError('Duplicate anchor id')
+    rows = output.get('keyframes', [{'frame': row['frame'], 'anchor_id': row['id']} for row in anchors])
+    result = {}
+    for row in rows:
+        frame, identifier = row['frame'], row['anchor_id']
+        if type(frame) is not int or not 0 <= frame < frames:
+            raise ValueError('Comparison time outside output frame range')
+        if frame in result or identifier not in identifiers:
+            raise ValueError('Duplicate comparison time or unknown anchor id')
+        result[frame] = identifier
+    return result
+
+
 def build(manifest: dict) -> dict:
     scene = json.loads(Path(manifest['scene_config']).read_text())
     frames = scene['generation']['frames']
     anchors = manifest['anchors']
-    comparisons = {row['frame']: row['id'] for row in anchors}
-    if len(comparisons) != len(anchors):
-        raise ValueError('Duplicate keyframe comparison time')
     items = [{key: row[key] for key in ('id', 'image', 'summary', 'casting_report', 'frame_index')} for row in anchors]
     for output in manifest['outputs']:
+        comparisons = comparison_map(anchors, output, frames)
         for index in range(frames):
             items.append({'id': f"{output['id']}:frame:{index}",
                           'image': str(Path(output['raw_frames'])/f'{index:03d}.png'),
@@ -43,9 +58,12 @@ def merge(manifest: dict, embeddings: dict) -> dict:
     rows = {item['id']: item for item in embeddings['items']}
     outputs = {}
     for output in manifest['outputs']:
+        comparisons = comparison_map(manifest['anchors'], output, count)
         frames = []
         for index in range(count):
             row = rows[f"{output['id']}:frame:{index}"]
+            if row['comparison_id'] != comparisons.get(index):
+                raise ValueError('Embedding reference differs from output receipt mapping')
             frames.append({'frame': index, 'cosine_vs_anchor0': row['cosine_vs_reference'],
                            'keyframe_reference': row['comparison_id'],
                            'cosine_vs_keyframe': row['cosine_vs_comparison']})
