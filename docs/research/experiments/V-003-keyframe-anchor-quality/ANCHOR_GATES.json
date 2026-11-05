@@ -554,7 +554,171 @@
         }
       },
       "sam_reruns": 0
+    },
+    {
+      "segment_frame": 60,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 17.347249750427277,
+          "IG": 29.570956659563087
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.132716049382716,
+          "IG": 1.1764705882352942
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0288837448559671,
+          "IG": 1.1996904024767803
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.616992950439453,
+        "background_pixels": 732757,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 60,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2c2a8522deacf76268a019c4ff058fe4f9c71cf29e481baf5edec75c546cbe13"
+        }
+      },
+      "sam_reruns": 0
+    },
+    {
+      "segment_frame": 72,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 4.208383498164988,
+          "IG": 3.4094064631328824
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1014925373134328,
+          "IG": 1.128755364806867
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0294322778630214,
+          "IG": 1.0568601186408246
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 7.083588600158691,
+        "background_pixels": 734138,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 72,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2e5f65f8cccfc1b4757a7401f9a838aeab331a590e205d4b04e7ca1e569f9004"
+        }
+      },
+      "sam_reruns": 0
     }
   ],
-  "updated_at_utc": "2026-11-05T16:47:37.679349+00:00"
+  "updated_at_utc": "2026-11-05T16:56:29.151611+00:00"
 }

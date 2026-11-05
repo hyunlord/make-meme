@@ -1,0 +1,41 @@
+{
+  "status": "ANCHORS_7_ACCEPTED_G7_PENDING",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "video_generations_started": 0,
+  "imagegen_calls_actual": 6,
+  "training_calls": 0,
+  "V002_remaining": "CANCELLED_BY_USER_NO_LIVE_WORKERS",
+  "variants": {
+    "K1-s1": {
+      "status": "NOT_STARTED",
+      "seed_index": 1
+    },
+    "K1-s2": {
+      "status": "NOT_STARTED",
+      "seed_index": 2
+    },
+    "K2-s1": {
+      "status": "NOT_STARTED",
+      "seed_index": 1
+    },
+    "K2-s2": {
+      "status": "NOT_STARTED",
+      "seed_index": 2
+    },
+    "K3-s1": {
+      "status": "NOT_STARTED",
+      "seed_index": 1
+    },
+    "K3-s2": {
+      "status": "NOT_STARTED",
+      "seed_index": 2
+    }
+  },
+  "interim_anchor_delivery": "PENDING",
+  "interim_seed1_delivery": "PENDING",
+  "firmware_verified": true,
+  "hwlog_verified_running": true,
+  "anchor_sam_runs_completed": 6,
+  "anchor0_sam_reused": true
+}
