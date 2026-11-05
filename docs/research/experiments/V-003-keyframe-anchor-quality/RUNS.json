@@ -1,5 +1,5 @@
 {
-  "status": "SIX_GENERATED_MEASUREMENT_PENDING",
+  "status": "SIX_GENERATED_MEASURED_POST_COMPLETE",
   "quality": "HUMAN_REVIEW_PENDING",
   "temporal": "UNVERIFIED",
   "video_generations_started": 6,
@@ -69,6 +69,152 @@
           "excerpt_run_filter": "K1-s1"
         },
         "evidence_issues": []
+      },
+      "variant": "K1",
+      "seed": 20261103,
+      "resolution": [
+        1152,
+        640
+      ],
+      "frames": 73,
+      "fps": 24,
+      "runtime_sha256": "a893585dfe67b1a93a24fdee39256f87dd8a2c4966a8c7cc5091a03177534f6b",
+      "anchor_mapping": [
+        {
+          "frame": 0,
+          "source_frame": 0,
+          "offset": 0,
+          "binding": "auto",
+          "strength": 1.0
+        },
+        {
+          "frame": 12,
+          "source_frame": 12,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 24,
+          "source_frame": 24,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 36,
+          "source_frame": 36,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 48,
+          "source_frame": 48,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 60,
+          "source_frame": 60,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 72,
+          "source_frame": 72,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        }
+      ],
+      "output_sam": {
+        "status": "COMPLETE",
+        "normal_exit_recorded": true,
+        "nvrm_events": 0
+      },
+      "post_processing": {
+        "name": "K1-s1",
+        "status": "CPU_POST_AND_METRICS_COMPLETE",
+        "start_utc": "2026-11-05T17:46:51.611581+00:00",
+        "end_utc": "2026-11-05T17:47:17.049026+00:00",
+        "frames": 73,
+        "fps": 24,
+        "raw_mp4_sha256": "738e02d7fb6ec337f07df2ec28e02474376cb9d1ccf73b84ea8aace5a5720601",
+        "raw_mp4_unchanged": true,
+        "post_mp4_sha256": "d9b8ac351c8f290d99f38622d460648484233afb5dd8de751d23d724fa6c4c24",
+        "post_png_manifest_sha256": "b291923824d850cd30ee30a0398d3eddf6e5aefa3f091fc23f4ce404be5e44b6",
+        "metrics_sha256": "5a437bdb8755a076ba6bc2a4813135e661bb881553f47cea5d2fe20013c7b875",
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "generation_receipt_sha256": "ec4d205eb4afba8a6dd6bb464bd107840c89570aae5e630314e61d71ea66f072",
+        "output_sam_summary_sha256": "d40f0c70765b99cd70627fe5a9b3b20a9f55e86e3d47ed60d3a617b6ecc08ad9",
+        "anchor_mapping": [
+          {
+            "frame": 0,
+            "source_frame": 0,
+            "offset": 0,
+            "binding": "auto",
+            "strength": 1.0
+          },
+          {
+            "frame": 12,
+            "source_frame": 12,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 24,
+            "source_frame": 24,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 36,
+            "source_frame": 36,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 48,
+            "source_frame": 48,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 60,
+            "source_frame": 60,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 72,
+            "source_frame": 72,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          }
+        ],
+        "anchor_ssim_rgb": "Exact transformed model conditioning PNG; no second resize",
+        "post_encoding": {
+          "codec": "libx264",
+          "crf": 18,
+          "pixel_format": "yuv420p",
+          "threads": 2
+        },
+        "code_sha256": {
+          "post_composite.py": "710147bf4f470b353ad7041e2182c5b0ebb91049cca2206dbab7b28d618d22b3",
+          "output_metrics.py": "74cf7dc4e076d29a1e59478cb34f6a3590c22cc0f4216d40850feae9a558b2b8",
+          "anchor_gates.py": "59b6d3cb713efe0c21217b0e8abb0f308c6870657644497529a18022dfba3cf8"
+        },
+        "quality": "HUMAN_REVIEW_PENDING",
+        "temporal_review": "UNVERIFIED"
       }
     },
     "K1-s2": {
@@ -125,6 +271,152 @@
           "excerpt_run_filter": "K1-s2"
         },
         "evidence_issues": []
+      },
+      "variant": "K1",
+      "seed": 20261104,
+      "resolution": [
+        1152,
+        640
+      ],
+      "frames": 73,
+      "fps": 24,
+      "runtime_sha256": "26e363e6b998c15e05b663fd30915554dd6c362ffd3405ca9139d743301d311f",
+      "anchor_mapping": [
+        {
+          "frame": 0,
+          "source_frame": 0,
+          "offset": 0,
+          "binding": "auto",
+          "strength": 1.0
+        },
+        {
+          "frame": 12,
+          "source_frame": 12,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 24,
+          "source_frame": 24,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 36,
+          "source_frame": 36,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 48,
+          "source_frame": 48,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 60,
+          "source_frame": 60,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 72,
+          "source_frame": 72,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        }
+      ],
+      "output_sam": {
+        "status": "COMPLETE",
+        "normal_exit_recorded": true,
+        "nvrm_events": 0
+      },
+      "post_processing": {
+        "name": "K1-s2",
+        "status": "CPU_POST_AND_METRICS_COMPLETE",
+        "start_utc": "2026-11-05T17:59:10.318794+00:00",
+        "end_utc": "2026-11-05T17:59:35.820364+00:00",
+        "frames": 73,
+        "fps": 24,
+        "raw_mp4_sha256": "0c5859a68b51671a875f6ec8a7894b6575db6e8c764b132cc7c0ebc0e9305d72",
+        "raw_mp4_unchanged": true,
+        "post_mp4_sha256": "f421f80aedd2ee03f6f6be3b2f4f45d22e06b58b7797411757fbdf65b61fa795",
+        "post_png_manifest_sha256": "d832fbba5d55d599a9ccca7fdf3841e25f8d0159806a3ecb6e3fa907d26d571a",
+        "metrics_sha256": "4188529eb789a2d5589c889f078f6d13846c12d22a4114a01362551f1c7604ab",
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "generation_receipt_sha256": "354e253025e5b54f39ba6865b6f4e642d3f285673e7956a8ee9f084a9dcc353a",
+        "output_sam_summary_sha256": "03ac8a7058447cd495aee684bf612937dbca766df3f0a4fac1871351732e1e16",
+        "anchor_mapping": [
+          {
+            "frame": 0,
+            "source_frame": 0,
+            "offset": 0,
+            "binding": "auto",
+            "strength": 1.0
+          },
+          {
+            "frame": 12,
+            "source_frame": 12,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 24,
+            "source_frame": 24,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 36,
+            "source_frame": 36,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 48,
+            "source_frame": 48,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 60,
+            "source_frame": 60,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 72,
+            "source_frame": 72,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          }
+        ],
+        "anchor_ssim_rgb": "Exact transformed model conditioning PNG; no second resize",
+        "post_encoding": {
+          "codec": "libx264",
+          "crf": 18,
+          "pixel_format": "yuv420p",
+          "threads": 2
+        },
+        "code_sha256": {
+          "post_composite.py": "710147bf4f470b353ad7041e2182c5b0ebb91049cca2206dbab7b28d618d22b3",
+          "output_metrics.py": "74cf7dc4e076d29a1e59478cb34f6a3590c22cc0f4216d40850feae9a558b2b8",
+          "anchor_gates.py": "59b6d3cb713efe0c21217b0e8abb0f308c6870657644497529a18022dfba3cf8"
+        },
+        "quality": "HUMAN_REVIEW_PENDING",
+        "temporal_review": "UNVERIFIED"
       }
     },
     "K2-s1": {
@@ -189,6 +481,152 @@
           "excerpt_run_filter": "K2-s1"
         },
         "evidence_issues": []
+      },
+      "variant": "K2",
+      "seed": 20261103,
+      "resolution": [
+        1152,
+        640
+      ],
+      "frames": 73,
+      "fps": 24,
+      "runtime_sha256": "42ef56bdd4b42722663b9692331a40ac588fd2d8d6d4baf56bc9337468784dcf",
+      "anchor_mapping": [
+        {
+          "frame": 0,
+          "source_frame": 0,
+          "offset": 0,
+          "binding": "auto",
+          "strength": 1.0
+        },
+        {
+          "frame": 12,
+          "source_frame": 12,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 24,
+          "source_frame": 24,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 36,
+          "source_frame": 36,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 48,
+          "source_frame": 48,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 60,
+          "source_frame": 60,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 72,
+          "source_frame": 72,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        }
+      ],
+      "output_sam": {
+        "status": "COMPLETE",
+        "normal_exit_recorded": true,
+        "nvrm_events": 0
+      },
+      "post_processing": {
+        "name": "K2-s1",
+        "status": "CPU_POST_AND_METRICS_COMPLETE",
+        "start_utc": "2026-11-05T17:51:21.255541+00:00",
+        "end_utc": "2026-11-05T17:51:46.885326+00:00",
+        "frames": 73,
+        "fps": 24,
+        "raw_mp4_sha256": "3b121d331e8b2405a1a846782f7af6ce2584820e4978846c52fd755fb2f09c23",
+        "raw_mp4_unchanged": true,
+        "post_mp4_sha256": "7e569a57936306d0315b7777fd6e70bde58ac46acdd1344818a8597b89434954",
+        "post_png_manifest_sha256": "47a70fccac20043ab91d27e7d5ee7cc72459d460524f973cfd00fbd617873bd5",
+        "metrics_sha256": "2d867ca9fa4c467115ddd6d7516499cfd3213f532dcd21d652fe43358fd28e05",
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "generation_receipt_sha256": "a13c2949cf19dc4f1ce8a0379327eb0a7d336a064cd5c4f7ae80a09cc358f275",
+        "output_sam_summary_sha256": "822c61ae559dc8cc0656c4994f4c1419ed2997816019cc5e0a38a92731c62758",
+        "anchor_mapping": [
+          {
+            "frame": 0,
+            "source_frame": 0,
+            "offset": 0,
+            "binding": "auto",
+            "strength": 1.0
+          },
+          {
+            "frame": 12,
+            "source_frame": 12,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 24,
+            "source_frame": 24,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 36,
+            "source_frame": 36,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 48,
+            "source_frame": 48,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 60,
+            "source_frame": 60,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 72,
+            "source_frame": 72,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          }
+        ],
+        "anchor_ssim_rgb": "Exact transformed model conditioning PNG; no second resize",
+        "post_encoding": {
+          "codec": "libx264",
+          "crf": 18,
+          "pixel_format": "yuv420p",
+          "threads": 2
+        },
+        "code_sha256": {
+          "post_composite.py": "710147bf4f470b353ad7041e2182c5b0ebb91049cca2206dbab7b28d618d22b3",
+          "output_metrics.py": "74cf7dc4e076d29a1e59478cb34f6a3590c22cc0f4216d40850feae9a558b2b8",
+          "anchor_gates.py": "59b6d3cb713efe0c21217b0e8abb0f308c6870657644497529a18022dfba3cf8"
+        },
+        "quality": "HUMAN_REVIEW_PENDING",
+        "temporal_review": "UNVERIFIED"
       }
     },
     "K2-s2": {
@@ -245,6 +683,152 @@
           "excerpt_run_filter": "K2-s2"
         },
         "evidence_issues": []
+      },
+      "variant": "K2",
+      "seed": 20261104,
+      "resolution": [
+        1152,
+        640
+      ],
+      "frames": 73,
+      "fps": 24,
+      "runtime_sha256": "b0ec1a44624a6abeda8f27e670618eb1c235bc8e3c2e53d90d22c37e71197608",
+      "anchor_mapping": [
+        {
+          "frame": 0,
+          "source_frame": 0,
+          "offset": 0,
+          "binding": "auto",
+          "strength": 1.0
+        },
+        {
+          "frame": 12,
+          "source_frame": 12,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 24,
+          "source_frame": 24,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 36,
+          "source_frame": 36,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 48,
+          "source_frame": 48,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 60,
+          "source_frame": 60,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        },
+        {
+          "frame": 72,
+          "source_frame": 72,
+          "offset": 0,
+          "binding": "guide",
+          "strength": 1.0
+        }
+      ],
+      "output_sam": {
+        "status": "COMPLETE",
+        "normal_exit_recorded": true,
+        "nvrm_events": 0
+      },
+      "post_processing": {
+        "name": "K2-s2",
+        "status": "CPU_POST_AND_METRICS_COMPLETE",
+        "start_utc": "2026-11-05T18:03:15.062878+00:00",
+        "end_utc": "2026-11-05T18:03:40.688644+00:00",
+        "frames": 73,
+        "fps": 24,
+        "raw_mp4_sha256": "a38ecab819312bcf7b57c2ea459e45d4e5dfff68d982bbddc3d45877ed6800c6",
+        "raw_mp4_unchanged": true,
+        "post_mp4_sha256": "5d494b2cb790af446028d7d36c2c6cb4a733233a8195f3e2571fc27001c8b518",
+        "post_png_manifest_sha256": "bec54d4f982b3654b443b385924e021759cbc9192b77bb96182be6b5b631a43d",
+        "metrics_sha256": "84ce6624a45d6fae7c0748560a07948f231b80305fefdf866c9bd55a7f80a210",
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "generation_receipt_sha256": "c7a0b0a1e3f1a20d242e350e677fa7cfc6a6f990f990416c467ec0f4b4ad1341",
+        "output_sam_summary_sha256": "308d4195b1dad4080aea6fbc83ad9fe9342b0f3d1356a050cb222c78686517e7",
+        "anchor_mapping": [
+          {
+            "frame": 0,
+            "source_frame": 0,
+            "offset": 0,
+            "binding": "auto",
+            "strength": 1.0
+          },
+          {
+            "frame": 12,
+            "source_frame": 12,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 24,
+            "source_frame": 24,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 36,
+            "source_frame": 36,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 48,
+            "source_frame": 48,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 60,
+            "source_frame": 60,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          },
+          {
+            "frame": 72,
+            "source_frame": 72,
+            "offset": 0,
+            "binding": "guide",
+            "strength": 1.0
+          }
+        ],
+        "anchor_ssim_rgb": "Exact transformed model conditioning PNG; no second resize",
+        "post_encoding": {
+          "codec": "libx264",
+          "crf": 18,
+          "pixel_format": "yuv420p",
+          "threads": 2
+        },
+        "code_sha256": {
+          "post_composite.py": "710147bf4f470b353ad7041e2182c5b0ebb91049cca2206dbab7b28d618d22b3",
+          "output_metrics.py": "74cf7dc4e076d29a1e59478cb34f6a3590c22cc0f4216d40850feae9a558b2b8",
+          "anchor_gates.py": "59b6d3cb713efe0c21217b0e8abb0f308c6870657644497529a18022dfba3cf8"
+        },
+        "quality": "HUMAN_REVIEW_PENDING",
+        "temporal_review": "UNVERIFIED"
       }
     },
     "K3-s1": {
@@ -346,6 +930,87 @@
           "excerpt_run_filter": "K3-s1"
         },
         "evidence_issues": []
+      },
+      "variant": "K3",
+      "seed": 20261103,
+      "resolution": [
+        1152,
+        640
+      ],
+      "frames": 73,
+      "fps": 24,
+      "runtime_sha256": "e01a4b762efd69904dd107d2bd7e410310f0a5ca3730987798f6eaccfc8545df",
+      "output_sam": {
+        "status": "COMPLETE",
+        "normal_exit_recorded": true,
+        "nvrm_events": 0
+      },
+      "post_processing": {
+        "name": "K3-s1",
+        "status": "CPU_POST_AND_METRICS_COMPLETE",
+        "start_utc": "2026-11-05T17:54:41.000597+00:00",
+        "end_utc": "2026-11-05T17:55:06.180549+00:00",
+        "frames": 73,
+        "fps": 24,
+        "raw_mp4_sha256": "fbdd4d619dcc677b1bcb92181816e900096194fc8085f7b6a9b58dfa5f9215a7",
+        "raw_mp4_unchanged": true,
+        "post_mp4_sha256": "82e8cd17c41066a3cacffc6b68cec713fe8ff0ce97ff7422a164c660f0529e2c",
+        "post_png_manifest_sha256": "7899deb20a291ae65dcc886114c2256407aad6d8d6b2f4750dbb9f03b2179f6a",
+        "metrics_sha256": "945fb35d6d4c1b4715e85ede50fea5ff2879ac5a156d81b7f6aea1b0c86ad487",
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "generation_receipt_sha256": "b4babc149255780fb253e181728b4dfce68e4e2139673ece77199ffbf8761cad",
+        "output_sam_summary_sha256": "ac2ff663d17ae2221c4f1127dbc155b010ffab107a2ac61c952915a1a96c9a6e",
+        "anchor_mapping": [
+          {
+            "frame": 0,
+            "source_frame": 0,
+            "offset": 0,
+            "binding": "auto",
+            "strength": 1.0
+          },
+          {
+            "frame": 17,
+            "source_frame": 12,
+            "offset": -5,
+            "binding": "replace",
+            "strength": 1.0
+          },
+          {
+            "frame": 33,
+            "source_frame": 36,
+            "offset": 3,
+            "binding": "replace",
+            "strength": 1.0
+          },
+          {
+            "frame": 49,
+            "source_frame": 48,
+            "offset": -1,
+            "binding": "replace",
+            "strength": 1.0
+          },
+          {
+            "frame": 65,
+            "source_frame": 60,
+            "offset": -5,
+            "binding": "replace",
+            "strength": 1.0
+          }
+        ],
+        "anchor_ssim_rgb": "Exact transformed model conditioning PNG; no second resize",
+        "post_encoding": {
+          "codec": "libx264",
+          "crf": 18,
+          "pixel_format": "yuv420p",
+          "threads": 2
+        },
+        "code_sha256": {
+          "post_composite.py": "710147bf4f470b353ad7041e2182c5b0ebb91049cca2206dbab7b28d618d22b3",
+          "output_metrics.py": "74cf7dc4e076d29a1e59478cb34f6a3590c22cc0f4216d40850feae9a558b2b8",
+          "anchor_gates.py": "59b6d3cb713efe0c21217b0e8abb0f308c6870657644497529a18022dfba3cf8"
+        },
+        "quality": "HUMAN_REVIEW_PENDING",
+        "temporal_review": "UNVERIFIED"
       }
     },
     "K3-s2": {
@@ -402,6 +1067,124 @@
           "excerpt_run_filter": "K3-s2"
         },
         "evidence_issues": []
+      },
+      "variant": "K3",
+      "seed": 20261104,
+      "resolution": [
+        1152,
+        640
+      ],
+      "frames": 73,
+      "fps": 24,
+      "runtime_sha256": "ee6202b40f3f32b3b3675111d376eb0a3acc15a31e45f3d2e8cba37c69197821",
+      "anchor_mapping": [
+        {
+          "frame": 0,
+          "source_frame": 0,
+          "offset": 0,
+          "binding": "auto",
+          "strength": 1.0
+        },
+        {
+          "frame": 17,
+          "source_frame": 12,
+          "offset": -5,
+          "binding": "replace",
+          "strength": 1.0
+        },
+        {
+          "frame": 33,
+          "source_frame": 36,
+          "offset": 3,
+          "binding": "replace",
+          "strength": 1.0
+        },
+        {
+          "frame": 49,
+          "source_frame": 48,
+          "offset": -1,
+          "binding": "replace",
+          "strength": 1.0
+        },
+        {
+          "frame": 65,
+          "source_frame": 60,
+          "offset": -5,
+          "binding": "replace",
+          "strength": 1.0
+        }
+      ],
+      "output_sam": {
+        "status": "COMPLETE",
+        "normal_exit_recorded": true,
+        "nvrm_events": 0
+      },
+      "post_processing": {
+        "name": "K3-s2",
+        "status": "CPU_POST_AND_METRICS_COMPLETE",
+        "start_utc": "2026-11-05T18:07:20.390111+00:00",
+        "end_utc": "2026-11-05T18:07:45.559174+00:00",
+        "frames": 73,
+        "fps": 24,
+        "raw_mp4_sha256": "24eaf19d508cff63725d39f0f89a110aab9e2f5f2ee708b3b736481deef1ed38",
+        "raw_mp4_unchanged": true,
+        "post_mp4_sha256": "d7af477027d1ced1fb5189cf11ccec8b08bc59067c126d4e4b6e618d81fb3360",
+        "post_png_manifest_sha256": "088d96a86004839275d6a917a134794d8a23ea99198520bae696b89f00532a50",
+        "metrics_sha256": "ee700862458e9caa90d685779932e01352e62abc78205460c48bb2c15401fc9f",
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "generation_receipt_sha256": "6839a8f85baaaa9e734672565d13a6217b3985ea6f7bcca133734b0ffc6ba4ae",
+        "output_sam_summary_sha256": "31295b59ecb2c41dc2873384e68833ea0aab3cb6d6fa4d9263bbe5703bfe9a49",
+        "anchor_mapping": [
+          {
+            "frame": 0,
+            "source_frame": 0,
+            "offset": 0,
+            "binding": "auto",
+            "strength": 1.0
+          },
+          {
+            "frame": 17,
+            "source_frame": 12,
+            "offset": -5,
+            "binding": "replace",
+            "strength": 1.0
+          },
+          {
+            "frame": 33,
+            "source_frame": 36,
+            "offset": 3,
+            "binding": "replace",
+            "strength": 1.0
+          },
+          {
+            "frame": 49,
+            "source_frame": 48,
+            "offset": -1,
+            "binding": "replace",
+            "strength": 1.0
+          },
+          {
+            "frame": 65,
+            "source_frame": 60,
+            "offset": -5,
+            "binding": "replace",
+            "strength": 1.0
+          }
+        ],
+        "anchor_ssim_rgb": "Exact transformed model conditioning PNG; no second resize",
+        "post_encoding": {
+          "codec": "libx264",
+          "crf": 18,
+          "pixel_format": "yuv420p",
+          "threads": 2
+        },
+        "code_sha256": {
+          "post_composite.py": "710147bf4f470b353ad7041e2182c5b0ebb91049cca2206dbab7b28d618d22b3",
+          "output_metrics.py": "74cf7dc4e076d29a1e59478cb34f6a3590c22cc0f4216d40850feae9a558b2b8",
+          "anchor_gates.py": "59b6d3cb713efe0c21217b0e8abb0f308c6870657644497529a18022dfba3cf8"
+        },
+        "quality": "HUMAN_REVIEW_PENDING",
+        "temporal_review": "UNVERIFIED"
       }
     }
   },
@@ -415,5 +1198,35 @@
   "video_generations_completed": 6,
   "scheduler_steps_completed": 66,
   "model_calls_completed": 66,
-  "quality_retries": 0
+  "quality_retries": 0,
+  "output_sam_runs_completed": 6,
+  "post_derivatives_completed": 6,
+  "raw_png_provenance": "CPU_DECODE_FROM_ORIGINAL_MP4_NOT_PREENCODE_MODEL_RGB",
+  "mechanical_preflight_events": [
+    {
+      "stage": "output embeddings assembly",
+      "status": "CORRECTED_BEFORE_WORKER_START",
+      "reason": "K3-s2 CPU processing receipt was not yet finalized during assembly input existence assertion; waited for completion and rebuilt frozen stage. Partial assembly preserved privately. No model execution or budget retry."
+    }
+  ],
+  "output_embeddings": {
+    "status": "COMPLETE_REFERENCE_ONLY",
+    "items": 445,
+    "anchor_items": 7,
+    "output_frame_items": 438,
+    "report_sha256": "73577b7b58498f34637bf6d3bbe84b68f1e0d8879ba394de53877ad70cc922c2",
+    "guard_status": "COMPLETE",
+    "normal_exit_recorded": true,
+    "nvrm_events": 0,
+    "additional_video_generation": false
+  },
+  "final_worker_observation": {
+    "observed_at_utc": "2026-11-05T18:13:23Z",
+    "boot_id_unchanged": true,
+    "own_tmux_sessions": 0,
+    "gpu_compute_processes": 0,
+    "hwlogger_still_running": true,
+    "quality": "HUMAN_REVIEW_PENDING",
+    "temporal": "UNVERIFIED"
+  }
 }

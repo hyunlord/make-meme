@@ -543,3 +543,5 @@ E1은 공식128배수1152×640 규약에서73프레임 영상2개를 생성해 M
 V-002 복구 개정2: M1 실제 영상·측정 전달 완료. M2 재시작 뒤 원격 상태 재확인이 선행되어야 하며 중복 생성 금지. 실루엣 IoU 자동 선택 대신 사용자 선택을 기다리고,14B/LTX·V-003는 자동 시작하지 않는다. [현재 복구 기록](experiments/V-002-mask-guided-swap/RESUME_R1/RECOVERY_R2_RESULTS.md).
 
 V-003 승인 착수: V-002 잔여 변형 종료, 앵커 시트 및 seed1 세 변형을 순차 중간 전달한다. 품질은 Kling과의 사용자 비교로 판단하며 자동 지표 순위는 사용하지 않는다. [계획](experiments/V-003-keyframe-anchor-quality/PLAN.md).
+
+V-003 결과(2026-11-06): 앵커7장(신규6·재사용1), K1/K2/K3 각2 seed의 RAW6개와 POST6개, 전73프레임 측정 완료. 두 중간 전달을 지켰으며 Kling 대비 품질은 HUMAN_REVIEW_PENDING이다. 사용자 검토 전 후속 생성은 예약하지 않는다. [결과](experiments/V-003-keyframe-anchor-quality/RESULTS.md).
