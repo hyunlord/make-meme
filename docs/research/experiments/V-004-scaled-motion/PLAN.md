@@ -29,3 +29,11 @@ Spark tmux/systemd에서완료하며root만heavy/imagegen을제어한다. 각hea
 부모지표+확대IoU·20–34방향일치·잘림률을전프레임기록한다. 자동우열선택없음. HUMAN_REVIEW_PENDING, 연속지각검수없으면temporalUNVERIFIED. K1/Kling과9열동기뷰어,RAW/POST나란히,18–36반복,.25/.5배속,11앵커윤곽시트,빈검토양식.
 
 중간전달1:앵커+확대윤곽시트,영상생성전. 중간전달2:seed1세변형,seed2전. 기본전달은Downloads의압축해제폴더와index.html이며ZIP은보조. 공개Git은문서/코드/hash만,미디어·개인경로비공개. 완료후정상종료·원격SHA·전달hash검증,후속생성예약없음.
+
+## 생성 전 S3 메모리 산정
+
+고정 checkpoint의 safetensors header와 공식 적재 생명주기를 CPU로 확인했다(모델 import/forward 없음). transformer BF16 파라미터42,010,009,088bytes(39.1245GiB)는 시간 길이에 따라 배증하지 않는 고정량이다. 부모 K1 sampled cgroup71.1155GiB·CUDA reserved39.7871GiB에서 고정CUDA하한38GiB를 분리하고, 나머지 활성값을 latent/guide-token 증가비의 제곱으로 늘리며 host/cache잔량과 추가8GiB여유를 합쳤다. S1/S2약80.12GiB, S3약83.78GiB로 산정되어 기존95GiB admission estimate를 유지한다. 이는 실제 peak의 보증이 아니며100GiB cgroup·NVRM·OOM·메모리·PSI중단조건은 그대로다.145프레임 실측은 아직 NOT_RUN이다.
+
+## 생성 전 실제 앵커·배율 동결 (2026-11-05T19:01:20.515738+00:00)
+
+신규16·20·28·32는 각1회로 G1–G6 전체 통과, 보정0회. 기존7장과 총11장 수용. 고정 높이비 중앙값은 Lab=1.115987460815047, IG=1.14이며 IG는 [0.9,1.1] 밖이므로 snap하지 않았다. 확대 Lab/앵커 사전 평균 IoU=0.5701981118950825로 0.5 주의선 이상이다. 73프레임 확대 조건과145프레임 hold 조건을 CPU로 생성했으며 실제 hash·프레임별 잘림은 SCALED_CONTROL.json에 보존한다. 결과를 보고 배율을 조정하지 않는다. G8 첫 CPU 호출의 canonical config 파일 누락은 동일 고정 설정을 역할 경로에 복사해 해결했다. 원 실패 로그 보존, 추가 imagegen/SAM 없음.

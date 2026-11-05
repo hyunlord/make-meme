@@ -1,0 +1,7790 @@
+{
+  "kind": "CPU_DERIVED_STRUCTURE_CONDITION_NOT_MODEL_OUTPUT",
+  "scales": {
+    "Lab": 1.115987460815047,
+    "IG": 1.14
+  },
+  "scale_evidence": [
+    {
+      "frame": 0,
+      "role": "Lab",
+      "source_bbox_height": 278,
+      "anchor_bbox_height": 347,
+      "ratio": 1.2482014388489209
+    },
+    {
+      "frame": 0,
+      "role": "IG",
+      "source_bbox_height": 245,
+      "anchor_bbox_height": 290,
+      "ratio": 1.183673469387755
+    },
+    {
+      "frame": 12,
+      "role": "Lab",
+      "source_bbox_height": 294,
+      "anchor_bbox_height": 318,
+      "ratio": 1.0816326530612246
+    },
+    {
+      "frame": 12,
+      "role": "IG",
+      "source_bbox_height": 280,
+      "anchor_bbox_height": 298,
+      "ratio": 1.0642857142857143
+    },
+    {
+      "frame": 16,
+      "role": "Lab",
+      "source_bbox_height": 287,
+      "anchor_bbox_height": 311,
+      "ratio": 1.083623693379791
+    },
+    {
+      "frame": 16,
+      "role": "IG",
+      "source_bbox_height": 257,
+      "anchor_bbox_height": 287,
+      "ratio": 1.1167315175097277
+    },
+    {
+      "frame": 20,
+      "role": "Lab",
+      "source_bbox_height": 266,
+      "anchor_bbox_height": 301,
+      "ratio": 1.131578947368421
+    },
+    {
+      "frame": 20,
+      "role": "IG",
+      "source_bbox_height": 250,
+      "anchor_bbox_height": 285,
+      "ratio": 1.14
+    },
+    {
+      "frame": 24,
+      "role": "Lab",
+      "source_bbox_height": 346,
+      "anchor_bbox_height": 353,
+      "ratio": 1.0202312138728324
+    },
+    {
+      "frame": 24,
+      "role": "IG",
+      "source_bbox_height": 246,
+      "anchor_bbox_height": 264,
+      "ratio": 1.0731707317073171
+    },
+    {
+      "frame": 28,
+      "role": "Lab",
+      "source_bbox_height": 319,
+      "anchor_bbox_height": 356,
+      "ratio": 1.115987460815047
+    },
+    {
+      "frame": 28,
+      "role": "IG",
+      "source_bbox_height": 243,
+      "anchor_bbox_height": 279,
+      "ratio": 1.1481481481481481
+    },
+    {
+      "frame": 32,
+      "role": "Lab",
+      "source_bbox_height": 330,
+      "anchor_bbox_height": 368,
+      "ratio": 1.1151515151515152
+    },
+    {
+      "frame": 32,
+      "role": "IG",
+      "source_bbox_height": 241,
+      "anchor_bbox_height": 267,
+      "ratio": 1.107883817427386
+    },
+    {
+      "frame": 36,
+      "role": "Lab",
+      "source_bbox_height": 353,
+      "anchor_bbox_height": 413,
+      "ratio": 1.1699716713881019
+    },
+    {
+      "frame": 36,
+      "role": "IG",
+      "source_bbox_height": 240,
+      "anchor_bbox_height": 288,
+      "ratio": 1.2
+    },
+    {
+      "frame": 48,
+      "role": "Lab",
+      "source_bbox_height": 333,
+      "anchor_bbox_height": 383,
+      "ratio": 1.15015015015015
+    },
+    {
+      "frame": 48,
+      "role": "IG",
+      "source_bbox_height": 228,
+      "anchor_bbox_height": 263,
+      "ratio": 1.1535087719298245
+    },
+    {
+      "frame": 60,
+      "role": "Lab",
+      "source_bbox_height": 324,
+      "anchor_bbox_height": 367,
+      "ratio": 1.132716049382716
+    },
+    {
+      "frame": 60,
+      "role": "IG",
+      "source_bbox_height": 221,
+      "anchor_bbox_height": 260,
+      "ratio": 1.1764705882352942
+    },
+    {
+      "frame": 72,
+      "role": "Lab",
+      "source_bbox_height": 335,
+      "anchor_bbox_height": 369,
+      "ratio": 1.1014925373134328
+    },
+    {
+      "frame": 72,
+      "role": "IG",
+      "source_bbox_height": 233,
+      "anchor_bbox_height": 263,
+      "ratio": 1.128755364806867
+    }
+  ],
+  "scale_basis": "Fixed median over every accepted anchor, not generated outputs",
+  "frames": [
+    {
+      "frame": 0,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab",
+          "IG"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            558.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 22401,
+          "visible_scaled_mask_pixels": 22401,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            438.0,
+            463
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18740,
+          "visible_scaled_mask_pixels": 18740,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            415.5,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15253,
+          "visible_scaled_mask_pixels": 13380,
+          "clipped_fraction": 0.12279551563626827
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            534.5,
+            476
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15775,
+          "visible_scaled_mask_pixels": 14103,
+          "clipped_fraction": 0.1059904912836767
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            610.5,
+            206.0
+          ],
+          "bbox_center_pixel": [
+            557.5,
+            345.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 6
+        },
+        "IG": {
+          "topmost_pixel": [
+            479.0,
+            212.0
+          ],
+          "bbox_center_pixel": [
+            437.5,
+            337.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        }
+      }
+    },
+    {
+      "frame": 1,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab",
+          "IG"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            559.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 22845,
+          "visible_scaled_mask_pixels": 22845,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            438.5,
+            464
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19150,
+          "visible_scaled_mask_pixels": 19150,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            416.5,
+            466
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15586,
+          "visible_scaled_mask_pixels": 13674,
+          "clipped_fraction": 0.12267419479019633
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            536.0,
+            476
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16188,
+          "visible_scaled_mask_pixels": 14447,
+          "clipped_fraction": 0.10754880158141833
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            613.5,
+            206.0
+          ],
+          "bbox_center_pixel": [
+            559.0,
+            346.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 20
+        },
+        "IG": {
+          "topmost_pixel": [
+            482.5,
+            211.0
+          ],
+          "bbox_center_pixel": [
+            438.0,
+            337.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 4
+        }
+      }
+    },
+    {
+      "frame": 2,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab",
+          "IG"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            560.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 22786,
+          "visible_scaled_mask_pixels": 22786,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            438.0,
+            465
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19122,
+          "visible_scaled_mask_pixels": 19122,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            418.0,
+            466
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15424,
+          "visible_scaled_mask_pixels": 13513,
+          "clipped_fraction": 0.12389782157676349
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            536.0,
+            475
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15766,
+          "visible_scaled_mask_pixels": 14035,
+          "clipped_fraction": 0.10979322592921477
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            616.5,
+            206.0
+          ],
+          "bbox_center_pixel": [
+            559.5,
+            345.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 22
+        },
+        "IG": {
+          "topmost_pixel": [
+            481.0,
+            209.0
+          ],
+          "bbox_center_pixel": [
+            437.5,
+            336.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 3,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab",
+          "IG"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            561.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 23147,
+          "visible_scaled_mask_pixels": 23147,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            438.5,
+            465
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19480,
+          "visible_scaled_mask_pixels": 19480,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            416.5,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15436,
+          "visible_scaled_mask_pixels": 13549,
+          "clipped_fraction": 0.1222466960352423
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            536.0,
+            475
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16017,
+          "visible_scaled_mask_pixels": 14331,
+          "clipped_fraction": 0.10526315789473684
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            620.5,
+            205.0
+          ],
+          "bbox_center_pixel": [
+            561.0,
+            345.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 20
+        },
+        "IG": {
+          "topmost_pixel": [
+            481.0,
+            204.0
+          ],
+          "bbox_center_pixel": [
+            438.0,
+            334.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 4,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            566.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 25499,
+          "visible_scaled_mask_pixels": 25499,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            434.0,
+            465
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19865,
+          "visible_scaled_mask_pixels": 19865,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            410.5,
+            466
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15217,
+          "visible_scaled_mask_pixels": 13377,
+          "clipped_fraction": 0.12091739501872906
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            548.0,
+            475
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15500,
+          "visible_scaled_mask_pixels": 13903,
+          "clipped_fraction": 0.10303225806451613
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            623.0,
+            200.0
+          ],
+          "bbox_center_pixel": [
+            566.0,
+            343.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 1
+        },
+        "IG": {
+          "topmost_pixel": [
+            478.5,
+            194.0
+          ],
+          "bbox_center_pixel": [
+            433.5,
+            329.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 4
+        }
+      }
+    },
+    {
+      "frame": 5,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            570.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 26134,
+          "visible_scaled_mask_pixels": 26134,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            433.5,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19753,
+          "visible_scaled_mask_pixels": 19753,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            412.0,
+            466
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14987,
+          "visible_scaled_mask_pixels": 13158,
+          "clipped_fraction": 0.1220391005538133
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            565.5,
+            471
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17614,
+          "visible_scaled_mask_pixels": 15836,
+          "clipped_fraction": 0.10094243215623935
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            623.5,
+            196.0
+          ],
+          "bbox_center_pixel": [
+            569.5,
+            340.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 16
+        },
+        "IG": {
+          "topmost_pixel": [
+            475.0,
+            189.0
+          ],
+          "bbox_center_pixel": [
+            433.0,
+            327.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 7
+        }
+      }
+    },
+    {
+      "frame": 6,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            569.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 25567,
+          "visible_scaled_mask_pixels": 25567,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            437.0,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20287,
+          "visible_scaled_mask_pixels": 20287,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            416.0,
+            465
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14437,
+          "visible_scaled_mask_pixels": 12627,
+          "clipped_fraction": 0.1253723072660525
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            560.0,
+            474
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17132,
+          "visible_scaled_mask_pixels": 15536,
+          "clipped_fraction": 0.09315900070044361
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            619.0,
+            191.0
+          ],
+          "bbox_center_pixel": [
+            569.0,
+            338.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 7
+        },
+        "IG": {
+          "topmost_pixel": [
+            474.0,
+            184.0
+          ],
+          "bbox_center_pixel": [
+            436.5,
+            325.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 7,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            568.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 25257,
+          "visible_scaled_mask_pixels": 25257,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            440.0,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20303,
+          "visible_scaled_mask_pixels": 20303,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            418.0,
+            465
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14282,
+          "visible_scaled_mask_pixels": 12452,
+          "clipped_fraction": 0.12813331466181208
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            552.5,
+            474
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16526,
+          "visible_scaled_mask_pixels": 14931,
+          "clipped_fraction": 0.09651458308120538
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            618.0,
+            189.0
+          ],
+          "bbox_center_pixel": [
+            568.0,
+            337.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 15
+        },
+        "IG": {
+          "topmost_pixel": [
+            471.5,
+            181.0
+          ],
+          "bbox_center_pixel": [
+            439.5,
+            323.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 14
+        }
+      }
+    },
+    {
+      "frame": 8,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            572.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 24899,
+          "visible_scaled_mask_pixels": 24899,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            447.0,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20485,
+          "visible_scaled_mask_pixels": 20485,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            424.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 13292,
+          "visible_scaled_mask_pixels": 11416,
+          "clipped_fraction": 0.14113752633162804
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            554.0,
+            474
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16446,
+          "visible_scaled_mask_pixels": 14776,
+          "clipped_fraction": 0.10154444849811504
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            623.5,
+            189.0
+          ],
+          "bbox_center_pixel": [
+            571.5,
+            337.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 28
+        },
+        "IG": {
+          "topmost_pixel": [
+            468.0,
+            173.0
+          ],
+          "bbox_center_pixel": [
+            446.5,
+            319.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        }
+      }
+    },
+    {
+      "frame": 9,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            574.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 24798,
+          "visible_scaled_mask_pixels": 24798,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            449.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20218,
+          "visible_scaled_mask_pixels": 20218,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            429.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 12937,
+          "visible_scaled_mask_pixels": 10992,
+          "clipped_fraction": 0.15034397464636315
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            556.0,
+            475
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16205,
+          "visible_scaled_mask_pixels": 14580,
+          "clipped_fraction": 0.10027769207034866
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            620.5,
+            187.0
+          ],
+          "bbox_center_pixel": [
+            573.5,
+            336.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 14
+        },
+        "IG": {
+          "topmost_pixel": [
+            460.5,
+            170.0
+          ],
+          "bbox_center_pixel": [
+            449.0,
+            318.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 30
+        }
+      }
+    },
+    {
+      "frame": 10,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            577.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 24931,
+          "visible_scaled_mask_pixels": 24931,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            451.0,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19993,
+          "visible_scaled_mask_pixels": 19993,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            432.5,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 13886,
+          "visible_scaled_mask_pixels": 11828,
+          "clipped_fraction": 0.14820682702002017
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            556.5,
+            474
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15946,
+          "visible_scaled_mask_pixels": 14326,
+          "clipped_fraction": 0.10159287595635269
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            624.5,
+            186.0
+          ],
+          "bbox_center_pixel": [
+            576.5,
+            336.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 14
+        },
+        "IG": {
+          "topmost_pixel": [
+            460.0,
+            167.0
+          ],
+          "bbox_center_pixel": [
+            450.5,
+            316.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        }
+      }
+    },
+    {
+      "frame": 11,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            580.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 24912,
+          "visible_scaled_mask_pixels": 24912,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            451.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19881,
+          "visible_scaled_mask_pixels": 19881,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            437.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 13515,
+          "visible_scaled_mask_pixels": 11455,
+          "clipped_fraction": 0.15242323344432113
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            559.0,
+            474
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15903,
+          "visible_scaled_mask_pixels": 14196,
+          "clipped_fraction": 0.107338238068289
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            633.5,
+            185.0
+          ],
+          "bbox_center_pixel": [
+            580.0,
+            335.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 14
+        },
+        "IG": {
+          "topmost_pixel": [
+            463.0,
+            167.0
+          ],
+          "bbox_center_pixel": [
+            450.5,
+            317.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        }
+      }
+    },
+    {
+      "frame": 12,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            585.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 25744,
+          "visible_scaled_mask_pixels": 25744,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            456.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19384,
+          "visible_scaled_mask_pixels": 19384,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            447.0,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14059,
+          "visible_scaled_mask_pixels": 11956,
+          "clipped_fraction": 0.1495838964364464
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            564.5,
+            474
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15446,
+          "visible_scaled_mask_pixels": 13577,
+          "clipped_fraction": 0.1210022012171436
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            684.5,
+            191.0
+          ],
+          "bbox_center_pixel": [
+            585.0,
+            338.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 8
+        },
+        "IG": {
+          "topmost_pixel": [
+            440.0,
+            181.0
+          ],
+          "bbox_center_pixel": [
+            455.0,
+            324.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 15
+        }
+      }
+    },
+    {
+      "frame": 13,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            595.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 26039,
+          "visible_scaled_mask_pixels": 26039,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            456.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18741,
+          "visible_scaled_mask_pixels": 18741,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            448.0,
+            466
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14465,
+          "visible_scaled_mask_pixels": 12343,
+          "clipped_fraction": 0.14669892844797788
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            567.5,
+            477
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 14980,
+          "visible_scaled_mask_pixels": 13047,
+          "clipped_fraction": 0.12903871829105473
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            696.0,
+            197.0
+          ],
+          "bbox_center_pixel": [
+            595.0,
+            341.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 7
+        },
+        "IG": {
+          "topmost_pixel": [
+            453.5,
+            192.0
+          ],
+          "bbox_center_pixel": [
+            455.5,
+            329.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 26
+        }
+      }
+    },
+    {
+      "frame": 14,
+      "reflection_owners": {
+        "2": "Lab",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "Lab",
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            618.0,
+            483
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 26879,
+          "visible_scaled_mask_pixels": 26879,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            455.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18293,
+          "visible_scaled_mask_pixels": 18293,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            552.5,
+            465
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 14154,
+          "visible_scaled_mask_pixels": 12299,
+          "clipped_fraction": 0.13105835806132543
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            609.0,
+            483
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15469,
+          "visible_scaled_mask_pixels": 12944,
+          "clipped_fraction": 0.16322968517680522
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            672.5,
+            196.0
+          ],
+          "bbox_center_pixel": [
+            617.5,
+            339.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 8
+        },
+        "IG": {
+          "topmost_pixel": [
+            462.5,
+            198.0
+          ],
+          "bbox_center_pixel": [
+            455.0,
+            332.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 2
+        }
+      }
+    },
+    {
+      "frame": 15,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            619.0,
+            480
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27292,
+          "visible_scaled_mask_pixels": 27292,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            456.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18034,
+          "visible_scaled_mask_pixels": 18034,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            450.0,
+            465
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14727,
+          "visible_scaled_mask_pixels": 12549,
+          "clipped_fraction": 0.14789162762273375
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            621.5,
+            484
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16447,
+          "visible_scaled_mask_pixels": 13692,
+          "clipped_fraction": 0.1675077521736487
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            676.0,
+            197.0
+          ],
+          "bbox_center_pixel": [
+            618.5,
+            338.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 21
+        },
+        "IG": {
+          "topmost_pixel": [
+            463.0,
+            201.0
+          ],
+          "bbox_center_pixel": [
+            455.5,
+            334.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        }
+      }
+    },
+    {
+      "frame": 16,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            599.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27057,
+          "visible_scaled_mask_pixels": 27057,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            460.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17519,
+          "visible_scaled_mask_pixels": 17519,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            455.0,
+            465
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14486,
+          "visible_scaled_mask_pixels": 12318,
+          "clipped_fraction": 0.14966174237194532
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            581.5,
+            484
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 18246,
+          "visible_scaled_mask_pixels": 15925,
+          "clipped_fraction": 0.12720596295078374
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            658.5,
+            197.0
+          ],
+          "bbox_center_pixel": [
+            599.0,
+            341.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        },
+        "IG": {
+          "topmost_pixel": [
+            463.0,
+            204.0
+          ],
+          "bbox_center_pixel": [
+            459.5,
+            335.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 17,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            596.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 26303,
+          "visible_scaled_mask_pixels": 26303,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            461.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16963,
+          "visible_scaled_mask_pixels": 16963,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            456.0,
+            464
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14759,
+          "visible_scaled_mask_pixels": 12548,
+          "clipped_fraction": 0.14980689748627957
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            580.0,
+            478
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17614,
+          "visible_scaled_mask_pixels": 15594,
+          "clipped_fraction": 0.11468150334960826
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            662.0,
+            201.0
+          ],
+          "bbox_center_pixel": [
+            596.0,
+            343.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        },
+        "IG": {
+          "topmost_pixel": [
+            462.5,
+            206.0
+          ],
+          "bbox_center_pixel": [
+            460.5,
+            336.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        }
+      }
+    },
+    {
+      "frame": 18,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            597.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 23733,
+          "visible_scaled_mask_pixels": 23733,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            461.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17078,
+          "visible_scaled_mask_pixels": 17078,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            456.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14560,
+          "visible_scaled_mask_pixels": 12416,
+          "clipped_fraction": 0.14725274725274726
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            582.0,
+            477
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16294,
+          "visible_scaled_mask_pixels": 14397,
+          "clipped_fraction": 0.1164232232723702
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            662.5,
+            208.0
+          ],
+          "bbox_center_pixel": [
+            597.0,
+            346.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 8
+        },
+        "IG": {
+          "topmost_pixel": [
+            462.0,
+            208.0
+          ],
+          "bbox_center_pixel": [
+            461.0,
+            337.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        }
+      }
+    },
+    {
+      "frame": 19,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            593.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 23663,
+          "visible_scaled_mask_pixels": 23663,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            461.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16856,
+          "visible_scaled_mask_pixels": 16856,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            456.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14738,
+          "visible_scaled_mask_pixels": 12611,
+          "clipped_fraction": 0.14432080336544986
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            583.0,
+            476
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15658,
+          "visible_scaled_mask_pixels": 13764,
+          "clipped_fraction": 0.12096053135777239
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            664.0,
+            214.0
+          ],
+          "bbox_center_pixel": [
+            592.5,
+            349.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        },
+        "IG": {
+          "topmost_pixel": [
+            463.0,
+            209.0
+          ],
+          "bbox_center_pixel": [
+            460.5,
+            338.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 20,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            599.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 24128,
+          "visible_scaled_mask_pixels": 24128,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            461.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17574,
+          "visible_scaled_mask_pixels": 17574,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            456.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 13403,
+          "visible_scaled_mask_pixels": 11378,
+          "clipped_fraction": 0.15108557785570395
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            574.0,
+            482
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 14978,
+          "visible_scaled_mask_pixels": 12968,
+          "clipped_fraction": 0.13419682200560823
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            669.0,
+            218.0
+          ],
+          "bbox_center_pixel": [
+            598.5,
+            351.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        },
+        "IG": {
+          "topmost_pixel": [
+            464.0,
+            212.0
+          ],
+          "bbox_center_pixel": [
+            460.5,
+            339.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 21
+        }
+      }
+    },
+    {
+      "frame": 21,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            598.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 25193,
+          "visible_scaled_mask_pixels": 25193,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            461.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16893,
+          "visible_scaled_mask_pixels": 16893,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            456.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14555,
+          "visible_scaled_mask_pixels": 12583,
+          "clipped_fraction": 0.13548608725523875
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            579.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15434,
+          "visible_scaled_mask_pixels": 13135,
+          "clipped_fraction": 0.14895684851626279
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            670.5,
+            220.0
+          ],
+          "bbox_center_pixel": [
+            597.5,
+            352.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 14
+        },
+        "IG": {
+          "topmost_pixel": [
+            464.5,
+            212.0
+          ],
+          "bbox_center_pixel": [
+            461.0,
+            339.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 14
+        }
+      }
+    },
+    {
+      "frame": 22,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            595.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 25209,
+          "visible_scaled_mask_pixels": 25209,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            462.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16245,
+          "visible_scaled_mask_pixels": 16245,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            459.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14528,
+          "visible_scaled_mask_pixels": 12517,
+          "clipped_fraction": 0.13842235682819384
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            580.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 13067,
+          "visible_scaled_mask_pixels": 11029,
+          "clipped_fraction": 0.15596540904568762
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            672.0,
+            222.0
+          ],
+          "bbox_center_pixel": [
+            595.0,
+            353.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        },
+        "IG": {
+          "topmost_pixel": [
+            467.0,
+            212.0
+          ],
+          "bbox_center_pixel": [
+            462.0,
+            339.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 7
+        }
+      }
+    },
+    {
+      "frame": 23,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            597.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 24379,
+          "visible_scaled_mask_pixels": 24379,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            463.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16910,
+          "visible_scaled_mask_pixels": 16910,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            459.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14668,
+          "visible_scaled_mask_pixels": 12660,
+          "clipped_fraction": 0.1368966457594764
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            577.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 12972,
+          "visible_scaled_mask_pixels": 10337,
+          "clipped_fraction": 0.20312981806968855
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            670.5,
+            222.0
+          ],
+          "bbox_center_pixel": [
+            596.5,
+            353.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 6
+        },
+        "IG": {
+          "topmost_pixel": [
+            468.0,
+            213.0
+          ],
+          "bbox_center_pixel": [
+            462.5,
+            340.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 24,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            623.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 22613,
+          "visible_scaled_mask_pixels": 22613,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            464.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17926,
+          "visible_scaled_mask_pixels": 17926,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            462.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14818,
+          "visible_scaled_mask_pixels": 12810,
+          "clipped_fraction": 0.13551086516398975
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            616.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 9275,
+          "visible_scaled_mask_pixels": 7086,
+          "clipped_fraction": 0.23601078167115902
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            550.0,
+            138.0
+          ],
+          "bbox_center_pixel": [
+            623.0,
+            311.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 3
+        },
+        "IG": {
+          "topmost_pixel": [
+            474.0,
+            215.0
+          ],
+          "bbox_center_pixel": [
+            464.0,
+            341.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 25,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            625.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 21421,
+          "visible_scaled_mask_pixels": 21421,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            466.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17844,
+          "visible_scaled_mask_pixels": 17844,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            463.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14957,
+          "visible_scaled_mask_pixels": 12986,
+          "clipped_fraction": 0.13177776292037174
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            616.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 8414,
+          "visible_scaled_mask_pixels": 6421,
+          "clipped_fraction": 0.23686712621820774
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            608.5,
+            129.0
+          ],
+          "bbox_center_pixel": [
+            625.0,
+            307.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 8
+        },
+        "IG": {
+          "topmost_pixel": [
+            475.0,
+            216.0
+          ],
+          "bbox_center_pixel": [
+            466.0,
+            341.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        }
+      }
+    },
+    {
+      "frame": 26,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            619.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 20083,
+          "visible_scaled_mask_pixels": 20083,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            468.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17849,
+          "visible_scaled_mask_pixels": 17849,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            465.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15008,
+          "visible_scaled_mask_pixels": 12977,
+          "clipped_fraction": 0.1353278251599147
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            612.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 7822,
+          "visible_scaled_mask_pixels": 5931,
+          "clipped_fraction": 0.2417540271030427
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            666.0,
+            141.0
+          ],
+          "bbox_center_pixel": [
+            618.5,
+            313.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 1
+        },
+        "IG": {
+          "topmost_pixel": [
+            478.0,
+            216.0
+          ],
+          "bbox_center_pixel": [
+            467.5,
+            341.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 27,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            617.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 18679,
+          "visible_scaled_mask_pixels": 18679,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            469.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17862,
+          "visible_scaled_mask_pixels": 17862,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            466.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15088,
+          "visible_scaled_mask_pixels": 13013,
+          "clipped_fraction": 0.13752651113467657
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            603.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 7341,
+          "visible_scaled_mask_pixels": 5726,
+          "clipped_fraction": 0.21999727557553467
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            692.0,
+            156.0
+          ],
+          "bbox_center_pixel": [
+            616.5,
+            320.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 1
+        },
+        "IG": {
+          "topmost_pixel": [
+            479.0,
+            217.0
+          ],
+          "bbox_center_pixel": [
+            469.0,
+            342.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 28,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            647.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17794,
+          "visible_scaled_mask_pixels": 17794,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            472.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17804,
+          "visible_scaled_mask_pixels": 17804,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            467.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15196,
+          "visible_scaled_mask_pixels": 13145,
+          "clipped_fraction": 0.13496972887602002
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            610.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 5951,
+          "visible_scaled_mask_pixels": 4774,
+          "clipped_fraction": 0.1977818853974122
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            696.0,
+            165.0
+          ],
+          "bbox_center_pixel": [
+            647.0,
+            325.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        },
+        "IG": {
+          "topmost_pixel": [
+            482.0,
+            218.0
+          ],
+          "bbox_center_pixel": [
+            472.0,
+            342.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        }
+      }
+    },
+    {
+      "frame": 29,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            655.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 18537,
+          "visible_scaled_mask_pixels": 18537,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            474.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17805,
+          "visible_scaled_mask_pixels": 17805,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            470.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15316,
+          "visible_scaled_mask_pixels": 13203,
+          "clipped_fraction": 0.13796030295116218
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            624.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 6170,
+          "visible_scaled_mask_pixels": 4846,
+          "clipped_fraction": 0.21458670988654782
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            698.0,
+            166.0
+          ],
+          "bbox_center_pixel": [
+            654.5,
+            325.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 21
+        },
+        "IG": {
+          "topmost_pixel": [
+            483.5,
+            218.0
+          ],
+          "bbox_center_pixel": [
+            473.0,
+            342.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        }
+      }
+    },
+    {
+      "frame": 30,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            658.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 20034,
+          "visible_scaled_mask_pixels": 20034,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            475.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17794,
+          "visible_scaled_mask_pixels": 17794,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            471.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15366,
+          "visible_scaled_mask_pixels": 13268,
+          "clipped_fraction": 0.13653520760119744
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            631.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 7387,
+          "visible_scaled_mask_pixels": 5883,
+          "clipped_fraction": 0.2036009205360769
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            695.0,
+            166.0
+          ],
+          "bbox_center_pixel": [
+            657.5,
+            325.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        },
+        "IG": {
+          "topmost_pixel": [
+            485.5,
+            218.0
+          ],
+          "bbox_center_pixel": [
+            474.0,
+            342.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 6
+        }
+      }
+    },
+    {
+      "frame": 31,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            661.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 21295,
+          "visible_scaled_mask_pixels": 21295,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            476.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17770,
+          "visible_scaled_mask_pixels": 17770,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            472.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15344,
+          "visible_scaled_mask_pixels": 13225,
+          "clipped_fraction": 0.13809958289885296
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            638.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 6868,
+          "visible_scaled_mask_pixels": 5275,
+          "clipped_fraction": 0.2319452533488643
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            635.0,
+            162.0
+          ],
+          "bbox_center_pixel": [
+            660.5,
+            323.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 1
+        },
+        "IG": {
+          "topmost_pixel": [
+            486.0,
+            219.0
+          ],
+          "bbox_center_pixel": [
+            475.0,
+            343.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        }
+      }
+    },
+    {
+      "frame": 32,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            668.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 24052,
+          "visible_scaled_mask_pixels": 24052,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            478.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17809,
+          "visible_scaled_mask_pixels": 17809,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            474.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15219,
+          "visible_scaled_mask_pixels": 13102,
+          "clipped_fraction": 0.1391024377422958
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            660.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 8511,
+          "visible_scaled_mask_pixels": 6858,
+          "clipped_fraction": 0.1942192456820585
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            643.0,
+            155.0
+          ],
+          "bbox_center_pixel": [
+            668.0,
+            320.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 13
+        },
+        "IG": {
+          "topmost_pixel": [
+            488.5,
+            221.0
+          ],
+          "bbox_center_pixel": [
+            478.0,
+            344.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 8
+        }
+      }
+    },
+    {
+      "frame": 33,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            668.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 25579,
+          "visible_scaled_mask_pixels": 25579,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            479.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17644,
+          "visible_scaled_mask_pixels": 17644,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            476.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14838,
+          "visible_scaled_mask_pixels": 12744,
+          "clipped_fraction": 0.14112414071977356
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            667.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 8911,
+          "visible_scaled_mask_pixels": 7292,
+          "clipped_fraction": 0.1816855571765234
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            646.0,
+            149.0
+          ],
+          "bbox_center_pixel": [
+            667.5,
+            317.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 7
+        },
+        "IG": {
+          "topmost_pixel": [
+            489.0,
+            222.0
+          ],
+          "bbox_center_pixel": [
+            479.0,
+            344.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 15
+        }
+      }
+    },
+    {
+      "frame": 34,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            665.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 26747,
+          "visible_scaled_mask_pixels": 26747,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            480.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17605,
+          "visible_scaled_mask_pixels": 17605,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            477.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15057,
+          "visible_scaled_mask_pixels": 12929,
+          "clipped_fraction": 0.1413296141329614
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            668.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 10686,
+          "visible_scaled_mask_pixels": 8249,
+          "clipped_fraction": 0.2280553995882463
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            648.0,
+            146.0
+          ],
+          "bbox_center_pixel": [
+            664.5,
+            315.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 9
+        },
+        "IG": {
+          "topmost_pixel": [
+            490.0,
+            222.0
+          ],
+          "bbox_center_pixel": [
+            480.0,
+            344.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 15
+        }
+      }
+    },
+    {
+      "frame": 35,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            662.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27993,
+          "visible_scaled_mask_pixels": 27993,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            481.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17482,
+          "visible_scaled_mask_pixels": 17482,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            479.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15068,
+          "visible_scaled_mask_pixels": 12961,
+          "clipped_fraction": 0.13983275816299442
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            668.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 11451,
+          "visible_scaled_mask_pixels": 9182,
+          "clipped_fraction": 0.19814863330713475
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            652.0,
+            143.0
+          ],
+          "bbox_center_pixel": [
+            661.5,
+            314.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 5
+        },
+        "IG": {
+          "topmost_pixel": [
+            492.0,
+            222.0
+          ],
+          "bbox_center_pixel": [
+            481.0,
+            344.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        }
+      }
+    },
+    {
+      "frame": 36,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            659.0,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29799,
+          "visible_scaled_mask_pixels": 29799,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            485.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17430,
+          "visible_scaled_mask_pixels": 17430,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            481.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15012,
+          "visible_scaled_mask_pixels": 12929,
+          "clipped_fraction": 0.13875566213695711
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            668.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 11439,
+          "visible_scaled_mask_pixels": 9449,
+          "clipped_fraction": 0.17396625579159017
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            606.0,
+            135.0
+          ],
+          "bbox_center_pixel": [
+            658.5,
+            312.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 7
+        },
+        "IG": {
+          "topmost_pixel": [
+            494.0,
+            222.0
+          ],
+          "bbox_center_pixel": [
+            484.5,
+            344.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        }
+      }
+    },
+    {
+      "frame": 37,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            660.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 30259,
+          "visible_scaled_mask_pixels": 30259,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            487.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17514,
+          "visible_scaled_mask_pixels": 17514,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            484.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14919,
+          "visible_scaled_mask_pixels": 12788,
+          "clipped_fraction": 0.1428379918225082
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            671.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 11099,
+          "visible_scaled_mask_pixels": 9258,
+          "clipped_fraction": 0.16587079917109648
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            608.5,
+            130.0
+          ],
+          "bbox_center_pixel": [
+            660.0,
+            307.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 6
+        },
+        "IG": {
+          "topmost_pixel": [
+            494.0,
+            223.0
+          ],
+          "bbox_center_pixel": [
+            487.0,
+            345.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        }
+      }
+    },
+    {
+      "frame": 38,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            660.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 30694,
+          "visible_scaled_mask_pixels": 30694,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            491.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17522,
+          "visible_scaled_mask_pixels": 17522,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            486.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14900,
+          "visible_scaled_mask_pixels": 12763,
+          "clipped_fraction": 0.14342281879194632
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            675.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 10851,
+          "visible_scaled_mask_pixels": 9099,
+          "clipped_fraction": 0.16145977329278408
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            611.5,
+            124.0
+          ],
+          "bbox_center_pixel": [
+            659.5,
+            304.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 2
+        },
+        "IG": {
+          "topmost_pixel": [
+            497.0,
+            223.0
+          ],
+          "bbox_center_pixel": [
+            490.5,
+            345.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        }
+      }
+    },
+    {
+      "frame": 39,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            660.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 30944,
+          "visible_scaled_mask_pixels": 30944,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            492.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17487,
+          "visible_scaled_mask_pixels": 17487,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            489.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14859,
+          "visible_scaled_mask_pixels": 12725,
+          "clipped_fraction": 0.14361666330170267
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            678.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 10787,
+          "visible_scaled_mask_pixels": 9058,
+          "clipped_fraction": 0.16028552887735237
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            608.5,
+            121.0
+          ],
+          "bbox_center_pixel": [
+            660.0,
+            303.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 20
+        },
+        "IG": {
+          "topmost_pixel": [
+            497.5,
+            223.0
+          ],
+          "bbox_center_pixel": [
+            492.0,
+            345.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 8
+        }
+      }
+    },
+    {
+      "frame": 40,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            655.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 31216,
+          "visible_scaled_mask_pixels": 31216,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            497.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17402,
+          "visible_scaled_mask_pixels": 17402,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            494.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14887,
+          "visible_scaled_mask_pixels": 12773,
+          "clipped_fraction": 0.14200308994424665
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            673.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 10512,
+          "visible_scaled_mask_pixels": 8662,
+          "clipped_fraction": 0.17598934550989345
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            604.5,
+            115.0
+          ],
+          "bbox_center_pixel": [
+            654.5,
+            300.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 16
+        },
+        "IG": {
+          "topmost_pixel": [
+            500.0,
+            225.0
+          ],
+          "bbox_center_pixel": [
+            496.5,
+            346.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 7
+        }
+      }
+    },
+    {
+      "frame": 41,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            651.5,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29635,
+          "visible_scaled_mask_pixels": 29635,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            499.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17309,
+          "visible_scaled_mask_pixels": 17309,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            496.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14837,
+          "visible_scaled_mask_pixels": 12726,
+          "clipped_fraction": 0.1422794365437757
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            666.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 11249,
+          "visible_scaled_mask_pixels": 9240,
+          "clipped_fraction": 0.17859365276913503
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            609.5,
+            115.0
+          ],
+          "bbox_center_pixel": [
+            651.0,
+            300.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 12
+        },
+        "IG": {
+          "topmost_pixel": [
+            503.0,
+            226.0
+          ],
+          "bbox_center_pixel": [
+            498.5,
+            346.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        }
+      }
+    },
+    {
+      "frame": 42,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            648.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29075,
+          "visible_scaled_mask_pixels": 29075,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            501.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17377,
+          "visible_scaled_mask_pixels": 17377,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            498.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14739,
+          "visible_scaled_mask_pixels": 12621,
+          "clipped_fraction": 0.1437003867290861
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            652.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 10868,
+          "visible_scaled_mask_pixels": 8739,
+          "clipped_fraction": 0.1958962090541038
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            616.5,
+            119.0
+          ],
+          "bbox_center_pixel": [
+            647.5,
+            302.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 8
+        },
+        "IG": {
+          "topmost_pixel": [
+            504.0,
+            226.0
+          ],
+          "bbox_center_pixel": [
+            501.0,
+            346.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        }
+      }
+    },
+    {
+      "frame": 43,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            646.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 28747,
+          "visible_scaled_mask_pixels": 28747,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            503.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17336,
+          "visible_scaled_mask_pixels": 17336,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            499.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14802,
+          "visible_scaled_mask_pixels": 12666,
+          "clipped_fraction": 0.14430482367247668
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            645.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 10992,
+          "visible_scaled_mask_pixels": 8990,
+          "clipped_fraction": 0.18213245997088792
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            630.0,
+            124.0
+          ],
+          "bbox_center_pixel": [
+            645.5,
+            304.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 33
+        },
+        "IG": {
+          "topmost_pixel": [
+            506.0,
+            227.0
+          ],
+          "bbox_center_pixel": [
+            502.5,
+            347.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        }
+      }
+    },
+    {
+      "frame": 44,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            647.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27771,
+          "visible_scaled_mask_pixels": 27771,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            504.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17295,
+          "visible_scaled_mask_pixels": 17295,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            502.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15022,
+          "visible_scaled_mask_pixels": 12869,
+          "clipped_fraction": 0.14332312608174677
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            649.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 12360,
+          "visible_scaled_mask_pixels": 10775,
+          "clipped_fraction": 0.12823624595469255
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            626.0,
+            126.0
+          ],
+          "bbox_center_pixel": [
+            646.5,
+            305.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 15
+        },
+        "IG": {
+          "topmost_pixel": [
+            510.0,
+            229.0
+          ],
+          "bbox_center_pixel": [
+            504.0,
+            348.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 1
+        }
+      }
+    },
+    {
+      "frame": 45,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            649.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27482,
+          "visible_scaled_mask_pixels": 27482,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            506.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17330,
+          "visible_scaled_mask_pixels": 17330,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            502.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14487,
+          "visible_scaled_mask_pixels": 12375,
+          "clipped_fraction": 0.14578587699316628
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            652.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 13073,
+          "visible_scaled_mask_pixels": 11532,
+          "clipped_fraction": 0.11787653943241796
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            631.0,
+            130.0
+          ],
+          "bbox_center_pixel": [
+            648.5,
+            308.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 29
+        },
+        "IG": {
+          "topmost_pixel": [
+            510.0,
+            230.0
+          ],
+          "bbox_center_pixel": [
+            505.5,
+            348.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        }
+      }
+    },
+    {
+      "frame": 46,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            652.0,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27550,
+          "visible_scaled_mask_pixels": 27550,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            506.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17152,
+          "visible_scaled_mask_pixels": 17152,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            503.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 14551,
+          "visible_scaled_mask_pixels": 12417,
+          "clipped_fraction": 0.1466565871761391
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            655.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 13580,
+          "visible_scaled_mask_pixels": 11962,
+          "clipped_fraction": 0.1191458026509573
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            630.0,
+            135.0
+          ],
+          "bbox_center_pixel": [
+            651.5,
+            311.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 27
+        },
+        "IG": {
+          "topmost_pixel": [
+            508.5,
+            232.0
+          ],
+          "bbox_center_pixel": [
+            505.5,
+            349.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 12
+        }
+      }
+    },
+    {
+      "frame": 47,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            656.0,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 28111,
+          "visible_scaled_mask_pixels": 28111,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            507.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17228,
+          "visible_scaled_mask_pixels": 17228,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            504.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15341,
+          "visible_scaled_mask_pixels": 13144,
+          "clipped_fraction": 0.14321100319405514
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            655.0,
+            483
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 14648,
+          "visible_scaled_mask_pixels": 12997,
+          "clipped_fraction": 0.11271163298743855
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            632.5,
+            144.0
+          ],
+          "bbox_center_pixel": [
+            655.5,
+            316.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 16
+        },
+        "IG": {
+          "topmost_pixel": [
+            510.0,
+            232.0
+          ],
+          "bbox_center_pixel": [
+            507.0,
+            349.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        }
+      }
+    },
+    {
+      "frame": 48,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            627.5,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29059,
+          "visible_scaled_mask_pixels": 29059,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            508.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17355,
+          "visible_scaled_mask_pixels": 17355,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            506.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15782,
+          "visible_scaled_mask_pixels": 13554,
+          "clipped_fraction": 0.1411734887846914
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            635.0,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16379,
+          "visible_scaled_mask_pixels": 14448,
+          "clipped_fraction": 0.11789486537639661
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            694.0,
+            155.0
+          ],
+          "bbox_center_pixel": [
+            627.0,
+            322.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        },
+        "IG": {
+          "topmost_pixel": [
+            512.5,
+            233.0
+          ],
+          "bbox_center_pixel": [
+            508.0,
+            350.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 12
+        }
+      }
+    },
+    {
+      "frame": 49,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            630.5,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29360,
+          "visible_scaled_mask_pixels": 29360,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            509.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17331,
+          "visible_scaled_mask_pixels": 17331,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            507.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 15945,
+          "visible_scaled_mask_pixels": 13670,
+          "clipped_fraction": 0.14267795547193476
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            636.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17064,
+          "visible_scaled_mask_pixels": 15015,
+          "clipped_fraction": 0.1200773558368495
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            699.0,
+            162.0
+          ],
+          "bbox_center_pixel": [
+            630.0,
+            325.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        },
+        "IG": {
+          "topmost_pixel": [
+            513.0,
+            233.0
+          ],
+          "bbox_center_pixel": [
+            509.0,
+            350.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        }
+      }
+    },
+    {
+      "frame": 50,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            634.0,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29390,
+          "visible_scaled_mask_pixels": 29390,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            511.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17436,
+          "visible_scaled_mask_pixels": 17436,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            508.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16042,
+          "visible_scaled_mask_pixels": 13776,
+          "clipped_fraction": 0.14125420770477495
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            642.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17323,
+          "visible_scaled_mask_pixels": 15232,
+          "clipped_fraction": 0.12070657507360157
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            706.0,
+            165.0
+          ],
+          "bbox_center_pixel": [
+            633.5,
+            326.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        },
+        "IG": {
+          "topmost_pixel": [
+            514.5,
+            234.0
+          ],
+          "bbox_center_pixel": [
+            510.5,
+            350.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 4
+        }
+      }
+    },
+    {
+      "frame": 51,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            640.5,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29315,
+          "visible_scaled_mask_pixels": 29315,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            512.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17635,
+          "visible_scaled_mask_pixels": 17635,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            509.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16197,
+          "visible_scaled_mask_pixels": 13944,
+          "clipped_fraction": 0.13909983330246342
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            647.0,
+            486
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16995,
+          "visible_scaled_mask_pixels": 14896,
+          "clipped_fraction": 0.12350691379817594
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            709.5,
+            165.0
+          ],
+          "bbox_center_pixel": [
+            640.0,
+            327.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 2
+        },
+        "IG": {
+          "topmost_pixel": [
+            515.0,
+            235.0
+          ],
+          "bbox_center_pixel": [
+            511.5,
+            351.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        }
+      }
+    },
+    {
+      "frame": 52,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            657.0,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 28504,
+          "visible_scaled_mask_pixels": 28504,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            513.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17794,
+          "visible_scaled_mask_pixels": 17794,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            510.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16507,
+          "visible_scaled_mask_pixels": 14229,
+          "clipped_fraction": 0.1380020597322348
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            650.5,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15713,
+          "visible_scaled_mask_pixels": 13751,
+          "clipped_fraction": 0.12486476166231783
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            671.0,
+            162.0
+          ],
+          "bbox_center_pixel": [
+            656.5,
+            325.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        },
+        "IG": {
+          "topmost_pixel": [
+            517.0,
+            237.0
+          ],
+          "bbox_center_pixel": [
+            513.0,
+            352.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        }
+      }
+    },
+    {
+      "frame": 53,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            663.5,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27316,
+          "visible_scaled_mask_pixels": 27316,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            513.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17805,
+          "visible_scaled_mask_pixels": 17805,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            511.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16725,
+          "visible_scaled_mask_pixels": 14424,
+          "clipped_fraction": 0.13757847533632286
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            655.0,
+            479
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 14820,
+          "visible_scaled_mask_pixels": 12804,
+          "clipped_fraction": 0.1360323886639676
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            673.5,
+            159.0
+          ],
+          "bbox_center_pixel": [
+            663.0,
+            324.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 2
+        },
+        "IG": {
+          "topmost_pixel": [
+            518.0,
+            237.0
+          ],
+          "bbox_center_pixel": [
+            513.0,
+            352.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 7
+        }
+      }
+    },
+    {
+      "frame": 54,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            668.0,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27330,
+          "visible_scaled_mask_pixels": 27330,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            515.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17912,
+          "visible_scaled_mask_pixels": 17912,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            512.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16771,
+          "visible_scaled_mask_pixels": 14477,
+          "clipped_fraction": 0.1367837338262477
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            664.0,
+            478
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 14616,
+          "visible_scaled_mask_pixels": 12642,
+          "clipped_fraction": 0.13505747126436782
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            664.0,
+            156.0
+          ],
+          "bbox_center_pixel": [
+            667.5,
+            322.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 23
+        },
+        "IG": {
+          "topmost_pixel": [
+            517.5,
+            238.0
+          ],
+          "bbox_center_pixel": [
+            514.5,
+            352.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        }
+      }
+    },
+    {
+      "frame": 55,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            678.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29243,
+          "visible_scaled_mask_pixels": 29243,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            516.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18009,
+          "visible_scaled_mask_pixels": 18009,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            512.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16401,
+          "visible_scaled_mask_pixels": 14119,
+          "clipped_fraction": 0.1391378574477166
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            677.5,
+            478
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16119,
+          "visible_scaled_mask_pixels": 13976,
+          "clipped_fraction": 0.13294869408772256
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            663.5,
+            154.0
+          ],
+          "bbox_center_pixel": [
+            677.5,
+            320.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 28
+        },
+        "IG": {
+          "topmost_pixel": [
+            518.0,
+            239.0
+          ],
+          "bbox_center_pixel": [
+            515.5,
+            353.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        }
+      }
+    },
+    {
+      "frame": 56,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            682.0,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 34054,
+          "visible_scaled_mask_pixels": 34054,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            517.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17800,
+          "visible_scaled_mask_pixels": 17800,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            514.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16781,
+          "visible_scaled_mask_pixels": 14465,
+          "clipped_fraction": 0.1380132292473631
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            678.5,
+            480
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 20705,
+          "visible_scaled_mask_pixels": 18292,
+          "clipped_fraction": 0.11654189809224826
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            663.0,
+            154.0
+          ],
+          "bbox_center_pixel": [
+            681.5,
+            321.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 19
+        },
+        "IG": {
+          "topmost_pixel": [
+            521.5,
+            239.0
+          ],
+          "bbox_center_pixel": [
+            517.0,
+            353.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 12
+        }
+      }
+    },
+    {
+      "frame": 57,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            680.0,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 34404,
+          "visible_scaled_mask_pixels": 34404,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            519.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18026,
+          "visible_scaled_mask_pixels": 18026,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            514.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17502,
+          "visible_scaled_mask_pixels": 15157,
+          "clipped_fraction": 0.1339846874642898
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            677.5,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 21303,
+          "visible_scaled_mask_pixels": 19049,
+          "clipped_fraction": 0.10580669389287893
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            671.5,
+            158.0
+          ],
+          "bbox_center_pixel": [
+            679.5,
+            323.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 4
+        },
+        "IG": {
+          "topmost_pixel": [
+            522.5,
+            239.0
+          ],
+          "bbox_center_pixel": [
+            519.0,
+            353.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        }
+      }
+    },
+    {
+      "frame": 58,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            682.5,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 34199,
+          "visible_scaled_mask_pixels": 34199,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            521.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18145,
+          "visible_scaled_mask_pixels": 18145,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            515.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 16961,
+          "visible_scaled_mask_pixels": 14654,
+          "clipped_fraction": 0.1360179234714934
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            680.0,
+            482
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 21316,
+          "visible_scaled_mask_pixels": 19062,
+          "clipped_fraction": 0.10574216550947645
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            668.5,
+            161.0
+          ],
+          "bbox_center_pixel": [
+            682.0,
+            324.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 16
+        },
+        "IG": {
+          "topmost_pixel": [
+            523.5,
+            240.0
+          ],
+          "bbox_center_pixel": [
+            521.0,
+            353.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        }
+      }
+    },
+    {
+      "frame": 59,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            686.5,
+            489
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 34088,
+          "visible_scaled_mask_pixels": 34088,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            522.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18127,
+          "visible_scaled_mask_pixels": 18127,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            515.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17596,
+          "visible_scaled_mask_pixels": 15266,
+          "clipped_fraction": 0.1324164582859741
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            683.0,
+            483
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 20946,
+          "visible_scaled_mask_pixels": 18728,
+          "clipped_fraction": 0.10589133963525256
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            666.5,
+            164.0
+          ],
+          "bbox_center_pixel": [
+            686.0,
+            326.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 24
+        },
+        "IG": {
+          "topmost_pixel": [
+            526.0,
+            240.0
+          ],
+          "bbox_center_pixel": [
+            521.5,
+            353.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        }
+      }
+    },
+    {
+      "frame": 60,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            691.0,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 32754,
+          "visible_scaled_mask_pixels": 32754,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            523.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18007,
+          "visible_scaled_mask_pixels": 18007,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            517.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 17822,
+          "visible_scaled_mask_pixels": 15456,
+          "clipped_fraction": 0.13275726630007856
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            689.0,
+            482
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 19908,
+          "visible_scaled_mask_pixels": 17409,
+          "clipped_fraction": 0.12552742616033755
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            680.0,
+            164.0
+          ],
+          "bbox_center_pixel": [
+            690.5,
+            326.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 5
+        },
+        "IG": {
+          "topmost_pixel": [
+            526.0,
+            241.0
+          ],
+          "bbox_center_pixel": [
+            523.0,
+            354.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 1
+        }
+      }
+    },
+    {
+      "frame": 61,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            698.5,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 31540,
+          "visible_scaled_mask_pixels": 31540,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            524.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18227,
+          "visible_scaled_mask_pixels": 18227,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            518.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18011,
+          "visible_scaled_mask_pixels": 15614,
+          "clipped_fraction": 0.13308533673865972
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            696.0,
+            482
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 18925,
+          "visible_scaled_mask_pixels": 16043,
+          "clipped_fraction": 0.15228533685601056
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            680.5,
+            164.0
+          ],
+          "bbox_center_pixel": [
+            698.0,
+            326.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 10
+        },
+        "IG": {
+          "topmost_pixel": [
+            525.0,
+            242.0
+          ],
+          "bbox_center_pixel": [
+            524.0,
+            354.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        }
+      }
+    },
+    {
+      "frame": 62,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            706.0,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 30209,
+          "visible_scaled_mask_pixels": 30209,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            524.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18220,
+          "visible_scaled_mask_pixels": 18220,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            518.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18242,
+          "visible_scaled_mask_pixels": 15820,
+          "clipped_fraction": 0.13277052954719878
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            706.5,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17636,
+          "visible_scaled_mask_pixels": 14833,
+          "clipped_fraction": 0.158936266727149
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            676.5,
+            164.0
+          ],
+          "bbox_center_pixel": [
+            705.5,
+            326.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 24
+        },
+        "IG": {
+          "topmost_pixel": [
+            526.0,
+            242.0
+          ],
+          "bbox_center_pixel": [
+            524.0,
+            354.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        }
+      }
+    },
+    {
+      "frame": 63,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            720.5,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29198,
+          "visible_scaled_mask_pixels": 29198,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            526.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18330,
+          "visible_scaled_mask_pixels": 18330,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            519.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18488,
+          "visible_scaled_mask_pixels": 16055,
+          "clipped_fraction": 0.13159887494591085
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            728.0,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16656,
+          "visible_scaled_mask_pixels": 14475,
+          "clipped_fraction": 0.13094380403458214
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            684.5,
+            163.0
+          ],
+          "bbox_center_pixel": [
+            720.0,
+            326.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 12
+        },
+        "IG": {
+          "topmost_pixel": [
+            526.5,
+            242.0
+          ],
+          "bbox_center_pixel": [
+            525.5,
+            354.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 16
+        }
+      }
+    },
+    {
+      "frame": 64,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            739.5,
+            491
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27257,
+          "visible_scaled_mask_pixels": 27257,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            526.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18771,
+          "visible_scaled_mask_pixels": 18771,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            519.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18781,
+          "visible_scaled_mask_pixels": 16303,
+          "clipped_fraction": 0.1319418561311964
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            740.5,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15343,
+          "visible_scaled_mask_pixels": 13704,
+          "clipped_fraction": 0.1068239588085772
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            691.5,
+            160.0
+          ],
+          "bbox_center_pixel": [
+            739.0,
+            325.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 14
+        },
+        "IG": {
+          "topmost_pixel": [
+            528.0,
+            241.0
+          ],
+          "bbox_center_pixel": [
+            526.0,
+            354.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 9
+        }
+      }
+    },
+    {
+      "frame": 65,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            743.5,
+            491
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 27937,
+          "visible_scaled_mask_pixels": 27937,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            525.5,
+            467
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 18929,
+          "visible_scaled_mask_pixels": 18929,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            521.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19062,
+          "visible_scaled_mask_pixels": 16516,
+          "clipped_fraction": 0.13356415905990976
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            743.0,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 15656,
+          "visible_scaled_mask_pixels": 14067,
+          "clipped_fraction": 0.10149463464486459
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            701.0,
+            160.0
+          ],
+          "bbox_center_pixel": [
+            743.0,
+            325.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 9
+        },
+        "IG": {
+          "topmost_pixel": [
+            526.5,
+            240.0
+          ],
+          "bbox_center_pixel": [
+            525.0,
+            353.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        }
+      }
+    },
+    {
+      "frame": 66,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            746.5,
+            490
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 28542,
+          "visible_scaled_mask_pixels": 28542,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            526.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19447,
+          "visible_scaled_mask_pixels": 19447,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            520.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19167,
+          "visible_scaled_mask_pixels": 16565,
+          "clipped_fraction": 0.13575416079720354
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            746.0,
+            481
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16543,
+          "visible_scaled_mask_pixels": 14994,
+          "clipped_fraction": 0.09363476999335066
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            707.5,
+            163.0
+          ],
+          "bbox_center_pixel": [
+            746.0,
+            326.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 12
+        },
+        "IG": {
+          "topmost_pixel": [
+            526.0,
+            239.0
+          ],
+          "bbox_center_pixel": [
+            525.5,
+            353.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        }
+      }
+    },
+    {
+      "frame": 67,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            750.5,
+            488
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29119,
+          "visible_scaled_mask_pixels": 29119,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            525.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19741,
+          "visible_scaled_mask_pixels": 19741,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            520.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19305,
+          "visible_scaled_mask_pixels": 16606,
+          "clipped_fraction": 0.13980833980833982
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            749.5,
+            480
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17557,
+          "visible_scaled_mask_pixels": 15925,
+          "clipped_fraction": 0.09295437717149854
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            717.0,
+            164.0
+          ],
+          "bbox_center_pixel": [
+            750.0,
+            325.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 5
+        },
+        "IG": {
+          "topmost_pixel": [
+            530.0,
+            235.0
+          ],
+          "bbox_center_pixel": [
+            525.0,
+            351.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 3
+        }
+      }
+    },
+    {
+      "frame": 68,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            757.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 28806,
+          "visible_scaled_mask_pixels": 28806,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            525.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19869,
+          "visible_scaled_mask_pixels": 19869,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            521.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19557,
+          "visible_scaled_mask_pixels": 16701,
+          "clipped_fraction": 0.14603466789384875
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            756.0,
+            480
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17737,
+          "visible_scaled_mask_pixels": 16112,
+          "clipped_fraction": 0.09161639510627502
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            728.5,
+            164.0
+          ],
+          "bbox_center_pixel": [
+            757.0,
+            325.0
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 22
+        },
+        "IG": {
+          "topmost_pixel": [
+            527.0,
+            233.0
+          ],
+          "bbox_center_pixel": [
+            524.5,
+            350.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        }
+      }
+    },
+    {
+      "frame": 69,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            757.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 28360,
+          "visible_scaled_mask_pixels": 28360,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            525.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20065,
+          "visible_scaled_mask_pixels": 20065,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            522.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19688,
+          "visible_scaled_mask_pixels": 16646,
+          "clipped_fraction": 0.1545103616416091
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            756.0,
+            479
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 17355,
+          "visible_scaled_mask_pixels": 15671,
+          "clipped_fraction": 0.09703255545952175
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            736.5,
+            161.0
+          ],
+          "bbox_center_pixel": [
+            756.5,
+            323.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 20
+        },
+        "IG": {
+          "topmost_pixel": [
+            530.0,
+            232.0
+          ],
+          "bbox_center_pixel": [
+            524.5,
+            349.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        }
+      }
+    },
+    {
+      "frame": 70,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            758.5,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 28900,
+          "visible_scaled_mask_pixels": 28900,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            526.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20411,
+          "visible_scaled_mask_pixels": 20411,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            524.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19705,
+          "visible_scaled_mask_pixels": 16546,
+          "clipped_fraction": 0.16031464095407258
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            758.5,
+            480
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16743,
+          "visible_scaled_mask_pixels": 15009,
+          "clipped_fraction": 0.10356566923490414
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            748.5,
+            157.0
+          ],
+          "bbox_center_pixel": [
+            758.0,
+            321.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 8
+        },
+        "IG": {
+          "topmost_pixel": [
+            530.0,
+            231.0
+          ],
+          "bbox_center_pixel": [
+            526.0,
+            349.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        }
+      }
+    },
+    {
+      "frame": 71,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            761.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 29440,
+          "visible_scaled_mask_pixels": 29440,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            527.0,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20488,
+          "visible_scaled_mask_pixels": 20488,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            525.0,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 19845,
+          "visible_scaled_mask_pixels": 16605,
+          "clipped_fraction": 0.16326530612244897
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            759.5,
+            480
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16138,
+          "visible_scaled_mask_pixels": 14342,
+          "clipped_fraction": 0.11129012269178337
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            757.0,
+            153.0
+          ],
+          "bbox_center_pixel": [
+            760.5,
+            319.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 5
+        },
+        "IG": {
+          "topmost_pixel": [
+            531.0,
+            229.0
+          ],
+          "bbox_center_pixel": [
+            526.5,
+            348.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 7
+        }
+      }
+    },
+    {
+      "frame": 72,
+      "reflection_owners": {
+        "2": "IG",
+        "3": "Lab"
+      },
+      "reflection_candidates": {
+        "2": [
+          "IG"
+        ],
+        "3": [
+          "Lab"
+        ]
+      },
+      "layer_tracks": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "clipping": [
+        {
+          "track": 0,
+          "role": "Lab",
+          "reflection": false,
+          "pivot": [
+            771.0,
+            487
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 30493,
+          "visible_scaled_mask_pixels": 30493,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 1,
+          "role": "IG",
+          "reflection": false,
+          "pivot": [
+            530.5,
+            468
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20375,
+          "visible_scaled_mask_pixels": 20375,
+          "clipped_fraction": 0.0
+        },
+        {
+          "track": 2,
+          "role": "IG",
+          "reflection": true,
+          "pivot": [
+            527.5,
+            460
+          ],
+          "scale": 1.14,
+          "unclipped_scaled_mask_pixels": 20127,
+          "visible_scaled_mask_pixels": 16673,
+          "clipped_fraction": 0.17161027475530383
+        },
+        {
+          "track": 3,
+          "role": "Lab",
+          "reflection": true,
+          "pivot": [
+            763.0,
+            478
+          ],
+          "scale": 1.115987460815047,
+          "unclipped_scaled_mask_pixels": 16210,
+          "visible_scaled_mask_pixels": 14446,
+          "clipped_fraction": 0.10882171499074646
+        }
+      ],
+      "scaled_directions": {
+        "Lab": {
+          "topmost_pixel": [
+            759.0,
+            151.0
+          ],
+          "bbox_center_pixel": [
+            770.5,
+            318.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 9
+        },
+        "IG": {
+          "topmost_pixel": [
+            533.0,
+            229.0
+          ],
+          "bbox_center_pixel": [
+            530.0,
+            348.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 13
+        }
+      }
+    }
+  ],
+  "keyframe_prechecks": [
+    {
+      "frame": 0,
+      "role": "Lab",
+      "iou": 0.6403358630712094,
+      "gating": false
+    },
+    {
+      "frame": 12,
+      "role": "Lab",
+      "iou": 0.5954472466232171,
+      "gating": false
+    },
+    {
+      "frame": 16,
+      "role": "Lab",
+      "iou": 0.6406826997672614,
+      "gating": false
+    },
+    {
+      "frame": 20,
+      "role": "Lab",
+      "iou": 0.6396673852787188,
+      "gating": false
+    },
+    {
+      "frame": 24,
+      "role": "Lab",
+      "iou": 0.5496885907877627,
+      "gating": false
+    },
+    {
+      "frame": 28,
+      "role": "Lab",
+      "iou": 0.5589416872945664,
+      "gating": false
+    },
+    {
+      "frame": 32,
+      "role": "Lab",
+      "iou": 0.4653882000734318,
+      "gating": false
+    },
+    {
+      "frame": 36,
+      "role": "Lab",
+      "iou": 0.5133750442686814,
+      "gating": false
+    },
+    {
+      "frame": 48,
+      "role": "Lab",
+      "iou": 0.46224850364173936,
+      "gating": false
+    },
+    {
+      "frame": 60,
+      "role": "Lab",
+      "iou": 0.5624502038712096,
+      "gating": false
+    },
+    {
+      "frame": 72,
+      "role": "Lab",
+      "iou": 0.6439538061681092,
+      "gating": false
+    }
+  ],
+  "precheck_mean_iou": 0.5701981118950825,
+  "precheck_notice": false,
+  "precheck_gating": false,
+  "hold_source_indices": [
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    8,
+    8,
+    9,
+    9,
+    10,
+    10,
+    11,
+    11,
+    12,
+    12,
+    13,
+    13,
+    14,
+    14,
+    15,
+    15,
+    16,
+    16,
+    17,
+    17,
+    18,
+    18,
+    19,
+    19,
+    20,
+    20,
+    21,
+    21,
+    22,
+    22,
+    23,
+    23,
+    24,
+    24,
+    25,
+    25,
+    26,
+    26,
+    27,
+    27,
+    28,
+    28,
+    29,
+    29,
+    30,
+    30,
+    31,
+    31,
+    32,
+    32,
+    33,
+    33,
+    34,
+    34,
+    35,
+    35,
+    36,
+    36,
+    37,
+    37,
+    38,
+    38,
+    39,
+    39,
+    40,
+    40,
+    41,
+    41,
+    42,
+    42,
+    43,
+    43,
+    44,
+    44,
+    45,
+    45,
+    46,
+    46,
+    47,
+    47,
+    48,
+    48,
+    49,
+    49,
+    50,
+    50,
+    51,
+    51,
+    52,
+    52,
+    53,
+    53,
+    54,
+    54,
+    55,
+    55,
+    56,
+    56,
+    57,
+    57,
+    58,
+    58,
+    59,
+    59,
+    60,
+    60,
+    61,
+    61,
+    62,
+    62,
+    63,
+    63,
+    64,
+    64,
+    65,
+    65,
+    66,
+    66,
+    67,
+    67,
+    68,
+    68,
+    69,
+    69,
+    70,
+    70,
+    71,
+    71,
+    72
+  ],
+  "geometry": {
+    "master": [
+      1280,
+      720
+    ],
+    "resized": [
+      1152,
+      648
+    ],
+    "native": [
+      1152,
+      640
+    ]
+  },
+  "conventions": {
+    "edge_dilation": "Euclidean native-pixel radius; applied identically to bodies and reflections",
+    "layer_occlusion": "Overwrite transformed dilated support including its black interior; configured back-to-front order",
+    "reflection_pairing": "User spatial rule, nearest horizontal center then vertical gap then role for multiple candidates",
+    "clipping": "1 - visible mask pixels / full offscreen-extended transformed mask pixels; NEAREST rasterization",
+    "affine": "PIL inverse affine NEAREST, pixel-edge pivot bottom-center body/top-center reflection",
+    "overlay": "Red scaled source, green accepted anchor; overlap mixed; review derivative"
+  },
+  "source_canny_sha256": "a02695bd93cf26a9956834d814325b7de91d0d71dd0a8bce8f3fcde457d49cd6",
+  "scaled_sha256": "36cde80fe72fb5749d325ef8e6b8c35df0ef28d9e72f46af51c5ad2279493bae",
+  "scaled_repeat_sha256": "e95834009d60461923d338e1a9354dce0b67101dd16e879659fd1f96113fb696",
+  "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
+  "source_summary_sha256": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+  "model_calls": 0
+}

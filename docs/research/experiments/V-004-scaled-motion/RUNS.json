@@ -1,0 +1,176 @@
+{
+  "experiment": "V-004-scaled-motion",
+  "status": "PRE_GENERATION",
+  "snapshot_scope": "Initial ledger before generation; actual fields require subsequent receipts",
+  "parent_commit": "8bb131081540e0c10a92d56889af7b63d13e7eff",
+  "preplan_commit_ref": "594eb39",
+  "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "imagegen_actual_calls": 4,
+  "imagegen_repairs": 0,
+  "new_anchor_sam": {
+    "status": "COMPLETE",
+    "planned_frames": [
+      16,
+      20,
+      28,
+      32
+    ],
+    "completed_calls": 4,
+    "evidence_ref": "ANCHOR_LEDGER.json",
+    "note": "Four guarded SAM runs completed with normal exit; G1-G6 passed for all new anchors."
+  },
+  "generation_attempts": 0,
+  "generation_completed_count": 0,
+  "generation_budget_max": 6,
+  "cells": [
+    {
+      "id": "S2-s1",
+      "planned": {
+        "variant": "S2",
+        "seed": 20261103,
+        "native_frames": 73,
+        "comparison_frames": 73,
+        "resolution": [
+          1152,
+          640
+        ],
+        "fps": 24,
+        "scheduler_steps": 11
+      },
+      "actual": {
+        "status": "NOT_RUN",
+        "elapsed_seconds": null,
+        "scheduler_steps": null,
+        "model_calls": null,
+        "memory": null,
+        "guard": null,
+        "hardware": null
+      }
+    },
+    {
+      "id": "S1-s1",
+      "planned": {
+        "variant": "S1",
+        "seed": 20261103,
+        "native_frames": 73,
+        "comparison_frames": 73,
+        "resolution": [
+          1152,
+          640
+        ],
+        "fps": 24,
+        "scheduler_steps": 11
+      },
+      "actual": {
+        "status": "NOT_RUN",
+        "elapsed_seconds": null,
+        "scheduler_steps": null,
+        "model_calls": null,
+        "memory": null,
+        "guard": null,
+        "hardware": null
+      }
+    },
+    {
+      "id": "S3-s1",
+      "planned": {
+        "variant": "S3",
+        "seed": 20261103,
+        "native_frames": 145,
+        "comparison_frames": 73,
+        "resolution": [
+          1152,
+          640
+        ],
+        "fps": 24,
+        "scheduler_steps": 11
+      },
+      "actual": {
+        "status": "NOT_RUN",
+        "elapsed_seconds": null,
+        "scheduler_steps": null,
+        "model_calls": null,
+        "memory": null,
+        "guard": null,
+        "hardware": null
+      }
+    },
+    {
+      "id": "S2-s2",
+      "planned": {
+        "variant": "S2",
+        "seed": 20261104,
+        "native_frames": 73,
+        "comparison_frames": 73,
+        "resolution": [
+          1152,
+          640
+        ],
+        "fps": 24,
+        "scheduler_steps": 11
+      },
+      "actual": {
+        "status": "NOT_RUN",
+        "elapsed_seconds": null,
+        "scheduler_steps": null,
+        "model_calls": null,
+        "memory": null,
+        "guard": null,
+        "hardware": null
+      }
+    },
+    {
+      "id": "S1-s2",
+      "planned": {
+        "variant": "S1",
+        "seed": 20261104,
+        "native_frames": 73,
+        "comparison_frames": 73,
+        "resolution": [
+          1152,
+          640
+        ],
+        "fps": 24,
+        "scheduler_steps": 11
+      },
+      "actual": {
+        "status": "NOT_RUN",
+        "elapsed_seconds": null,
+        "scheduler_steps": null,
+        "model_calls": null,
+        "memory": null,
+        "guard": null,
+        "hardware": null
+      }
+    },
+    {
+      "id": "S3-s2",
+      "planned": {
+        "variant": "S3",
+        "seed": 20261104,
+        "native_frames": 145,
+        "comparison_frames": 73,
+        "resolution": [
+          1152,
+          640
+        ],
+        "fps": 24,
+        "scheduler_steps": 11
+      },
+      "actual": {
+        "status": "NOT_RUN",
+        "elapsed_seconds": null,
+        "scheduler_steps": null,
+        "model_calls": null,
+        "memory": null,
+        "guard": null,
+        "hardware": null
+      }
+    }
+  ],
+  "training": 0,
+  "quality_retries": 0,
+  "counting_note": "Six planned cells are not six executed model calls; missing actual measurements remain null."
+}

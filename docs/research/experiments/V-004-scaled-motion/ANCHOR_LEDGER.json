@@ -1,0 +1,81 @@
+{
+  "calls": [
+    {
+      "frame": 16,
+      "candidate": 1,
+      "status": "ACCEPTED_G1_G6_PASS",
+      "tool": "Codex native imagegen",
+      "model": "UNKNOWN_NOT_EXPOSED",
+      "billing": "UNKNOWN_NOT_EXPOSED",
+      "raw_sha256": "c66424fb79c3c88d561b0e87d1870ecd9cb18990843a099f6c1a79fe6485777e",
+      "master_sha256": "89f9dc3b543613ddb761c8acca378a5cdd87cd4da5455a83b3654d5109367305",
+      "prompt_sha256": "dd1df008bcd0d3986fec7eeb2bf2338db521e1a8f5d4e821b5a377e041ad94e1",
+      "recorded_at_utc": "2026-11-05T18:32:56.366469+00:00",
+      "gate_sha256": "931c04b08f46a5061cefb2ac237a00b96fb54bd47108544722969dcb03fa47db"
+    },
+    {
+      "frame": 20,
+      "candidate": 1,
+      "status": "ACCEPTED_G1_G6_PASS",
+      "tool": "Codex native imagegen",
+      "model": "UNKNOWN_NOT_EXPOSED",
+      "billing": "UNKNOWN_NOT_EXPOSED",
+      "raw_sha256": "34098d59017022d56f5771ee6e0dd3a6cdafb51844492927af09bc9986bb775c",
+      "master_sha256": "275cb7674e0aaeffedb3213b367b719047c56ac58338f249d188e775b41ea700",
+      "prompt_sha256": "c1e7470f6e03449031cf22afefa715ac68730134daaaddc127a6d556dd7864ee",
+      "recorded_at_utc": "2026-11-05T18:38:37.117944+00:00",
+      "gate_sha256": "8de4f7d943565277499f36df6467c84f5763cfac64f50b4f63dc7cc6bcb7eb6d"
+    },
+    {
+      "frame": 28,
+      "candidate": 1,
+      "status": "ACCEPTED_G1_G6_PASS",
+      "tool": "Codex native imagegen",
+      "model": "UNKNOWN_NOT_EXPOSED",
+      "billing": "UNKNOWN_NOT_EXPOSED",
+      "raw_sha256": "15b8eb2d29c16f77ab30558b3b46e36a78cd2a91162c53725d0edb8ac60914a4",
+      "master_sha256": "8a459d576cad441f967cbd2d8849df46ab83bc600d4d623ca33146c962b01827",
+      "prompt_sha256": "6c83dec89da23dc72f792d1ad9e633d0d91bc3c9a1de83922a2a723c4d5ea040",
+      "recorded_at_utc": "2026-11-05T18:47:54.017879+00:00",
+      "gate_sha256": "5558cede129e98b620f1f1f5c9f943781976606655e3c2cb1f728284b0cf20fa"
+    },
+    {
+      "frame": 32,
+      "candidate": 1,
+      "status": "ACCEPTED_G1_G6_PASS",
+      "tool": "Codex native imagegen",
+      "model": "UNKNOWN_NOT_EXPOSED",
+      "billing": "UNKNOWN_NOT_EXPOSED",
+      "raw_sha256": "b7b2fc5db770c387da2a6c851639a0b3e813f57ffe68f465f3ce766dd407099a",
+      "master_sha256": "8581b299d3637314c1295b40233acad60bb0bf7f5bded1e455db0d3b78ec20d4",
+      "prompt_sha256": "5c0b5a566fefcae3003d60d3137499d707d467a4628296ecf3ad385374834de1",
+      "recorded_at_utc": "2026-11-05T18:53:50.792934+00:00",
+      "gate_sha256": "6b0b7af89a31a66db4c77501e51520bf5cf78d935bca7968e229b04bf630bb54"
+    }
+  ],
+  "actual_calls": 4,
+  "repairs": 0,
+  "reused_frames": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    60,
+    72
+  ],
+  "accepted_frames": [
+    0,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    48,
+    60,
+    72
+  ],
+  "dropped_frames": []
+}
