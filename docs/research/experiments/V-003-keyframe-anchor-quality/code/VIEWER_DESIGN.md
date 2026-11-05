@@ -14,3 +14,5 @@ Single play/pause/frame/rate control; RAW/POST switches only generated columns w
 Native controls, visible focus, Korean word-break keep-all, semantic headings and tables. No animation, external fonts or network dependencies.
 ## Verification
 Real browser screenshots375/768/1280px, play/pause/frame/rate/toggle/anchor controls, empty states, document links. Temporal video quality is not inferred from playback QA.
+
+Final packages with POST default to BOTH: RAW and POST appear side by side within each generated column with aligned labels. RAW-only and POST-only remain available. All visible videos share the same timeline; hidden roles are paused. Intermediate packages remain immutable.
