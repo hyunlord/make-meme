@@ -8,7 +8,7 @@ from dataclasses import replace
 import numpy as np
 from anchor_gates import Policy, Row
 from post_composite import Geometry, Instance
-from output_metrics import bind, descriptors, masked_ssim, silhouette_score, run
+from output_metrics import bind, descriptors, masked_ssim, silhouette_score, run, rgb
 
 
 class MetricsTests(unittest.TestCase):
@@ -24,6 +24,26 @@ class MetricsTests(unittest.TestCase):
         self.assertAlmostEqual(masked_ssim(a, a, region), 1.0)
         self.assertLess(masked_ssim(a, 255-a, region), .5)
         self.assertIsNone(masked_ssim(a, a, ~region))
+
+    def test_anchor_rgb_matches_actual_model_lanczos_crop(self):
+        # Given: a high-frequency canonical image and the model-input transform.
+        geo = Geometry((128, 72), (112, 64))
+        pixels = np.random.default_rng(123).integers(0, 256, (72, 128, 3), dtype=np.uint8)
+        image = Image.fromarray(pixels)
+        resized = image.resize(geo.resized, Image.Resampling.LANCZOS)
+        left = (geo.resized[0]-geo.output[0])//2
+        top = (geo.resized[1]-geo.output[1])//2
+        expected = np.asarray(resized.crop((left, top, left+geo.output[0], top+geo.output[1])))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'anchor.png'
+            image.save(path)
+            # When: reading the anchor specifically for adherence measurement.
+            actual = rgb(path, geo, anchor=True)
+            # Then: model-input bytes match; the source reader retains BICUBIC.
+            np.testing.assert_array_equal(actual, expected)
+            source = rgb(path, geo)
+            np.testing.assert_array_equal(source, np.asarray(geo.transform(image, mask=False)))
+            self.assertFalse(np.array_equal(source, actual))
 
     def test_native_bbox_returns_canonical_crop_offset(self):
         mask = np.zeros((640, 1152), dtype=bool)

@@ -69,11 +69,18 @@ def masked_ssim(a: NDArray[np.float64], b: NDArray[np.float64], region: NDArray[
     return float(value.mean(axis=2)[region].mean())
 
 
-def rgb(path: Path, geo: Geometry) -> NDArray[np.float64]:
+def rgb(path: Path, geo: Geometry, *, anchor: bool = False) -> NDArray[np.float64]:
+    """Match model-input LANCZOS for anchors; retain POST-source BICUBIC elsewhere."""
     with Image.open(path) as image:
         image = image.convert('RGB')
         if image.size == geo.master:
-            image = geo.transform(image, mask=False)
+            if anchor:
+                resized = image.resize(geo.resized, Image.Resampling.LANCZOS)
+                left = (geo.resized[0]-geo.output[0])//2
+                top = (geo.resized[1]-geo.output[1])//2
+                image = resized.crop((left, top, left+geo.output[0], top+geo.output[1]))
+            else:
+                image = geo.transform(image, mask=False)
         if image.size != geo.output:
             raise ValueError(f'Unexpected RGB size: {image.size}')
         return np.asarray(image, dtype=np.float64)
@@ -146,7 +153,7 @@ def run(scene_path: Path, runtime: dict) -> dict:
             if set(anchor['casting']) != set(policy.cast):
                 raise ValueError('Anchor casting must come from accepted gate artifact')
             am = {i.track: i.mask for i in read_instances(Path(anchor['summary']), anchor.get('summary_frame', 0), geo)}
-            ar = rgb(Path(anchor['image']), geo)
+            ar = rgb(Path(anchor['image']), geo, anchor=True)
             scores = {}
             for role, track in anchor['casting'].items():
                 target = casting.get(role) if casting else None
@@ -166,7 +173,7 @@ def run(scene_path: Path, runtime: dict) -> dict:
             'geometry': {'master': geo.master, 'measurement_canvas': geo.output, 'resized': geo.resized},
             'definitions': {'iou': 'V002 missing output = all-frame zero; cropped visible support only; NOT a motion pass criterion',
                             'swap': 'Nearest-center opposition proxy only, not an identity verdict',
-                            'ssim': 'RGB local 7x7, sample covariance, range255; mean on anchor/output object union',
+                            'ssim': 'RGB local 7x7, sample covariance, range255; mean on anchor/output object union; anchor LANCZOS resize/crop matches model input',
                             'background': 'Consecutive RGB MAE outside union of both POST edit regions; reflections excluded',
                             'upright': 'bbox height/width proxy; missing frames never pass; reference upper band reported separately'},
             'frames': frames, 'roles': aggregate, 'keyframes': keyframes,
