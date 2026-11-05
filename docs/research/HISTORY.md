@@ -872,3 +872,7 @@ E1은 공식128배수1152×640 규약에서73프레임 영상2개를 생성해 M
 ## V-002 r1 복구 개정 2: M1 실제 전달 (2026-11-05 KST)
 
 새 부팅 확인 후 기존 M1 영상·SAM·지표·시트를 먼저 Spark에서 포장해 Mac에 hash 검증 전달했다. M2 미완료 1회 재시작은8step 확인 뒤 다시 접근이 유실됐으며, Spark 내부 M2→M3 및 완료 영수증 기반 SAM 배치의 이후 상태는 미확인이다. 14B 자동 선택은 폐기하고 이번 복구의14B/LTX는 제외했다. [복구 기록](experiments/V-002-mask-guided-swap/RESUME_R1/RECOVERY_R2_RESULTS.md).
+
+## V-003 착수·V-002 종료 (2026-11-06)
+
+사용자 지시로 V-002 잔여 변형 실행을 종료하고 M1·과거 실패 기록을 보존한다. V-003은 기존 앵커0와 촘촘한 신규 앵커·LTX canny/guide/replace 비교를 사전 등록한다. 펌웨어 지정 버전과 hw.csv 기록을 확인했다. [계획](experiments/V-003-keyframe-anchor-quality/PLAN.md).
