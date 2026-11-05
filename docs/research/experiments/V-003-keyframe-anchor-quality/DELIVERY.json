@@ -44,5 +44,53 @@
       "clip-08-raw.mp4": "PASS",
       "clip-09-raw.mp4": "PASS"
     }
+  },
+  "seed1_interim": {
+    "filename": "V003-review-20261106-seed1.zip",
+    "bytes": 10584777,
+    "sha256": "6556369cf9e02598dc3070d448712014d90fb43ea0317bf5a0be642d8c99fa19",
+    "payload_count": 28,
+    "zip_entry_count": 29,
+    "crc": "PASS",
+    "actual_extraction": "PASS",
+    "payload_hashes": "PASS",
+    "browser_qa": {
+      "status": "PASS",
+      "actual_media": true,
+      "columns": 10,
+      "videos": 7,
+      "anchors": 7,
+      "not_run": 3,
+      "controls": [
+        "play",
+        "pause",
+        "frame",
+        "slider",
+        "0.5x",
+        "RAW_POST",
+        "keyframe_anchor"
+      ],
+      "viewports": [
+        375,
+        768,
+        1280
+      ],
+      "errors": [],
+      "quality": "HUMAN_REVIEW_PENDING",
+      "temporal_quality": "UNVERIFIED"
+    },
+    "quality": "HUMAN_REVIEW_PENDING",
+    "host_transfer_sha256": "PASS",
+    "mac_crc": "PASS",
+    "mac_actual_extraction": "PASS",
+    "mac_payload_hashes": "PASS",
+    "visual_qa": "PASS: actual desktop viewport inspected",
+    "post": "PENDING",
+    "output_sam": "PENDING",
+    "original_mp4_byte_preservation": {
+      "clip-02-raw.mp4": "PASS",
+      "clip-04-raw.mp4": "PASS",
+      "clip-06-raw.mp4": "PASS"
+    }
   }
 }
