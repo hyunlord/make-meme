@@ -1,0 +1,80 @@
+{
+  "observed_at_utc": "2026-11-05T16:20:28.026014+00:00",
+  "status": "VERIFIED_EXISTING_INPUTS",
+  "assets": [
+    {
+      "role": "SOURCE_VIDEO",
+      "sha256": "da33bb95d4e05c49c537f3fdb27b2189fafec2b4f8d1a27e6b14efe034071f6b",
+      "bytes": 7824508,
+      "parent_hash_match": true
+    },
+    {
+      "role": "REF_LAB",
+      "sha256": "54f8052c7264139a41d2818d5c881abd2442f462b5d02cc7908c1f360f00fadb",
+      "bytes": 507749,
+      "parent_hash_match": true
+    },
+    {
+      "role": "REF_IG",
+      "sha256": "bbfcbe937fe870e387f28784e94ab00616aa13afdd7d0a809a776bc937a6194c",
+      "bytes": 765356,
+      "parent_hash_match": true
+    },
+    {
+      "role": "KLING_RESULT",
+      "sha256": "829e234a83fbe487560b5ce58e1a453c1087d3683034fc363cccc2056cba3e94",
+      "bytes": 8326491,
+      "parent_hash_match": true
+    }
+  ],
+  "derived_assets": [
+    {
+      "role": "anchor",
+      "sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779",
+      "parent_hash_match": true
+    },
+    {
+      "role": "source_sam_summary",
+      "sha256": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+      "parent_hash_match": true
+    },
+    {
+      "role": "anchor_sam_summary",
+      "sha256": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3",
+      "parent_hash_match": true
+    },
+    {
+      "role": "canny",
+      "sha256": "a02695bd93cf26a9956834d814325b7de91d0d71dd0a8bce8f3fcde457d49cd6",
+      "parent_hash_match": true
+    }
+  ],
+  "source_video_metadata": {
+    "width": 1916,
+    "height": 1078,
+    "frame_rate": "24/1",
+    "frames": 361,
+    "duration_seconds": 15.041667
+  },
+  "kling_video_metadata": {
+    "width": 1280,
+    "height": 720,
+    "frame_rate": "24/1",
+    "frames": 361,
+    "duration_seconds": 15.041667
+  },
+  "canonical_source_metadata": {
+    "width": 1280,
+    "height": 720,
+    "frames": 73,
+    "source_mask_files": 292,
+    "mapping": "Existing V-001 canonical timeline; segment is configured in V003_SCENE_CONFIG.json"
+  },
+  "source_frame_and_mask_hash_parity": {
+    "verified_files": 365,
+    "mismatches": 0
+  },
+  "casting_definition": "V003_SCENE_CONFIG.json",
+  "personal_media_published": false,
+  "private_manifest_available": true
+}

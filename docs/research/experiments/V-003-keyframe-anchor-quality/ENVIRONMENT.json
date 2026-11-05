@@ -1,0 +1,64 @@
+{
+  "observed_date_kst": "2026-11-06",
+  "firmware": {
+    "EC": "0x0300050b",
+    "SoC": "0x02009b0e",
+    "matches_requested_versions": true,
+    "update_state": "Success",
+    "method": "fwupdmgr get-devices"
+  },
+  "hardware_logger": {
+    "running": true,
+    "file_growing": true,
+    "observed_interval_seconds": [
+      5,
+      6
+    ],
+    "header_present": false,
+    "columns": [
+      "timestamp_iso8601",
+      "gpu_temperature_c",
+      "gpu_power_w",
+      "gpu_sm_clock_mhz",
+      "thermal_zone_0_millic",
+      "thermal_zone_1_millic",
+      "thermal_zone_2_millic",
+      "thermal_zone_3_millic",
+      "thermal_zone_4_millic",
+      "thermal_zone_5_millic",
+      "thermal_zone_6_millic",
+      "mem_available_mib"
+    ],
+    "memory_source": "/proc/meminfo MemAvailable divided by1024; free is not invoked",
+    "historical_rows_with_blank_memory": true,
+    "latest_memory_values_present": true,
+    "logger_restarted": false
+  },
+  "prior_experiment_closure": {
+    "V002_processes_observed": 0,
+    "V002_user_units_observed": 0,
+    "V002_user_unit_files_observed": 0,
+    "V002_user_timers_observed": 0,
+    "tmux_server_observed": false,
+    "M2_completed_mp4_found": false,
+    "M2_recovery_completed_mp4_found": false,
+    "M3_output_directory_found": false,
+    "remaining_work": "CANCELLED_BY_USER",
+    "processes_terminated": 0
+  },
+  "gpu_compute_processes_at_intake": 0,
+  "admission_note": "Intake absence is not the required three-minute heavy-stage admission observation.",
+  "embedding_asset": {
+    "model_id": "google/siglip2-so400m-patch14-384",
+    "snapshot": "e8e487298228002f3d8a82e0cd5c8ea9c567f57f",
+    "weight_file_exists": true,
+    "weight_bytes": 4544143072,
+    "weight_hash_computed": false,
+    "config_sha256": "73477b47ae9a395f008f993ebd8fb5c16ce0b5e8419ffdf2f5b2183b260f9cff",
+    "preprocessor_config_sha256": "fb2817d3523ca3b666c859f15320c7138416bc38ffc515e2963f78c868c51c90",
+    "model_imported": false,
+    "measurement_run": false,
+    "downloaded": false
+  },
+  "raw_logs_private": true
+}

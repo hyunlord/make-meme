@@ -1,0 +1,24 @@
+{
+  "imagegen_calls": 1,
+  "model_identifier": "UNKNOWN",
+  "billing": "UNKNOWN",
+  "calls": [
+    {
+      "keyframe": 12,
+      "attempt": 1,
+      "status": "GENERATED_GATE_PENDING",
+      "raw_dimensions": [
+        1672,
+        941
+      ],
+      "master_dimensions": [
+        1280,
+        720
+      ],
+      "raw_sha256": "61e78cc4b54ddc4df7c3e46a4df7822cad5539b153a4427b3e7d7ce0912aba22",
+      "master_sha256": "b5c783e182f7c04a5eec5b0b4666190ce09f5659c852ac9b3d417e65cbaee0ed",
+      "prompt_sha256": "3291a8e63c29b89cefc6ccda4fc504f4c94c326a520cfe61296bf0e40f3d885e"
+    }
+  ],
+  "reused_anchor0_sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779"
+}
