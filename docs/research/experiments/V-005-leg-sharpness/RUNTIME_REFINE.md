@@ -45,3 +45,9 @@
 - CPU 검사는 실제 GPU 실행·영상 품질 확인을 대체하지 않는다.
 
 공식 근거: [IC-LoRA pipeline](https://github.com/Lightricks/LTX-2/blob/e98f6d927d83c92ef2be6aec76c8440b19306e39/packages/ltx-pipelines/src/ltx_pipelines/ic_lora.py), [chunk operators](https://github.com/Lightricks/LTX-2/blob/e98f6d927d83c92ef2be6aec76c8440b19306e39/packages/ltx-pipelines/src/ltx_pipelines/chunks/operators.py), [GaussianNoiser](https://github.com/Lightricks/LTX-2/blob/e98f6d927d83c92ef2be6aec76c8440b19306e39/packages/ltx-core/src/ltx_core/components/noisers.py).
+
+## 기계적 import 수정 (2026-11-06, 첫 CPU guard 이후)
+
+직접 `python entry.py` 사전 검증은 통과했으나, 실제 보호 worker의 `runpy.run_path`는 스크립트 디렉터리를 자동으로 import 검색 경로에 넣지 않아 `refine_schedule` import에서 실패했다. 이 실패는 모델 적재·sampler 전에 발생했으며 기존 실패 stage·로그·entry bytes를 보존했다.
+
+최소 수정은 sibling import 전에 `sys.path.insert(0, str(Path(__file__).resolve().parent))` 한 줄을 추가한 것이다. 다른 cwd의 새 인터프리터에서 `runpy.run_path`로 실행하는 회귀 검사는 수정 전 동일 오류로 실패하고 수정 후 통과했다(전체 CPU 검사 5개). Spark의 실제 연구 executable에서도 `/tmp` cwd에서 `run_name='__main__'`로 CPU 계약 검사를 통과했다. 기존 stage 파일을 덮어쓰지 않도록 새 entry 이름과 새 `importfix` stage를 사용한다. sigma·입력·모델·예산 변경은 없다.

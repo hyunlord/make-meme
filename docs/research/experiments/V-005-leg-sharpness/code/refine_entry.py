@@ -13,6 +13,7 @@ import subprocess
 import sys
 import time
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from refine_schedule import read_official_grids, select_schedule
 
 

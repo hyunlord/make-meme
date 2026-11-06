@@ -74,3 +74,16 @@ def test_runtime_hook_preserves_stage_two_chain_and_restores_module(monkeypatch)
     assert calls == [('one',['source-latent'],[.421875,0.],noiser),('two',['upsampled-refined-one'],[.421875,0.],noiser)]
     assert official.denoise_chunks is original
     assert [s.steps for s in observed] == [1, 1]
+
+
+def test_entry_imports_siblings_when_guard_uses_runpy_from_other_cwd(tmp_path):
+    # Given: a fresh interpreter outside the script folder, like the guarded worker.
+    import subprocess
+    entry = MODULE.with_name('refine_entry.py')
+    program = 'import runpy,sys;runpy.run_path(sys.argv[1]);assert "torch" not in sys.modules;print("RUNPY_IMPORT_PASS")'
+    # When: runpy executes the entry without automatically prepending its directory.
+    result = subprocess.run([sys.executable, '-c', program, str(entry)], cwd=tmp_path,
+                            text=True, capture_output=True, check=False)
+    # Then: sibling modules resolve without importing the model runtime.
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == 'RUNPY_IMPORT_PASS'
