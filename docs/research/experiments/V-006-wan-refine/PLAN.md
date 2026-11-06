@@ -41,3 +41,6 @@ Official DiffSynth A14B example calls the pipeline without scheduler overrides. 
 
 ## W2 support gate, before any model execution
 CPU fixture executes the existing input-video unit body with shape doubles: single reference input/noiseT10/10 passes; requestedtwo references input/noiseT10/11 mismatch. W2 NOT_SUPPORTED underexplicitworkorderbranch, noW2download/load/generation. SeeW2_SUPPORT.md. W1remainsindependent.
+
+## Resolved numeric configuration
+V006_SCENE_CONFIG.json preserves the attachment unchanged. V006_RESOLVED_SCENE_CONFIG.json resolves the explicitly inheritedV005measurementpolicy and nativepixel composition radii before results; noqualitysettingchanges. The composition useszero blend at8/40 andfullreplacementat13/35, finite inwardfeather8px after12px dilation. MissingSAMbody retainsbasepixels withmissingstatus, never fabricatesobjectdetections.

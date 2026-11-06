@@ -1,0 +1,35 @@
+{
+  "LTX": {
+    "actual_shape_status": "ARTIFACT_UNAVAILABLE",
+    "reason": "Parent receipts preserve grids and call counts but no actual latent tensors or shape trace; no LTX rerun authorized.",
+    "inferred_not_measured": {
+      "stage1_CTHW": [
+        128,
+        10,
+        10,
+        18
+      ],
+      "stage2_CTHW": [
+        128,
+        10,
+        20,
+        36
+      ]
+    },
+    "inferred_status": "CODE_DERIVED_NOT_MEASURED",
+    "inferred_token_counts": {
+      "stage1": 1800,
+      "stage2": 7200
+    },
+    "code_evidence": [
+      "ltx_core/types.py:34 scale8/32/32;110-125 C128 and shape formula",
+      "ltx_pipelines/utils/types.py:210 VideoLatentPatchifier(patch_size=1)",
+      "ltx_core/components/patchifiers.py:24 token formula",
+      "ltx_pipelines/ic_lora.py:293,907-908 half-size first stage"
+    ]
+  },
+  "Wan": {
+    "actual_shape_status": "NOT_RUN"
+  },
+  "tokens_must_not_be_claimed_measured_from_formula": true
+}

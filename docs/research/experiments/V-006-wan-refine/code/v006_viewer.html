@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="원본, 기준선, 생성 영상과 앵커를 함께 재생하는 오프라인 연구 검토 페이지"><title>영상 검토</title>
+<style>
+:root{--bg:#fff;--fg:#171717;--muted:#555;--line:#ddd;--empty:#f4f4f4;--focus:#005ea8;--s:8px;--body:16px;--caption:14px;--heading:24px;--column:256px}
+*{box-sizing:border-box}body{margin:calc(var(--s)*2);font:var(--body)/1.5 system-ui,sans-serif;color:var(--fg);background:var(--bg);word-break:keep-all}header{overflow-wrap:anywhere}h1{font-size:var(--heading)}h2{font-size:var(--body)}h1,h2,p{margin:0 0 calc(var(--s)*2)}button,select,input{font:inherit}button,select{padding:var(--s);background:var(--bg);border:1px solid var(--line);color:var(--fg)}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s);margin-bottom:var(--s)}.scroll{overflow-x:auto;margin-bottom:calc(var(--s)*3)}.columns,.anchors{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(var(--column),1fr);gap:var(--s)}figure{margin:0;border:1px solid var(--line);padding:var(--s)}figcaption{font-size:var(--caption);min-height:3em}video,.media img,.empty{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--empty)}.empty{display:flex;align-items:center;justify-content:center;padding:var(--s);text-align:center}.media-pair{display:flex;gap:var(--s)}.media-part{flex:1;min-width:0}.video-window{position:relative;overflow:hidden;aspect-ratio:16/9}.video-window canvas{position:absolute;inset:0;width:100%;height:100%;background:var(--empty)}.video-window canvas[hidden]{display:none}.zoom-status{font-size:var(--caption);color:var(--muted)}.chart{min-width:640px;width:100%;height:auto}.chart-label{font-size:var(--caption)}.plot-legend{display:flex;flex-wrap:wrap;gap:var(--s);font-size:var(--caption)}.media-part[hidden]{display:none}.media-label{font-size:var(--caption);min-height:3em}.mode-slot{min-height:64px}.mode-slot select{max-width:100%}.status{overflow-wrap:anywhere;font-size:var(--caption);color:var(--muted)}#position{flex:1;min-width:160px}#keyframes{display:flex;gap:var(--s);flex-wrap:wrap;margin-bottom:var(--s)}#anchor-now{max-width:512px;width:100%;aspect-ratio:16/9;object-fit:contain}table{border-collapse:collapse;width:100%;font-size:var(--caption)}td,th{padding:var(--s);border:1px solid var(--line);text-align:left;vertical-align:top}a{color:var(--focus)}footer{margin-top:calc(var(--s)*3)}#errors{color:#a00000}.anchors img{width:100%;aspect-ratio:16/9;object-fit:contain}
+</style></head><body><header><h1 id="title">영상 검토</h1><p id="stage"></p><p id="first-look"></p><p>품질 판정: HUMAN_REVIEW_PENDING. IoU와 bbox 비율은 동작·직립의 대리 지표이며 변형의 우열을 정하지 않습니다.</p></header>
+<main><div class="controls"><button id="play">재생</button><button id="pause">일시정지</button><button id="prev">이전 프레임</button><button id="next">다음 프레임</button><button id="kick-loop" aria-pressed="false">다리 구간 반복</button><button id="zoom" aria-pressed="false">하체 2배 보기</button><label>속도 <select id="rate"></select></label></div>
+<div class="controls"><label for="position">프레임</label><input id="position" type="range" min="0" value="0" step="1"><output id="time"></output></div><p id="errors" role="status"></p>
+<div class="scroll"><div id="columns" class="columns"></div></div>
+<section><h2>다리 선명도 · 프레임별 참고 지표</h2><p>회색 픽셀 비율은 반투명도 정답이 아니며, 경계 분산은 동작·외형 품질을 판정하지 않습니다. Kling은 조명·크기가 다른 참고 열입니다.</p><div id="plots"></div></section><section><h2>자동 측정 (참고값)</h2><div class="scroll"><table><thead><tr><th>출력</th><th>기술 상태</th><th>측정</th></tr></thead><tbody id="metrics"></tbody></table></div></section></main><footer id="documents"></footer>
+<script id="review-data" type="application/json">{}</script>
+<script>
+'use strict';
+const data=JSON.parse(document.querySelector('#review-data').textContent);const $=s=>document.querySelector(s);const videos=[];let loopEnabled=false,zoomEnabled=false;let playing=false,raf=0,currentFrame=0,mode='raw';
+$('#first-look').textContent=data.top_line;$('#title').textContent=data.title;document.title=data.title;$('#stage').textContent=data.stage;$('#position').max=data.frames-1;for(const rate of data.playback_rates){const option=document.createElement('option');option.value=rate;option.textContent=`${rate}×`;$('#rate').append(option)}
+function element(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e}
+function display(frame){currentFrame=Math.max(0,Math.min(data.frames-1,frame));$('#position').value=currentFrame;$('#time').textContent=`${currentFrame} / ${data.frames-1} (${(currentFrame/data.fps).toFixed(3)}초)`;for(const item of videos){const outside=currentFrame<item.start||currentFrame>=item.start+item.frames;item.status.textContent=item.clip.status+(outside?" · RAW 구간 밖: 경계 프레임 정지 표시":"");}drawZooms()}
+function pause(){playing=false;cancelAnimationFrame(raf);videos.forEach(({video})=>video.pause())}
+function localFrame(item, frame){return Math.max(0,Math.min(item.frames-1,frame-item.start));}
+function setTime(item, frame){if(item.video.readyState>0)item.video.currentTime=localFrame(item,frame)/data.fps;}
+function seek(frame){pause();display(frame);videos.forEach(item=>setTime(item,currentFrame));}
+let playStart=0,startFrame=0;
+function tick(now){if(!playing)return;let frame=startFrame+(now-playStart)/1000*data.fps*Number($('#rate').value);
+ if(loopEnabled&&frame>data.kick_loop_frames[1]){frame=data.kick_loop_frames[0];startFrame=frame;playStart=now;}
+ if(frame>data.frames-1){seek(data.frames-1);return;}
+ display(Math.floor(frame));
+ for(const item of videos){const {video}=item,within=frame>=item.start&&frame<item.start+item.frames;
+  if(!within){video.pause();setTime(item,frame);}else if(video.readyState>1){if(Math.abs(video.currentTime-localFrame(item,frame)/data.fps)>1/data.fps)setTime(item,frame);if(video.paused)video.play().catch(e=>$('#errors').textContent=e.message);}}
+ raf=requestAnimationFrame(tick);}
+function metricLines(m){
+const scaled=m.scaled,cost=m.cost||m.base?.cost;m=m.base||m;
+const number=(v,scale=1,digits=2)=>typeof v==='number'&&Number.isFinite(v)?(v*scale).toFixed(digits):'NOT_MEASURED';
+const lines=[];
+if(m.roles){for(const [role,r]of Object.entries(m.roles))lines.push(`${role}: 직립 하한 ${number(r.upright_lower_bound_fraction,100)}% · 중심 거리 ${number(r.center_distance_width_percent)}%W · IoU ${number(r.iou_all_frame,1,3)}`);lines.push(`개체 수 일치 ${number(m.count_matches_fraction,100)}% · 반대 대응 대리값 ${number(m.geometric_opposition_frames,1,0)}프레임`);lines.push('IoU·직립·반대 대응은 대리 지표이며 동작/정체성 합격 판정이 아닙니다.');}
+if(m.background)lines.push(`배경 연속 차이 비율 RAW/원본 ${number(m.background.raw_over_source)} · POST/원본 ${number(m.background.post_over_source)} (합성 PNG 기준)`);
+if(scaled){const d=scaled.kick_direction||{};lines.push(`확대 Lab IoU ${number(scaled.scaled_iou?.all_frame_mean,1,3)} · 방향 일치 ${number(d.window_agreement_with_missing_axis_penalty,100)}% (${number(d.comparable_frames,1,0)}/${number(d.total_window_frames,1,0)} 비교 가능)`);lines.push('최상단 점 방향은 머리·귀를 가리킬 수도 있으며 발차기 성공 판정이 아닙니다.');}
+if(cost){lines.push(`생성 ${number(cost.elapsed_seconds,1,1)}초 · RSS ${number(cost.peak_rss_bytes_receipt,1/1073741824)}GiB · cgroup ${number(cost.cgroup_peak_bytes_sampled,1/1073741824)}GiB · ${number(cost.scheduler_steps_completed,1,0)} steps`);}
+if(m.input_mask_iou_missing_penalty){lines.push(`S2 입력 Lab IoU ${number(m.input_mask_iou_missing_penalty.mean,1,3)} · 확대 Lab IoU ${number(m.scaled_iou_missing_penalty?.mean,1,3)} · 방향 일치 ${number(m.kick_direction_missing_penalty?.mean,100)}%`);lines.push(`실제 개체 수 일치 ${number(m.count_matches_fraction,100)}% · 관측 ${m.frame_count}프레임`);}
+if(m.seams){for(const[role,r]of Object.entries(m.seams.outputs||{}))lines.push(`이음새 ${role}: 경계/주변 변화 ${number(r.boundary_mean_over_surrounding,1,3)}`);}
+if(!lines.length)lines.push('NOT_MEASURED');return lines;
+}
+for(const clip of data.clips){const fig=element('figure');fig.append(element('figcaption',clip.label));const modeSlot=element('div');modeSlot.className='mode-slot';fig.append(modeSlot);const status=element('p',clip.status);status.className='status';
+ const media=element('div');media.className='media';const sources=clip.sources||{};const roles=Object.keys(sources);
+ if(roles.length){const video=element('video');video.muted=true;video.playsInline=true;video.preload='auto';video.setAttribute('aria-label',clip.label);const viewport=element('div');viewport.className='video-window';viewport.append(video);const canvas=element('canvas');canvas.hidden=true;canvas.width=512;canvas.height=288;viewport.append(canvas);const zoomStatus=element('div');zoomStatus.className='zoom-status';zoomStatus.hidden=true;const modeLabel=element('p');modeLabel.className='media-label';
+ const item={video,clip,status,canvas,zoomStatus,role:roles[0],frames:data.frames,start:0};
+ function switchRole(role){pause();const src=sources[role];item.role=role;item.frames=src.frames;item.start=src.start_frame;video.src=src.src;modeLabel.textContent=src.label;video.onloadeddata=()=>{setTime(item,currentFrame);drawZoom(item);};video.load();}
+ if(clip.generated){const label=element('label','표시 '),select=element('select');select.setAttribute('aria-label',clip.label+' 표시');for(const role of roles){const option=element('option',sources[role].label);option.value=role;select.append(option);}select.value=clip.default_role;label.append(select);modeSlot.append(label);select.onchange=()=>switchRole(select.value);}
+ video.addEventListener('error',()=>status.textContent='MEDIA_ERROR: '+clip.label);video.addEventListener('seeked',()=>drawZoom(item));media.append(modeLabel,viewport,zoomStatus);videos.push(item);switchRole(clip.default_role||roles[0]);
+ }else{const empty=element('div',clip.status+': '+(clip.reason||'영상 없음'));empty.className='empty';media.append(empty);}
+ fig.append(media,status);$('#columns').append(fig);const row=element('tr');row.append(element('th',clip.label),element('td',clip.status));const cell=element('td');
+ if(clip.metrics){for(const line of metricLines(clip.metrics))cell.append(element('div',line));}else cell.textContent='NOT_MEASURED';
+ if(clip.leg_metrics)for(const line of legLines(clip.leg_metrics))cell.append(element('div',line));row.append(cell);$('#metrics').append(row);}
+for(const [label,path]of Object.entries(data.documents)){const a=element('a',label);a.href=path;$('#documents').append(a,document.createTextNode(' · '))}
+
+function legLines(metrics){
+  const fmt=v=>Number.isFinite(v)?v.toFixed(3):'NOT_MEASURED';
+  const labels={semi_transparency_ratio:'회색 비율',edge_laplacian_variance:'경계 분산'};
+  return Object.entries(metrics.summary||{}).map(([key,r])=>`${labels[key]||key}: 다리 구간 평균 ${fmt(r.window?.mean)} / 최대 ${fmt(r.window?.maximum)} · 나머지 평균 ${fmt(r.outside?.mean)} · 구간/나머지 ${fmt(r.window_mean_over_outside_mean)} · 관측 ${r.window?.observed??0}/${r.window?.total??0}`);
+}
+function drawZoom(item){
+  const {video,clip,role,canvas,zoomStatus}=item;
+  const active=zoomEnabled;
+  canvas.hidden=!active;zoomStatus.hidden=!active;
+  if(!active)return;
+  const context=canvas.getContext('2d');context.clearRect(0,0,canvas.width,canvas.height);
+  const metrics=clip.leg_metrics, row=metrics?.frames?.find(r=>r.frame===currentFrame);
+  const box=row?.lab_bbox_master, geometry=metrics?.geometry||metrics;
+  if(!box||!geometry||!video.videoWidth||video.readyState<2){canvas.hidden=true;zoomStatus.textContent='하체 위치 미측정 · 원본 크기 표시';return;}
+  const master=metrics.coordinate_basis,resized=geometry.resized_before_crop,offset=geometry.crop_offset;
+  const cx=(box[0]+box[2])/2*resized[0]/master[0]-offset[0];
+  const cy=(box[3]-(box[3]-box[1])*data.lower_fraction/2)*resized[1]/master[1]-offset[1];
+  const sw=video.videoWidth/data.raw_zoom_factor,sh=video.videoHeight/data.raw_zoom_factor;
+  const sx=Math.max(0,Math.min(video.videoWidth-sw,cx-sw/2));
+  const sy=Math.max(0,Math.min(video.videoHeight-sh,cy-sh/2));
+  context.drawImage(video,sx,sy,sw,sh,0,0,canvas.width,canvas.height);
+  zoomStatus.textContent=`${data.raw_zoom_factor}배 · 프레임 ${currentFrame} Lab 하체 중심 · ${item.role}`;
+}
+function drawZooms(){for(const item of videos)drawZoom(item)}
+function renderPlots(){
+  const specs=[['semi_transparency_ratio','회색 비율 (참고)'],['edge_laplacian_variance','경계 Laplacian 분산']];
+  const colors=['#005ea8','#a14400','#267a39','#a30052','#6c46a3','#4c636e','#835b00','#007b83','#6a6a6a','#ad3428'];
+  const series=[...data.clips,...(data.leg_references||[])].filter(c=>c.leg_metrics?.frames);
+  for(const [key,title]of specs){
+    const section=element('div'),heading=element('h3',title);section.append(heading);
+    if(!series.length){section.append(element('p','NOT_MEASURED'));$('#plots').append(section);continue;}
+    const values=series.flatMap(c=>c.leg_metrics.frames.map(r=>r[key]).filter(Number.isFinite));
+    const max=key==='semi_transparency_ratio'?1:Math.max(1,...values),w=960,h=240,pad=48;
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('chart');svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',`${title}, 프레임별 그래프, 클릭하면 해당 프레임으로 이동`);
+    const node=(tag,attrs,text)=>{const el=document.createElementNS(svg.namespaceURI,tag);for(const[k,v]of Object.entries(attrs))el.setAttribute(k,String(v));if(text!==undefined)el.textContent=text;svg.append(el);return el};
+    const x=f=>pad+f/(data.frames-1)*(w-pad*2),y=v=>h-pad-v/max*(h-pad*2);
+    node('rect',{x:x(data.kick_loop_frames[0]),y:pad,width:x(data.kick_loop_frames[1])-x(data.kick_loop_frames[0]),height:h-pad*2,fill:'#f4f4f4'});
+    for(const ratio of [0,.5,1]){node('line',{x1:pad,y1:y(max*ratio),x2:w-pad,y2:y(max*ratio),stroke:'#ddd'});node('text',{x:pad-8,y:y(max*ratio)+4,'text-anchor':'end','font-size':12},(max*ratio).toFixed(key==='semi_transparency_ratio'?2:0));}
+    for(const f of [0,...data.kick_loop_frames,data.frames-1])node('text',{x:x(f),y:h-pad+20,'text-anchor':'middle','font-size':12},String(f));
+    const legend=element('div');legend.className='plot-legend';
+    series.forEach((clip,i)=>{let path='',connected=false;for(const row of clip.leg_metrics.frames){const value=row[key];if(!Number.isFinite(value)){connected=false;continue;}path+=`${connected?'L':'M'}${x(row.frame)},${y(value)} `;connected=true;}node('path',{d:path,fill:'none',stroke:colors[i%colors.length],'stroke-width':2});const label=element('span',clip.label);label.style.color=colors[i%colors.length];legend.append(label)});
+    svg.addEventListener('click',e=>{const rect=svg.getBoundingClientRect();seek(Math.round(((e.clientX-rect.left)/rect.width*w-pad)/(w-pad*2)*(data.frames-1)))});
+    const scroll=element('div');scroll.className='scroll';scroll.append(svg);section.append(scroll,legend);$('#plots').append(section);
+  }
+}
+
+function play(){pause();if(!videos.length)return;playing=true;startFrame=currentFrame;playStart=performance.now();raf=requestAnimationFrame(tick);}
+$('#play').onclick=play;
+$('#kick-loop').onclick=()=>{loopEnabled=!loopEnabled;$('#kick-loop').setAttribute('aria-pressed',String(loopEnabled));$('#kick-loop').textContent=loopEnabled?'다리 구간 반복 켜짐':'다리 구간 반복';if(loopEnabled){seek(data.kick_loop_frames[0]);play();}};
+$('#pause').onclick=pause;$('#prev').onclick=()=>seek(currentFrame-1);$('#next').onclick=()=>seek(currentFrame+1);$('#position').oninput=e=>seek(Number(e.target.value));
+$('#rate').onchange=e=>{pause();videos.forEach(({video})=>video.playbackRate=Number(e.target.value));};
+$('#zoom').onclick=()=>{zoomEnabled=!zoomEnabled;$('#zoom').setAttribute('aria-pressed',String(zoomEnabled));drawZooms();};
+renderPlots();display(0);
+</script></body></html>

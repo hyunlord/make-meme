@@ -1,0 +1,237 @@
+{
+  "experiment": "V-006-wan-refine",
+  "input": "V-004 S2-s1 RAW (motion correct, legs ghost in segment frames 18-27 and weakly 42)",
+  "user_verdict_v005": "R1 (LTX refine) and R3 (2-frame anchors) both insufficient",
+  "user_decisions": [
+    "Lab size unchanged"
+  ],
+  "hypothesis": "LTX VAE 32x spatial / 8x temporal compression makes thin fast legs sub-token; Wan (8x spatial with 2x2 patch = 16px token, 4x temporal) is finer",
+  "scene": {
+    "segment": {
+      "start": 240,
+      "end_exclusive": 313,
+      "frames": 73,
+      "fps": 24
+    },
+    "sam_text_prompt": "dog",
+    "casting": {
+      "Lab": "track0",
+      "IG": "track1"
+    },
+    "reflections": [
+      "track2",
+      "track3"
+    ]
+  },
+  "refine_window": {
+    "segment_frames": [
+      8,
+      40
+    ],
+    "frames": 33,
+    "rule": "4n+1"
+  },
+  "common": {
+    "resolution": [
+      1152,
+      640
+    ],
+    "fps": 24,
+    "runner": "DiffSynth (V-002) preferred; else minimal patch to official Wan code, diff in RUNTIME_WAN.md",
+    "method": "video-to-video: encode input, mix noise to strength s, denoise to end",
+    "prompt": "V-004 S2 prompt + ' Sharp, clearly defined legs and paws.'",
+    "sampler_shift_cfg": "official defaults, record actual",
+    "seed": 20261103,
+    "precision": "bf16 only; convert fp32 to bf16 safetensors first and record hash"
+  },
+  "variants": {
+    "W1-a": {
+      "model": "Wan2.2-T2V-A14B low-noise expert only",
+      "strength": 0.35,
+      "control": null,
+      "refs": null
+    },
+    "W1-b": {
+      "model": "Wan2.2-T2V-A14B low-noise expert only",
+      "strength": 0.55,
+      "control": null,
+      "refs": null
+    },
+    "W2": {
+      "model": "Wan2.2-VACE-Fun-A14B",
+      "strength": 0.55,
+      "control": "V-004 scaled canny, segment frames 8-40",
+      "refs": [
+        "REF_LAB",
+        "REF_IG"
+      ],
+      "if_unsupported": "NOT_SUPPORTED with evidence"
+    }
+  },
+  "sigma_check_before_generation": {
+    "record": [
+      "requested strength",
+      "actual start sigma",
+      "remaining steps",
+      "expert boundary and confirmation that only low-noise expert is needed"
+    ],
+    "stop_if": "W1-a and W1-b actual start sigma are equal"
+  },
+  "reinsertion": {
+    "full_window": {
+      "frames": [
+        8,
+        40
+      ],
+      "linear_blend": {
+        "in": [
+          8,
+          13
+        ],
+        "out": [
+          35,
+          40
+        ]
+      }
+    },
+    "legs_only": {
+      "region": "lower 45% of output Lab SAM bbox, dilated 12px, feather 8px",
+      "temporal": "same blends as full_window"
+    },
+    "keep_refined_33_frame_raw": true,
+    "viewer_default": "full_window"
+  },
+  "metrics": {
+    "leg_sharpness": "V-005 section 5.1 (semi-transparency ratio, boundary Laplacian variance); frames 14-34 mean/max, others mean, per-frame plot; baselines S2-s1, V-005 R1, V-005 R3-s1",
+    "motion_retention": "per-frame Lab mask IoU vs S2-s1, scaled Lab IoU, kick direction agreement 20-34",
+    "identity": "Lab/IG crop embedding vs anchor0",
+    "seam": "consecutive-frame difference spikes at frames 8-13 and 35-40",
+    "latent_shapes": "actual latent C/T/H/W and token counts for LTX stage 1, LTX stage 2, Wan",
+    "cost": "steps, time, peak memory, hw.csv peaks"
+  },
+  "no_automatic_ranking": true,
+  "ops": {
+    "base": "V-003 section 3 / V-004 section 8",
+    "start_conditions": "V-001 section 7: MemAvailable >= 112GiB, drop-caches, expandable_segments, NVRM watch stop on first, MemoryHigh = MemoryMax",
+    "load_only_low_noise_expert": true,
+    "time_projection": "from first-step time; if projected > 60 min per run then BLOCKED_TIME, no resolution downgrade",
+    "download": "official sources only, keep >= 200GiB free, record hashes"
+  },
+  "viewer": {
+    "columns": [
+      "source",
+      "Kling result",
+      "S2-s1 (input)",
+      "V-005 R3-s1",
+      "W1-a",
+      "W1-b",
+      "W2"
+    ],
+    "per_W_toggle": [
+      "full window",
+      "legs only",
+      "refined 33-frame raw"
+    ],
+    "top_line": "\uba3c\uc800 \ubcfc \uac83: RAW, \ub2e4\ub9ac \uad6c\uac04 \ubc18\ubcf5(14~34), 0.25\ubc30\uc18d, \ub2e4\ub9ac \ud655\ub300\ub85c S2-s1\uacfc W\ub4e4\uc744 \ube44\uad50",
+    "extras": [
+      "leg loop 14-34",
+      "0.25x/0.5x",
+      "frame step",
+      "2x lower-body zoom",
+      "leg sharpness plot"
+    ],
+    "human_review_items": [
+      "\ub2e4\ub9ac \ubc88\uc9d0 (\uc2ec\ud568/\uc57d\uac04/\uc5c6\uc74c)",
+      "\ubc1c\ucc28\uae30 \ub3d9\uc791\uc774 S2\uc640 \uac19\uc740\uac00 (\ub2e4\ub984/\ube44\uc2b7\ud568/\uac19\uc74c)",
+      "\uc774\uc74c\uc0c8\uac00 \ubcf4\uc774\ub294\uac00 (\uc608/\uc544\ub2c8\uc624)",
+      "Kling \ub300\ube44",
+      "\ud55c \uc904 \uba54\ubaa8"
+    ]
+  },
+  "dataset_record": "V-005 section 7.2 rule; add parent_sample linking to S2-s1 SAMPLE; update SCHEMA.md",
+  "budget": {
+    "refine_generations_max": 3,
+    "imagegen": 0,
+    "quality_retries": 0,
+    "training": 0,
+    "wall_hours_cap_excluding_wait_download_convert": 6,
+    "interim_delivery": "after W1-a (both reinsertion derivatives + leg zoom comparison)"
+  },
+  "delivery": "uncompressed folder ~/Downloads/V006-review-<date>/ with index.html",
+  "config_separation_rule": "all scene-specific values live only in this file; code reads them, never hardcodes",
+  "measurement_policy": {
+    "master_size": [
+      1280,
+      720
+    ],
+    "role": "Lab",
+    "lower_fraction": 0.45,
+    "mask_dilation_px": 4,
+    "boundary_band_px": 3,
+    "gray_luma_inclusive": [
+      70,
+      170
+    ],
+    "dark_luma_exclusive_max": 60,
+    "luma_rgb_weights": [
+      0.299,
+      0.587,
+      0.114
+    ],
+    "laplacian_kernel": [
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        -4,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "laplacian_border": "reflect",
+    "window_inclusive": [
+      14,
+      34
+    ],
+    "pixel_resampling": "BICUBIC",
+    "mask_resampling": "NEAREST",
+    "local_dilation_px": 12,
+    "local_feather_px": 8,
+    "local_ramp_in": [
+      14,
+      17
+    ],
+    "local_ramp_out": [
+      31,
+      34
+    ],
+    "local_radius_coordinate_basis": "master"
+  },
+  "composition_policy": {
+    "lower_fraction": 0.45,
+    "dilation_px": 12,
+    "feather_px": 8,
+    "pixel_basis": "native output",
+    "rounding": "nearest integer",
+    "feather": "finite inward Euclidean distance / feather_px",
+    "missing_body": "BASE_ONLY_WITH_MISSING_STATUS"
+  },
+  "measurement_extension": {
+    "kick_direction_frames_inclusive": [
+      20,
+      34
+    ],
+    "source_track": 0,
+    "frame_statistics_scope": "RAW refinement frames only; outside means outside main window within refined33",
+    "inherited_scene_sha256": "b0c2acabe873ca7420683f16d3baea379d51ff9890073e847770986cccab6120",
+    "inherited_leg_scene_sha256": "539c6faca4d559ff13f24ac256e2b229cd861c3e8247b97c7d27af7289e3e722",
+    "original_scene_sha256": "007395ea8b1839c6fa5230dcf1affb6f19fbf9b832a0b6569c1a931cba34f62c"
+  }
+}

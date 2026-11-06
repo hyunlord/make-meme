@@ -1,0 +1,45 @@
+{
+  "bios_version": "5.36_0ACUM08",
+  "bios_date": "07/02/2026",
+  "hwlog_advancing": true,
+  "hwlog_rows": [
+    "2026-11-06T23:05:26+09:00,34, 3.67, 208,36700,34700,35500,35000,35200,36700,35100,117836",
+    "2026-11-06T23:05:31+09:00,35, 3.80, 208,36700,34800,35600,34800,35200,36700,35700,117853"
+  ],
+  "cache_helper": {
+    "present": true,
+    "uid": 0,
+    "mode": "0o755",
+    "sha256": "459b01732633a250c03d6a5e65a44343c7bb939ef3093b628a0d66770dafa528",
+    "executed": false
+  },
+  "external_gpu_count": 0,
+  "heavy_admission": "NOT_YET_RUN",
+  "worker_started": false,
+  "guard_copy": {
+    "scope": "V006 only; common guards unchanged",
+    "changes": [
+      "Require112GiB startup headroom after cache helper",
+      "Recognize V006 duplicate units"
+    ],
+    "tests": {
+      "inherited_guard_tests_passed": 29,
+      "targeted_start_checks_passed": 4,
+      "py_compile": "PASS",
+      "shell_syntax": "PASS"
+    },
+    "diff_sha256": "808f83f0ebe4f88a75831b4f2f7884f3c3ed348ea31742522f7d1ceb88824a48",
+    "files": {
+      "test_r1.py": "7cad764ce4152d1487de27080f4f25581d0e75b7733c3903a276c079492488bb",
+      "memory.py": "5700b2b45bae864711ae558bb85f593f64f72e259d90d2d3c937a327f62abbaa",
+      "test_v002.py": "e637b8af21d890cb9ac5bc357d2c671fea1f7d3a6a5c10b84b4f3d570b072d3c",
+      "supervisor.py": "058fb25fd12e4096c2c93aa5f8b3270080c4259667f6f98439c45a064b105877",
+      "test_start_contract.py": "721293473046c5b8bfe99b0d41595697b580aeaefca105af0b37d83f5650e7ab",
+      "policy.py": "035960bdf86e01120e495923970c2f8803752b41c65b55369b7f2b0d71a7fb69",
+      "test_exit_observation.py": "2170ea0e11434dcce19fe5b307cc7d79b3f6e49ed6a94d4eb69d176a54ab17bb",
+      "safety.py": "fd503174104e07e905ad5e1e3d6761c384efc31ae5c7604fb1ac994a13f9ef1e",
+      "test_v001.py": "ea50b699b51cc9ff690cded8a67d6c4413a6b15c271f3af326d79a16baeb9871",
+      "uma.py": "936cb7b2a937970eb61c86e9cb3e29fcb9b73f12e00e11c4f24e3c1561f2720b"
+    }
+  }
+}
