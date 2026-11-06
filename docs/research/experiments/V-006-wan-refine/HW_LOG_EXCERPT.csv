@@ -1,0 +1,2 @@
+status,reason
+UNAVAILABLE,Remote hw.csv excerpt could not be retrieved after connectivity loss; this file contains no telemetry samples

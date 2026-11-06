@@ -44,3 +44,6 @@ CPU fixture executes the existing input-video unit body with shape doubles: sing
 
 ## Resolved numeric configuration
 V006_SCENE_CONFIG.json preserves the attachment unchanged. V006_RESOLVED_SCENE_CONFIG.json resolves the explicitly inheritedV005measurementpolicy and nativepixel composition radii before results; noqualitysettingchanges. The composition useszero blend at8/40 andfullreplacementat13/35, finite inwardfeather8px after12px dilation. MissingSAMbody retainsbasepixels withmissingstatus, never fabricatesobjectdetections.
+
+## Execution interruption, recorded 2026-11-06T15:21:40.696049+00:00
+W1-a last observed41/50schedulersteps, thenSSH/Tailscalepingfailed andpeeroffline. Completion/boot/normalexit UNKNOWN, powerlossUNCONFIRMED. W1-b NOT_RUN, noautomaticdownstreamstage. Intermediate actualmedia delivery blocked. Original preregistration andpriorreceipts preserved. Noqualityretry orrestart.

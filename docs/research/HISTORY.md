@@ -891,3 +891,5 @@ V-005 실행 종료(2026-11-06): R1 2회·15앵커 R3 2회 생성/측정, R2 공
 
 ## V-005 user verdict / V-006 preregistration (2026-11-06)
 V-005 R1 and R3 are insufficient for leg ghosting per user review. V-006 starts with frozen S2-s1 refinement inputs; official DiffSynth example defaults resolve the scheduler/expert interpretation before generation. Previous technical and delivery evidence is preserved. See [PLAN](experiments/V-006-wan-refine/PLAN.md).
+
+V-006 실행 중 원격 관측 상실(2026-11-07): W1-a 마지막41/50step 후 SSH/ping timeout·peer offline. 완료/종료/전원 상태 UNKNOWN, W1-b NOT_RUN, W2 NOT_SUPPORTED. 새 영상 전달은 미완료이며 재시도하지 않았다. [상태 기록](experiments/V-006-wan-refine/RESULTS.md).

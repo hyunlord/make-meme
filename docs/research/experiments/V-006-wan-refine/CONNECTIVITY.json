@@ -1,0 +1,21 @@
+{
+  "observations": [
+    {
+      "at": "2026-11-06T15:20:31.163446+00:00",
+      "peer": {
+        "Online": false,
+        "LastSeen": "2026-11-06T15:20:00.1Z",
+        "LastHandshake": "2026-11-07T00:17:30.650793+09:00"
+      },
+      "ssh": "CONNECT_TIMEOUT",
+      "tailscale_ping": "TWO_TIMEOUTS",
+      "remote_worker": "UNKNOWN",
+      "power_loss": "UNCONFIRMED",
+      "last_observed_scheduler_steps": 41,
+      "last_observed_model_fn_calls": 84,
+      "last_observed_model_fn_completed": 83
+    }
+  ],
+  "cause": "UNKNOWN",
+  "no_retry_generation": true
+}

@@ -1,0 +1,38 @@
+{
+  "status": "LOCAL_EVIDENCE_ONLY",
+  "created_at_utc": "2026-11-06T15:21:57.058645+00:00",
+  "source_head": "0853953092422b4d670146f63edb5260b2df1189",
+  "primary": "UNCOMPRESSED_FOLDER",
+  "folder_name": "V006-review-20261107",
+  "viewer": "index.html",
+  "new_output_videos": 0,
+  "interim_generation_delivery": "NOT_PERFORMED_NO_COMPLETED_OUTPUT_AVAILABLE",
+  "W1-a": "UNKNOWN",
+  "W1-b": "NOT_RUN",
+  "W2": "NOT_SUPPORTED",
+  "remote_status": "BLOCKED_REMOTE_UNREACHABLE",
+  "spark_transfer": "NOT_VERIFIED",
+  "spark_worker_shutdown": "UNKNOWN",
+  "mac_payload_hashes": "PASS",
+  "payload_count": 39,
+  "payload_bytes": 157367,
+  "manifest_sha256": "7d72298241deb9564b913361a9ebf9ce23df3834b967ac6d95bb0b980932c2f2",
+  "browser_qa": {
+    "status": "PASS",
+    "scope": "LOCAL_STATUS_PAGE_ONLY_NO_GENERATED_MEDIA",
+    "viewports": [
+      375,
+      768,
+      1280
+    ],
+    "links_verified": 38,
+    "document_navigation": "PASS",
+    "new_output_videos": 0,
+    "errors": []
+  },
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "qa_browser_closed": true,
+  "qa_server_started": false,
+  "source_snapshot_note": "Public document payload hashes identify the final uncommitted evidence snapshot at packaging; source_head is the pre-final-record commit, not a claim that every payload was committed at that point."
+}

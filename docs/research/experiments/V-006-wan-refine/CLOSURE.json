@@ -1,0 +1,14 @@
+{
+  "recorded_at_utc": "2026-11-06T15:21:40.696049+00:00",
+  "remote_access": "UNREACHABLE",
+  "remote_worker_state": "UNKNOWN",
+  "remote_boot_state": "UNKNOWN",
+  "power_loss": "UNCONFIRMED",
+  "normal_exit_verified": false,
+  "downstream_autostart": false,
+  "W1_b_started": false,
+  "W2_started": false,
+  "worker_configured_runtime_max_seconds": 3900,
+  "timeout_stop_seconds": 20,
+  "warning": "Configured timers require a responsive host; not proof of shutdown. No restart, retry, reboot, service change or other-process termination attempted."
+}

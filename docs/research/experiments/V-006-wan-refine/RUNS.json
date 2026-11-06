@@ -1,14 +1,14 @@
 {
-  "status": "PREREGISTERED",
-  "recorded_at_utc": "2026-11-06T14:01:52.349448+00:00",
-  "model_loads": 0,
-  "downloads": 0,
-  "conversions": 0,
+  "status": "BLOCKED_REMOTE_UNREACHABLE",
+  "recorded_at_utc": "2026-11-06T15:21:40.696049+00:00",
+  "model_loads": 1,
+  "downloads": 1,
+  "conversions": 1,
   "generations": 0,
   "imagegen": 0,
   "training": 0,
   "variants": {
-    "W1-a": "NOT_RUN",
+    "W1-a": "UNKNOWN_REMOTE_UNREACHABLE",
     "W1-b": "NOT_RUN",
     "W2": "NOT_SUPPORTED"
   },
@@ -25,5 +25,25 @@
       "W1-a": 0.7291666269302368,
       "W1-b": 0.859375
     }
-  }
+  },
+  "first_step_projection": {
+    "first_step_seconds": 44.26754145199084,
+    "projected_seconds": 2247.22943582655
+  },
+  "generation_attempts": 1,
+  "completed_generations_verified": 0,
+  "last_observation": {
+    "scheduler_steps": 41,
+    "model_fn_calls_attempted": 84,
+    "model_fn_calls_completed": 83,
+    "vae_encodes": 1,
+    "source": "live progress.json read before connectivity loss; not a final receipt"
+  },
+  "actual_model_input_sigma": {
+    "W1-a": 0.7291666269302368,
+    "W1-b": null
+  },
+  "remote_completion": "UNKNOWN",
+  "power_loss": "UNCONFIRMED",
+  "cleanup": "UNKNOWN"
 }

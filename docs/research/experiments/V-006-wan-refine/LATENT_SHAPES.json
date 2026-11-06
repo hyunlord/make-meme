@@ -29,7 +29,26 @@
     ]
   },
   "Wan": {
-    "actual_shape_status": "NOT_RUN"
+    "actual_shape_status": "OBSERVED_FIRST_MODEL_INPUT",
+    "run": "W1-a",
+    "latents": {
+      "shape": [
+        1,
+        16,
+        9,
+        80,
+        144
+      ],
+      "dtype": "torch.bfloat16",
+      "sha256": "61bf18748c57b1b7f97e72eaa5de0028df011da42ad8e7f46c3db1f0dba521d9",
+      "finite": true
+    },
+    "patch_size": [
+      1,
+      2,
+      2
+    ],
+    "token_count": 25920
   },
   "tokens_must_not_be_claimed_measured_from_formula": true
 }
