@@ -1,0 +1,256 @@
+{
+  "experiment": "V-005-leg-sharpness",
+  "base": "V-004 S2: 11 guide anchors (frame 0 auto) + scaled canny IC-LoRA 1.0, 73 frames, distilled, 1152x640, 24fps",
+  "problem": "legs become semi-transparent during fast motion, segment frames 18-27 and weakly 42 (S2-s1 RAW, same in POST)",
+  "user_decisions": [
+    "Lab size unchanged this round"
+  ],
+  "scene": {
+    "segment": {
+      "start": 240,
+      "end_exclusive": 313,
+      "frames": 73,
+      "fps": 24
+    },
+    "sam_text_prompt": "dog",
+    "casting": {
+      "Lab": "track0",
+      "IG": "track1"
+    },
+    "reflections": [
+      "track2",
+      "track3"
+    ],
+    "scaled_control": "reuse V-004 scaled canny (verify hash); Lab scale 1.115987, IG 1.14"
+  },
+  "anchors": {
+    "reused_accepted": [
+      0,
+      12,
+      16,
+      20,
+      24,
+      28,
+      32,
+      36,
+      48,
+      60,
+      72
+    ],
+    "new_for_R3": [
+      18,
+      22,
+      26,
+      30
+    ],
+    "new_anchor_method": "V-004 section 3; pose description must include body facing and kicking-leg direction",
+    "gates": "V-003 corrected G1-G5, G6 lower 0.8 only, G7 record, G8 record",
+    "repairs_per_keyframe": 1,
+    "drop_on_final_fail": [
+      "G1",
+      "G6"
+    ]
+  },
+  "common_generation": {
+    "engine": "LTX-2.3 ic_lora pipeline, Lightricks/LTX-2 e98f6d927d83c92ef2be6aec76c8440b19306e39",
+    "resolution": [
+      1152,
+      640
+    ],
+    "frames": 73,
+    "fps": 24,
+    "keyframe_mode": "frame 0 auto, others guide strength 1.0",
+    "ic_lora": "ltx-2.3-22b-ic-lora-union-control-ref0.5, strength 1.0, scaled canny",
+    "prompt": "same as V-004 S2"
+  },
+  "variants": {
+    "R1": {
+      "input": "V-004 S2-s1 RAW",
+      "method": "SDEdit-style: encode input, noise to sigma, denoise from sigma with S2 conditions; official v2v path if present, else minimal pipeline patch (record diff in RUNTIME_REFINE.md); apply to both stages",
+      "sigmas": {
+        "R1-a": 0.35,
+        "R1-b": 0.55
+      },
+      "nearest_schedule_step_if_not_exact": true,
+      "seed": 20261103,
+      "local_composite_derivative": {
+        "frames": [
+          14,
+          34
+        ],
+        "region": "lower 45% of output Lab SAM bbox, dilated 12px, feather 8px",
+        "temporal_ramp": {
+          "in": [
+            14,
+            17
+          ],
+          "out": [
+            31,
+            34
+          ]
+        },
+        "inside": "refined pixels",
+        "outside": "S2-s1 RAW"
+      }
+    },
+    "R2": {
+      "model": "LTX-2.3 22B non-distilled (dev/full) checkpoint, official recommended steps and guidance",
+      "preconditions": [
+        "official non-distilled checkpoint exists",
+        "same license as distilled",
+        "IC-LoRA documented for this checkpoint",
+        "official pipeline supports non-distilled + IC-LoRA + keyframes"
+      ],
+      "if_any_precondition_fails": "NOT_SUPPORTED with evidence",
+      "download_allowed": true,
+      "min_free_disk_gib": 200,
+      "seeds": [
+        20261103,
+        20261104
+      ],
+      "per_run_time_cap_min": 45,
+      "on_time_cap": "ENGINE_STOPPED_TIME, skip remaining R2 seed"
+    },
+    "R3": {
+      "anchors": "15 (11 reused + 18, 22, 26, 30)",
+      "model": "distilled",
+      "seeds": [
+        20261103,
+        20261104
+      ]
+    }
+  },
+  "run_order": [
+    "R1-a",
+    "R1-b",
+    "R1 local composite",
+    "R3 new anchors",
+    "R3-s1",
+    "R2-s1",
+    "INTERIM DELIVERY",
+    "R3-s2",
+    "R2-s2"
+  ],
+  "metrics": {
+    "leg_region": "lower 45% of output Lab SAM bbox intersect mask dilated 4px; exclude reflections; 1280x720 frame basis",
+    "semi_transparency_ratio": "count(luma 70-170) / (count(luma < 60) + count(luma 70-170)) in leg region",
+    "edge_sharpness": "Laplacian variance in +/-3px band around leg-region mask boundary",
+    "report": "mean and max over frames 14-34, mean over other frames, ratio; per-frame plot",
+    "references": [
+      "S2-s1",
+      "S2-s2",
+      "V-003 K1-s1",
+      "Kling (reference column only)"
+    ],
+    "motion_retention": "V-004 metrics + for R1 per-frame Lab mask IoU vs input S2-s1",
+    "cost": "time, peak memory, hw.csv peaks"
+  },
+  "no_automatic_ranking": true,
+  "viewer": {
+    "columns": [
+      "source",
+      "Kling result",
+      "S2-s1 (base)",
+      "R1-a",
+      "R1-b",
+      "R1-b local composite",
+      "R2-s1",
+      "R2-s2",
+      "R3-s1",
+      "R3-s2"
+    ],
+    "extras": [
+      "leg loop frames 14-34",
+      "0.25x/0.5x",
+      "2x lower-body zoom toggle (RAW)",
+      "leg sharpness plot",
+      "anchor sheet at 2-frame spacing"
+    ],
+    "top_line": "먼저 볼 것: 원본·Kling·S2-s1과 각 변형을 RAW, 다리 구간 반복, 0.25배속으로",
+    "human_review_extra_item": "다리 번짐 (심함 / 약간 / 없음)"
+  },
+  "roadmap_update": "write 3-stage roadmap into repo ROADMAP.md; HISTORY one line each for V-004 end and V-005 start",
+  "dataset_record": {
+    "location": "v005-private/dataset/ (not in Git)",
+    "per_output": "SAMPLE.json with paths and hashes of source segment, refs, anchors+gates, SAM masks/tracks, control, scene config hash, generation settings, RAW/POST outputs, human verdict (PENDING until filled)",
+    "backfill": "V-003 and V-004 outputs, paths and hashes only",
+    "schema_doc": "dataset/SCHEMA.md"
+  },
+  "ops": "same as V-003 section 3 / V-004 section 8",
+  "budget": {
+    "imagegen_max_calls": 8,
+    "generations_max": 6,
+    "checkpoint_downloads": 1,
+    "quality_retries": 0,
+    "training": 0,
+    "wall_hours_cap_excluding_wait_and_download": 6,
+    "interim_deliveries": [
+      "after R1-a, R1-b, R3-s1, R2-s1"
+    ]
+  },
+  "delivery": "uncompressed folder ~/Downloads/V005-review-<date>/ with index.html; ZIP optional secondary",
+  "config_separation_rule": "all scene-specific values live only in this file; code reads them, never hardcodes",
+  "attachment_sha256": "6067df27bf9e440fbc09c1964207687265548f744eca6dfeb41d47e90bed664d",
+  "measurement_policy": {
+    "master_size": [
+      1280,
+      720
+    ],
+    "role": "Lab",
+    "lower_fraction": 0.45,
+    "mask_dilation_px": 4,
+    "boundary_band_px": 3,
+    "gray_luma_inclusive": [
+      70,
+      170
+    ],
+    "dark_luma_exclusive_max": 60,
+    "luma_rgb_weights": [
+      0.299,
+      0.587,
+      0.114
+    ],
+    "laplacian_kernel": [
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        -4,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "laplacian_border": "reflect",
+    "window_inclusive": [
+      14,
+      34
+    ],
+    "pixel_resampling": "BICUBIC",
+    "mask_resampling": "NEAREST",
+    "local_dilation_px": 12,
+    "local_feather_px": 8,
+    "local_ramp_in": [
+      14,
+      17
+    ],
+    "local_ramp_out": [
+      31,
+      34
+    ],
+    "local_radius_coordinate_basis": "master"
+  },
+  "resolved_contract": {
+    "source_attachment_preserved": true,
+    "policy_added_before_outputs": true,
+    "r1_nearest_tie_rule": "earlier schedule index",
+    "r1_stage2_clean_latent": "spatially upsampled refined stage1 output",
+    "refinement_requested_sigma_is_not_additive_noise_coefficient": true
+  }
+}
