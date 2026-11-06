@@ -89,12 +89,31 @@ def test_real_cli_outputs_keep_input_and_exterior(tmp_path):
         summary['frames'].append({'index':i,'objects':[{'track_index':0,'present':True}]})
         base['frames'].append({'frame':i,'actual_tracks':[0],'reflection_tracks':[]})
     sp=tmp_path/'sam'/'summary.json';sp.write_text(json.dumps(summary));bp=tmp_path/'base.json';bp.write_text(json.dumps(base))
-    runtime={'raw_frames':str(tmp_path/'raw'),'output_summary':str(sp),'base_metrics':str(bp),'native_size':[64,40],'frame_count':4}
+    (tmp_path/'input-sam').mkdir()
+    input_summary=json.loads(json.dumps(summary));input_base=json.loads(json.dumps(base))
+    for i in range(4):
+        source_mask=mask.copy()
+        if i==1:
+            source_mask[:]=0;source_mask[3:32,25:45]=255
+        if i==2:
+            input_summary['frames'][i]['objects'][0]['present']=False
+            input_base['frames'][i]['actual_tracks']=[]
+        Image.fromarray(source_mask).save(tmp_path/'input-sam'/f'{i:03d}-track-00.png')
+    isp=tmp_path/'input-sam'/'summary.json';isp.write_text(json.dumps(input_summary))
+    ibp=tmp_path/'input-base.json';ibp.write_text(json.dumps(input_base))
+    runtime={'raw_frames':str(tmp_path/'raw'),'output_summary':str(sp),'base_metrics':str(bp),
+             'native_size':[64,40],'frame_count':4,'input_summary':str(isp),'input_base_metrics':str(ibp)}
     rp=tmp_path/'runtime.json';rp.write_text(json.dumps(runtime));out=tmp_path/'metrics.json'
     # When CLI runs against actual files, then all rows and coverage are measured.
     subprocess.run([sys.executable,str(Path(__file__).with_name('leg_metrics.py')),str(scene),str(rp),str(out)],check=True)
     result=json.loads(out.read_text());assert len(result['frames'])==4
     assert result['summary']['semi_transparency_ratio']['window']['mean']==1.
+    assert result['frames'][0]['lab_mask_iou_vs_input']==1.
+    assert result['frames'][1]['lab_mask_iou_vs_input']==pytest.approx(.6)
+    assert result['frames'][2]['lab_mask_iou_vs_input'] is None
+    assert result['frames'][2]['input_iou_status']=='MISSING_MASK'
+    assert result['input_mask_iou']['observed']==3
+    assert result['input_mask_iou']['mean']==pytest.approx(2.6/3)
     runtime.update(base_frames=str(tmp_path/'base'),refined_frames=str(tmp_path/'raw'),output_dir=str(tmp_path/'local'))
     rp.write_text(json.dumps(runtime))
     subprocess.run([sys.executable,str(Path(__file__).with_name('leg_local.py')),str(scene),str(rp)],check=True)

@@ -1,5 +1,5 @@
 {
-  "actual_calls": 0,
+  "actual_calls": 4,
   "repairs": 0,
   "max_calls": 8,
   "reused_frames": [
@@ -21,5 +21,80 @@
     26,
     30
   ],
-  "calls": []
+  "calls": [
+    {
+      "frame": 18,
+      "candidate": 1,
+      "status": "ACCEPTED",
+      "started_utc": "2026-11-06T04:38:07.350791+00:00",
+      "tool": "Codex native imagegen",
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
+      "finished_utc": "2026-11-06T04:38:46.569724+00:00",
+      "raw_size": [
+        1672,
+        941
+      ],
+      "raw_sha256": "156835c72d90fe8950857ade5109406b4dd2fd42b9d15d5932a52bd0e16d1e10",
+      "master_sha256": "598eb194653e84d850834d1ab67df8ce0a8afd4530870ba6563b0107603ae6da",
+      "prompt_sha256": "044021050dfb774c6664ad4e42876cc9cb5387dd267d4167410bbd9e0272f647",
+      "gate_report": "gates-f018-c1.json",
+      "g8_report": "g8-f018-c1.json",
+      "repair_needed": false
+    },
+    {
+      "frame": 22,
+      "candidate": 1,
+      "status": "ACCEPTED",
+      "started_utc": "2026-11-06T04:39:00.794183+00:00",
+      "tool": "Codex native imagegen",
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
+      "finished_utc": "2026-11-06T04:39:54.671419+00:00",
+      "raw_size": [
+        1672,
+        941
+      ],
+      "raw_sha256": "9985319853dd5b3cc4d214e90bff1edd22b87d219011a199bacbcf8305e97016",
+      "master_sha256": "55447fdde73c5f45c16f7b19da81ced23f85c11246704725588c965c64f21bb0",
+      "prompt_sha256": "8ce85d1b3756a98f0f1ed6d880d6cdaafef707b2fcdd774705be342de058a5e4",
+      "gate_report": "gates-f022-c1.json",
+      "g8_report": "g8-f022-c1.json",
+      "repair_needed": false
+    },
+    {
+      "frame": 26,
+      "candidate": 1,
+      "status": "GENERATED_AWAITING_GATES",
+      "started_utc": "2026-11-06T04:39:54.672641+00:00",
+      "tool": "Codex native imagegen",
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
+      "finished_utc": "2026-11-06T04:40:40.152420+00:00",
+      "raw_size": [
+        1672,
+        941
+      ],
+      "raw_sha256": "389ab217307c53a615d5175d174050bcb776c0d9bb66e2fabc5de7fa61fcad66",
+      "master_sha256": "74defe13357f4a56e15fc999994c4deefaaa7e612b7c130a5a41afea336aafca",
+      "prompt_sha256": "c8b84275394b8ce1d682c4b3f4eb203ed635a468d13dd9c7389e72288f9c2554"
+    },
+    {
+      "frame": 30,
+      "candidate": 1,
+      "status": "GENERATED_AWAITING_GATES",
+      "started_utc": "2026-11-06T04:40:40.153697+00:00",
+      "tool": "Codex native imagegen",
+      "model_identifier": "UNKNOWN",
+      "billing": "UNKNOWN",
+      "finished_utc": "2026-11-06T04:41:23.428210+00:00",
+      "raw_size": [
+        1672,
+        941
+      ],
+      "raw_sha256": "fbc51739939c532baebdd16a72fc0980c0f751622402f4d09c08294c99f18055",
+      "master_sha256": "01d47df29f10a2cf0518814eaa33e61481dc849ec16fb22ec7dbabe817aea212",
+      "prompt_sha256": "70bf7e99bee6848f84b343c14b6bcd17e5006524b7a5cb90da378b687400dcff"
+    }
+  ]
 }

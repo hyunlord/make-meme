@@ -1,19 +1,143 @@
 {
-  "status": "PREREGISTERED",
+  "status": "IN_PROGRESS",
   "quality": "HUMAN_REVIEW_PENDING",
   "generation_budget": 6,
-  "actual_generations": 0,
+  "actual_generations": 2,
   "training": 0,
   "cells": [
     {
       "id": "R1-a",
-      "status": "NOT_RUN",
-      "reason": null
+      "status": "RAN",
+      "reason": null,
+      "generation_receipt_sha256": "ca46f6447af55e00383469c161240dc15c8615b5a9a9b3219c706253f26672f3",
+      "receipt": {
+        "status": "GENERATED",
+        "elapsed_seconds": 81.61355554500187,
+        "first_step_seconds": 12.940999861995806,
+        "denoiser_calls": 2,
+        "scheduler_steps_completed": 2,
+        "peak_rss_kib": 44336352,
+        "cuda_peak_allocated_bytes": 42501975040,
+        "cuda_peak_reserved_bytes": 42595254272,
+        "start_utc": "2026-11-06T04:18:39.709425+00:00",
+        "end_utc": "2026-11-06T04:20:01.323504+00:00",
+        "frames": 73,
+        "fps": 24,
+        "resolution": [
+          1152,
+          640
+        ],
+        "scene_sha256": "539c6faca4d559ff13f24ac256e2b229cd861c3e8247b97c7d27af7289e3e722",
+        "input_raw_sha256": "dbc5ddb8789e41a62c8f3cf5c5109020f5a08cee314885371d1d8e4276eaff26",
+        "requested_sigma": 0.35,
+        "grids": [
+          [
+            0.421875,
+            0.0
+          ],
+          [
+            0.421875,
+            0.0
+          ]
+        ],
+        "expected_scheduler_steps": 2,
+        "expected_grid_lengths": [
+          2,
+          2
+        ],
+        "refinement_stages": [
+          {
+            "requested": 0.35,
+            "start_index": 7,
+            "sigmas": [
+              0.421875,
+              0.0
+            ],
+            "remaining_steps": 1
+          },
+          {
+            "requested": 0.35,
+            "start_index": 2,
+            "sigmas": [
+              0.421875,
+              0.0
+            ],
+            "remaining_steps": 1
+          }
+        ],
+        "refinement_initialization": [
+          "VAE_ENCODE_S2_RAW_AT_STAGE1_RESOLUTION",
+          "OFFICIAL_SPATIAL_UPSAMPLE_OF_REFINED_STAGE1"
+        ]
+      },
+      "supervisor_stage": "v005-r1-a-importfix-heavy"
     },
     {
       "id": "R1-b",
-      "status": "NOT_RUN",
-      "reason": null
+      "status": "RAN",
+      "reason": null,
+      "generation_receipt_sha256": "4d50d9ccc9f7db7dc0594fddf62e071cd28714bde2bd797a597d732e5f215c2f",
+      "receipt": {
+        "status": "GENERATED",
+        "elapsed_seconds": 82.12387015599961,
+        "first_step_seconds": 12.137370106996968,
+        "denoiser_calls": 2,
+        "scheduler_steps_completed": 2,
+        "peak_rss_kib": 44296272,
+        "cuda_peak_allocated_bytes": 42501975040,
+        "cuda_peak_reserved_bytes": 42595254272,
+        "start_utc": "2026-11-06T04:23:54.231782+00:00",
+        "end_utc": "2026-11-06T04:25:16.356229+00:00",
+        "frames": 73,
+        "fps": 24,
+        "resolution": [
+          1152,
+          640
+        ],
+        "scene_sha256": "539c6faca4d559ff13f24ac256e2b229cd861c3e8247b97c7d27af7289e3e722",
+        "input_raw_sha256": "dbc5ddb8789e41a62c8f3cf5c5109020f5a08cee314885371d1d8e4276eaff26",
+        "requested_sigma": 0.55,
+        "grids": [
+          [
+            0.421875,
+            0.0
+          ],
+          [
+            0.421875,
+            0.0
+          ]
+        ],
+        "expected_scheduler_steps": 2,
+        "expected_grid_lengths": [
+          2,
+          2
+        ],
+        "refinement_stages": [
+          {
+            "requested": 0.55,
+            "start_index": 7,
+            "sigmas": [
+              0.421875,
+              0.0
+            ],
+            "remaining_steps": 1
+          },
+          {
+            "requested": 0.55,
+            "start_index": 2,
+            "sigmas": [
+              0.421875,
+              0.0
+            ],
+            "remaining_steps": 1
+          }
+        ],
+        "refinement_initialization": [
+          "VAE_ENCODE_S2_RAW_AT_STAGE1_RESOLUTION",
+          "OFFICIAL_SPATIAL_UPSAMPLE_OF_REFINED_STAGE1"
+        ]
+      },
+      "supervisor_stage": "v005-r1-b-importfix-heavy"
     },
     {
       "id": "R2-s1",
@@ -35,5 +159,157 @@
       "status": "NOT_RUN",
       "reason": null
     }
-  ]
+  ],
+  "last_verified_utc": "2026-11-06T04:27:07.794473+00:00",
+  "stage_evidence": [
+    {
+      "stage": "v005-r1-a-cpu",
+      "supervisor_sha256": "4a41f0c368895fc7f2d943b4ee611fbba29e1695ad22d8e0f6e4d484798a00cc",
+      "status": "NOT_CLEAN",
+      "worker_returncode": 1,
+      "normal_exit_recorded": false,
+      "guard_reason": "OBSERVATION_FAILED",
+      "started_epoch": 1793938383.3480117,
+      "finished_epoch": 1793938384.5169282,
+      "nvrm_events": 0,
+      "kernel_watch_status": "NOT_REQUESTED_CPU",
+      "peak_worker_rss_bytes_observed": 12939264,
+      "peak_cgroup_bytes_observed": 6946816,
+      "cgroup_high_events_observed": 0,
+      "psi_full_avg10_max_observed": 0.0,
+      "min_available_bytes_observed": 123357786112,
+      "concurrent_external_gpu": false,
+      "observation_count": 2,
+      "memory_scope": "cgroup and PSI sampled; worker RSS from registered /proc VmHWM, not final ru_maxrss",
+      "mechanical_failure": "ModuleNotFoundError: refine_schedule before model load; original CPU attempt retained",
+      "model_loads": 0,
+      "sampler_calls": 0
+    },
+    {
+      "stage": "v005-r1-a-importfix-cpu",
+      "supervisor_sha256": "d67a53cef049cceb20afb7e9b4a935bec47190ce145925979579404441801813",
+      "status": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "guard_reason": "COMPLETE",
+      "started_epoch": 1793938496.39439,
+      "finished_epoch": 1793938498.6407852,
+      "nvrm_events": 0,
+      "kernel_watch_status": "NOT_REQUESTED_CPU",
+      "peak_worker_rss_bytes_observed": 18927616,
+      "peak_cgroup_bytes_observed": 10395648,
+      "cgroup_high_events_observed": 0,
+      "psi_full_avg10_max_observed": 0.0,
+      "min_available_bytes_observed": 121528270848,
+      "concurrent_external_gpu": false,
+      "observation_count": 3,
+      "memory_scope": "cgroup and PSI sampled; worker RSS from registered /proc VmHWM, not final ru_maxrss"
+    },
+    {
+      "stage": "v005-r1-a-importfix-heavy",
+      "supervisor_sha256": "43d755beeedeea8f2340cfa25338e099eeba4ac982440e66afbd0618f62520cd",
+      "status": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "guard_reason": "COMPLETE",
+      "started_epoch": 1793938711.2994509,
+      "finished_epoch": 1793938804.8025029,
+      "nvrm_events": 0,
+      "kernel_watch_status": "AVAILABLE",
+      "peak_worker_rss_bytes_observed": 45400424448,
+      "peak_cgroup_bytes_observed": 76432003072,
+      "cgroup_high_events_observed": 0,
+      "psi_full_avg10_max_observed": 0.0,
+      "min_available_bytes_observed": 76530241536,
+      "concurrent_external_gpu": false,
+      "observation_count": 88,
+      "memory_scope": "cgroup and PSI sampled; worker RSS from registered /proc VmHWM, not final ru_maxrss"
+    },
+    {
+      "stage": "v005-r1-b-importfix-cpu",
+      "supervisor_sha256": "349d10b945d1d17db3f2268a71852d71fb362dff37f39a18c0e2c3ff635d42fe",
+      "status": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "guard_reason": "COMPLETE",
+      "started_epoch": 1793938533.9804833,
+      "finished_epoch": 1793938536.2261758,
+      "nvrm_events": 0,
+      "kernel_watch_status": "NOT_REQUESTED_CPU",
+      "peak_worker_rss_bytes_observed": 19128320,
+      "peak_cgroup_bytes_observed": 10006528,
+      "cgroup_high_events_observed": 0,
+      "psi_full_avg10_max_observed": 0.0,
+      "min_available_bytes_observed": 119646072832,
+      "concurrent_external_gpu": false,
+      "observation_count": 3,
+      "memory_scope": "cgroup and PSI sampled; worker RSS from registered /proc VmHWM, not final ru_maxrss"
+    },
+    {
+      "stage": "v005-r1-b-importfix-heavy",
+      "supervisor_sha256": "f50ba005de347aeba0c2e84907b6c55d8977457d8464c3861073f643b4796169",
+      "status": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "guard_reason": "COMPLETE",
+      "started_epoch": 1793939026.1311302,
+      "finished_epoch": 1793939119.3845136,
+      "nvrm_events": 0,
+      "kernel_watch_status": "AVAILABLE",
+      "peak_worker_rss_bytes_observed": 45359382528,
+      "peak_cgroup_bytes_observed": 76333260800,
+      "cgroup_high_events_observed": 0,
+      "psi_full_avg10_max_observed": 0.0,
+      "min_available_bytes_observed": 76425289728,
+      "concurrent_external_gpu": false,
+      "observation_count": 88,
+      "memory_scope": "cgroup and PSI sampled; worker RSS from registered /proc VmHWM, not final ru_maxrss"
+    },
+    {
+      "stage": "v005-sam-output-r1-a-cpu",
+      "supervisor_sha256": "0173bba2bca08fb2663d3dc7b832f0dc7be598caccfece21e561f6c2920f31fb",
+      "status": "COMPLETE",
+      "worker_returncode": 0,
+      "normal_exit_recorded": true,
+      "guard_reason": "COMPLETE",
+      "started_epoch": 1793938872.0301278,
+      "finished_epoch": 1793938874.2787158,
+      "nvrm_events": 0,
+      "kernel_watch_status": "NOT_REQUESTED_CPU",
+      "peak_worker_rss_bytes_observed": 17068032,
+      "peak_cgroup_bytes_observed": 7892992,
+      "cgroup_high_events_observed": 0,
+      "psi_full_avg10_max_observed": 0.0,
+      "min_available_bytes_observed": 122483761152,
+      "concurrent_external_gpu": false,
+      "observation_count": 3,
+      "memory_scope": "cgroup and PSI sampled; worker RSS from registered /proc VmHWM, not final ru_maxrss"
+    }
+  ],
+  "preload_cpu_failures": [
+    {
+      "stage": "v005-r1-a-cpu",
+      "supervisor_sha256": "4a41f0c368895fc7f2d943b4ee611fbba29e1695ad22d8e0f6e4d484798a00cc",
+      "status": "NOT_CLEAN",
+      "worker_returncode": 1,
+      "normal_exit_recorded": false,
+      "guard_reason": "OBSERVATION_FAILED",
+      "started_epoch": 1793938383.3480117,
+      "finished_epoch": 1793938384.5169282,
+      "nvrm_events": 0,
+      "kernel_watch_status": "NOT_REQUESTED_CPU",
+      "peak_worker_rss_bytes_observed": 12939264,
+      "peak_cgroup_bytes_observed": 6946816,
+      "cgroup_high_events_observed": 0,
+      "psi_full_avg10_max_observed": 0.0,
+      "min_available_bytes_observed": 123357786112,
+      "concurrent_external_gpu": false,
+      "observation_count": 2,
+      "memory_scope": "cgroup and PSI sampled; worker RSS from registered /proc VmHWM, not final ru_maxrss",
+      "mechanical_failure": "ModuleNotFoundError: refine_schedule before model load; original CPU attempt retained",
+      "model_loads": 0,
+      "sampler_calls": 0
+    }
+  ],
+  "sampler_budget_note": "CPU entry failures consume no generation budget; completed R1-a/R1-b are separate authorized runs despite identical quantized sigma grids."
 }

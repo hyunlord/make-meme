@@ -30,9 +30,11 @@ def main() -> None:
         minimum=json.loads(scene.read_text())['sam_settings']['min_area_fraction']
         tracks=[t for t in tracks if om[t].area/(policy.size[0]*policy.size[1])>=minimum]
         if index==0:casting=bind(sm,om,tracks,policy)
-        rows.append({'frame':index,'actual_tracks':tracks,'reflection_tracks':reflections})
+        rows.append({'frame':index,'actual_tracks':tracks,'reflection_tracks':reflections,
+                     'count_matches':len(tracks)==policy.count})
     atomic_json(output,{'casting':casting,'casting_status':'ESTABLISHED' if casting else 'UNESTABLISHED',
-                        'frames':rows,'role':'REFERENCE_ONLY','quality':'HUMAN_REVIEW_PENDING'})
+                        'frames':rows,'count_matches_fraction':sum(row['count_matches'] for row in rows)/len(rows),
+                        'role':r.get('role','REFERENCE_ONLY'),'quality':'HUMAN_REVIEW_PENDING'})
 
 
 if __name__=='__main__':main()
