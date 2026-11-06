@@ -2,7 +2,7 @@
 
 개인 원본·참조·앵커·마스크·영상 및 runtime 절대경로는 Git에 포함하지 않는다. 아래 변수는 비공개 manifest에서 확인한 역할을 가리킨다. 기존 가중치·venv를 재사용하며 공식 LTX checkout은 `e98f6d927d83c92ef2be6aec76c8440b19306e39`이다. 장면 값은 [V005_SCENE_CONFIG.json](V005_SCENE_CONFIG.json)에서 읽고 V-004 확대 canny의 실제 파일 hash와 고정 배율을 그대로 유지한다.
 
-작성 시 확인 상태: R1-a/b 생성 완료, 실제 양 단계 σ=0.421875·1+1step이며 두 RAW hash가 같다. R2는 [지원 확인](R2_SUPPORT.md)에 따라 NOT_SUPPORTED/생성 0회다. R3는 아직 실행 완료로 기록하지 않는다. 아래 준비·실행 명령의 존재를 완료 증거로 취급하지 않고 최종 실제 상태는 RUNS와 supervisor receipt로 확인한다.
+작성 시 확인 상태: R1-a/b 생성 완료, 실제 양 단계 σ=0.421875·1+1step이며 두 RAW hash가 같다. R2는 [지원 확인](R2_SUPPORT.md)에 따라 NOT_SUPPORTED/생성 0회다. R3-s1은 73프레임 생성 완료(136.592초, 11step/11call, supervisor COMPLETE·반환값 0·정상 종료)이며 출력 SAM·측정은 대기 중이다. R3-s2는 중간 전달 전 NOT_RUN이다. 아래 준비·실행 명령의 존재를 완료 증거로 취급하지 않고 최종 실제 상태는 RUNS와 supervisor receipt로 확인한다.
 
 ## 실행 역할과 사전 검증
 
@@ -60,7 +60,7 @@ CUDA_VISIBLE_DEVICES='' "$RESEARCH_PY" "$RUN_ROOT/code/aggregate_metrics.py" "$S
 
 ```bash
 /usr/bin/python3 "$RUN_ROOT/code/aggregate_anchors.py" "$ANCHOR_REQUEST" "$ACCEPTED_SNAPSHOT"
-/usr/bin/python3 "$RUN_ROOT/code/prepare_ltx.py" "$R3_ASSEMBLY_REQUEST"
+/usr/bin/python3 "$RUN_ROOT/code/prepare_ltx.py" "$R3_ASSEMBLY_REQUEST" "$RUN_NAME"
 ```
 
 이후 실제 준비된 CPU/heavy stage를 위 단일 흐름으로 실행한다. 신규 앵커가 제외되면 수용된 개수와 위치를 기록하며 무조건 15개라고 기입하지 않는다. R3 실행 후 decode·SAM·POST·측정도 같은 절차를 적용한다.

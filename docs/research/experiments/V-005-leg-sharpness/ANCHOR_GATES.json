@@ -1,0 +1,1949 @@
+{
+  "parent_experiment": "V-004-scaled-motion",
+  "parent_gates_sha256": "2a5663484fb85bd92fb649e8b02ea82c08a586d8da1c37982cc0c5076cd55e65",
+  "scene_config_sha256": "b0c2acabe873ca7420683f16d3baea379d51ff9890073e847770986cccab6120",
+  "reused_rows_preserved_exactly": true,
+  "parent_amendments": [],
+  "anchors": [
+    {
+      "segment_frame": 0,
+      "candidate": "reused",
+      "G6_rejudgment": "EXISTING_SAM_CPU_ONLY",
+      "sam_reruns": 0,
+      "before": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 5.825569371178689,
+          "IG": 22.557338454106933
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.2482014388489209,
+          "IG": 1.183673469387755
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.3366566589248288,
+          "IG": 1.1943854464862869
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": false,
+          "G5": true
+        },
+        "failed_gates": [
+          "G6"
+        ],
+        "all_gates_pass": false,
+        "background_mae": 5.6278300285339355,
+        "background_pixels": 756366,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 0,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "2318fb340e7682ee9cce720cf59b93df4dc11504167c74a8aae1f0eaae1f5798",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+        }
+      },
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 5.825569371178689,
+          "IG": 22.557338454106933
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.2482014388489209,
+          "IG": 1.183673469387755
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.3366566589248288,
+          "IG": 1.1943854464862869
+        },
+        "G6_above_reference_upper": {
+          "Lab": true,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 5.6278300285339355,
+        "background_pixels": 756366,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 0,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+        }
+      },
+      "G7_reference_only": {
+        "Lab": 1.0,
+        "IG": 0.9999998807907104
+      }
+    },
+    {
+      "segment_frame": 12,
+      "candidate": "call1",
+      "G6_rejudgment": "EXISTING_SAM_CPU_ONLY",
+      "sam_reruns": 0,
+      "before": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 14.903909550484071,
+          "IG": 11.479587611258353
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0816326530612246,
+          "IG": 1.0642857142857143
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0773233596227336,
+          "IG": 1.0516906170752325
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.010643005371094,
+        "background_pixels": 761534,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 12,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "2318fb340e7682ee9cce720cf59b93df4dc11504167c74a8aae1f0eaae1f5798",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
+        }
+      },
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 14.903909550484071,
+          "IG": 11.479587611258353
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0816326530612246,
+          "IG": 1.0642857142857143
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0773233596227336,
+          "IG": 1.0516906170752325
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.010643005371094,
+        "background_pixels": 761534,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 12,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
+        }
+      },
+      "G7_reference_only": {
+        "Lab": 0.9026162624359131,
+        "IG": 0.8842923045158386
+      }
+    },
+    {
+      "segment_frame": 16,
+      "candidate": 1,
+      "origin": "V004_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 14.164858552578924,
+          "IG": 13.687275742763813
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.083623693379791,
+          "IG": 1.1167315175097277
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.066558753326566,
+          "IG": 1.015822043035957
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 7.577259063720703,
+        "background_pixels": 758941,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 16,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "a576306822afcde0e6887b7504da9fc7a72dc38a770460cdcc4f6276afa862c0"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            724.5,
+            257.0
+          ],
+          "bbox_center_pixel": [
+            665.5,
+            400.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        },
+        "anchor": {
+          "topmost_pixel": [
+            732.5,
+            255.0
+          ],
+          "bbox_center_pixel": [
+            656.5,
+            410.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 6
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 18,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 17.114235398409196,
+          "IG": 21.899417468560447
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1666666666666667,
+          "IG": 1.1462450592885376
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.087216248506571,
+          "IG": 1.0295614304986864
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 7.869398593902588,
+        "background_pixels": 767433,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 18,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "b0c2acabe873ca7420683f16d3baea379d51ff9890073e847770986cccab6120",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "f083504c1fea7d38b06791f1be4c6a6063528c67ac2fc5fa111f5233801672d0"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            728.5,
+            268.0
+          ],
+          "bbox_center_pixel": [
+            663.5,
+            405.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 8
+        },
+        "anchor": {
+          "topmost_pixel": [
+            721.0,
+            258.0
+          ],
+          "bbox_center_pixel": [
+            648.0,
+            418.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 20,
+      "candidate": 1,
+      "origin": "V004_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 12.915119851566327,
+          "IG": 22.50738041648522
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.131578947368421,
+          "IG": 1.14
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0311657984551823,
+          "IG": 0.9910227272727273
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 7.3821187019348145,
+        "background_pixels": 770724,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 20,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "31960e9b28ffda1b6d9e8b00e3b1f351a5fbc937349bd833d623c2f8c830420f"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            735.0,
+            278.0
+          ],
+          "bbox_center_pixel": [
+            665.0,
+            410.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 11
+        },
+        "anchor": {
+          "topmost_pixel": [
+            735.5,
+            274.0
+          ],
+          "bbox_center_pixel": [
+            649.0,
+            424.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 10
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 22,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 6.902674583274123,
+          "IG": 34.064387543502455
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0722433460076046,
+          "IG": 1.0281124497991967
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.9610743034449433,
+          "IG": 1.0347454333462882
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 8.858840942382812,
+        "background_pixels": 772200,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 22,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          []
+        ],
+        "scene_config_sha256": "b0c2acabe873ca7420683f16d3baea379d51ff9890073e847770986cccab6120",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "b5425d1c892a112baadba19bd664ab427d9cfb8312ead1d1d76cf8a18f69483d"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            737.5,
+            281.0
+          ],
+          "bbox_center_pixel": [
+            661.5,
+            412.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 12
+        },
+        "anchor": {
+          "topmost_pixel": [
+            733.0,
+            267.0
+          ],
+          "bbox_center_pixel": [
+            651.0,
+            407.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 24,
+      "candidate": "call1",
+      "G6_rejudgment": "FIRST_EVALUATION_AFTER_AMENDMENT",
+      "sam_reruns": 0,
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 0.4912521662375422,
+          "IG": 21.373479286828843
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.0202312138728324,
+          "IG": 1.0731707317073171
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.9336078089213654,
+          "IG": 1.0600029926679635
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.038745880126953,
+        "background_pixels": 765137,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 24,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2660a921e5912277b2a6a1d95406391499d4ca3b78d61debd170683c623cc0ea"
+        }
+      },
+      "G7_reference_only": {
+        "Lab": 0.7412821054458618,
+        "IG": 0.8921977281570435
+      }
+    },
+    {
+      "segment_frame": 26,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 2.5921385981715748,
+          "IG": 32.432927410423474
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1749271137026238,
+          "IG": 1.1795918367346938
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.8913240172916457,
+          "IG": 1.0571205531392884
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 8.628003120422363,
+        "background_pixels": 754829,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 26,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "b0c2acabe873ca7420683f16d3baea379d51ff9890073e847770986cccab6120",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "b9bdc454aec5889d4d56442b81dce6fcee0ea0ae4c0dce23ef29b474acf50786"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            734.5,
+            201.0
+          ],
+          "bbox_center_pixel": [
+            687.5,
+            372.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 2
+        },
+        "anchor": {
+          "topmost_pixel": [
+            724.0,
+            170.0
+          ],
+          "bbox_center_pixel": [
+            687.5,
+            371.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 5
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 28,
+      "candidate": 1,
+      "origin": "V004_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 15.857269628078601,
+          "IG": 35.15822542810211
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.115987460815047,
+          "IG": 1.1481481481481481
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.8638172172654931,
+          "IG": 1.101691286662385
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.544624328613281,
+        "background_pixels": 766236,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 28,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "a8efbf114e14fddb73c98e8d1943b7055a5b6be62c77270b8691cf6ecbce6b48"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            768.0,
+            225.0
+          ],
+          "bbox_center_pixel": [
+            719.0,
+            384.0
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 17
+        },
+        "anchor": {
+          "topmost_pixel": [
+            780.0,
+            215.0
+          ],
+          "bbox_center_pixel": [
+            701.5,
+            392.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 15
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 30,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 15.192673341490044,
+          "IG": 36.32868409406526
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1257861635220126,
+          "IG": 1.1440329218106995
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.9811320754716982,
+          "IG": 1.2326032125315278
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 8.863568305969238,
+        "background_pixels": 760158,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 30,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "scene_config_sha256": "b0c2acabe873ca7420683f16d3baea379d51ff9890073e847770986cccab6120",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2f2fadebda78cee14b0eb442b7556382e48f50087ca37c92c6fae61dfc20dd5d"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            767.5,
+            226.0
+          ],
+          "bbox_center_pixel": [
+            730.5,
+            384.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 12
+        },
+        "anchor": {
+          "topmost_pixel": [
+            762.5,
+            219.0
+          ],
+          "bbox_center_pixel": [
+            718.0,
+            397.5
+          ],
+          "quadrant": "UPPER_RIGHT",
+          "topmost_tie_count": 2
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 32,
+      "candidate": 1,
+      "origin": "V004_NEW",
+      "disposition": "ACCEPT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 12.92119321740661,
+          "IG": 35.05854384788464
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1151515151515152,
+          "IG": 1.107883817427386
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 0.9018181818181819,
+          "IG": 1.0947727663335707
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 8.221348762512207,
+        "background_pixels": 746682,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 32,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          []
+        ],
+        "scene_config_sha256": "c22db7526440290918bdf436c442198fed7ce05801edee708cb79bc7a2f27222",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "78d742a3d5d21b51e67adcd931c6216f8c0981a56fc0b80ded430287777faf05"
+        }
+      },
+      "G8_status": "RECORDED_REFERENCE_ONLY",
+      "G8_reference_only": {
+        "gate": false,
+        "role": "Lab",
+        "definition": "Topmost row; median x tie; bbox center in pixel-index coordinates; explicit axis equality",
+        "caveat": "Topmost mask point may be head/ear rather than kicking leg",
+        "source": {
+          "topmost_pixel": [
+            717.0,
+            214.0
+          ],
+          "bbox_center_pixel": [
+            742.5,
+            378.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 9
+        },
+        "anchor": {
+          "topmost_pixel": [
+            688.0,
+            208.0
+          ],
+          "bbox_center_pixel": [
+            741.5,
+            391.5
+          ],
+          "quadrant": "UPPER_LEFT",
+          "topmost_tie_count": 25
+        },
+        "quadrant_agreement": true
+      }
+    },
+    {
+      "segment_frame": 36,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 15.155549491844035,
+          "IG": 40.297886023250754
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1699716713881019,
+          "IG": 1.2
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0244528067875918,
+          "IG": 1.2377358490566037
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 8.00423812866211,
+        "background_pixels": 737463,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 36,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          []
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "7bce4a6ff43d102b167d0f79b7850421168571876b6d6bcb74630209831f8f63"
+        }
+      },
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.8472852110862732,
+        "IG": 0.8900498151779175
+      }
+    },
+    {
+      "segment_frame": 48,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 30.586327314606635,
+          "IG": 57.191384190685184
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.15015015015015,
+          "IG": 1.1535087719298245
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.010894302374123,
+          "IG": 1.1020784445189407
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.416417121887207,
+        "background_pixels": 753439,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 48,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "ba59774982d154f80a9eb76df0749c51323fc229d3951400544aa8c25357f905"
+        }
+      },
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.9316020011901855,
+        "IG": 0.8691859245300293
+      }
+    },
+    {
+      "segment_frame": 60,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 17.347249750427277,
+          "IG": 29.570956659563087
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.132716049382716,
+          "IG": 1.1764705882352942
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0288837448559671,
+          "IG": 1.1996904024767803
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 9.616992950439453,
+        "background_pixels": 732757,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 60,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2c2a8522deacf76268a019c4ff058fe4f9c71cf29e481baf5edec75c546cbe13"
+        }
+      },
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.8622336387634277,
+        "IG": 0.8703752756118774
+      }
+    },
+    {
+      "segment_frame": 72,
+      "candidate": "call1",
+      "before": null,
+      "before_status": "NOT_EVALUATED_BEFORE_AMENDMENT",
+      "after": {
+        "casting": {
+          "Lab": 0,
+          "IG": 1
+        },
+        "actual_count": 2,
+        "center_shift_px": {
+          "Lab": 4.208383498164988,
+          "IG": 3.4094064631328824
+        },
+        "bbox_height_ratio": {
+          "Lab": 1.1014925373134328,
+          "IG": 1.128755364806867
+        },
+        "aspect_ratio_vs_source": {
+          "Lab": 1.0294322778630214,
+          "IG": 1.0568601186408246
+        },
+        "G6_above_reference_upper": {
+          "Lab": false,
+          "IG": false
+        },
+        "G6_thresholds": {
+          "lower_inclusive": 0.8,
+          "reference_upper": 1.25,
+          "upper_bound_is_failure": false
+        },
+        "gates": {
+          "G1": true,
+          "G2": true,
+          "G3": true,
+          "G4": true,
+          "G6": true,
+          "G5": true
+        },
+        "failed_gates": [],
+        "all_gates_pass": true,
+        "background_mae": 7.083588600158691,
+        "background_pixels": 734138,
+        "G7": {
+          "status": "NOT_MEASURED",
+          "reason": "Separate existing-local-model embedding measurement required",
+          "gating": false
+        },
+        "source_frame_index": 72,
+        "coordinate_size": [
+          1280,
+          720
+        ],
+        "source_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor_classification": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "scene_config_sha256": "10131b8ae5f00cdcdeec91744fed748d0c36e87d3db8e33b815f720f27fd8725",
+        "input_summary_sha256": {
+          "source": "fea1586ae62b57034eb43f917f78884d55138e8a4dfbdfeaa21314e53030f2dc",
+          "anchor": "2e5f65f8cccfc1b4757a7401f9a838aeab331a590e205d4b04e7ca1e569f9004"
+        }
+      },
+      "sam_reruns": 0,
+      "G7_reference_only": {
+        "Lab": 0.8654326796531677,
+        "IG": 0.8648660182952881
+      }
+    }
+  ],
+  "provenance": [
+    {
+      "frame": 0,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "3f546a40e7e07a8a103edd56daf47046e962e83285bc574fb7389c29fe3fd24a",
+      "master_sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779",
+      "sam_summary_sha256": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3"
+    },
+    {
+      "frame": 12,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "6d6b4264c6e7ea2b1f2221873a1e34148ceb688a105ab2197559d19f734df02b",
+      "master_sha256": "b5c783e182f7c04a5eec5b0b4666190ce09f5659c852ac9b3d417e65cbaee0ed",
+      "sam_summary_sha256": "3f7a938876ca6373e630d94f5cff44be2e1bd68091c308133f633ac3bef90c2f"
+    },
+    {
+      "frame": 16,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "931c04b08f46a5061cefb2ac237a00b96fb54bd47108544722969dcb03fa47db",
+      "master_sha256": "89f9dc3b543613ddb761c8acca378a5cdd87cd4da5455a83b3654d5109367305",
+      "sam_summary_sha256": "a576306822afcde0e6887b7504da9fc7a72dc38a770460cdcc4f6276afa862c0"
+    },
+    {
+      "frame": 18,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "gate_sha256": "43f65d7b22c8fe0ee205f0cbec5037d0e96bdea218f4fa1bbc0161d4041098a7",
+      "master_sha256": "598eb194653e84d850834d1ab67df8ce0a8afd4530870ba6563b0107603ae6da",
+      "sam_summary_sha256": "f083504c1fea7d38b06791f1be4c6a6063528c67ac2fc5fa111f5233801672d0"
+    },
+    {
+      "frame": 20,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "8de4f7d943565277499f36df6467c84f5763cfac64f50b4f63dc7cc6bcb7eb6d",
+      "master_sha256": "275cb7674e0aaeffedb3213b367b719047c56ac58338f249d188e775b41ea700",
+      "sam_summary_sha256": "31960e9b28ffda1b6d9e8b00e3b1f351a5fbc937349bd833d623c2f8c830420f"
+    },
+    {
+      "frame": 22,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "gate_sha256": "f4f4b763431d44315ac7744f3954ad365cb8fe2eab95515e6cfe036ee34ce088",
+      "master_sha256": "55447fdde73c5f45c16f7b19da81ced23f85c11246704725588c965c64f21bb0",
+      "sam_summary_sha256": "b5425d1c892a112baadba19bd664ab427d9cfb8312ead1d1d76cf8a18f69483d"
+    },
+    {
+      "frame": 24,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "2816efa0535eadfa3c96f5056f768a73ef91acbb31bb51781b30fd452c8c441b",
+      "master_sha256": "f43914d16be543735a00b0f71c24ed9fb4a0afacf8d61ae07b21e210e1703d44",
+      "sam_summary_sha256": "2660a921e5912277b2a6a1d95406391499d4ca3b78d61debd170683c623cc0ea"
+    },
+    {
+      "frame": 26,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "gate_sha256": "52c2e4d1f7af72546ea4f10d50579f73c7ea1dab382d7ff5d852a9f688803c01",
+      "master_sha256": "74defe13357f4a56e15fc999994c4deefaaa7e612b7c130a5a41afea336aafca",
+      "sam_summary_sha256": "b9bdc454aec5889d4d56442b81dce6fcee0ea0ae4c0dce23ef29b474acf50786"
+    },
+    {
+      "frame": 28,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "5558cede129e98b620f1f1f5c9f943781976606655e3c2cb1f728284b0cf20fa",
+      "master_sha256": "8a459d576cad441f967cbd2d8849df46ab83bc600d4d623ca33146c962b01827",
+      "sam_summary_sha256": "a8efbf114e14fddb73c98e8d1943b7055a5b6be62c77270b8691cf6ecbce6b48"
+    },
+    {
+      "frame": 30,
+      "candidate": 1,
+      "origin": "V005_NEW",
+      "gate_sha256": "afcd52915c074ce3111e2b93930fb1a9dd4ae8bb32636a8893426cdcdd036f24",
+      "master_sha256": "01d47df29f10a2cf0518814eaa33e61481dc849ec16fb22ec7dbabe817aea212",
+      "sam_summary_sha256": "2f2fadebda78cee14b0eb442b7556382e48f50087ca37c92c6fae61dfc20dd5d"
+    },
+    {
+      "frame": 32,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "6b0b7af89a31a66db4c77501e51520bf5cf78d935bca7968e229b04bf630bb54",
+      "master_sha256": "8581b299d3637314c1295b40233acad60bb0bf7f5bded1e455db0d3b78ec20d4",
+      "sam_summary_sha256": "78d742a3d5d21b51e67adcd931c6216f8c0981a56fc0b80ded430287777faf05"
+    },
+    {
+      "frame": 36,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "bd2ca1659b7524cc83efa3c8ebdb87c7cacd15d8aa90befd742533f0dc349e85",
+      "master_sha256": "3f2adb575c77ccc0daf8b1d9a4f5ff6868039ab3cb87632c0fd5b57715891738",
+      "sam_summary_sha256": "7bce4a6ff43d102b167d0f79b7850421168571876b6d6bcb74630209831f8f63"
+    },
+    {
+      "frame": 48,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "a7389b02aa40b85a399b305e21b439d41ea18ac084808955934301df6e78e3da",
+      "master_sha256": "579d75f12672c1362b42091e97cfc33666795875880815edbd175bdb4d7ac89e",
+      "sam_summary_sha256": "ba59774982d154f80a9eb76df0749c51323fc229d3951400544aa8c25357f905"
+    },
+    {
+      "frame": 60,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "086bf699d78f0a0c7af64ca8ca981b13701d2e74907b6f0e7ae60cd6ffc0ff0d",
+      "master_sha256": "75f2b9553e80bef6d6f04469fb05c5faaffec3c7ac15df5fb72798a3e9014f4c",
+      "sam_summary_sha256": "2c2a8522deacf76268a019c4ff058fe4f9c71cf29e481baf5edec75c546cbe13"
+    },
+    {
+      "frame": 72,
+      "origin": "V004_REUSED_UNCHANGED",
+      "gate_sha256": "130e3e2618ade24425377ed398b2baec50767b61eb89a87683a410eed9591fe9",
+      "master_sha256": "cc6410ff80ed7eb8319d333a527cee981a39176f9d3e39081a4bd0b5f4b06bb5",
+      "sam_summary_sha256": "2e5f65f8cccfc1b4757a7401f9a838aeab331a590e205d4b04e7ca1e569f9004"
+    }
+  ],
+  "accepted_frames": [
+    0,
+    12,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    36,
+    48,
+    60,
+    72
+  ],
+  "G7_new_measurement": "MEASURED_REFERENCE_ONLY",
+  "G7_new_anchors_reference_only": {
+    "report_sha256": "6eced23d1a5bd379610b92808bc8c6c16b42c5677753928d31e4c48d5f0377ee",
+    "supervisor_sha256": "98dcb49570df9adc51105bfba6e5b4cefe9d0f9901b59ad0f225282a497f27a5",
+    "measurement": {
+      "status": "MEASURED_REFERENCE_ONLY",
+      "gate": false,
+      "reference_id": "f000",
+      "feature": "SiglipVisionModel.pooler_output; L2 normalized",
+      "crop": "SAM bbox RGB, unmasked; official local image processor",
+      "device": "cuda",
+      "dtype": "torch.bfloat16",
+      "items": [
+        {
+          "id": "f000",
+          "cosine_vs_reference": {
+            "Lab": 1.0,
+            "IG": 0.9999998807907104
+          },
+          "comparison_id": null,
+          "cosine_vs_comparison": {
+            "Lab": null,
+            "IG": null
+          },
+          "crop_bbox": {
+            "Lab": [
+              492,
+              229,
+              746,
+              576
+            ],
+            "IG": [
+              351,
+              264,
+              572,
+              554
+            ]
+          },
+          "image_sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779",
+          "sam_summary_sha256": "b379aad80e43da5d54a27356c6c884867abc509e0ed2a98ef4a5c340c32ae3e3",
+          "casting_report_sha256": "3f546a40e7e07a8a103edd56daf47046e962e83285bc574fb7389c29fe3fd24a"
+        },
+        {
+          "id": "f018",
+          "cosine_vs_reference": {
+            "Lab": 0.9127830862998962,
+            "IG": 0.9327022433280945
+          },
+          "comparison_id": null,
+          "cosine_vs_comparison": {
+            "Lab": null,
+            "IG": null
+          },
+          "crop_bbox": {
+            "Lab": [
+              509,
+              258,
+              788,
+              580
+            ],
+            "IG": [
+              408,
+              266,
+              575,
+              556
+            ]
+          },
+          "image_sha256": "598eb194653e84d850834d1ab67df8ce0a8afd4530870ba6563b0107603ae6da",
+          "sam_summary_sha256": "f083504c1fea7d38b06791f1be4c6a6063528c67ac2fc5fa111f5233801672d0",
+          "casting_report_sha256": "43f65d7b22c8fe0ee205f0cbec5037d0e96bdea218f4fa1bbc0161d4041098a7"
+        },
+        {
+          "id": "f022",
+          "cosine_vs_reference": {
+            "Lab": 0.900809645652771,
+            "IG": 0.8808926343917847
+          },
+          "comparison_id": null,
+          "cosine_vs_comparison": {
+            "Lab": null,
+            "IG": null
+          },
+          "crop_bbox": {
+            "Lab": [
+              502,
+              267,
+              801,
+              549
+            ],
+            "IG": [
+              409,
+              269,
+              564,
+              525
+            ]
+          },
+          "image_sha256": "55447fdde73c5f45c16f7b19da81ced23f85c11246704725588c965c64f21bb0",
+          "sam_summary_sha256": "b5425d1c892a112baadba19bd664ab427d9cfb8312ead1d1d76cf8a18f69483d",
+          "casting_report_sha256": "f4f4b763431d44315ac7744f3954ad365cb8fe2eab95515e6cfe036ee34ce088"
+        },
+        {
+          "id": "f026",
+          "cosine_vs_reference": {
+            "Lab": 0.7891476154327393,
+            "IG": 0.9385708570480347
+          },
+          "comparison_id": null,
+          "cosine_vs_comparison": {
+            "Lab": null,
+            "IG": null
+          },
+          "crop_bbox": {
+            "Lab": [
+              572,
+              170,
+              804,
+              573
+            ],
+            "IG": [
+              399,
+              264,
+              582,
+              553
+            ]
+          },
+          "image_sha256": "74defe13357f4a56e15fc999994c4deefaaa7e612b7c130a5a41afea336aafca",
+          "sam_summary_sha256": "b9bdc454aec5889d4d56442b81dce6fcee0ea0ae4c0dce23ef29b474acf50786",
+          "casting_report_sha256": "52c2e4d1f7af72546ea4f10d50579f73c7ea1dab382d7ff5d852a9f688803c01"
+        },
+        {
+          "id": "f030",
+          "cosine_vs_reference": {
+            "Lab": 0.7680158615112305,
+            "IG": 0.8909850716590881
+          },
+          "comparison_id": null,
+          "cosine_vs_comparison": {
+            "Lab": null,
+            "IG": null
+          },
+          "crop_bbox": {
+            "Lab": [
+              629,
+              219,
+              808,
+              577
+            ],
+            "IG": [
+              419,
+              275,
+              574,
+              553
+            ]
+          },
+          "image_sha256": "01d47df29f10a2cf0518814eaa33e61481dc849ec16fb22ec7dbabe817aea212",
+          "sam_summary_sha256": "2f2fadebda78cee14b0eb442b7556382e48f50087ca37c92c6fae61dfc20dd5d",
+          "casting_report_sha256": "afcd52915c074ce3111e2b93930fb1a9dd4ae8bb32636a8893426cdcdd036f24"
+        }
+      ],
+      "aggregate": {
+        "Lab": {
+          "minimum": 0.7680158615112305,
+          "mean": 0.8741512417793273,
+          "observed": 5,
+          "total": 5
+        },
+        "IG": {
+          "minimum": 0.8808926343917847,
+          "mean": 0.9286301374435425,
+          "observed": 5,
+          "total": 5
+        }
+      },
+      "model_revision": "e8e487298228002f3d8a82e0cd5c8ea9c567f57f",
+      "local_files_only": true,
+      "model_config_sha256": "73477b47ae9a395f008f993ebd8fb5c16ce0b5e8419ffdf2f5b2183b260f9cff",
+      "scene_config_sha256": "b0c2acabe873ca7420683f16d3baea379d51ff9890073e847770986cccab6120",
+      "elapsed_seconds": 7.944444894790649,
+      "finished_unix": 1793941621.725182,
+      "peak_rss_kib": 3387328
+    },
+    "acceptance_changed": false,
+    "scope": "Four new anchors plus f000 reference. Existing per-anchor G7 fields are historical, retained unchanged."
+  }
+}

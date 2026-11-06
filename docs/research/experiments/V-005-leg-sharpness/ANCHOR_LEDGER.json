@@ -65,7 +65,7 @@
     {
       "frame": 26,
       "candidate": 1,
-      "status": "GENERATED_AWAITING_GATES",
+      "status": "ACCEPTED",
       "started_utc": "2026-11-06T04:39:54.672641+00:00",
       "tool": "Codex native imagegen",
       "model_identifier": "UNKNOWN",
@@ -77,12 +77,15 @@
       ],
       "raw_sha256": "389ab217307c53a615d5175d174050bcb776c0d9bb66e2fabc5de7fa61fcad66",
       "master_sha256": "74defe13357f4a56e15fc999994c4deefaaa7e612b7c130a5a41afea336aafca",
-      "prompt_sha256": "c8b84275394b8ce1d682c4b3f4eb203ed635a468d13dd9c7389e72288f9c2554"
+      "prompt_sha256": "c8b84275394b8ce1d682c4b3f4eb203ed635a468d13dd9c7389e72288f9c2554",
+      "gate_report": "gates-f026-c1.json",
+      "g8_report": "g8-f026-c1.json",
+      "repair_needed": false
     },
     {
       "frame": 30,
       "candidate": 1,
-      "status": "GENERATED_AWAITING_GATES",
+      "status": "ACCEPTED",
       "started_utc": "2026-11-06T04:40:40.153697+00:00",
       "tool": "Codex native imagegen",
       "model_identifier": "UNKNOWN",
@@ -94,7 +97,10 @@
       ],
       "raw_sha256": "fbc51739939c532baebdd16a72fc0980c0f751622402f4d09c08294c99f18055",
       "master_sha256": "01d47df29f10a2cf0518814eaa33e61481dc849ec16fb22ec7dbabe817aea212",
-      "prompt_sha256": "70bf7e99bee6848f84b343c14b6bcd17e5006524b7a5cb90da378b687400dcff"
+      "prompt_sha256": "70bf7e99bee6848f84b343c14b6bcd17e5006524b7a5cb90da378b687400dcff",
+      "gate_report": "gates-f030-c1.json",
+      "g8_report": "g8-f030-c1.json",
+      "repair_needed": false
     }
   ]
 }
