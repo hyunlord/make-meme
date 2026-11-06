@@ -886,3 +886,5 @@ V-004 실행 기록(2026-11-06): 신규 앵커 4장 수용, S1/S2/S3 각 2 seed 
 V-004 종료·사용자 검토(2026-11-06): 사용자 의뢰에서 발차기 개선과 남은 반투명 다리 번짐을 보고했다. 과거 자동지표/독립검수 상태는 소급 수정하지 않는다.
 
 V-005 시작(2026-11-06): 고정 S2 체형에서 다듬기·비축소 지원 여부·2프레임 앵커를 비교하고 출력별 SAMPLE 계보를 기록한다. [사전 계획](experiments/V-005-leg-sharpness/PLAN.md).
+
+V-005 실행 종료(2026-11-06): R1 2회·15앵커 R3 2회 생성/측정, R2 공식 경로 NOT_SUPPORTED. R1 두 RAW는 같은 실효 sigma로 byte 동일. SAMPLE16개 기록, 품질 HUMAN_REVIEW_PENDING. [결과](experiments/V-005-leg-sharpness/RESULTS.md).

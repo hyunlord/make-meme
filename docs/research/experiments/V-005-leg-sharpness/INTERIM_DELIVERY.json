@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "payload_count": 45,
+  "zip_entry_count": 46,
+  "bytes": 20359381,
+  "sha256": "0c48fc09cf927d594ee6adf7e2d00d30105565cec0d7f5efe68d98b00dd36212",
+  "mac_payloads": "PASS",
+  "zip_crc": "PASS",
+  "actual_extraction": "PASS",
+  "extracted_payload_hashes": "PASS",
+  "spark_mac_zip_identity": "PASS",
+  "delivered_at_utc": "2026-11-06T05:23:15.060108+00:00",
+  "source_commit": "007d00e",
+  "primary": "UNCOMPRESSED_FOLDER",
+  "folder_name": "V005-review-20261106-interim",
+  "viewer": "index.html",
+  "secondary_zip": "V005-review-20261106-interim.zip",
+  "spark_built_first": true,
+  "mac_delivery": "VERIFIED",
+  "browser_qa": {
+    "status": "PASS",
+    "actual_media": true,
+    "viewports": [
+      375,
+      768,
+      1280
+    ],
+    "javascript_errors": 0,
+    "controls": [
+      "RAW/POST",
+      "RAW-only dynamic lower-body zoom",
+      "14-34 loop",
+      "0.25x/0.5x",
+      "seek",
+      "pause"
+    ]
+  },
+  "visual_layout_review": "PASS",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "media_columns": 7,
+  "all_columns": 10,
+  "not_run": [
+    "R2-s1: NOT_SUPPORTED",
+    "R2-s2: NOT_SUPPORTED",
+    "R3-s2: NOT_RUN"
+  ],
+  "measurement_pending": [
+    "Kling output SAM/leg measurement",
+    "output embedding similarity"
+  ],
+  "blank_human_review": true
+}

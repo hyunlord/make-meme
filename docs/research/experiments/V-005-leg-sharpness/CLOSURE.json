@@ -1,0 +1,225 @@
+{
+  "status": "OWNED_WORKERS_EXITED",
+  "checked_utc": "2026-11-06T05:42:16.426323+00:00",
+  "generation_status": "COMPLETE_WITH_R2_NOT_SUPPORTED",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "delivery_status": "PENDING_SEPARATE_VERIFICATION",
+  "own_registered_identity_count": 33,
+  "own_live_worker_count": 0,
+  "own_active_unit_count": 0,
+  "own_tmux_session_count": 0,
+  "same_boot_as_start": true,
+  "hardware_logger": {
+    "size_increased": true,
+    "mtime_increased": true,
+    "last_two_observed_rows": [
+      "2026-11-06T14:42:14+09:00,40, 3.98, 208,42600,39800,40800,40100,40800,42600,41800,118079",
+      "2026-11-06T14:42:19+09:00,40, 4.09, 208,41800,39800,39900,39800,39900,41800,40800,118045"
+    ]
+  },
+  "observations": [
+    {
+      "stage": "v005-anchor-embeddings-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-anchor-embeddings-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-output-embeddings-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-output-embeddings-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r1-a-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r1-a-importfix-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r1-a-importfix-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r1-b-importfix-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r1-b-importfix-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r3-s1-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r3-s1-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r3-s2-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-r3-s2-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f018-c1-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f018-c1-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f022-c1-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f022-c1-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f026-c1-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f026-c1-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f030-c1-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-f030-c1-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r1-a-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r1-a-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r1-b-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r1-b-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r1-b-local-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r1-b-local-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r3-s1-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r3-s1-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r3-s2-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-output-r3-s2-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-reference-kling-cpu",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    },
+    {
+      "stage": "v005-sam-reference-kling-heavy",
+      "pid_exists": false,
+      "same_starttime": false,
+      "owned_worker_alive": false
+    }
+  ],
+  "other_processes_terminated": 0,
+  "other_services_modified": 0,
+  "scheduled_followup_generations": 0,
+  "scope": "Read-only comparison of registered PID starttime+boot and own systemd units/tmux sessions. Other work was not stopped. No new model or GPU work was launched."
+}

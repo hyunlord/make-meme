@@ -2,7 +2,7 @@
 
 개인 원본·참조·앵커·마스크·영상 및 runtime 절대경로는 Git에 포함하지 않는다. 아래 변수는 비공개 manifest에서 확인한 역할을 가리킨다. 기존 가중치·venv를 재사용하며 공식 LTX checkout은 `e98f6d927d83c92ef2be6aec76c8440b19306e39`이다. 장면 값은 [V005_SCENE_CONFIG.json](V005_SCENE_CONFIG.json)에서 읽고 V-004 확대 canny의 실제 파일 hash와 고정 배율을 그대로 유지한다.
 
-작성 시 확인 상태: R1-a/b 생성 완료, 실제 양 단계 σ=0.421875·1+1step이며 두 RAW hash가 같다. R2는 [지원 확인](R2_SUPPORT.md)에 따라 NOT_SUPPORTED/생성 0회다. R3-s1은 73프레임 생성 완료(136.592초, 11step/11call, supervisor COMPLETE·반환값 0·정상 종료)이며 출력 SAM·측정은 대기 중이다. R3-s2는 중간 전달 전 NOT_RUN이다. 아래 준비·실행 명령의 존재를 완료 증거로 취급하지 않고 최종 실제 상태는 RUNS와 supervisor receipt로 확인한다.
+작성 시 확인 상태: R1-a/b와 R3-s1/s2 총 4개 생성 완료. R1의 실제 양 단계 σ=0.421875·1+1step이며 두 RAW hash가 같다. R2는 [지원 확인](R2_SUPPORT.md)에 따라 NOT_SUPPORTED/생성 0회다. R3-s1/s2는 각각 136.592/142.045초, 각 73프레임·11step/11call이며 생성 supervisor는 COMPLETE·반환값 0·정상 종료다. R3 두 출력의 SAM·CPU 측정과 총 16개 비공개 SAMPLE 검증은 완료했다. 출력 embedding 정체성 측정도 307개 항목에서 완료했다. 생성·측정의 기술 작업 완료와 최종 전달·종료 receipt 검증은 구분한다. 아래 명령의 존재를 완료 증거로 취급하지 않고 실제 상태는 RUNS와 supervisor receipt로 확인한다.
 
 ## 실행 역할과 사전 검증
 

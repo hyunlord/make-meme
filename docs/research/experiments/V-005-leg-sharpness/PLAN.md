@@ -35,3 +35,11 @@ R1 전체 RAW/원본 배경 POST/국소 다리 합성은 별도 파생물로 보
 개인 경로·사진·영상·마스크는 Git 제외. 출력별 비공개 SAMPLE.json과 V003/V004 소급12개를 경로/hash로 기록한다. 인간 판정은 PENDING, 기존 서술을 임의 학습 레이블로 바꾸지 않는다. 공개 dataset/SCHEMA.md만 게시한다.
 
 필수 중간 전달1회 및 최종 Downloads/V005-review-실제날짜/index.html 비압축 폴더. RAW/POST, 14–34반복,0.25/0.5배속,RAW하체2배보기,선명도그래프,2프레임간격앵커시트,빈HUMAN_REVIEW 제공. Spark에서 먼저 완성한 후 Mac 전송과 hash 검증. 후속 생성/학습은 예약하지 않는다.
+
+## 실행 후 상태 기록 (사전 계획과 구분)
+
+2026-11-06 실행: R1-a/b와 R3-s1/s2 네 셀 생성·SAM·CPU 후처리·계승 지표 측정 완료. R2 두 셀은 고정 공식 경로의 지원 조건 미충족으로 NOT_SUPPORTED이며 예산을 다른 생성에 전용하지 않았다. 실제 imagegen4회(보정0), 생성4회, scheduler/model call 각각26회, 학습0회. R1 두 RAW는 byte 동일하며 서로 다른 실효 강도 비교가 아니다. 기존11+신규4 앵커 수용, 크기·확대 canny 재산정0.
+
+중간 전달은 007d00e 증거를 바탕으로 05:23 UTC에 Mac 비압축 폴더 검증까지 완료한 후 R3-s2를 시작했다(INTERIM_DELIVERY.json). 최종 출력 embedding307개 항목과 역할별 73/73 frame coverage를 확인했다. SAMPLE16개(소급12+신규4) 호스트 간 hash 일치, 사람 판정PENDING. CLOSURE에서 자체worker/unit/tmux0, 동일boot, 기존hwlogger 갱신을 확인했다. 최종 폴더 전달 검증은 별도 DELIVERY.json에 기록한다. 품질 HUMAN_REVIEW_PENDING, temporal UNVERIFIED, 후속 생성 예약0.
+
+기계적 수정은 최초 R1 CPU 단계의 runpy import 경로와 CPU G8 코드 연결에 한정했으며 원래 실패 기록을 보존했다. 출력 품질을 이유로 강도·seed·prompt·게이트를 변경하지 않았다.

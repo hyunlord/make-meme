@@ -28,3 +28,12 @@ def test_private_paths_are_not_silently_published(tmp_path):
     # When collecting into public metrics, then the leak is blocked.
     with pytest.raises(ValueError,match='Private path'):
         collect({'status':'MEASURED','leg':str(path)},1)
+
+
+def test_embedding_coverage_is_required(tmp_path):
+    path=tmp_path/'embedding.json'
+    path.write_text(json.dumps({'frames':[{'frame':0}]}))
+    with pytest.raises(ValueError,match='Incomplete or duplicate'):
+        collect({'status':'MEASURED','embedding':str(path)},2)
+    result=collect({'status':'MEASURED','required':['embedding'],'embedding':str(path)},1)
+    assert result['evidence']['embedding']['status']=='AVAILABLE'

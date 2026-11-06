@@ -27,7 +27,7 @@ def sha(path: Path) -> str:
 def collect(spec: dict, count: int) -> dict:
     result={'status':spec['status'],'evidence':{}}
     if 'reason' in spec:result['reason']=spec['reason']
-    for key in ('base','scaled','leg','processing','manifest','confirmation'):
+    for key in ('base','scaled','leg','processing','manifest','confirmation','embedding'):
         if key not in spec:
             continue
         path=Path(spec[key])
@@ -38,7 +38,7 @@ def collect(spec: dict, count: int) -> dict:
         text=json.dumps(data)
         if '/home/' in text or '/Users/' in text:
             raise ValueError(f'Private path in {key} report: sanitize source before publication')
-        if key in ('base','scaled','leg'):
+        if key in ('base','scaled','leg','embedding'):
             rows=data['frames']
             if len(rows)!=count or {r['frame'] for r in rows}!=set(range(count)):
                 raise ValueError(f'Incomplete or duplicate frame metrics: {key}')
