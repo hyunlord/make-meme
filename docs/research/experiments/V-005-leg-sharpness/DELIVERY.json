@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "delivered_at_utc": "2026-11-06T05:44:45.940376+00:00",
+  "source_commit": "73fd8cf",
+  "primary": "UNCOMPRESSED_FOLDER",
+  "folder_name": "V005-review-20261106",
+  "viewer": "index.html",
+  "secondary_zip": "V005-review-20261106.zip",
+  "bytes": 21874399,
+  "sha256": "a57cdea7c0321745ae46069c56af56b59229f7d02382f46fff8fa1249f61d9fa",
+  "payload_count": 52,
+  "zip_entry_count": 53,
+  "spark_built_first": true,
+  "mac_payloads": "PASS",
+  "zip_crc": "PASS",
+  "actual_extraction": "PASS",
+  "extracted_payload_hashes": "PASS",
+  "spark_mac_zip_identity": "PASS",
+  "browser_qa": {
+    "status": "PASS",
+    "actual_media": true,
+    "viewports": [
+      375,
+      768,
+      1280
+    ],
+    "javascript_errors": 0,
+    "controls": [
+      "RAW/POST",
+      "RAW-only dynamic lower-body zoom",
+      "14-34 loop",
+      "0.25x/0.5x",
+      "seek",
+      "pause"
+    ]
+  },
+  "quality": "HUMAN_REVIEW_PENDING",
+  "temporal": "UNVERIFIED",
+  "media_columns": 8,
+  "all_columns": 10,
+  "not_supported": [
+    "R2-s1",
+    "R2-s2"
+  ],
+  "measurement_pending": [],
+  "blank_human_review": "PUBLIC_PACKAGE_BYTE_IDENTICAL",
+  "interim_preserved": true,
+  "qa_browser_closed": true,
+  "qa_server_started": false
+}
