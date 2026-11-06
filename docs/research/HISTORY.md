@@ -888,3 +888,6 @@ V-004 종료·사용자 검토(2026-11-06): 사용자 의뢰에서 발차기 개
 V-005 시작(2026-11-06): 고정 S2 체형에서 다듬기·비축소 지원 여부·2프레임 앵커를 비교하고 출력별 SAMPLE 계보를 기록한다. [사전 계획](experiments/V-005-leg-sharpness/PLAN.md).
 
 V-005 실행 종료(2026-11-06): R1 2회·15앵커 R3 2회 생성/측정, R2 공식 경로 NOT_SUPPORTED. R1 두 RAW는 같은 실효 sigma로 byte 동일. SAMPLE16개 기록, 품질 HUMAN_REVIEW_PENDING. [결과](experiments/V-005-leg-sharpness/RESULTS.md).
+
+## V-005 user verdict / V-006 preregistration (2026-11-06)
+V-005 R1 and R3 are insufficient for leg ghosting per user review. V-006 starts with frozen S2-s1 refinement inputs; official DiffSynth example defaults resolve the scheduler/expert interpretation before generation. Previous technical and delivery evidence is preserved. See [PLAN](experiments/V-006-wan-refine/PLAN.md).

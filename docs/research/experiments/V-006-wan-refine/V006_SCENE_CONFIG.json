@@ -1,0 +1,73 @@
+{
+  "experiment": "V-006-wan-refine",
+  "input": "V-004 S2-s1 RAW (motion correct, legs ghost in segment frames 18-27 and weakly 42)",
+  "user_verdict_v005": "R1 (LTX refine) and R3 (2-frame anchors) both insufficient",
+  "user_decisions": ["Lab size unchanged"],
+  "hypothesis": "LTX VAE 32x spatial / 8x temporal compression makes thin fast legs sub-token; Wan (8x spatial with 2x2 patch = 16px token, 4x temporal) is finer",
+  "scene": {
+    "segment": {"start": 240, "end_exclusive": 313, "frames": 73, "fps": 24},
+    "sam_text_prompt": "dog",
+    "casting": {"Lab": "track0", "IG": "track1"},
+    "reflections": ["track2", "track3"]
+  },
+  "refine_window": {"segment_frames": [8, 40], "frames": 33, "rule": "4n+1"},
+  "common": {
+    "resolution": [1152, 640],
+    "fps": 24,
+    "runner": "DiffSynth (V-002) preferred; else minimal patch to official Wan code, diff in RUNTIME_WAN.md",
+    "method": "video-to-video: encode input, mix noise to strength s, denoise to end",
+    "prompt": "V-004 S2 prompt + ' Sharp, clearly defined legs and paws.'",
+    "sampler_shift_cfg": "official defaults, record actual",
+    "seed": 20261103,
+    "precision": "bf16 only; convert fp32 to bf16 safetensors first and record hash"
+  },
+  "variants": {
+    "W1-a": {"model": "Wan2.2-T2V-A14B low-noise expert only", "strength": 0.35, "control": null, "refs": null},
+    "W1-b": {"model": "Wan2.2-T2V-A14B low-noise expert only", "strength": 0.55, "control": null, "refs": null},
+    "W2": {"model": "Wan2.2-VACE-Fun-A14B", "strength": 0.55, "control": "V-004 scaled canny, segment frames 8-40", "refs": ["REF_LAB", "REF_IG"], "if_unsupported": "NOT_SUPPORTED with evidence"}
+  },
+  "sigma_check_before_generation": {
+    "record": ["requested strength", "actual start sigma", "remaining steps", "expert boundary and confirmation that only low-noise expert is needed"],
+    "stop_if": "W1-a and W1-b actual start sigma are equal"
+  },
+  "reinsertion": {
+    "full_window": {"frames": [8, 40], "linear_blend": {"in": [8, 13], "out": [35, 40]}},
+    "legs_only": {"region": "lower 45% of output Lab SAM bbox, dilated 12px, feather 8px", "temporal": "same blends as full_window"},
+    "keep_refined_33_frame_raw": true,
+    "viewer_default": "full_window"
+  },
+  "metrics": {
+    "leg_sharpness": "V-005 section 5.1 (semi-transparency ratio, boundary Laplacian variance); frames 14-34 mean/max, others mean, per-frame plot; baselines S2-s1, V-005 R1, V-005 R3-s1",
+    "motion_retention": "per-frame Lab mask IoU vs S2-s1, scaled Lab IoU, kick direction agreement 20-34",
+    "identity": "Lab/IG crop embedding vs anchor0",
+    "seam": "consecutive-frame difference spikes at frames 8-13 and 35-40",
+    "latent_shapes": "actual latent C/T/H/W and token counts for LTX stage 1, LTX stage 2, Wan",
+    "cost": "steps, time, peak memory, hw.csv peaks"
+  },
+  "no_automatic_ranking": true,
+  "ops": {
+    "base": "V-003 section 3 / V-004 section 8",
+    "start_conditions": "V-001 section 7: MemAvailable >= 112GiB, drop-caches, expandable_segments, NVRM watch stop on first, MemoryHigh = MemoryMax",
+    "load_only_low_noise_expert": true,
+    "time_projection": "from first-step time; if projected > 60 min per run then BLOCKED_TIME, no resolution downgrade",
+    "download": "official sources only, keep >= 200GiB free, record hashes"
+  },
+  "viewer": {
+    "columns": ["source", "Kling result", "S2-s1 (input)", "V-005 R3-s1", "W1-a", "W1-b", "W2"],
+    "per_W_toggle": ["full window", "legs only", "refined 33-frame raw"],
+    "top_line": "먼저 볼 것: RAW, 다리 구간 반복(14~34), 0.25배속, 다리 확대로 S2-s1과 W들을 비교",
+    "extras": ["leg loop 14-34", "0.25x/0.5x", "frame step", "2x lower-body zoom", "leg sharpness plot"],
+    "human_review_items": ["다리 번짐 (심함/약간/없음)", "발차기 동작이 S2와 같은가 (다름/비슷함/같음)", "이음새가 보이는가 (예/아니오)", "Kling 대비", "한 줄 메모"]
+  },
+  "dataset_record": "V-005 section 7.2 rule; add parent_sample linking to S2-s1 SAMPLE; update SCHEMA.md",
+  "budget": {
+    "refine_generations_max": 3,
+    "imagegen": 0,
+    "quality_retries": 0,
+    "training": 0,
+    "wall_hours_cap_excluding_wait_download_convert": 6,
+    "interim_delivery": "after W1-a (both reinsertion derivatives + leg zoom comparison)"
+  },
+  "delivery": "uncompressed folder ~/Downloads/V006-review-<date>/ with index.html",
+  "config_separation_rule": "all scene-specific values live only in this file; code reads them, never hardcodes"
+}
