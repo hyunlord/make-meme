@@ -167,7 +167,18 @@
       "anchor sheet at 2-frame spacing"
     ],
     "top_line": "먼저 볼 것: 원본·Kling·S2-s1과 각 변형을 RAW, 다리 구간 반복, 0.25배속으로",
-    "human_review_extra_item": "다리 번짐 (심함 / 약간 / 없음)"
+    "human_review_extra_item": "다리 번짐 (심함 / 약간 / 없음)",
+    "playback_rates": [
+      1,
+      0.5,
+      0.25
+    ],
+    "raw_zoom_factor": 2,
+    "anchor_sheet_range": [
+      16,
+      32
+    ],
+    "anchor_sheet_step": 2
   },
   "roadmap_update": "write 3-stage roadmap into repo ROADMAP.md; HISTORY one line each for V-004 end and V-005 start",
   "dataset_record": {

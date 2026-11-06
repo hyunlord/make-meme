@@ -1,0 +1,115 @@
+{
+  "observed_at_utc": "2026-11-06T04:07:49.959795+00:00",
+  "status": "FILES_PRESENT_HASHED",
+  "inputs": [
+    {
+      "role": "accepted_anchor_manifest",
+      "bytes": 1602,
+      "sha256": "a730f2bc79805f04b18407470f08590bce4353e2c2207402d580c6a3772295f5"
+    },
+    {
+      "role": "parent_S2_s1_runtime",
+      "bytes": 2760,
+      "sha256": "739263b3d0f6432c9ea38c33f2f50e6b0fa0330c665d58e24c448544b08f3ade"
+    },
+    {
+      "role": "scaled_canny",
+      "bytes": 1046368,
+      "sha256": "36cde80fe72fb5749d325ef8e6b8c35df0ef28d9e72f46af51c5ad2279493bae"
+    },
+    {
+      "role": "S2_s1_RAW",
+      "bytes": 744889,
+      "sha256": "dbc5ddb8789e41a62c8f3cf5c5109020f5a08cee314885371d1d8e4276eaff26"
+    },
+    {
+      "role": "S2_s1_receipt",
+      "bytes": 3693,
+      "sha256": "6664568b59cc077360553b31ad21e65d642f3abf687972e35bfae7fbbb8d6a19"
+    },
+    {
+      "role": "S2_s1_SAM_summary",
+      "bytes": 126493,
+      "sha256": "f269d89ddd3f7ab89ec7a78dc68b4baef9bb5091652b5473777472bab9114307"
+    },
+    {
+      "role": "anchor_f000",
+      "bytes": 850884,
+      "sha256": "071f9e5e3b2c8b110aadd254838415d740b433f9b726bbf18a6117f25c81e779"
+    },
+    {
+      "role": "anchor_f012",
+      "bytes": 835864,
+      "sha256": "b5c783e182f7c04a5eec5b0b4666190ce09f5659c852ac9b3d417e65cbaee0ed"
+    },
+    {
+      "role": "anchor_f016",
+      "bytes": 859420,
+      "sha256": "89f9dc3b543613ddb761c8acca378a5cdd87cd4da5455a83b3654d5109367305"
+    },
+    {
+      "role": "anchor_f020",
+      "bytes": 853138,
+      "sha256": "275cb7674e0aaeffedb3213b367b719047c56ac58338f249d188e775b41ea700"
+    },
+    {
+      "role": "anchor_f024",
+      "bytes": 829540,
+      "sha256": "f43914d16be543735a00b0f71c24ed9fb4a0afacf8d61ae07b21e210e1703d44"
+    },
+    {
+      "role": "anchor_f028",
+      "bytes": 855097,
+      "sha256": "8a459d576cad441f967cbd2d8849df46ab83bc600d4d623ca33146c962b01827"
+    },
+    {
+      "role": "anchor_f032",
+      "bytes": 866858,
+      "sha256": "8581b299d3637314c1295b40233acad60bb0bf7f5bded1e455db0d3b78ec20d4"
+    },
+    {
+      "role": "anchor_f036",
+      "bytes": 866371,
+      "sha256": "3f2adb575c77ccc0daf8b1d9a4f5ff6868039ab3cb87632c0fd5b57715891738"
+    },
+    {
+      "role": "anchor_f048",
+      "bytes": 839309,
+      "sha256": "579d75f12672c1362b42091e97cfc33666795875880815edbd175bdb4d7ac89e"
+    },
+    {
+      "role": "anchor_f060",
+      "bytes": 849275,
+      "sha256": "75f2b9553e80bef6d6f04469fb05c5faaffec3c7ac15df5fb72798a3e9014f4c"
+    },
+    {
+      "role": "anchor_f072",
+      "bytes": 862771,
+      "sha256": "cc6410ff80ed7eb8319d333a527cee981a39176f9d3e39081a4bd0b5f4b06bb5"
+    }
+  ],
+  "scaled_canny_parent_hash_match": true,
+  "accepted_anchor_count": 11,
+  "scale_recomputed": false,
+  "firmware": {
+    "bios": "5.36_0ACUM08",
+    "bios_date": "07/02/2026",
+    "embedded_controller": "0x0300050b",
+    "uefi_device": "0x02009b0e"
+  },
+  "cache_helper": {
+    "present": true,
+    "root_owned": true,
+    "mode": "0755",
+    "sha256": "459b01732633a250c03d6a5e65a44343c7bb939ef3093b628a0d66770dafa528",
+    "execution": "NOT_EXECUTED_IN_INTAKE"
+  },
+  "hardware_logger": {
+    "tail_rows": [
+      "2026-11-06T13:07:43+09:00,35, 3.77, 208,37700,34800,35800,34800,35800,37700,36700,117851",
+      "2026-11-06T13:07:48+09:00,35, 3.83, 208,37700,34900,35800,35000,35800,37700,36600,117849"
+    ],
+    "advancing": true
+  },
+  "privacy": "Absolute paths and raw device inventory retained privately."
+}

@@ -1,0 +1,25 @@
+{
+  "actual_calls": 0,
+  "repairs": 0,
+  "max_calls": 8,
+  "reused_frames": [
+    0,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    48,
+    60,
+    72
+  ],
+  "planned_new_frames": [
+    18,
+    22,
+    26,
+    30
+  ],
+  "calls": []
+}

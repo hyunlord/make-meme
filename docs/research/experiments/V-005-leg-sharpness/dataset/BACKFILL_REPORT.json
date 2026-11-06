@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "samples": [
+    {
+      "sample_id": "V-003/K1-s1",
+      "sha256": "0944a56e2c97975948f615cee4c061b486ccf390191c05dd1dff717bdcff2192",
+      "anchors": 7,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-003/K1-s2",
+      "sha256": "c8ea23050380a439b10787bf734985e2062af78a5793889e8f6f1acde1bffb15",
+      "anchors": 7,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-003/K2-s1",
+      "sha256": "a1e9d384056a7f60e2fb7ae8aa1985d9c507a0a8482f0f634d77db6d4f04c498",
+      "anchors": 7,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-003/K2-s2",
+      "sha256": "fc8197ba1b59167ef46d6c4379dc3f26aaf6ad5fb6e00532562ea21b16a9484a",
+      "anchors": 7,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-003/K3-s1",
+      "sha256": "63fce4e9b56b2a1aeeb6c89199fec7f8568e3c151d6c1b618f2caa6adbcca5ad",
+      "anchors": 5,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-003/K3-s2",
+      "sha256": "d825638dc4c6c829badf52b9d3514f9757abb862e1c9f6ffd74e4be31adf99e9",
+      "anchors": 5,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-004/S1-s1",
+      "sha256": "d8f3d2260477931f60676ded3ea39006fa874dfacd184d8761543114c9b83dab",
+      "anchors": 11,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-004/S1-s2",
+      "sha256": "2e5dc8cfe38e51bd9683ae1115870ad735f51a49becd7aa93ec1306f02fdff3a",
+      "anchors": 11,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-004/S2-s1",
+      "sha256": "bf26bd57d898a407566c5575b36606e0ababba3c8b4ff25f176828e0b94d1228",
+      "anchors": 11,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-004/S2-s2",
+      "sha256": "717d320da15c20b14d5eb08f0827862efbe7de467927f11ad63991941957286f",
+      "anchors": 11,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-004/S3-s1",
+      "sha256": "218045fb45e9fc9a2dc79515ca78567035aeee485d317f04b10f8b17be3edf76",
+      "anchors": 11,
+      "human_review": "PENDING"
+    },
+    {
+      "sample_id": "V-004/S3-s2",
+      "sha256": "b28142a93a79ed38b05d95a5d5a1b299339a75c36a1517b993a3a6d4063f7da9",
+      "anchors": 11,
+      "human_review": "PENDING"
+    }
+  ],
+  "sample_count": 12,
+  "media_copied": false,
+  "local_records_only": true,
+  "record_origin": "BACKFILL",
+  "host_transfer_sha256": "PASS",
+  "schema_version": "1.0",
+  "source_frame_count_each": 73,
+  "comparison_raw_frame_count_each": 73,
+  "post_frame_count_each": 73,
+  "training_performed": false,
+  "new_v005_samples": "PENDING_OUTPUTS"
+}

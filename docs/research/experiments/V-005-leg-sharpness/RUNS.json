@@ -1,0 +1,39 @@
+{
+  "status": "PREREGISTERED",
+  "quality": "HUMAN_REVIEW_PENDING",
+  "generation_budget": 6,
+  "actual_generations": 0,
+  "training": 0,
+  "cells": [
+    {
+      "id": "R1-a",
+      "status": "NOT_RUN",
+      "reason": null
+    },
+    {
+      "id": "R1-b",
+      "status": "NOT_RUN",
+      "reason": null
+    },
+    {
+      "id": "R2-s1",
+      "status": "NOT_SUPPORTED",
+      "reason": "Frozen official IC-LoRA path is distilled-only"
+    },
+    {
+      "id": "R2-s2",
+      "status": "NOT_SUPPORTED",
+      "reason": "Frozen official IC-LoRA path is distilled-only"
+    },
+    {
+      "id": "R3-s1",
+      "status": "NOT_RUN",
+      "reason": null
+    },
+    {
+      "id": "R3-s2",
+      "status": "NOT_RUN",
+      "reason": null
+    }
+  ]
+}
