@@ -38,3 +38,6 @@ https://github.com/modelscope/DiffSynth-Studio
 
 ## Resolved before execution
 Official DiffSynth A14B example calls the pipeline without scheduler overrides. Therefore use its defaults, not Wan CLI defaults; the user prioritizes this runner. W1-a/W1-b actual start sigma0.7291666269302368/0.859375,50steps each, both below0.875. No settings were selected from generated results. Source: https://github.com/modelscope/DiffSynth-Studio/blob/08fdc0da8f41426885d9432e9007e6e460a4c30d/examples/wanvideo/model_inference/Wan2.2-T2V-A14B.py
+
+## W2 support gate, before any model execution
+CPU fixture executes the existing input-video unit body with shape doubles: single reference input/noiseT10/10 passes; requestedtwo references input/noiseT10/11 mismatch. W2 NOT_SUPPORTED underexplicitworkorderbranch, noW2download/load/generation. SeeW2_SUPPORT.md. W1remainsindependent.

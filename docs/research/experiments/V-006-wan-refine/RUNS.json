@@ -10,7 +10,7 @@
   "variants": {
     "W1-a": "NOT_RUN",
     "W1-b": "NOT_RUN",
-    "W2": "NOT_RUN"
+    "W2": "NOT_SUPPORTED"
   },
   "sigma_equal": false,
   "quality": "HUMAN_REVIEW_PENDING",
